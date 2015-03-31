@@ -9,9 +9,9 @@ Dinei Rockenbach - Desenvolvedor
 Polyana Ellwanger - Redatora Geral  
 
 **Grupo 2 - Cargos, Salários e Benefícios**  
-Luan Meller - Redator   
+Luan Meller - Redator  
 Maicol Genz - Analista e DBA  
-Juliano Pires - Desenvolvedor 
+Juliano Pires - Desenvolvedor  
 Augusto Zvoboter - Gerente de Projeto  
 
 **Grupo 3 - Treinamento e Desenvolvimento**  
