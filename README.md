@@ -15,17 +15,17 @@ Maicol Genz - Desenvolvedor e DBA
 Augusto Zvoboter - Gerente de Projeto  
 
 **Grupo 3 - Treinamento e Desenvolvimento**  
-Rafael Radünz - ?  
-Filipe Kohls - ?  
-Raicard Rübel - ?  
+Filipe Kohls - Redator  
+Raicard Rübel - Analista  
+Rafael Radünz - Desenvolvedor  
 
 **Grupo 4 - Ficha do Funcionário e Folha de Pagamento**  
-Max Naegele - ? 
-Kelvin Urnau - ?  
-Edivan Ludwig - ?  
+Kelvin Urnau - Redator  
+Edivan Ludwig - Analista  
+Max Naegele - Desenvolvedor  
 
 **Grupo 5 - Avaliação de Desempenho**  
-Larissa Cardoso - ?  
+Larissa Cardoso - Redatora  
 Mateus Hammes - Analista  
-Paulo Both - ?  
+Paulo Both - Desenvolvedor  
 
