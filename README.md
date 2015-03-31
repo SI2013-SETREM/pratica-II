@@ -19,7 +19,7 @@ Filipe Kohls - Redator
 Raicard Rübel - Analista  
 Rafael Radünz - Desenvolvedor  
 
-**Grupo 4 - Ficha do Funcionário e Folha de Pagamento**  
+**Grupo 4 - Ficha Funcional e Folha de Pagamento**  
 Kelvin Urnau - Redator  
 Edivan Ludwig - Analista  
 Max Naegele - Desenvolvedor  
