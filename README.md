@@ -6,11 +6,11 @@ Repositório da Prática II da turma de Sistemas de Informação de 2013
 Diego Diesel - Redator  
 Nadine Anderle - Analista  
 Dinei Rockenbach - Desenvolvedor  
-Polyana Ellwanger - Redatora Geral  
+Polyana Ellwanger - Redatora  
 
 **Grupo 2 - Cargos, Salários e Benefícios**  
 Luan Meller - Redator  
-Maicol Genz - Analista e DBA  
+Maicol Genz - Analista  
 Juliano Pires - Desenvolvedor  
 Augusto Zvoboter - Gerente de Projeto  
 
@@ -29,3 +29,10 @@ Larissa Cardoso - Redatora
 Mateus Hammes - Analista  
 Paulo Both - Desenvolvedor  
 
+## Principais Papeis e Responsáveis:  
+**Gerente de Projeto**: Augusto Zvoboter  
+**Banco de Dados (DBA)**: Maicol Genz  
+**Redatora Geral**: Polyana Ellwanger  
+**Analista Geral**: Nadine Anderle  
+**Desenvolvedor Geral**: Dinei Rockenbach  
+**Design e Diagramação**: Dinei Rockenbach  
