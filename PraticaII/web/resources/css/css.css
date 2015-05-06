@@ -14,23 +14,30 @@
 .table {
   margin-bottom: 10px;
 }
-.table-footer .pagination {
-  margin: 0;
+.dataTables_wrapper .col-editar-header,
+.dataTables_wrapper .col-excluir-header {
+  max-width: 50px;
 }
-.dataTables_wrapper .dataTables_paginate .paginate_button {
+.dataTables_wrapper div.dataTables_paginate {
   padding: 0;
 }
-.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+.dataTables_wrapper div.dataTables_paginate .paginate_button {
+  padding: 0;
+}
+.dataTables_wrapper div.dataTables_paginate .paginate_button:hover {
   color: #00456a;
   border: 1px solid transparent;
   background: none;
 }
-.pagination > .disabled > a,
-.pagination > .disabled > a:focus,
-.pagination > .disabled > a:hover,
-.pagination > .disabled > span,
-.pagination > .disabled > span:focus,
-.pagination > .disabled > span:hover {
+.dataTables_wrapper div.dataTables_paginate ul.pagination {
+  margin: 0;
+}
+.dataTables_wrapper div.dataTables_paginate ul.pagination > .disabled > a,
+.dataTables_wrapper div.dataTables_paginate ul.pagination > .disabled > a:focus,
+.dataTables_wrapper div.dataTables_paginate ul.pagination > .disabled > a:hover,
+.dataTables_wrapper div.dataTables_paginate ul.pagination > .disabled > span,
+.dataTables_wrapper div.dataTables_paginate ul.pagination > .disabled > span:focus,
+.dataTables_wrapper div.dataTables_paginate ul.pagination > .disabled > span:hover {
   color: #bebebe;
 }
 body {

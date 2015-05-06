@@ -50,29 +50,42 @@
 .table {
     margin-bottom: 10px;
 }
-.table-footer {
-    .pagination {
-        margin: 0;
-    }
-}
 // Alterações no comportamento das DataTables
-.dataTables_wrapper .dataTables_paginate .paginate_button {
-    padding: 0;
+.dataTables_wrapper {
+    .col-editar-header,
+    .col-excluir-header {
+        max-width: 50px;
+    }
     
-    &:hover {
-        color: @corPrimaria;
-        border: 1px solid transparent;
-        background: none;
+    div.dataTables_paginate {
+        padding: 0;
+        
+        .paginate_button {
+            padding: 0;
+            
+            &:hover {
+                color: @corPrimaria;
+                border: 1px solid transparent;
+                background: none;
+            }
+        }
+        
+        ul.pagination {
+            margin: 0;
+
+            > .disabled > a,
+            > .disabled > a:focus,
+            > .disabled > a:hover,
+            > .disabled > span,
+            > .disabled > span:focus,
+            > .disabled > span:hover {
+                color: #bebebe;
+            }
+
+        }
     }
 }
-.pagination > .disabled > a,
-.pagination > .disabled > a:focus,
-.pagination > .disabled > a:hover,
-.pagination > .disabled > span,
-.pagination > .disabled > span:focus,
-.pagination > .disabled > span:hover {
-    color: #bebebe;
-}
+
 //CSS Projeto
 body {
     background: #E9ECF3;
