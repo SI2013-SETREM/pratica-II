@@ -1,0 +1,194 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title><ui:insert name="title">Início</ui:insert> - GRH</title>
+        <!--<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700|Signika:400,700" rel="stylesheet" type="text/css"/>-->
+        <h:outputStylesheet name="./bootstrap/css/bootstrap.min.css" />
+        <h:outputStylesheet name="./font-awesome/css/font-awesome.min.css" />
+        <h:outputStylesheet name="./data-tables/dataTables.min.css" />
+        <h:outputStylesheet name="./css/css.css" />
+        <h:outputScript name="./js/jquery-2.1.3.min.js"></h:outputScript>
+        <h:outputScript name="./bootstrap/js/bootstrap.min.js"></h:outputScript>
+        <h:outputScript name="./data-tables/dataTables.min.js"></h:outputScript>
+        <h:outputScript name="./js/default.js"></h:outputScript>
+        <ui:insert name="header"> </ui:insert>
+    </h:head>
+    <h:body>
+        <div class="page-container">
+            <div class="page-header navbar navbar-static-top">
+                <div class="page-logo">
+                    <h:link outcome="/faces/view/index">
+                        <h1 class="logo">
+                            <h:graphicImage alt="GRH Gestão de Recursos Humanos" name="img/grh_topo.png"></h:graphicImage>
+                        </h1>
+                    </h:link>
+                </div>
+                <div class="page-topmenu pull-right">
+                    <ul class="nav navbar-nav pull-right">
+                        <li class="dropdown dropdown-inbox">
+                            <a class="dropdown-toggle dropdown-icon" data-close-others="true" data-toggle="dropdown" href="javascript:void(0);">
+                                <i class="fa fa-envelope"></i>
+                                <span class="badge badge-danger">9</span>
+                            </a>
+                            <ul class="dropdown-menu pull-right">
+                                <li class="external">
+                                    <span>Você tem 9 novas mensagens</span>
+                                    <a href="#">Ver todas</a>
+                                </li>
+                                <li></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown dropdown-user">
+                            <a href="javascript:void(0);">
+                                <span>Nome Usuário</span>
+                                <h:graphicImage class="user-photo" name="img/user.jpg"></h:graphicImage>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="main-content-wrapper">
+                <div class="page-sidebar-wrapper">
+                    <div class="page-sidebar navbar-collapse collapse">
+                        <ul class="page-sidebar-menu">
+                            <li class="#{view.viewId == '/view/index.xhtml' ? 'active' : ''}">
+                                <h:link outcome="/faces/view/index">
+                                    <span class="fa fa-home"></span>
+                                    <span class="menu-text">Início</span>
+                                </h:link>
+                            </li>
+                            <li class="menu-dropdown #{view.viewId.contains('/rs/') ? 'open' : ''}">
+                                <a href="javascript:void(0);">
+                                    <span class="fa fa-paste"></span>
+                                    <span class="menu-text">Recrutamento e Seleção</span>
+                                    <span class="fa dropdown-chevron pull-right"></span>
+                                </a>
+                                <ul class="submenu">
+                                    <li class="#{view.viewId.contains('/rs/painelvagas') ? 'active' : ''}">
+                                        <h:link outcome="/faces/view/rs/painelvagas">
+                                            <span class="fa fa-paste"></span>
+                                            <span class="menu-text">Painel de Vagas</span>
+                                        </h:link>
+                                    </li>
+                                    <li class="#{view.viewId.contains('/rs/recrutamento') ? 'active' : ''}">
+                                        <h:link outcome="/faces/view/rs/recrutamento">
+                                            <span class="fa fa-bullhorn"></span>
+                                            <span class="menu-text">Processos de Recrutamento</span>
+                                        </h:link>
+                                    </li>
+                                    <li class="#{view.viewId.contains('/rs/cv') ? 'active' : ''}">
+                                        <h:link outcome="/faces/view/rs/cv">
+                                            <span class="fa fa-file-text-o"></span>
+                                            <span class="menu-text">Gestão de Currículos</span>
+                                        </h:link>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="menu-dropdown #{view.viewId.contains('/csb/') ? 'open' : ''}">
+                                <a href="javascript:void(0);">
+                                    <span class="fa fa-briefcase"></span>
+                                    <span class="menu-text">Cargos, Salários, Benefícios</span>
+                                    <span class="fa dropdown-chevron pull-right"></span>
+                                </a>
+                                <ul class="submenu">
+                                    <li class="#{view.viewId.contains('ID_PAGINA_AQUI') ? 'active' : ''}">
+                                        <h:link outcome="/faces/view/index">
+                                            <span class="fa fa-briefcase"></span>
+                                            <span class="menu-text">Cargos</span>
+                                        </h:link>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="menu-dropdown #{view.viewId.contains('/td/') ? 'open' : ''}">
+                                <a href="javascript:void(0);">
+                                    <span class="fa fa-graduation-cap"></span>
+                                    <span class="menu-text">Treinamento e Desenvolvimento</span>
+                                    <span class="fa dropdown-chevron pull-right"></span>
+                                </a>
+                                <ul class="submenu">
+                                    <li class="#{view.viewId.contains('ID_PAGINA_AQUI') ? 'active' : ''}">
+                                        <h:link outcome="/faces/view/index">
+                                            <span class="fa fa-users"></span>
+                                            <span class="menu-text">Turmas</span>
+                                        </h:link>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="menu-dropdown #{view.viewId.contains('/fp/') ? 'open' : ''}">
+                                <a href="javascript:void(0);">
+                                    <span class="fa fa-usd"></span>
+                                    <span class="menu-text">Ficha Funcional</span>
+                                    <span class="fa dropdown-chevron pull-right"></span>
+                                </a>
+                                <ul class="submenu">
+                                    <li class="#{view.viewId.contains('ID_PAGINA_AQUI') ? 'active' : ''}">
+                                        <h:link outcome="/faces/view/index">
+                                            <span class="fa fa-street-view"></span>
+                                            <span class="menu-text">Funcionários</span>
+                                        </h:link>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="menu-dropdown #{view.viewId.contains('/ad/') ? 'open' : ''}">
+                                <a href="javascript:void(0);">
+                                    <span class="fa fa-tasks"></span>
+                                    <span class="menu-text">Avaliação de Desempenho</span>
+                                    <span class="fa dropdown-chevron pull-right"></span>
+                                </a>
+                                <ul class="submenu">
+                                    <li class="#{view.viewId.contains('ID_PAGINA_AQUI') ? 'active' : ''}">
+                                        <h:link outcome="/faces/view/index">
+                                            <span class="fa fa-flag"></span>
+                                            <span class="menu-text">Avaliações</span>
+                                        </h:link>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="menu-dropdown #{view.viewId.contains('/conf/') ? 'open' : ''}">
+                                <a href="javascript:void(0);">
+                                    <span class="fa fa-cogs"></span>
+                                    <span class="menu-text">Configurações</span>
+                                    <span class="fa dropdown-chevron pull-right"></span>
+                                </a>
+                                <ul class="submenu">
+                                    <li class="#{view.viewId.contains('/idiomas') ? 'active' : ''}">
+                                        <h:link outcome="/faces/view/conf/idiomaslst">
+                                            <span class="fa fa-language"></span>
+                                            <span class="menu-text">Idiomas</span>
+                                        </h:link>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="#{view.viewId == '/view/about.xhtml' ? 'active' : ''}">
+                                <h:link outcome="/faces/view/about">
+                                    <span class="fa fa-info-circle"></span>
+                                    <span class="menu-text">Sobre</span>
+                                </h:link>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="page-content-wrapper">
+                    <div class="page-content">
+                        <div class="page-title">
+                            <h2><ui:insert name="title">Início</ui:insert></h2>
+                        </div>
+                        <ui:fragment rendered="#{empty no_breadcrumb}">
+                            <ul class="breadcrumb">
+                                <li>
+                                    <h:link value="Início" outcome="/faces/view/index" />
+                                </li>
+                                <ui:insert name="breadcrumb"> </ui:insert>
+                            </ul>
+                        </ui:fragment>
+                        <ui:insert name="main-content" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </h:body>
+</html>
+
