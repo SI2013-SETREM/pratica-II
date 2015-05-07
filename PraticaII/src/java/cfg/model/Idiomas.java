@@ -1,5 +1,5 @@
 
-package conf.model;
+package cfg.model;
 
 import java.io.Serializable;
 import javax.persistence.Entity;

@@ -1,7 +1,7 @@
 
-package conf.dao;
+package cfg.dao;
 
-import conf.model.Idiomas;
+import cfg.model.Idiomas;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;

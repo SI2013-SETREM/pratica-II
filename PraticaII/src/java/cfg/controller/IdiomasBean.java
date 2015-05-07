@@ -1,8 +1,8 @@
 
-package conf.controller;
+package cfg.controller;
 
-import conf.dao.IdiomaDAO;
-import conf.model.Idiomas;
+import cfg.dao.IdiomaDAO;
+import cfg.model.Idiomas;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.model.DataModel;
