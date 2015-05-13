@@ -10,6 +10,6 @@
     <property name="hibernate.show_sql">true</property>
     <property name="hibernate.format_sql">true</property>
     <property name="hibernate.hbm2ddl.auto">update</property>
-    <mapping class="conf.model.Idiomas" />
+    <mapping class="cfg.model.Idioma" />
   </session-factory>
 </hibernate-configuration>
