@@ -10,8 +10,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="idiomas")
-public class Idiomas implements Serializable {
+@Table(name="idioma")
+public class Idioma implements Serializable {
     
     public static final String sTitle = "Idioma";
     public static final String pTitle = "Idiomas";
@@ -22,7 +22,7 @@ public class Idiomas implements Serializable {
     private int idi_codigo;
     private String idi_descricao;
 
-    public Idiomas() {
+    public Idioma() {
     }
 
     public int getIdiCodigo() {

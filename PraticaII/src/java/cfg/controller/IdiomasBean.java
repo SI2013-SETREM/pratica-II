@@ -2,7 +2,7 @@
 package cfg.controller;
 
 import cfg.dao.IdiomaDAO;
-import cfg.model.Idiomas;
+import cfg.model.Idioma;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.model.DataModel;
@@ -12,10 +12,10 @@ import javax.faces.model.ListDataModel;
 @RequestScoped
 public class IdiomasBean {
     
-    private final String sTitle = Idiomas.sTitle;
-    private final String pTitle = Idiomas.pTitle;
+    private final String sTitle = Idioma.sTitle;
+    private final String pTitle = Idioma.pTitle;
     
-    private Idiomas idioma = new Idiomas();
+    private Idioma idioma = new Idioma();
     private IdiomaDAO dao = new IdiomaDAO();
     private DataModel idiomas;
     
@@ -30,11 +30,11 @@ public class IdiomasBean {
         return pTitle;
     }
     
-    public Idiomas getIdioma() {
+    public Idioma getIdioma() {
         return idioma;
     }
 
-    public void setIdioma(Idiomas idioma) {
+    public void setIdioma(Idioma idioma) {
         this.idioma = idioma;
     }
 
@@ -52,8 +52,8 @@ public class IdiomasBean {
         return "idiomaslst";
     }
     
-    public String edit(Idiomas i) {
-        idioma = (Idiomas) idiomas.getRowData();
+    public String edit(Idioma i) {
+        idioma = (Idioma) idiomas.getRowData();
         return "idiomasfrm";
     }
     
@@ -62,7 +62,7 @@ public class IdiomasBean {
         return "idiomaslst";
     }
     
-    public String delete(Idiomas i) {
+    public String delete(Idioma i) {
         dao.delete(i);
         return "idiomaslst";
     }
