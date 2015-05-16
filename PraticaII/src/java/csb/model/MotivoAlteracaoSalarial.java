@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="cbs_motivoalteracaosalarial")
-public class CsbMotivoAlteracaoSalarial implements Serializable {
+public class MotivoAlteracaoSalarial implements Serializable {
     
     public static final String sTitle = "Motivo de Alteração Salarial";
     public static final String pTitle = "Motivos para Alterações Salariais";
@@ -24,7 +24,7 @@ public class CsbMotivoAlteracaoSalarial implements Serializable {
     private String mas_descricao;
     private boolean mas_situacao;
 
-    public CsbMotivoAlteracaoSalarial() {
+    public MotivoAlteracaoSalarial() {
     }
 
     public int getMas_codigo() {

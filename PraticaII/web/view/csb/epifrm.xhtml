@@ -9,30 +9,30 @@
         <ui:composition template="./../modelos/default.xhtml">
 
             <ui:define name="title">
-                ${csbEpiBean.pTitle}
+                ${epiBean.pTitle}
             </ui:define>
 
             <ui:define name="breadcrumb">
                 <li>Cargos, Salários, Benefícios</li>
-                <li><h:link value="${csbEpiBean.pTitle}" outcome="/faces/view/cfg/csbepilst" /></li>
+                <li><h:link value="${epiBean.pTitle}" outcome="/faces/view/cfg/csbepilst" /></li>
             </ui:define>
 
             <ui:define name="main-content">
                 <div class="panel panel-body">
-                    <h3><h:outputText value="Dados do ${csbEpiBean.sTitle}"/></h3>
+                    <h3><h:outputText value="Dados do ${epiBean.sTitle}"/></h3>
                     <f:view>
                         <h:form styleClass="form-horizontal">
-                            <h:inputHidden id="epiCodigo" value="#{csbEpiBean.cbsEpi.epiCodigo}" />
+                            <h:inputHidden id="epiCodigo" value="#{epiBean.cbsEpi.epiCodigo}" />
                             <div class="form-group">
                                 <h:outputLabel value="Descrição:" for="epiDescricao" styleClass="control-label col-sm-1" />
                                 <div class="col-md-6 col-sm-12">
-                                    <h:inputText id="epiDescricao" value="#{csbEpiBean.cbsEpi.epiDescricao}" title="EpiDescricao" styleClass="form-control" pt:autofocus="" />
+                                    <h:inputText id="epiDescricao" value="#{epiBean.cbsEpi.epiDescricao}" title="EpiDescricao" styleClass="form-control" pt:autofocus="" />
                                 </div>
                             </div>
                             <div class="form-group">
                                 <h:outputLabel value="Tipo" for="epiTipo" styleClass="control-label col-sm-1" />
                                 <div class="col-md-6 col-sm-12">
-                                    <h:selectOneMenu id="epiTipo" value="#{csbEpiBean.cbsEpi.epiTipo}" styleClass="form-control" pt:autofocus="">
+                                    <h:selectOneMenu id="epiTipo" value="#{epiBean.cbsEpi.epiTipo}" styleClass="form-control" pt:autofocus="">
                                         <f:selectItem itemValue="C" itemLabel="COLETIVO" />
                                         <f:selectItem itemValue="I" itemLabel="INDIVIDUAL" />
                                     </h:selectOneMenu>
@@ -41,7 +41,7 @@
                             <div class="form-group">
                                 <h:outputLabel value="Situação" for="epiSituacao" styleClass="control-label col-sm-1" />
                                 <div class="col-md-6 col-sm-12">
-                                    <h:selectOneMenu id="epiTipo" value="#{csbEpiBean.cbsEpi.epiSituacao}" styleClass="form-control" pt:autofocus="">
+                                    <h:selectOneMenu id="epiTipo" value="#{epiBean.cbsEpi.epiSituacao}" styleClass="form-control" pt:autofocus="">
                                         <f:selectItem itemValue="true" itemLabel="ATIVO" />
                                         <f:selectItem itemValue="false" itemLabel="INATIVO" />
                                     </h:selectOneMenu>
@@ -49,8 +49,8 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-md-offset-1 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
-                                    <h:link styleClass="btn btn-default" value="Cancelar" outcome="#{csbEpiBean.listar()}" />
-                                    <h:commandButton styleClass="btn btn-success" value="Salvar" action="#{csbEpiBean.salvar()}"></h:commandButton>
+                                    <h:link styleClass="btn btn-default" value="Cancelar" outcome="#{epiBean.listar()}" />
+                                    <h:commandButton styleClass="btn btn-success" value="Salvar" action="#{epiBean.salvar()}"></h:commandButton>
                                 </div>
                             </div>
                         </h:form>

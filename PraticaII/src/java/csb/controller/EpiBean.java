@@ -1,7 +1,7 @@
 package csb.controller;
 
-import csb.dao.CsbEpiDAO;
-import csb.model.CsbEpi;
+import csb.dao.EpiDAO;
+import csb.model.Epi;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.model.DataModel;
@@ -9,16 +9,16 @@ import javax.faces.model.ListDataModel;
 
 @ManagedBean
 @RequestScoped
-public class CsbEpiBean {
+public class EpiBean {
 
-    private final String sTitle = CsbEpi.sTitle;
-    private final String pTitle = CsbEpi.pTitle;
+    private final String sTitle = Epi.sTitle;
+    private final String pTitle = Epi.pTitle;
 
-    private CsbEpi cbsepi = new CsbEpi();
-    private CsbEpiDAO dao = new CsbEpiDAO();
+    private Epi cbsepi = new Epi();
+    private EpiDAO dao = new EpiDAO();
     private DataModel datamodel;
 
-    public CsbEpiBean() {
+    public EpiBean() {
     }
 
     public String getsTitle() {
@@ -29,7 +29,7 @@ public class CsbEpiBean {
         return pTitle;
     }
 
-    public CsbEpi getCbsEpi() {
+    public Epi getCbsEpi() {
         return cbsepi;
     }
 
@@ -42,7 +42,7 @@ public class CsbEpiBean {
         this.datamodel = datamodel;
     }
 
-    public void setCbsEpi(CsbEpi cbsepi) {
+    public void setCbsEpi(Epi cbsepi) {
         this.cbsepi = cbsepi;
     }
 
@@ -55,8 +55,8 @@ public class CsbEpiBean {
         return "cbsepilst";
     }
 
-    public String edit(CsbEpi i) {
-        cbsepi = (CsbEpi) datamodel.getRowData();
+    public String edit(Epi i) {
+        cbsepi = (Epi) datamodel.getRowData();
         return "csbepifrm";
     }
 
@@ -65,7 +65,7 @@ public class CsbEpiBean {
         return "cbsepilst";
     }
 
-    public String delete(CsbEpi i) {
+    public String delete(Epi i) {
         dao.delete(i);
         return "cbsepilst";
     }

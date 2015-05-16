@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "cbs_epi")
-public class CsbEpi implements Serializable {
+public class Epi implements Serializable {
 
     public static final String sTitle = "Equipamento de Proteção";
     public static final String pTitle = "Equipamentos de Proteção";
@@ -24,7 +24,7 @@ public class CsbEpi implements Serializable {
     private char epi_tipo;
     private boolean epi_situacao;
 
-    public CsbEpi() {
+    public Epi() {
     }
 
     public int getEpi_codigo() {

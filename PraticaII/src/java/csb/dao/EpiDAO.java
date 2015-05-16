@@ -1,44 +1,43 @@
 package csb.dao;
 
-import csb.model.CsbTipoExame;
+import csb.model.Epi;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import util.HibernateUtil;
 
-public class CsbTipoExameDAO {
-
+public class EpiDAO {
     private Session session;
 
-    public CsbTipoExameDAO() {
+    public EpiDAO() {
         session = HibernateUtil.getSessionFactory().openSession();
     }
-
-    public void insert(CsbTipoExame tp) {
+    
+    public void insert(Epi e) {
         Transaction t = session.beginTransaction();
-        session.save(tp);
+        session.save(e);
         t.commit();
     }
-
-    public void update(CsbTipoExame tp) {
+    
+    public void update(Epi e) {
         Transaction t = session.beginTransaction();
-        session.merge(tp);
+        session.merge(e);
         t.commit();
     }
-
-    public void delete(CsbTipoExame tp) {
+    
+    public void delete(Epi e) {
         Transaction t = session.beginTransaction();
-        session.delete(tp);
+        session.delete(e);
         t.commit();
     }
-
-    public CsbTipoExame findById(int eme_codigo) {
-        return (CsbTipoExame) session.load(CsbTipoExame.class, eme_codigo);
+    
+    public Epi findById(int epi_codigo) {
+        return (Epi) session.load(Epi.class, epi_codigo);
     }
-
-    public List<CsbTipoExame> findAll() {
-        Query q = session.createQuery("from CbsTipoExame");
+    
+    public List<Epi> findAll() {
+        Query q = session.createQuery("from CsbEpi");
         return q.list();
     }
 }

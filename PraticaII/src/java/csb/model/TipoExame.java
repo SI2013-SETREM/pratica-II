@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="cbs_tipoexame")
-public class CsbTipoExame implements Serializable {
+public class TipoExame implements Serializable {
     
     public static final String sTitle = "Tipo de Exame";
     public static final String pTitle = "Tipos de Exames";
@@ -28,7 +28,7 @@ public class CsbTipoExame implements Serializable {
     private boolean eme_obrigatorio;
     private Date eme_intervalorepeticao;
 
-    public CsbTipoExame() {
+    public TipoExame() {
     }
 
     public int getEme_codigo() {
