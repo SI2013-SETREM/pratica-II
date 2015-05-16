@@ -1,8 +1,8 @@
-<?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    
     <h:head>
         <link rel="icon" href="#{resource['img/favicon.ico']}" sizes="16x16" />
         <title><ui:insert name="title">Início</ui:insert> - GRH</title>
@@ -17,6 +17,7 @@
         <h:outputScript name="./js/default.js"></h:outputScript>
         <ui:insert name="header"> </ui:insert>
     </h:head>
+    
     <h:body>
         <div class="page-container">
             <div class="page-header navbar navbar-static-top">
@@ -159,6 +160,12 @@
                                         <h:link outcome="/faces/view/cfg/idiomaslst">
                                             <span class="fa fa-language"></span>
                                             <span class="menu-text">Idiomas</span>
+                                        </h:link>
+                                    </li>
+                                    <li class="#{view.viewId.contains('/local') ? 'active' : ''}">
+                                        <h:link outcome="/faces/view/cfg/idiomaslst">
+                                            <span class="fa fa-location-arrow"></span>
+                                            <span class="menu-text">Localizações</span>
                                         </h:link>
                                     </li>
                                 </ul>
