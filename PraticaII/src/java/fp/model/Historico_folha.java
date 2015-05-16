@@ -1,5 +1,6 @@
 package fp.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,7 +14,7 @@ import javax.persistence.SequenceGenerator;
  */
 @Entity
 @SequenceGenerator(name = "genHistorico_folha", sequenceName = "genHistorico_folha", allocationSize = 1)
-public class Historico_folha {
+public class Historico_folha implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "genHistorico_folha")
