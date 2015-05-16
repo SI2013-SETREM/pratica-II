@@ -71,7 +71,7 @@ public class CsbEpiBean {
     }
 
     public String salvar() {
-        if (cbsepi.getEpiCodigo() > 0) {
+        if (cbsepi.getEpi_codigo()> 0) {
             dao.update(cbsepi);
         } else {
             dao.insert(cbsepi);
