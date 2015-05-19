@@ -156,8 +156,8 @@ body {
   position: relative;
   padding: 15px;
 }
-.page-sidebar .page-sidebar-menu > li > a > .glyphicon,
-.page-sidebar .page-sidebar-menu > li > a > .fa {
+.page-sidebar .page-sidebar-menu > li a .glyphicon,
+.page-sidebar .page-sidebar-menu > li a .fa {
   font-size: 18px;
 }
 .page-sidebar .page-sidebar-menu > li > a > .right-arrow {
@@ -197,13 +197,21 @@ body {
 .page-sidebar .page-sidebar-menu .menu-dropdown > .submenu {
   display: none;
   padding: 0;
-  margin: 5px 0;
+  margin: 3px 0 5px 0;
   list-style-type: none;
+  box-shadow: 0px 1px 10px -6px inset;
 }
 .page-sidebar .page-sidebar-menu .menu-dropdown > .submenu > li a {
   padding: 8px 10px 8px 30px;
 }
-.page-sidebar .page-sidebar-menu .menu-dropdown.open .dropdown-chevron:before {
+.page-sidebar .page-sidebar-menu .menu-dropdown > .submenu > li > .submenu {
+  margin: 2px 0;
+}
+.page-sidebar .page-sidebar-menu .menu-dropdown > .submenu > li > .submenu > li a {
+  padding: 8px 10px 8px 40px;
+}
+.page-sidebar .page-sidebar-menu .menu-dropdown.open > a > .dropdown-chevron:before,
+.page-sidebar .page-sidebar-menu .menu-dropdown.open > .dropdown-chevron:before {
   content: "\f078";
 }
 .page-sidebar .page-sidebar-menu .menu-dropdown.open > .submenu {

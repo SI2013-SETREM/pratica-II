@@ -58,8 +58,10 @@ function toggleDropdown($a) {
 $(document).ready(function(){
     
     $('.menu-dropdown > a').click(function(e) {
+        e.preventDefault();
         $a = $(this);
-        $('.menu-dropdown.open > a').each(function() { //fecha os menus ativos
+        $menuDropdown = $a.parent();
+        $('.menu-dropdown.open > a', $menuDropdown.parent()).each(function() { //fecha os menus ativos
             toggleDropdown($(this));
             if ($(this).is($a)) {
                 $a = null;
@@ -72,6 +74,7 @@ $(document).ready(function(){
     $('.dataTable').DataTable();
     
     
+    /*
     // Ripple effect
     var parent, ink, d, x, y;
     $(".ripple a").click(function (e) {
@@ -100,5 +103,5 @@ $(document).ready(function(){
 
         //set the position and add class .animate
         ink.css({top: y + 'px', left: x + 'px'}).addClass("animate");
-    });
+    });*/
 });
