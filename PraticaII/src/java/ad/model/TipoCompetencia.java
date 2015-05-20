@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "tipo_competencias")
-public class Tipo_Competencia implements Serializable {
+public class TipoCompetencia implements Serializable {
 
     public static final String sTitle = "Tipo de Competência";
     public static final String pTitle = "Tipo de Competências";
@@ -21,7 +21,7 @@ public class Tipo_Competencia implements Serializable {
     private int tcp_codigo;
     private String tcp_descricao;
 
-    public Tipo_Competencia() {
+    public TipoCompetencia() {
 
     }
 

@@ -25,7 +25,7 @@ public class Competencia implements Serializable {
     private char cmp_status;
     @ManyToOne
     @JoinColumn(name = "codtipocompetencia")
-    private Tipo_Competencia tipo_competencia;
+    private TipoCompetencia tipo_competencia;
 
     public Competencia() {
 
@@ -54,11 +54,11 @@ public class Competencia implements Serializable {
         this.cmp_status = cmp_status;
     }
 
-    public Tipo_Competencia getTipo_competencia() {
+    public TipoCompetencia getTipo_competencia() {
         return tipo_competencia;
     }
 
-    public void setTipo_competencia(Tipo_Competencia tipo_competencia) {
+    public void setTipo_competencia(TipoCompetencia tipo_competencia) {
         this.tipo_competencia = tipo_competencia;
     }
 

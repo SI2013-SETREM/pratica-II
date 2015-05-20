@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "historico_avaliacao")
-public class Historico_Avaliacao implements Serializable {
+public class HistoricoAvaliacao implements Serializable {
 
     public static final String sTitle = "Histórico Avaliação";
     public static final String pTitle = "Histórico de Avaliações";
@@ -30,6 +30,6 @@ public class Historico_Avaliacao implements Serializable {
     @JoinColumn(name = "codavaliacao")
     private Avaliacao avaliacao;
 
-    public Historico_Avaliacao() {
+    public HistoricoAvaliacao() {
     }
 }
