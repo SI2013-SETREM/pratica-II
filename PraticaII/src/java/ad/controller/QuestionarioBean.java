@@ -11,22 +11,11 @@ import javax.faces.model.ListDataModel;
 @RequestScoped
 public class QuestionarioBean {
 
-    private final String sTitle = HistoricoAvaliacao.sTitle;
-    private final String pTitle = HistoricoAvaliacao.pTitle;
-
     private HistoricoAvaliacao avaliacao = new HistoricoAvaliacao();
     private HistoricoAvaliacaoDAO dao = new HistoricoAvaliacaoDAO();
     private DataModel avaliacoes;
 
     public QuestionarioBean() {
-    }
-
-    public String getsTitle() {
-        return sTitle;
-    }
-
-    public String getpTitle() {
-        return pTitle;
     }
 
     public HistoricoAvaliacao getHistorico_Avaliacao() {

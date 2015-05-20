@@ -67,7 +67,7 @@ public class AvaliacaoBean {
     }
 
     public String salvar() {
-        if (avaliacao.getAva_codigo()> 0) {
+        if (true) {
             dao.update(avaliacao);
         } else {
             dao.insert(avaliacao);
