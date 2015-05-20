@@ -4,36 +4,113 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:p="http://primefaces.org/ui">
 
     <body>
 
         <ui:composition template="./../modelos/default.xhtml">
 
             <ui:define name="title">
-                ${idiomasBean.pTitle}
+                Avaliação
             </ui:define>
 
             <ui:define name="breadcrumb">
                 <li>Avliação de Desempenho</li>
-                <li><h:link value="Listagem" outcome="/faces/view/ad/avaliacaolst" /></li>
+                <!--<li><h:link value="Listagem" outcome="/faces/view/ad/avaliacaolst" /></li>-->
             </ui:define>
 
             <ui:define name="main-content">
+                <script>
+                    $(function () {
+                        $('#bntAddPanel').click(function (e) {
+                            e.preventDefault();
+                            var html = $('#HtmlExample').clone().attr('id', '');
+                            $(html).insertAfter('#HtmlExample');
+                        });
+                        $(document).on('click', '.removePanel', function () {
+                            $(this).parents('.panel:eq(0)').slideUp()(function () {
+                                $(this).remove();
+                            });
+                        });
+                    });
+                </script>
+                <style>
+                    .removePanel{
+                        float: right;
+                        cursor: pointer;
+                    }
+                    #HtmlExample{
+                        display: none;
+                    }
+                </style>
                 <div class="panel panel-body">
-                    <h3><h:outputText value="Dados da Avaliação"/></h3>
-                    <f:view>
-                        <h:form styleClass="form-horizontal">
+                    <h:form id="form" styleClass="form-horizontal">
+                        <p:growl id="msgs" showDetail="true" />
+                        <!--<h3><h:outputText value="Dados da Avaliação"/></h3>-->
+                        <p:tabView>
                             <h:inputHidden id="idiCodigo" value="#{avaliacaoBean.avaliacao.ava_codigo}" />
-
-                            <div class="form-group">
-                                <div class="col-md-offset-1 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
-                                    <h:link styleClass="btn btn-default" value="Cancelar" outcome="#{avaliacaoBean.listar()}" />
-                                    <h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{avaliacaoBean.salvar()}"></h:commandButton>
+                            <p:tab title="Dados da Avaliação">
+                                <div class="row">
+                                    <di class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="col-md-5">
+                                                <p:outputLabel value="Nome: " for="nome" />
+                                            </div>
+                                            <div class="col-md-7">
+                                                <p:inputText id="nome" value="" title="Nome"/>
+                                            </div>
+                                        </div>
+                                    </di>
+                                    <di class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="col-md-5">
+                                                <p:outputLabel value="Data de Início: " for="date_start" /></div>
+                                            <div class="col-md-7"><p:calendar id="date_start" value="#{calendarView.date9}" pattern="dd-MM-yyyy" mask="true" />
+                                            </div>
+                                        </div>
+                                    </di>
+                                    <di class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="col-md-5">
+                                                <p:outputLabel value="Data de Término: " for="date_end" />
+                                            </div>
+                                            <div class="col-md-7">
+                                                <p:calendar id="date_end" value="#{calendarView.date9}" pattern="dd-MM-yyyy" mask="true" />
+                                            </div>
+                                        </div>
+                                    </di>
                                 </div>
+                            </p:tab>
+                            <p:tab title="Formulário">
+                                <div class="panel panel-default" id="HtmlExample">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <i class="fa fa-times removePanel"></i>
+                                            <label>Nome:</label>
+                                            <input type="text" class="form-control"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <a id="bntAddPanel" class="btn btn-primary"><i class="fa fa-plus"></i>Add Questão</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </p:tab>
+                            <p:tab title="Outro">
+                                <p:outputLabel for="mask" value="Mask:" />
+                                <p:calendar id="mask" value="#{calendarView.date9}" pattern="dd-MM-yyyy" mask="true" />
+                            </p:tab>
+                        </p:tabView>
+                        <div class="form-group">
+                            <div class="col-md-offset-1 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
+                                <h:commandButton styleClass="btn btn-default" value="Cancelar" action="#{avaliacaoBean.listar()}"/>
+                                <h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{avaliacaoBean.salvar()}"/>
                             </div>
-                        </h:form>
-                    </f:view>
+                        </div>
+                    </h:form>
                 </div>
             </ui:define>
 

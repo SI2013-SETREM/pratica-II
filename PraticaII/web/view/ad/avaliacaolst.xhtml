@@ -7,43 +7,28 @@
     <body>
         <ui:composition template="../modelos/default.xhtml">
             <ui:define name="title">
-                ${idiomasBean.pTitle}
+                Avaliações
             </ui:define>
 
             <ui:define name="breadcrumb">
-                <li>Configurações</li>
-                <li>${idiomasBean.pTitle}</li>
+                <li>Listagem</li>
             </ui:define>
 
             <ui:define name="main-content">
                 <div class="panel panel-body">
-                    <h3><h:outputText value="Lista de ${idiomasBean.pTitle}"/></h3>
+                    <h3><h:outputText value="Lista de Avaliações"/></h3>
                     <div class="btns-top-table">
-                        <h:link outcome="idiomasfrm" styleClass="btn btn-success">
-                            <i class="fa fa-plus"></i> Inserir ${idiomasBean.sTitle}
+                        <h:link outcome="avaliacaofrm" styleClass="btn btn-success">
+                            <i class="fa fa-plus"></i> Inserir Avaliação
                         </h:link>
                     </div>
                     <h:form>
-                        <h:dataTable value="${idiomasBean.idiomas}" var="item" styleClass="dataTable table table-bordered table-striped">
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Nome"/>
-                                </f:facet>
-                                <h:outputText value="${item.getIdiDescricao()}"/>
-                            </h:column>
-                            <h:column class="col-editar">
-                                <f:facet name="header" class="col-head-editar">
-                                    <h:outputText value="Editar"/>
-                                </f:facet>
-                                <h:commandLink action="${idiomasBean.edit(item)}">
-                                    <i class="fa fa-pencil"></i> Editar
-                                </h:commandLink>
-                            </h:column>
+                        <h:dataTable value="${avaliacaoBean.avaliacoes}" var="item" styleClass="dataTable table table-bordered table-striped">
                             <h:column class="col-excluir">
                                 <f:facet name="header">
                                     <h:outputText value="Excluir"/>
                                 </f:facet>
-                                <h:commandLink onclick="return confirm('Deseja realmente excluir o ${idiomasBean.sTitle}?');" action="${idiomasBean.delete(item)}">
+                                <h:commandLink onclick="return confirm('Deseja realmente excluir a Avaiação?');" action="${idiomasBean.delete(item)}">
                                     <i class="fa fa-trash"></i> Excluir
                                 </h:commandLink>
                             </h:column>
