@@ -1,6 +1,6 @@
 package ad.controller;
 
-import ad.dao.Historico_AvaliacaoDAO;
+import ad.dao.HistoricoAvaliacaoDAO;
 import ad.model.HistoricoAvaliacao;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -15,7 +15,7 @@ public class QuestionarioBean {
     private final String pTitle = HistoricoAvaliacao.pTitle;
 
     private HistoricoAvaliacao avaliacao = new HistoricoAvaliacao();
-    private Historico_AvaliacaoDAO dao = new Historico_AvaliacaoDAO();
+    private HistoricoAvaliacaoDAO dao = new HistoricoAvaliacaoDAO();
     private DataModel avaliacoes;
 
     public QuestionarioBean() {
