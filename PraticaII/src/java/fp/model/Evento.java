@@ -45,6 +45,7 @@ public class Evento implements Serializable {
     private Serie_evento serie_evento;
     @ManyToOne
     private Formula formula;
+    
     //@ManyToOne
     //private Beneficio beneficio;
 
