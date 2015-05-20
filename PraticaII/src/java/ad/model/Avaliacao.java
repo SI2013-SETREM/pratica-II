@@ -1,54 +1,48 @@
 package ad.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import rs.model.Questionario;
+import td.model.Treinamento;
 
 @Entity
-@Table(name="avaliacoes")
+@Table(name = "avaliacao")
 public class Avaliacao implements Serializable {
-    
+
     public static final String sTitle = "Avaliação";
     public static final String pTitle = "Avaliações";
-    
+
     @Id
-    @SequenceGenerator(name="avaliacoes_pk_sequence", sequenceName="avaliacoes_id_seq")
-    @GeneratedValue(strategy=GenerationType.AUTO, generator="avaliacoes_pk_sequence")
+    @SequenceGenerator(name = "avaliacoes_pk_sequence", sequenceName = "avaliacoes_id_seq")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "avaliacoes_pk_sequence")
     private int ava_codigo;
+    @ManyToOne
+    @JoinColumn(name = "codtreinamento")
+    private Treinamento treinamento;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "recrutamento")
+//    private Recrutamento recrutamento;
+//
+    @ManyToOne
+    @JoinColumn(name = "codquestionario")
+    private Questionario questionario;
+
+    private int ava_status;
     private String ava_nome;
+    private Date ava_data_inicial;
+    private int ava_modulo;
     private String ava_observacao;
+    private Date ava_data_final;
 
     public Avaliacao() {
     }
-
-    public int getAva_codigo() {
-        return ava_codigo;
-    }
-
-    public void setAva_codigo(int ava_codigo) {
-        this.ava_codigo = ava_codigo;
-    }
-
-    public String getAva_nome() {
-        return ava_nome;
-    }
-
-    public void setAva_nome(String ava_nome) {
-        this.ava_nome = ava_nome;
-    }
-
-    public String getAva_observacao() {
-        return ava_observacao;
-    }
-
-    public void setAva_observacao(String ava_observacao) {
-        this.ava_observacao = ava_observacao;
-    }
-
-
-    
 }
