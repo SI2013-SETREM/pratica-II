@@ -16,16 +16,15 @@ public class Evento_folha implements Serializable {
     private Evento evento;
     @ManyToOne
     private Historico_folha historico_folha;
-    @Column(nullable = false)
     private double evf_valor;
     private String evf_indice;
     private boolean evf_imprimir;
     private String evf_descricao;
-    @Column(nullable = false)
+    
     private int evf_serv_codigo;
-    @Column(nullable = false)
+ 
     private int evf_tpe_codigo;
-    @Column(nullable = false)
+    
     private int evf_ben_codigo;
     private int evf_for_godigo;
     private int evf_tif_codigo;
