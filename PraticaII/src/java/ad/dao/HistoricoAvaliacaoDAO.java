@@ -1,6 +1,6 @@
 package ad.dao;
 
-import ad.model.HistoricoAvaliacao;
+import ad.model.Historico_avaliacao;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -15,29 +15,29 @@ public class HistoricoAvaliacaoDAO {
         session = HibernateUtil.getSessionFactory().openSession();
     }
 
-    public void insert(HistoricoAvaliacao i) {
+    public void insert(Historico_avaliacao i) {
         Transaction t = session.beginTransaction();
         session.save(i);
         t.commit();
     }
 
-    public void update(HistoricoAvaliacao i) {
+    public void update(Historico_avaliacao i) {
         Transaction t = session.beginTransaction();
         session.merge(i);
         t.commit();
     }
 
-    public void delete(HistoricoAvaliacao i) {
+    public void delete(Historico_avaliacao i) {
         Transaction t = session.beginTransaction();
         session.delete(i);
         t.commit();
     }
 
-    public HistoricoAvaliacao findById(int idi_codigo) {
-        return (HistoricoAvaliacao) session.load(HistoricoAvaliacao.class, idi_codigo);
+    public Historico_avaliacao findById(int idi_codigo) {
+        return (Historico_avaliacao) session.load(Historico_avaliacao.class, idi_codigo);
     }
 
-    public List<HistoricoAvaliacao> findAll() {
+    public List<Historico_avaliacao> findAll() {
         Query q = session.createQuery("from Historico_Avaliacao");
         return q.list();
     }
