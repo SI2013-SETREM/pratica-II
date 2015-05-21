@@ -1,3 +1,13 @@
+/* #######################################
+
+
+
+FALTA A LIGAÇÃO COM PESSOA (pes_codigo_solicitou)
+
+
+#################################3
+
+*/
 package td.model;
 
 import java.io.Serializable;
@@ -6,6 +16,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -20,6 +32,17 @@ public class Solicitacao implements Serializable{
     private String sol_descricao;
     private Date sol_data;
     private int sol_prioridade;
+    /*@ManyToOne
+    @JoinColumn(name = "pes_codigo")
+    private Pessoa pessoa;
+
+    public Pessoa getPessoa() {
+        return pessoa;
+    }
+
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
+    }*/
 
     public int getSol_codigo() {
         return sol_codigo;
