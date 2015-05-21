@@ -38,10 +38,10 @@ public class Avaliacao implements Serializable {
 
     private int ava_status;
     private String ava_nome;
-    private Date ava_data_inicial;
+    private Date ava_datahora_inicial;
     private int ava_modulo;
     private String ava_observacao;
-    private Date ava_data_final;
+    private Date ava_datahora_final;
 
     public Avaliacao() {
     }

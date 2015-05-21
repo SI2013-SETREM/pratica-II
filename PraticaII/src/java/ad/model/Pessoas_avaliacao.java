@@ -24,7 +24,7 @@ public class Pessoas_avaliacao implements Serializable {
     
     private double pea_media;
     private String pea_observacao;
-    private Date pea_data_criacao;
+    private Date pea_datahora_criacao;
 
     public Pessoas_avaliacao() {
     }

@@ -15,9 +15,9 @@ public class Competencias_pessoa implements Serializable {
     @ManyToOne
     @JoinColumn(name = "codcompetencia")
     private Competencia competencia;
-    private String pcp_observacao;
-    private Date pcp_datahora_criacao;
-    private Date pcp_datahora_alteracao;
+    private String cop_observacao;
+    private Date cop_datahora_criacao;
+    private Date cop_datahora_alteracao;
 
     public Competencias_pessoa() {
     }

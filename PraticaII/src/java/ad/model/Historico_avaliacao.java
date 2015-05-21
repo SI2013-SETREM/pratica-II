@@ -18,11 +18,11 @@ public class Historico_avaliacao implements Serializable {
     @Id
     @SequenceGenerator(name = "historico_avaliacao_pk_sequence", sequenceName = "historico_avaliacao_id_seq")
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "historico_avaliacao_pk_sequence")
-    private int hav_codigo;
-    private Date hav_datahora_inicio;
-    private Date hav_datahora_fim;
-    private double hav_valor;
-    private String hav_descricao;
+    private int hia_codigo;
+    private Date hia_datahora_inicio;
+    private Date hia_datahora_fim;
+    private double hia_valor;
+    private String hia_descricao;
     @ManyToOne
     @JoinColumn(name = "codavaliacao")
     private Avaliacao avaliacao;
