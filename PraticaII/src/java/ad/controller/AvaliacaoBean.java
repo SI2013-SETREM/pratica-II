@@ -11,22 +11,11 @@ import javax.faces.model.ListDataModel;
 @RequestScoped
 public class AvaliacaoBean {
 
-    private final String sTitle = Avaliacao.sTitle;
-    private final String pTitle = Avaliacao.pTitle;
-
     private Avaliacao avaliacao = new Avaliacao();
     private AvaliacaoDAO dao = new AvaliacaoDAO();
     private DataModel avaliacoes;
 
     public AvaliacaoBean() {
-    }
-
-    public String getsTitle() {
-        return sTitle;
-    }
-
-    public String getpTitle() {
-        return pTitle;
     }
 
     public Avaliacao getAvaliacao() {

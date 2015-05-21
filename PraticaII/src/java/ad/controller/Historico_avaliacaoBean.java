@@ -1,6 +1,6 @@
 package ad.controller;
 
-import ad.dao.HistoricoAvaliacaoDAO;
+import ad.dao.Historico_avaliacaoDAO;
 import ad.model.Historico_avaliacao;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -9,13 +9,13 @@ import javax.faces.model.ListDataModel;
 
 @ManagedBean
 @RequestScoped
-public class HistoricoAvaliacaoBean {
+public class Historico_avaliacaoBean {
 
     private Historico_avaliacao avaliacao = new Historico_avaliacao();
-    private HistoricoAvaliacaoDAO dao = new HistoricoAvaliacaoDAO();
+    private Historico_avaliacaoDAO dao = new Historico_avaliacaoDAO();
     private DataModel avaliacoes;
 
-    public HistoricoAvaliacaoBean() {
+    public Historico_avaliacaoBean() {
     }
 
     public Historico_avaliacao getHistorico_Avaliacao() {
