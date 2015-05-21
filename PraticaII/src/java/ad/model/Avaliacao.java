@@ -14,15 +14,12 @@ import rs.model.Questionario;
 import td.model.Treinamento;
 
 @Entity
-@Table(name = "avaliacao")
+//@Table(name = "avaliacao")
 public class Avaliacao implements Serializable {
 
-    public static final String sTitle = "Avaliação";
-    public static final String pTitle = "Avaliações";
-
     @Id
-    @SequenceGenerator(name = "avaliacoes_pk_sequence", sequenceName = "avaliacoes_id_seq")
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "avaliacoes_pk_sequence")
+    @SequenceGenerator(name = "avaliacao_pk_sequence", sequenceName = "avaliacao_id_seq")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "avaliacao_pk_sequence")
     private int ava_codigo;
     @ManyToOne
     @JoinColumn(name = "codtreinamento")
@@ -43,6 +40,6 @@ public class Avaliacao implements Serializable {
     private String ava_observacao;
     private Date ava_datahora_final;
 
-    public Avaliacao() {
+    public Avaliacao() { 
     }
 }

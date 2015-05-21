@@ -9,16 +9,33 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-//@Table(name = "tipo_competencias")
+//@Table(name = "tipo_competencia")
 public class Tipo_competencia implements Serializable {
 
     @Id
-    @SequenceGenerator(name = "tipo_competencias_pk_sequence", sequenceName = "tipo_competencias_id_seq")
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "tipo_competencias_pk_sequence")
+    @SequenceGenerator(name = "tipo_competencia_pk_sequence", sequenceName = "tipo_competencia_id_seq")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "tipo_competencia_pk_sequence")
     private int tcp_codigo;
     private String tcp_descricao;
 
     public Tipo_competencia() {
-
     }
+
+    public int getTcp_codigo() {
+        return tcp_codigo;
+    }
+
+    public void setTcp_codigo(int tcp_codigo) {
+        this.tcp_codigo = tcp_codigo;
+    }
+
+    public String getTcp_descricao() {
+        return tcp_descricao;
+    }
+
+    public void setTcp_descricao(String tcp_descricao) {
+        this.tcp_descricao = tcp_descricao;
+    }
+    
+    
 }

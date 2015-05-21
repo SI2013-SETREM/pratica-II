@@ -1,45 +1,44 @@
 package ad.dao;
 
-import ad.model.Historico_avaliacao;
+import ad.model.Pessoas_avaliacao;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import util.HibernateUtil;
 
-public class HistoricoAvaliacaoDAO {
+public class Pessoas_avaliacaoDAO {
 
     private Session session;
 
-    public HistoricoAvaliacaoDAO() {
+    public Pessoas_avaliacaoDAO() {
         session = HibernateUtil.getSessionFactory().openSession();
     }
 
-    public void insert(Historico_avaliacao i) {
+    public void insert(Pessoas_avaliacao i) {
         Transaction t = session.beginTransaction();
         session.save(i);
         t.commit();
     }
 
-    public void update(Historico_avaliacao i) {
+    public void update(Pessoas_avaliacao i) {
         Transaction t = session.beginTransaction();
         session.merge(i);
         t.commit();
     }
 
-    public void delete(Historico_avaliacao i) {
+    public void delete(Pessoas_avaliacao i) {
         Transaction t = session.beginTransaction();
         session.delete(i);
         t.commit();
     }
 
-    public Historico_avaliacao findById(int idi_codigo) {
-        return (Historico_avaliacao) session.load(Historico_avaliacao.class, idi_codigo);
+    public Pessoas_avaliacao findById(int idi_codigo) {
+        return (Pessoas_avaliacao) session.load(Pessoas_avaliacao.class, idi_codigo);
     }
 
-    public List<Historico_avaliacao> findAll() {
-        Query q = session.createQuery("from Historico_Avaliacao");
+    public List<Pessoas_avaliacao> findAll() {
+        Query q = session.createQuery("from Pessoas_avaliacao");
         return q.list();
     }
-
 }
