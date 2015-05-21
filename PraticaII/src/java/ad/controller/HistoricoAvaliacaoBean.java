@@ -1,7 +1,7 @@
 package ad.controller;
 
 import ad.dao.HistoricoAvaliacaoDAO;
-import ad.model.HistoricoAvaliacao;
+import ad.model.Historico_avaliacao;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.model.DataModel;
@@ -11,18 +11,18 @@ import javax.faces.model.ListDataModel;
 @RequestScoped
 public class HistoricoAvaliacaoBean {
 
-    private HistoricoAvaliacao avaliacao = new HistoricoAvaliacao();
+    private Historico_avaliacao avaliacao = new Historico_avaliacao();
     private HistoricoAvaliacaoDAO dao = new HistoricoAvaliacaoDAO();
     private DataModel avaliacoes;
 
     public HistoricoAvaliacaoBean() {
     }
 
-    public HistoricoAvaliacao getHistorico_Avaliacao() {
+    public Historico_avaliacao getHistorico_Avaliacao() {
         return avaliacao;
     }
 
-    public void setHistorico_Avaliacao(HistoricoAvaliacao avaliacao) {
+    public void setHistorico_Avaliacao(Historico_avaliacao avaliacao) {
         this.avaliacao = avaliacao;
     }
 
@@ -40,8 +40,8 @@ public class HistoricoAvaliacaoBean {
         return "avaliacaolst";
     }
 
-    public String edit(HistoricoAvaliacao i) {
-        avaliacao = (HistoricoAvaliacao) avaliacoes.getRowData();
+    public String edit(Historico_avaliacao i) {
+        avaliacao = (Historico_avaliacao) avaliacoes.getRowData();
         return "avaliacaofrm";
     }
 
@@ -50,7 +50,7 @@ public class HistoricoAvaliacaoBean {
         return "avaliacaolst";
     }
 
-    public String delete(HistoricoAvaliacao i) {
+    public String delete(Historico_avaliacao i) {
         dao.delete(i);
         return "avaliacoeslst";
     }
