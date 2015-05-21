@@ -8,7 +8,7 @@ import rs.model.Pergunta;
 import rs.model.Questionario;
 
 //@Table(name = "avaliacao_pessoa_cargo")
-public class PerguntaPessoaAvaliacao implements Serializable {
+public class Pergunta_pessoa_avaliacao implements Serializable {
 
 //    @ManyToOne
 //    @JoinColumn(name = "codpessoa")
@@ -33,7 +33,7 @@ public class PerguntaPessoaAvaliacao implements Serializable {
     private String ppa_resposta;
     private double ppa_valor;
 
-    public PerguntaPessoaAvaliacao() {
+    public Pergunta_pessoa_avaliacao() {
     }
 
 }

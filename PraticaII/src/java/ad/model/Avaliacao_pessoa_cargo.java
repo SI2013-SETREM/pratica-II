@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 //@Table(name = "avaliacao_pessoa_cargo")
-public class AvaliacaoPessoaCargo implements Serializable {
+public class Avaliacao_pessoa_cargo implements Serializable {
 
     @Id
     @SequenceGenerator(name = "avaliacao_pessoa_cargo_pk_sequence", sequenceName = "avaliacao_pessoa_cargo_id_seq")
@@ -30,7 +30,7 @@ public class AvaliacaoPessoaCargo implements Serializable {
 //private Pessoa pessoa;
     private int apc_status;
 
-    public AvaliacaoPessoaCargo() {
+    public Avaliacao_pessoa_cargo() {
     }
 
 }

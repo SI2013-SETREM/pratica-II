@@ -22,7 +22,7 @@ public class Competencia implements Serializable {
     private int cmp_status;
     @ManyToOne
     @JoinColumn(name = "codtipocompetencia")
-    private TipoCompetencia tipocompetencia;
+    private Tipo_competencia tipocompetencia;
 
     public Competencia() {
     }

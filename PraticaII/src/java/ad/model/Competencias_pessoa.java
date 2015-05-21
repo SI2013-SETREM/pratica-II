@@ -7,7 +7,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Table(name = "tipo_competencias")
-public class CompetenciasPessoa implements Serializable {
+public class Competencias_pessoa implements Serializable {
     // @ManyToOne
     //@JoinColumn(name = "codpessoa")
     //private Pessoa pessoa;
@@ -19,6 +19,6 @@ public class CompetenciasPessoa implements Serializable {
     private Date pcp_datahora_criacao;
     private Date pcp_datahora_alteracao;
 
-    public CompetenciasPessoa() {
+    public Competencias_pessoa() {
     }
 }

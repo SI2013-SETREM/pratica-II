@@ -7,7 +7,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 //@Table(name = "pessoa_avaliacao")
-public class PessoasAvaliacao implements Serializable {
+public class Pessoas_avaliacao implements Serializable {
 
    
 //    @ManyToOne
@@ -26,7 +26,7 @@ public class PessoasAvaliacao implements Serializable {
     private String pea_observacao;
     private Date pea_data_criacao;
 
-    public PessoasAvaliacao() {
+    public Pessoas_avaliacao() {
     }
     
     

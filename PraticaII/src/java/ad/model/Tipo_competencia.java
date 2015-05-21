@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 //@Table(name = "tipo_competencias")
-public class TipoCompetencia implements Serializable {
+public class Tipo_competencia implements Serializable {
 
     @Id
     @SequenceGenerator(name = "tipo_competencias_pk_sequence", sequenceName = "tipo_competencias_id_seq")
@@ -18,7 +18,7 @@ public class TipoCompetencia implements Serializable {
     private int tcp_codigo;
     private String tcp_descricao;
 
-    public TipoCompetencia() {
+    public Tipo_competencia() {
 
     }
 }

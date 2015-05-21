@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "historico_avaliacao")
-public class HistoricoAvaliacao implements Serializable {
+public class Historico_avaliacao implements Serializable {
 
     @Id
     @SequenceGenerator(name = "historico_avaliacao_pk_sequence", sequenceName = "historico_avaliacao_id_seq")
@@ -27,6 +27,6 @@ public class HistoricoAvaliacao implements Serializable {
     @JoinColumn(name = "codavaliacao")
     private Avaliacao avaliacao;
 
-    public HistoricoAvaliacao() {
+    public Historico_avaliacao() {
     }
 }
