@@ -11,11 +11,11 @@ import javax.persistence.ManyToOne;
  * @author Kelvin
  */
 
-public class Evento_folha implements Serializable {
+public class EventoFolha implements Serializable {
     @ManyToOne
     private Evento evento;
     @ManyToOne
-    private Historico_folha historico_folha;
+    private HistoricoFolha historico_folha;
     private double evf_valor;
     private String evf_indice;
     private boolean evf_imprimir;
@@ -38,11 +38,11 @@ public class Evento_folha implements Serializable {
         this.evento = evento;
     }
 
-    public Historico_folha getHistorico_folha() {
+    public HistoricoFolha getHistorico_folha() {
         return historico_folha;
     }
 
-    public void setHistorico_folha(Historico_folha historico_folha) {
+    public void setHistorico_folha(HistoricoFolha historico_folha) {
         this.historico_folha = historico_folha;
     }
 
