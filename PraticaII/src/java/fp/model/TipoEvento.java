@@ -20,6 +20,7 @@ import javax.persistence.SequenceGenerator;
 @SequenceGenerator(name = "genTipoEvento", sequenceName = "genTipoEvento", allocationSize = 1)
 public class TipoEvento implements Serializable{
     
+    
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "genTipoEvento")
     private int tpe_codigo;
