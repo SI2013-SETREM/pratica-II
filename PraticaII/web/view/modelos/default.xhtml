@@ -137,25 +137,31 @@
                                             <span class="menu-text">Local</span>                                       
                                         </h:link> 
                                     </li>
-                                    <li class="#{view.viewId.contains('ID_PAGINA_AQUI') ? 'active' : ''}">
-                                    
-                                        <h:link outcome="/faces/view/index">
+                                    <li class="menu-dropdown #{view.viewId.contains('ID_PAGINA_AQUI') ? 'open' : ''}">
+                                        <a href="javascript:void(0);">
                                             <span class="fa fa-gears"></span>
-                                            <span class="menu-text">Curso</span>                                       
-                                        </h:link> 
+                                            <span class="menu-text">Curso</span>
+                                            <span class="fa dropdown-chevron pull-right"></span>
+                                        </a>
+                                        <ul class="submenu">
+                                            <li class="menu-dropdown #{view.viewId.contains('ID_PAGINA_AQUI') ? 'active' : ''}">
+                                                <h:link outcome="/faces/view/index">
+                                                    <span class="fa fa-cog"></span>
+                                                    <span class="menu-text">Novo Curso</span>
+                                                </h:link>
+                                            </li>
+                                            <li class="menu-dropdown #{view.viewId.contains('ID_PAGINA_AQUI') ? 'active' : ''}">
+                                                <h:link outcome="/faces/view/index">
+                                                    <span class="fa fa-street-view"></span>
+                                                    <span class="menu-text">Curso por Pessoa</span>
+                                                </h:link>
+                                            </li>
+                                        </ul>
                                     </li>
-                                    <li class="#{view.viewId.contains('ID_PAGINA_AQUI') ? 'active' : ''}">
-                                    
+                                    <li class="#{view.viewId.contains('ID_PAGINA_AQUI') ? 'active' : ''}">                                 
                                         <h:link outcome="/faces/view/index">
                                             <span class="fa fa-user-plus"></span>
                                             <span class="menu-text">Solicitação</span>                                       
-                                        </h:link> 
-                                    </li>
-                                    <li class="#{view.viewId.contains('ID_PAGINA_AQUI') ? 'active' : ''}">
-                                    
-                                        <h:link outcome="/faces/view/index">
-                                            <span class="fa fa-street-view"></span>
-                                            <span class="menu-text">Cursos por Pessoa</span>                                       
                                         </h:link> 
                                     </li>
                                 </ul>
