@@ -14,11 +14,11 @@ import javax.persistence.SequenceGenerator;
  * @author Kelvin
  */
 @Entity
-@SequenceGenerator (name= "genEvento_padrao", sequenceName= "segEvento_padrao", allocationSize = 1)
-public class Evento_padrao implements Serializable {
+@SequenceGenerator (name= "genEventoPadrao", sequenceName= "segEventoPadrao", allocationSize = 1)
+public class EventoPadrao implements Serializable {
     
     @Id
-    @GeneratedValue (strategy = GenerationType.SEQUENCE, generator = "genEvento_padrao")
+    @GeneratedValue (strategy = GenerationType.SEQUENCE, generator = "genEventoPadrao")
     private int evp_codigo;
     @ManyToOne
     private Evento evento;

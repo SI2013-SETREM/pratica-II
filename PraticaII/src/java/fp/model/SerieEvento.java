@@ -13,11 +13,11 @@ import javax.persistence.SequenceGenerator;
  * @author Max
  */
 @Entity
-@SequenceGenerator(name = "genSerie_evento", sequenceName = "genSerie_evento", allocationSize = 1)
-public class Serie_evento implements Serializable{
+@SequenceGenerator(name = "genSerieEvento", sequenceName = "genSerieEvento", allocationSize = 1)
+public class SerieEvento implements Serializable{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "genSerie_evento")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "genSerieEvento")
     private int sev_codigo;
     @Column(nullable = false)
     private String sev_descricao;

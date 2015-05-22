@@ -15,11 +15,11 @@ import javax.persistence.SequenceGenerator;
  * @author Max
  */
 @Entity
-@SequenceGenerator(name = "genHistorico_folha", sequenceName = "genHistorico_folha", allocationSize = 1)
-public class Historico_folha implements Serializable {
+@SequenceGenerator(name = "genHistoricoFolha", sequenceName = "genHistoricoFolha", allocationSize = 1)
+public class HistoricoFolha implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "genHistorico_folha")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "genHistoricoFolha")
     private int hif_codigo;
     //@ManyToOne
     //private Pessoa pessoa;

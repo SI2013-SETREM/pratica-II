@@ -36,13 +36,13 @@ public class Evento implements Serializable {
     private boolean eve_acumular_rais_horas;
     private boolean eve_horas_dias;
     @ManyToOne
-    private Tab_inss tab_inss;
+    private TabINSS tab_inss;
     @ManyToOne
-    private Tabela_irrf tabela_irrf;
+    private TabelaIRRF tabela_irrf;
     @ManyToOne
-    private Tipo_evento tipo_evento;
+    private TipoEvento tipo_evento;
     @ManyToOne
-    private Serie_evento serie_evento;
+    private SerieEvento serie_evento;
     @ManyToOne
     private Formula formula;
     
@@ -145,35 +145,35 @@ public class Evento implements Serializable {
         this.eve_horas_dias = eve_horas_dias;
     }
 
-    public Tab_inss getTab_inss() {
+    public TabINSS getTab_inss() {
         return tab_inss;
     }
 
-    public void setTab_inss(Tab_inss tab_inss) {
+    public void setTab_inss(TabINSS tab_inss) {
         this.tab_inss = tab_inss;
     }
 
-    public Tabela_irrf getTabela_irrf() {
+    public TabelaIRRF getTabela_irrf() {
         return tabela_irrf;
     }
 
-    public void setTabela_irrf(Tabela_irrf tabela_irrf) {
+    public void setTabela_irrf(TabelaIRRF tabela_irrf) {
         this.tabela_irrf = tabela_irrf;
     }
 
-    public Tipo_evento getTipo_evento() {
+    public TipoEvento getTipo_evento() {
         return tipo_evento;
     }
 
-    public void setTipo_evento(Tipo_evento tipo_evento) {
+    public void setTipo_evento(TipoEvento tipo_evento) {
         this.tipo_evento = tipo_evento;
     }
 
-    public Serie_evento getSerie_evento() {
+    public SerieEvento getSerie_evento() {
         return serie_evento;
     }
 
-    public void setSerie_evento(Serie_evento serie_evento) {
+    public void setSerie_evento(SerieEvento serie_evento) {
         this.serie_evento = serie_evento;
     }
 

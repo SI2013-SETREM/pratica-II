@@ -17,11 +17,11 @@ import javax.persistence.SequenceGenerator;
  * @author Cliente
  */
 @Entity
-@SequenceGenerator(name = "genTipo_evento", sequenceName = "genTipo_evento", allocationSize = 1)
-public class Tipo_evento implements Serializable{
+@SequenceGenerator(name = "genTipoEvento", sequenceName = "genTipoEvento", allocationSize = 1)
+public class TipoEvento implements Serializable{
     
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "genTipo_evento")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "genTipoEvento")
     private int tpe_codigo;
     private String tpe_tipo_de_entrada;
     private String tpe_nome;

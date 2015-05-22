@@ -14,11 +14,11 @@ import javax.persistence.SequenceGenerator;
  */
 
 @Entity
-@SequenceGenerator (name= "genFaixa_irrf", sequenceName= "segFaixa_irrf", allocationSize = 1)
-public class Faixa_irrf implements Serializable {
+@SequenceGenerator (name= "genFaixaIRRF", sequenceName= "segFaixaIRRF", allocationSize = 1)
+public class FaixaIRRF implements Serializable {
     
      @Id
-    @GeneratedValue (strategy = GenerationType.SEQUENCE, generator = "genFaixa_irrf")
+    @GeneratedValue (strategy = GenerationType.SEQUENCE, generator = "genFaixaIRRF")
     private int frf_codigo;
     private double frf_salario_inicial;
     private double frf_salario_final;

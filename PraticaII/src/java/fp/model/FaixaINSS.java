@@ -13,11 +13,11 @@ import javax.persistence.SequenceGenerator;
  * @author Kelvin
  */
 @Entity
-@SequenceGenerator (name= "genFaixa_inss", sequenceName= "segFaixa_inss", allocationSize = 1)
-public class Faixa_inss implements Serializable {
+@SequenceGenerator (name= "genFaixaINSS", sequenceName= "segFaixaINSS", allocationSize = 1)
+public class FaixaINSS implements Serializable {
     
     @Id
-    @GeneratedValue (strategy = GenerationType.SEQUENCE, generator = "genFaixa_inss")
+    @GeneratedValue (strategy = GenerationType.SEQUENCE, generator = "genFaixaINSS")
     private int fai_codigo;
     private double fai_sal_ini;
     private double fai_sal_fin;

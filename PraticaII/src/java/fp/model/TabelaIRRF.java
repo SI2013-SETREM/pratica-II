@@ -14,11 +14,11 @@ import javax.persistence.SequenceGenerator;
  * @author Kelvin
  */
 @Entity
-@SequenceGenerator (name= "genTabela_irrf", sequenceName= "segTabela_irrf", allocationSize = 1)
-public class Tabela_irrf implements Serializable{
+@SequenceGenerator (name= "genTabelaIRRF", sequenceName= "segTabelaIRRF", allocationSize = 1)
+public class TabelaIRRF implements Serializable{
     
     @Id
-    @GeneratedValue (strategy = GenerationType.SEQUENCE, generator = "genTabela_irrf")
+    @GeneratedValue (strategy = GenerationType.SEQUENCE, generator = "genTabelaIRRF")
     private int tif_codigo;
     private Date tif_dataincial;
     private Date tif_datafinal;

@@ -15,14 +15,14 @@ import javax.persistence.SequenceGenerator;
  * @author Kelvin
  */
 @Entity
-@SequenceGenerator (name= "genTab_inss", sequenceName= "segTab_inss", allocationSize = 1)
-public class Tab_inss implements Serializable{
+@SequenceGenerator (name= "genTabINSS", sequenceName= "segTabINSS", allocationSize = 1)
+public class TabINSS implements Serializable{
     
     @Id
-    @GeneratedValue (strategy = GenerationType.SEQUENCE, generator = "genTab_inss")
+    @GeneratedValue (strategy = GenerationType.SEQUENCE, generator = "genTabINSS")
     private int tbs_codigo;
     @ManyToOne
-    private Faixa_inss faixa_inss;
+    private FaixaINSS faixa_inss;
     private Date tbs_data_inicial;
     private Date tbs_data_final;
     private double tbs_sal_fami_ini;
@@ -42,11 +42,11 @@ public class Tab_inss implements Serializable{
         this.tbs_codigo = tbs_codigo;
     }
 
-    public Faixa_inss getFaixa_inss() {
+    public FaixaINSS getFaixa_inss() {
         return faixa_inss;
     }
 
-    public void setFaixa_inss(Faixa_inss faixa_inss) {
+    public void setFaixa_inss(FaixaINSS faixa_inss) {
         this.faixa_inss = faixa_inss;
     }
 
