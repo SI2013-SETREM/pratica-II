@@ -16,7 +16,7 @@ import javax.persistence.SequenceGenerator;
 @Entity
 @SequenceGenerator (name= "genTabelaIRRF", sequenceName= "segTabelaIRRF", allocationSize = 1)
 public class TabelaIRRF implements Serializable{
-    
+     
     @Id
     @GeneratedValue (strategy = GenerationType.SEQUENCE, generator = "genTabelaIRRF")
     private int tif_codigo;

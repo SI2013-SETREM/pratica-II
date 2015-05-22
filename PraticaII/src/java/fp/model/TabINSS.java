@@ -17,7 +17,7 @@ import javax.persistence.SequenceGenerator;
 @Entity
 @SequenceGenerator (name= "genTabINSS", sequenceName= "segTabINSS", allocationSize = 1)
 public class TabINSS implements Serializable{
-    
+     
     @Id
     @GeneratedValue (strategy = GenerationType.SEQUENCE, generator = "genTabINSS")
     private int tbs_codigo;

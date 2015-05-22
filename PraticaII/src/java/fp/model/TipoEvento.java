@@ -19,6 +19,7 @@ import javax.persistence.SequenceGenerator;
 @Entity
 @SequenceGenerator(name = "genTipoEvento", sequenceName = "genTipoEvento", allocationSize = 1)
 public class TipoEvento implements Serializable{
+ 
     
     
     @Id
