@@ -5,10 +5,73 @@
  */
 package ad.controller;
 
+import ad.dao.Pessoas_avaliacaoDAO;
+import ad.model.Pessoas_avaliacao;
+import javax.faces.model.DataModel;
+import javax.faces.model.ListDataModel;
+
 /**
  *
  * @author User
  */
 public class Pessoas_avaliacaoBean {
-    
+
+    private Pessoas_avaliacao pessoas_avaliacao = new Pessoas_avaliacao();
+    private Pessoas_avaliacaoDAO dao = new Pessoas_avaliacaoDAO();
+    private DataModel avaliacoes;
+
+    public Pessoas_avaliacaoBean() {
+    }
+
+    public Pessoas_avaliacao getPessoas_avaliacao() {
+        return pessoas_avaliacao;
+    }
+
+    public void setPessoas_avaliacao(Pessoas_avaliacao pessoas_avaliacao) {
+        this.pessoas_avaliacao = pessoas_avaliacao;
+    }
+
+    public DataModel getAvaliacoes() {
+        this.avaliacoes = new ListDataModel(dao.findAll());
+        return avaliacoes;
+    }
+
+    public void setAvaliacoes(DataModel avaliacoes) {
+        this.avaliacoes = avaliacoes;
+    }
+
+    public String insert() {
+        dao.insert(pessoas_avaliacao);
+        return " pessoas_avaliacaolst";
+    }
+
+    public String edit(Pessoas_avaliacao i) {
+        pessoas_avaliacao = (Pessoas_avaliacao) avaliacoes.getRowData();
+        return " pessoas_avaliacaofrm";
+    }
+
+    public String update() {
+        dao.update(pessoas_avaliacao);
+        return " pessoas_avaliacaolst";
+    }
+
+    public String delete(Pessoas_avaliacao i) {
+        dao.delete(i);
+        return "pessoas_avaliacaolst";
+    }
+
+    public String salvar() {
+        if (true) {
+            dao.update(pessoas_avaliacao);
+        } else {
+            dao.insert(pessoas_avaliacao);
+        }
+
+        return "pessoas_avaliacaolst";
+    }
+
+    public String listar() {
+        return "pessoas_avaliacaolst";
+    }
+
 }
