@@ -16,22 +16,24 @@ public class Curso implements Serializable{
     @Id
     @SequenceGenerator(name="trd_curso_pk_sequence", sequenceName="trd_curso_id_seq")
     @GeneratedValue(strategy=GenerationType.AUTO, generator="trd_curso_pk_sequence")
-    private int codigo_curso;
-    private String nome_curso;
+    private int cur_codigo;
+    private String cur_nome;
 
-    public int getCodigo_curso() {
-        return codigo_curso;
+    public int getCur_codigo() {
+        return cur_codigo;
     }
 
-    public void setCodigo_curso(int codigo_curso) {
-        this.codigo_curso = codigo_curso;
+    public void setCur_codigo(int cur_codigo) {
+        this.cur_codigo = cur_codigo;
     }
 
-    public String getNome_curso() {
-        return nome_curso;
+    public String getCur_nome() {
+        return cur_nome;
     }
 
-    public void setNome_curso(String nome_curso) {
-        this.nome_curso = nome_curso;
+    public void setCur_nome(String cur_nome) {
+        this.cur_nome = cur_nome;
     }
+
+
 }

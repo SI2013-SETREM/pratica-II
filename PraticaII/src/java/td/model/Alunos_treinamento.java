@@ -21,6 +21,10 @@ public class Alunos_treinamento implements Serializable {
     private int tra_aprovado;
     private double tra_frequencia;
     private String tra_observacao;
+    private Date tra_datainicio;
+    private Date tra_datafim;
+    private int tra_limite_alunos;
+    private int tra_status_turma;
     @ManyToOne
     @JoinColumn(name = "tre_codigo")
     private Treinamento treinamento;
