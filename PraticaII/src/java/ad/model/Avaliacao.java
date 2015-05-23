@@ -9,11 +9,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 import rs.model.Questionario;
 import td.model.Treinamento;
 
 @Entity
-//@Table(name = "avaliacao")
+@Table(name = "avaliacao")
 public class Avaliacao implements Serializable {
 
     public static final String sTitle = "Avaliação";
@@ -24,11 +25,11 @@ public class Avaliacao implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "avaliacao_pk_sequence")
     private int ava_codigo;
     @ManyToOne
-    @JoinColumn(name = "codtreinamento")
+    @JoinColumn(name = "tre_codigo")
     private Treinamento treinamento;
 
     @ManyToOne
-    @JoinColumn(name = "codquestionario")
+    @JoinColumn(name = "qst_codigo")
     private Questionario questionario;
 
     private int ava_status;
@@ -102,6 +103,14 @@ public class Avaliacao implements Serializable {
 
     public void setAva_dataFinal(Date ava_dataFinal) {
         this.ava_dataFinal = ava_dataFinal;
+    }
+
+    public static String getsTitle() {
+        return sTitle;
+    }
+
+    public static String getpTitle() {
+        return pTitle;
     }
 
 }

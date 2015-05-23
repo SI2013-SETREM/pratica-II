@@ -35,33 +35,38 @@ public class Pessoas_avaliacaoBean {
         this.pessoas_avaliacao = pessoas_avaliacao;
     }
 
-    public DataModel getAvaliacoes() {
+    public DataModel getPessoaAvaliacoes() {
         this.pessoas_avaliacoes = new ListDataModel(dao.findAll());
         return pessoas_avaliacoes;
     }
 
-    public void setAvaliacoes(DataModel avaliacoes) {
-        this.pessoas_avaliacoes = avaliacoes;
+    public void setPessoaAvaliacoes(DataModel pessoas_avaliacoes) {
+        this.pessoas_avaliacoes = pessoas_avaliacoes;
     }
 
     public String insert() {
         dao.insert(pessoas_avaliacao);
-        return " pessoas_avaliacaolst";
+        return "pessoasavaliacaolst";
     }
 
     public String edit(Pessoas_avaliacao i) {
         pessoas_avaliacao = (Pessoas_avaliacao) pessoas_avaliacoes.getRowData();
-        return " pessoas_avaliacaofrm";
+        return "pessoasavaliacaofrm";
+    }
+
+    public String details(Pessoas_avaliacao i) {
+        pessoas_avaliacao = (Pessoas_avaliacao) pessoas_avaliacoes.getRowData();
+        return "pessoasavaliacaodls";
     }
 
     public String update() {
         dao.update(pessoas_avaliacao);
-        return " pessoas_avaliacaolst";
+        return "pessoasavaliacaolst";
     }
 
     public String delete(Pessoas_avaliacao i) {
         dao.delete(i);
-        return "pessoas_avaliacaolst";
+        return "pessoasavaliacaolst";
     }
 
     public String salvar() {
@@ -71,11 +76,12 @@ public class Pessoas_avaliacaoBean {
             dao.insert(pessoas_avaliacao);
         }
 
-        return "pessoas_avaliacaolst";
+        return "pessoasavaliacaolst";
     }
 
     public String listar() {
-        return "pessoas_avaliacaolst";
+
+        return "pessoasavaliacaolst";
     }
 
 }

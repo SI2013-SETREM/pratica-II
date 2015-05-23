@@ -11,11 +11,11 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-//@Table(name = "competencia")
+@Table(name = "competencia")
 public class Competencia implements Serializable {
 
-    public static final String sTitle = "Competência";
-    public static final String pTitle = "Competências";
+    public static String sTitle = "Competência";
+    public static String pTitle = "Competências";
 
     @Id
     @SequenceGenerator(name = "competencia_pk_sequence", sequenceName = "competencia_id_seq")
@@ -24,7 +24,7 @@ public class Competencia implements Serializable {
     private String cmp_descricao;
     private int cmp_status;
     @ManyToOne
-    @JoinColumn(name = "codtipocompetencia")
+    @JoinColumn(name = "tcp_codigo")
     private Tipo_competencia tipocompetencia;
 
     public Competencia() {
@@ -60,6 +60,14 @@ public class Competencia implements Serializable {
 
     public void setTipocompetencia(Tipo_competencia tipocompetencia) {
         this.tipocompetencia = tipocompetencia;
+    }
+
+    public static String getsTitle() {
+        return sTitle;
+    }
+
+    public static String getpTitle() {
+        return pTitle;
     }
 
     @Override

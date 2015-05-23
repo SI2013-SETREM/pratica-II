@@ -14,6 +14,9 @@ import javax.faces.model.ListDataModel;
 @RequestScoped
 public class CompetenciaBean {
 
+    private final String sTitle = Competencia.sTitle;
+    private final String pTitle = Competencia.pTitle;
+
     private Competencia competencia = new Competencia();
     private CompetenciaDAO dao = new CompetenciaDAO();
     private DataModel competencias;
