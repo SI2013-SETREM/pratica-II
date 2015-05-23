@@ -20,7 +20,7 @@ public class Dependente implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "genDependente")
     private int dep_codigo;
     @ManyToOne
-    private Ficha_funcional ficha_funcional;
+    private FichaFuncional ficha_funcional;
     private String dep_observacao;
 
     public int getDep_codigo() {
@@ -31,11 +31,11 @@ public class Dependente implements Serializable {
         this.dep_codigo = dep_codigo;
     }
 
-    public Ficha_funcional getFicha_funcional() {
+    public FichaFuncional getFicha_funcional() {
         return ficha_funcional;
     }
 
-    public void setFicha_funcional(Ficha_funcional ficha_funcional) {
+    public void setFicha_funcional(FichaFuncional ficha_funcional) {
         this.ficha_funcional = ficha_funcional;
     }
 

@@ -22,7 +22,7 @@ public class Falta implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "genFerias")
     private int flt_codigo;
     @ManyToOne
-    private Ficha_funcional ficha_funcional;
+    private FichaFuncional ficha_funcional;
     @ManyToOne
     private Advertencia advertencia;
     @Column(nullable = false)
@@ -41,11 +41,11 @@ public class Falta implements Serializable {
         this.flt_codigo = flt_codigo;
     }
 
-    public Ficha_funcional getFicha_funcional() {
+    public FichaFuncional getFicha_funcional() {
         return ficha_funcional;
     }
 
-    public void setFicha_funcional(Ficha_funcional ficha_funcional) {
+    public void setFicha_funcional(FichaFuncional ficha_funcional) {
         this.ficha_funcional = ficha_funcional;
     }
 

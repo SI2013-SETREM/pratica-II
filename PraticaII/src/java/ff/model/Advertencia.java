@@ -22,7 +22,7 @@ public class Advertencia implements Serializable{
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "genAdvertencia")
     private int adv_codigo;
     @ManyToOne
-    private Ficha_funcional ficha_funcional;
+    private FichaFuncional ficha_funcional;
     private String adv_descricao;
     @Column(nullable = false)
     private Date adv_data;
@@ -39,11 +39,11 @@ public class Advertencia implements Serializable{
         this.adv_codigo = adv_codigo;
     }
 
-    public Ficha_funcional getFicha_funcional() {
+    public FichaFuncional getFicha_funcional() {
         return ficha_funcional;
     }
 
-    public void setFicha_funcional(Ficha_funcional ficha_funcional) {
+    public void setFicha_funcional(FichaFuncional ficha_funcional) {
         this.ficha_funcional = ficha_funcional;
     }
 
