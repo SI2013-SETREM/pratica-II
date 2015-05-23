@@ -15,7 +15,7 @@ import javax.persistence.SequenceGenerator;
 
 /**
  *
- * @author Cliente
+ * @author Kelvin
  */
 @Entity
 @SequenceGenerator(name = "genEvento", sequenceName = "genEvento", allocationSize = 1)
