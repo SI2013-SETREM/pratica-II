@@ -1,6 +1,7 @@
 
 package fp.model;
 
+import cfg.model.Pessoa;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,8 +23,8 @@ public class EventoPadrao implements Serializable {
     private int evp_codigo;
     @ManyToOne
     private Evento evento;
-    //@ManyToOne
-    //private Pessoa pessoa;
+    @ManyToOne
+    private Pessoa pessoa;
 
     public int getEvp_codigo() {
         return evp_codigo;
@@ -39,6 +40,14 @@ public class EventoPadrao implements Serializable {
 
     public void setEvento(Evento evento) {
         this.evento = evento;
+    }
+
+    public Pessoa getPessoa() {
+        return pessoa;
+    }
+
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
     }
     
 }
