@@ -10,7 +10,7 @@ import javax.faces.model.ListDataModel;
 
 @ManagedBean
 @RequestScoped
-public class IdiomasBean {
+public class IdiomaBean {
     
     private final String sTitle = Idioma.sTitle;
     private final String pTitle = Idioma.pTitle;
@@ -19,7 +19,7 @@ public class IdiomasBean {
     private IdiomaDAO dao = new IdiomaDAO();
     private DataModel idiomas;
     
-    public IdiomasBean() {
+    public IdiomaBean() {
     }
 
     public String getsTitle() {
@@ -49,22 +49,22 @@ public class IdiomasBean {
     
     public String insert() {
         dao.insert(idioma);
-        return "idiomaslst";
+        return "idiomalst";
     }
     
     public String edit(Idioma i) {
         idioma = (Idioma) idiomas.getRowData();
-        return "idiomasfrm";
+        return "idiomafrm";
     }
     
     public String update() {
         dao.update(idioma);
-        return "idiomaslst";
+        return "idiomalst";
     }
     
     public String delete(Idioma i) {
         dao.delete(i);
-        return "idiomaslst";
+        return "idiomalst";
     }
     
     public String salvar() {
@@ -73,11 +73,11 @@ public class IdiomasBean {
         else 
             dao.insert(idioma);
         
-        return "idiomaslst";
+        return "idiomalst";
     }
     
     public String listar() {
-        return "idiomaslst";
+        return "idiomalst";
     }
     
     

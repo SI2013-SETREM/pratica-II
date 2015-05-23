@@ -17,7 +17,7 @@ public class Pergunta implements Serializable {
     public static final String pTitle = "Perguntas";
     
     @Id
-    private Questionario qst_codigo;
+    private Questionario questionario;
     @Id
     private int prg_codigo;
     private String prg_pergunta;
@@ -28,20 +28,20 @@ public class Pergunta implements Serializable {
 
     // From http://stackoverflow.com/questions/3585034/how-to-map-a-composite-key-with-hibernate
     public class PerguntaPK implements Serializable {
-        protected Questionario qst_codigo;
+        protected Questionario questionario;
         protected int prg_codigo;
 
         public PerguntaPK() {}
 
-        public PerguntaPK(Questionario qst_codigo, int prg_codigo) {
-            this.qst_codigo = qst_codigo;
+        public PerguntaPK(Questionario questionario, int prg_codigo) {
+            this.questionario = questionario;
             this.prg_codigo = prg_codigo;
         }
 
         @Override
         public int hashCode() {
             int hash = 7;
-            hash = 19 * hash + Objects.hashCode(this.qst_codigo);
+            hash = 19 * hash + Objects.hashCode(this.questionario);
             hash = 19 * hash + this.prg_codigo;
             return hash;
         }
@@ -55,7 +55,7 @@ public class Pergunta implements Serializable {
                 return false;
             }
             final PerguntaPK other = (PerguntaPK) obj;
-            if (!Objects.equals(this.qst_codigo, other.qst_codigo)) {
+            if (!Objects.equals(this.questionario, other.questionario)) {
                 return false;
             }
             if (this.prg_codigo != other.prg_codigo) {
@@ -69,12 +69,12 @@ public class Pergunta implements Serializable {
     public Pergunta() {
     }
 
-    public Questionario getQst_codigo() {
-        return qst_codigo;
+    public Questionario getQuestionario() {
+        return questionario;
     }
 
-    public void setQst_codigo(Questionario qst_codigo) {
-        this.qst_codigo = qst_codigo;
+    public void setQuestionario(Questionario questionario) {
+        this.questionario = questionario;
     }
 
     public int getPrg_codigo() {

@@ -181,8 +181,7 @@ body {
   color: #00456a;
 }
 .page-sidebar .page-sidebar-menu li.active > a {
-  border-left: 2px solid #00456a;
-  margin-left: -2px;
+  border-left: 3px solid #00456a;
 }
 .page-sidebar .page-sidebar-menu .menu-dropdown .dropdown-chevron {
   font-size: 14px;

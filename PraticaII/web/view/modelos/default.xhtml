@@ -75,8 +75,8 @@
                                             <span class="menu-text">Gestão de Currículos</span>
                                         </h:link>
                                     </li>
-                                    <li class="#{view.viewId.contains('/rs/qst') ? 'active' : ''}">
-                                        <h:link outcome="/faces/view/rs/qst">
+                                    <li class="#{view.viewId.contains('/rs/questionario') ? 'active' : ''}">
+                                        <h:link outcome="/faces/view/rs/questionariolst">
                                             <span class="fa fa-question-circle"></span>
                                             <span class="menu-text">Questionários</span>
                                         </h:link>
@@ -203,8 +203,8 @@
                                     <span class="fa dropdown-chevron pull-right"></span>
                                 </a>
                                 <ul class="submenu">
-                                    <li class="#{view.viewId.contains('/idiomas') ? 'active' : ''}">
-                                        <h:link outcome="/faces/view/cfg/idiomaslst">
+                                    <li class="#{view.viewId.contains('/idioma') ? 'active' : ''}">
+                                        <h:link outcome="/faces/view/cfg/idiomalst">
                                             <span class="fa fa-language"></span>
                                             <span class="menu-text">Idiomas</span>
                                         </h:link>
@@ -217,13 +217,13 @@
                                         </a>
                                         <ul class="submenu">
                                             <li class="menu-dropdown #{view.viewId.contains('/local') ? 'active' : ''}">
-                                                <h:link outcome="/faces/view/cfg/idiomaslst">
+                                                <h:link outcome="/faces/view/cfg/idiomalst">
                                                     <span class="fa fa-flag"></span>
                                                     <span class="menu-text">Cidades</span>
                                                 </h:link>
                                             </li>
                                             <li class="menu-dropdown #{view.viewId.contains('/local') ? 'active' : ''}">
-                                                <h:link outcome="/faces/view/cfg/idiomaslst">
+                                                <h:link outcome="/faces/view/cfg/idiomalst">
                                                     <span class="fa fa-location-arrow"></span>
                                                     <span class="menu-text">Bairros</span>
                                                 </h:link>

@@ -6,36 +6,36 @@
     xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
     <ui:define name="title">
-        ${idiomasBean.pTitle}
+        ${idiomaBean.pTitle}
     </ui:define>
 
     <ui:define name="breadcrumb">
         <li>Configurações</li>
-        <li><h:link value="${idiomasBean.pTitle}" outcome="/faces/view/cfg/idiomaslst" /></li>
+        <li><h:link value="${idiomaBean.pTitle}" outcome="/faces/view/cfg/idiomalst" /></li>
     </ui:define>
 
     <ui:define name="main-content">
         <div class="panel panel-body">
-            <h3><h:outputText value="Dados do ${idiomasBean.sTitle}"/></h3>
+            <h3><h:outputText value="Dados do ${idiomaBean.sTitle}"/></h3>
             <f:view>
                 <h:form styleClass="form-horizontal">
-                    <h:inputHidden id="idiCodigo" value="#{idiomasBean.idioma.idiCodigo}" />
+                    <h:inputHidden id="idiCodigo" value="#{idiomaBean.idioma.idiCodigo}" />
 <!--                            <div class="form-group">
                         <h:outputLabel value="Código:" for="idiCodigo" styleClass="control-label col-sm-1" />
                         <div class="col-md-6">
-                            <h:inputText id="idiCodigo" value="#{idiomasBean.idioma.idiCodigo}" title="IdiCodigo" styleClass="form-control" />
+                            <h:inputText id="idiCodigo" value="#{idiomaBean.idioma.idiCodigo}" title="IdiCodigo" styleClass="form-control" />
                         </div>
                     </div>-->
                     <div class="form-group">
                         <h:outputLabel value="Descrição:" for="idiDescricao" styleClass="control-label col-sm-1" />
                         <div class="col-md-6 col-sm-12">
-                            <h:inputText id="idiDescricao" value="#{idiomasBean.idioma.idiDescricao}" title="IdiDescricao" styleClass="form-control" pt:autofocus="" />
+                            <h:inputText id="idiDescricao" value="#{idiomaBean.idioma.idiDescricao}" title="IdiDescricao" styleClass="form-control" pt:autofocus="" />
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-md-offset-1 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
-                            <h:link styleClass="btn btn-default" value="Cancelar" outcome="#{idiomasBean.listar()}" />
-                            <h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{idiomasBean.salvar()}"></h:commandButton>
+                            <h:link styleClass="btn btn-default" value="Cancelar" outcome="#{idiomaBean.listar()}" />
+                            <h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{idiomaBean.salvar()}"></h:commandButton>
                         </div>
                     </div>
                 </h:form>
