@@ -9,7 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
 import rs.model.Questionario;
 import td.model.Treinamento;
 
@@ -24,23 +23,18 @@ public class Avaliacao implements Serializable {
     @ManyToOne
     @JoinColumn(name = "codtreinamento")
     private Treinamento treinamento;
-//
-//    @ManyToOne
-//    @JoinColumn(name = "recrutamento")
-//    private Recrutamento recrutamento;
-//
+
     @ManyToOne
     @JoinColumn(name = "codquestionario")
     private Questionario questionario;
 
     private int ava_status;
     private String ava_nome;
-    private Date ava_datahora_inicial;
-    private int ava_modulo;
+    private Date ava_dataInicial;
     private String ava_observacao;
-    private Date ava_datahora_final;
+    private Date ava_dataFinal;
 
-    public Avaliacao() { 
+    public Avaliacao() {
     }
 
     public int getAva_codigo() {
@@ -83,22 +77,6 @@ public class Avaliacao implements Serializable {
         this.ava_nome = ava_nome;
     }
 
-    public Date getAva_datahora_inicial() {
-        return ava_datahora_inicial;
-    }
-
-    public void setAva_datahora_inicial(Date ava_datahora_inicial) {
-        this.ava_datahora_inicial = ava_datahora_inicial;
-    }
-
-    public int getAva_modulo() {
-        return ava_modulo;
-    }
-
-    public void setAva_modulo(int ava_modulo) {
-        this.ava_modulo = ava_modulo;
-    }
-
     public String getAva_observacao() {
         return ava_observacao;
     }
@@ -107,12 +85,20 @@ public class Avaliacao implements Serializable {
         this.ava_observacao = ava_observacao;
     }
 
-    public Date getAva_datahora_final() {
-        return ava_datahora_final;
+    public Date getAva_dataInicial() {
+        return ava_dataInicial;
     }
 
-    public void setAva_datahora_final(Date ava_datahora_final) {
-        this.ava_datahora_final = ava_datahora_final;
+    public void setAva_dataInicial(Date ava_dataInicial) {
+        this.ava_dataInicial = ava_dataInicial;
     }
-    
+
+    public Date getAva_dataFinal() {
+        return ava_dataFinal;
+    }
+
+    public void setAva_dataFinal(Date ava_dataFinal) {
+        this.ava_dataFinal = ava_dataFinal;
+    }
+
 }

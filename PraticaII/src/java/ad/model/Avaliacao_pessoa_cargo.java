@@ -21,16 +21,19 @@ public class Avaliacao_pessoa_cargo implements Serializable {
     @ManyToOne
     @JoinColumn(name = "codavaliacao")
     private Avaliacao avaliacao;
-//@ManyToOne
-//@JoinColumn(name = "cargo")
-//private Cargo cargo;
 
-//@ManyToOne
-//@JoinColumn(name = "pessoa")
-//private Pessoa pessoa;
-    private int apc_status;
+//    @ManyToOne
+//    @JoinColumn(name = "cargo")
+//    private Cargo cargo;
+
+//    @ManyToOne
+//    @JoinColumn(name = "pessoa")
+//    private Pessoa pessoa;
+//    private int apc_status;
 
     public Avaliacao_pessoa_cargo() {
     }
+    
+    
 
 }

@@ -18,8 +18,8 @@ public class AvaliacaoBean {
     }
 
     public Avaliacao getAvaliacao() {
-        avaliacao.setAva_datahora_inicial(new Date());
-        avaliacao.setAva_datahora_final(new Date());
+        avaliacao.setAva_dataInicial(new Date());
+        avaliacao.setAva_dataFinal(new Date());
         return avaliacao;
     }
 

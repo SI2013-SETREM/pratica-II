@@ -6,7 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
 
 @Entity
 //@Table(name = "tipo_competencia")
@@ -36,6 +35,5 @@ public class Tipo_competencia implements Serializable {
     public void setTcp_descricao(String tcp_descricao) {
         this.tcp_descricao = tcp_descricao;
     }
-    
-    
+
 }

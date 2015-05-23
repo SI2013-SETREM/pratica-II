@@ -13,11 +13,9 @@ public class Pergunta_pessoa_avaliacao implements Serializable {
 //    @ManyToOne
 //    @JoinColumn(name = "codpessoa")
 //    private Pessoa pessoa;
-
 //    @ManyToOne
 //    @JoinColumn(name = "codavaliador")
 //    private Pessoa avaliador;
-
     @ManyToOne
     @JoinColumn(name = "codavaiacao")
     private Avaliacao avaliacao;
@@ -31,7 +29,7 @@ public class Pergunta_pessoa_avaliacao implements Serializable {
     private Pergunta pergunta;
 
     private String ppa_resposta;
-    private double ppa_valor;
+    private int ppa_valor;
 
     public Pergunta_pessoa_avaliacao() {
     }
