@@ -14,11 +14,11 @@ import javax.persistence.SequenceGenerator;
  * @author Max
  */
 @Entity
-@SequenceGenerator(name = "genFicha_funcional", sequenceName = "genFicha_funcional", allocationSize = 1)
-public class Ficha_funcional implements Serializable {
+@SequenceGenerator(name = "genFichaFuncional", sequenceName = "genFichaFuncional", allocationSize = 1)
+public class FichaFuncional implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "genFicha_funcional")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "genFichaFuncional")
     private int ffu_codigo;
  
     @Column(nullable = false)
