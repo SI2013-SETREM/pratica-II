@@ -18,7 +18,7 @@ public class Pessoas_avaliacaoBean {
 
     private Pessoas_avaliacao pessoas_avaliacao = new Pessoas_avaliacao();
     private Pessoas_avaliacaoDAO dao = new Pessoas_avaliacaoDAO();
-    private DataModel avaliacoes;
+    private DataModel pessoas_avaliacoes;
 
     public Pessoas_avaliacaoBean() {
     }
@@ -32,12 +32,12 @@ public class Pessoas_avaliacaoBean {
     }
 
     public DataModel getAvaliacoes() {
-        this.avaliacoes = new ListDataModel(dao.findAll());
-        return avaliacoes;
+        this.pessoas_avaliacoes = new ListDataModel(dao.findAll());
+        return pessoas_avaliacoes;
     }
 
     public void setAvaliacoes(DataModel avaliacoes) {
-        this.avaliacoes = avaliacoes;
+        this.pessoas_avaliacoes = avaliacoes;
     }
 
     public String insert() {
@@ -46,7 +46,7 @@ public class Pessoas_avaliacaoBean {
     }
 
     public String edit(Pessoas_avaliacao i) {
-        pessoas_avaliacao = (Pessoas_avaliacao) avaliacoes.getRowData();
+        pessoas_avaliacao = (Pessoas_avaliacao) pessoas_avaliacoes.getRowData();
         return " pessoas_avaliacaofrm";
     }
 
