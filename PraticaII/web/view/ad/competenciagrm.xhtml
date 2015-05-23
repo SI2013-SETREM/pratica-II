@@ -45,7 +45,7 @@
                                 </f:facet>
                                 <h:outputText value="#{item.cmp_descricao}"/>
                             </p:column>
-                            ]  <p:column>
+                            <p:column>
                                 <f:facet name="header">
                                     <h:outputText value="Status"/>
                                 </f:facet>
@@ -70,14 +70,25 @@
                     </h:form><br/>
                     <h:form id="form" styleClass="form-horizontal">
                         <h:inputHidden id="idiCodigo" value="#{competenciaBean.competencia.cmp_codigo}" />
-                        <div class="col-md-12">
-                            <div class="row">
-                                <div class="col-md-12"><p:outputLabel value="Status: " for="descricao" /></div>
-                                <div class="col-md-12 desc"><p:inputTextarea id="descricao" value="#{competenciaBean.competencia.cmp_status}" placeholder="Descrição do tipo de Competência"/></div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="col-md-12"><p:outputLabel value="Status: " for="status" /></div>
+                                <div class="col-md-12 desc">
+                                    <p:selectOneMenu id="status" value="#{competenciaBean.competencia.cmp_status}" style="width:200px">
+                                        <f:selectItem itemLabel="Ativo" itemValue="1" />
+                                        <f:selectItem itemLabel="Bloqueado" itemValue="2" />
+                                    </p:selectOneMenu>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="row">
+                            <div class="col-md-6">
+                                <div class="col-md-12"><p:outputLabel value="Tipo de Competência: " for="tipo_competencia" /></div>
+                                <div class="col-md-12 desc">
+                                    <p:selectOneMenu id="tipo_competencia" value="">
+                                        <f:selectItems value="" itemLabel=""/>
+                                    </p:selectOneMenu>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
                                 <div class="col-md-12"><p:outputLabel value="Descrição: " for="descricao" /></div>
                                 <div class="col-md-12 desc"><p:inputTextarea id="descricao" value="#{competenciaBean.competencia.cmp_descricao}" placeholder="Descrição do tipo de Competência"/></div>
                             </div>

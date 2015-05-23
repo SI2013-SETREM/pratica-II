@@ -42,4 +42,77 @@ public class Avaliacao implements Serializable {
 
     public Avaliacao() { 
     }
+
+    public int getAva_codigo() {
+        return ava_codigo;
+    }
+
+    public void setAva_codigo(int ava_codigo) {
+        this.ava_codigo = ava_codigo;
+    }
+
+    public Treinamento getTreinamento() {
+        return treinamento;
+    }
+
+    public void setTreinamento(Treinamento treinamento) {
+        this.treinamento = treinamento;
+    }
+
+    public Questionario getQuestionario() {
+        return questionario;
+    }
+
+    public void setQuestionario(Questionario questionario) {
+        this.questionario = questionario;
+    }
+
+    public int getAva_status() {
+        return ava_status;
+    }
+
+    public void setAva_status(int ava_status) {
+        this.ava_status = ava_status;
+    }
+
+    public String getAva_nome() {
+        return ava_nome;
+    }
+
+    public void setAva_nome(String ava_nome) {
+        this.ava_nome = ava_nome;
+    }
+
+    public Date getAva_datahora_inicial() {
+        return ava_datahora_inicial;
+    }
+
+    public void setAva_datahora_inicial(Date ava_datahora_inicial) {
+        this.ava_datahora_inicial = ava_datahora_inicial;
+    }
+
+    public int getAva_modulo() {
+        return ava_modulo;
+    }
+
+    public void setAva_modulo(int ava_modulo) {
+        this.ava_modulo = ava_modulo;
+    }
+
+    public String getAva_observacao() {
+        return ava_observacao;
+    }
+
+    public void setAva_observacao(String ava_observacao) {
+        this.ava_observacao = ava_observacao;
+    }
+
+    public Date getAva_datahora_final() {
+        return ava_datahora_final;
+    }
+
+    public void setAva_datahora_final(Date ava_datahora_final) {
+        this.ava_datahora_final = ava_datahora_final;
+    }
+    
 }

@@ -2,13 +2,12 @@ package ad.controller;
 
 import ad.dao.AvaliacaoDAO;
 import ad.model.Avaliacao;
+import java.util.Date;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 
 @ManagedBean
-@RequestScoped
 public class AvaliacaoBean {
 
     private Avaliacao avaliacao = new Avaliacao();
@@ -19,6 +18,8 @@ public class AvaliacaoBean {
     }
 
     public Avaliacao getAvaliacao() {
+        avaliacao.setAva_datahora_inicial(new Date());
+        avaliacao.setAva_datahora_final(new Date());
         return avaliacao;
     }
 
@@ -56,7 +57,7 @@ public class AvaliacaoBean {
     }
 
     public String salvar() {
-        if (true) {
+        if (avaliacao.getAva_codigo() > 0) {
             dao.update(avaliacao);
         } else {
             dao.insert(avaliacao);

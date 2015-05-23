@@ -24,23 +24,42 @@
                     $(function () {
                         $('#bntAddPanel').click(function (e) {
                             e.preventDefault();
-                            var html = $('#HtmlExample').clone().attr('id', '');
-                            $(html).insertAfter('#HtmlExample');
+                            var html = $('.Questao.HtmlExample').clone().removeClass('HtmlExample');
+                            $('#Formulario').append($(html));
                         });
                         $(document).on('click', '.removePanel', function () {
-                            $(this).parents('.panel:eq(0)').slideUp()(function () {
+                            $(this).parents('.Questao:eq(0)').slideUp()(function () {
                                 $(this).remove();
                             });
                         });
                     });
                 </script>
+
+
+
                 <style>
                     .removePanel{
                         float: right;
                         cursor: pointer;
                     }
-                    #HtmlExample{
+                    .HtmlExample{
                         display: none;
+                    }
+                    .lbl{
+                        text-align: right;
+                    }
+                    .field{
+                        text-align: left;
+                    }
+                    .serach{
+                        position: absolute;
+                        right: 25px;
+                        top: 35px;
+                    }
+                    .ViewField{
+                        border: 1px solid #ccc;
+                        padding: 5px;
+                        border-radius: 4px;
                     }
                 </style>
                 <div class="panel panel-body">
@@ -53,44 +72,50 @@
                                 <div class="row">
                                     <di class="col-md-6">
                                         <div class="form-group">
-                                            <div class="col-md-5">
+                                            <div class="col-md-5 lbl">
                                                 <p:outputLabel value="Nome: " for="nome" />
                                             </div>
-                                            <div class="col-md-7">
+                                            <div class="col-md-7 field">
                                                 <p:inputText id="nome" value="" title="Nome"/>
                                             </div>
                                         </div>
                                     </di>
                                     <di class="col-md-6">
                                         <div class="form-group">
-                                            <div class="col-md-5">
-                                                <p:outputLabel value="Data de Início: " for="date_start" /></div>
-                                            <div class="col-md-7"><p:calendar id="date_start" value="#{calendarView.date9}" pattern="dd-MM-yyyy" mask="true" />
+                                            <div class="col-md-5 lbl">
+                                                <p:outputLabel value="Status: " for="status" />
+                                            </div>
+                                            <div class="col-md-7 field">
+                                                <p:inputText id="status" value="" title="Status"/>
+                                                <!--                                                <select class="form-control" id="status">
+                                                                                                    <option value="1">Ativo</option>
+                                                                                                    <option value="2">Inativo</option>
+                                                                                                </select>-->
                                             </div>
                                         </div>
                                     </di>
                                     <di class="col-md-6">
                                         <div class="form-group">
-                                            <div class="col-md-5">
+                                            <div class="col-md-5 lbl">
+                                                <p:outputLabel value="Data de Início: " for="date_start" /></div>
+                                            <div class="col-md-7 field"><p:calendar id="date_start" value="#{avaliacaoBean.avaliacao.ava_datahora_inicial}" pattern="dd/MM/yyyy" mask="true" />
+                                            </div>
+                                        </div>
+                                    </di>
+                                    <di class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="col-md-5 lbl">
                                                 <p:outputLabel value="Data de Término: " for="date_end" />
                                             </div>
-                                            <div class="col-md-7">
-                                                <p:calendar id="date_end" value="#{calendarView.date9}" pattern="dd-MM-yyyy" mask="true" />
+                                            <div class="col-md-7 field">
+                                                <p:calendar id="date_end" value="#{avaliacaoBean.avaliacao.ava_datahora_final}" pattern="dd/MM/yyyy" mask="true" />
                                             </div>
                                         </div>
                                     </di>
                                 </div>
                             </p:tab>
                             <p:tab title="Formulário">
-                                <div class="panel panel-default" id="HtmlExample">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <i class="fa fa-times removePanel"></i>
-                                            <label>Nome:</label>
-                                            <input type="text" class="form-control"/>
-                                        </div>
-                                    </div>
-                                </div>
+                                <div id="Formulario"></div>
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-md-12">
@@ -98,10 +123,6 @@
                                         </div>
                                     </div>
                                 </div>
-                            </p:tab>
-                            <p:tab title="Outro">
-                                <p:outputLabel for="mask" value="Mask:" />
-                                <p:calendar id="mask" value="#{calendarView.date9}" pattern="dd-MM-yyyy" mask="true" />
                             </p:tab>
                         </p:tabView>
                         <div class="form-group">
@@ -112,9 +133,98 @@
                         </div>
                     </h:form>
                 </div>
+
+
+                <script>
+                    $(function () {
+                        $(document).on('change', '.selectType', function () {
+                            var val = $(this).val();
+                            $(this).parents('.Questao:eq(0)').find('.ViewField .fieldView').addClass('hidden');
+                            $(this).parents('.Questao:eq(0)').find('.ViewField .fieldView[data-type="' + val + '"]').removeClass('hidden');
+                        });
+                    });
+                </script>
+                <div class="panel panel-default Questao HtmlExample">
+                    <div class="panel-body">
+                        <i class="fa fa-times removePanel"></i>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Competência: </label>
+                                <input type="text" class="form-control" placeholder="Pesquisar competência"/>
+                                <i class="fa fa-search Icomp serach"></i>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="checkbox"/>
+                                <label>Obrigatório: </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Tipo de questão: </label>
+                                <select class="form-control selectType">
+                                    <option value="0">--Selecione--</option>
+                                    <option value="1">Texto Normal</option>
+                                    <option value="2">Texto Grande</option>
+                                    <option value="3">Numérico</option>
+                                    <option value="4">Multiseleção</option>
+                                    <option value="5">Caixa de seleção</option>
+                                    <option value="6">Verdadeiro ou falso</option>
+                                    <option value="7">Monetário</option>
+                                    <option value="8">Data</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Label:</label>
+                                <input type="text" class="form-control" placeholder="Nome que aprece no campo"/>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control"/>
+                                <a class="btn btn-primary"><i class="fa fa-plus"></i>Add</a>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="ViewField">
+                                    <input type="text" class="form-control hidden fieldView" data-type="1"/>
+                                    <textarea class="form-control hidden fieldView" data-type="2"></textarea>   
+                                    <input type="number" min="0" class="form-control hidden fieldView" data-type="3"/>
+                                    <input type="checkbox" class="hidden fieldView" data-type="4"/>
+                                    <select class="form-control hidden fieldView" data-type="5"></select>
+                                    <input type="checkbox" class="hidden fieldView" data-type="6"/>
+                                    <input type="number" min='0' class="form-control hidden fieldView" data-type="7"/>
+                                    <input type="date" class="form-control hidden fieldView" data-type="8"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             </ui:define>
-
         </ui:composition>
-
     </body>
 </html>

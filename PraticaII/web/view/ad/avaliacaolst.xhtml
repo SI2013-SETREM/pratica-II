@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
     <body>
         <ui:composition template="../modelos/default.xhtml">
             <ui:define name="title">
@@ -15,6 +16,7 @@
             </ui:define>
 
             <ui:define name="main-content">
+
                 <div class="panel panel-body">
                     <h3><h:outputText value="Lista de Avaliações"/></h3>
                     <div class="btns-top-table">
@@ -23,16 +25,60 @@
                         </h:link>
                     </div>
                     <h:form>
-                        <h:dataTable value="${avaliacaoBean.avaliacoes}" var="item" styleClass="dataTable table table-bordered table-striped">
-                            <h:column class="col-excluir">
+                        <p:dataTable value="${avaliacaoBean.avaliacao}" var="item" styleClass="dataTable table table-bordered table-striped">
+                            <p:column>
                                 <f:facet name="header">
-                                    <h:outputText value="Excluir"/>
+                                    <h:outputText value="Id"/>
                                 </f:facet>
-                                <h:commandLink onclick="return confirm('Deseja realmente excluir a Avaiação?');" action="${idiomasBean.delete(item)}">
-                                    <i class="fa fa-trash"></i> Excluir
-                                </h:commandLink>
-                            </h:column>
-                        </h:dataTable>
+                                <h:outputText value="#{item.ava_codigo}"/>
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Nome"/>
+                                </f:facet>
+                                <h:outputText value="#{item.ava_nome}"/>
+                            </p:column>  
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Status"/>
+                                </f:facet>
+                                <h:outputText value="#{item.ava_status}"/>
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Data Inicial"/>
+                                </f:facet>
+                                <h:outputText value="#{item.ava_datahora_inicial}"/>
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Data Final"/>
+                                </f:facet>
+                                <h:outputText value="#{item.ava_datahora_final}"/>
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Observação"/>
+                                </f:facet>
+                                <h:outputText value="#{item.ava_observacao}"/>
+                            </p:column>
+
+                            <p:column style="width: 200px">
+                                <f:facet name="header">
+                                    <h:outputText value="Opções"/>
+                                </f:facet>
+                                <h:commandLink action="#{avaliacaoBean.edit()}" class="btn btn-default fa fa-pencil" title="Editar"/>
+                                <h:commandLink class="btn btn-default fa fa-list" title="Detalhes"/>
+                                <h:commandLink class="btn btn-default fa fa-users" title="Avaliados"/>
+                                <h:commandLink action="#{avaliacaoBean.delete()}" class="btn btn-default fa fa-trash" onclick="return confirm('Are you sure?')" title="Excluir"/>
+                            </p:column>
+
+                        </p:dataTable>
                     </h:form>
                 </div>
             </ui:define>
