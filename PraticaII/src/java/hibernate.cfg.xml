@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
   <session-factory>
@@ -10,6 +10,44 @@
     <property name="hibernate.show_sql">true</property>
     <property name="hibernate.format_sql">true</property>
     <property name="hibernate.hbm2ddl.auto">update</property>
-    <mapping class="cfg.model.Idioma" />
+    <mapping class="ad.model.Avaliacao"/>
+    <mapping class="ad.model.Competencia"/>
+    <mapping class="cfg.model.Bairro"/>
+    <mapping class="cfg.model.Cidade"/>
+    <mapping class="cfg.model.Conversa"/>
+    <mapping class="cfg.model.Empresa"/>
+    <mapping class="cfg.model.Endereco"/>
+    <mapping class="cfg.model.Idioma"/>
+    <mapping class="cfg.model.Log"/>
+    <mapping class="cfg.model.Parametro"/>
+    <mapping class="cfg.model.Pessoa"/>
+    <mapping class="cfg.model.RedeSocial"/>
+    <mapping class="cfg.model.Repositorio"/>
+    <mapping class="cfg.model.Usuario"/>
+    <mapping class="csb.model.Epi"/>
+    <mapping class="csb.model.MotivoAlteracaoSalarial"/>
+    <mapping class="csb.model.TipoExame"/>
+    <mapping class="ff.model.Advertencia"/>
+    <mapping class="ff.model.Dependente"/>
+    <mapping class="ff.model.Falta"/>
+    <mapping class="ff.model.Ferias"/>
+    <mapping class="ff.model.FichaFuncional"/>
+    <mapping class="fp.model.Evento"/>
+    <mapping class="fp.model.EventoFolha"/>
+    <mapping class="fp.model.EventoPadrao"/>
+    <mapping class="fp.model.FaixaINSS"/>
+    <mapping class="fp.model.FaixaIRRF"/>
+    <mapping class="fp.model.Formula"/>
+    <mapping class="fp.model.HistoricoFolha"/>
+    <mapping class="fp.model.SerieEvento"/>
+    <mapping class="fp.model.TabINSS"/>
+    <mapping class="fp.model.TabelaIRRF"/>
+    <mapping class="fp.model.TipoEvento"/>
+    <mapping class="rs.model.Pergunta"/>
+    <mapping class="rs.model.Questionario"/>
+    <mapping class="td.model.Curso"/>
+    <mapping class="td.model.Local"/>
+    <mapping class="td.model.Solicitacao"/>
+    <mapping class="td.model.Treinamento"/>
   </session-factory>
 </hibernate-configuration>

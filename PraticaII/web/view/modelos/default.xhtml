@@ -97,7 +97,7 @@
                             </li>
                             <li class="menu-dropdown #{view.viewId.contains('/csb/') ? 'open' : ''}">
                                 <a href="javascript:void(0);">
-                                    <span class="fa fa-briefcase"></span>
+                                    <span class="fa fa-files-o"></span>
                                     <span class="menu-text">Cargos, Salários, Benefícios</span>
                                     <span class="fa dropdown-chevron pull-right"></span>
                                 </a>
@@ -203,32 +203,62 @@
                                     <span class="fa dropdown-chevron pull-right"></span>
                                 </a>
                                 <ul class="submenu">
+                                    <li class="#{view.viewId.contains('/usuario') ? 'active' : ''}">
+                                        <h:link outcome="/faces/view/cfg/usuariolst">
+                                            <span class="fa fa-users"></span>
+                                            <span class="menu-text">Usuários</span>
+                                        </h:link>
+                                    </li>
+                                    <li class="#{view.viewId.contains('/empresa') ? 'active' : ''}">
+                                        <h:link outcome="/faces/view/cfg/empresalst">
+                                            <span class="fa fa-briefcase"></span>
+                                            <span class="menu-text">Empresas</span>
+                                        </h:link>
+                                    </li>
                                     <li class="#{view.viewId.contains('/idioma') ? 'active' : ''}">
                                         <h:link outcome="/faces/view/cfg/idiomalst">
                                             <span class="fa fa-language"></span>
                                             <span class="menu-text">Idiomas</span>
                                         </h:link>
                                     </li>
-                                    <li class="menu-dropdown #{view.viewId.contains('/local') ? 'open' : ''}">
+                                    <li class="#{view.viewId.contains('/redeSocial') ? 'active' : ''}">
+                                        <h:link outcome="/faces/view/cfg/redeSociallst">
+                                            <span class="fa fa-share-alt"></span>
+                                            <span class="menu-text">Redes Sociais</span>
+                                        </h:link>
+                                    </li>
+                                    <li class="menu-dropdown #{view.viewId.contains('/cidade') || view.viewId.contains('/bairro') || view.viewId.contains('/endereco') ? 'open' : ''}">
                                         <a href="javascript:void(0);">
                                             <span class="fa fa-location-arrow"></span>
-                                            <span class="menu-text">Localizações</span>
+                                            <span class="menu-text">Localização</span>
                                             <span class="fa dropdown-chevron pull-right"></span>
                                         </a>
                                         <ul class="submenu">
-                                            <li class="menu-dropdown #{view.viewId.contains('/local') ? 'active' : ''}">
-                                                <h:link outcome="/faces/view/cfg/idiomalst">
-                                                    <span class="fa fa-flag"></span>
+                                            <li class="#{view.viewId.contains('/cidade') ? 'active' : ''}">
+                                                <h:link outcome="/faces/view/cfg/cidadelst">
+                                                    <span class="fa fa-building"></span>
                                                     <span class="menu-text">Cidades</span>
                                                 </h:link>
                                             </li>
-                                            <li class="menu-dropdown #{view.viewId.contains('/local') ? 'active' : ''}">
-                                                <h:link outcome="/faces/view/cfg/idiomalst">
-                                                    <span class="fa fa-location-arrow"></span>
+                                            <li class="#{view.viewId.contains('/bairro') ? 'active' : ''}">
+                                                <h:link outcome="/faces/view/cfg/bairrolst">
+                                                    <span class="fa fa-th-large"></span>
                                                     <span class="menu-text">Bairros</span>
                                                 </h:link>
                                             </li>
+                                            <li class="#{view.viewId.contains('/endereco') ? 'active' : ''}">
+                                                <h:link outcome="/faces/view/cfg/enderecolst">
+                                                    <span class="fa fa-map-marker"></span>
+                                                    <span class="menu-text">Endereços</span>
+                                                </h:link>
+                                            </li>
                                         </ul>
+                                    </li>
+                                    <li class="#{view.viewId.contains('/parametro') ? 'active' : ''}">
+                                        <h:link outcome="/faces/view/cfg/parametrolst">
+                                            <span class="fa fa-cog"></span>
+                                            <span class="menu-text">Parâmetros</span>
+                                        </h:link>
                                     </li>
                                 </ul>
                             </li>

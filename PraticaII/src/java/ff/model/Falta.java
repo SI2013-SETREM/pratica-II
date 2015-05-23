@@ -19,7 +19,7 @@ import javax.xml.crypto.Data;
 public class Falta implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "genFerias")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "genFalta")
     private int flt_codigo;
     @ManyToOne
     private FichaFuncional ficha_funcional;
