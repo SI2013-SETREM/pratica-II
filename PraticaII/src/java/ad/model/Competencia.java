@@ -14,6 +14,9 @@ import javax.persistence.Table;
 //@Table(name = "competencia")
 public class Competencia implements Serializable {
 
+    public static final String sTitle = "Competência";
+    public static final String pTitle = "Competências";
+
     @Id
     @SequenceGenerator(name = "competencia_pk_sequence", sequenceName = "competencia_id_seq")
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "competencia_pk_sequence")
@@ -80,6 +83,5 @@ public class Competencia implements Serializable {
         }
         return true;
     }
-    
-    
+
 }

@@ -7,6 +7,8 @@ package ad.controller;
 
 import ad.dao.Pessoas_avaliacaoDAO;
 import ad.model.Pessoas_avaliacao;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 
@@ -14,6 +16,8 @@ import javax.faces.model.ListDataModel;
  *
  * @author User
  */
+@ManagedBean
+@RequestScoped
 public class Pessoas_avaliacaoBean {
 
     private Pessoas_avaliacao pessoas_avaliacao = new Pessoas_avaliacao();

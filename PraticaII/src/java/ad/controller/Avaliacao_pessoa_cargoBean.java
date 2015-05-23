@@ -5,10 +5,15 @@
  */
 package ad.controller;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+
 /**
  *
  * @author User
  */
+@ManagedBean
+@RequestScoped
 public class Avaliacao_pessoa_cargoBean {
     
 }

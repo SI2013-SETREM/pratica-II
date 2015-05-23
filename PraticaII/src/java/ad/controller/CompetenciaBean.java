@@ -6,10 +6,12 @@ import ad.model.Competencia;
 import ad.model.Tipo_competencia;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 
 @ManagedBean
+@RequestScoped
 public class CompetenciaBean {
 
     private Competencia competencia = new Competencia();

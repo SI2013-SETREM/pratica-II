@@ -3,7 +3,6 @@ package ad.model;
 import java.io.Serializable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 import rs.model.Pergunta;
 import rs.model.Questionario;
 

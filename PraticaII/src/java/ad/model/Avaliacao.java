@@ -16,6 +16,9 @@ import td.model.Treinamento;
 //@Table(name = "avaliacao")
 public class Avaliacao implements Serializable {
 
+    public static final String sTitle = "Avaliação";
+    public static final String pTitle = "Avaliações";
+
     @Id
     @SequenceGenerator(name = "avaliacao_pk_sequence", sequenceName = "avaliacao_id_seq")
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "avaliacao_pk_sequence")

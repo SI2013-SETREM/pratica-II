@@ -11,6 +11,9 @@ import javax.persistence.SequenceGenerator;
 //@Table(name = "tipo_competencia")
 public class Tipo_competencia implements Serializable {
 
+    public static final String sTitle = "Tipo de Competência";
+    public static final String pTitle = "Tipos de Competências";
+
     @Id
     @SequenceGenerator(name = "tipo_competencia_pk_sequence", sequenceName = "tipo_competencia_id_seq")
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "tipo_competencia_pk_sequence")
