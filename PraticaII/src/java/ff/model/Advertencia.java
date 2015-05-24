@@ -1,5 +1,6 @@
 package ff.model;
 
+import cfg.model.Pessoa;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
@@ -25,6 +26,8 @@ public class Advertencia implements Serializable{
     private int adv_codigo;
     @ManyToOne
     private FichaFuncional ffu_codigo;
+    @ManyToOne
+    private Pessoa pes_codigo_aplicador;
     private String adv_descricao;
     @Column(nullable = false)
     private Date adv_data;
@@ -87,5 +90,13 @@ public class Advertencia implements Serializable{
 
     public void setFfu_codigo(FichaFuncional ffu_codigo) {
         this.ffu_codigo = ffu_codigo;
+    }
+
+    public Pessoa getPes_codigo_aplicador() {
+        return pes_codigo_aplicador;
+    }
+
+    public void setPes_codigo_aplicador(Pessoa pes_codigo_aplicador) {
+        this.pes_codigo_aplicador = pes_codigo_aplicador;
     }
 }
