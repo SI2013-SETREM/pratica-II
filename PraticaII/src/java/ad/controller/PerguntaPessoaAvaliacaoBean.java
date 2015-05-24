@@ -5,8 +5,8 @@
  */
 package ad.controller;
 
-import ad.dao.Pergunta_pessoa_avaliacaoDAO;
-import ad.model.Pergunta_pessoa_avaliacao;
+import ad.dao.PerguntaPessoaAvaliacaoDAO;
+import ad.model.PerguntaPessoaAvaliacao;
 import javax.annotation.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
@@ -16,12 +16,12 @@ import javax.faces.bean.RequestScoped;
  */
 @ManagedBean
 @RequestScoped
-public class Pergunta_pessoa_avaliacaoBean {
+public class PerguntaPessoaAvaliacaoBean {
 
-    Pergunta_pessoa_avaliacao perguntaPessoaAvaliacao = new Pergunta_pessoa_avaliacao();
-    Pergunta_pessoa_avaliacaoDAO DAO = new Pergunta_pessoa_avaliacaoDAO();
+    PerguntaPessoaAvaliacao perguntaPessoaAvaliacao = new PerguntaPessoaAvaliacao();
+    PerguntaPessoaAvaliacaoDAO DAO = new PerguntaPessoaAvaliacaoDAO();
 
-    public Pergunta_pessoa_avaliacaoBean() {
+    public PerguntaPessoaAvaliacaoBean() {
     }
     
     

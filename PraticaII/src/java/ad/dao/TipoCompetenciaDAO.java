@@ -1,44 +1,44 @@
 package ad.dao;
 
-import ad.model.Pergunta_pessoa_avaliacao;
+import ad.model.TipoCompetencia;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import util.HibernateUtil;
 
-public class Pergunta_pessoa_avaliacaoDAO {
+public class TipoCompetenciaDAO {
 
     private Session session;
 
-    public Pergunta_pessoa_avaliacaoDAO() {
+    public TipoCompetenciaDAO() {
         session = HibernateUtil.getSessionFactory().openSession();
     }
 
-    public void insert(Pergunta_pessoa_avaliacao i) {
+    public void insert(TipoCompetencia i) {
         Transaction t = session.beginTransaction();
         session.save(i);
         t.commit();
     }
 
-    public void update(Pergunta_pessoa_avaliacao i) {
+    public void update(TipoCompetencia i) {
         Transaction t = session.beginTransaction();
         session.merge(i);
         t.commit();
     }
 
-    public void delete(Pergunta_pessoa_avaliacao i) {
+    public void delete(TipoCompetencia i) {
         Transaction t = session.beginTransaction();
         session.delete(i);
         t.commit();
     }
 
-    public Pergunta_pessoa_avaliacao findById(int idi_codigo) {
-        return (Pergunta_pessoa_avaliacao) session.load(Pergunta_pessoa_avaliacao.class, idi_codigo);
+    public TipoCompetencia findById(int idi_codigo) {
+        return (TipoCompetencia) session.load(TipoCompetencia.class, idi_codigo);
     }
 
-    public List<Pergunta_pessoa_avaliacao> findAll() {
-        Query q = session.createQuery("from Pergunta_pessoa_avaliacao");
+    public List<TipoCompetencia> findAll() {
+        Query q = session.createQuery("from Tipo_competencia");
         return q.list();
     }
 }

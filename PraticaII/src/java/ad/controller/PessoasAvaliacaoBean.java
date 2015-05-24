@@ -5,8 +5,8 @@
  */
 package ad.controller;
 
-import ad.dao.Pessoas_avaliacaoDAO;
-import ad.model.Pessoas_avaliacao;
+import ad.dao.PessoasAvaliacaoDAO;
+import ad.model.PessoasAvaliacao;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.model.DataModel;
@@ -18,20 +18,20 @@ import javax.faces.model.ListDataModel;
  */
 @ManagedBean
 @RequestScoped
-public class Pessoas_avaliacaoBean {
+public class PessoasAvaliacaoBean {
 
-    private Pessoas_avaliacao pessoas_avaliacao = new Pessoas_avaliacao();
-    private Pessoas_avaliacaoDAO dao = new Pessoas_avaliacaoDAO();
+    private PessoasAvaliacao pessoas_avaliacao = new PessoasAvaliacao();
+    private PessoasAvaliacaoDAO dao = new PessoasAvaliacaoDAO();
     private DataModel pessoas_avaliacoes;
 
-    public Pessoas_avaliacaoBean() {
+    public PessoasAvaliacaoBean() {
     }
 
-    public Pessoas_avaliacao getPessoas_avaliacao() {
+    public PessoasAvaliacao getPessoas_avaliacao() {
         return pessoas_avaliacao;
     }
 
-    public void setPessoas_avaliacao(Pessoas_avaliacao pessoas_avaliacao) {
+    public void setPessoas_avaliacao(PessoasAvaliacao pessoas_avaliacao) {
         this.pessoas_avaliacao = pessoas_avaliacao;
     }
 
@@ -49,13 +49,13 @@ public class Pessoas_avaliacaoBean {
         return "pessoasavaliacaolst";
     }
 
-    public String edit(Pessoas_avaliacao i) {
-        pessoas_avaliacao = (Pessoas_avaliacao) pessoas_avaliacoes.getRowData();
+    public String edit(PessoasAvaliacao i) {
+        pessoas_avaliacao = (PessoasAvaliacao) pessoas_avaliacoes.getRowData();
         return "pessoasavaliacaofrm";
     }
 
-    public String details(Pessoas_avaliacao i) {
-        pessoas_avaliacao = (Pessoas_avaliacao) pessoas_avaliacoes.getRowData();
+    public String details(PessoasAvaliacao i) {
+        pessoas_avaliacao = (PessoasAvaliacao) pessoas_avaliacoes.getRowData();
         return "pessoasavaliacaodls";
     }
 
@@ -64,7 +64,7 @@ public class Pessoas_avaliacaoBean {
         return "pessoasavaliacaolst";
     }
 
-    public String delete(Pessoas_avaliacao i) {
+    public String delete(PessoasAvaliacao i) {
         dao.delete(i);
         return "pessoasavaliacaolst";
     }

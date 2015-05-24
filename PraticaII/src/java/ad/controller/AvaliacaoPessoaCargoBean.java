@@ -5,8 +5,8 @@
  */
 package ad.controller;
 
-import ad.dao.Avaliacao_pessoa_cargoDAO;
-import ad.model.Avaliacao_pessoa_cargo;
+import ad.dao.AvaliacaoPessoaCargoDAO;
+import ad.model.AvaliacaoPessoaCargo;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.model.DataModel;
@@ -18,20 +18,20 @@ import javax.faces.model.ListDataModel;
  */
 @ManagedBean
 @RequestScoped
-public class Avaliacao_pessoa_cargoBean {
+public class AvaliacaoPessoaCargoBean {
 
-    private Avaliacao_pessoa_cargo avaliacaoPessoaCargo = new Avaliacao_pessoa_cargo();
-    private Avaliacao_pessoa_cargoDAO dao = new Avaliacao_pessoa_cargoDAO();
+    private AvaliacaoPessoaCargo avaliacaoPessoaCargo = new AvaliacaoPessoaCargo();
+    private AvaliacaoPessoaCargoDAO dao = new AvaliacaoPessoaCargoDAO();
     private DataModel avaliacaoPessoasCargos;
 
-    public Avaliacao_pessoa_cargoBean() {
+    public AvaliacaoPessoaCargoBean() {
     }
 
-    public Avaliacao_pessoa_cargo getAvaliacao_pessoa_cargo() {
+    public AvaliacaoPessoaCargo getAvaliacao_pessoa_cargo() {
         return avaliacaoPessoaCargo;
     }
 
-    public void setAvaliacao_pessoa_cargo(Avaliacao_pessoa_cargo avaliacaoPessoaCargo) {
+    public void setAvaliacao_pessoa_cargo(AvaliacaoPessoaCargo avaliacaoPessoaCargo) {
         this.avaliacaoPessoaCargo = avaliacaoPessoaCargo;
     }
 
@@ -49,8 +49,8 @@ public class Avaliacao_pessoa_cargoBean {
         return "avaliacaoPessoaCargolst";
     }
 
-    public String edit(Avaliacao_pessoa_cargo i) {
-        avaliacaoPessoaCargo = (Avaliacao_pessoa_cargo) avaliacaoPessoasCargos.getRowData();
+    public String edit(AvaliacaoPessoaCargo i) {
+        avaliacaoPessoaCargo = (AvaliacaoPessoaCargo) avaliacaoPessoasCargos.getRowData();
         return "avaliacaoPessoaCargofrm";
     }
 
@@ -59,7 +59,7 @@ public class Avaliacao_pessoa_cargoBean {
         return "avaliacaoPessoaCargolst";
     }
 
-    public String delete(Avaliacao_pessoa_cargo i) {
+    public String delete(AvaliacaoPessoaCargo i) {
         dao.delete(i);
         return "avaliacaoPessoaCargolst";
     }

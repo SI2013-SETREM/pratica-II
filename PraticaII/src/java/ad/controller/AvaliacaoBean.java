@@ -58,7 +58,7 @@ public class AvaliacaoBean {
 
     public String delete(Avaliacao i) {
         dao.delete(i);
-        return "avaliacoeslst";
+        return "avaliacaolst";
     }
 
     public String salvar() {
@@ -68,11 +68,11 @@ public class AvaliacaoBean {
             dao.insert(avaliacao);
         }
 
-        return "avaliacoeslst";
+        return "avaliacaolst";
     }
 
     public String listar() {
-        return "avaliacoeslst";
+        return "avaliacaolst";
     }
 
 }

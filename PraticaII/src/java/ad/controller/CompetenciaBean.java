@@ -1,9 +1,9 @@
 package ad.controller;
 
 import ad.dao.CompetenciaDAO;
-import ad.dao.Tipo_competenciaDAO;
+import ad.dao.TipoCompetenciaDAO;
 import ad.model.Competencia;
-import ad.model.Tipo_competencia;
+import ad.model.TipoCompetencia;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -21,9 +21,9 @@ public class CompetenciaBean {
     private CompetenciaDAO dao = new CompetenciaDAO();
     private DataModel competencias;
 
-    private List<Tipo_competencia> lstipo_competencia;
-    private Tipo_competenciaDAO tipo_competenciaDAO = new Tipo_competenciaDAO();
-    private Tipo_competencia tipo_competencia = new Tipo_competencia();
+    private List<TipoCompetencia> lstipo_competencia;
+    private TipoCompetenciaDAO tipo_competenciaDAO = new TipoCompetenciaDAO();
+    private TipoCompetencia tipo_competencia = new TipoCompetencia();
 
     public CompetenciaBean() {
     }
@@ -36,29 +36,29 @@ public class CompetenciaBean {
         this.competencia = i;
     }
 
-    public DataModel getAvaliacoes() {
+    public DataModel getCompetencias() {
         this.competencias = new ListDataModel(dao.findAll());
         return competencias;
     }
 
-    public void setAvaliacoes(DataModel dm) {
+    public void setCompetencias(DataModel dm) {
         this.competencias = dm;
     }
 
-    public List<Tipo_competencia> getLstipo_competencia() {
+    public List<TipoCompetencia> getLstipo_competencia() {
         lstipo_competencia = tipo_competenciaDAO.findAll();
         return lstipo_competencia;
     }
 
-    public void setLstipo_competencia(List<Tipo_competencia> lstipo_competencia) {
+    public void setLstipo_competencia(List<TipoCompetencia> lstipo_competencia) {
         this.lstipo_competencia = lstipo_competencia;
     }
 
-    public Tipo_competencia getTipo_competencia() {
+    public TipoCompetencia getTipo_competencia() {
         return tipo_competencia;
     }
 
-    public void setTipo_competencia(Tipo_competencia tipo_competencia) {
+    public void setTipo_competencia(TipoCompetencia tipo_competencia) {
         this.tipo_competencia = tipo_competencia;
     }
 

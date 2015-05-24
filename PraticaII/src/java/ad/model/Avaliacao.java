@@ -14,7 +14,7 @@ import rs.model.Questionario;
 import td.model.Treinamento;
 
 @Entity
-@Table(name = "avaliacao")
+@Table(name = "avd_avaliacao")
 public class Avaliacao implements Serializable {
 
     public static final String sTitle = "Avaliação";
@@ -25,11 +25,11 @@ public class Avaliacao implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "avaliacao_pk_sequence")
     private int ava_codigo;
     @ManyToOne
-    @JoinColumn(name = "tre_codigo")
+    @JoinColumn(name = "tre_codigo", referencedColumnName = "tre_codigo")
     private Treinamento treinamento;
 
     @ManyToOne
-    @JoinColumn(name = "qst_codigo")
+    @JoinColumn(name = "qst_codigo", referencedColumnName = "qst_codigo")
     private Questionario questionario;
 
     private int ava_status;

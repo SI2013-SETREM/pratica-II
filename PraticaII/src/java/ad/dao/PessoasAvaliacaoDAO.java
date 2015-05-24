@@ -1,44 +1,44 @@
 package ad.dao;
 
-import ad.model.Avaliacao_pessoa_cargo;
+import ad.model.PessoasAvaliacao;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import util.HibernateUtil;
 
-public class Avaliacao_pessoa_cargoDAO {
+public class PessoasAvaliacaoDAO {
 
     private Session session;
 
-    public Avaliacao_pessoa_cargoDAO() {
+    public PessoasAvaliacaoDAO() {
         session = HibernateUtil.getSessionFactory().openSession();
     }
 
-    public void insert(Avaliacao_pessoa_cargo i) {
+    public void insert(PessoasAvaliacao i) {
         Transaction t = session.beginTransaction();
         session.save(i);
         t.commit();
     }
 
-    public void update(Avaliacao_pessoa_cargo i) {
+    public void update(PessoasAvaliacao i) {
         Transaction t = session.beginTransaction();
         session.merge(i);
         t.commit();
     }
 
-    public void delete(Avaliacao_pessoa_cargo i) {
+    public void delete(PessoasAvaliacao i) {
         Transaction t = session.beginTransaction();
         session.delete(i);
         t.commit();
     }
 
-    public Avaliacao_pessoa_cargo findById(int idi_codigo) {
-        return (Avaliacao_pessoa_cargo) session.load(Avaliacao_pessoa_cargo.class, idi_codigo);
+    public PessoasAvaliacao findById(int idi_codigo) {
+        return (PessoasAvaliacao) session.load(PessoasAvaliacao.class, idi_codigo);
     }
 
-    public List<Avaliacao_pessoa_cargo> findAll() {
-        Query q = session.createQuery("from Avaliacao_pessoa_cargo");
+    public List<PessoasAvaliacao> findAll() {
+        Query q = session.createQuery("from Pessoas_avaliacao");
         return q.list();
     }
 }

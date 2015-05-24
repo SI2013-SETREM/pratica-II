@@ -11,7 +11,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "competencia")
+@Table(name = "avd_competencia")
 public class Competencia implements Serializable {
 
     public static String sTitle = "Competência";
@@ -23,9 +23,10 @@ public class Competencia implements Serializable {
     private int cmp_codigo;
     private String cmp_descricao;
     private int cmp_status;
+
     @ManyToOne
-    @JoinColumn(name = "tcp_codigo")
-    private Tipo_competencia tipocompetencia;
+    @JoinColumn(name = "tcp_codigo", referencedColumnName = "tcp_codigo")
+    private TipoCompetencia tipocompetencia;
 
     public Competencia() {
     }
@@ -54,11 +55,11 @@ public class Competencia implements Serializable {
         this.cmp_status = cmp_status;
     }
 
-    public Tipo_competencia getTipocompetencia() {
+    public TipoCompetencia getTipocompetencia() {
         return tipocompetencia;
     }
 
-    public void setTipocompetencia(Tipo_competencia tipocompetencia) {
+    public void setTipocompetencia(TipoCompetencia tipocompetencia) {
         this.tipocompetencia = tipocompetencia;
     }
 

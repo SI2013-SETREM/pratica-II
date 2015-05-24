@@ -1,7 +1,7 @@
 package ad.controller;
 
-import ad.dao.Tipo_competenciaDAO;
-import ad.model.Tipo_competencia;
+import ad.dao.TipoCompetenciaDAO;
+import ad.model.TipoCompetencia;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.model.DataModel;
@@ -9,20 +9,20 @@ import javax.faces.model.ListDataModel;
 
 @ManagedBean
 @RequestScoped
-public class Tipo_competenciaBean {
+public class TipoCompetenciaBean {
 
-    private Tipo_competencia tipo_competencia = new Tipo_competencia();
-    private Tipo_competenciaDAO dao = new Tipo_competenciaDAO();
+    private TipoCompetencia tipo_competencia = new TipoCompetencia();
+    private TipoCompetenciaDAO dao = new TipoCompetenciaDAO();
     private DataModel tipo_competencias;
 
-    public Tipo_competenciaBean() {
+    public TipoCompetenciaBean() {
     }
 
-    public Tipo_competencia getTipo_competencia() {
+    public TipoCompetencia getTipo_competencia() {
         return tipo_competencia;
     }
 
-    public void setTipo_competencia(Tipo_competencia i) {
+    public void setTipo_competencia(TipoCompetencia i) {
         this.tipo_competencia = i;
     }
 
@@ -35,8 +35,8 @@ public class Tipo_competenciaBean {
         this.tipo_competencias = dm;
     }
 
-    public String edit(Tipo_competencia i) {
-        tipo_competencia = (Tipo_competencia) tipo_competencias.getRowData();
+    public String edit(TipoCompetencia i) {
+        tipo_competencia = (TipoCompetencia) tipo_competencias.getRowData();
         return "tipo_competenciagrm";
     }
 
@@ -45,7 +45,7 @@ public class Tipo_competenciaBean {
         return "tipo_competenciagrm";
     }
 
-    public String delete(Tipo_competencia i) {
+    public String delete(TipoCompetencia i) {
         dao.delete(i);
         return "tipo_competenciagrm";
     }
