@@ -33,7 +33,9 @@ public class AvaliacaoBean {
     }
 
     public DataModel getAvaliacoes() {
-        this.avaliacoes = new ListDataModel(dao.findAll());
+        if (avaliacoes == null) {
+            avaliacoes = new ListDataModel(dao.findAll());
+        }
         return avaliacoes;
     }
 

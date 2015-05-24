@@ -7,7 +7,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.FacesConverter;
 
-@FacesConverter("tipo_competenciaConverter")
+@FacesConverter("tipoCompetenciaConverter")
 public class TipoCompetenciaConverter implements javax.faces.convert.Converter {
 
     @Override

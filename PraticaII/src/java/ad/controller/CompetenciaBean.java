@@ -21,9 +21,9 @@ public class CompetenciaBean {
     private CompetenciaDAO dao = new CompetenciaDAO();
     private DataModel competencias;
 
-    private List<TipoCompetencia> lstipo_competencia;
-    private TipoCompetenciaDAO tipo_competenciaDAO = new TipoCompetenciaDAO();
-    private TipoCompetencia tipo_competencia = new TipoCompetencia();
+    private List<TipoCompetencia> lstipoCompetencia;
+    private TipoCompetenciaDAO tipoCompetenciaDAO = new TipoCompetenciaDAO();
+    private TipoCompetencia tipoCompetencia = new TipoCompetencia();
 
     public CompetenciaBean() {
     }
@@ -37,7 +37,9 @@ public class CompetenciaBean {
     }
 
     public DataModel getCompetencias() {
-        this.competencias = new ListDataModel(dao.findAll());
+        if (competencias == null) {
+            competencias = new ListDataModel(dao.findAll());
+        }
         return competencias;
     }
 
@@ -45,55 +47,68 @@ public class CompetenciaBean {
         this.competencias = dm;
     }
 
-    public List<TipoCompetencia> getLstipo_competencia() {
-        lstipo_competencia = tipo_competenciaDAO.findAll();
-        return lstipo_competencia;
+    public List<TipoCompetencia> getLstipoCompetencia() {
+        lstipoCompetencia = tipoCompetenciaDAO.findAll();
+        return lstipoCompetencia;
     }
 
-    public void setLstipo_competencia(List<TipoCompetencia> lstipo_competencia) {
-        this.lstipo_competencia = lstipo_competencia;
+    public void setLstipoCompetencia(List<TipoCompetencia> lstipoCompetencia) {
+        this.lstipoCompetencia = lstipoCompetencia;
     }
 
     public TipoCompetencia getTipo_competencia() {
-        return tipo_competencia;
+        return tipoCompetencia;
     }
 
-    public void setTipo_competencia(TipoCompetencia tipo_competencia) {
-        this.tipo_competencia = tipo_competencia;
+    public void setTipo_competencia(TipoCompetencia tipoCompetencia) {
+        this.tipoCompetencia = tipoCompetencia;
+    }
+
+    public String newCompetencia() {
+        competencia = new Competencia();
+        return "competenciafrm";
+    }
+
+    public String select() {
+        competencia = (Competencia) competencias.getRowData();
+        competencia = dao.findById(competencia.getCmp_codigo());
+        return "competenciafrm";
     }
 
     public String insert() {
         dao.insert(competencia);
-        return "competenciagrm";
+        return "competencialst";
     }
 
-    public String edit(Competencia i) {
+    public String edit() {
         competencia = (Competencia) competencias.getRowData();
-        return "competenciagrm";
+        return "competencialst";
     }
 
     public String update() {
         dao.update(competencia);
-        return "competenciagrm";
+        return "competencialst";
     }
 
-    public String delete(Competencia i) {
-        dao.delete(i);
-        return "competenciagrm";
+    public String delete() {
+        competencia = (Competencia) competencias.getRowData();
+        dao.delete(competencia);
+        competencia = null;
+        return "competencialst";
     }
 
     public String salvar() {
-        competencia.setTipocompetencia(tipo_competencia);
+        competencia.setTipocompetencia(tipoCompetencia);
         if (competencia.getCmp_codigo() > 0) {
             dao.update(competencia);
         } else {
             dao.insert(competencia);
         }
-        return "competenciagrm";
+        return "competencialst";
     }
 
     public String listar() {
-        return "competenciagrm";
+        return "competencialst";
     }
 
     public String Status() {
