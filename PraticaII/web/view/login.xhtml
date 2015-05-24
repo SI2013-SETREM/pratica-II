@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    
+    <h:head>
+        <link rel="icon" href="#{resource['img/favicon.ico']}" sizes="16x16" />
+        <title>Login - GRH</title>
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700|Signika:400,700" rel="stylesheet" type="text/css"/>
+        <h:outputStylesheet name="./bootstrap/css/bootstrap.min.css" />
+        <h:outputStylesheet name="./font-awesome/css/font-awesome.min.css" />
+        <h:outputStylesheet name="./css/css.css" />
+        <h:outputScript name="./js/jquery-2.1.3.min.js"></h:outputScript>
+        <h:outputScript name="./bootstrap/js/bootstrap.min.js"></h:outputScript>
+        <h:outputScript name="./js/default.js"></h:outputScript>
+    </h:head>
+    
+    <h:body styleClass="page-login">
+        <div class="page-container">
+            <div class="logo">
+                <h1>
+                    <h:graphicImage alt="GRH - Gestão de Recursos Humanos" name="img/grh_topo.png"></h:graphicImage>
+                </h1>
+            </div>
+            <div class="login-container">
+                <div class="form-login">
+                    <form>
+                        <h3 class="title">Faça login em sua conta</h3>
+                        <div class="alert alert-danger alert-dismissable">
+                            <button class="close">
+                                <i class="fa fa-close"></i>
+                            </button>
+                            <span id="alertMsg">Por favor, faça login para acessar esta página</span>
+                        </div>
+                        <div class="form-group form-group-lg">
+                            <div class="form-control-icon">
+                                <i class="fa fa-user"></i>
+                                <input placeholder="Usuário" type="text" class="input-user form-control" id="input-user" required="required" />
+                            </div>
+                        </div>
+                        <div class="form-group form-group-lg">
+                            <div class="form-control-icon">
+                                <i class="fa fa-key"></i>
+                                <input placeholder="Senha" type="password" class="input-password form-control" id="input-password" required="required" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn-lg btn btn-primary btn-block input-send">
+                                Login
+                                <i class="fa fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="copyright">
+                2015 © GR Sistemas
+            </div>
+        </div>
+    </h:body>
+</html>
+

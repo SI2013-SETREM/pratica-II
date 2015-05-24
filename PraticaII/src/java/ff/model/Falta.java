@@ -1,6 +1,7 @@
 package ff.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,28 +9,36 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
-import javax.xml.crypto.Data;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
 
 /**
  *
  * @author Max
  */
 @Entity
-@SequenceGenerator(name = "genFalta", sequenceName = "genFalta", allocationSize = 1)
+@Table(name = "ffp_falta")
 public class Falta implements Serializable {
 
     @Id
+    @SequenceGenerator(name = "genFalta", sequenceName = "genFalta", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "genFalta")
     private int flt_codigo;
+    
     @ManyToOne
     private FichaFuncional ficha_funcional;
+    
     @ManyToOne
     private Advertencia advertencia;
     @Column(nullable = false)
-    private Data flt_data;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date flt_data;
+    
     @Column(nullable = false)
     private double flt_qtd_horas;
+    
     private String observacao;
+    
     @Column(nullable = false)
     private String flt_justificativa;
 
@@ -57,11 +66,11 @@ public class Falta implements Serializable {
         this.advertencia = advertencia;
     }
 
-    public Data getFlt_data() {
+    public Date getFlt_data() {
         return flt_data;
     }
 
-    public void setFlt_data(Data flt_data) {
+    public void setFlt_data(Date flt_data) {
         this.flt_data = flt_data;
     }
 

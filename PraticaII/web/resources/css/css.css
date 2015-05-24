@@ -14,6 +14,42 @@
 .table {
   margin-bottom: 10px;
 }
+.alert .close {
+  font-size: 14px;
+}
+.alert .close > .fa {
+  font-size: 16px;
+}
+.form-group-lg .form-control-icon,
+.form-control-icon {
+  position: relative;
+}
+.form-group-lg .form-control-icon > .fa,
+.form-control-icon > .fa {
+  display: block;
+  position: absolute;
+  font-size: 16px;
+  width: 16px;
+  margin: 9px 2px 4px 10px;
+  text-align: center;
+  color: #777777;
+}
+.form-group-lg .form-control-icon.focused > .fa,
+.form-control-icon.focused > .fa {
+  color: #00456a;
+}
+.form-group-lg .form-control-icon > input,
+.form-control-icon > input {
+  padding-left: 30px;
+}
+.form-group-lg .form-control-icon > .fa {
+  font-size: 20px;
+  width: 20px;
+  margin: 12px 2px 4px 10px;
+}
+.form-group-lg .form-control-icon > input {
+  padding-left: 35px;
+}
 .dataTables_wrapper .col-editar-header,
 .dataTables_wrapper .col-excluir-header {
   max-width: 50px;
@@ -43,6 +79,34 @@
 body {
   background: #E9ECF3;
   color: #777777;
+}
+.page-login {
+  font-family: 'Open Sans', Tahoma, Arial, sans-serif;
+}
+.page-login .logo {
+  margin: 3% auto 0;
+  text-align: center;
+}
+.page-login .login-container .title {
+  font-family: 'Signika', Tahoma, Arial, sans-serif;
+  margin: 10px 0 20px;
+}
+.page-login .login-container .form-login {
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 4px;
+  width: 450px;
+  margin: 2% auto 0;
+  display: block;
+}
+.page-login .login-container .form-login label {
+  font-weight: normal;
+}
+.page-login .copyright {
+  margin-top: 5px;
+  text-align: center;
+  color: #777777;
+  font-size: 12px;
 }
 .page-header.navbar {
   width: 100%;
@@ -122,6 +186,7 @@ body {
 .page-sidebar {
   max-height: none;
   background-color: #ffffff;
+  border-radius: 4px;
   padding: 0;
   float: left;
   margin-bottom: 10px;
@@ -226,6 +291,8 @@ body {
   padding: 10px 0 0 20px;
 }
 .page-content-wrapper .page-content > .page-title h2 {
+  font-family: 'Signika', Tahoma, Arial, sans-serif;
+  color: #00456a;
   margin: 10px 0;
 }
 .ripple {

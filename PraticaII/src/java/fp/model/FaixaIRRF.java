@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 /**
  *
@@ -14,10 +15,11 @@ import javax.persistence.SequenceGenerator;
  */
 
 @Entity
-@SequenceGenerator (name= "genFaixaIRRF", sequenceName= "segFaixaIRRF", allocationSize = 1)
+@Table(name = "ffp_faixa_irrf")
 public class FaixaIRRF implements Serializable {
     
-     @Id
+    @Id
+    @SequenceGenerator (name= "genFaixaIRRF", sequenceName= "segFaixaIRRF", allocationSize = 1)
     @GeneratedValue (strategy = GenerationType.SEQUENCE, generator = "genFaixaIRRF")
     private int frf_codigo;
     private double frf_salario_inicial;

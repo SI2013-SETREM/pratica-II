@@ -8,16 +8,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 /**
  *
  * @author Kelvin
  */
 @Entity
-@SequenceGenerator (name= "genTabelaIRRF", sequenceName= "segTabelaIRRF", allocationSize = 1)
+@Table(name = "ffp_tabela_irrf")
 public class TabelaIRRF implements Serializable{
      
     @Id
+    @SequenceGenerator (name= "genTabelaIRRF", sequenceName= "segTabelaIRRF", allocationSize = 1)
     @GeneratedValue (strategy = GenerationType.SEQUENCE, generator = "genTabelaIRRF")
     private int tif_codigo;
     private Date tif_dataincial;

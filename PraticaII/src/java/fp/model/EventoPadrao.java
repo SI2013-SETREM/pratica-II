@@ -9,16 +9,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 /**
  *
  * @author Kelvin
  */
 @Entity
-@SequenceGenerator (name= "genEventoPadrao", sequenceName= "segEventoPadrao", allocationSize = 1)
+@Table(name = "ffp_evento_padrao")
 public class EventoPadrao implements Serializable {
     
     @Id
+    @SequenceGenerator (name= "genEventoPadrao", sequenceName= "segEventoPadrao", allocationSize = 1)
     @GeneratedValue (strategy = GenerationType.SEQUENCE, generator = "genEventoPadrao")
     private int evp_codigo;
     @ManyToOne

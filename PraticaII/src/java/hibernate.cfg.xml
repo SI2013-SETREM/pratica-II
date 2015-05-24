@@ -11,7 +11,11 @@
     <property name="hibernate.format_sql">true</property>
     <property name="hibernate.hbm2ddl.auto">update</property>
     <mapping class="ad.model.Avaliacao"/>
+    <mapping class="ad.model.AvaliacaoPessoaCargo"/>
     <mapping class="ad.model.Competencia"/>
+    <mapping class="ad.model.PerguntaPessoaAvaliacao"/>
+    <mapping class="ad.model.PessoasAvaliacao"/>
+    <mapping class="ad.model.TipoCompetencia"/>
     <mapping class="cfg.model.Bairro"/>
     <mapping class="cfg.model.Cidade"/>
     <mapping class="cfg.model.Conversa"/>

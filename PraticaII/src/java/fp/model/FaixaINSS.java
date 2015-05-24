@@ -7,16 +7,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 /**
  *
  * @author Kelvin
  */
 @Entity
-@SequenceGenerator (name= "genFaixaINSS", sequenceName= "segFaixaINSS", allocationSize = 1)
+@Table(name = "ffp_faixa_inss")
 public class FaixaINSS implements Serializable {
     
     @Id
+    @SequenceGenerator (name= "genFaixaINSS", sequenceName= "segFaixaINSS", allocationSize = 1)
     @GeneratedValue (strategy = GenerationType.SEQUENCE, generator = "genFaixaINSS")
     private int fai_codigo;
     private double fai_sal_ini;

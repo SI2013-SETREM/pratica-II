@@ -7,10 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import rs.model.Pergunta;
-import rs.model.Questionario;
+//import rs.model.Questionario;
 
 @Entity
 @Table(name = "avd_pergunta_pessoa_avaliacao")
@@ -21,21 +22,23 @@ public class PerguntaPessoaAvaliacao implements Serializable {
     @ManyToOne
     @JoinColumn(name = "pes_codigo", referencedColumnName = "pes_codigo")
     private Pessoa colaboradorAvaliado;
+    
     @Id
     @ManyToOne
     @JoinColumn(name = "pes_codigo_avaliador", referencedColumnName = "pes_codigo")
     private Pessoa avaliador;
+    
     @Id
     @ManyToOne
     @JoinColumn(name = "ava_codigo", referencedColumnName = "ava_codigo")
     private Avaliacao avaliacao;
+    
     @Id
     @ManyToOne
-    @JoinColumn(name = "qst_codigo", referencedColumnName = "qst_codigo")
-    private Questionario questionario;
-    @Id
-    @ManyToOne
-    @JoinColumn(name = "prg_codigo", referencedColumnName = "prg_codigo")
+    @JoinColumns( {
+        @JoinColumn(name = "prg_codigo", referencedColumnName = "prg_codigo"),
+        @JoinColumn(name = "qst_codigo", referencedColumnName = "qst_codigo")
+    })
     private Pergunta pergunta;
 
     private String ppa_resposta;
@@ -47,31 +50,28 @@ public class PerguntaPessoaAvaliacao implements Serializable {
         protected Pessoa avaliador;
         protected Pessoa colaboradorAvaliado;
         protected Avaliacao avaliacao;
-        protected Questionario questionario;
         protected Pergunta pergunta;
 
         public PerguntaPessoaAvaliacaoPK() {
         }
 
-        public PerguntaPessoaAvaliacaoPK(Pessoa avaliador, Pessoa colaboradorAvaliado, Avaliacao avaliacao, Questionario questionario, Pergunta pergunta) {
+        public PerguntaPessoaAvaliacaoPK(Pessoa avaliador, Pessoa colaboradorAvaliado, Avaliacao avaliacao, Pergunta pergunta) {
             this.avaliador = avaliador;
             this.colaboradorAvaliado = colaboradorAvaliado;
             this.avaliacao = avaliacao;
-            this.questionario = questionario;
             this.pergunta = pergunta;
         }
 
         @Override
         public int hashCode() {
-            int hash = 7;
-            hash = 37 * hash + Objects.hashCode(this.avaliador);
-            hash = 37 * hash + Objects.hashCode(this.colaboradorAvaliado);
-            hash = 37 * hash + Objects.hashCode(this.avaliacao);
-            hash = 37 * hash + Objects.hashCode(this.questionario);
-            hash = 37 * hash + Objects.hashCode(this.pergunta);
+            int hash = 3;
+            hash = 29 * hash + Objects.hashCode(this.avaliador);
+            hash = 29 * hash + Objects.hashCode(this.colaboradorAvaliado);
+            hash = 29 * hash + Objects.hashCode(this.avaliacao);
+            hash = 29 * hash + Objects.hashCode(this.pergunta);
             return hash;
         }
-
+        
         @Override
         public boolean equals(Object obj) {
             if (obj == null) {
@@ -88,9 +88,6 @@ public class PerguntaPessoaAvaliacao implements Serializable {
                 return false;
             }
             if (!Objects.equals(this.avaliacao, other.avaliacao)) {
-                return false;
-            }
-            if (!Objects.equals(this.questionario, other.questionario)) {
                 return false;
             }
             if (!Objects.equals(this.pergunta, other.pergunta)) {
@@ -125,14 +122,6 @@ public class PerguntaPessoaAvaliacao implements Serializable {
 
     public void setAvaliacao(Avaliacao avaliacao) {
         this.avaliacao = avaliacao;
-    }
-
-    public Questionario getQuestionario() {
-        return questionario;
-    }
-
-    public void setQuestionario(Questionario questionario) {
-        this.questionario = questionario;
     }
 
     public Pergunta getPergunta() {

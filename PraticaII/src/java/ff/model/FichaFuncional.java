@@ -8,16 +8,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 /**
  *
  * @author Max
  */
 @Entity
-@SequenceGenerator(name = "genFichaFuncional", sequenceName = "genFichaFuncional", allocationSize = 1)
+@Table(name = "ffp_ficha_funcional")
 public class FichaFuncional implements Serializable {
 
     @Id
+    @SequenceGenerator(name = "genFichaFuncional", sequenceName = "genFichaFuncional", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "genFichaFuncional")
     private int ffu_codigo;
  

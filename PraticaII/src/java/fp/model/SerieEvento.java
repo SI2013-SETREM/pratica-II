@@ -7,16 +7,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 /**
  *
  * @author Max
  */
 @Entity
-@SequenceGenerator(name = "genSerieEvento", sequenceName = "genSerieEvento", allocationSize = 1)
+@Table(name = "ffp_serie_evento")
 public class SerieEvento implements Serializable{
 
     @Id
+    @SequenceGenerator(name = "genSerieEvento", sequenceName = "genSerieEvento", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "genSerieEvento")
     private int sev_codigo;
     @Column(nullable = false)

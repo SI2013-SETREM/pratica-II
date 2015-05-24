@@ -11,18 +11,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
-/**
- *
- * @author Cliente
- */
 @Entity
-@SequenceGenerator(name = "genTipoEvento", sequenceName = "genTipoEvento", allocationSize = 1)
+@Table(name = "ffp_tipo_evento")
 public class TipoEvento implements Serializable{
  
-    
-    
     @Id
+    @SequenceGenerator(name = "genTipoEvento", sequenceName = "genTipoEvento", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "genTipoEvento")
     private int tpe_codigo;
     private String tpe_tipo_de_entrada;

@@ -7,16 +7,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 /**
  *
  * @author Kelvin
  */
 @Entity
-@SequenceGenerator (name= "genFormula", sequenceName= "segFormula", allocationSize = 1)
+@Table(name = "ffp_formula")
 public class Formula implements Serializable {
     
     @Id
+    @SequenceGenerator (name= "genFormula", sequenceName= "segFormula", allocationSize = 1)
     @GeneratedValue (strategy = GenerationType.SEQUENCE, generator = "genFormula")
     private int for_codigo;
     private double for_taxa;

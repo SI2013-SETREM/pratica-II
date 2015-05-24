@@ -10,16 +10,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 /**
- *
  * @author Max
  */
 @Entity
-@SequenceGenerator(name = "genHistoricoFolha", sequenceName = "genHistoricoFolha", allocationSize = 1)
+@Table(name = "ffp_historico_folha")
 public class HistoricoFolha implements Serializable {
 
     @Id
+    @SequenceGenerator(name = "genHistoricoFolha", sequenceName = "genHistoricoFolha", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "genHistoricoFolha")
     private int hif_codigo;
     @ManyToOne

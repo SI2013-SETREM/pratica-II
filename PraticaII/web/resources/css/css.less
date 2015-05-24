@@ -13,6 +13,7 @@
 @corBlue: #169EF4;
 @corLimegreen: #26a69a;
 
+@defaultBorderRadius: 4px;
 @sidebarWidth: 250px;
 
 ///// MIXINS /////
@@ -49,6 +50,41 @@
 }
 .table {
     margin-bottom: 10px;
+}
+.alert .close {
+    font-size: 14px;
+    > .fa {
+        font-size: 16px;
+    }
+}
+.form-group-lg .form-control-icon,
+.form-control-icon {
+    position: relative;
+    > .fa {
+        display: block;
+        position: absolute;
+        font-size: 16px;
+        width: 16px;
+        margin: 9px 2px 4px 10px;
+        text-align: center;
+        color: @corSecundaria;
+    }
+    &.focused > .fa {
+        color: @corPrimaria;
+    }
+    > input {
+        padding-left: 30px;
+    }
+}
+.form-group-lg .form-control-icon {
+    > .fa {
+        font-size: 20px;
+        width: 20px;
+        margin: 12px 2px 4px 10px;
+    }
+    > input {
+        padding-left: 35px;
+    }
 }
 // Alterações no comportamento das DataTables
 .dataTables_wrapper {
@@ -91,6 +127,40 @@ body {
     background: #E9ECF3;
     color: @corSecundaria;
 }
+// Página de login
+.page-login {
+    font-family: @fontesTexto;
+    
+    .logo {
+        margin: 3% auto 0;
+        text-align: center;
+    }
+    .login-container {
+        .title {
+            font-family: @fontesTitulo;
+            margin: 10px 0 20px;
+        }
+        .form-login {
+            padding: 30px;
+            background: @corWhite;
+            border-radius: @defaultBorderRadius;
+            width: 450px;
+            margin: 2% auto 0;
+            display: block;
+
+            label {
+                font-weight: normal;
+            }
+        }
+    }
+    .copyright {
+        margin-top: 5px;
+        text-align: center;
+        color: @corSecundaria;
+        font-size: 12px;
+    }
+}
+
 .page-header.navbar {
     width: 100%;
     margin: 0;
@@ -172,6 +242,7 @@ body {
 .page-sidebar {
     max-height: none;
     background-color: @corWhite;
+    border-radius: @defaultBorderRadius;
     padding: 0;
     float: left;
     margin-bottom: 10px;
@@ -297,6 +368,8 @@ body {
         padding: 10px 0 0 20px;
         
         > .page-title h2 {
+            font-family: @fontesTitulo;
+            color: @corPrimaria;
             margin: 10px 0;
         }
         

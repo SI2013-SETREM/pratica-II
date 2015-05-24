@@ -7,16 +7,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 /**
  *
  * @author Max
  */
 @Entity
-@SequenceGenerator(name = "genDependente", sequenceName = "genDependente", allocationSize = 1)
+@Table(name = "ffp_dependente")
 public class Dependente implements Serializable {
 
     @Id
+    @SequenceGenerator(name = "genDependente", sequenceName = "genDependente", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "genDependente")
     private int dep_codigo;
     @ManyToOne

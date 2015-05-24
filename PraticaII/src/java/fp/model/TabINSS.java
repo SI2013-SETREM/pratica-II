@@ -9,16 +9,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 /**
  *
  * @author Kelvin
  */
 @Entity
-@SequenceGenerator (name= "genTabINSS", sequenceName= "segTabINSS", allocationSize = 1)
+@Table(name = "ffp_tab_inss")
 public class TabINSS implements Serializable{
      
     @Id
+    @SequenceGenerator (name= "genTabINSS", sequenceName= "segTabINSS", allocationSize = 1)
     @GeneratedValue (strategy = GenerationType.SEQUENCE, generator = "genTabINSS")
     private int tbs_codigo;
     @ManyToOne

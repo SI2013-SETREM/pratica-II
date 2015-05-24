@@ -1,37 +1,39 @@
-$.extend($.fn.dataTable.defaults, {
-    "language": {
-        "emptyTable": "Nenhum registro encontrado",
-        "info": "Mostrando _START_ - _END_ de _TOTAL_ registros",
-        "infoEmpty": "Mostrando 0 - 0 de 0 registros",
-        "infoFiltered": "(Filtrados de _MAX_ registros)",
-        "infoPostFix": "",
-        "infoThousands": ".",
-        "lengthMenu": "_MENU_ registros por página",
-        "loadingRecords": "Carregando...",
-        "processing": "Processando...",
-        "zeroRecords": "Nenhum registro encontrado",
-        "search": "<i class='fa fa-search'></i>",
-        "paginate": {
-            "next": "Próxima",
-            "previous": "Anterior",
-            "first": "",
-            "last": ""
+if (typeof($.fn.dataTable) !== 'undefined') {
+    $.extend($.fn.dataTable.defaults, {
+        "language": {
+            "emptyTable": "Nenhum registro encontrado",
+            "info": "Mostrando _START_ - _END_ de _TOTAL_ registros",
+            "infoEmpty": "Mostrando 0 - 0 de 0 registros",
+            "infoFiltered": "(Filtrados de _MAX_ registros)",
+            "infoPostFix": "",
+            "infoThousands": ".",
+            "lengthMenu": "_MENU_ registros por página",
+            "loadingRecords": "Carregando...",
+            "processing": "Processando...",
+            "zeroRecords": "Nenhum registro encontrado",
+            "search": "<i class='fa fa-search'></i>",
+            "paginate": {
+                "next": "Próxima",
+                "previous": "Anterior",
+                "first": "",
+                "last": ""
+            },
+            "aria": {
+                "sortAscending": ": Ordenar colunas de forma ascendente",
+                "sortDescending": ": Ordenar colunas de forma descendente"
+            }
         },
-        "aria": {
-            "sortAscending": ": Ordenar colunas de forma ascendente",
-            "sortDescending": ": Ordenar colunas de forma descendente"
-        }
-    },
-    "lengthMenu": [ 5, 10, 50, 100 ],
-    "renderer": "bootstrap",
-    "pagingType": "full_numbers",
-    "columnDefs": [ {
-        "targets": [-1, -2],
-        "orderable": false,
-        "searchable": false
-    } ],
-    "dom": '<"dataTables_wrapper form-inline dt-bootstrap no-footer"<"row"<"col-sm-6"i><"col-sm-6"f>><"row"<"col-sm-12"rt>><"row"<"col-sm-5"l><"col-sm-7"p>>>'
-});
+        "lengthMenu": [ 5, 10, 50, 100 ],
+        "renderer": "bootstrap",
+        "pagingType": "full_numbers",
+        "columnDefs": [ {
+            "targets": [-1, -2],
+            "orderable": false,
+            "searchable": false
+        } ],
+        "dom": '<"dataTables_wrapper form-inline dt-bootstrap no-footer"<"row"<"col-sm-6"i><"col-sm-6"f>><"row"<"col-sm-12"rt>><"row"<"col-sm-5"l><"col-sm-7"p>>>'
+    });
+}
 
 function toggleDropdown($a) {
     var $parent = $a.parent();
@@ -57,6 +59,21 @@ function toggleDropdown($a) {
 }
 $(document).ready(function(){
     
+    $('.alert-dismissable .close').click(function() {
+        $(this).parent().fadeOut(200);
+        return false;
+    });
+    
+    //Login
+    $('.form-login input')
+        .focus(function() {
+            $(this).parent().addClass('focused');
+        })
+        .blur(function() {
+            $(this).parent().removeClass('focused');
+        })
+    ;
+    
     $('.menu-dropdown > a').click(function(e) {
         e.preventDefault();
         $a = $(this);
@@ -71,7 +88,9 @@ $(document).ready(function(){
             toggleDropdown($a);
     });
     
-    $('.dataTable').DataTable();
+    if (typeof($.fn.dataTable) !== 'undefined') {
+        $('.dataTable').DataTable();
+    }
     
     
     /*
