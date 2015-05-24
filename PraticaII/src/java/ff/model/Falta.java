@@ -26,10 +26,10 @@ public class Falta implements Serializable {
     private int flt_codigo;
     
     @ManyToOne
-    private FichaFuncional ficha_funcional;
+    private FichaFuncional ffu_codigo;
     
     @ManyToOne
-    private Advertencia advertencia;
+    private Advertencia adv_codigo;
     @Column(nullable = false)
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date flt_data;
@@ -48,22 +48,6 @@ public class Falta implements Serializable {
 
     public void setFlt_codigo(int flt_codigo) {
         this.flt_codigo = flt_codigo;
-    }
-
-    public FichaFuncional getFicha_funcional() {
-        return ficha_funcional;
-    }
-
-    public void setFicha_funcional(FichaFuncional ficha_funcional) {
-        this.ficha_funcional = ficha_funcional;
-    }
-
-    public Advertencia getAdvertencia() {
-        return advertencia;
-    }
-
-    public void setAdvertencia(Advertencia advertencia) {
-        this.advertencia = advertencia;
     }
 
     public Date getFlt_data() {
@@ -96,5 +80,21 @@ public class Falta implements Serializable {
 
     public void setFlt_justificativa(String flt_justificativa) {
         this.flt_justificativa = flt_justificativa;
+    }
+
+    public FichaFuncional getFfu_codigo() {
+        return ffu_codigo;
+    }
+
+    public void setFfu_codigo(FichaFuncional ffu_codigo) {
+        this.ffu_codigo = ffu_codigo;
+    }
+
+    public Advertencia getAdv_codigo() {
+        return adv_codigo;
+    }
+
+    public void setAdv_codigo(Advertencia adv_codigo) {
+        this.adv_codigo = adv_codigo;
     }
 }

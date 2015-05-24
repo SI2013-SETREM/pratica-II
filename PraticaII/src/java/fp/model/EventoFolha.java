@@ -4,18 +4,23 @@ package fp.model;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  *
  * @author Kelvin
  */
-
+@Entity
+@Table(name = "ffp_evento_folha")
 public class EventoFolha implements Serializable {
+    @Id
     @ManyToOne
-    private Evento evento;
+    private Evento eve_evento;
+    @Id
     @ManyToOne
-    private HistoricoFolha historico_folha;
+    private HistoricoFolha hif_codigo;
     private double evf_valor;
     private String evf_indice;
     private boolean evf_imprimir;
@@ -30,21 +35,7 @@ public class EventoFolha implements Serializable {
     private int evf_tif_codigo;
     private int evs_tbs_codigo;
 
-    public Evento getEvento() {
-        return evento;
-    }
 
-    public void setEvento(Evento evento) {
-        this.evento = evento;
-    }
-
-    public HistoricoFolha getHistorico_folha() {
-        return historico_folha;
-    }
-
-    public void setHistorico_folha(HistoricoFolha historico_folha) {
-        this.historico_folha = historico_folha;
-    }
 
     public double getEvf_valor() {
         return evf_valor;
@@ -124,6 +115,22 @@ public class EventoFolha implements Serializable {
 
     public void setEvs_tbs_codigo(int evs_tbs_codigo) {
         this.evs_tbs_codigo = evs_tbs_codigo;
+    }
+
+    public Evento getEve_evento() {
+        return eve_evento;
+    }
+
+    public void setEve_evento(Evento eve_evento) {
+        this.eve_evento = eve_evento;
+    }
+
+    public HistoricoFolha getHif_codigo() {
+        return hif_codigo;
+    }
+
+    public void setHif_codigo(HistoricoFolha hif_codigo) {
+        this.hif_codigo = hif_codigo;
     }
     
     

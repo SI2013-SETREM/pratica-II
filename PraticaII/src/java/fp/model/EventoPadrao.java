@@ -24,9 +24,9 @@ public class EventoPadrao implements Serializable {
     @GeneratedValue (strategy = GenerationType.SEQUENCE, generator = "genEventoPadrao")
     private int evp_codigo;
     @ManyToOne
-    private Evento evento;
+    private Evento eve_codigo;
     @ManyToOne
-    private Pessoa pessoa;
+    private Pessoa pes_codigo;
 
     public int getEvp_codigo() {
         return evp_codigo;
@@ -36,20 +36,22 @@ public class EventoPadrao implements Serializable {
         this.evp_codigo = evp_codigo;
     }
 
-    public Evento getEvento() {
-        return evento;
+    public Evento getEve_codigo() {
+        return eve_codigo;
     }
 
-    public void setEvento(Evento evento) {
-        this.evento = evento;
+    public void setEve_codigo(Evento eve_codigo) {
+        this.eve_codigo = eve_codigo;
     }
 
-    public Pessoa getPessoa() {
-        return pessoa;
+    public Pessoa getPes_codigo() {
+        return pes_codigo;
     }
 
-    public void setPessoa(Pessoa pessoa) {
-        this.pessoa = pessoa;
+    public void setPes_codigo(Pessoa pes_codigo) {
+        this.pes_codigo = pes_codigo;
     }
+
+
     
 }

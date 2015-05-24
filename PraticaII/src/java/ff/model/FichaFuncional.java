@@ -1,5 +1,6 @@
 package ff.model;
 
+import cfg.model.Pessoa;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
@@ -7,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -23,11 +25,14 @@ public class FichaFuncional implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "genFichaFuncional")
     private int ffu_codigo;
  
+    @ManyToOne
+    private Pessoa pes_codigo;
     @Column(nullable = false)
     private int ffp_situacao_ficha;
     @Column(nullable = false)
     private Date ffp_data_adimissao;
     private Date ffp_data_desligamento;
+    
 
     public int getFfu_codigo() {
         return ffu_codigo;
@@ -60,4 +65,14 @@ public class FichaFuncional implements Serializable {
     public void setFfp_data_desligamento(Date ffp_data_desligamento) {
         this.ffp_data_desligamento = ffp_data_desligamento;
     }
+
+    public Pessoa getPes_codigo() {
+        return pes_codigo;
+    }
+
+    public void setPes_codigo(Pessoa pes_codigo) {
+        this.pes_codigo = pes_codigo;
+    }
+
+
 }

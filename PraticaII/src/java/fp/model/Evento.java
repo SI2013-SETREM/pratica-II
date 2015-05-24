@@ -38,17 +38,17 @@ public class Evento implements Serializable {
     private boolean eve_acumular_rais_horas;
     private boolean eve_horas_dias;
     @ManyToOne
-    private TabINSS tab_inss;
+    private TabINSS tbs_codigo;
     @ManyToOne
-    private TabelaIRRF tabela_irrf;
+    private TabelaIRRF tif_codigo;
     @ManyToOne
-    private TipoEvento tipo_evento;
+    private TipoEvento tpe_codigo;
     @ManyToOne
-    private SerieEvento serie_evento;
+    private SerieEvento sev_codigo;
     @ManyToOne
-    private Formula formula;
+    private Formula for_codigo;
     //@ManyToOne
-    //private Beneficio beneficio;
+    //private Beneficio ben_codigo;
 
     public int getEve_codigo() {
         return eve_codigo;
@@ -146,45 +146,45 @@ public class Evento implements Serializable {
         this.eve_horas_dias = eve_horas_dias;
     }
 
-    public TabINSS getTab_inss() {
-        return tab_inss;
+    public TabINSS getTbs_codigo() {
+        return tbs_codigo;
     }
 
-    public void setTab_inss(TabINSS tab_inss) {
-        this.tab_inss = tab_inss;
+    public void setTbs_codigo(TabINSS tbs_codigo) {
+        this.tbs_codigo = tbs_codigo;
     }
 
-    public TabelaIRRF getTabela_irrf() {
-        return tabela_irrf;
+    public TabelaIRRF getTif_codigo() {
+        return tif_codigo;
     }
 
-    public void setTabela_irrf(TabelaIRRF tabela_irrf) {
-        this.tabela_irrf = tabela_irrf;
+    public void setTif_codigo(TabelaIRRF tif_codigo) {
+        this.tif_codigo = tif_codigo;
     }
 
-    public TipoEvento getTipo_evento() {
-        return tipo_evento;
+    public TipoEvento getTpe_codigo() {
+        return tpe_codigo;
     }
 
-    public void setTipo_evento(TipoEvento tipo_evento) {
-        this.tipo_evento = tipo_evento;
+    public void setTpe_codigo(TipoEvento tpe_codigo) {
+        this.tpe_codigo = tpe_codigo;
     }
 
-    public SerieEvento getSerie_evento() {
-        return serie_evento;
+    public SerieEvento getSev_codigo() {
+        return sev_codigo;
     }
 
-    public void setSerie_evento(SerieEvento serie_evento) {
-        this.serie_evento = serie_evento;
+    public void setSev_codigo(SerieEvento sev_codigo) {
+        this.sev_codigo = sev_codigo;
     }
 
-    public Formula getFormula() {
-        return formula;
+    public Formula getFor_codigo() {
+        return for_codigo;
     }
 
-    public void setFormula(Formula formula) {
-        this.formula = formula;
+    public void setFor_codigo(Formula for_codigo) {
+        this.for_codigo = for_codigo;
     }
-    
-;
+
+ 
 }

@@ -24,7 +24,7 @@ public class TabINSS implements Serializable{
     @GeneratedValue (strategy = GenerationType.SEQUENCE, generator = "genTabINSS")
     private int tbs_codigo;
     @ManyToOne
-    private FaixaINSS faixa_inss;
+    private FaixaINSS fai_codigo;
     private Date tbs_data_inicial;
     private Date tbs_data_final;
     private double tbs_sal_fami_ini;
@@ -44,13 +44,7 @@ public class TabINSS implements Serializable{
         this.tbs_codigo = tbs_codigo;
     }
 
-    public FaixaINSS getFaixa_inss() {
-        return faixa_inss;
-    }
-
-    public void setFaixa_inss(FaixaINSS faixa_inss) {
-        this.faixa_inss = faixa_inss;
-    }
+  
 
     public Date getTbs_data_inicial() {
         return tbs_data_inicial;
@@ -130,6 +124,14 @@ public class TabINSS implements Serializable{
 
     public void setTbs_ali_lei2(String tbs_ali_lei2) {
         this.tbs_ali_lei2 = tbs_ali_lei2;
+    }
+
+    public FaixaINSS getFai_codigo() {
+        return fai_codigo;
+    }
+    
+    public void setFai_codigo(FaixaINSS fai_codigo) {
+        this.fai_codigo = fai_codigo;
     }
     
 }

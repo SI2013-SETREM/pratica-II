@@ -24,7 +24,7 @@ public class HistoricoFolha implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "genHistoricoFolha")
     private int hif_codigo;
     @ManyToOne
-    private Pessoa pessoa;
+    private Pessoa pes_codigo;
     private double hif_valor_acre;
     private double hif_valor_desc;
     @Column(nullable = false)
@@ -40,14 +40,6 @@ public class HistoricoFolha implements Serializable {
 
     public void setHif_codigo(int hif_codigo) {
         this.hif_codigo = hif_codigo;
-    }
-
-    public Pessoa getPessoa() {
-        return pessoa;
-    }
-
-    public void setPessoa(Pessoa pessoa) {
-        this.pessoa = pessoa;
     }
 
     public double getHif_valor_acre() {
@@ -88,6 +80,14 @@ public class HistoricoFolha implements Serializable {
 
     public void setHif_valor_liquido(double hif_valor_liquido) {
         this.hif_valor_liquido = hif_valor_liquido;
+    }
+
+    public Pessoa getPes_codigo() {
+        return pes_codigo;
+    }
+
+    public void setPes_codigo(Pessoa pes_codigo) {
+        this.pes_codigo = pes_codigo;
     }
     
     

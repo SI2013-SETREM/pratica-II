@@ -23,7 +23,7 @@ public class Ferias implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "genFerias")
     private int fer_codigo;
     @ManyToOne
-    private FichaFuncional ficha_funcional;
+    private FichaFuncional ffu_codigo;
     private Date fer_data_inicio;
     private Date fer_data_fim;
     private String fer_observacao;
@@ -34,14 +34,6 @@ public class Ferias implements Serializable {
 
     public void setFer_codigo(int fer_codigo) {
         this.fer_codigo = fer_codigo;
-    }
-
-    public FichaFuncional getFicha_funcional() {
-        return ficha_funcional;
-    }
-
-    public void setFicha_funcional(FichaFuncional ficha_funcional) {
-        this.ficha_funcional = ficha_funcional;
     }
 
     public Date getFer_data_inicio() {
@@ -66,5 +58,13 @@ public class Ferias implements Serializable {
 
     public void setFer_observacao(String fer_observacao) {
         this.fer_observacao = fer_observacao;
+    }
+
+    public FichaFuncional getFfu_codigo() {
+        return ffu_codigo;
+    }
+
+    public void setFfu_codigo(FichaFuncional ffu_codigo) {
+        this.ffu_codigo = ffu_codigo;
     }
 }
