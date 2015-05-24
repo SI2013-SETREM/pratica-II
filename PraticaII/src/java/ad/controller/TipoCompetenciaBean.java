@@ -11,55 +11,66 @@ import javax.faces.model.ListDataModel;
 @RequestScoped
 public class TipoCompetenciaBean {
 
-    private TipoCompetencia tipo_competencia = new TipoCompetencia();
+    private TipoCompetencia tipoCompetencia = new TipoCompetencia();
     private TipoCompetenciaDAO dao = new TipoCompetenciaDAO();
-    private DataModel tipo_competencias;
+    private DataModel tipoCompetencias;
 
     public TipoCompetenciaBean() {
     }
 
-    public TipoCompetencia getTipo_competencia() {
-        return tipo_competencia;
+    public TipoCompetencia getTipoCompetencia() {
+        return tipoCompetencia;
     }
 
-    public void setTipo_competencia(TipoCompetencia i) {
-        this.tipo_competencia = i;
+    public void setTipoCompetencia(TipoCompetencia i) {
+        this.tipoCompetencia = i;
     }
 
-    public DataModel getAvaliacoes() {
-        this.tipo_competencias = new ListDataModel(dao.findAll());
-        return tipo_competencias;
+    public DataModel getTipoCompetencias() {
+        if (tipoCompetencias == null) {
+            tipoCompetencias = new ListDataModel(dao.findAll());
+        }
+        return tipoCompetencias;
     }
 
-    public void setAvaliacoes(DataModel dm) {
-        this.tipo_competencias = dm;
+    public void setTipoCompetencias(DataModel dm) {
+        this.tipoCompetencias = dm;
     }
 
     public String edit(TipoCompetencia i) {
-        tipo_competencia = (TipoCompetencia) tipo_competencias.getRowData();
-        return "tipo_competenciagrm";
+        tipoCompetencia = (TipoCompetencia) tipoCompetencias.getRowData();
+        return "tipocompetenciafrm";
+    }
+
+    public String select() {
+        tipoCompetencia = (TipoCompetencia) tipoCompetencias.getRowData();
+        tipoCompetencia = dao.findById(tipoCompetencia.getTcp_codigo());
+        return "tipocompetenciafrm";
     }
 
     public String update() {
-        dao.update(tipo_competencia);
-        return "tipo_competenciagrm";
+        dao.update(tipoCompetencia);
+        return "tipocompetenciafrm";
     }
 
-    public String delete(TipoCompetencia i) {
-        dao.delete(i);
-        return "tipo_competenciagrm";
+    public String delete() {
+        tipoCompetencia = (TipoCompetencia) tipoCompetencias.getRowData();
+        dao.delete(tipoCompetencia);
+        tipoCompetencia = null;
+        tipoCompetencias = new ListDataModel(dao.findAll());
+        return "tipocompetenciafrm";
     }
 
     public String insert() {
-        if (tipo_competencia.getTcp_codigo() > 0) {
-            dao.update(tipo_competencia);
+        if (tipoCompetencia.getTcp_codigo() > 0) {
+            dao.update(tipoCompetencia);
         } else {
-            dao.insert(tipo_competencia);
+            dao.insert(tipoCompetencia);
         }
-        return "tipo_competenciagrm";
+        return "tipocompetenciafrm";
     }
 
     public String list() {
-        return "tipo_competenciagrm";
+        return "tipocompetenciafrm";
     }
 }
