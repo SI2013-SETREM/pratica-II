@@ -26,7 +26,7 @@
                         </h:link>
                     </div>
                     <h:form>
-                        <p:dataTable value="${avaliacaoBean.avaliacao}" var="item" styleClass="dataTable table table-bordered table-striped">
+                        <p:dataTable value="${avaliacaoBean.avaliacoes}" var="item" styleClass="dataTable table table-bordered table-striped">
                             <p:column>
                                 <f:facet name="header">
                                     <h:outputText value="Id"/>
@@ -73,10 +73,10 @@
                                 <f:facet name="header">
                                     <h:outputText value="Opções"/>
                                 </f:facet>
-                                <h:commandLink action="#{avaliacaoBean.edit()}" class="btn btn-default fa fa-pencil" title="Editar"/>
+                                <h:commandLink action="#{avaliacaoBean.edit(item)}" class="btn btn-default fa fa-pencil" title="Editar"/>
                                 <!--<h:commandLink class="btn btn-default fa fa-list" title="Detalhes"/>-->
                                 <h:commandLink action="#{pessoas_avaliacaoBean.listar()}" class="btn btn-default fa fa-users" title="Avaliados"/>
-                                <h:commandLink action="#{avaliacaoBean.delete()}" class="btn btn-default fa fa-trash" onclick="return confirm('Are you sure?')" title="Excluir"/>
+                                <h:commandLink action="#{avaliacaoBean.delete(item)}" class="btn btn-default fa fa-trash" onclick="return confirm('Are you sure?')" title="Excluir"/>
                             </p:column>
 
                         </p:dataTable>

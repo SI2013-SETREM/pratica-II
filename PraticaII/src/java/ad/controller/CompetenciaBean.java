@@ -80,7 +80,7 @@ public class CompetenciaBean {
         return "competencialst";
     }
 
-    public String edit() {
+    public String edit(Competencia i) {
         competencia = (Competencia) competencias.getRowData();
         return "competencialst";
     }
@@ -90,7 +90,7 @@ public class CompetenciaBean {
         return "competencialst";
     }
 
-    public String delete() {
+    public String delete(Competencia i) {
         competencia = (Competencia) competencias.getRowData();
         dao.delete(competencia);
         competencia = null;
@@ -118,4 +118,21 @@ public class CompetenciaBean {
             return "Inativo";
         }
     }
+
+    public void setTipoCompetencia(TipoCompetencia tipoCompetencia) {
+        this.tipoCompetencia = tipoCompetencia;
+    }
+
+    public String getsTitle() {
+        return sTitle;
+    }
+
+    public String getpTitle() {
+        return pTitle;
+    }
+
+    public TipoCompetencia getTipoCompetencia() {
+        return tipoCompetencia;
+    }
+
 }

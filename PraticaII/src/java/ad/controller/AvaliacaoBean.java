@@ -77,4 +77,12 @@ public class AvaliacaoBean {
         return "avaliacaolst";
     }
 
+    public String getsTitle() {
+        return sTitle;
+    }
+
+    public String getpTitle() {
+        return pTitle;
+    }
+
 }
