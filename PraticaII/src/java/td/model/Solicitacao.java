@@ -1,15 +1,6 @@
-/* #######################################
-
-
-
-FALTA A LIGAÇÃO COM PESSOA (pes_codigo_solicitou)
-
-
-#################################3
-
-*/
 package td.model;
 
+import cfg.model.Pessoa;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
@@ -25,6 +16,9 @@ import javax.persistence.Table;
 @Table(name="trd_solicitacao")
 public class Solicitacao implements Serializable{
     
+    public static final String sTitle = "Solicitação";
+    public static final String pTitle = "Solicitações";
+    
     @Id
     @SequenceGenerator(name="trd_solicitacao_pk_sequence", sequenceName="trd_solicitacao_id_seq")
     @GeneratedValue(strategy=GenerationType.AUTO, generator="trd_solicitacao_pk_sequence")
@@ -32,7 +26,7 @@ public class Solicitacao implements Serializable{
     private String sol_descricao;
     private Date sol_data;
     private int sol_prioridade;
-    /*@ManyToOne
+    @ManyToOne
     @JoinColumn(name = "pes_codigo")
     private Pessoa pessoa;
 
@@ -42,7 +36,7 @@ public class Solicitacao implements Serializable{
 
     public void setPessoa(Pessoa pessoa) {
         this.pessoa = pessoa;
-    }*/
+    }
 
     public int getSol_codigo() {
         return sol_codigo;

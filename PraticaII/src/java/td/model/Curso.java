@@ -13,6 +13,9 @@ import javax.persistence.Table;
 @Table(name="trd_curso")
 public class Curso implements Serializable{
     
+    public static final String sTitle = "Curso";
+    public static final String pTitle = "Cursos";
+    
     @Id
     @SequenceGenerator(name="trd_curso_pk_sequence", sequenceName="trd_curso_id_seq")
     @GeneratedValue(strategy=GenerationType.AUTO, generator="trd_curso_pk_sequence")

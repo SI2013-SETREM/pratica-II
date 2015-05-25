@@ -1,15 +1,7 @@
-/* #######################################
-
-
-
-FALTA A LIGAÇÃO COM PESSOA E EMPRESA (pes_codigo e emp_codigo)
-
-
-#################################3
-
-*/
 package td.model;
 
+import cfg.model.Empresa;
+import cfg.model.Pessoa;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
@@ -25,6 +17,9 @@ import javax.persistence.Table;
 @Table(name="trd_cursos_pessoa")
 public class Cursos_pessoa implements Serializable {
     
+    public static final String sTitle = "Cursos por Pessoa";
+    public static final String pTitle = "Cursos por Pessoas";
+    
     @Id
     @SequenceGenerator(name="trd_cursos_pessoa_pk_sequence", sequenceName="trd_cursos_pessoa_id_seq")
     @GeneratedValue(strategy=GenerationType.AUTO, generator="trd_cursos_pessoa_pk_sequence")
@@ -38,7 +33,7 @@ public class Cursos_pessoa implements Serializable {
     @ManyToOne
     @JoinColumn(name = "codigo_curso")
     private Curso curso;
-    /*
+    
     @ManyToOne
     @JoinColumn(name = "pes_codigo")
     private Pessoa pessoa;
@@ -61,7 +56,7 @@ public class Cursos_pessoa implements Serializable {
     public void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
     }
-    */
+    
     
     public Curso getCurso() {
         return curso;

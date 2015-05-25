@@ -1,5 +1,6 @@
 package td.model;
 
+import cfg.model.Pessoa;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
@@ -15,6 +16,9 @@ import javax.persistence.Table;
 @Table(name="trd_alunos_treinamento")
 public class Alunos_treinamento implements Serializable {
     
+    public static final String sTitle = "Alunos por Treinamento";
+    public static final String pTitle = "Alunos por Treinamentos";
+    
     @Id
     @SequenceGenerator(name="trd_alunos_treinamento_pk_sequence", sequenceName="trd_alunos_treinamento_id_seq")
     @GeneratedValue(strategy=GenerationType.AUTO, generator="trd_alunos_treinamento_pk_sequence")
@@ -28,7 +32,7 @@ public class Alunos_treinamento implements Serializable {
     @ManyToOne
     @JoinColumn(name = "tre_codigo")
     private Treinamento treinamento;
-    /* 
+    
     @ManyToOne
     @JoinColumn(name = "pes_codigo_aluno")
     private Pessoa pessoa;
@@ -41,7 +45,7 @@ public class Alunos_treinamento implements Serializable {
     public void setPessoa(Pessoa pessoa) {
         this.pessoa = pessoa;
     }
-    */
+    
 
     public int getTra_aprovado() {
         return tra_aprovado;

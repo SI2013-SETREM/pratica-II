@@ -11,10 +11,21 @@ import javax.faces.model.ListDataModel;
 @RequestScoped
 public class SolicitacaoBean {
 
+    private final String sTitle = Solicitacao.sTitle;
+    private final String pTitle = Solicitacao.pTitle;
+
     private Solicitacao solicitacao = new Solicitacao();
     private SolicitacaoDAO dao = new SolicitacaoDAO();
     private DataModel solicitacoes;
 
+    public String getsTitle() {
+        return sTitle;
+    }
+
+    public String getpTitle() {
+        return pTitle;
+    }
+    
     public Solicitacao getSolicitacao() {
         return solicitacao;
     }

@@ -11,10 +11,21 @@ import javax.faces.model.ListDataModel;
 @RequestScoped
 public class LocalBean {
 
+    private final String sTitle = Local.sTitle;
+    private final String pTitle = Local.pTitle;
+
     private Local local = new Local();
     private LocalDAO dao = new LocalDAO();
     private DataModel locais;
 
+    public String getsTitle() {
+        return sTitle;
+    }
+
+    public String getpTitle() {
+        return pTitle;
+    }
+    
     public Local getLocal() {
         return local;
     }

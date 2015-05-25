@@ -11,10 +11,21 @@ import javax.faces.model.ListDataModel;
 @RequestScoped
 public class CursoBean {
 
+    private final String sTitle = Curso.sTitle;
+    private final String pTitle = Curso.pTitle;
+
     private Curso curso = new Curso();
     private CursoDAO dao = new CursoDAO();
     private DataModel cursos;
 
+    public String getsTitle() {
+        return sTitle;
+    }
+
+    public String getpTitle() {
+        return pTitle;
+    }
+    
     public Curso getCurso() {
         return curso;
     }

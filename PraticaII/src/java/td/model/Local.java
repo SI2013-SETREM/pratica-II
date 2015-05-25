@@ -12,6 +12,9 @@ import javax.persistence.Table;
 @Table(name="trd_local")
 public class Local implements Serializable{    
     
+    public static final String sTitle = "Local";
+    public static final String pTitle = "Locais";
+    
     @Id
     @SequenceGenerator(name="trd_local_pk_sequence", sequenceName="trd_local_id_seq")
     @GeneratedValue(strategy=GenerationType.AUTO, generator="trd_local_pk_sequence")
