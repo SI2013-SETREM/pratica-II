@@ -17,7 +17,7 @@ public class Questionario implements Serializable {
     public static final String pTitle = "Questionários";
     
     @Id
-    @SequenceGenerator(name="questionario_pk_sequence", sequenceName="questionario_id_seq")
+    @SequenceGenerator(name="questionario_pk_sequence", sequenceName="seq_rs_questionario")
     @GeneratedValue(strategy=GenerationType.AUTO, generator="questionario_pk_sequence")
     private int qst_codigo;
     private String qst_titulo;
@@ -28,45 +28,44 @@ public class Questionario implements Serializable {
     public Questionario() {
     }
 
-    public int getQst_codigo() {
+    public int getQstCodigo() {
         return qst_codigo;
     }
 
-    public void setQst_codigo(int qst_codigo) {
+    public void setQstCodigo(int qst_codigo) {
         this.qst_codigo = qst_codigo;
     }
 
-    public String getQst_titulo() {
+    public String getQstTitulo() {
         return qst_titulo;
     }
 
-    public void setQst_titulo(String qst_titulo) {
+    public void setQstTitulo(String qst_titulo) {
         this.qst_titulo = qst_titulo;
     }
 
-    public int getQst_pontuacaototal() {
+    public int getQstPontuacaototal() {
         return qst_pontuacaototal;
     }
 
-    public void setQst_pontuacaototal(int qst_pontuacaototal) {
+    public void setQstPontuacaototal(int qst_pontuacaototal) {
         this.qst_pontuacaototal = qst_pontuacaototal;
     }
 
-    public int getQst_tipo() {
+    public int getQstTipo() {
         return qst_tipo;
     }
 
-    public void setQst_tipo(int qst_tipo) {
+    public void setQstTipo(int qst_tipo) {
         this.qst_tipo = qst_tipo;
     }
 
-    public int getQst_pontuacaomax() {
+    public int getQstPontuacaomax() {
         return qst_pontuacaomax;
     }
 
-    public void setQst_pontuacaomax(int qst_pontuacaomax) {
+    public void setQstPontuacaomax(int qst_pontuacaomax) {
         this.qst_pontuacaomax = qst_pontuacaomax;
     }
-    
     
 }

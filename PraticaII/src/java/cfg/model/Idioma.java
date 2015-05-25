@@ -17,7 +17,7 @@ public class Idioma implements Serializable {
     public static final String pTitle = "Idiomas";
     
     @Id
-    @SequenceGenerator(name="idioma_pk_sequence", sequenceName="idioma_id_seq")
+    @SequenceGenerator(name="idioma_pk_sequence", sequenceName="seq_cfg_idioma")
     @GeneratedValue(strategy=GenerationType.AUTO, generator="idioma_pk_sequence")
     private int idi_codigo;
     private String idi_descricao;
