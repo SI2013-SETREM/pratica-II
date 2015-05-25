@@ -39,18 +39,18 @@ public class TipoCompetenciaBean {
 
     public String edit(TipoCompetencia i) {
         tipoCompetencia = (TipoCompetencia) tipoCompetencias.getRowData();
-        return "tipocompetenciafrm";
+        return "tipocompetenciagrm";
     }
 
     public String select() {
         tipoCompetencia = (TipoCompetencia) tipoCompetencias.getRowData();
         tipoCompetencia = dao.findById(tipoCompetencia.getTcp_codigo());
-        return "tipocompetenciafrm";
+        return "tipocompetenciagrm";
     }
 
     public String update() {
         dao.update(tipoCompetencia);
-        return "tipocompetenciafrm";
+        return "tipocompetenciagrm";
     }
 
     public String delete() {
@@ -58,7 +58,7 @@ public class TipoCompetenciaBean {
         dao.delete(tipoCompetencia);
         tipoCompetencia = null;
         tipoCompetencias = new ListDataModel(dao.findAll());
-        return "tipocompetenciafrm";
+        return "tipocompetenciagrm";
     }
 
     public String insert() {
@@ -67,10 +67,10 @@ public class TipoCompetenciaBean {
         } else {
             dao.insert(tipoCompetencia);
         }
-        return "tipocompetenciafrm";
+        return "tipocompetenciagrm";
     }
 
     public String list() {
-        return "tipocompetenciafrm";
+        return "tipocompetenciagrm";
     }
 }
