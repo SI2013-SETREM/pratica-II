@@ -11,6 +11,9 @@ import javax.faces.model.ListDataModel;
 @RequestScoped
 public class TipoCompetenciaBean {
 
+    private final String sTitle = TipoCompetencia.sTitle;
+    private final String pTitle = TipoCompetencia.pTitle;
+
     private TipoCompetencia tipoCompetencia = new TipoCompetencia();
     private TipoCompetenciaDAO dao = new TipoCompetenciaDAO();
     private DataModel tipoCompetencias;
@@ -73,4 +76,13 @@ public class TipoCompetenciaBean {
     public String list() {
         return "tipocompetenciagrm";
     }
+
+    public String getsTitle() {
+        return sTitle;
+    }
+
+    public String getpTitle() {
+        return pTitle;
+    }
+
 }

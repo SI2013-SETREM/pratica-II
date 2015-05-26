@@ -36,7 +36,7 @@
                     <div class="form-group">
                         <h:outputLabel value="Tipo de Competência" for="tipoCompetencia" />
                         <h:selectOneMenu id="tipoCompetencia" converter="tipoCompetenciaConverter" value="#{competenciaBean.competencia.tipocompetencia}" >
-                            <f:selectItems value="#{competenciaBean.lstipoCompetencia}" var="Tipo" itemLabel="#{tipo.getTcp_descricao}">
+                            <f:selectItems value="#{competenciaBean.lstipoCompetencia}" var="Tipo" itemLabel="#{tipo.tcp_descricao}">
                             </f:selectItems>
                         </h:selectOneMenu>
                     </div>
