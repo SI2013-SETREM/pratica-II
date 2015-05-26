@@ -38,7 +38,8 @@ public class TipoCompetenciaDAO {
     }
 
     public List<TipoCompetencia> findAll() {
-        Query q = session.createQuery("from Tipo_competencia");
+        Query q = session.createQuery("from TipoCompetencia");
         return q.list();
     }
+
 }

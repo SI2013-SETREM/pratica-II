@@ -9,7 +9,7 @@
     </ui:define>
 
     <ui:define name="breadcrumb">
-        <li>Configurações</li>
+        <li>Avaliação</li>
         <li>${competenciaBean.pTitle}</li>
     </ui:define>
 
@@ -29,21 +29,18 @@
                         </f:facet>
                         <h:outputText value="${item.getCmp_descricao()}"/>
                     </h:column>
-
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Tipo"/>
-                        </f:facet>
-                        <h:outputText value="${item.getTipocompetencia()}"/>
-                    </h:column>
-
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="Status"/>
                         </f:facet>
                         <h:outputText value="${item.getCmp_status()}"/>
                     </h:column>
-
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Tipo"/>
+                        </f:facet>
+                        <h:outputText value="${item.tipocompetencia.getTcp_descricao()}"/>
+                    </h:column>
                     <h:column headerClass="col-editar-header">
                         <f:facet name="header">
                             <h:outputText value="Editar"/>
