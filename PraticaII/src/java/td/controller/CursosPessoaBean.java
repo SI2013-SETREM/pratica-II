@@ -1,7 +1,7 @@
 package td.controller;
 
-import td.dao.Cursos_pessoaDAO;
-import td.model.Cursos_pessoa;
+import td.dao.CursosPessoaDAO;
+import td.model.CursosPessoa;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.model.DataModel;
@@ -9,13 +9,13 @@ import javax.faces.model.ListDataModel;
 
 @ManagedBean
 @RequestScoped
-public class Cursos_pessoaBean {
+public class CursosPessoaBean {
 
-    private final String sTitle = Cursos_pessoa.sTitle;
-    private final String pTitle = Cursos_pessoa.pTitle;
+    private final String sTitle = CursosPessoa.sTitle;
+    private final String pTitle = CursosPessoa.pTitle;
 
-    private Cursos_pessoa cursos_pessoa = new Cursos_pessoa();
-    private Cursos_pessoaDAO dao = new Cursos_pessoaDAO();
+    private CursosPessoa cursos_pessoa = new CursosPessoa();
+    private CursosPessoaDAO dao = new CursosPessoaDAO();
     private DataModel cursos_pessoas;
 
     public String getsTitle() {
@@ -26,11 +26,11 @@ public class Cursos_pessoaBean {
         return pTitle;
     }
     
-    public Cursos_pessoa getCursos_pessoa() {
+    public CursosPessoa getCursos_pessoa() {
         return cursos_pessoa;
     }
 
-    public void setCursos_pessoa(Cursos_pessoa cursos_pessoa) {
+    public void setCursos_pessoa(CursosPessoa cursos_pessoa) {
         this.cursos_pessoa = cursos_pessoa;
     }
 
@@ -48,8 +48,8 @@ public class Cursos_pessoaBean {
         return "cursos_pessoalst";
     }
     
-    public String edit(Cursos_pessoa i) {
-        cursos_pessoa = (Cursos_pessoa) cursos_pessoas.getRowData();
+    public String edit(CursosPessoa i) {
+        cursos_pessoa = (CursosPessoa) cursos_pessoas.getRowData();
         return "cursos_pessoafrm";
     }
 
@@ -58,7 +58,7 @@ public class Cursos_pessoaBean {
         return "cursos_pessoalst";
     }
     
-    public String delete(Cursos_pessoa i) {
+    public String delete(CursosPessoa i) {
         dao.delete(i);
         return "cursos_pessoalst";
     }

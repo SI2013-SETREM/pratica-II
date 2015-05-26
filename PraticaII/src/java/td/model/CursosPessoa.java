@@ -15,7 +15,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="trd_cursos_pessoa")
-public class Cursos_pessoa implements Serializable {
+public class CursosPessoa implements Serializable {
     
     public static final String sTitle = "Cursos por Pessoa";
     public static final String pTitle = "Cursos por Pessoas";

@@ -1,7 +1,7 @@
 package td.controller;
 
-import td.dao.Alunos_treinamentoDAO;
-import td.model.Alunos_treinamento;
+import td.dao.AlunosTreinamentoDAO;
+import td.model.AlunosTreinamento;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.model.DataModel;
@@ -9,14 +9,14 @@ import javax.faces.model.ListDataModel;
 
 @ManagedBean
 @RequestScoped
-public class Alunos_treinamentoBean {
+public class AlunosTreinamentoBean {
 
-    private final String sTitle = Alunos_treinamento.sTitle;
+    private final String sTitle = AlunosTreinamento.sTitle;
 
-    private final String pTitle = Alunos_treinamento.pTitle;
+    private final String pTitle = AlunosTreinamento.pTitle;
     
-    private Alunos_treinamento alunos_treinamento = new Alunos_treinamento();
-    private Alunos_treinamentoDAO dao = new Alunos_treinamentoDAO();
+    private AlunosTreinamento alunos_treinamento = new AlunosTreinamento();
+    private AlunosTreinamentoDAO dao = new AlunosTreinamentoDAO();
     private DataModel alunos_treinamentos;
     
     public String getsTitle() {
@@ -27,11 +27,11 @@ public class Alunos_treinamentoBean {
         return pTitle;
     }
     
-    public Alunos_treinamento getAlunos_treinamento() {
+    public AlunosTreinamento getAlunos_treinamento() {
         return alunos_treinamento;
     }
 
-    public void setAlunos_treinamento(Alunos_treinamento alunos_treinamento) {
+    public void setAlunos_treinamento(AlunosTreinamento alunos_treinamento) {
         this.alunos_treinamento = alunos_treinamento;
     }
     
@@ -49,8 +49,8 @@ public class Alunos_treinamentoBean {
         return "alunos_treinamentolst";
     }
     
-    public String edit(Alunos_treinamento i) {
-        alunos_treinamento = (Alunos_treinamento) alunos_treinamentos.getRowData();
+    public String edit(AlunosTreinamento i) {
+        alunos_treinamento = (AlunosTreinamento) alunos_treinamentos.getRowData();
         return "alunos_treinamentofrm";
     }
 
@@ -59,7 +59,7 @@ public class Alunos_treinamentoBean {
         return "alunos_treinamentolst";
     }
     
-    public String delete(Alunos_treinamento i) {
+    public String delete(AlunosTreinamento i) {
         dao.delete(i);
         return "alunos_treinamentolst";
     }

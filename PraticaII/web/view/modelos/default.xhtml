@@ -130,30 +130,30 @@
                                             <span class="menu-text">Treinamento</span>                                       
                                         </h:link> 
                                     </li>
-                                    <li class="#{view.viewId.contains('/local') ? 'active' : ''}">
+                                    <li class="#{view.viewId.contains('/td/local') ? 'active' : ''}">
                                     
-                                        <h:link outcome="/faces/view/td/localfrm">
+                                        <h:link outcome="/faces/view/td/locallst">
                                             <span class="fa fa-institution"></span>
                                             <span class="menu-text">Local</span>                                       
                                         </h:link> 
                                     </li>
-                                    <li class="menu-dropdown #{view.viewId.contains('ID_PAGINA_AQUI') ? 'open' : ''}">
+                                    <li class="menu-dropdown #{view.viewId.contains('/curso') || view.viewId.contains('/cursospessoa') ? 'open' : ''}">
                                         <a href="javascript:void(0);">
                                             <span class="fa fa-gears"></span>
                                             <span class="menu-text">Curso</span>
                                             <span class="fa dropdown-chevron pull-right"></span>
                                         </a>
                                         <ul class="submenu">
-                                            <li class="menu-dropdown #{view.viewId.contains('ID_PAGINA_AQUI') ? 'active' : ''}">
-                                                <h:link outcome="/faces/view/index">
+                                            <li class="#{view.viewId.contains('/curso') ? 'active' : ''}">
+                                                <h:link outcome="/faces/view/td/cursolst">
                                                     <span class="fa fa-cog"></span>
                                                     <span class="menu-text">Novo Curso</span>
                                                 </h:link>
                                             </li>
-                                            <li class="menu-dropdown #{view.viewId.contains('ID_PAGINA_AQUI') ? 'active' : ''}">
-                                                <h:link outcome="/faces/view/index">
+                                            <li class="#{view.viewId.contains('/cursospessoa') ? 'active' : ''}">
+                                                <h:link outcome="/faces/view/cfg/cursospessoalst">
                                                     <span class="fa fa-street-view"></span>
-                                                    <span class="menu-text">Curso por Pessoa</span>
+                                                    <span class="menu-text">Cursos por Pessoa</span>
                                                 </h:link>
                                             </li>
                                         </ul>
