@@ -117,15 +117,15 @@
                                     <span class="fa dropdown-chevron pull-right"></span>
                                 </a>
                                 <ul class="submenu">
-                                    <li class="#{view.viewId.contains('ID_PAGINA_AQUI') ? 'active' : ''}">
-                                        <h:link outcome="/faces/view/index">
+                                    <li class="#{view.viewId.contains('/td/alunostreinamento') ? 'active' : ''}">
+                                        <h:link outcome="/faces/view/td/alunostreinamentolst">
                                             <span class="fa fa-users"></span>
                                             <span class="menu-text">Turmas</span>                                       
                                         </h:link>
                                     </li>
-                                    <li class="#{view.viewId.contains('ID_PAGINA_AQUI') ? 'active' : ''}">
+                                    <li class="#{view.viewId.contains('/td/treinamento') ? 'active' : ''}">
                                     
-                                        <h:link outcome="/faces/view/index">
+                                        <h:link outcome="/faces/view/td/treinamentolst">
                                             <span class="fa fa-book"></span>
                                             <span class="menu-text">Treinamento</span>                                       
                                         </h:link> 
@@ -151,15 +151,15 @@
                                                 </h:link>
                                             </li>
                                             <li class="#{view.viewId.contains('/cursospessoa') ? 'active' : ''}">
-                                                <h:link outcome="/faces/view/cfg/cursospessoalst">
+                                                <h:link outcome="/faces/view/td/cursospessoalst">
                                                     <span class="fa fa-street-view"></span>
                                                     <span class="menu-text">Cursos por Pessoa</span>
                                                 </h:link>
                                             </li>
                                         </ul>
                                     </li>
-                                    <li class="#{view.viewId.contains('ID_PAGINA_AQUI') ? 'active' : ''}">                                 
-                                        <h:link outcome="/faces/view/index">
+                                    <li class="#{view.viewId.contains('/td/solicitacao') ? 'active' : ''}">                                 
+                                        <h:link outcome="/faces/view/td/solicitacaolst">
                                             <span class="fa fa-user-plus"></span>
                                             <span class="menu-text">Solicitação</span>                                       
                                         </h:link> 

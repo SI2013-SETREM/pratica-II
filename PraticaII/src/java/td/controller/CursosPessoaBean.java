@@ -45,22 +45,22 @@ public class CursosPessoaBean {
 
     public String insert() {
         dao.insert(cursos_pessoa);
-        return "cursos_pessoalst";
+        return "cursospessoalst";
     }
     
     public String edit(CursosPessoa i) {
         cursos_pessoa = (CursosPessoa) cursos_pessoas.getRowData();
-        return "cursos_pessoafrm";
+        return "cursospessoafrm";
     }
 
     public String update() {
         dao.update(cursos_pessoa);
-        return "cursos_pessoalst";
+        return "cursospessoalst";
     }
     
     public String delete(CursosPessoa i) {
         dao.delete(i);
-        return "cursos_pessoalst";
+        return "cursospessoalst";
     }
     
     public String salvar() {
@@ -69,11 +69,11 @@ public class CursosPessoaBean {
         } else {
             dao.insert(cursos_pessoa);
         }
-        return "cursos_pessoalst";
+        return "cursospessoalst";
     }
 
     public String listar() {
-        return "cursos_pessoalst";
+        return "cursospessoalst";
     }
     
 }

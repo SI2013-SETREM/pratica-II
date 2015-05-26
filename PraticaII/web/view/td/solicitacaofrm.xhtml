@@ -6,36 +6,36 @@
     xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
     <ui:define name="title">
-        ${localBean.pTitle}
+        ${solicitacaoBean.pTitle}
     </ui:define>
 
     <ui:define name="breadcrumb">
         <li>Treinamento e Desenvolvimento</li>
-        <li><h:link value="${localBean.pTitle}" outcome="/faces/view/td/locallst" /></li>
+        <li><h:link value="${solicitacaoBean.pTitle}" outcome="/faces/view/td/solicitacaolst" /></li>
     </ui:define>
 
     <ui:define name="main-content">
         <div class="panel panel-body">
-            <h3><h:outputText value="Dados do ${localBean.sTitle}"/></h3>
+            <h3><h:outputText value="Dados da ${solicitacaoBean.sTitle}"/></h3>
             <f:view>
                 <h:form styleClass="form-horizontal">
-                    <h:inputHidden id="locCodigo" value="#{localBean.local.loc_codigo}" />
+                    <h:inputHidden id="solCodigo" value="#{solicitacaoBean.solicitacao.sol_codigo}" />
 <!--                            <div class="form-group">
-                        <h:outputLabel value="Código:" for="locCodigo" styleClass="control-label col-sm-1" />
+                        <h:outputLabel value="Código:" for="solCodigo" styleClass="control-label col-sm-1" />
                         <div class="col-md-6">
-                            <h:inputText id="locCodigo" value="#{localBean.local.loc_codigo}" title="LocCodigo" styleClass="form-control" />
+                            <h:inputText id="solCodigo" value="#{solicitacaoBean.solicitacao.sol_codigo}" title="SolCodigo" styleClass="form-control" />
                         </div>
                     </div>-->
                     <div class="form-group">
-                        <h:outputLabel value="Descrição:" for="loc_Descricao" styleClass="control-label col-sm-1" />
+                        <h:outputLabel value="Descrição" for="sol_Descricao" styleClass="control-label col-sm-1" />
                         <div class="col-md-6 col-sm-12">
-                            <h:inputText id="locDescricao" value="#{localBean.local.loc_descricao}" title="LocDescricao" styleClass="form-control" pt:autofocus="" />
+                            <h:inputText id="solDescricao" value="#{solicitacaoBean.solicitacao.sol_descricao}" title="SolDescricao" styleClass="form-control" pt:autofocus="" />
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-md-offset-1 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
-                            <h:link styleClass="btn btn-default" value="Cancelar" outcome="#{localBean.listar()}" />
-                            <h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{localBean.salvar()}"></h:commandButton>
+                            <h:link styleClass="btn btn-default" value="Cancelar" outcome="#{solicitacaoBean.listar()}" />
+                            <h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{solicitacaoBean.salvar()}"></h:commandButton>
                         </div>
                     </div>
                 </h:form>

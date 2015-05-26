@@ -19,17 +19,17 @@
             <h3><h:outputText value="Dados do ${cursoBean.sTitle}"/></h3>
             <f:view>
                 <h:form styleClass="form-horizontal">
-                    <h:inputHidden id="idiCodigo" value="#{cursoBean.curso.cur_codigo}" />
+                    <h:inputHidden id="curCodigo" value="#{cursoBean.curso.cur_codigo}" />
 <!--                            <div class="form-group">
-                        <h:outputLabel value="Código:" for="idiCodigo" styleClass="control-label col-sm-1" />
+                        <h:outputLabel value="Código:" for="curCodigo" styleClass="control-label col-sm-1" />
                         <div class="col-md-6">
-                            <h:inputText id="idiCodigo" value="#{cursoBean.curso.cur_codigo}" title="IdiCodigo" styleClass="form-control" />
+                            <h:inputText id="curCodigo" value="#{cursoBean.curso.cur_codigo}" title="CurCodigo" styleClass="form-control" />
                         </div>
                     </div>-->
                     <div class="form-group">
                         <h:outputLabel value="Nome" for="cur_Nome" styleClass="control-label col-sm-1" />
                         <div class="col-md-6 col-sm-12">
-                            <h:inputText id="idiDescricao" value="#{cursoBean.curso.cur_nome}" title="CurNome" styleClass="form-control" pt:autofocus="" />
+                            <h:inputText id="curNome" value="#{cursoBean.curso.cur_nome}" title="CurNome" styleClass="form-control" pt:autofocus="" />
                         </div>
                     </div>
                     <div class="form-group">
