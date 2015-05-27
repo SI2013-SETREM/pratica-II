@@ -6,7 +6,7 @@
     <h:head>
         <link rel="icon" href="#{resource['img/favicon.ico']}" sizes="16x16" />
         <title><ui:insert name="title">Início</ui:insert> - GRH</title>
-        <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700|Signika:400,700" rel="stylesheet" type="text/css"/>
+        <!--<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700|Signika:400,700" rel="stylesheet" type="text/css"/>-->
         <h:outputStylesheet name="./bootstrap/css/bootstrap.min.css" />
         <h:outputStylesheet name="./font-awesome/css/font-awesome.min.css" />
         <h:outputStylesheet name="./data-tables/dataTables.min.css" />
@@ -33,14 +33,23 @@
                         <li class="dropdown dropdown-inbox">
                             <a class="dropdown-toggle dropdown-icon" data-close-others="true" data-toggle="dropdown" href="javascript:void(0);">
                                 <i class="fa fa-envelope"></i>
-                                <span class="badge badge-danger">9</span>
+                                <!--<span class="badge badge-danger">9</span>-->
+                                <span class="badge badge-danger"></span>
                             </a>
-                            <ul class="dropdown-menu pull-right">
-                                <li class="external">
+                            <ul class="dropdown-menu pull-right messages-list">
+                                <li class="no-messages">
+                                    <a href="#">
+                                        <i class="fa fa-envelope"></i>
+                                        Nova mensagem
+                                    </a>
+                                </li>
+<!--                                <li class="messages-top">
                                     <span>Você tem 9 novas mensagens</span>
                                     <a href="#">Ver todas</a>
                                 </li>
-                                <li></li>
+                                <li>
+                                    
+                                </li>-->
                             </ul>
                         </li>
                         <li class="dropdown dropdown-user">
@@ -60,6 +69,12 @@
                                 <h:link outcome="/faces/view/index">
                                     <span class="fa fa-home"></span>
                                     <span class="menu-text">Início</span>
+                                </h:link>
+                            </li>
+                            <li class="#{view.viewId.contains('/ff/') ? 'active' : ''}">
+                                <h:link outcome="/faces/view/ff/fichafunlst">
+                                    <span class="fa fa-street-view"></span>
+                                    <span class="menu-text">Funcionários</span>
                                 </h:link>
                             </li>
                             <li class="menu-dropdown #{view.viewId.contains('/rs/') ? 'open' : ''}">
@@ -124,14 +139,12 @@
                                         </h:link>
                                     </li>
                                     <li class="#{view.viewId.contains('/td/treinamento') ? 'active' : ''}">
-                                    
                                         <h:link outcome="/faces/view/td/treinamentolst">
                                             <span class="fa fa-book"></span>
                                             <span class="menu-text">Treinamento</span>                                       
                                         </h:link> 
                                     </li>
                                     <li class="#{view.viewId.contains('/td/local') ? 'active' : ''}">
-                                    
                                         <h:link outcome="/faces/view/td/locallst">
                                             <span class="fa fa-institution"></span>
                                             <span class="menu-text">Local</span>                                       
@@ -169,14 +182,32 @@
                             <li class="menu-dropdown #{view.viewId.contains('/fp/') ? 'open' : ''}">
                                 <a href="javascript:void(0);">
                                     <span class="fa fa-usd"></span>
-                                    <span class="menu-text">Ficha Funcional</span>
+                                    <span class="menu-text">Folha de Pagamento</span>
                                     <span class="fa dropdown-chevron pull-right"></span>
                                 </a>
                                 <ul class="submenu">
-                                    <li class="#{view.viewId.contains('ID_PAGINA_AQUI') ? 'active' : ''}">
-                                        <h:link outcome="/faces/view/index">
-                                            <span class="fa fa-street-view"></span>
-                                            <span class="menu-text">Funcionários</span>
+                                    <li class="#{view.viewId.contains('/folhapaglst') ? 'active' : ''}">
+                                        <h:link outcome="/faces/view/fp/folhapaglst">
+                                            <span class="fa fa-money"></span>
+                                            <span class="menu-text">Folha de Pagamento</span>
+                                        </h:link>
+                                    </li>
+                                    <li class="#{view.viewId.contains('/eventolst') ? 'active' : ''}">
+                                        <h:link outcome="/faces/view/fp/eventolst">
+                                            <span class="fa fa-list"></span>
+                                            <span class="menu-text">Eventos da Folha</span>
+                                        </h:link>
+                                    </li>
+                                    <li class="#{view.viewId.contains('/serieeventolst') ? 'active' : ''}">
+                                        <h:link outcome="/faces/view/fp/serieeventolst">
+                                            <span class="fa fa-th-list"></span>
+                                            <span class="menu-text">Serie de Evento</span>
+                                        </h:link>
+                                    </li>
+                                    <li class="#{view.viewId.contains('/tpeventolst') ? 'active' : ''}">
+                                        <h:link outcome="/faces/view/fp/tpeventolst">
+                                            <span class="fa fa-th-large"></span>
+                                            <span class="menu-text">Tipo de Evento</span>
                                         </h:link>
                                     </li>
                                 </ul>
@@ -188,10 +219,22 @@
                                     <span class="fa dropdown-chevron pull-right"></span>
                                 </a>
                                 <ul class="submenu">
-                                    <li class="#{view.viewId.contains('ID_PAGINA_AQUI') ? 'active' : ''}">
-                                        <h:link outcome="/faces/view/index">
-                                            <span class="fa fa-flag"></span>
+                                    <li class="#{view.viewId.contains('/avaliacao') ? 'active' : ''}">
+                                        <h:link outcome="/faces/view/ad/avaliacaolst">
+                                            <span class="fa fa-tasks"></span>
                                             <span class="menu-text">Avaliações</span>
+                                        </h:link>
+                                    </li>
+                                    <li class="#{view.viewId.contains('/competencia') ? 'active' : ''}">
+                                        <h:link outcome="/faces/view/ad/competencialst">
+                                            <span class="fa fa-cube"></span>
+                                            <span class="menu-text">Competência</span>
+                                        </h:link>
+                                    </li>
+                                    <li class="#{view.viewId.contains('/tipocompetencia') ? 'active' : ''}">
+                                        <h:link outcome="/faces/view/ad/tipocompetenciagrm">
+                                            <span class="fa fa-cubes"></span>
+                                            <span class="menu-text">Tipo de Competência</span>
                                         </h:link>
                                     </li>
                                 </ul>

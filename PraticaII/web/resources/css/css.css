@@ -170,7 +170,7 @@ body {
 .page-topmenu .navbar-nav > li .dropdown-menu {
   font-size: 12px;
 }
-.page-topmenu .navbar-nav > li .dropdown-menu > .external a {
+.page-topmenu .navbar-nav > li .dropdown-menu > .messages-top a {
   float: right;
 }
 .page-topmenu .nav > li > a:focus,

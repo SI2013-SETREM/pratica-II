@@ -37,8 +37,8 @@ public class Conversa implements Serializable {
     private List<Pessoa> pessoas;
     
     @ManyToMany
-    @JoinTable(name = "cnv_als")
-    private List<Alias> alias;
+    @JoinTable(name = "cnv_apl")
+    private List<Apelido> apelido;
     
     public Conversa() {
     }
@@ -75,12 +75,12 @@ public class Conversa implements Serializable {
         this.pessoas = pessoas;
     }
 
-    public List<Alias> getAlias() {
-        return alias;
+    public List<Apelido> getApelido() {
+        return apelido;
     }
 
-    public void setAlias(List<Alias> alias) {
-        this.alias = alias;
+    public void setApelido(List<Apelido> apelido) {
+        this.apelido = apelido;
     }
     
 }

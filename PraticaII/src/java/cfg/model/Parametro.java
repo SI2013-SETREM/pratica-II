@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package cfg.model;
 
 import java.io.Serializable;
@@ -23,7 +19,27 @@ public class Parametro implements Serializable {
     @Id
     @SequenceGenerator(name = "par_codigo", sequenceName = "par_codigo")
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "par_codigo")
- 
     private int par_codigo;
+    
+    private int par_qst_pontuacaomax_padrao;
 
+    public Parametro() {
+    }
+
+    public int getPar_codigo() {
+        return par_codigo;
+    }
+
+    public void setPar_codigo(int par_codigo) {
+        this.par_codigo = par_codigo;
+    }
+
+    public int getPar_qst_pontuacaomax_padrao() {
+        return par_qst_pontuacaomax_padrao;
+    }
+
+    public void setPar_qst_pontuacaomax_padrao(int par_qst_pontuacaomax_padrao) {
+        this.par_qst_pontuacaomax_padrao = par_qst_pontuacaomax_padrao;
+    }
+    
 }

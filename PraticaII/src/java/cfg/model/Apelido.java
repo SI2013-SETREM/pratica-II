@@ -13,8 +13,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="alias")
-public class Alias implements Serializable {
+@Table(name="apelido")
+public class Apelido implements Serializable {
     
     public static final String sTitle = "Apelido";
     public static final String pTitle = "Apelidos";
@@ -27,19 +27,20 @@ public class Alias implements Serializable {
     private String als_nome;
     private int als_status;
 
+    // Revisar as chaves destes join, tem que especificar com JoinColumn
     @ManyToMany
-    @JoinTable(name = "als_pes")
+    @JoinTable(name = "apl_pes")
     private List<Pessoa> pessoas;
     
     @ManyToMany
-    @JoinTable(name = "cnv_als")
+    @JoinTable(name = "cnv_apl")
     private List<Conversa> conversas;
     
     @ManyToMany
-    @JoinTable(name = "als_msg")
+    @JoinTable(name = "apl_msg")
     private List<Mensagem> mensagens;
     
-    public Alias() {
+    public Apelido() {
     }
 
     public int getAlsCodigo() {

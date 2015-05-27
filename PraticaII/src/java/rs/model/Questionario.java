@@ -2,10 +2,13 @@
 package rs.model;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -25,6 +28,10 @@ public class Questionario implements Serializable {
     private int qst_tipo;
     private int qst_pontuacaomax;
 
+    @OneToMany
+    @JoinColumn(name = "qst_codigo", referencedColumnName = "qst_codigo")
+    private List<Pergunta> perguntas;
+    
     public Questionario() {
     }
 
@@ -55,17 +62,44 @@ public class Questionario implements Serializable {
     public int getQstTipo() {
         return qst_tipo;
     }
+    
+    public String getQstTipoDsc() {
+        String r = "";
+        switch(qst_tipo) {
+            case 1:
+                r = "Normal";
+                break;
+            case 2:
+                r = "Avaliação 180º";
+                break;
+            case 3:
+                r = "Avaliação 360º";
+                break;
+        }
+        return r;
+    }
 
     public void setQstTipo(int qst_tipo) {
         this.qst_tipo = qst_tipo;
     }
 
     public int getQstPontuacaomax() {
+        if (qst_codigo == 0) {
+            qst_pontuacaomax = 20;
+        }
         return qst_pontuacaomax;
     }
 
     public void setQstPontuacaomax(int qst_pontuacaomax) {
         this.qst_pontuacaomax = qst_pontuacaomax;
+    }
+
+    public List<Pergunta> getPerguntas() {
+        return perguntas;
+    }
+
+    public void setPerguntas(List<Pergunta> perguntas) {
+        this.perguntas = perguntas;
     }
     
 }
