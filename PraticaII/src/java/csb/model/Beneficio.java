@@ -39,13 +39,6 @@ public class Beneficio implements Serializable {
     }
 
     public Beneficio(int ben_codigo, String ben_descricao, Double ben_valor, Double ben_valorpago, Date ben_datainicio, Boolean ben_situacao, Date ben_datafim) {
-        this.ben_codigo = ben_codigo;
-        this.ben_descricao = ben_descricao;
-        this.ben_valor = ben_valor;
-        this.ben_valorpago = ben_valorpago;
-        this.ben_datainicio = ben_datainicio;
-        this.ben_situacao = ben_situacao;
-        this.ben_datafim = ben_datafim;
     }
 
     public int getBen_codigo() {

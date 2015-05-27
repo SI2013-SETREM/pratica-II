@@ -1,16 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package csb.model;
 
-import cfg.model.*;
+import ad.model.Competencia;
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -24,20 +22,24 @@ public class Cargo implements Serializable {
     @Id
     @SequenceGenerator(name = "car_codigo", sequenceName = "car_codigo")
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "car_codigo")
- 
     private int car_codigo;
     private String car_descricao;
     private int car_ativo;
     private String car_cbo;
     private Double car_tetosalarial;
     private Double car_pisosalarial;
-    private int car_pai;
+    @OneToOne
+    private Cargo car_pai;
+    @OneToMany
+    private List<Competencia> Competencia;
+    @OneToMany
+    private List<Graduacao> Graduacao;
 
     public Cargo() {
         
     }
 
-    public Cargo(int car_codigo, String car_descricao, int car_ativo, String car_cbo, Double car_tetosalarial, Double car_pisosalarial, int car_pai) {
+    public Cargo(int car_codigo, String car_descricao, int car_ativo, String car_cbo, Double car_tetosalarial, Double car_pisosalarial, Cargo car_pai) {
         this.car_codigo = car_codigo;
         this.car_descricao = car_descricao;
         this.car_ativo = car_ativo;
@@ -95,14 +97,27 @@ public class Cargo implements Serializable {
         this.car_pisosalarial = car_pisosalarial;
     }
 
-    public int getCar_pai() {
+    public Cargo getCar_pai() {
         return car_pai;
     }
 
-    public void setCar_pai(int car_pai) {
+    public void setCar_pai(Cargo car_pai) {
         this.car_pai = car_pai;
     }
-    
-    
-    
+
+    public List<Competencia> getCompetencia() {
+        return Competencia;
+    }
+
+    public void setCompetencia(List<Competencia> Competencia) {
+        this.Competencia = Competencia;
+    }    
+
+    public List<Graduacao> getGraduacao() {
+        return Graduacao;
+    }
+
+    public void setGraduacao(List<Graduacao> Graduacao) {
+        this.Graduacao = Graduacao;
+    }
 }
