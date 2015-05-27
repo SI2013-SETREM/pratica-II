@@ -57,7 +57,7 @@ public class SerieEventoDAO {
         return (SerieEvento) session.load(SerieEvento.class, id);
     }
 
-    public List<SerieEvento> finAll() {
+    public List<SerieEvento> findAll() {
 
         Query query = session.createQuery("from SerieEvento");
         return query.list();
