@@ -16,6 +16,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "ffp_serie_evento")
 public class SerieEvento implements Serializable{
+    
+    public static final String sTitle = "Serie Evento";
+    public static final String pTitle = "Serie Eventos";
 
     @Id
     @SequenceGenerator(name = "genSerieEvento", sequenceName = "genSerieEvento", allocationSize = 1)
