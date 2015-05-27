@@ -27,15 +27,18 @@ public class EquipamentosPessoa implements Serializable {
     @Id
     @ManyToOne
     @JoinColumn(name = "epi_codigo", referencedColumnName = "epi_codigo")
-    private Epi epi_codigo;
+    private Epi epi;
+    
     @Id
     @ManyToOne
     @JoinColumn(name = "pes_codigo", referencedColumnName = "pes_codigo")
-    private Pessoa pes_codigo; 
+    private Pessoa pessoa;
+    
     @Id
     @ManyToOne
     @JoinColumn(name = "car_codigo", referencedColumnName = "car_codigo")
-    private Cargo car_codigo; 
+    private Cargo cargo;
+    
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date epe_datainicio;
     @Temporal(javax.persistence.TemporalType.DATE)
@@ -59,9 +62,9 @@ public class EquipamentosPessoa implements Serializable {
         @Override
         public int hashCode() {
             int hash = 7;
-            hash = 17 * hash + Objects.hashCode(this.cargo);
-            hash = 17 * hash + Objects.hashCode(this.pessoa);
-            hash = 17 * hash + Objects.hashCode(this.epi);
+            hash = 11 * hash + Objects.hashCode(this.cargo);
+            hash = 11 * hash + Objects.hashCode(this.pessoa);
+            hash = 11 * hash + Objects.hashCode(this.epi);
             return hash;
         }
 
@@ -85,34 +88,34 @@ public class EquipamentosPessoa implements Serializable {
             }
             return true;
         }
-        
+
     }
 
     public EquipamentosPessoa() {
     }
 
-    public Epi getEpi_codigo() {
-        return epi_codigo;
+    public Epi getEpi() {
+        return epi;
     }
 
-    public void setEpi_codigo(Epi epi_codigo) {
-        this.epi_codigo = epi_codigo;
+    public void setEpi(Epi epi) {
+        this.epi = epi;
     }
 
-    public Pessoa getPes_codigo() {
-        return pes_codigo;
+    public Pessoa getPessoa() {
+        return pessoa;
     }
 
-    public void setPes_codigo(Pessoa pes_codigo) {
-        this.pes_codigo = pes_codigo;
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
     }
 
-    public Cargo getCar_codigo() {
-        return car_codigo;
+    public Cargo getCargo() {
+        return cargo;
     }
 
-    public void setCar_codigo(Cargo car_codigo) {
-        this.car_codigo = car_codigo;
+    public void setCargo(Cargo cargo) {
+        this.cargo = cargo;
     }
 
     public Date getEpe_datainicio() {

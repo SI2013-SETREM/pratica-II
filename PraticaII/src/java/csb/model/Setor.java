@@ -25,12 +25,13 @@ public class Setor implements Serializable{
     @GeneratedValue(strategy=GenerationType.AUTO, generator="setor_pk_sequence")
     private int set_codigo;
     private String set_descricao;
-    @OneToMany
-    private List<Epi> Epi;
-    @OneToMany
-    private List<Cargo> Cargo;
     
-
+    @OneToMany
+    private List<Epi> epis;
+    
+    @OneToMany
+    private List<Cargo> cargos;
+    
     public Setor() {
     }
     
@@ -50,19 +51,19 @@ public class Setor implements Serializable{
         this.set_descricao = set_descricao;
     }
 
-    public List<Epi> getEpi() {
-        return Epi;
+    public List<Epi> getEpis() {
+        return epis;
     }
 
-    public void setEpi(List<Epi> Epi) {
-        this.Epi = Epi;
+    public void setEpis(List<Epi> epis) {
+        this.epis = epis;
     }    
 
-    public List<Cargo> getCargo() {
-        return Cargo;
+    public List<Cargo> getCargos() {
+        return cargos;
     }
 
-    public void setCargo(List<Cargo> Cargo) {
-        this.Cargo = Cargo;
+    public void setCargos(List<Cargo> cargos) {
+        this.cargos = cargos;
     }
 }

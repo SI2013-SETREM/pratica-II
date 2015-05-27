@@ -27,11 +27,13 @@ public class BeneficiosPessoa implements Serializable {
     @Id
     @ManyToOne
     @JoinColumn(name = "ben_codigo", referencedColumnName = "ben_codigo")
-    private Beneficio ben_codigo;
+    private Beneficio beneficio;
+    
     @Id
     @ManyToOne
     @JoinColumn(name = "pes_codigo", referencedColumnName = "pes_codigo")
-    private Pessoa pes_codigo;
+    private Pessoa pessoa;
+    
     private boolean ben_ativo;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date ben_datainicio;
@@ -83,20 +85,20 @@ public class BeneficiosPessoa implements Serializable {
     public BeneficiosPessoa() {
     }
 
-    public Beneficio getBen_codigo() {
-        return ben_codigo;
+    public Beneficio getBeneficio() {
+        return beneficio;
     }
 
-    public void setBen_codigo(Beneficio ben_codigo) {
-        this.ben_codigo = ben_codigo;
+    public void setBeneficio(Beneficio beneficio) {
+        this.beneficio = beneficio;
     }
 
-    public Pessoa getPes_codigo() {
-        return pes_codigo;
+    public Pessoa getPessoa() {
+        return pessoa;
     }
 
-    public void setPes_codigo(Pessoa pes_codigo) {
-        this.pes_codigo = pes_codigo;
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
     }
 
     public boolean isBen_ativo() {

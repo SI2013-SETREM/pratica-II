@@ -26,11 +26,11 @@ public class BeneficiosCargo implements Serializable {
     @Id
     @ManyToOne
     @JoinColumn(name = "ben_codigo", referencedColumnName = "ben_codigo")
-    private Beneficio ben_codigo;
+    private Beneficio beneficio;
     @Id
     @ManyToOne
     @JoinColumn(name = "car_codigo", referencedColumnName = "car_codigo")
-    private Cargo car_codigo;
+    private Cargo cargo;
     private boolean ben_ativo;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date ben_datainicio;
@@ -52,9 +52,9 @@ public class BeneficiosCargo implements Serializable {
 
         @Override
         public int hashCode() {
-            int hash = 7;
-            hash = 17 * hash + Objects.hashCode(this.beneficio);
-            hash = 17 * hash + Objects.hashCode(this.cargo);
+            int hash = 5;
+            hash = 29 * hash + Objects.hashCode(this.beneficio);
+            hash = 29 * hash + Objects.hashCode(this.cargo);
             return hash;
         }
 
@@ -75,26 +75,26 @@ public class BeneficiosCargo implements Serializable {
             }
             return true;
         }
-
+        
     }
 
     public BeneficiosCargo() {
     }
 
-    public Beneficio getBen_codigo() {
-        return ben_codigo;
+    public Beneficio getBeneficio() {
+        return beneficio;
     }
 
-    public void setBen_codigo(Beneficio ben_codigo) {
-        this.ben_codigo = ben_codigo;
+    public void setBeneficio(Beneficio beneficio) {
+        this.beneficio = beneficio;
     }
 
-    public Cargo getCar_codigo() {
-        return car_codigo;
+    public Cargo getCargo() {
+        return cargo;
     }
 
-    public void setCar_codigo(Cargo car_codigo) {
-        this.car_codigo = car_codigo;
+    public void setCargo(Cargo cargo) {
+        this.cargo = cargo;
     }
 
     public boolean isBen_ativo() {

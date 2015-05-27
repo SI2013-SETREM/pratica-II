@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
 
 @Entity
 @Table(name="cbs_tipoexame")
@@ -24,8 +25,10 @@ public class TipoExame implements Serializable {
     private String eme_descricao;
     private char eme_tipo;
     private boolean eme_periodico;
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date eme_validade;
     private boolean eme_obrigatorio;
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date eme_intervalorepeticao;
 
     public TipoExame() {

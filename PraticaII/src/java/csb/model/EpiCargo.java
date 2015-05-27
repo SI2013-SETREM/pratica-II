@@ -23,11 +23,13 @@ public class EpiCargo implements Serializable {
     @Id
     @ManyToOne
     @JoinColumn(name = "epi_codigo", referencedColumnName = "epi_codigo")
-    private Epi epi_codigo;
+    private Epi epi;
+    
     @Id
     @ManyToOne
     @JoinColumn(name = "car_codigo", referencedColumnName = "car_codigo")
-    private Cargo car_codigo;
+    private Cargo cargo;
+    
     private boolean ecr_obrigatorio;
     
     public class EpiCargoPK implements Serializable {
@@ -72,20 +74,20 @@ public class EpiCargo implements Serializable {
     public EpiCargo() {
     }
 
-    public Epi getEpi_codigo() {
-        return epi_codigo;
+    public Epi getEpi() {
+        return epi;
     }
 
-    public void setEpi_codigo(Epi epi_codigo) {
-        this.epi_codigo = epi_codigo;
+    public void setEpi(Epi epi) {
+        this.epi = epi;
     }
 
-    public Cargo getCar_codigo() {
-        return car_codigo;
+    public Cargo getCargo() {
+        return cargo;
     }
 
-    public void setCar_codigo(Cargo car_codigo) {
-        this.car_codigo = car_codigo;
+    public void setCargo(Cargo cargo) {
+        this.cargo = cargo;
     }
 
     public boolean isEcr_obrigatorio() {

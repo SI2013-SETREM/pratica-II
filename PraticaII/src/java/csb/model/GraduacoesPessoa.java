@@ -25,11 +25,13 @@ public class GraduacoesPessoa implements Serializable {
     @Id
     @ManyToOne
     @JoinColumn(name = "grd_codigo", referencedColumnName = "grd_codigo")
-    private Graduacao grd_codigo;
+    private Graduacao graduacao;
+    
     @Id
     @ManyToOne
     @JoinColumn(name = "pes_codigo", referencedColumnName = "pes_codigo")
-    private Pessoa pes_codigo;
+    private Pessoa pessoa;
+    
     private boolean grd_status;
 
     public class GraduacoesPessoaPK implements Serializable {
@@ -76,20 +78,20 @@ public class GraduacoesPessoa implements Serializable {
     public GraduacoesPessoa() {
     }
 
-    public Graduacao getGrd_codigo() {
-        return grd_codigo;
+    public Graduacao getGraduacao() {
+        return graduacao;
     }
 
-    public void setGrd_codigo(Graduacao grd_codigo) {
-        this.grd_codigo = grd_codigo;
+    public void setGraduacao(Graduacao graduacao) {
+        this.graduacao = graduacao;
     }
 
-    public Pessoa getPes_codigo() {
-        return pes_codigo;
+    public Pessoa getPessoa() {
+        return pessoa;
     }
 
-    public void setPes_codigo(Pessoa pes_codigo) {
-        this.pes_codigo = pes_codigo;
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
     }
 
     public boolean isGrd_status() {

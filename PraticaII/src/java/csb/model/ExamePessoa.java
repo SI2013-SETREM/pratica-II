@@ -27,11 +27,13 @@ public class ExamePessoa implements Serializable {
     @Id
     @ManyToOne
     @JoinColumn(name = "eme_codigo", referencedColumnName = "eme_codigo")
-    private TipoExame eme_codigo;
+    private TipoExame tipoExame;
+    
     @Id
     @ManyToOne
     @JoinColumn(name = "pes_codigo", referencedColumnName = "pes_codigo")
-    private Pessoa pes_codigo; 
+    private Pessoa pessoa;
+    
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date eps_dataexame;
     @Temporal(javax.persistence.TemporalType.DATE)
@@ -41,20 +43,20 @@ public class ExamePessoa implements Serializable {
 
     
     public class ExamePessoaPK implements Serializable {
-        protected TipoExame tipoexame;
+        protected TipoExame tipoExame;
         protected Pessoa pessoa;
 
         public ExamePessoaPK() {}
 
         public ExamePessoaPK(TipoExame tipoexame, Pessoa pessoa) {
-            this.tipoexame = tipoexame;
+            this.tipoExame = tipoexame;
             this.pessoa = pessoa;
         }
 
         @Override
         public int hashCode() {
             int hash = 7;
-            hash = 17 * hash + Objects.hashCode(this.tipoexame);
+            hash = 17 * hash + Objects.hashCode(this.tipoExame);
             hash = 17 * hash + Objects.hashCode(this.pessoa);
             return hash;
         }
@@ -68,7 +70,7 @@ public class ExamePessoa implements Serializable {
                 return false;
             }
             final ExamePessoaPK other = (ExamePessoaPK) obj;
-            if (!Objects.equals(this.tipoexame, other.tipoexame)) {
+            if (!Objects.equals(this.tipoExame, other.tipoExame)) {
                 return false;
             }
             if (!Objects.equals(this.pessoa, other.pessoa)) {
@@ -82,20 +84,20 @@ public class ExamePessoa implements Serializable {
     public ExamePessoa() {
     }
 
-    public TipoExame getEme_codigo() {
-        return eme_codigo;
+    public TipoExame getTipoExame() {
+        return tipoExame;
     }
 
-    public void setEme_codigo(TipoExame eme_codigo) {
-        this.eme_codigo = eme_codigo;
+    public void setTipoExame(TipoExame tipoExame) {
+        this.tipoExame = tipoExame;
     }
 
-    public Pessoa getPes_codigo() {
-        return pes_codigo;
+    public Pessoa getPessoa() {
+        return pessoa;
     }
 
-    public void setPes_codigo(Pessoa pes_codigo) {
-        this.pes_codigo = pes_codigo;
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
     }
 
     public Date getEps_dataexame() {

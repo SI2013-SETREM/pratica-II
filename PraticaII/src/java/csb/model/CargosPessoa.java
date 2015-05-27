@@ -26,11 +26,13 @@ public class CargosPessoa implements Serializable {
     @Id
     @ManyToOne
     @JoinColumn(name = "car_codigo", referencedColumnName = "car_codigo")
-    private Cargo car_codigo;
+    private Cargo cargo;
+    
     @Id
     @ManyToOne
     @JoinColumn(name = "pes_codigo", referencedColumnName = "pes_codigo")
-    private Pessoa pes_codigo; 
+    private Pessoa pessoa; 
+    
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date car_data_inicio;
     @Temporal(javax.persistence.TemporalType.DATE)
@@ -79,20 +81,20 @@ public class CargosPessoa implements Serializable {
     public CargosPessoa() {
     }
 
-    public Cargo getCar_codigo() {
-        return car_codigo;
+    public Cargo getCargo() {
+        return cargo;
     }
 
-    public void setCar_codigo(Cargo car_codigo) {
-        this.car_codigo = car_codigo;
+    public void setCargo(Cargo cargo) {
+        this.cargo = cargo;
     }
 
-    public Pessoa getPes_codigo() {
-        return pes_codigo;
+    public Pessoa getPessoa() {
+        return pessoa;
     }
 
-    public void setPes_codigo(Pessoa pes_codigo) {
-        this.pes_codigo = pes_codigo;
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
     }
 
     public Date getCar_data_inicio() {

@@ -31,15 +31,15 @@ public class Salario implements Serializable {
     
     @ManyToOne
     @JoinColumn(name = "car_codigo", referencedColumnName = "car_codigo")
-    private Cargo car_codigo;
+    private Cargo cargo;
     
     @ManyToOne
     @JoinColumn(name = "mas_codigo", referencedColumnName = "mas_codigo")
-    private MotivoAlteracaoSalarial mas_codigo;
+    private MotivoAlteracaoSalarial motivoAlteracaoSalarial;
     
     @ManyToOne
     @JoinColumn(name = "pes_codigo", referencedColumnName = "pes_codigo")
-    private Pessoa pes_codigo;
+    private Pessoa pessoa;
     
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date sal_datainicio;
@@ -59,28 +59,28 @@ public class Salario implements Serializable {
         this.sal_codigo = sal_codigo;
     }
 
-    public Cargo getCar_codigo() {
-        return car_codigo;
+    public Cargo getCargo() {
+        return cargo;
     }
 
-    public void setCar_codigo(Cargo car_codigo) {
-        this.car_codigo = car_codigo;
+    public void setCargo(Cargo cargo) {
+        this.cargo = cargo;
     }
 
-    public MotivoAlteracaoSalarial getMas_codigo() {
-        return mas_codigo;
+    public MotivoAlteracaoSalarial getMotivoAlteracaoSalarial() {
+        return motivoAlteracaoSalarial;
     }
 
-    public void setMas_codigo(MotivoAlteracaoSalarial mas_codigo) {
-        this.mas_codigo = mas_codigo;
+    public void setMotivoAlteracaoSalarial(MotivoAlteracaoSalarial motivoAlteracaoSalarial) {
+        this.motivoAlteracaoSalarial = motivoAlteracaoSalarial;
     }
 
-    public Pessoa getPes_codigo() {
-        return pes_codigo;
+    public Pessoa getPessoa() {
+        return pessoa;
     }
 
-    public void setPes_codigo(Pessoa pes_codigo) {
-        this.pes_codigo = pes_codigo;
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
     }
 
     public Date getSal_datainicio() {
