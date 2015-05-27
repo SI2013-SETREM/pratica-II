@@ -4,12 +4,10 @@ import ad.dao.AvaliacaoDAO;
 import ad.model.Avaliacao;
 import java.util.Date;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 
 @ManagedBean
-@RequestScoped
 public class AvaliacaoBean {
 
     private final String sTitle = Avaliacao.sTitle;
@@ -33,9 +31,7 @@ public class AvaliacaoBean {
     }
 
     public DataModel getAvaliacoes() {
-        if (avaliacoes == null) {
-            avaliacoes = new ListDataModel(dao.findAll());
-        }
+        avaliacoes = new ListDataModel(dao.findAll());
         return avaliacoes;
     }
 
@@ -69,7 +65,6 @@ public class AvaliacaoBean {
         } else {
             dao.insert(avaliacao);
         }
-
         return "avaliacaolst";
     }
 

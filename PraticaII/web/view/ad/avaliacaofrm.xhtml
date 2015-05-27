@@ -1,230 +1,69 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+<ui:composition template="./../modelos/default.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
-    <body>
+    <ui:define name="title">
+        ${avaliacaoBean.pTitle}
+    </ui:define>
 
-        <ui:composition template="./../modelos/default.xhtml">
+    <ui:define name="breadcrumb">
+        <li>Avaliação</li>
+        <li><h:link value="${avaliacaoBean.pTitle}" outcome="/faces/view/ad/tipocompetencialst" /></li>
+    </ui:define>
 
-            <ui:define name="title">
-                Avaliação
-            </ui:define>
+    <ui:define name="main-content">
+        <div class="panel panel-body">
+            <h3><h:outputText value="Dados do ${avaliacaoBean.sTitle}"/></h3>
+            <f:view>
+                <h:form styleClass="form-horizontal">
+                    <h:inputHidden id="idiCodigo" value="#{avaliacaoBean.avaliacao.ava_codigo}" />
 
-            <ui:define name="breadcrumb">
-                <li>Avliação de Desempenho</li>
-                <!--<li><h:link value="Listagem" outcome="/faces/view/ad/avaliacaolst" /></li>-->
-            </ui:define>
-
-            <ui:define name="main-content">
-                <script>
-                    $(function () {
-                        $('#bntAddPanel').click(function (e) {
-                            e.preventDefault();
-                            var html = $('.Questao.HtmlExample').clone().removeClass('HtmlExample');
-                            $('#Formulario').append($(html));
-                        });
-                        $(document).on('click', '.removePanel', function () {
-                            $(this).parents('.Questao:eq(0)').slideUp()(function () {
-                                $(this).remove();
-                            });
-                        });
-                    });
-                </script>
-
-
-
-                <style>
-                    .removePanel{
-                        float: right;
-                        cursor: pointer;
-                    }
-                    .HtmlExample{
-                        display: none;
-                    }
-                    .lbl{
-                        text-align: right;
-                    }
-                    .field{
-                        text-align: left;
-                    }
-                    .serach{
-                        position: absolute;
-                        right: 25px;
-                        top: 35px;
-                    }
-                    .ViewField{
-                        border: 1px solid #ccc;
-                        padding: 5px;
-                        border-radius: 4px;
-                    }
-                </style>
-                <div class="panel panel-body">
-                    <h:form id="form" styleClass="form-horizontal">
-                        <p:growl id="msgs" showDetail="true" />
-                        <!--<h3><h:outputText value="Dados da Avaliação"/></h3>-->
-                        <p:tabView>
-                            <h:inputHidden id="idiCodigo" value="#{avaliacaoBean.avaliacao.ava_codigo}" />
-                            <p:tab title="Dados da Avaliação">
-                                <div class="row">
-                                    <di class="col-md-6">
-                                        <div class="form-group">
-                                            <div class="col-md-5 lbl">
-                                                <p:outputLabel value="Nome: " for="nome" />
-                                            </div>
-                                            <div class="col-md-7 field">
-                                                <p:inputText id="nome" value="" title="Nome"/>
-                                            </div>
-                                        </div>
-                                    </di>
-                                    <di class="col-md-6">
-                                        <div class="form-group">
-                                            <div class="col-md-5 lbl">
-                                                <p:outputLabel value="Status: " for="status" />
-                                            </div>
-                                            <div class="col-md-7 field">
-                                                <p:inputText id="status" value="" title="Status"/>
-                                                <!--                                                <select class="form-control" id="status">
-                                                                                                    <option value="1">Ativo</option>
-                                                                                                    <option value="2">Inativo</option>
-                                                                                                </select>-->
-                                            </div>
-                                        </div>
-                                    </di>
-                                    <di class="col-md-6">
-                                        <div class="form-group">
-                                            <div class="col-md-5 lbl">
-                                                <p:outputLabel value="Data de Início: " for="date_start" /></div>
-                                            <div class="col-md-7 field"><p:calendar id="date_start" value="#{avaliacaoBean.avaliacao.ava_datahora_inicial}" pattern="dd/MM/yyyy" mask="true" />
-                                            </div>
-                                        </div>
-                                    </di>
-                                    <di class="col-md-6">
-                                        <div class="form-group">
-                                            <div class="col-md-5 lbl">
-                                                <p:outputLabel value="Data de Término: " for="date_end" />
-                                            </div>
-                                            <div class="col-md-7 field">
-                                                <p:calendar id="date_end" value="#{avaliacaoBean.avaliacao.ava_datahora_final}" pattern="dd/MM/yyyy" mask="true" />
-                                            </div>
-                                        </div>
-                                    </di>
-                                </div>
-                            </p:tab>
-                            <p:tab title="Formulário">
-                                <div id="Formulario"></div>
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <a id="bntAddPanel" class="btn btn-primary"><i class="fa fa-plus"></i>Add Questão</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </p:tab>
-                        </p:tabView>
-                        <div class="form-group">
-                            <div class="col-md-offset-1 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
-                                <h:commandButton styleClass="btn btn-default" value="Cancelar" action="#{avaliacaoBean.listar()}"/>
-                                <h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{avaliacaoBean.salvar()}"/>
-                            </div>
-                        </div>
-                    </h:form>
-                </div>
-
-
-                <script>
-                    $(function () {
-                        $(document).on('change', '.selectType', function () {
-                            var val = $(this).val();
-                            $(this).parents('.Questao:eq(0)').find('.ViewField .fieldView').addClass('hidden');
-                            $(this).parents('.Questao:eq(0)').find('.ViewField .fieldView[data-type="' + val + '"]').removeClass('hidden');
-                        });
-                    });
-                </script>
-                <div class="panel panel-default Questao HtmlExample">
-                    <div class="panel-body">
-                        <i class="fa fa-times removePanel"></i>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Competência: </label>
-                                <input type="text" class="form-control" placeholder="Pesquisar competência"/>
-                                <i class="fa fa-search Icomp serach"></i>
-                            </div>
-                            <div class="col-md-6">
-                                <input type="checkbox"/>
-                                <label>Obrigatório: </label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Tipo de questão: </label>
-                                <select class="form-control selectType">
-                                    <option value="0">--Selecione--</option>
-                                    <option value="1">Texto Normal</option>
-                                    <option value="2">Texto Grande</option>
-                                    <option value="3">Numérico</option>
-                                    <option value="4">Multiseleção</option>
-                                    <option value="5">Caixa de seleção</option>
-                                    <option value="6">Verdadeiro ou falso</option>
-                                    <option value="7">Monetário</option>
-                                    <option value="8">Data</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6">
-                                <label>Label:</label>
-                                <input type="text" class="form-control" placeholder="Nome que aprece no campo"/>
-                            </div>
-                            <div class="col-md-6">
-                                <input type="text" class="form-control"/>
-                                <a class="btn btn-primary"><i class="fa fa-plus"></i>Add</a>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="ViewField">
-                                    <input type="text" class="form-control hidden fieldView" data-type="1"/>
-                                    <textarea class="form-control hidden fieldView" data-type="2"></textarea>   
-                                    <input type="number" min="0" class="form-control hidden fieldView" data-type="3"/>
-                                    <input type="checkbox" class="hidden fieldView" data-type="4"/>
-                                    <select class="form-control hidden fieldView" data-type="5"></select>
-                                    <input type="checkbox" class="hidden fieldView" data-type="6"/>
-                                    <input type="number" min='0' class="form-control hidden fieldView" data-type="7"/>
-                                    <input type="date" class="form-control hidden fieldView" data-type="8"/>
-                                </div>
-                            </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Nome: " for="nome" styleClass="control-label col-sm-1" />
+                        <div class="col-md-6 col-sm-12">
+                            <h:inputText id="nome" value="#{avaliacaoBean.avaliacao.ava_nome}" title="Nome" styleClass="form-control" pt:autofocus="" />
                         </div>
                     </div>
-                </div>
 
+                    <div class="form-group">
+                        <h:outputLabel value="Status: " for="status" styleClass="control-label col-sm-1" />
+                        <div class="col-md-6 col-sm-12">
+                            <h:inputText id="status" value="#{avaliacaoBean.avaliacao.ava_status}" title="Status" styleClass="form-control" pt:autofocus="" />
+                        </div>
+                    </div>
 
+                    <div class="form-group">
+                        <h:outputLabel value="Data de Início: " for="datainicio" styleClass="control-label col-sm-1" />
+                        <div class="col-md-6 col-sm-12">
+                            <h:inputText id="datainicio" value="#{avaliacaoBean.avaliacao.ava_dataInicial}" title="Data de Início" styleClass="form-control" pt:autofocus="" />
+                        </div>
+                    </div>
 
+                    <div class="form-group">
+                        <h:outputLabel value="Status: " for="datafim" styleClass="control-label col-sm-1" />
+                        <div class="col-md-6 col-sm-12">
+                            <h:inputText id="datafim" value="#{avaliacaoBean.avaliacao.ava_dataFinal}" title="Data de Término" styleClass="form-control" pt:autofocus="" />
+                        </div>
+                    </div>
 
+                    <div class="form-group">
+                        <h:outputLabel value="Status: " for="observacao" styleClass="control-label col-sm-1" />
+                        <div class="col-md-6 col-sm-12">
+                            <h:inputText id="observacao" value="#{avaliacaoBean.avaliacao.ava_observacao}" title="Observação" styleClass="form-control" pt:autofocus="" />
+                        </div>
+                    </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            </ui:define>
-        </ui:composition>
-    </body>
-</html>
+                    <div class="form-group">
+                        <div class="col-md-offset-1 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
+                            <h:link styleClass="btn btn-default" value="Cancelar" outcome="#{avaliacaoBean.listar()}" />
+                            <h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{avaliacaoBean.salvar()}"></h:commandButton>
+                        </div>
+                    </div>
+                </h:form>
+            </f:view>
+        </div>
+    </ui:define>
+</ui:composition>

@@ -1,88 +1,85 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
-    <body>
-        <ui:composition template="../modelos/default.xhtml">
-            <ui:define name="title">
-                ${avaliacaoBean.sTitle}
-            </ui:define>
+<ui:composition template="../modelos/default.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-            <ui:define name="breadcrumb">
-                <li>Listagem</li>
-                <li> ${avaliacaoBean.sTitle}</li>
-            </ui:define>
+    <ui:define name="title">
+        ${avaliacaoBean.pTitle}
+    </ui:define>
 
-            <ui:define name="main-content">
+    <ui:define name="breadcrumb">
+        <li>Avaliação</li>
+        <li>${avaliacaoBean.pTitle}</li>
+    </ui:define>
 
-                <div class="panel panel-body">
-                    <h3><h:outputText value="Lista de Avaliações"/></h3>
-                    <div class="btns-top-table">
-                        <h:link outcome="avaliacaofrm" styleClass="btn btn-success">
-                            <i class="fa fa-plus"></i> Inserir Avaliação
-                        </h:link>
-                    </div>
-                    <h:form>
-                        <p:dataTable value="${avaliacaoBean.avaliacoes}" var="item" styleClass="dataTable table table-bordered table-striped">
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Id"/>
-                                </f:facet>
-                                <h:outputText value="#{item.ava_codigo}"/>
-                            </p:column>
+    <ui:define name="main-content">
+        <div class="panel panel-body">
+            <h3><h:outputText value="Lista de ${avaliacaoBean.pTitle}"/></h3>
+            <div class="btns-top-table">
+                <h:link outcome="avaliacaofrm" styleClass="btn btn-success">
+                    <i class="fa fa-plus"></i> Inserir ${avaliacaoBean.sTitle}
+                </h:link>
+            </div>
+            <h:form>
+                <h:dataTable value="${avaliacaoBean.avaliacoes}" var="item" rendered="${avaliacaoBean.avaliacoes.rowAvailable}" styleClass="dataTable table table-bordered table-striped">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Nome"/>
+                        </f:facet>
+                        <h:outputText value="${item.getAva_nome()}"/>
+                    </h:column>
 
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Nome"/>
-                                </f:facet>
-                                <h:outputText value="#{item.ava_nome}"/>
-                            </p:column>  
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Taxa"/>
+                        </f:facet>
+                        <h:outputText value="${item.getTaxa()}"/>
+                    </h:column>
 
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Status"/>
-                                </f:facet>
-                                <h:outputText value="#{item.ava_status}"/>
-                            </p:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Status"/>
+                        </f:facet>
+                        <h:outputText value="${item.getStatus()}"/>
+                    </h:column>
 
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Data Inicial"/>
-                                </f:facet>
-                                <h:outputText value="#{item.ava_datahora_inicial}"/>
-                            </p:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Data Inicial"/>
+                        </f:facet>
+                        <h:outputText value="${item.getAva_dataInicial()}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
+                    </h:column>
 
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Data Final"/>
-                                </f:facet>
-                                <h:outputText value="#{item.ava_datahora_final}"/>
-                            </p:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Data Final"/>
+                        </f:facet>
+                        <h:outputText value="${item.getAva_dataFinal()}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
+                    </h:column>
 
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Observação"/>
-                                </f:facet>
-                                <h:outputText value="#{item.ava_observacao}"/>
-                            </p:column>
-
-                            <p:column style="width: 200px">
-                                <f:facet name="header">
-                                    <h:outputText value="Opções"/>
-                                </f:facet>
-                                <h:commandLink action="#{avaliacaoBean.edit(item)}" class="btn btn-default fa fa-pencil" title="Editar"/>
-                                <!--<h:commandLink class="btn btn-default fa fa-list" title="Detalhes"/>-->
-                                <h:commandLink action="#{pessoas_avaliacaoBean.listar()}" class="btn btn-default fa fa-users" title="Avaliados"/>
-                                <h:commandLink action="#{avaliacaoBean.delete(item)}" class="btn btn-default fa fa-trash" onclick="return confirm('Are you sure?')" title="Excluir"/>
-                            </p:column>
-
-                        </p:dataTable>
-                    </h:form>
-                </div>
-            </ui:define>
-        </ui:composition>
-    </body>
-</html>
+                    <h:column headerClass="col-editar-header">
+                        <f:facet name="header">
+                            <h:outputText value="Editar"/>
+                        </f:facet>
+                        <h:commandLink action="${avaliacaoBean.edit(item)}">
+                            <i class="fa fa-pencil"></i> Editar
+                        </h:commandLink>
+                    </h:column>
+                    <h:column headerClass="col-excluir-header">
+                        <f:facet name="header">
+                            <h:outputText value="Excluir"/>
+                        </f:facet>
+                        <h:commandLink onclick="return confirm('Deseja realmente excluir o ${avaliacaoBean.sTitle}?');" action="${avaliacaoBean.delete(item)}">
+                            <i class="fa fa-trash"></i> Excluir
+                        </h:commandLink>
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>

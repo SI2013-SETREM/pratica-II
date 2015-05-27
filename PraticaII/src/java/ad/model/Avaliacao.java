@@ -113,4 +113,15 @@ public class Avaliacao implements Serializable {
         return pTitle;
     }
 
+    public String getStatus() {
+        if (ava_status == 1) {
+            return "Ativo";
+        } else {
+            return "Inativo";
+        }
+    }
+
+    public String getTaxa() {
+        return "10%";
+    }
 }
