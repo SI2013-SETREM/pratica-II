@@ -68,7 +68,7 @@ public class CidadeBean {
     }
     
     public String salvar() {
-        if (cidade.getCid_cep()!="")
+        if (cidade.getCid_codigo()!=0)
             dao.update(cidade);
         else 
             dao.insert(cidade);

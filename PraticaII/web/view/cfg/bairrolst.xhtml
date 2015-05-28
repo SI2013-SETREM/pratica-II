@@ -46,7 +46,7 @@
                         <f:facet name="header">
                             <h:outputText value="Excluir"/>
                         </f:facet>
-                        <h:commandLink onclick="return confirm('Deseja realmente excluir o ${bairroBean.sTitle}?');" action="${cidadeBean.delete(item)}">
+                        <h:commandLink onclick="return confirm('Deseja realmente excluir o ${bairroBean.sTitle}?');" action="${bairroBean.delete(item)}">
                             <i class="fa fa-trash"></i> Excluir
                         </h:commandLink>
                     </h:column>

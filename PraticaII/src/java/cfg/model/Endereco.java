@@ -16,21 +16,23 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "endereco")
 public class Endereco implements Serializable {
- public static final String sTitle = "Endereço";
+
+    public static final String sTitle = "Endereço";
     public static final String pTitle = "Endereços";
-    
+
     @Id
-    @SequenceGenerator(name="end_codigo", sequenceName="end_codigo")
-    @GeneratedValue(strategy=GenerationType.AUTO, generator="end_codigo")
+    @SequenceGenerator(name = "end_codigo", sequenceName = "end_codigo")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "end_codigo")
     private int end_codigo;
     private String end_descricao;
-
+    private String end_cep;
     public Endereco() {
     }
 
-    public Endereco(int end_codigo, String end_descricao) {
+    public Endereco(int end_codigo, String end_descricao, String end_cep) {
         this.end_codigo = end_codigo;
         this.end_descricao = end_descricao;
+        this.end_cep = end_cep;
     }
 
     public int getEnd_codigo() {
@@ -47,6 +49,14 @@ public class Endereco implements Serializable {
 
     public void setEnd_descricao(String end_descricao) {
         this.end_descricao = end_descricao;
+    }
+
+    public String getEnd_cep() {
+        return end_cep;
+    }
+
+    public void setEnd_cep(String end_cep) {
+        this.end_cep = end_cep;
     }
     
     

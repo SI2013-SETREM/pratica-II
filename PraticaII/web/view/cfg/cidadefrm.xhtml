@@ -6,36 +6,42 @@
     xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
     <ui:define name="title">
-        ${idiomasBean.pTitle}
+        ${cidadeBean.pTitle}
     </ui:define>
 
     <ui:define name="breadcrumb">
         <li>Configurações</li>
-        <li><h:link value="${idiomasBean.pTitle}" outcome="/faces/view/cfg/idiomaslst" /></li>
+        <li><h:link value="${cidadeBean.pTitle}" outcome="/faces/view/cfg/idiomaslst" /></li>
     </ui:define>
 
     <ui:define name="main-content">
         <div class="panel panel-body">
-            <h3><h:outputText value="Dados do ${idiomasBean.sTitle}"/></h3>
+            <h3><h:outputText value="Dados do ${cidadeBean.sTitle}"/></h3>
             <f:view>
                 <h:form styleClass="form-horizontal">
-                    <h:inputHidden id="idiCodigo" value="#{idiomasBean.idioma.idiCodigo}" />
+                    <h:inputHidden id="cidCodigo" value="#{cidadeBean.cidade.cid_codigo}" />
 <!--                            <div class="form-group">
                         <h:outputLabel value="Código:" for="idiCodigo" styleClass="control-label col-sm-1" />
                         <div class="col-md-6">
-                            <h:inputText id="idiCodigo" value="#{idiomasBean.idioma.idiCodigo}" title="IdiCodigo" styleClass="form-control" />
+                                                <h:inputText id="cidCodigo" value="#{cidadeBean.cidade.cid_codigo}" title="IdiCodigo" styleClass="form-control" />
                         </div>
                     </div>-->
                     <div class="form-group">
-                        <h:outputLabel value="Descrição:" for="idiDescricao" styleClass="control-label col-sm-1" />
+                        <h:outputLabel value="Cidade" for="cidNome" styleClass="control-label col-sm-1" />
                         <div class="col-md-6 col-sm-12">
-                            <h:inputText id="idiDescricao" value="#{idiomasBean.idioma.idiDescricao}" title="IdiDescricao" styleClass="form-control" pt:autofocus="" />
+                            <h:inputText id="cidNome" value="#{cidadeBean.cidade.cid_nome}" title="IdiDescricao" styleClass="form-control" pt:autofocus="" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="UF:" for="cidUF" styleClass="control-label col-sm-1" />
+                        <div class="col-md-6 col-sm-12">
+                            <h:inputText id="cidUF" value="#{cidadeBean.cidade.cid_uf}" title="IdiDescricao" styleClass="form-control" pt:autofocus="" />
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-md-offset-1 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
-                            <h:link styleClass="btn btn-default" value="Cancelar" outcome="#{idiomasBean.listar()}" />
-                            <h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{idiomasBean.salvar()}"></h:commandButton>
+                            <h:link styleClass="btn btn-default" value="Cancelar" outcome="#{cidadeBean.listar()}" />
+                            <h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{cidadeBean.salvar()}"></h:commandButton>
                         </div>
                     </div>
                 </h:form>
