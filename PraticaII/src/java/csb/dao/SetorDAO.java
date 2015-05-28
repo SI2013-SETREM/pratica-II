@@ -45,7 +45,7 @@ public class SetorDAO {
     }
 
     public List<Setor> findAll() {
-        Query q = session.createQuery("from Setor");
+        Query q = session.createQuery("from Setor where 1=1 order by set_descricao asc");
         return q.list();
     }
 

@@ -20,7 +20,7 @@ public class SetorBean {
 
     private Setor setor = new Setor();
     private SetorDAO dao = new SetorDAO();
-    private DataModel datamodel;
+    private DataModel setores;
 
     public SetorBean() {
     }
@@ -33,25 +33,21 @@ public class SetorBean {
         return pTitle;
     }
 
-    public Setor getCbsEpi() {
+    public Setor getSetor() {
         return setor;
     }
 
-    public DataModel getDatamodel() {
-        this.datamodel = new ListDataModel(dao.findAll());
-        return datamodel;
+    public DataModel getSetores() {
+        this.setores = new ListDataModel(dao.findAll());
+        return setores;
     }
 
-    public void setDatamodel(DataModel datamodel) {
-        this.datamodel = datamodel;
+    public void setSetores(DataModel datamodel) {
+        this.setores = datamodel;
     }
 
-    public void setCbsEpi(Setor setor) {
+    public void setSetor(Setor setor) {
         this.setor = setor;
-    }
-
-    public void setCbsEpiDM(DataModel setorDM) {
-        this.datamodel = setorDM;
     }
 
     public String insert() {
@@ -60,7 +56,7 @@ public class SetorBean {
     }
 
     public String edit(Setor i) {
-        setor = (Setor) datamodel.getRowData();
+        setor = (Setor) setores.getRowData();
         return "setorfrm";
     }
 
@@ -80,7 +76,6 @@ public class SetorBean {
         } else {
             dao.insert(setor);
         }
-
         return "setorlst";
     }
 
