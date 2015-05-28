@@ -5,10 +5,14 @@
  */
 package rs.controller;
 
+import csb.dao.SetorDAO;
+import csb.model.Setor;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
+import org.primefaces.model.TreeNode;
 import rs.dao.RecrutamentoCargoDAO;
 import rs.model.RecrutamentoCargo;
 
@@ -26,9 +30,16 @@ public class RecrutamentoCargoBean {
     private RecrutamentoCargo recrutamentoCargo = new RecrutamentoCargo();
     private RecrutamentoCargoDAO dao = new RecrutamentoCargoDAO();
     private DataModel recrutamentoCargos;
+    private SetorDAO daosetor = new SetorDAO();
+    private TreeNode bla;
 
     public RecrutamentoCargoBean() {
 
+    }
+
+    @PostConstruct
+    public void init() {
+        bla = daosetor.arvoreSetor();
     }
 
     public String getsTitle() {
@@ -63,37 +74,41 @@ public class RecrutamentoCargoBean {
     public void setRecrutamentoCargos(DataModel recrutamentoCargos) {
         this.recrutamentoCargos = recrutamentoCargos;
     }
-    
-    
-     public String insert() {
+
+    public TreeNode getBla() {
+        return bla;
+    }
+
+    public String insert() {
         dao.insert(recrutamentoCargo);
         return "recrutamentocargolst";
     }
-    
+
     public String edit(RecrutamentoCargo i) {
         recrutamentoCargo = (RecrutamentoCargo) recrutamentoCargos.getRowData();
         return "recrutamentocargofrm";
     }
-    
+
     public String update() {
         dao.update(recrutamentoCargo);
         return "recrutamentocargolst";
     }
-    
+
     public String delete(RecrutamentoCargo r) {
         dao.delete(r);
         return "recrutamentocargolst";
     }
-    
+
     public String salvar() {
-        if (recrutamentoCargo.getRecCarCodigo()> 0)
+        if (recrutamentoCargo.getRecCarCodigo() > 0) {
             dao.update(recrutamentoCargo);
-        else 
+        } else {
             dao.insert(recrutamentoCargo);
-        
+        }
+
         return "recrutamentocargolst";
     }
-    
+
     public String listar() {
         return "recrutamentocargolst";
     }

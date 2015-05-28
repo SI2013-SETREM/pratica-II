@@ -5,6 +5,8 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.primefaces.model.DefaultTreeNode;
+import org.primefaces.model.TreeNode;
 import util.HibernateUtil;
 
 /**
@@ -44,5 +46,16 @@ public class SetorDAO {
     public List<Setor> findAll() {
         Query q = session.createQuery("from Setor");
         return q.list();
+    }
+
+    public TreeNode arvoreSetor() {
+        TreeNode bla = new DefaultTreeNode("aa", null);
+        TreeNode um = new DefaultTreeNode("1", bla);
+        new DefaultTreeNode("1.1", um);
+        TreeNode dois = new DefaultTreeNode("2", bla);
+        new DefaultTreeNode("2.1", dois);
+        TreeNode dois_dois = new DefaultTreeNode("2.2", dois);
+        new DefaultTreeNode("2.2.10", dois_dois);
+        return bla;
     }
 }
