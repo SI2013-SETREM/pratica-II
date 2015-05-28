@@ -27,4 +27,30 @@ public class Empresa implements Serializable {
     private int emp_codigo;
     private String emp_nome;
 
+    public Empresa() {
+    }
+
+    public Empresa(int emp_codigo, String emp_nome) {
+        this.emp_codigo = emp_codigo;
+        this.emp_nome = emp_nome;
+    }
+
+    public int getEmp_codigo() {
+        return emp_codigo;
+    }
+
+    public void setEmp_codigo(int emp_codigo) {
+        this.emp_codigo = emp_codigo;
+    }
+
+    public String getEmp_nome() {
+        return emp_nome;
+    }
+
+    public void setEmp_nome(String emp_nome) {
+        this.emp_nome = emp_nome;
+    }
+    
+    
+
 }
