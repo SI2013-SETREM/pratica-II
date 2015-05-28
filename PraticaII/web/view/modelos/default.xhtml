@@ -117,10 +117,22 @@
                                     <span class="fa dropdown-chevron pull-right"></span>
                                 </a>
                                 <ul class="submenu">
-                                    <li class="#{view.viewId.contains('ID_PAGINA_AQUI') ? 'active' : ''}">
-                                        <h:link outcome="/faces/view/index">
+                                    <li class="#{view.viewId.contains('/cargo') ? 'active' : ''}">
+                                        <h:link outcome="/faces/view/csb/cargolst">
                                             <span class="fa fa-briefcase"></span>
                                             <span class="menu-text">Cargos</span>
+                                        </h:link>
+                                    </li>
+                                    <li class="#{view.viewId.contains('/setor') ? 'active' : ''}">
+                                        <h:link outcome="/faces/view/csb/setorlst">
+                                            <span class="fa fa-sitemap"></span>
+                                            <span class="menu-text">Setores</span>
+                                        </h:link>
+                                    </li>
+                                    <li class="#{view.viewId.contains('/graduacao') ? 'active' : ''}">
+                                        <h:link outcome="/faces/view/csb/graduacaolst">
+                                            <span class="fa fa-graduation-cap"></span>
+                                            <span class="menu-text">Graduações</span>
                                         </h:link>
                                     </li>
                                 </ul>
@@ -232,7 +244,7 @@
                                         </h:link>
                                     </li>
                                     <li class="#{view.viewId.contains('/tipocompetencia') ? 'active' : ''}">
-                                        <h:link outcome="/faces/view/ad/tipocompetenciagrm">
+                                        <h:link outcome="/faces/view/ad/tipocompetencialst">
                                             <span class="fa fa-cubes"></span>
                                             <span class="menu-text">Tipo de Competência</span>
                                         </h:link>

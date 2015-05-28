@@ -50,6 +50,12 @@
 .form-group-lg .form-control-icon > input {
   padding-left: 35px;
 }
+.ui-icon {
+  background: transparent;
+  border-radius: 0;
+  text-indent: 0;
+  overflow: auto;
+}
 .dataTables_wrapper .col-editar-header,
 .dataTables_wrapper .col-excluir-header {
   max-width: 50px;

@@ -24,7 +24,7 @@
             </div>
             <div class="login-container">
                 <div class="form-login">
-                    <form>
+                    <form name="frmLogin" method="POST" action="j_security_check">
                         <h3 class="title">Faça login em sua conta</h3>
                         <div class="alert alert-danger alert-dismissable">
                             <button class="close">
@@ -35,13 +35,13 @@
                         <div class="form-group form-group-lg">
                             <div class="form-control-icon">
                                 <i class="fa fa-user"></i>
-                                <input placeholder="Usuário" type="text" class="input-user form-control" id="input-user" required="required" />
+                                <input name="j_username" placeholder="Usuário" type="text" class="input-user form-control" id="input-user" required="required" />
                             </div>
                         </div>
                         <div class="form-group form-group-lg">
                             <div class="form-control-icon">
                                 <i class="fa fa-key"></i>
-                                <input placeholder="Senha" type="password" class="input-password form-control" id="input-password" required="required" />
+                                <input name="j_password" placeholder="Senha" type="password" class="input-password form-control" id="input-password" required="required" />
                             </div>
                         </div>
                         <div class="form-group">
