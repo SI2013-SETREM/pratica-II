@@ -31,7 +31,7 @@ public class RecrutamentoCargoBean {
     private RecrutamentoCargoDAO dao = new RecrutamentoCargoDAO();
     private DataModel recrutamentoCargos;
     private SetorDAO daosetor = new SetorDAO();
-    private TreeNode bla;
+    private TreeNode arvoreCargos;
 
     public RecrutamentoCargoBean() {
 
@@ -39,7 +39,7 @@ public class RecrutamentoCargoBean {
 
     @PostConstruct
     public void init() {
-        bla = daosetor.arvoreSetor();
+        arvoreCargos = daosetor.arvoreSetor();
     }
 
     public String getsTitle() {
@@ -75,8 +75,8 @@ public class RecrutamentoCargoBean {
         this.recrutamentoCargos = recrutamentoCargos;
     }
 
-    public TreeNode getBla() {
-        return bla;
+    public TreeNode getArvoreCargos() {
+        return arvoreCargos;
     }
 
     public String insert() {

@@ -102,6 +102,10 @@ public class Setor implements Serializable, Comparable<Setor> {
         }
         return true;
     }   
+    @Override
+    public String toString() {
+        return this.getSet_descricao();
+    }
     
     @Override
     public int compareTo(Setor o) {

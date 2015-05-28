@@ -1,5 +1,6 @@
 package csb.dao;
 
+import csb.model.Cargo;
 import csb.model.Setor;
 import java.util.List;
 import org.hibernate.Query;
@@ -49,13 +50,14 @@ public class SetorDAO {
     }
 
     public TreeNode arvoreSetor() {
-        TreeNode bla = new DefaultTreeNode("aa", null);
-        TreeNode um = new DefaultTreeNode("1", bla);
-        new DefaultTreeNode("1.1", um);
-        TreeNode dois = new DefaultTreeNode("2", bla);
-        new DefaultTreeNode("2.1", dois);
-        TreeNode dois_dois = new DefaultTreeNode("2.2", dois);
-        new DefaultTreeNode("2.2.10", dois_dois);
-        return bla;
+        TreeNode raiz = new DefaultTreeNode("raiz", null);
+        List<Setor> setores = this.findAll();
+        for (Setor s : setores) {
+            TreeNode nodeSetor = new DefaultTreeNode("setor", s, raiz);
+            for (Cargo c : s.getCargos()) {
+                TreeNode nodeCargo= new DefaultTreeNode("cargo", c, nodeSetor);
+            }
+        }
+        return raiz;
     }
 }
