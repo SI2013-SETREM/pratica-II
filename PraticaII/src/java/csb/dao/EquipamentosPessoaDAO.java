@@ -1,43 +1,43 @@
 package csb.dao;
 
-import csb.model.Epi;
+import csb.model.EquipamentosPessoa;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import util.HibernateUtil;
 
-public class EpiDAO {
+public class EquipamentosPessoaDAO {
     private Session session;
 
-    public EpiDAO() {
+    public EquipamentosPessoaDAO() {
         session = HibernateUtil.getSessionFactory().openSession();
     }
     
-    public void insert(Epi e) {
+    public void insert(EquipamentosPessoa e) {
         Transaction t = session.beginTransaction();
         session.save(e);
         t.commit();
     }
     
-    public void update(Epi e) {
+    public void update(EquipamentosPessoa e) {
         Transaction t = session.beginTransaction();
         session.merge(e);
         t.commit();
     }
     
-    public void delete(Epi e) {
+    public void delete(EquipamentosPessoa e) {
         Transaction t = session.beginTransaction();
         session.delete(e);
         t.commit();
     }
     
-    public Epi findById(int epi_codigo) {
-        return (Epi) session.load(Epi.class, epi_codigo);
+    public EquipamentosPessoa findById(int pes_codigo) {
+        return (EquipamentosPessoa) session.load(EquipamentosPessoa.class, pes_codigo);
     }
     
-    public List<Epi> findAll() {
-        Query q = session.createQuery("from Epi");
+    public List<EquipamentosPessoa> findAll() {
+        Query q = session.createQuery("from EquipamentosPessoa");
         return q.list();
     }
 }

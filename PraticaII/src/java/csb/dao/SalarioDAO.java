@@ -1,43 +1,43 @@
 package csb.dao;
 
-import csb.model.Epi;
+import csb.model.Salario;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import util.HibernateUtil;
 
-public class EpiDAO {
+public class SalarioDAO {
     private Session session;
 
-    public EpiDAO() {
+    public SalarioDAO() {
         session = HibernateUtil.getSessionFactory().openSession();
     }
     
-    public void insert(Epi e) {
+    public void insert(Salario s) {
         Transaction t = session.beginTransaction();
-        session.save(e);
+        session.save(s);
         t.commit();
     }
     
-    public void update(Epi e) {
+    public void update(Salario s) {
         Transaction t = session.beginTransaction();
-        session.merge(e);
+        session.merge(s);
         t.commit();
     }
     
-    public void delete(Epi e) {
+    public void delete(Salario s) {
         Transaction t = session.beginTransaction();
-        session.delete(e);
+        session.delete(s);
         t.commit();
     }
     
-    public Epi findById(int epi_codigo) {
-        return (Epi) session.load(Epi.class, epi_codigo);
+    public Salario findById(int sal_codigo) {
+        return (Salario) session.load(Salario.class, sal_codigo);
     }
     
-    public List<Epi> findAll() {
-        Query q = session.createQuery("from Epi");
+    public List<Salario> findAll() {
+        Query q = session.createQuery("from Salario");
         return q.list();
     }
 }
