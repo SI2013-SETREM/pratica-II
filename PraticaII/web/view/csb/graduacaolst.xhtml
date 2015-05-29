@@ -5,24 +5,24 @@
     xmlns:f="http://xmlns.jcp.org/jsf/core">
     
     <ui:define name="title">
-        ${GraduacaoBean.pTitle}
+        ${graduacaoBean.pTitle}
     </ui:define>
 
     <ui:define name="breadcrumb">
         <li>Graduações</li>
-        <li>${GraduacaoBean.pTitle}</li>
+        <li>${graduacaoBean.pTitle}</li>
     </ui:define>
 
     <ui:define name="main-content">
         <div class="panel panel-body">
-            <h3><h:outputText value="Lista de ${GraduacaoBean.pTitle}"/></h3>
+            <h3><h:outputText value="Lista de ${graduacaoBean.pTitle}"/></h3>
             <div class="btns-top-table">
                 <h:link outcome="graduacaofrm" styleClass="btn btn-success">
-                    <i class="fa fa-plus"></i> Inserir ${GraduacaoBean.sTitle}
+                    <i class="fa fa-plus"></i> Inserir ${graduacaoBean.sTitle}
                 </h:link>
             </div>
             <h:form>
-                <h:dataTable value="${GraduacaoBean.graduacao}" var="item" rendered="${GraduacaoBean.graduacao.rowAvailable}" styleClass="dataTable table table-bordered table-striped">
+                <h:dataTable value="${graduacaoBean.graduacoes}" var="item" rendered="${graduacaoBean.graduacoes.rowAvailable}" styleClass="dataTable table table-bordered table-striped">
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="Descrição"/>
@@ -33,7 +33,7 @@
                         <f:facet name="header">
                             <h:outputText value="Editar"/>
                         </f:facet>
-                        <h:commandLink action="${GraduacaoBean.edit(item)}">
+                        <h:commandLink action="${graduacaoBean.edit(item)}">
                             <i class="fa fa-pencil"></i> Editar
                         </h:commandLink>
                     </h:column>
@@ -41,7 +41,7 @@
                         <f:facet name="header">
                             <h:outputText value="Excluir"/>
                         </f:facet>
-                        <h:commandLink onclick="return confirm('Deseja realmente excluir a ${GraduacaoBean.sTitle}?');" action="${graduacaoBean.delete(item)}">
+                        <h:commandLink onclick="return confirm('Deseja realmente excluir a ${graduacaoBean.sTitle}?');" action="${graduacaoBean.delete(item)}">
                             <i class="fa fa-trash"></i> Excluir
                         </h:commandLink>
                     </h:column>

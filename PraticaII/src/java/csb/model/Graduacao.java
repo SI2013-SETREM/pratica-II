@@ -27,6 +27,13 @@ public class Graduacao implements Serializable {
     public Graduacao() {
     }
 
+    public Graduacao(int grd_codigo, String grd_descricao) {
+        this.grd_codigo = grd_codigo;
+        this.grd_descricao = grd_descricao;
+    }
+
+    
+    
     public int getGrd_codigo() {
         return grd_codigo;
     }
