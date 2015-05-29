@@ -20,7 +20,8 @@ import javax.persistence.Temporal;
 @Table(name = "mensagem")
 @IdClass(Mensagem.MensagemPK.class)
 public class Mensagem implements Serializable {
-    
+       public static final String sTitle = "Mensagem";
+    public static final String pTitle = "Mensagens";
     @Id
     @ManyToOne
     @JoinColumn(name = "cnv_codigo", referencedColumnName = "cnv_codigo")

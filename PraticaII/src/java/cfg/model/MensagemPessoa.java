@@ -19,6 +19,8 @@ import javax.persistence.Table;
 @Table(name = "mensagem_pessoa")
 @IdClass(MensagemPessoa.MensagemPessoaPK.class)
 public class MensagemPessoa implements Serializable {
+    public static final String sTitle = "Mensagem Pessoa";
+    public static final String pTitle = "Mensagens Pessoa";
     
     @Id
     @ManyToOne
