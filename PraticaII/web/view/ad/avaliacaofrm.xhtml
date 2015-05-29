@@ -3,59 +3,112 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
-                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="title">
-        ${avaliacaoBean.pTitle}
+        #{avaliacaoBean.pTitle}
     </ui:define>
 
     <ui:define name="breadcrumb">
         <li>Avaliação</li>
-        <li><h:link value="${avaliacaoBean.pTitle}" outcome="/faces/view/ad/tipocompetencialst" /></li>
+        <li><h:link value="#{avaliacaoBean.pTitle}" outcome="/faces/view/ad/tipocompetencialst" /></li>
     </ui:define>
 
     <ui:define name="main-content">
+        <style>
+            .search{
+                position: absolute;
+                right: 25px;
+                top: 10px;
+            }
+        </style>
         <div class="panel panel-body">
-            <h3><h:outputText value="Dados do ${avaliacaoBean.sTitle}"/></h3>
+            <h3><h:outputText value="Dados do #{avaliacaoBean.sTitle}"/></h3>
             <f:view>
                 <h:form styleClass="form-horizontal">
                     <h:inputHidden id="idiCodigo" value="#{avaliacaoBean.avaliacao.ava_codigo}" />
-
-                    <div class="form-group">
-                        <h:outputLabel value="Nome: " for="nome" styleClass="control-label col-sm-1" />
-                        <div class="col-md-6 col-sm-12">
-                            <h:inputText id="nome" value="#{avaliacaoBean.avaliacao.ava_nome}" title="Nome" styleClass="form-control" pt:autofocus="" />
+                    <div class="row">
+                        <div class="col-md-6 col-xs-12">
+                            <div class="form-group">
+                                <h:outputLabel value="Nome: " for="nome" styleClass="control-label col-md-4" />
+                                <div class="col-md-8 col-xs-12">
+                                    <h:inputText id="nome" value="#{avaliacaoBean.avaliacao.ava_nome}" title="Nome" styleClass="form-control" pt:autofocus="" />
+                                </div>
+                            </div>   
+                        </div>
+                        <div class="col-md-6 col-xs-12">
+                            <div class="form-group">
+                                <h:outputLabel value="Status: " for="status" styleClass="control-label col-md-4" />
+                                <div class="col-md-8 col-xs-12">
+                                    <h:inputText id="status" value="#{avaliacaoBean.avaliacao.ava_status}" title="Status" styleClass="form-control" pt:autofocus="" />
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <h:outputLabel value="Status: " for="status" styleClass="control-label col-sm-1" />
-                        <div class="col-md-6 col-sm-12">
-                            <h:inputText id="status" value="#{avaliacaoBean.avaliacao.ava_status}" title="Status" styleClass="form-control" pt:autofocus="" />
+                    <div class="row">
+                        <div class="col-md-6 col-xs-12">
+                            <div class="form-group">
+                                <h:outputLabel value="Data de Início: " for="datainicio" styleClass="control-label col-md-4" />
+                                <div class="col-md-8 col-xs-12">
+                                    <h:inputText id="datainicio" value="#{avaliacaoBean.avaliacao.ava_dataInicial}" title="Data de Início" styleClass="form-control" pt:autofocus="">
+                                        <f:convertDateTime pattern="dd/MM/yyyy"/></h:inputText>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xs-12">
+                            <div class="form-group">
+                                <h:outputLabel value="Data de Término: " for="datafim" styleClass="control-label col-md-4" />
+                                <div class="col-md-8 col-xs-12">
+                                    <h:inputText id="datafim" value="#{avaliacaoBean.avaliacao.ava_dataFinal}" title="Data de Término" styleClass="form-control" pt:autofocus="">
+                                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                    </h:inputText>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <h:outputLabel value="Data de Início: " for="datainicio" styleClass="control-label col-sm-1" />
-                        <div class="col-md-6 col-sm-12">
-                            <h:inputText id="datainicio" value="#{avaliacaoBean.avaliacao.ava_dataInicial}" title="Data de Início" styleClass="form-control" pt:autofocus="" />
+                    <div class="row">
+                        <div class="col-md-6 col-xs-12">
+                            <div class="form-group">
+                                <h:outputLabel value="Avaliadores: " for="avaliadores" styleClass="control-label col-md-4" />
+                                <div class="col-md-8 col-xs-12">
+                                    <h:inputText id="avaliadores" styleClass="form-control" title="Pesquisar Avaliadores"/>
+                                    <i class="fa fa-search search"></i>
+                                </div>
+                            </div> </div>
+                        <div class="col-md-6 col-xs-12">
+                            <div class="form-group">
+                                <h:outputLabel value="Avaliados: " for="avaliados" styleClass="control-label col-md-4" />
+                                <div class="col-md-8 col-xs-12">
+                                    <h:inputText id="avaliados" styleClass="form-control" title="Pesquisar Avaliados"/>
+                                    <i class="fa fa-search search"></i>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
-                    <div class="form-group">
-                        <h:outputLabel value="Status: " for="datafim" styleClass="control-label col-sm-1" />
-                        <div class="col-md-6 col-sm-12">
-                            <h:inputText id="datafim" value="#{avaliacaoBean.avaliacao.ava_dataFinal}" title="Data de Término" styleClass="form-control" pt:autofocus="" />
+                    <div class="row">
+                        <div class="col-md-12 col-xs-12">
+                            <div class="form-group">
+                                <h:outputLabel value="Observação: " for="observacao" styleClass="control-label col-md-2" />
+                                <div class="col-md-10 col-sm-12">
+                                    <h:inputTextarea id="observacao" value="#{avaliacaoBean.avaliacao.ava_observacao}" title="Observação" styleClass="form-control" pt:autofocus=""/>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
-                    <div class="form-group">
-                        <h:outputLabel value="Status: " for="observacao" styleClass="control-label col-sm-1" />
-                        <div class="col-md-6 col-sm-12">
-                            <h:inputText id="observacao" value="#{avaliacaoBean.avaliacao.ava_observacao}" title="Observação" styleClass="form-control" pt:autofocus="" />
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p:outputLabel value="Multiple:" for="cargos" />
+                            <p:autoComplete id="cargos" multiple="true" completeMethod="#{avaliacaoBean.completeCargo}" value="#{avaliacaoBean.lsavaliadores}"
+                                            var="cargo" itemLabel="#{cargo.getCar_descricao}" itemValue="#{cargo}" converter="cargoConverter" forceSelection="true">
+                                <p:column>
+                                    <h:outputText value="#{cargo.getCar_descricao}" />
+                                </p:column>
+                            </p:autoComplete>
                         </div>
                     </div>
-
                     <div class="form-group">
                         <div class="col-md-offset-1 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
                             <h:link styleClass="btn btn-default" value="Cancelar" outcome="#{avaliacaoBean.listar()}" />

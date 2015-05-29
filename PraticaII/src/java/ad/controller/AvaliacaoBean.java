@@ -1,8 +1,14 @@
 package ad.controller;
 
 import ad.dao.AvaliacaoDAO;
+import ad.dao.CargoDAO;
+import ad.dao.TipoCompetenciaDAO;
 import ad.model.Avaliacao;
+import ad.model.TipoCompetencia;
+import csb.model.Cargo;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
@@ -12,12 +18,29 @@ public class AvaliacaoBean {
 
     private final String sTitle = Avaliacao.sTitle;
     private final String pTitle = Avaliacao.pTitle;
-
+    private List<Cargo> lsavaliadores;
+    private CargoDAO cargodao = new CargoDAO();
+    private TipoCompetenciaDAO tipocompetenciadao = new TipoCompetenciaDAO();
+    private List<Cargo> lsavaliados;
+    private List<TipoCompetencia> lstipocompetencia;
     private Avaliacao avaliacao = new Avaliacao();
     private AvaliacaoDAO dao = new AvaliacaoDAO();
     private DataModel avaliacoes;
 
     public AvaliacaoBean() {
+    }
+
+    public List<Cargo> completeCargo(String query) {
+        List<Cargo> allCargos = cargodao.findAll();
+        List<Cargo> filteredThemes = new ArrayList<Cargo>();
+
+        for (int i = 0; i < allCargos.size(); i++) {
+            Cargo skin = allCargos.get(i);
+            if (skin.getCar_descricao().toLowerCase().startsWith(query)) {
+                filteredThemes.add(skin);
+            }
+        }
+        return filteredThemes;
     }
 
     public Avaliacao getAvaliacao() {
@@ -78,6 +101,22 @@ public class AvaliacaoBean {
 
     public String getpTitle() {
         return pTitle;
+    }
+
+    public List<Cargo> getLsavaliadores() {
+        return lsavaliadores;
+    }
+
+    public void setLsavaliadores(List<Cargo> lsavaliadores) {
+        this.lsavaliadores = lsavaliadores;
+    }
+
+    public List<TipoCompetencia> getLstipocompetencia() {
+        return lstipocompetencia;
+    }
+
+    public void setLstipocompetencia(List<TipoCompetencia> lstipocompetencia) {
+        this.lstipocompetencia = lstipocompetencia;
     }
 
 }
