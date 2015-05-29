@@ -17,6 +17,9 @@ import javax.persistence.Table;
 @Table(name = "ffp_tipo_evento")
 public class TipoEvento implements Serializable{
  
+    public static final String sTitle = "Tipo de Evento";
+    public static final String pTitle = "Tipos de Eventos";
+    
     @Id
     @SequenceGenerator(name = "genTipoEvento", sequenceName = "genTipoEvento", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "genTipoEvento")

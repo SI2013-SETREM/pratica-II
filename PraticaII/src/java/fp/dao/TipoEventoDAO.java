@@ -58,9 +58,9 @@ public class TipoEventoDAO {
 
     public List<TipoEvento> finAll() {
 
-        Query query = session.createQuery("from TipoEvento");
-        return query.list();
+        Query q = session.createQuery("from TipoEvento");
+        return q.list();
 
     }
-    
+  
 }
