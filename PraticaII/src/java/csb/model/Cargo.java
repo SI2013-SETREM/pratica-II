@@ -14,7 +14,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "csb_cargo")
-public class Cargo implements Serializable {
+public class Cargo implements Serializable, Comparable<Cargo> {
 
     public static final String sTitle = "Cargo";
     public static final String pTitle = "Cargos";
@@ -119,5 +119,15 @@ public class Cargo implements Serializable {
 
     public void setGraduacao(List<Graduacao> Graduacao) {
         this.Graduacao = Graduacao;
+    }
+    
+    @Override
+    public String toString() {
+        return this.getCar_descricao();
+    }
+    
+    @Override
+    public int compareTo(Cargo o) {
+        return this.getCar_descricao().compareTo(o.getCar_descricao());
     }
 }

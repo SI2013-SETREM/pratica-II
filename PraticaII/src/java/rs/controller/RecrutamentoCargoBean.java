@@ -5,8 +5,7 @@
  */
 package rs.controller;
 
-import csb.dao.SetorDAO;
-import csb.model.Setor;
+import csb.dao.CargoDAO;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -30,7 +29,7 @@ public class RecrutamentoCargoBean {
     private RecrutamentoCargo recrutamentoCargo = new RecrutamentoCargo();
     private RecrutamentoCargoDAO dao = new RecrutamentoCargoDAO();
     private DataModel recrutamentoCargos;
-    private SetorDAO daosetor = new SetorDAO();
+    private CargoDAO daocargo = new CargoDAO();
     private TreeNode arvoreCargos;
 
     public RecrutamentoCargoBean() {
@@ -39,7 +38,7 @@ public class RecrutamentoCargoBean {
 
     @PostConstruct
     public void init() {
-        arvoreCargos = daosetor.arvoreSetor();
+        arvoreCargos = daocargo.arvoreSetor();
     }
 
     public String getsTitle() {

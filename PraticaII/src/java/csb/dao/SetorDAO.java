@@ -1,13 +1,10 @@
 package csb.dao;
 
-import csb.model.Cargo;
 import csb.model.Setor;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.primefaces.model.DefaultTreeNode;
-import org.primefaces.model.TreeNode;
 import util.HibernateUtil;
 
 /**
@@ -47,17 +44,5 @@ public class SetorDAO {
     public List<Setor> findAll() {
         Query q = session.createQuery("from Setor where 1=1 order by set_descricao asc");
         return q.list();
-    }
-
-    public TreeNode arvoreSetor() {
-        TreeNode raiz = new DefaultTreeNode("raiz", null);
-        List<Setor> setores = this.findAll();
-        for (Setor s : setores) {
-            TreeNode nodeSetor = new DefaultTreeNode("setor", s, raiz);
-            for (Cargo c : s.getCargos()) {
-                TreeNode nodeCargo= new DefaultTreeNode("cargo", c, nodeSetor);
-            }
-        }
-        return raiz;
     }
 }

@@ -17,7 +17,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "csb_setor")
-public class Setor implements Serializable, Comparable<Setor> {
+public class Setor implements Serializable {
 
     public static final String sTitle = "Setor";
     public static final String pTitle = "Setores";
@@ -67,48 +67,5 @@ public class Setor implements Serializable, Comparable<Setor> {
 
     public void setCargos(List<Cargo> cargos) {
         this.cargos = cargos;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 79 * hash + this.set_codigo;
-        hash = 79 * hash + Objects.hashCode(this.set_descricao);
-        hash = 79 * hash + Objects.hashCode(this.epis);
-        hash = 79 * hash + Objects.hashCode(this.cargos);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Setor other = (Setor) obj;
-        if (this.set_codigo != other.set_codigo) {
-            return false;
-        }
-        if (!Objects.equals(this.set_descricao, other.set_descricao)) {
-            return false;
-        }
-        if (!Objects.equals(this.epis, other.epis)) {
-            return false;
-        }
-        if (!Objects.equals(this.cargos, other.cargos)) {
-            return false;
-        }
-        return true;
-    }   
-    @Override
-    public String toString() {
-        return this.getSet_descricao();
-    }
-    
-    @Override
-    public int compareTo(Setor o) {
-        return this.getSet_descricao().compareTo(o.getSet_descricao());
     }
 }
