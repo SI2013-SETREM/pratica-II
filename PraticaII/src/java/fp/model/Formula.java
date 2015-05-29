@@ -17,6 +17,9 @@ import javax.persistence.Table;
 @Table(name = "ffp_formula")
 public class Formula implements Serializable {
     
+    public static final String sTitle = "Fórmula";
+    public static final String pTitle = "Fórmulas";
+    
     @Id
     @SequenceGenerator (name= "genFormula", sequenceName= "segFormula", allocationSize = 1)
     @GeneratedValue (strategy = GenerationType.SEQUENCE, generator = "genFormula")
