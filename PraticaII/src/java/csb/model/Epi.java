@@ -10,7 +10,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "cbs_epi")
+@Table(name = "csb_epi")
 public class Epi implements Serializable {
 
     public static final String sTitle = "Equipamento de Proteção";

@@ -10,7 +10,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="cbs_motivoalteracaosalarial")
+@Table(name="csb_motivoalteracaosalarial")
 public class MotivoAlteracaoSalarial implements Serializable {
     
     public static final String sTitle = "Motivo de Alteração Salarial";

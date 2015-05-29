@@ -11,7 +11,7 @@
 
     <ui:define name="breadcrumb">
         <li>Cargos, salários, benefícios</li>
-        <li><h:link value="${setorBean.pTitle}" outcome="/faces/view/cfg/idiomalst" /></li>
+        <li><h:link value="${setorBean.pTitle}" outcome="/faces/view/cfg/setorlst" /></li>
     </ui:define>
 
     <ui:define name="main-content">
@@ -29,7 +29,7 @@
                     <div class="form-group">
                         <div class="col-md-offset-1 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
                             <h:link styleClass="btn btn-default" value="Cancelar" outcome="#{setorBean.listar()}" />
-                            <h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{setorBean.salvar()}"></h:commandButton>
+                            <h:commandButton styleClass="btns btn-primary" value="Salvar" action="#{setorBean.salvar()}"></h:commandButton>
                         </div>
                     </div>
                 </h:form>

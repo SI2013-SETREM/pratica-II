@@ -38,7 +38,7 @@ public class MotivoAlteracaoSalarialDAO {
     }
 
     public List<MotivoAlteracaoSalarial> findAll() {
-        Query q = session.createQuery("from CbsMotivoAlteracaoSalarial");
+        Query q = session.createQuery("from MotivoAlteracaoSalarial order by mas_descricao asc");
         return q.list();
     }
 }

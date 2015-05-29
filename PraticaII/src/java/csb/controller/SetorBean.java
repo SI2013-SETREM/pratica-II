@@ -6,7 +6,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
-
 /**
  *
  * @author Juliano Pires
@@ -14,7 +13,7 @@ import javax.faces.model.ListDataModel;
 @ManagedBean
 @RequestScoped
 public class SetorBean {
-    
+
     private final String sTitle = Setor.sTitle;
     private final String pTitle = Setor.pTitle;
 
@@ -71,12 +70,12 @@ public class SetorBean {
     }
 
     public String salvar() {
-        if (setor.getSet_codigo()> 0) {
+        if (setor.getSet_codigo() > 0) {
             dao.update(setor);
         } else {
             dao.insert(setor);
         }
-        return "setorlst";
+       return "setorlst";
     }
 
     public String listar() {

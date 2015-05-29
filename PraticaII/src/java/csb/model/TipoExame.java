@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 
 @Entity
-@Table(name="cbs_tipoexame")
+@Table(name="csb_tipoexame")
 public class TipoExame implements Serializable {
     
     public static final String sTitle = "Tipo de Exame";
