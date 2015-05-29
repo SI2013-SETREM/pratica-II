@@ -1,0 +1,90 @@
+<ui:composition template="./../modelos/default.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+    <ui:define name="title">
+        ${tabINSSBean.getsTitle()}
+    </ui:define>
+
+
+
+    <ui:define name="breadcrumb">
+        <li>Configurações</li>
+        <li><h:link value="${tabINSSBean.getsTitle()}" outcome="/faces/view/fp/tabinsslst" /></li>
+    </ui:define>
+
+    <ui:define name="main-content">
+        <div class="panel panel-body">
+            <h3><h:outputText value="Cadastro da ${tabINSSBean.getsTitle()}"/></h3>
+            <f:view>
+               
+                <h:form styleClass="form-horizontal">
+                    <h:inputHidden id="tpeCodigo" value="#{tabINSSBean.tabinss.tbs_codigo}" />
+
+                    <div class="form-group" style="border: solid; border-color: #666">
+                        <h:outputLabel value="Data Inicial :" for="tabdtini" styleClass="control-label col-sm-4" />
+                        <div class="col-md-2 col-sm-4">
+                            <h:inputText id="t1" value="#{tabINSSBean.tabinss.tbs_data_inicial}" title="TpeNome" styleClass="form-control" pt:autofocus="" />
+                        </div>
+                        <h:outputLabel value="Data Final :" for="tabdtfin" styleClass="control-label col-sm-2" />
+                        <div class="col-md-2 col-sm-4">
+                            <h:inputText id="t2" value="#{tabINSSBean.tabinss.tbs_data_final}" title="TpeNome" styleClass="form-control" pt:autofocus="" />
+                        </div>
+                    </div>
+                    <div class="form-group" style="border: solid; border-color: #666">
+                        <h:outputLabel value="Salário Familia até:" for="tpeNome" styleClass="control-label col-sm-6" />
+                        <div class="col-md-2 col-sm-0">
+                            <h:inputText id="t3" value="#{tabINSSBean.tabinss.tbs_sal_fami_uni}" title="TpeNome" styleClass="form-control" pt:autofocus="" />
+                        </div>
+                        <h:outputLabel value="Ab. Imposto de Renda:" for="tpeNome" styleClass="control-label col-sm-2" />
+                        <div class="col-md-2 col-sm-1">
+                            <h:inputText id="t4" value="#{tabINSSBean.tabinss.tbs_ab_imp_uni}" title="TpeNome" styleClass="form-control" pt:autofocus="" />
+                        </div>
+                    </div>
+                    <div class="form-group" style="border: solid; border-color: #666">
+                        <h:outputLabel value="Salário Familia de :" for="tpeNome" styleClass="control-label col-sm-2" />
+                        <div class="col-md-2 col-sm-0">
+                            <h:inputText id="t5" value="#{tabINSSBean.tabinss.tbs_sal_fami_ini}" title="TpeNome" styleClass="form-control" pt:autofocus="" />
+                        </div>
+                        <h:outputLabel value="Salário Familia até :" for="tpeNome" styleClass="control-label col-sm-2" />
+                        <div class="col-md-2 col-sm-0">
+                            <h:inputText id="t6" value="#{tabINSSBean.tabinss.tbs_sal_fami_fin}" title="TpeNome" styleClass="form-control" pt:autofocus="" />
+                        </div>
+                        <h:outputLabel value="Ab. Imposto de Renda :" for="tpeNome" styleClass="control-label col-sm-2" />
+                        <div class="col-md-2 col-sm-1">
+                            <h:inputText id="t7" value="#{tabINSSBean.tabinss.tbs_ab_imp_ini_fin}" title="TpeNome" styleClass="form-control" pt:autofocus="" />
+                        </div>
+                    </div>         
+                    <div class="form-group" style="border: solid; border-color: #666">
+                        <h:outputLabel value="Aliquota Normal :" for="tpeNome" styleClass="control-label col-sm-2" />
+                        <div class="col-md-2 col-sm-1">   
+                            <h:inputText id="t8" value="#{tabINSSBean.tabinss.tbs_ali_normal}" title="TpeNome" styleClass="form-control" pt:autofocus="" />
+                        </div>  
+                        <h:outputLabel value="Aliquota Lei 9.601/98 :" for="tpeNome" styleClass="control-label col-sm-2" />
+                        <div class="col-md-2 col-sm-1">
+                            <h:inputText id="t9" value="#{tabINSSBean.tabinss.tbs_ali_lei1}" title="TpeNome" styleClass="form-control" pt:autofocus="" />
+                        </div>
+                        <h:outputLabel value="Aliquota Lei 10.097/00 :" for="tpeNome" styleClass="control-label col-sm-2" />
+                        <div class="col-md-2 col-sm-1">
+                            <h:inputText id="t10" value="#{tabINSSBean.tabinss.tbs_ali_lei2}" title="TpeNome" styleClass="form-control" pt:autofocus="" />
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="form-group">
+                        <div class="col-md-offset-1 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
+                            <h:link styleClass="btn btn-default" value="Cancelar" outcome="#{tabINSSBean.listar()}" />
+                            <h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{tabINSSBean.salvar()}"></h:commandButton>
+                        </div>
+                    </div>
+                </h:form>
+            </f:view>
+        </div>
+    </ui:define>
+
+</ui:composition>
