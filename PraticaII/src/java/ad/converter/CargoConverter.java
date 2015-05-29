@@ -18,6 +18,6 @@ public class CargoConverter implements javax.faces.convert.Converter {
 
     @Override
     public String getAsString(FacesContext facesContext, UIComponent uIComponent, Object object) {
-        return "" + ((Cargo) object).getCar_cbo();
+        return "" + ((Cargo) object).getCar_codigo();
     }
 }

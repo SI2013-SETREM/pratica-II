@@ -71,26 +71,13 @@ public class Competencia implements Serializable {
         return pTitle;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 79 * hash + this.cmp_codigo;
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
+////////////////////////////////////////////////////////////////
+    public String getStatus() {
+        if (cmp_status == 1) {
+            return "Ativo";
+        } else {
+            return "Inativo";
         }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Competencia other = (Competencia) obj;
-        if (this.cmp_codigo != other.cmp_codigo) {
-            return false;
-        }
-        return true;
     }
 
 }

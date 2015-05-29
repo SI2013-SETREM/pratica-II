@@ -38,7 +38,24 @@ public class PessoasAvaliacaoDAO {
     }
 
     public List<PessoasAvaliacao> findAll() {
-        Query q = session.createQuery("from Pessoas_avaliacao");
+        Query q = session.createQuery("from PessoasAvaliacao");
         return q.list();
     }
+
+////------MApear    
+    public List<PessoasAvaliacao> GetListPessoasAvaliacao(int ava_id, int pes_codigo, int pes_codigo_avaliador) {
+        String sql = "";
+        if (ava_id != 0) {
+            sql += " and ava_codigo = " + ava_id;
+        }
+        if (pes_codigo != 0) {
+            sql += " and pes_codigo = " + pes_codigo;
+        }
+        if (pes_codigo_avaliador != 0) {
+            sql += " and pes_codigo_avaliador = " + pes_codigo_avaliador;
+        }
+        Query q = session.createQuery(" from PessoasAvaliacao where 1=1 " + sql);
+        return q.list();
+    }
+
 }

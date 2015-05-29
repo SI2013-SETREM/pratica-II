@@ -1,28 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ad.controller;
 
 import ad.dao.PessoasAvaliacaoDAO;
 import ad.model.PessoasAvaliacao;
+import java.util.List;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 
-/**
- *
- * @author User
- */
 @ManagedBean
-@RequestScoped
 public class PessoasAvaliacaoBean {
+
+    private final String sTitle = PessoasAvaliacao.getsTitle();
+    private final String pTitle = PessoasAvaliacao.getpTitle();
 
     private PessoasAvaliacao pessoas_avaliacao = new PessoasAvaliacao();
     private PessoasAvaliacaoDAO dao = new PessoasAvaliacaoDAO();
     private DataModel pessoas_avaliacoes;
+
+    private List<PessoasAvaliacao> lsPessoasAvaliacao;
 
     public PessoasAvaliacaoBean() {
     }
@@ -82,6 +77,31 @@ public class PessoasAvaliacaoBean {
     public String listar() {
 
         return "pessoasavaliacaolst";
+    }
+
+    ///---------------------------------- MApear
+    public List<PessoasAvaliacao> GetListPessoasAvaliacao(int ava_id, int pes_codigo, int pes_codigo_avaliador) {
+
+        lsPessoasAvaliacao = dao.GetListPessoasAvaliacao(ava_id, pes_codigo, pes_codigo_avaliador);
+        return lsPessoasAvaliacao;
+    }
+
+    public String getListPessoaAvaliacoes(int ava_id) {
+        this.pessoas_avaliacoes = new ListDataModel(dao.GetListPessoasAvaliacao(ava_id, 0, 0));
+        return "pessoasavaliacaolst";
+    }
+
+    public String Details(PessoasAvaliacao item) {
+        // pessoas_avaliacao = dao.findById(item.get)
+        return "pessoasavaliacaodls";
+    }
+
+    public String getsTitle() {
+        return sTitle;
+    }
+
+    public String getpTitle() {
+        return pTitle;
     }
 
 }

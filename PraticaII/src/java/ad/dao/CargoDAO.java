@@ -37,9 +37,13 @@ public class CargoDAO {
         return (Cargo) session.load(Cargo.class, idi_codigo);
     }
 
-    public List<Cargo> findAll() {
-        Query q = session.createQuery("from Cargo");
-        return q.list();
+    public List<Cargo> findAll(String query) {
+        String sql = "";
+        if (query != "") {
+            sql = " and upper (translate(car_descricao, 'ÁÇÉÍÓÚÀÈÌÒÙÂÊÎÔÛÃÕËÜáçéíóúàèìòùâêîôûãõëü', 'ACEIOUAEIOUAEIOUAOEUaceiouaeiouaeiouaoeu'))"
+                    + " LIKE upper(translate('%" + query + "%', 'ÁÇÉÍÓÚÀÈÌÒÙÂÊÎÔÛÃÕËÜáçéíóúàèìòùâêîôûãõëü', 'ACEIOUAEIOUAEIOUAOEUaceiouaeiouaeiouaoeu'))";
+        }
+        return session.createQuery("from Cargo where 1 = 1 " + sql).list();
     }
 
 }

@@ -48,4 +48,25 @@ public class TipoCompetencia implements Serializable {
         return pTitle;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 79 * hash + this.tcp_codigo;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final TipoCompetencia other = (TipoCompetencia) obj;
+        if (this.tcp_codigo != other.tcp_codigo) {
+            return false;
+        }
+        return true;
+    }
 }

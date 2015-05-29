@@ -124,4 +124,6 @@ public class Avaliacao implements Serializable {
     public String getTaxa() {
         return "10%";
     }
+
+  
 }

@@ -20,9 +20,7 @@ public class AvaliacaoBean {
     private final String pTitle = Avaliacao.pTitle;
     private List<Cargo> lsavaliadores;
     private CargoDAO cargodao = new CargoDAO();
-    private TipoCompetenciaDAO tipocompetenciadao = new TipoCompetenciaDAO();
     private List<Cargo> lsavaliados;
-    private List<TipoCompetencia> lstipocompetencia;
     private Avaliacao avaliacao = new Avaliacao();
     private AvaliacaoDAO dao = new AvaliacaoDAO();
     private DataModel avaliacoes;
@@ -31,16 +29,17 @@ public class AvaliacaoBean {
     }
 
     public List<Cargo> completeCargo(String query) {
-        List<Cargo> allCargos = cargodao.findAll();
-        List<Cargo> filteredThemes = new ArrayList<Cargo>();
-
-        for (int i = 0; i < allCargos.size(); i++) {
-            Cargo skin = allCargos.get(i);
-            if (skin.getCar_descricao().toLowerCase().startsWith(query)) {
-                filteredThemes.add(skin);
-            }
-        }
-        return filteredThemes;
+        return cargodao.findAll(query);
+        //      List<Cargo> allCargos = cargodao.findAll();
+//        List<Cargo> filteredThemes = new ArrayList<Cargo>();
+//
+//        for (int i = 0; i < allCargos.size(); i++) {
+//            Cargo skin = allCargos.get(i);
+//            if (skin.getCar_descricao().toLowerCase().startsWith(query)) {
+//                filteredThemes.add(skin);
+//            }
+//        }
+//        return filteredThemes;
     }
 
     public Avaliacao getAvaliacao() {
@@ -87,6 +86,9 @@ public class AvaliacaoBean {
             dao.update(avaliacao);
         } else {
             dao.insert(avaliacao);
+            for(int i= 0; i < lsavaliadores.size(); i++){
+            
+            }
         }
         return "avaliacaolst";
     }
@@ -111,12 +113,12 @@ public class AvaliacaoBean {
         this.lsavaliadores = lsavaliadores;
     }
 
-    public List<TipoCompetencia> getLstipocompetencia() {
-        return lstipocompetencia;
+    public List<Cargo> getLsavaliados() {
+        return lsavaliados;
     }
 
-    public void setLstipocompetencia(List<TipoCompetencia> lstipocompetencia) {
-        this.lstipocompetencia = lstipocompetencia;
+    public void setLsavaliados(List<Cargo> lsavaliados) {
+        this.lsavaliados = lsavaliados;
     }
 
 }
