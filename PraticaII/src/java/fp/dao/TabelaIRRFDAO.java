@@ -1,11 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package fp.dao;
-
-
 
 import fp.model.TabelaIRRF;
 import java.util.List;
@@ -16,10 +10,6 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import util.HibernateUtil;
 
-/**
- *
- * @author Max
- */
 public class TabelaIRRFDAO {
     
     
@@ -57,7 +47,7 @@ public class TabelaIRRFDAO {
         return (TabelaIRRF) session.load(TabelaIRRF.class, id);
     }
 
-    public List<TabelaIRRF> finAll() {
+    public List<TabelaIRRF> findAll() {
 
         Query query = session.createQuery("from TabelaIRRF");
         return query.list();

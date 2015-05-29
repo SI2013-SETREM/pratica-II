@@ -40,7 +40,7 @@ public class EventoFolhaDAO {
         return (EventoFolha) session.load(EventoFolha.class, id);
     }
 
-    public List<EventoFolha> finAll() {
+    public List<EventoFolha> findAll() {
 
         Query query = session.createQuery("from EventoFolha");
         return query.list();

@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -18,6 +19,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "ffp_tabela_irrf")
 public class TabelaIRRF implements Serializable{
+    
+    public static final String sTitle = "Tabela IRRF";
+    public static final String pTitle = "Tabela IRRFS";
      
     @Id
     @SequenceGenerator (name= "genTabelaIRRF", sequenceName= "segTabelaIRRF", allocationSize = 1)
@@ -29,7 +33,8 @@ public class TabelaIRRF implements Serializable{
     private double tif_valor_min_darf;
     private double tif_por_pis_pasep;
     @ManyToOne
-    private FaixaIRRF frf_codigo;
+    @JoinColumn(name = "frf_codigo", referencedColumnName = "frf_codigo")
+    private FaixaIRRF faixairrf;
 
     public int getTif_codigo() {
         return tif_codigo;
@@ -79,12 +84,14 @@ public class TabelaIRRF implements Serializable{
         this.tif_por_pis_pasep = tif_por_pis_pasep;
     }
 
-    public FaixaIRRF getFrf_codigo() {
-        return frf_codigo;
+    public FaixaIRRF getFaixairrf() {
+        return faixairrf;
     }
 
-    public void setFrf_codigo(FaixaIRRF frf_codigo) {
-        this.frf_codigo = frf_codigo;
+    public void setFaixairrf(FaixaIRRF faixairrf) {
+        this.faixairrf = faixairrf;
     }
+
+    
     
 }

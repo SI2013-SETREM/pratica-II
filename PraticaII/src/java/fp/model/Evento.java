@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -21,6 +22,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "ffp_evento")
 public class Evento implements Serializable {
+    
+    public static final String sTitle = "Evento";
+    public static final String pTitle = "Eventos";
 
     @Id
     @SequenceGenerator(name = "genEvento", sequenceName = "genEvento", allocationSize = 1)
@@ -38,15 +42,21 @@ public class Evento implements Serializable {
     private boolean eve_acumular_rais_horas;
     private boolean eve_horas_dias;
     @ManyToOne
-    private TabINSS tbs_codigo;
+    @JoinColumn(name = "tbs_codigo", referencedColumnName = "tbs_codigo")
+    private TabINSS tabelainss;
     @ManyToOne
-    private TabelaIRRF tif_codigo;
+    @JoinColumn(name = "tif_codigo", referencedColumnName = "tif_codigo")
+    private TabelaIRRF tabelairrf;
     @ManyToOne
-    private TipoEvento tpe_codigo;
+    @JoinColumn(name = "tpe_codigo", referencedColumnName = "tpe_codigo")
+    private TipoEvento tipoevento;
     @ManyToOne
-    private SerieEvento sev_codigo;
+    @JoinColumn(name = "sev_codigo", referencedColumnName = "sev_codigo")
+    private SerieEvento serieevento;
     @ManyToOne
-    private Formula for_codigo;
+    @JoinColumn(name = "for_codigo", referencedColumnName = "for_codigo")
+    private Formula formula;
+    
     //@ManyToOne
     //private Beneficio ben_codigo;
 
@@ -146,45 +156,44 @@ public class Evento implements Serializable {
         this.eve_horas_dias = eve_horas_dias;
     }
 
-    public TabINSS getTbs_codigo() {
-        return tbs_codigo;
+    public SerieEvento getSerieevento() {
+        return serieevento;
     }
 
-    public void setTbs_codigo(TabINSS tbs_codigo) {
-        this.tbs_codigo = tbs_codigo;
+    public void setSerieevento(SerieEvento serieevento) {
+        this.serieevento = serieevento;
     }
 
-    public TabelaIRRF getTif_codigo() {
-        return tif_codigo;
+    public TabINSS getTabelainss() {
+        return tabelainss;
     }
 
-    public void setTif_codigo(TabelaIRRF tif_codigo) {
-        this.tif_codigo = tif_codigo;
+    public void setTabelainss(TabINSS tabelainss) {
+        this.tabelainss = tabelainss;
     }
 
-    public TipoEvento getTpe_codigo() {
-        return tpe_codigo;
+    public TabelaIRRF getTabelairrf() {
+        return tabelairrf;
     }
 
-    public void setTpe_codigo(TipoEvento tpe_codigo) {
-        this.tpe_codigo = tpe_codigo;
+    public void setTabelairrf(TabelaIRRF tabelairrf) {
+        this.tabelairrf = tabelairrf;
     }
 
-    public SerieEvento getSev_codigo() {
-        return sev_codigo;
+    public TipoEvento getTipoevento() {
+        return tipoevento;
     }
 
-    public void setSev_codigo(SerieEvento sev_codigo) {
-        this.sev_codigo = sev_codigo;
+    public void setTipoevento(TipoEvento tipoevento) {
+        this.tipoevento = tipoevento;
     }
 
-    public Formula getFor_codigo() {
-        return for_codigo;
+    public Formula getFormula() {
+        return formula;
     }
 
-    public void setFor_codigo(Formula for_codigo) {
-        this.for_codigo = for_codigo;
+    public void setFormula(Formula formula) {
+        this.formula = formula;
     }
 
- 
 }

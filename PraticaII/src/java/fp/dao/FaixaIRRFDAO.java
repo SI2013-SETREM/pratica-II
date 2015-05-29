@@ -57,7 +57,7 @@ public class FaixaIRRFDAO {
         return (FaixaIRRF) session.load(FaixaIRRFDAO.class, id);
     }
 
-    public List<FaixaIRRF> finAll() {
+    public List<FaixaIRRF> findAll() {
 
         Query query = session.createQuery("from FaixaIRRF");
         return query.list();

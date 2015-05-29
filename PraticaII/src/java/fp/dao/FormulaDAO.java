@@ -56,7 +56,7 @@ public class FormulaDAO {
         return (Formula) session.load(FormulaDAO.class, id);
     }
 
-    public List<Formula> finAll() {
+    public List<Formula> findAll() {
 
         Query query = session.createQuery("from Formula");
         return query.list();

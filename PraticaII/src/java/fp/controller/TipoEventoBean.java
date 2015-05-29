@@ -57,7 +57,7 @@ public class TipoEventoBean {
     }
     
      public DataModel getTiposDeEvento() {
-        this.tiposdeevento = new ListDataModel(dao.finAll());
+        this.tiposdeevento = new ListDataModel(dao.findAll());
         return tiposdeevento;
     }
     

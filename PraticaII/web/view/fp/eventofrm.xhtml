@@ -1,12 +1,72 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
-    <h:head>
-        <title>Facelet Title</title>
-    </h:head>
-    <h:body>
-        Hello from Facelets
-    </h:body>
-</html>
+<ui:composition template="./../modelos/default.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
+    <ui:define name="title">
+        ${EventoBean.pTitle}
+    </ui:define>
+
+    <ui:define name="breadcrumb">
+        <li>Configurações</li>
+        <li><h:link value="${EventoBean.pTitle}" outcome="/faces/view/fp/eventolst" /></li>
+    </ui:define>
+
+    <ui:define name="main-content">
+        <div class="panel panel-body">
+            <h3><h:outputText value="Dados de ${EventoBean.sTitle}"/></h3>
+            <f:view>
+                <h:form styleClass="form-horizontal">
+                    <h:inputHidden id="idiCodigo" value="#{eventoBean.evento.eve_codigo}" />
+<!--                            <div class="form-group">
+                        <h:outputLabel value="Código:" for="evecodigo" styleClass="control-label col-sm-1" />
+                        <div class="col-md-6">
+                            <h:inputText id="idiCodigo" value="#{eventoBean.evento.eve_codigo}" title="evecodigo" styleClass="form-control" />
+                        </div>
+                    </div>-->
+                    <div class="form-group">
+                        <h:outputLabel value="Descrição" for="eveNome" styleClass="control-label col-sm-1" />
+                        <div class="col-md-6 col-sm-12">
+                            <h:inputText id="eveDescricao" value="#{eventoBean.evento.eve_descricao}" title="SevNome" styleClass="form-control" pt:autofocus="" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Índice" for="eveIndice" styleClass="control-label col-sm-1" />
+                        <div class="col-md-6 col-sm-12">
+                            <h:inputText id="eveIndice" value="#{eventoBean.evento.eve_indice}" title="EveIndice" styleClass="form-control" pt:autofocus="" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Série: " for="serieevento" styleClass="control-label col-sm-1" />
+                        <div class="col-md-6 col-sm-12">
+                            <h:selectOneMenu id="serieevento" converter="serieEventoConverter" value="#{eventoBean.evento.serieevento}" styleClass="form-control" pt:autofocus="" >
+                                <f:selectItems value="#{eventoBean.lstSerieEvento}" var="tipe" itemLabel="#{tipe.sev_nome}"/>
+                            </h:selectOneMenu>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Tipo: " for="tipoevento" styleClass="control-label col-sm-1" />
+                        <div class="col-md-6 col-sm-12">
+                            <h:selectOneMenu id="tipoevento" converter="tipoEventoConverter" value="#{eventoBean.evento.tipoevento}" styleClass="form-control" pt:autofocus="" >
+                                <f:selectItems value="#{eventoBean.lstTipoEvento}" var="tipe" itemLabel="#{tipe.tpe_nome}"/>
+                            </h:selectOneMenu>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="form-group">
+                        <div class="col-md-offset-1 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
+                            <h:link styleClass="btn btn-default" value="Cancelar" outcome="#{EventoBean.listar()}" />
+                            <h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{EventoBean.salvar()}"></h:commandButton>
+                        </div>
+                    </div>
+                </h:form>
+            </f:view>
+        </div>
+    </ui:define>
+
+</ui:composition>
