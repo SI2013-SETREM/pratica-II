@@ -36,7 +36,7 @@ public class Cargo implements Serializable, Comparable<Cargo> {
     private List<Graduacao> Graduacao;
 
     public Cargo() {
-        
+
     }
 
     public Cargo(int car_codigo, String car_descricao, int car_ativo, String car_cbo, Double car_tetosalarial, Double car_pisosalarial, Cargo car_pai) {
@@ -111,7 +111,7 @@ public class Cargo implements Serializable, Comparable<Cargo> {
 
     public void setCompetencia(List<Competencia> Competencia) {
         this.Competencia = Competencia;
-    }    
+    }
 
     public List<Graduacao> getGraduacao() {
         return Graduacao;
@@ -120,12 +120,34 @@ public class Cargo implements Serializable, Comparable<Cargo> {
     public void setGraduacao(List<Graduacao> Graduacao) {
         this.Graduacao = Graduacao;
     }
-    
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 79 * hash + this.car_codigo;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Cargo other = (Cargo) obj;
+        if (this.car_codigo != other.car_codigo) {
+            return false;
+        }
+        return true;
+    }
+
     @Override
     public String toString() {
         return this.getCar_descricao();
     }
-    
+
     @Override
     public int compareTo(Cargo o) {
         return this.getCar_descricao().compareTo(o.getCar_descricao());

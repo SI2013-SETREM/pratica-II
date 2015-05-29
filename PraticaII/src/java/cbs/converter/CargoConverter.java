@@ -1,6 +1,6 @@
-package ad.converter;
+package cbs.converter;
 
-import ad.dao.CargoDAO;
+import csb.dao.CargoDAO;
 import csb.model.Cargo;
 
 import javax.faces.component.UIComponent;

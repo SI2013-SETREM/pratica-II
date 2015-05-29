@@ -1,12 +1,9 @@
 package ad.controller;
 
 import ad.dao.AvaliacaoDAO;
-import ad.dao.CargoDAO;
-import ad.dao.TipoCompetenciaDAO;
+import csb.dao.CargoDAO;
 import ad.model.Avaliacao;
-import ad.model.TipoCompetencia;
 import csb.model.Cargo;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -29,17 +26,7 @@ public class AvaliacaoBean {
     }
 
     public List<Cargo> completeCargo(String query) {
-        return cargodao.findAll(query);
-        //      List<Cargo> allCargos = cargodao.findAll();
-//        List<Cargo> filteredThemes = new ArrayList<Cargo>();
-//
-//        for (int i = 0; i < allCargos.size(); i++) {
-//            Cargo skin = allCargos.get(i);
-//            if (skin.getCar_descricao().toLowerCase().startsWith(query)) {
-//                filteredThemes.add(skin);
-//            }
-//        }
-//        return filteredThemes;
+        return cargodao.searchCargos(query);
     }
 
     public Avaliacao getAvaliacao() {
@@ -86,8 +73,8 @@ public class AvaliacaoBean {
             dao.update(avaliacao);
         } else {
             dao.insert(avaliacao);
-            for(int i= 0; i < lsavaliadores.size(); i++){
-            
+            for (int i = 0; i < lsavaliadores.size(); i++) {
+
             }
         }
         return "avaliacaolst";

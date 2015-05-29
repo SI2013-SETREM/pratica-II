@@ -65,4 +65,13 @@ public class CargoDAO {
         }
         return raiz;
     }
+
+    public List<Cargo> searchCargos(String name) {
+        String sql = "";
+        if (name != "") {
+            sql = " and upper (translate(car_descricao, 'ÁÇÉÍÓÚÀÈÌÒÙÂÊÎÔÛÃÕËÜáçéíóúàèìòùâêîôûãõëü', 'ACEIOUAEIOUAEIOUAOEUaceiouaeiouaeiouaoeu'))"
+                    + " LIKE upper(translate('%" + name + "%', 'ÁÇÉÍÓÚÀÈÌÒÙÂÊÎÔÛÃÕËÜáçéíóúàèìòùâêîôûãõëü', 'ACEIOUAEIOUAEIOUAOEUaceiouaeiouaeiouaoeu'))";
+        }
+        return session.createQuery("from Cargo where 1 = 1 " + sql).list();
+    }
 }
