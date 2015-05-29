@@ -32,9 +32,7 @@ public class TabelaIRRF implements Serializable{
     private double tif_valor_deducao;
     private double tif_valor_min_darf;
     private double tif_por_pis_pasep;
-    @ManyToOne
-    @JoinColumn(name = "frf_codigo", referencedColumnName = "frf_codigo")
-    private FaixaIRRF faixairrf;
+    
 
     public int getTif_codigo() {
         return tif_codigo;
@@ -84,14 +82,5 @@ public class TabelaIRRF implements Serializable{
         this.tif_por_pis_pasep = tif_por_pis_pasep;
     }
 
-    public FaixaIRRF getFaixairrf() {
-        return faixairrf;
-    }
-
-    public void setFaixairrf(FaixaIRRF faixairrf) {
-        this.faixairrf = faixairrf;
-    }
-
-    
     
 }

@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -26,6 +28,11 @@ public class FaixaIRRF implements Serializable {
     private double frf_salario_final;
     private double frf_aliquota;
     private double frf_deducao;
+   
+     @ManyToOne
+    @JoinColumn(name = "tif_codigo", referencedColumnName = "tif_codigo")
+    private TabelaIRRF tabelairrf;
+    
 
     public int getFrf_codigo() {
         return frf_codigo;
@@ -66,6 +73,17 @@ public class FaixaIRRF implements Serializable {
     public void setFrf_deducao(double frf_deducao) {
         this.frf_deducao = frf_deducao;
     }
+
+    public TabelaIRRF getTabelairrf() {
+        return tabelairrf;
+    }
+
+    public void setTabelairrf(TabelaIRRF tabelairrf) {
+        this.tabelairrf = tabelairrf;
+    }
+
+ 
+    
     
     
 }

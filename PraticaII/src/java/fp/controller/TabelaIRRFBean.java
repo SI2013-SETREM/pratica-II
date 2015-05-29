@@ -23,7 +23,7 @@ public class TabelaIRRFBean {
     private DataModel tabelairrfs;
     
     
-     private List<FaixaIRRF> lstfaixairrf;
+    private List<FaixaIRRF> lstfaixairrf;
     private FaixaIRRF faixairrf = new FaixaIRRF();
     private FaixaIRRFDAO faixairrfdao = new FaixaIRRFDAO();
     
