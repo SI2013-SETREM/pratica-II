@@ -29,10 +29,7 @@
                     <div class="form-group">
                         <h:outputLabel value="Situação" for="masSituacao" styleClass="control-label col-sm-1" />
                         <div class="col-md-6 col-sm-12">
-                            <h:selectOneMenu required="true" id="masSituacao" value="#{motivoAlteracaoSalarialBean.motivo.mas_situacao}" title="masSituacao" styleClass="form-control" pt:autofocus="">
-                                <f:selectItem itemValue="true" itemLabel="ATIVO" />
-                                <f:selectItem itemValue="false" itemLabel="INATIVO" />	
-                            </h:selectOneMenu>
+                            <h:selectBooleanCheckbox value="#{motivoAlteracaoSalarialBean.motivo.mas_situacao}" id="masSituacao" title="masSituacao" pt:autofocus="" />
                         </div>
                     </div>
                     <div class="form-group">
