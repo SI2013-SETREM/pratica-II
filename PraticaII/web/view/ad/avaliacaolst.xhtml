@@ -9,8 +9,7 @@
     </ui:define>
 
     <ui:define name="breadcrumb">
-        <li>Avaliação</li>
-        <li>${avaliacaoBean.pTitle}</li>
+        <li href="avaliacaolst">${avaliacaoBean.pTitle}</li>
     </ui:define>
 
     <ui:define name="main-content">
@@ -27,14 +26,16 @@
                         <f:facet name="header">
                             <h:outputText value="Nome"/>
                         </f:facet>
-                        <h:outputText value="${item.getAva_nome()}"/>
+                        <h:outputText value="${item.getAva_codigo()}"/>
+                        <!--getAva_nome-->
+
                     </h:column>
 
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="Taxa"/>
                         </f:facet>
-                        <h:outputText value="${item.getTaxa()}"/>
+                        <h:outputText value="${item.getAva_nome()}"/>
                     </h:column>
 
                     <h:column>
@@ -60,6 +61,15 @@
                         <h:outputText value="${item.getAva_dataFinal()}">
                             <f:convertDateTime pattern="dd/MM/yyyy"/>
                         </h:outputText>
+                    </h:column>
+
+                    <h:column headerClass="col-editar-header">
+                        <f:facet name="header">
+                            <h:outputText value="Detalhes"/>
+                        </f:facet>
+                        <h:commandLink action="${pessoasAvaliacaoBean.getListPessoaAvaliacoes(item.getAva_codigo())}">
+                            <i class="fa fa-pencil"></i> Detalhes
+                        </h:commandLink>
                     </h:column>
 
                     <h:column headerClass="col-editar-header">

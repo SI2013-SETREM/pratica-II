@@ -21,34 +21,23 @@
                 <h:form styleClass="form-horizontal">
                     <h:inputHidden id="idiCodigo" value="#{competenciaBean.competencia.cmp_codigo}" />
                     <div class="form-group">
-                        <h:outputLabel value="Nome: " for="nome" styleClass="control-label col-sm-1" />
+                        <h:outputLabel value="Nome: " for="nome" styleClass="control-label col-md-2" />
                         <div class="col-md-6 col-sm-12">
                             <h:inputText id="nome" value="#{competenciaBean.competencia.cmp_descricao}" title="Nome da Competência" styleClass="form-control" pt:autofocus="" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <h:outputLabel value="Tipo de Competência: " for="tipocompetencia" styleClass="control-label col-sm-1" />
+                        <h:outputLabel value="Tipo de Competência: " for="tipocompetencia" styleClass="control-label col-md-2" />
                         <div class="col-md-6 col-sm-12">
                             <h:selectOneMenu id="tipocompetencia" converter="tipoCompetenciaConverter" value="#{competenciaBean.competencia.tipocompetencia}" styleClass="form-control" pt:autofocus="" >
-                                <f:selectItems value="#{competenciaBean.lstipocompetencia}" var="tipe" itemLabel="#{tipe.tcp_descricao}"/>
+                                <f:selectItems value="#{competenciaBean.lstipocompetencia}" var="tipe" itemLabel="#{tipe.tcp_descricao}" itemValue="#{tipe}"/>
                             </h:selectOneMenu>
                         </div>
                     </div>
                     <div class="form-group">
-                        <h:outputLabel value="Tipo de Competência: " for="tipocompetencia" styleClass="control-label col-sm-1" />
+                        <h:outputLabel value="Status: " for="status" styleClass="control-label col-md-2" />
                         <div class="col-md-6 col-sm-12">
-                            <h:selectManyListbox id="tipocompetencia" converter="tipoCompetenciaConverter" value="#{competenciaBean.competencia.tipocompetencia}" styleClass="form-control" pt:autofocus="" >
-                                <f:selectItems value="#{competenciaBean.lstipocompetencia}" var="tipe" itemLabel="#{tipe.tcp_descricao}"/>
-                            </h:selectManyListbox>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <h:outputLabel value="Status: " for="status" styleClass="control-label col-sm-1" />
-                        <div class="col-md-6 col-sm-12">
-                            <h:selectOneMenu id="status" value="#{competenciaBean.competencia.cmp_status}" styleClass="form-control" pt:autofocus="" >
-                                <f:selectItems value="1" itemLabel="Ativo"/>
-                                <f:selectItems value="0" itemLabel="Inativo"/>
-                            </h:selectOneMenu>
+                            <h:inputText id="status" value="#{competenciaBean.competencia.cmp_status}" title="Status" styleClass="form-control" pt:autofocus="" />
                         </div>
                     </div>
                     <div class="form-group">
