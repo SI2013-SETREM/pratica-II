@@ -59,6 +59,7 @@ public class FormulaBean {
     }
 
     public DataModel getFormulas() {
+        this.formulas = new ListDataModel(dao.findAll());
         return formulas;
     }
 
