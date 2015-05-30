@@ -1,10 +1,13 @@
 package td.model;
 
+import cfg.model.Empresa;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -20,6 +23,10 @@ public class Local implements Serializable{
     @GeneratedValue(strategy=GenerationType.AUTO, generator="trd_local_pk_sequence")
     private int loc_codigo;
     private String loc_descricao;
+    private String loc_infraestrutura;
+    @ManyToOne
+    @JoinColumn(name = "emp_codigo")
+    private Empresa empresa;
 
     public int getLoc_codigo() {
         return loc_codigo;
@@ -37,4 +44,19 @@ public class Local implements Serializable{
         this.loc_descricao = loc_descricao;
     }
     
+    public String getLoc_infraestrutura() {
+        return loc_infraestrutura;
+    }
+
+    public void setLoc_infraestrutura(String loc_infraestrutura) {
+        this.loc_infraestrutura = loc_infraestrutura;
+    }
+
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
 }

@@ -63,14 +63,14 @@ public class CursosPessoaBean {
         return "cursospessoalst";
     }
     
-    public String salvar() {
-        if (cursos_pessoa.getEmpresa().getEmp_codigo()> 0)
+  /*  public String salvar() {
+        if (cursos_pessoa.getCurso().getCur_codigo() > 0)
             dao.update(cursos_pessoa);
         else 
             dao.insert(cursos_pessoa);
         
         return "idiomalst";
-    }
+    }*/
 
     public String listar() {
         return "cursospessoalst";

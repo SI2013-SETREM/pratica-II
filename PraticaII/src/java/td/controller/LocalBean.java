@@ -65,11 +65,11 @@ public class LocalBean {
     }
     
     public String salvar() {
-        if (true) {
+         if (local.getLoc_codigo()> 0)
             dao.update(local);
-        } else {
+        else 
             dao.insert(local);
-        }
+        
         return "locallst";
     }
 
