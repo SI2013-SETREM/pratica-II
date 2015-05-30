@@ -1,4 +1,5 @@
 package ad.controller;
+//////172.20.143.90 --- ip interno da Setrem pra servidor, Blz
 
 import ad.dao.AvaliacaoDAO;
 import ad.dao.AvaliacaoPessoaCargoDAO;
@@ -80,6 +81,26 @@ public class AvaliacaoBean {
 
     public String edit(Avaliacao i) {
         avaliacao = (Avaliacao) avaliacoes.getRowData();
+        lsAvaliacaoPessoaCargo = avaliacaoPessoaCargoDAO.getListAvaliacaoPessoaCargo(avaliacao.getAva_codigo(), 0, 0);
+
+        for (int j = 0; j < lsAvaliacaoPessoaCargo.size(); j++) {
+            AvaliacaoPessoaCargo VPC = new AvaliacaoPessoaCargo();
+            VPC = lsAvaliacaoPessoaCargo.get(j);
+            if (VPC.getApc_status() == 2) {// verifica se é AVALIADOR
+                if (VPC.getCargo() != null && VPC.getCargo().getCar_codigo() != 0) {
+                    lsCargoAvaliador.add(VPC.getCargo());
+                } else {
+                    lsPessoaAvaliador.add(VPC.getPessoa());
+                }
+            } else {///Se não, ele é COLABORADOR AVALIADO
+                if (VPC.getCargo() != null && VPC.getCargo().getCar_codigo() != 0) {
+                    lsCargoColaborador.add(VPC.getCargo());
+                } else {
+                    lsPessoaColaborador.add(VPC.getPessoa());
+                }
+            }
+        }
+
         return "avaliacaofrm";
     }
 
@@ -97,8 +118,7 @@ public class AvaliacaoBean {
         if (avaliacao.getAva_codigo() > 0) {
             dao.update(avaliacao);
         } else {
-            dao.insert(avaliacao);
-            for (int i = 0; i < lsCargoAvaliador.size(); i++) { ///realiza for para "pegar" todas as pessoas dos cargos relacionados
+                    for (int i = 0; i < lsCargoAvaliador.size(); i++) { ///realiza for para "pegar" todas as pessoas dos cargos relacionados
                 AvaliacaoPessoaCargo VPC = new AvaliacaoPessoaCargo();/// Objeto AvaliacaoPessoaCargo, utilizado para verificar quais são os avaliados e avaliadores da Avaliação
                 List<CargosPessoa> lscargosPessoa = cargosPessoaDAO.GetListCargoPessoa(0, lsCargoAvaliador.get(i).getCar_codigo());///Pega as pessoas daquele cargo
                 for (int x = 0; x < lscargosPessoa.size(); x++) {
