@@ -11,14 +11,16 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-/**
- *
- * @author Kelvin
- */
+
 @Entity
 @Table(name = "ffp_tab_inss")
 public class TabINSS implements Serializable{
      
+    private static final String sTitle = "Tabela INSS";
+    private static final String pTitle = "Tabelas INSS";
+
+  
+    
     @Id
     @SequenceGenerator (name= "genTabINSS", sequenceName= "segTabINSS", allocationSize = 1)
     @GeneratedValue (strategy = GenerationType.SEQUENCE, generator = "genTabINSS")
@@ -33,11 +35,19 @@ public class TabINSS implements Serializable{
     private double tbs_ali_normal;
     private String tbs_ali_lei1;
     private String tbs_ali_lei2;
-
+    
     public int getTbs_codigo() {
         return tbs_codigo;
     }
 
+      public static String getsTitle() {
+        return sTitle;
+    }
+
+    public static String getpTitle() {
+        return pTitle;
+    }
+    
     public void setTbs_codigo(int tbs_codigo) {
         this.tbs_codigo = tbs_codigo;
     }

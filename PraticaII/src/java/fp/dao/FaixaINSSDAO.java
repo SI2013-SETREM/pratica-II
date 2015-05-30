@@ -56,7 +56,7 @@ public class FaixaINSSDAO {
         return (FaixaINSS) session.load(FaixaINSSDAO.class, id);
     }
 
-    public List<FaixaINSS> finAll() {
+    public List<FaixaINSS> findAll() {
 
         Query query = session.createQuery("from FaixaINSS");
         return query.list();
