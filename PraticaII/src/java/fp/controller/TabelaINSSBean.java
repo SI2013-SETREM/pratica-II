@@ -61,22 +61,22 @@ public class TabelaINSSBean {
     
     public String insert() {
         dao.insert(tabelainss);
-        return "tabelairrfslst";
+        return "tabelainsslst";
     }
     
     public String edit(TabINSS i) {
         tabelainss = (TabINSS) tabelasinss.getRowData();
-        return "tabelairrfsfrm";
+        return "tabelainssfrm";
     }
     
     public String update() {
         dao.update(tabelainss);
-        return "tabelairrflst";
+        return "tabelainsslst";
     }
     
     public String delete(TabINSS i) {
         dao.delete(i);
-        return "tabelairrflst";
+        return "tabelainsslst";
     }
     
     public String salvar() {
@@ -85,11 +85,11 @@ public class TabelaINSSBean {
         else 
             dao.insert(tabelainss);
         
-        return "tabelairrflst";
+        return "tabelainsslst";
     }
     
     public String listar() {
-        return "tabelairrflst";
+        return "tabelainsslst";
     }
     
     public List<FaixaINSS> getLstFaixaINSS() {
