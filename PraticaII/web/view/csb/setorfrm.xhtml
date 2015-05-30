@@ -11,7 +11,7 @@
 
     <ui:define name="breadcrumb">
         <li>Cargos, salários, benefícios</li>
-        <li><h:link value="${setorBean.pTitle}" outcome="/faces/view/cfg/setorlst" /></li>
+        <li><h:link value="${setorBean.pTitle}" outcome="/faces/view/csb/setorlst" /></li>
     </ui:define>
 
     <ui:define name="main-content">
@@ -23,13 +23,13 @@
                     <div class="form-group">
                         <h:outputLabel value="Descrição:" for="setDescricao" styleClass="control-label col-sm-1" />
                         <div class="col-md-6 col-sm-12">
-                            <h:inputText id="idiDescricao" value="#{setorBean.setor.set_descricao}" title="setDescricao" styleClass="form-control" pt:autofocus="" />
+                            <h:inputText pt:required="required" id="idiDescricao" value="#{setorBean.setor.set_descricao}" title="Descrição" styleClass="form-control" pt:autofocus="" />
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-md-offset-1 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
                             <h:link styleClass="btn btn-default" value="Cancelar" outcome="#{setorBean.listar()}" />
-                            <h:commandButton styleClass="btns btn-primary" value="Salvar" action="#{setorBean.salvar()}"></h:commandButton>
+                            <h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{setorBean.salvar()}"></h:commandButton>
                         </div>
                     </div>
                 </h:form>

@@ -38,7 +38,7 @@ public class TipoExameDAO {
     }
 
     public List<TipoExame> findAll() {
-        Query q = session.createQuery("from CbsTipoExame");
+        Query q = session.createQuery("from TipoExame");
         return q.list();
     }
 }

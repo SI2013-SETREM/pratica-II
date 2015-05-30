@@ -1,35 +1,30 @@
 package csb.model;
 
-
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
 
 @Entity
-@Table(name="csb_tipoexame")
+@Table(name = "csb_tipoexame")
 public class TipoExame implements Serializable {
-    
+
     public static final String sTitle = "Tipo de Exame";
     public static final String pTitle = "Tipos de Exames";
-    
+
     @Id
-    @SequenceGenerator(name="cbs_tipoexame_pk_sequence", sequenceName="cbs_tipoexame_eme_codigo_seq")
-    @GeneratedValue(strategy=GenerationType.AUTO, generator="cbs_tipoexame_pk_sequence")
+    @SequenceGenerator(name = "cbs_tipoexame_pk_sequence", sequenceName = "cbs_tipoexame_eme_codigo_seq")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "cbs_tipoexame_pk_sequence")
     private int eme_codigo;
     private String eme_descricao;
     private char eme_tipo;
     private boolean eme_periodico;
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date eme_validade;
+    private int eme_validade;
     private boolean eme_obrigatorio;
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date eme_intervalorepeticao;
+    private int eme_intervalorepeticao;
 
     public TipoExame() {
     }
@@ -66,11 +61,11 @@ public class TipoExame implements Serializable {
         this.eme_periodico = eme_periodico;
     }
 
-    public Date getEme_validade() {
+    public int getEme_validade() {
         return eme_validade;
     }
 
-    public void setEme_validade(Date eme_validade) {
+    public void setEme_validade(int eme_validade) {
         this.eme_validade = eme_validade;
     }
 
@@ -82,11 +77,11 @@ public class TipoExame implements Serializable {
         this.eme_obrigatorio = eme_obrigatorio;
     }
 
-    public Date getEme_intervalorepeticao() {
+    public int getEme_intervalorepeticao() {
         return eme_intervalorepeticao;
     }
 
-    public void setEme_intervalorepeticao(Date eme_intervalorepeticao) {
+    public void setEme_intervalorepeticao(int eme_intervalorepeticao) {
         this.eme_intervalorepeticao = eme_intervalorepeticao;
     }
 }

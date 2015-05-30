@@ -1,0 +1,95 @@
+<ui:composition template="./../modelos/default.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+    <ui:define name="header">
+        <script type="text/javascript">
+            $(function () {
+                $(".emePeriodico").click(function () {
+                    debugger;
+                    if ($(".emePeriodico").is(':checked')) {
+                        $("#emeIntervalorepeticaoDiv").fadeIn();
+                        $(".emeIntervalorepeticao").attr("required", "required");
+                    }else{
+                        $("#emeIntervalorepeticaoDiv").fadeOut();
+                        $(".emeIntervalorepeticao").removeAttr("required");
+                    }
+                });
+            });
+        </script>
+    </ui:define>
+
+    <ui:define name="title">
+        ${tipoExameBean.pTitle}
+    </ui:define>
+
+    <ui:define name="breadcrumb">
+        <li>Cargos, salários, benefícios</li>
+        <li><h:link value="${tipoExameBean.pTitle}" outcome="/faces/view/csb/tipoexamelst" /></li>
+    </ui:define>
+
+    <ui:define name="main-content">
+        <div class="panel panel-body">
+            <h3><h:outputText value="Dados do ${tipoExameBean.sTitle}"/></h3>
+            <f:view>
+                <h:form styleClass="form-horizontal">
+                    <h:inputHidden id="emeCodigo" value="#{tipoExameBean.tipoexame.eme_codigo}" />
+                    <div class="form-group">
+                        <h:outputLabel value="Descrição" for="emeDescricao" styleClass="control-label col-sm-1" />
+                        <div class="col-md-6 col-sm-12">
+                            <h:inputText pt:required="required" id="masDescricao" value="#{tipoExameBean.tipoexame.eme_descricao}" title="Descrição" styleClass="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Tipo" for="emeTipo" styleClass="control-label col-sm-1" />
+                        <div class="col-md-6 col-sm-12">
+                            <h:selectOneMenu id="emeTipo" styleClass="form-control" value="#{tipoExameBean.tipoexame.eme_tipo}">
+                                <f:selectItem itemValue="A" itemLabel="Exame Admissional" />
+                                <f:selectItem itemValue="D" itemLabel="Exame Demissional" />	   							
+                                <f:selectItem itemValue="M" itemLabel="Exame de Mudança de Cargo/Função" />	   							
+                                <f:selectItem itemValue="P" itemLabel="Exame Periódico" />	   							
+                                <f:selectItem itemValue="R" itemLabel="Exame de Retorno ao Trabalho" />	   							
+                            </h:selectOneMenu>	
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Validade" for="emeValidade" styleClass="control-label col-sm-1" />
+                        <div class="col-md-6 col-sm-12">
+                            <h:inputText pt:type="number" pt:required="required" id="emeValidade" value="#{tipoExameBean.tipoexame.eme_validade}" title="Validade do Exame (em dias)" styleClass="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Obrigatório" for="emeObrigatorio" styleClass="control-label col-sm-1" />
+                        <div style="padding-top: 5px" class="col-md-6 col-sm-12">
+                            <h:selectBooleanCheckbox value="#{tipoExameBean.tipoexame.eme_obrigatorio}" id="emeObrigatorio" title="emeObrigatorio" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Periódico" for="emePeriodico" styleClass="control-label col-sm-1" />
+                        <div style="padding-top: 5px" class="col-md-6 col-sm-12">
+                            <h:selectBooleanCheckbox value="#{tipoExameBean.tipoexame.eme_periodico}" id="emePeriodico" class="emePeriodico" title="emePeriodico" />
+                        </div>
+                    </div>
+                    <div id="emeIntervalorepeticaoDiv" style="display: none;" class="form-group">
+                        <h:outputLabel value="Intervalo" for="emeIntervalorepeticao" styleClass="control-label col-sm-1" />
+                        <div class="col-md-4 col-sm-11">
+                            <h:inputText pt:type="number" id="emeIntervalorepeticao" value="#{tipoExameBean.tipoexame.eme_intervalorepeticao}" title="Intervalo de Repetição (em dias)" styleClass="form-control emeIntervalorepeticao" />
+                        </div>
+                        <div class="col-md-2 col-sm-1">
+                            <span class="form-control-static"> dias</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-1 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
+                            <h:link styleClass="btn btn-default" value="Cancelar" outcome="#{tipoExameBean.listar()}" />
+                            <h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{tipoExameBean.salvar()}"></h:commandButton>
+                        </div>
+                    </div>
+                </h:form>
+            </f:view>
+        </div>
+    </ui:define>
+</ui:composition>

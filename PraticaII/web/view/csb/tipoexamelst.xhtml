@@ -1,0 +1,82 @@
+<ui:composition template="../modelos/default.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="title">
+        ${tipoExameBean.pTitle}
+    </ui:define>
+
+    <ui:define name="breadcrumb">
+        <li>Cargos, salários, benefícios</li>
+        <li>${tipoExameBean.pTitle}</li>
+    </ui:define>
+
+    <ui:define name="main-content">
+        <div class="panel panel-body">
+            <h3><h:outputText value="Lista de ${tipoExameBean.pTitle}"/></h3>
+            <div class="btns-top-table">
+                <h:link outcome="tipoexamefrm" styleClass="btn btn-success">
+                    <i class="fa fa-plus"></i> Inserir ${tipoExameBean.sTitle}
+                </h:link>
+            </div>
+            <h:form>
+                <h:dataTable value="${tipoExameBean.tipoexames}" var="item" rendered="${tipoExameBean.tipoexames.rowAvailable}" styleClass="dataTable table table-bordered table-striped">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Descrição"/>
+                        </f:facet>
+                        <h:outputText value="${item.getEme_descricao()}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Tipo"/>
+                        </f:facet>
+                        <h:outputText value="${item.getEme_tipo() == 'A' ? 'ADMISSIONAL' : $item.getEme_tipo() == 'D' ? 'DEMISSIONAL' : $item.getEme_tipo() == 'P' ? 'PERIODICO' : $item.getEme_tipo() == 'R' ? 'RETORNO AO TRABALHO' : $item.getEme_tipo() == 'M' ? 'MUDANÇA DE CARGO' : 'DESCONHECIDO'}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Validade"/>
+                        </f:facet>
+                        <h:outputText value="${item.getEme_validade()} dias"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Obrigatório?"/>
+                        </f:facet>
+                        <h:outputText value="${item.isEme_obrigatorio() == true ? 'SIM' : 'NÃO' }"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Períodico?"/>
+                        </f:facet>
+                        <h:outputText value="${item.isEme_periodico() == true ? 'SIM' : 'NÃO' }"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Repetição"/>
+                        </f:facet>
+                        <h:outputText value="${item.getEme_intervalorepeticao()} dias"/>
+                    </h:column>
+                    <h:column headerClass="col-editar-header">
+                        <f:facet name="header">
+                            <h:outputText value="Editar"/>
+                        </f:facet>
+                        <h:commandLink action="${tipoExameBean.edit(item)}">
+                            <i class="fa fa-pencil"></i> Editar
+                        </h:commandLink>
+                    </h:column>
+                    <h:column headerClass="col-excluir-header">
+                        <f:facet name="header">
+                            <h:outputText value="Excluir"/>
+                        </f:facet>
+                        <h:commandLink onclick="return confirm('Deseja realmente excluir o ${tipoExameBean.sTitle}?');" action="${tipoExameBean.delete(item)}">
+                            <i class="fa fa-trash"></i> Excluir
+                        </h:commandLink>
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>

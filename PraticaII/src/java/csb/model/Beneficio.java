@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
 
 @Entity
 @Table(name = "csb_beneficio")
@@ -29,9 +30,10 @@ public class Beneficio implements Serializable {
     private int ben_codigo;
     private String ben_descricao;
     private Double ben_valor;
-    private Double ben_valorpago;
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date ben_datainicio;
     private Boolean ben_situacao;
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date ben_datafim;
 
     public Beneficio() {
@@ -63,14 +65,6 @@ public class Beneficio implements Serializable {
 
     public void setBen_valor(Double ben_valor) {
         this.ben_valor = ben_valor;
-    }
-
-    public Double getBen_valorpago() {
-        return ben_valorpago;
-    }
-
-    public void setBen_valorpago(Double ben_valorpago) {
-        this.ben_valorpago = ben_valorpago;
     }
 
     public Date getBen_datainicio() {

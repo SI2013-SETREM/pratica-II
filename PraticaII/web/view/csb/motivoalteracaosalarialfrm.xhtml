@@ -23,19 +23,19 @@
                     <div class="form-group">
                         <h:outputLabel value="Descrição:" for="masDescricao" styleClass="control-label col-sm-1" />
                         <div class="col-md-6 col-sm-12">
-                            <h:inputText id="masDescricao" value="#{motivoAlteracaoSalarialBean.motivo.mas_descricao}" title="masDescricao" styleClass="form-control" pt:autofocus="" />
+                            <h:inputText pt:required="required" id="masDescricao" value="#{motivoAlteracaoSalarialBean.motivo.mas_descricao}" title="Descrição" styleClass="form-control" pt:autofocus="" />
                         </div>
                     </div>
                     <div class="form-group">
                         <h:outputLabel value="Situação" for="masSituacao" styleClass="control-label col-sm-1" />
                         <div style="padding-top: 5px" class="col-md-6 col-sm-12">
-                            <h:selectBooleanCheckbox value="#{motivoAlteracaoSalarialBean.motivo.mas_situacao}" id="masSituacao" title="masSituacao" pt:autofocus="" />
+                            <h:selectBooleanCheckbox value="#{motivoAlteracaoSalarialBean.motivo.mas_situacao}" id="masSituacao" title="Situação" pt:autofocus="" />
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-md-offset-1 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
                             <h:link styleClass="btn btn-default" value="Cancelar" outcome="#{motivoAlteracaoSalarialBean.listar()}" />
-                            <h:commandButton styleClass="btns btn-primary" value="Salvar" action="#{motivoAlteracaoSalarialBean.salvar()}"></h:commandButton>
+                            <h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{motivoAlteracaoSalarialBean.salvar()}"></h:commandButton>
                         </div>
                     </div>
                 </h:form>
