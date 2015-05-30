@@ -34,19 +34,19 @@
                     <h:inputHidden id="idiCodigo" value="#{eventoBean.evento.eve_codigo}" />
 
                     <div class="form-group">
-                        <h:outputLabel value="Descrição" for="eveNome" styleClass="control-label col-sm-1" />
+                        <h:outputLabel value="Descrição" for="eveNome" styleClass="control-label col-sm-2" />
                         <div class="col-md-6 col-sm-12">
                             <h:inputText id="eveDescricao" value="#{eventoBean.evento.eve_descricao}" title="SevNome" styleClass="form-control" pt:autofocus="" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <h:outputLabel value="Índice" for="eveIndice" styleClass="control-label col-sm-1" />
+                        <h:outputLabel value="Índice" for="eveIndice" styleClass="control-label col-sm-2" />
                         <div class="col-md-6 col-sm-12">
                             <h:inputText id="eveIndice" value="#{eventoBean.evento.eve_indice}" title="EveIndice" styleClass="form-control" pt:autofocus="" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <h:outputLabel value="Série: " for="serieevento" styleClass="control-label col-sm-1" />
+                        <h:outputLabel value="Série: " for="serieevento" styleClass="control-label col-sm-2" />
                         <div class="col-md-6 col-sm-12">
                             <h:selectOneMenu id="serieevento" converter="serieEventoConverter" value="#{eventoBean.evento.serieevento}" styleClass="form-control" pt:autofocus="" >
                                 <f:selectItems value="#{eventoBean.lstSerieEvento}" var="tipe" itemLabel="#{tipe.sev_nome}"/>
@@ -54,7 +54,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <h:outputLabel value="Tipo: " for="tipoevento" styleClass="control-label col-sm-1" />
+                        <h:outputLabel value="Tipo: " for="tipoevento" styleClass="control-label col-sm-2" />
                         <div class="col-md-6 col-sm-12">
                             <h:selectOneMenu id="tipoevento" converter="tipoEventoConverter" value="#{eventoBean.evento.tipoevento}" styleClass="form-control" pt:autofocus="" >
                                 <f:selectItems value="#{eventoBean.lstTipoEvento}" var="tipe" itemLabel="#{tipe.tpe_nome}"/>
