@@ -2,12 +2,13 @@ package ad.controller;
 
 import ad.dao.AvaliacaoDAO;
 import ad.dao.AvaliacaoPessoaCargoDAO;
-import ad.dao.CargoDAO;
 import ad.dao.PessoasAvaliacaoDAO;
 import ad.model.Avaliacao;
+import cfg.dao.PessoaDAO;
 import ad.model.AvaliacaoPessoaCargo;
 import ad.model.PessoasAvaliacao;
 import cfg.model.Pessoa;
+import csb.dao.CargoDAO;
 import csb.dao.CargosPessoaDAO;
 import csb.model.Cargo;
 import csb.model.CargosPessoa;
@@ -22,10 +23,15 @@ public class AvaliacaoBean {
 
     private final String sTitle = Avaliacao.sTitle;
     private final String pTitle = Avaliacao.pTitle;
+    private List<Cargo> lsCargo1;
+    private List<Cargo> lsCargo2;
+    private List<Pessoa> lsPessoa1;
+    private List<Pessoa> lsPessoa2;
     private List<Cargo> lsavaliadoresCargo;
     private CargoDAO cargodao = new CargoDAO();
-    private List<Cargo> lsavaliados;
-    private Avaliacao avaliacao = new Avaliacao();
+    private PessoaDAO pessoadao = new PessoaDAO();
+
+    private Avaliacao avaliacao;
     private AvaliacaoDAO dao = new AvaliacaoDAO();
     private AvaliacaoPessoaCargoDAO avaliacaoPessoaCargoDAO = new AvaliacaoPessoaCargoDAO();
     private PessoasAvaliacaoDAO pessoaAvaliacaoDAO = new PessoasAvaliacaoDAO();
@@ -39,12 +45,19 @@ public class AvaliacaoBean {
     }
 
     public List<Cargo> completeCargo(String query) {
-        return cargodao.searchCargos(query);
+        return cargodao.searchCargo(query);
+    }
+
+    public List<Pessoa> completePessoa(String query) {
+        return pessoadao.searchPessoa(query);
     }
 
     public Avaliacao getAvaliacao() {
-        avaliacao.setAva_dataInicial(new Date());
-        avaliacao.setAva_dataFinal(new Date());
+        if (avaliacao == null) {
+            avaliacao = new Avaliacao();
+            avaliacao.setAva_dataInicial(new Date());
+            avaliacao.setAva_dataFinal(new Date());
+        }
         return avaliacao;
     }
 
@@ -85,7 +98,7 @@ public class AvaliacaoBean {
         if (avaliacao.getAva_codigo() > 0) {
             dao.update(avaliacao);
         } else {
-
+            dao.insert(avaliacao);
             for (int i = 0; i < lsavaliadoresCargo.size(); i++) { ///realiza for para "pegar" todas as pessoas dos cargos relacionados
                 AvaliacaoPessoaCargo VPC = new AvaliacaoPessoaCargo();
                 List<CargosPessoa> lscargosPessoa = cargosPessoaDAO.GetListCargoPessoa(0, lsavaliadoresCargo.get(i).getCar_codigo());///Pega as pessoas daquele cargo
@@ -97,7 +110,7 @@ public class AvaliacaoBean {
                 VPC.setApc_status(2);//2 = status do Avaliadores
                 lsAvaliacaoPessoaCargo.add(VPC);
             }
-            for (int j = 0; j < lsavaliados.size(); j++) {
+            for (int j = 0; j < lsCargo2.size(); j++) {
 
                 AvaliacaoPessoaCargo VPCAavaliados = new AvaliacaoPessoaCargo();
                 List<CargosPessoa> lscargosPessoa = cargosPessoaDAO.GetListCargoPessoa(0, lsavaliadoresCargo.get(j).getCar_codigo());///Pega as pessoas daquele cargo
@@ -139,8 +152,9 @@ public class AvaliacaoBean {
 
                 dao.insert(avaliacao);
             }
-            return "avaliacaolst";
+
         }
+        return "avaliacaolst";
     }
 
     public String listar() {
@@ -155,20 +169,41 @@ public class AvaliacaoBean {
         return pTitle;
     }
 
-    public List<Cargo> getLsavaliadores() {
-        return lsavaliadoresCargo;
+    public List<Pessoa> getLsPessoa1() {
+        return lsPessoa1;
+    }
+//    public List<Cargo> getLsavaliadores() {
+//        return lsavaliadoresCargo;
+//    }
+//
+
+    public void setLsPessoa1(List<Pessoa> lsPessoa1) {
+        this.lsPessoa1 = lsPessoa1;
+
     }
 
-    public void setLsavaliadores(List<Cargo> lsavaliadoresCargo) {
-        this.lsavaliadoresCargo = lsavaliadoresCargo;
+    public List<Pessoa> getLsPessoa2() {
+        return lsPessoa2;
     }
 
-    public List<Cargo> getLsavaliados() {
-        return lsavaliados;
+    public void setLsPessoa2(List<Pessoa> lsPessoa2) {
+        this.lsPessoa2 = lsPessoa2;
     }
 
-    public void setLsavaliados(List<Cargo> lsavaliados) {
-        this.lsavaliados = lsavaliados;
+    public List<Cargo> getLsCargo1() {
+        return lsCargo1;
+    }
+
+    public void setLsCargo1(List<Cargo> lsCargo1) {
+        this.lsCargo1 = lsCargo1;
+    }
+
+    public List<Cargo> getLsCargo2() {
+        return lsCargo2;
+    }
+
+    public void setLsCargo2(List<Cargo> lsCargo2) {
+        this.lsCargo2 = lsCargo2;
     }
 
 }

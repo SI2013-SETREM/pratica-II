@@ -23,7 +23,6 @@ public class AvaliacaoPessoaCargo implements Serializable {
     @ManyToOne
     @JoinColumn(name = "ava_codigo", referencedColumnName = "ava_codigo")
     private Avaliacao avaliacao;
-
     @ManyToOne
     @JoinColumn(name = "car_codigo", referencedColumnName = "car_codigo")
     private Cargo cargo;

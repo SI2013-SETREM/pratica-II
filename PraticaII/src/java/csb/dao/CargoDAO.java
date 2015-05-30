@@ -1,5 +1,6 @@
 package csb.dao;
 
+import cfg.model.Pessoa;
 import csb.model.Cargo;
 import csb.model.Setor;
 import java.util.List;
@@ -66,12 +67,14 @@ public class CargoDAO {
         return raiz;
     }
 
-    public List<Cargo> searchCargos(String name) {
-        String sql = "";
-        if (name != "") {
-            sql = " and upper (translate(car_descricao, 'ÁÇÉÍÓÚÀÈÌÒÙÂÊÎÔÛÃÕËÜáçéíóúàèìòùâêîôûãõëü', 'ACEIOUAEIOUAEIOUAOEUaceiouaeiouaeiouaoeu'))"
+    public List<Cargo> searchCargo(String name) {
+        String sqlCargo = "";
+        if (name != null && name != "") {
+            sqlCargo = " and upper (translate(car_descricao, 'ÁÇÉÍÓÚÀÈÌÒÙÂÊÎÔÛÃÕËÜáçéíóúàèìòùâêîôûãõëü', 'ACEIOUAEIOUAEIOUAOEUaceiouaeiouaeiouaoeu'))"
                     + " LIKE upper(translate('%" + name + "%', 'ÁÇÉÍÓÚÀÈÌÒÙÂÊÎÔÛÃÕËÜáçéíóúàèìòùâêîôûãõëü', 'ACEIOUAEIOUAEIOUAOEUaceiouaeiouaeiouaoeu'))";
         }
-        return session.createQuery("from Cargo where 1 = 1 " + sql).list();
+        return session.createQuery("from Cargo where 1 = 1 " + sqlCargo).list();
     }
+
+  
 }

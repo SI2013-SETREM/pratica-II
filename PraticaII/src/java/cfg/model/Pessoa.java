@@ -281,6 +281,27 @@ public class Pessoa implements Serializable {
     public void setPes_cur_pretensaosalarial(Double pes_cur_pretensaosalarial) {
         this.pes_cur_pretensaosalarial = pes_cur_pretensaosalarial;
     }
-    
-    
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 79 * hash + this.pes_codigo;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Pessoa other = (Pessoa) obj;
+        if (this.pes_codigo != other.pes_codigo) {
+            return false;
+        }
+        return true;
+    }
+
 }
