@@ -20,6 +20,9 @@ import javax.persistence.Table;
 @Table(name = "ffp_faixa_irrf")
 public class FaixaIRRF implements Serializable {
     
+    public static final String sTitle = "Faixa IRRF";
+    public static final String pTitle = "Faixa IRRFS";
+    
     @Id
     @SequenceGenerator (name= "genFaixaIRRF", sequenceName= "segFaixaIRRF", allocationSize = 1)
     @GeneratedValue (strategy = GenerationType.SEQUENCE, generator = "genFaixaIRRF")
