@@ -23,11 +23,10 @@ public class AvaliacaoBean {
 
     private final String sTitle = Avaliacao.sTitle;
     private final String pTitle = Avaliacao.pTitle;
-    private List<Cargo> lsCargo1;
-    private List<Cargo> lsCargo2;
-    private List<Pessoa> lsPessoa1;
-    private List<Pessoa> lsPessoa2;
-    private List<Cargo> lsavaliadoresCargo;
+    private List<Cargo> lsCargoAvaliador;
+    private List<Cargo> lsCargoColaborador;
+    private List<Pessoa> lsPessoaAvaliador;
+    private List<Pessoa> lsPessoaColaborador;
     private CargoDAO cargodao = new CargoDAO();
     private PessoaDAO pessoadao = new PessoaDAO();
 
@@ -99,9 +98,9 @@ public class AvaliacaoBean {
             dao.update(avaliacao);
         } else {
             dao.insert(avaliacao);
-            for (int i = 0; i < lsavaliadoresCargo.size(); i++) { ///realiza for para "pegar" todas as pessoas dos cargos relacionados
+            for (int i = 0; i < lsCargoAvaliador.size(); i++) { ///realiza for para "pegar" todas as pessoas dos cargos relacionados
                 AvaliacaoPessoaCargo VPC = new AvaliacaoPessoaCargo();
-                List<CargosPessoa> lscargosPessoa = cargosPessoaDAO.GetListCargoPessoa(0, lsavaliadoresCargo.get(i).getCar_codigo());///Pega as pessoas daquele cargo
+                List<CargosPessoa> lscargosPessoa = cargosPessoaDAO.GetListCargoPessoa(0, lsCargoAvaliador.get(i).getCar_codigo());///Pega as pessoas daquele cargo
                 for (int x = 0; x < lscargosPessoa.size(); x++) {
                     VPC.setPessoa(lscargosPessoa.get(x).getPessoa());
                     VPC.setCargo(lscargosPessoa.get(x).getCargo());
@@ -110,10 +109,10 @@ public class AvaliacaoBean {
                 VPC.setApc_status(2);//2 = status do Avaliadores
                 lsAvaliacaoPessoaCargo.add(VPC);
             }
-            for (int j = 0; j < lsCargo2.size(); j++) {
+            for (int j = 0; j < lsCargoColaborador.size(); j++) {
 
                 AvaliacaoPessoaCargo VPCAavaliados = new AvaliacaoPessoaCargo();
-                List<CargosPessoa> lscargosPessoa = cargosPessoaDAO.GetListCargoPessoa(0, lsavaliadoresCargo.get(j).getCar_codigo());///Pega as pessoas daquele cargo
+                List<CargosPessoa> lscargosPessoa = cargosPessoaDAO.GetListCargoPessoa(0, lsCargoColaborador.get(j).getCar_codigo());///Pega as pessoas daquele cargo
                 for (int z = 0; z < lscargosPessoa.size(); z++) {
                     VPCAavaliados.setPessoa(lscargosPessoa.get(z).getPessoa());
                     VPCAavaliados.setCargo(lscargosPessoa.get(z).getCargo());
@@ -125,12 +124,11 @@ public class AvaliacaoBean {
             //Até aki esta criado todas as AvaliaçõesPessoaCargo, e Agora deve-se cadastrar as PessoasAvaliações, Blz
 
             for (int y = 0; y < 10; y++) {
-                if (lsAvaliacaoPessoaCargo.get(y).getApc_status() == 1) {///Verifica se é AVALIADOR
+                if (lsAvaliacaoPessoaCargo.get(y).getApc_status() == 2) {///Verifica se é AVALIADOR
                     Pessoa Avaliador = lsAvaliacaoPessoaCargo.get(y).getPessoa();
                     for (int b = 0; b < 10; b++) {
-                        if (lsAvaliacaoPessoaCargo.get(b).getApc_status() == 2) {//Verifica se é COLABORADOR
+                        if (lsAvaliacaoPessoaCargo.get(b).getApc_status() == 1) {//Verifica se é COLABORADOR
                             Pessoa Colaborador = lsAvaliacaoPessoaCargo.get(b).getPessoa();
-
                             //crio as PessoasAvaliacao
                             PessoasAvaliacao pessoaAvaliacao = new PessoasAvaliacao();
                             pessoaAvaliacao.setAvaliacao(avaliacao);
@@ -149,8 +147,6 @@ public class AvaliacaoBean {
             }
             for (int c = 0; c < lsPessoasAvaliacao.size(); c++) {
                 pessoaAvaliacaoDAO.insert(lsPessoasAvaliacao.get(c));
-
-                dao.insert(avaliacao);
             }
 
         }
@@ -169,41 +165,36 @@ public class AvaliacaoBean {
         return pTitle;
     }
 
-    public List<Pessoa> getLsPessoa1() {
-        return lsPessoa1;
-    }
-//    public List<Cargo> getLsavaliadores() {
-//        return lsavaliadoresCargo;
-//    }
-//
-
-    public void setLsPessoa1(List<Pessoa> lsPessoa1) {
-        this.lsPessoa1 = lsPessoa1;
-
+    public List<Cargo> getLsCargoAvaliador() {
+        return lsCargoAvaliador;
     }
 
-    public List<Pessoa> getLsPessoa2() {
-        return lsPessoa2;
+    public void setLsCargoAvaliador(List<Cargo> lsCargoAvaliador) {
+        this.lsCargoAvaliador = lsCargoAvaliador;
     }
 
-    public void setLsPessoa2(List<Pessoa> lsPessoa2) {
-        this.lsPessoa2 = lsPessoa2;
+    public List<Cargo> getLsCargoColaborador() {
+        return lsCargoColaborador;
     }
 
-    public List<Cargo> getLsCargo1() {
-        return lsCargo1;
+    public void setLsCargoColaborador(List<Cargo> lsCargoColaborador) {
+        this.lsCargoColaborador = lsCargoColaborador;
     }
 
-    public void setLsCargo1(List<Cargo> lsCargo1) {
-        this.lsCargo1 = lsCargo1;
+    public List<Pessoa> getLsPessoaAvaliador() {
+        return lsPessoaAvaliador;
     }
 
-    public List<Cargo> getLsCargo2() {
-        return lsCargo2;
+    public void setLsPessoaAvaliador(List<Pessoa> lsPessoaAvaliador) {
+        this.lsPessoaAvaliador = lsPessoaAvaliador;
     }
 
-    public void setLsCargo2(List<Cargo> lsCargo2) {
-        this.lsCargo2 = lsCargo2;
+    public List<Pessoa> getLsPessoaColaborador() {
+        return lsPessoaColaborador;
+    }
+
+    public void setLsPessoaColaborador(List<Pessoa> lsPessoaColaborador) {
+        this.lsPessoaColaborador = lsPessoaColaborador;
     }
 
 }
