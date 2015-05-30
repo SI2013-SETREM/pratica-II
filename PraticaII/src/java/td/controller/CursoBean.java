@@ -64,11 +64,11 @@ public class CursoBean {
     }
     
     public String salvar() {
-        if (true) {
+        if (curso.getCur_codigo()> 0)
             dao.update(curso);
-        } else {
+        else 
             dao.insert(curso);
-        }
+        
         return "cursolst";
     }
 

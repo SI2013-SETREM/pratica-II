@@ -65,11 +65,11 @@ public class AlunosTreinamentoBean {
     }
     
     public String salvar() {
-        if (true) {
+        if (alunos_treinamento.> 0)
             dao.update(alunos_treinamento);
-        } else {
+        else 
             dao.insert(alunos_treinamento);
-        }
+        
         return "alunostreinamentolst";
     }
 

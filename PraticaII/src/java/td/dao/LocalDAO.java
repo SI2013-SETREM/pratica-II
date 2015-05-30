@@ -33,7 +33,7 @@ public class LocalDAO {
         t.commit();
     }
 
-    public Local findById(String id) {
+    public Local findById(int id) {
         return (Local) session.load(Local.class, id);
     }
 

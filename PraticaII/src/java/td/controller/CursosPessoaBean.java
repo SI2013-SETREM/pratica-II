@@ -64,12 +64,12 @@ public class CursosPessoaBean {
     }
     
     public String salvar() {
-        if (true) {
+        if (cursos_pessoa.getEmpresa().getEmp_codigo()> 0)
             dao.update(cursos_pessoa);
-        } else {
+        else 
             dao.insert(cursos_pessoa);
-        }
-        return "cursospessoalst";
+        
+        return "idiomalst";
     }
 
     public String listar() {

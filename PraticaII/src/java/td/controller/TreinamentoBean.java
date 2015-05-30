@@ -1,11 +1,14 @@
 package td.controller;
 
+import java.util.List;
 import td.dao.TreinamentoDAO;
 import td.model.Treinamento;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
+import td.dao.LocalDAO;
+import td.model.Local;
 
 @ManagedBean
 @RequestScoped
@@ -14,6 +17,10 @@ public class TreinamentoBean {
     private final String sTitle = Treinamento.sTitle;
     private final String pTitle = Treinamento.pTitle;
 
+    private List<Local> lstlocal;
+    private Local local = new Local();
+    private LocalDAO localdao = new LocalDAO();
+    
     private Treinamento treinamento = new Treinamento();
     private TreinamentoDAO dao = new TreinamentoDAO();
     private DataModel treinamentos;
@@ -64,15 +71,24 @@ public class TreinamentoBean {
     }
     
     public String salvar() {
-        if (true) {
+        if (treinamento.getTre_codigo()> 0)
             dao.update(treinamento);
-        } else {
+        else 
             dao.insert(treinamento);
-        }
+        
         return "treinamentolst";
     }
 
     public String listar() {
         return "treinamentolst";
+    }
+    
+    public List<Local> getLstlocal() {
+        lstlocal = localdao.findAll();
+        return lstlocal;
+    }
+
+    public void setLstlocal(List<Local> i) {
+        this.lstlocal = i;
     }
 }

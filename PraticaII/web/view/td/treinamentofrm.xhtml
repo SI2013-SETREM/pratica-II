@@ -27,9 +27,36 @@
                         </div>
                     </div>-->
                     <div class="form-group">
-                        <h:outputLabel value="Descrição" for="tre_descricao" styleClass="control-label col-sm-1" />
+                        <h:outputLabel value="Descrição: " for="tre_descricao" styleClass="control-label col-sm-1" />
                         <div class="col-md-6 col-sm-12">
                             <h:inputText id="treDescricao" value="#{treinamentoBean.treinamento.tre_descricao}" title="TreDescricao" styleClass="form-control" pt:autofocus="" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel value="Local: " for="local" styleClass="control-label col-sm-1" />
+                        <div class="col-md-6 col-sm-12">
+                            <h:selectOneMenu id="local" converter="localConverter" value="#{treinamentoBean.treinamento.local}" styleClass="form-control" pt:autofocus="" >
+                                <f:selectItems value="#{treinamentoBean.lstlocal}" var="tipe" itemLabel="#{tipe.loc_descricao}"/>
+                            </h:selectOneMenu>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Carga Horária: " for="tre_cargahoraria" styleClass="control-label col-sm-1" />
+                        <div class="col-md-6 col-sm-12">
+                            <h:inputText id="treCargaHoraria" value="#{treinamentoBean.treinamento.tre_cargahoraria}" title="TreCargaHoraria" styleClass="form-control" pt:autofocus="" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Custo Total: " for="tre_custotoal" styleClass="control-label col-sm-1" />
+                        <div class="col-md-6 col-sm-12">
+                            <h:inputText id="treCustoTotal" value="#{treinamentoBean.treinamento.tre_custototal}" title="TreCustoTotal" styleClass="form-control" pt:autofocus="" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Status: " for="tre_status" styleClass="control-label col-sm-1" />
+                        <div class="col-md-6 col-sm-12">
+                            <h:inputText id="treStatus" value="#{treinamentoBean.treinamento.tre_status}" title="TreStatus" styleClass="form-control" pt:autofocus="" />
                         </div>
                     </div>
                     <div class="form-group">

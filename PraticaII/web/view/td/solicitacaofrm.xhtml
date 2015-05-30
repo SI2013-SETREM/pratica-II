@@ -32,6 +32,18 @@
                             <h:inputText id="solDescricao" value="#{solicitacaoBean.solicitacao.sol_descricao}" title="SolDescricao" styleClass="form-control" pt:autofocus="" />
                         </div>
                     </div>
+                  <!--  <div class="form-group">
+                        <h:outputLabel value="Data:" for="sol_data" styleClass="control-label col-sm-1" />
+                        <div class="col-md-6 col-sm-12">
+                            <h:inputText id="solData" value="#{solicitacaoBean.solicitacao.sol_data}" title="SolData" styleClass="form-control" pt:autofocus="" />
+                        </div>
+                    </div>-->
+                    <div class="form-group">
+                        <h:outputLabel value="Prioridade:" for="sol_Prioridade" styleClass="control-label col-sm-1" />
+                        <div class="col-md-6 col-sm-12">
+                            <h:inputText id="solPrioridade" value="#{solicitacaoBean.solicitacao.sol_prioridade}" title="SolPrioridade" styleClass="form-control" pt:autofocus="" />
+                        </div>
+                    </div>
                     <div class="form-group">
                         <div class="col-md-offset-1 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
                             <h:link styleClass="btn btn-default" value="Cancelar" outcome="#{solicitacaoBean.listar()}" />

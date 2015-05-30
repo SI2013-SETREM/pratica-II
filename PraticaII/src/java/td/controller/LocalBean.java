@@ -1,5 +1,6 @@
 package td.controller;
 
+import java.util.List;
 import td.dao.LocalDAO;
 import td.model.Local;
 import javax.faces.bean.ManagedBean;
@@ -13,7 +14,7 @@ public class LocalBean {
 
     private final String sTitle = Local.sTitle;
     private final String pTitle = Local.pTitle;
-
+    
     private Local local = new Local();
     private LocalDAO dao = new LocalDAO();
     private DataModel locais;

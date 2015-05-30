@@ -64,11 +64,11 @@ public class SolicitacaoBean {
     }
     
     public String salvar() {
-        if (true) {
+        if (solicitacao.getSol_codigo()> 0)
             dao.update(solicitacao);
-        } else {
+        else 
             dao.insert(solicitacao);
-        }
+        
         return "solicitacaolst";
     }
 
