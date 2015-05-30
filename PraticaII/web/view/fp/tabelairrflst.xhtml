@@ -33,13 +33,15 @@
                         <f:facet name="header">
                             <h:outputText value="Data Inicial"/>
                         </f:facet>
-                        <h:outputText value="${item.getTif_dataincial()}"/>
+                        <h:outputText value="${item.getTif_dataincial()}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/></h:outputText>
                     </h:column>
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="Data Final"/>
                         </f:facet>
-                        <h:outputText value="${item.getTif_datafinal()}"/>
+                        <h:outputText value="${item.getTif_datafinal()}">
+                        <f:convertDateTime pattern="dd/MM/yyyy"/></h:outputText>
                     </h:column>
                     <h:column>
                         <f:facet name="header">
