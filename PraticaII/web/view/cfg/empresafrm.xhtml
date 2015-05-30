@@ -1,9 +1,9 @@
 <ui:composition template="./../modelos/default.xhtml"
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-    xmlns:h="http://xmlns.jcp.org/jsf/html"
-    xmlns:f="http://xmlns.jcp.org/jsf/core"
-    xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
     <ui:define name="title">
         ${empresaBean.pTitle}
@@ -19,25 +19,89 @@
             <h3><h:outputText value="Dados do ${empresaBean.sTitle}"/></h3>
             <f:view>
                 <h:form styleClass="form-horizontal">
-                    <h:inputHidden id="idiCodigo" value="#{empresaBean.empresa.emp_codigo}" />
-<!--                            <div class="form-group">
-                        <h:outputLabel value="Código:" for="idiCodigo" styleClass="control-label col-sm-1" />
-                        <div class="col-md-6">
-                                                <h:inputText id="idiCodigo" value="#{empresaBean.empresa.emp_codigo}" title="IdiCodigo" styleClass="form-control" />
-                        </div>
-                    </div>-->
+                    <h:inputHidden id="empCodigo" value="#{empresaBean.empresa.emp_codigo}" />
                     <div class="form-group">
-                        <h:outputLabel value="Descrição:" for="idiDescricao" styleClass="control-label col-sm-1" />
+                        <h:outputLabel value="Nome" for="empNome" styleClass="control-label col-sm-1" />
                         <div class="col-md-6 col-sm-12">
-                            <h:inputText id="idiDescricao" value="#{empresaBean.empresa.emp_nome}" title="IdiDescricao" styleClass="form-control" pt:autofocus="" />
+                            <h:inputText id="empNome" value="#{empresaBean.empresa.emp_nome}" title="empNome" styleClass="form-control" pt:autofocus="" />
                         </div>
                     </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Descrição:" for="empDescricao" styleClass="control-label col-sm-1" />
+                        <div class="col-md-6 col-sm-12">
+                            <h:inputText id="empDescricao" value="#{empresaBean.empresa.emp_descricao}" title="empDescricao" styleClass="form-control" pt:autofocus="" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Tamanho" for="empTamanho" styleClass="control-label col-sm-1" />
+                        <div style="padding-top: 5px" class="col-md-6 col-sm-12">
+                            <h:selectOneMenu value="#{empresaBean.empresa.emp_tipo}" id="empTamanho" class="form-control">
+                                <f:selectItem itemValue="1" itemLabel="Familiar"/>
+                                <f:selectItem itemValue="2" itemLabel="Pequena"/>
+                                <f:selectItem itemValue="3" itemLabel="Média"/>
+                                <f:selectItem itemValue="4" itemLabel="Grande"/>
+                                <f:selectItem itemValue="5" itemLabel="Global"/>
+                            </h:selectOneMenu>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Repositório" for="empRepositorio" styleClass="control-label col-sm-1" />
+                        <div style="padding-top: 5px" class="col-md-6 col-sm-12">
+                            <h:selectOneMenu value="#{empresaBean.empresa.repositorio}" id="empRepositorio" class="form-control">
+                                <f:selectItems value="#{repositorioBean.repositorios}" itemLabel="#{repositorio.rep_nome}" var="repositorio"/>
+                            </h:selectOneMenu>
+                        </div>
+                    </div>  
+                    <div class="form-group">
+                        <h:outputLabel value="Cidade" for="empCidade" styleClass="control-label col-sm-1" />
+                        <div style="padding-top: 5px" class="col-md-6 col-sm-12">
+                            <h:selectOneMenu value="#{empresaBean.empresa.cidade}" id="empCidade" class="form-control">
+                                <f:selectItems value="#{cidadeBean.cidades}" itemLabel="#{cidade.cid_nome}" var="cidade"/>
+                            </h:selectOneMenu>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Bairro" for="empBairro" styleClass="control-label col-sm-1" />
+                        <div style="padding-top: 5px" class="col-md-6 col-sm-12">
+                            <h:selectOneMenu value="#{empresaBean.empresa.bairro}" id="empBairro" class="form-control">
+                                <f:selectItems value="#{bairroBean.bairros}" itemLabel="#{bairro.bai_descricao}" var="bairro"/>
+                            </h:selectOneMenu>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Endereço" for="empEndereco" styleClass="control-label col-sm-1" />
+                        <div style="padding-top: 5px" class="col-md-6 col-sm-12">
+                            <h:selectOneMenu value="#{empresaBean.empresa.endereco}" id="empEndereco" class="form-control">
+                                <f:selectItems value="#{enderecoBean.enderecos}" itemLabel="#{endereco.end_descricao}" var="endereco"/>
+                            </h:selectOneMenu>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Tipo" for="empTipo" styleClass="control-label col-sm-1" />
+                        <div style="padding-top: 5px" class="col-md-6 col-sm-12">
+                            <h:selectOneMenu value="#{empresaBean.empresa.emp_tipo}" id="empTipo" class="form-control">
+                                <f:selectItem itemValue="1" itemLabel="Empresa Privada"/>
+                                <f:selectItem itemValue="2" itemLabel="Empresa Pública"/>
+                                <f:selectItem itemValue="3" itemLabel="Escola Privada"/>
+                                <f:selectItem itemValue="4" itemLabel="Escola Pública"/>
+                            </h:selectOneMenu>
+                        </div>
+                    </div> 
+                    <div class="form-group">
+                        <h:outputLabel value="Web Site:" for="empWebSite" styleClass="control-label col-sm-1" />
+                        <div class="col-md-6 col-sm-12">
+                            <h:inputText id="empWebSite" value="#{empresaBean.empresa.emp_descricao}" title="empWebSite" styleClass="form-control" pt:autofocus="" />
+                        </div>
+                    </div>
+                    
+                    
                     <div class="form-group">
                         <div class="col-md-offset-1 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
                             <h:link styleClass="btn btn-default" value="Cancelar" outcome="#{empresaBean.listar()}" />
                             <h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{empresaBean.salvar()}"></h:commandButton>
                         </div>
                     </div>
+                    
                 </h:form>
             </f:view>
         </div>
