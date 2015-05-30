@@ -10,185 +10,274 @@
         Ficha Funcional
     </ui:define>
     <link href="../../resources/css/css.css" rel="stylesheet" type="text/css"/>
-    <style>
-        .bloco {
-            margin: 5px 10px 10px;
-            padding: 10px 20px;           
-            background: #f8f8f8;
-            border: 1px solid #ddd;
-            border-radius: .25em;
-            overflow: auto;
-        }
-    </style>
 
-    <script>
-        $(function () {
-            $("#dtnasc").mask("99/99/9999");
-        });
-    </script>
+
+
     <ui:define name="breadcrumb">
         <li>Ficha Funcional</li>
 
     </ui:define>
 
     <ui:define name="main-content">
+        <style>
+            .bloco {
+                margin: 5px 10px 10px;
+                padding: 40px;           
+                background: #f8f8f8;
+                border: 1px solid #ddd;
+                border-radius: .25em;
+                overflow: auto;
+            }
+            .bloco2 {
+                margin: 5px 20px 10px;
+                padding: 20px;           
+                background: #f8f8f8;
+                border: 2px solid #ddd;
+                border-radius: .25em;
+                overflow: auto;
+            }
+        </style>
+        <script>
+            $(function () {
+                $("#dtnasc").mask("99/99/9999");
+            });
+        </script>
         <div class="panel panel-body">
             <h3><h:outputText value="Dados do Funcionário"/></h3>
             <f:view>
                 <h:form styleClass="form-horizontal">
+                    <div class="bloco">
+                        <h3>Informações Pessoais</h3>
 
-                    
-                        <div class="form-group">
-                            <div class="col-md-2 col-xs-offset-1 text-right">
-                                <label  for="nome" styleClass="control-label col-sm-1" >Nome Completo:</label>
+                        <div class="bloco2">
+
+                            <div class="form-group">
+                                <div class="col-md-3  text-right">
+                                    <label  for="nome" styleClass="control-label col-sm-1" >Nome Completo:</label>
+                                </div>
+                                <div class="col-md-2 text-right">
+                                    <input  id="nome" value="${fichaFuncionalBean.fichaFuncional.pessoa.pes_nome}"  style="border: none" title="Nome do Funcionário" styleClass="form-control col-md-3" readonly="true" />
+                                </div>
+                                <div class="col-md-3 text-right">
+                                    <label  for="dtnas" styleClass="control-label col-sm-2" >Data de Nascimento:</label>
+                                </div>
+                                <div class="col-md-2  text-right">
+                                    <input id="dtnas" value="${fichaFuncionalBean.fichaFuncional.pessoa.pes_datanasc}"  style="border: none" title="Data de Nascimeto" styleClass="form-control" readonly="true" />
+                                </div>
+
                             </div>
-                            <div class="col-md-2 text-right">
-                                <input  id="nome" value="${fichaFuncionalBean.fichaFuncional.pessoa.pes_nome}"  style="border: none" title="Nome do Funcionário" styleClass="form-control col-md-3" readonly="true" />
+                            <div class="form-group">
+                                <div class="col-md-2 col-xs-offset-1 text-right">
+                                    <label  for="cpf" styleClass="control-label col-sm-1" >CPF:</label>
+                                </div>
+                                <div class="col-md-2 text-right">
+                                    <input id="cpf" value="${fichaFuncionalBean.fichaFuncional.pessoa.pes_cpf} 029.124.630-70"  style="border: none" title="CPF" styleClass="form-control" readonly="true" />
+                                </div>
+
+                                <div class="col-md-2 col-xs-offset-1 text-right">
+                                    <label  for="tipPessoa" styleClass="control-label col-sm-2" >Tipo Pessoa:</label>
+                                </div>
+                                <div class="col-md-2 text-right">
+                                    <input id="tipPessoa" value="${fichaFuncionalBean.fichaFuncional.pessoa.pes_tipo}"  style="border: none" title="Tipo Pessoa" styleClass="form-control" readonly="true" />
+                                </div>
+
                             </div>
-                            <div class="col-md-2 col-xs-offset-1 text-right">
-                                <label  for="dtnas" styleClass="control-label col-sm-2" >Data de Nascimento:</label>
-                            </div>
-                            <div class="col-md-5  text-right">
-                                <input id="dtnas" value="${fichaFuncionalBean.fichaFuncional.pessoa.pes_datanasc}"  style="border: none" title="Data de Nascimeto" styleClass="form-control" readonly="true" />
+                            <div class="form-group">
+                                <div class="col-md-2 col-xs-offset-1 text-right">
+                                    <label  for="rg" styleClass="control-label col-sm-1" >RG:</label>
+                                </div>
+                                <div class="col-md-2 text-right">
+                                    <input id="rg" value="${fichaFuncionalBean.fichaFuncional.pessoa.pes_rg}"  style="border: none" title="Identidade" styleClass="form-control" readonly="true" />
+                                </div>
+
+                                <div class="col-md-2 col-xs-offset-1 text-right">
+                                    <label  for="estCv" styleClass="control-label col-sm-2" >Estado Civíl:</label>
+                                </div>
+                                <div class="col-md-2 text-right">
+                                    <input id="estCv" value="${fichaFuncionalBean.fichaFuncional.pessoa.pes_estadocivil}"  style="border: none" title="Estado Civíl" styleClass="form-control" readonly="true" />
+                                </div>                    
                             </div>
 
+                            <div class="form-group">
+                                <div class="col-md-2 col-xs-offset-1 text-right">
+                                    <label  for="cep" styleClass="control-label col-sm-1" >CEP:</label>
+                                </div>
+                                <div class="col-md-2 text-right">
+                                    <input id="cep" value="${fichaFuncionalBean.fichaFuncional.pessoa.pes_cpf}"  style="border: none" title="CEP" styleClass="form-control" readonly="true" />
+                                </div> 
+
+                                <div class="col-md-2 col-xs-offset-1 text-right">
+                                    <label  for="tlf" styleClass="control-label col-sm-2" >Telefone:</label>
+                                </div>
+                                <div class="col-md-2 text-right">
+                                    <input id="tlf" value="${fichaFuncionalBean.fichaFuncional.pessoa.pes_telefone}"  style="border: none" title="Telefone" styleClass="form-control" readonly="true" />
+                                </div> 
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-2 col-xs-offset-1 text-right">
+                                    <label  for="cdd" styleClass="control-label col-sm-1" >Cidade:</label>
+                                </div>
+                                <div class="col-md-2 text-right">
+                                    <input id="cdd" value="${fichaFuncionalBean.fichaFuncional.pessoa.cidade}"  style="border: none" title="Cidade" styleClass="form-control" readonly="true" />
+                                </div> 
+                                <div class="col-md-2 col-xs-offset-1 text-right">
+                                    <label  for="ndp" styleClass="control-label col-sm-2" >Nome do Pai:</label>
+                                </div>
+                                <div class="col-md-2 text-right">
+                                    <input id="ndp" value="${fichaFuncionalBean.fichaFuncional.pessoa.pes_pai}"  style="border: none" title="Filiação" styleClass="form-control" readonly="true" />
+                                </div> 
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-2 col-xs-offset-1 text-right">
+                                    <label  for="brr" styleClass="control-label col-sm-1" >Bairro:</label>
+                                </div>
+                                <div class="col-md-2 text-right">
+                                    <input id="brr" value="${fichaFuncionalBean.fichaFuncional.pessoa.bairro} "  style="border: none" title="Bairro" styleClass="form-control" readonly="true" />
+                                </div> 
+
+                                <div class="col-md-2 col-xs-offset-1 text-right">
+                                    <label  for="ndm" styleClass="control-label col-sm-2" >Nome da Mãe:</label>
+                                </div>
+                                <div class="col-md-2 text-right">
+                                    <input id="ndm" value="${fichaFuncionalBean.fichaFuncional.pessoa.pes_mae}"  style="border: none" title="Filiação" styleClass="form-control" readonly="true" />
+                                </div> 
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-2 col-xs-offset-1 text-right">
+                                    <label  for="edr" styleClass="control-label col-sm-1" >Endereço:</label>
+                                </div>
+                                <div class="col-md-2 text-right">
+                                    <input id="edr" value="falta"  style="border: none" title="Endereço" styleClass="form-control" readonly="true" />
+                                </div> 
+                                <div class="col-md-2 col-xs-offset-1 text-right">
+                                    <label  for="eml" styleClass="control-label col-sm-1" >E-mail:</label>
+                                </div>
+                                <div class="col-md-2 text-right">
+                                    <input id="eml" value="${fichaFuncionalBean.fichaFuncional.pessoa.pes_email}"  style="border: none" title="E-mail" styleClass="form-control" readonly="true" />
+                                </div> 
+
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-2 col-xs-offset-1 text-right">
+                                    <label  for="nmr" styleClass="control-label col-sm-1" >Número:</label>
+                                </div>
+                                <div class="col-md-2 text-right">
+                                    <input id="nmr" value="${fichaFuncionalBean.fichaFuncional.pessoa.pen_numeroend}"  style="border: none" title="Número da casa" styleClass="form-control" readonly="true" />
+                                </div> 
+
+                                <div class="col-md-3  text-right">
+                                    <label  for="cde" styleClass="control-label col-sm-1" >Complemento Endereço:</label>
+                                </div>
+                                <div class="col-md-2 text-right">
+                                    <input id="cde" value="${fichaFuncionalBean.fichaFuncional.pessoa.pes_complementoend}"  style="border: none" title="Complemento" styleClass="form-control" readonly="true" />
+                                </div> 
+                            </div>
+                            <div class="form-group">
+
+                                <div class="col-md-2 col-xs-offset-1 text-right">
+                                    <h:outputLabel value="Observação:" for="obs" styleClass="control-label col-sm-1 text-right" />
+                                </div>
+                                <div class="col-md-2 text-left">
+                                    <p:inputTextarea rows="4" cols="75" readonly="true" />
+                                </div> 
+
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <div class="col-md-2 col-xs-offset-1 text-right">
-                                <label  for="cpf" styleClass="control-label col-sm-1" >CPF:</label>
+                        <div class="bloco2">
+                            <div class="form-group">
+                                <h3>Lista de Benefícios</h3>
                             </div>
-                            <div class="col-md-2 text-right">
-                                <input id="cpf" value="${fichaFuncionalBean.fichaFuncional.pessoa.pes_cpf} 029.124.630-70"  style="border: none" title="CPF" styleClass="form-control" readonly="true" />
-                            </div>
+                            
+                            <h:dataTable value=""  var="item"  styleClass="dataTable table table-bordered table-striped">
 
-                            <div class="col-md-2 col-xs-offset-1 text-right">
-                                <label  for="tipPessoa" styleClass="control-label col-sm-2" >Tipo Pessoa:</label>
-                            </div>
-                            <div class="col-md-2 text-right">
-                                <input id="tipPessoa" value="${fichaFuncionalBean.fichaFuncional.pessoa.pes_tipo}"  style="border: none" title="Tipo Pessoa" styleClass="form-control" readonly="true" />
-                            </div>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Beneficios atuais"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item}"/>
+                                </h:column>
+                                 <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Valor"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item}"/>
+                                </h:column>
+                               
 
+                            </h:dataTable>
+                           
                         </div>
-                        <div class="form-group">
-                            <div class="col-md-2 col-xs-offset-1 text-right">
-                                <label  for="rg" styleClass="control-label col-sm-1" >RG:</label>
+                         <div class="bloco2">
+                            <div class="form-group">
+                                <h3>Cargos de Atuação </h3>
                             </div>
-                            <div class="col-md-2 text-right">
-                                <input id="rg" value="${fichaFuncionalBean.fichaFuncional.pessoa.pes_rg}"  style="border: none" title="Identidade" styleClass="form-control" readonly="true" />
-                            </div>
+                            
+                            <h:dataTable value=""  var="item"  styleClass="dataTable table table-bordered table-striped">
 
-                            <div class="col-md-2 col-xs-offset-1 text-right">
-                                <label  for="estCv" styleClass="control-label col-sm-2" >Estado Civíl:</label>
-                            </div>
-                            <div class="col-md-2 text-right">
-                                <input id="estCv" value="${fichaFuncionalBean.fichaFuncional.pessoa.pes_estadocivil}"  style="border: none" title="Estado Civíl" styleClass="form-control" readonly="true" />
-                            </div>                    
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Nome do Cargo"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item}"/>
+                                </h:column>
+                                  <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Data de Inicio"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item}"/>
+                                </h:column>
+                               
+
+                            </h:dataTable>
+                           
                         </div>
-
-                        <div class="form-group">
-                            <div class="col-md-2 col-xs-offset-1 text-right">
-                                <label  for="cep" styleClass="control-label col-sm-1" >CEP:</label>
+                         <div class="bloco2">
+                            <div class="form-group">
+                                <h3>Férias</h3>
                             </div>
-                            <div class="col-md-2 text-right">
-                                <input id="cep" value="${fichaFuncionalBean.fichaFuncional.pessoa.pes_cpf}"  style="border: none" title="CEP" styleClass="form-control" readonly="true" />
-                            </div> 
+                            
+                            <h:dataTable value=""  var="item"  styleClass="dataTable table table-bordered table-striped">
 
-                            <div class="col-md-2 col-xs-offset-1 text-right">
-                                <label  for="tlf" styleClass="control-label col-sm-2" >Telefone:</label>
-                            </div>
-                            <div class="col-md-2 text-right">
-                                <input id="tlf" value="${fichaFuncionalBean.fichaFuncional.pessoa.pes_telefone}"  style="border: none" title="Telefone" styleClass="form-control" readonly="true" />
-                            </div> 
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Observação"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item}"/>
+                                </h:column>
+                                 <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Data Inicio"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item}"/>
+                                </h:column>
+                                 <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Data Final"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item}"/>
+                                </h:column>
+                               
+
+                            </h:dataTable>
+                           
                         </div>
-
-                        <div class="form-group">
-                            <div class="col-md-2 col-xs-offset-1 text-right">
-                                <label  for="cdd" styleClass="control-label col-sm-1" >Cidade:</label>
-                            </div>
-                            <div class="col-md-2 text-right">
-                                <input id="cdd" value="${fichaFuncionalBean.fichaFuncional.pessoa.cidade}"  style="border: none" title="Cidade" styleClass="form-control" readonly="true" />
-                            </div> 
-                            <div class="col-md-2 col-xs-offset-1 text-right">
-                                <label  for="ndp" styleClass="control-label col-sm-2" >Nome do Pai:</label>
-                            </div>
-                            <div class="col-md-2 text-right">
-                                <input id="ndp" value="${fichaFuncionalBean.fichaFuncional.pessoa.pes_pai}"  style="border: none" title="Filiação" styleClass="form-control" readonly="true" />
-                            </div> 
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-2 col-xs-offset-1 text-right">
-                                <label  for="brr" styleClass="control-label col-sm-1" >Bairro:</label>
-                            </div>
-                            <div class="col-md-2 text-right">
-                                <input id="brr" value="${fichaFuncionalBean.fichaFuncional.pessoa.bairro} "  style="border: none" title="Bairro" styleClass="form-control" readonly="true" />
-                            </div> 
-
-                            <div class="col-md-2 col-xs-offset-1 text-right">
-                                <label  for="ndm" styleClass="control-label col-sm-2" >Nome da Mãe:</label>
-                            </div>
-                            <div class="col-md-2 text-right">
-                                <input id="ndm" value="${fichaFuncionalBean.fichaFuncional.pessoa.pes_mae}"  style="border: none" title="Filiação" styleClass="form-control" readonly="true" />
-                            </div> 
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-2 col-xs-offset-1 text-right">
-                                <label  for="edr" styleClass="control-label col-sm-1" >Endereço:</label>
-                            </div>
-                            <div class="col-md-2 text-right">
-                                <input id="edr" value="falta"  style="border: none" title="Endereço" styleClass="form-control" readonly="true" />
-                            </div> 
-                            <div class="col-md-2 col-xs-offset-1 text-right">
-                                <label  for="eml" styleClass="control-label col-sm-1" >E-mail:</label>
-                            </div>
-                            <div class="col-md-2 text-right">
-                                <input id="eml" value="${fichaFuncionalBean.fichaFuncional.pessoa.pes_email}"  style="border: none" title="E-mail" styleClass="form-control" readonly="true" />
-                            </div> 
-
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-2 col-xs-offset-1 text-right">
-                                <label  for="nmr" styleClass="control-label col-sm-1" >Número:</label>
-                            </div>
-                            <div class="col-md-2 text-right">
-                                <input id="nmr" value="${fichaFuncionalBean.fichaFuncional.pessoa.pen_numeroend}"  style="border: none" title="Número da casa" styleClass="form-control" readonly="true" />
-                            </div> 
-
-                            <div class="col-md-3  text-right">
-                                <label  for="cde" styleClass="control-label col-sm-1" >Complemento Endereço:</label>
-                            </div>
-                            <div class="col-md-2 text-right">
-                                <input id="cde" value="${fichaFuncionalBean.fichaFuncional.pessoa.pes_complementoend}"  style="border: none" title="Complemento" styleClass="form-control" readonly="true" />
-                            </div> 
-                        </div>
-
-
-
-                        <div class="form-group">
-
-                            <div class="col-md-2 col-xs-offset-1 text-right">
-                                <h:outputLabel value="Observação:" for="obs" styleClass="control-label col-sm-1 text-right" />
-                            </div>
-                            <div class="col-md-2 text-left">
-                                <p:inputTextarea rows="6" cols="33" />
-                            </div> 
-
-                        </div>
-
-               
-
+                        
+                    </div>
 
                     <div class="form-group">
-                        <div class="col-md-offset-1 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
-                            <h:link styleClass="btn btn-default" value="Cancelar" outcome="" />
+                        <div class="col-md-offset-9 col-md-11 col-xs-offset-10 col-sm-12 btn-group-separated">
+                            <h:link styleClass="btn btn-default" value="Cancelar" />
                             <h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{idiomaBean.salvar()}"></h:commandButton>
                         </div>
                     </div>
                 </h:form>
             </f:view>
         </div>
+
     </ui:define>
 
 </ui:composition>
