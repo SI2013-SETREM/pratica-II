@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -26,6 +28,11 @@ public class FaixaINSS implements Serializable {
     private double fai_aliquota;
     private double fai_ab_imp_renda;
 
+     @ManyToOne
+    @JoinColumn(name = "tbs_codigo", referencedColumnName = "tbs_codigo")
+    private TabINSS tabelainss;
+    
+    
     public int getFai_codigo() {
         return fai_codigo;
     }
@@ -64,6 +71,14 @@ public class FaixaINSS implements Serializable {
 
     public void setFai_ab_imp_renda(double fai_ab_imp_renda) {
         this.fai_ab_imp_renda = fai_ab_imp_renda;
+    }
+
+    public TabINSS getTabelainss() {
+        return tabelainss;
+    }
+
+    public void setTabelainss(TabINSS tabelainss) {
+        this.tabelainss = tabelainss;
     }
     
     
