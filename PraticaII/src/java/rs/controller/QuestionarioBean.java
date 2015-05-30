@@ -80,5 +80,9 @@ public class QuestionarioBean {
         return "questionariolst";
     }
     
+    public void addPergunta() {
+        this.questionario.addPergunta();
+    }
+    
     
 }

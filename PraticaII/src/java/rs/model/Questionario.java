@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -30,6 +31,7 @@ public class Questionario implements Serializable {
 
     @OneToMany
     @JoinColumn(name = "qst_codigo", referencedColumnName = "qst_codigo")
+    @OrderBy(value = "prg_ordem")
     private List<Pergunta> perguntas;
     
     public Questionario() {
@@ -63,7 +65,7 @@ public class Questionario implements Serializable {
         return qst_tipo;
     }
     
-    public String getQstTipoDsc() {
+    public String getQstTipoDsc(int qst_tipo) {
         String r = "";
         switch(qst_tipo) {
             case 1:
@@ -77,6 +79,9 @@ public class Questionario implements Serializable {
                 break;
         }
         return r;
+    }
+    public String getQstTipoDsc() {
+        return this.getQstTipoDsc(this.qst_tipo);
     }
 
     public void setQstTipo(int qst_tipo) {
@@ -100,6 +105,10 @@ public class Questionario implements Serializable {
 
     public void setPerguntas(List<Pergunta> perguntas) {
         this.perguntas = perguntas;
+    }
+    
+    public void addPergunta() {
+        this.perguntas.add(new Pergunta());
     }
     
 }
