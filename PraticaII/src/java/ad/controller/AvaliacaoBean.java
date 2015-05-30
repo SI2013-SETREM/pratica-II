@@ -99,45 +99,40 @@ public class AvaliacaoBean {
         } else {
             dao.insert(avaliacao);
             for (int i = 0; i < lsCargoAvaliador.size(); i++) { ///realiza for para "pegar" todas as pessoas dos cargos relacionados
-                AvaliacaoPessoaCargo VPC = new AvaliacaoPessoaCargo();
+                AvaliacaoPessoaCargo VPC = new AvaliacaoPessoaCargo();/// Objeto AvaliacaoPessoaCargo, utilizado para verificar quais são os avaliados e avaliadores da Avaliação
                 List<CargosPessoa> lscargosPessoa = cargosPessoaDAO.GetListCargoPessoa(0, lsCargoAvaliador.get(i).getCar_codigo());///Pega as pessoas daquele cargo
                 for (int x = 0; x < lscargosPessoa.size(); x++) {
-                    VPC.setPessoa(lscargosPessoa.get(x).getPessoa());
-                    VPC.setCargo(lscargosPessoa.get(x).getCargo());
+                    lsPessoaAvaliador.add(lscargosPessoa.get(x).getPessoa());
                 }
+                VPC.setCargo(lsCargoAvaliador.get(i));
                 VPC.setAvaliacao(avaliacao);
                 VPC.setApc_status(2);//2 = status do Avaliadores
                 lsAvaliacaoPessoaCargo.add(VPC);
             }
-            for (int j = 0; j < lsCargoColaborador.size(); j++) {
 
+            for (int j = 0; j < lsCargoColaborador.size(); j++) {
                 AvaliacaoPessoaCargo VPCAavaliados = new AvaliacaoPessoaCargo();
                 List<CargosPessoa> lscargosPessoa = cargosPessoaDAO.GetListCargoPessoa(0, lsCargoColaborador.get(j).getCar_codigo());///Pega as pessoas daquele cargo
                 for (int z = 0; z < lscargosPessoa.size(); z++) {
-                    VPCAavaliados.setPessoa(lscargosPessoa.get(z).getPessoa());
-                    VPCAavaliados.setCargo(lscargosPessoa.get(z).getCargo());
+                    lsPessoaColaborador.add(lscargosPessoa.get(z).getPessoa());
                 }
+                VPCAavaliados.setCargo(lsCargoColaborador.get(j));
                 VPCAavaliados.setAvaliacao(avaliacao);
                 VPCAavaliados.setApc_status(1);//1 = status do Colaboradores, ou seja, os avaliados
                 lsAvaliacaoPessoaCargo.add(VPCAavaliados);
             }
             //Até aki esta criado todas as AvaliaçõesPessoaCargo, e Agora deve-se cadastrar as PessoasAvaliações, Blz
 
-            for (int y = 0; y < 10; y++) {
-                if (lsAvaliacaoPessoaCargo.get(y).getApc_status() == 2) {///Verifica se é AVALIADOR
-                    Pessoa Avaliador = lsAvaliacaoPessoaCargo.get(y).getPessoa();
-                    for (int b = 0; b < 10; b++) {
-                        if (lsAvaliacaoPessoaCargo.get(b).getApc_status() == 1) {//Verifica se é COLABORADOR
-                            Pessoa Colaborador = lsAvaliacaoPessoaCargo.get(b).getPessoa();
-                            //crio as PessoasAvaliacao
-                            PessoasAvaliacao pessoaAvaliacao = new PessoasAvaliacao();
-                            pessoaAvaliacao.setAvaliacao(avaliacao);
-                            pessoaAvaliacao.setAvaliador(Avaliador);
-                            pessoaAvaliacao.setColaboradorAvaliado(Colaborador);
-                            pessoaAvaliacao.setPea_media(0);
-                            lsPessoasAvaliacao.add(pessoaAvaliacao);
-                        }
-                    }
+            for (int y = 0; y < lsPessoaAvaliador.size(); y++) {
+                Pessoa Avaliador = lsPessoaAvaliador.get(y);
+                for (int b = 0; b < lsPessoaColaborador.size(); b++) {
+                    Pessoa Colaborador = lsAvaliacaoPessoaCargo.get(b).getPessoa();
+                    PessoasAvaliacao pessoaAvaliacao = new PessoasAvaliacao();
+                    pessoaAvaliacao.setAvaliacao(avaliacao);
+                    pessoaAvaliacao.setAvaliador(Avaliador);
+                    pessoaAvaliacao.setColaboradorAvaliado(Colaborador);
+                    pessoaAvaliacao.setPea_media(0);
+                    lsPessoasAvaliacao.add(pessoaAvaliacao);
                 }
             }
 ///Hora de Inserir :0
