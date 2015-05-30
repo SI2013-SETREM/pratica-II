@@ -1,6 +1,7 @@
 package ad.model;
 
 import cfg.model.Pessoa;
+import csb.model.Cargo;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Entity;
@@ -16,8 +17,6 @@ import javax.persistence.Table;
 public class AvaliacaoPessoaCargo implements Serializable {
 //acho q nau precisa do sTitle aki, pois aqui n'ao vai ter nenhuma tela
 
-//    @SequenceGenerator(name = "avaliacao_pessoa_cargo_pk_sequence", sequenceName = "avaliacao_pessoa_cargo_id_seq")
-//    @GeneratedValue(strategy = GenerationType.AUTO, generator = "avaliacao_pessoa_cargo_pk_sequence")
     @Id
     private int apc_codigo;
     @Id
@@ -25,9 +24,10 @@ public class AvaliacaoPessoaCargo implements Serializable {
     @JoinColumn(name = "ava_codigo", referencedColumnName = "ava_codigo")
     private Avaliacao avaliacao;
 
-//    @ManyToOne
-//    @JoinColumn(name = "car_codigo", referencedColumnName = "car_codigo")
-//    private Cargo cargo;
+    @ManyToOne
+    @JoinColumn(name = "car_codigo", referencedColumnName = "car_codigo")
+    private Cargo cargo;
+
     @ManyToOne
     @JoinColumn(name = "pes_codigo", referencedColumnName = "pes_codigo")
     private Pessoa pessoa;
@@ -108,6 +108,14 @@ public class AvaliacaoPessoaCargo implements Serializable {
 
     public void setApc_status(int apc_status) {
         this.apc_status = apc_status;
+    }
+
+    public Cargo getCargo() {
+        return cargo;
+    }
+
+    public void setCargo(Cargo cargo) {
+        this.cargo = cargo;
     }
 
 }
