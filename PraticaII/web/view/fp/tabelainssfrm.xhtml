@@ -83,13 +83,13 @@
                      <div class="form-group">
                         <h:outputLabel value="Aliquota Lei 9.01/98:" for="tifPorPisPasep" styleClass="control-label col-sm-1" />
                         <div class="col-md-6 col-sm-12">
-                            <h:inputText id="tisAlinormal" value="#{tabelaINSSBean.tabINSS.tbs_ali_lei1}" title="tifPorPisPasep" styleClass="form-control" pt:autofocus="" />
+                            <h:inputText id="tisAlil1" value="#{tabelaINSSBean.tabINSS.tbs_ali_lei1}" title="tifPorPisPasep" styleClass="form-control" pt:autofocus="" />
                         </div>
                     </div>
                      <div class="form-group">
                         <h:outputLabel value="Aliquota Lei 10.097/00:" for="tifPorPisPasep" styleClass="control-label col-sm-1" />
                         <div class="col-md-6 col-sm-12">
-                            <h:inputText id="tisAlinormal" value="#{tabelaINSSBean.tabINSS.tbs_ali_lei2}" title="tifPorPisPasep" styleClass="form-control" pt:autofocus="" />
+                            <h:inputText id="tisAlil2" value="#{tabelaINSSBean.tabINSS.tbs_ali_lei2}" title="tifPorPisPasep" styleClass="form-control" pt:autofocus="" />
                         </div>
                     </div>
 
@@ -97,8 +97,8 @@
 
                     <div class="form-group">
                         <div class="col-md-offset-1 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
-                            <h:link styleClass="btn btn-default" value="Cancelar" outcome="#{tabelaIRRFBean.listar()}" />
-                            <h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{tabelaIRRFBean.salvar()}"></h:commandButton>
+                            <h:link styleClass="btn btn-default" value="Cancelar" outcome="#{tabelaINSSBean.listar()}" />
+                            <h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{tabelaINSSBean.salvar()}"></h:commandButton>
                         </div>
                     </div>
                 </h:form>

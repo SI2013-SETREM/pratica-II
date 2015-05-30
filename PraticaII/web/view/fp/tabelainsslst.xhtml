@@ -1,16 +1,115 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>TODO supply a title</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
-</html>
+<ui:composition template="../modelos/default.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    <ui:define name="title">
+        ${tabelaINSSBean.getpTitle()}
+    </ui:define>
+
+    <ui:define name="breadcrumb">
+        <li>Configurações</li>
+        <li>${tabelaINSSBean.getpTitle()}</li>
+    </ui:define>
+
+    <ui:define name="main-content">
+        <div class="panel panel-body">
+            <h3><h:outputText value="Lista de ${tabelaINSSBean.getpTitle()}"/></h3>
+            <div class="btns-top-table">
+                <h:link outcome="tabelainssfrm" styleClass="btn btn-success">
+                    <i class="fa fa-plus"></i> Inserir ${tabelaINSSBean.getpTitle()}
+                </h:link>
+            </div>
+            <h:form>
+                <h:dataTable value="${tabelaINSSBean.tabsINSS}" var="item" rendered="${tabelaINSSBean.tabsINSS.rowAvailable}" styleClass="dataTable table table-bordered table-striped">
+                    
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Data Inicial"/>
+                        </f:facet>
+                        <h:outputText value="${item.getTbs_data_inicial()}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/></h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Data Final"/>
+                        </f:facet>
+                        <h:outputText value="${item.getTbs_data_final()}">
+                        <f:convertDateTime pattern="dd/MM/yyyy"/></h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Salário Familia de"/>
+                        </f:facet>
+                        <h:outputText value="${item.getTbs_sal_fami_ini() }"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Salário Familia até"/>
+                        </f:facet>
+                        <h:outputText value="${item.getTbs_sal_fami_fin()}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Ab. Imp Renda"/>
+                        </f:facet>
+                        <h:outputText value="${item.getTbs_ab_imp_ini_fin()}"/>
+                    </h:column>
+                     <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Salário Familia até"/>
+                        </f:facet>
+                        <h:outputText value="${item.getTbs_sal_fami_uni()}"/>
+                    </h:column>
+                     <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Ab Imp Renda"/>
+                        </f:facet>
+                        <h:outputText value="${item.getTbs_ab_imp_uni()}"/>
+                    </h:column>
+                     <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Aliquota Normal"/>
+                        </f:facet>
+                        <h:outputText value="${item.getTbs_ali_normal()}"/>
+                    </h:column>
+                      <!--<h:column>-->
+                        <!--<f:facet name="header">-->
+                            <!--<h:outputText value="Aliquota Lei 9.01/98"/>-->
+                        <!--</f:facet>-->
+                        <!--<h:outputText value="${item.getTbs_ali_lei1()}"/>-->
+                    <!--</h:column>-->
+                     <!--<h:column>-->
+                        <!--<f:facet name="header">-->
+                            <!--<h:outputText value="Aliquota Lei 10.097/00"/>-->
+                        <!--</f:facet>-->
+                        <!--<h:outputText value="${item.getTbs_ali_lei2()}"/>-->
+                    <!--</h:column>-->
+                    
+                    
+                    
+                    
+                    
+                    
+                    <h:column headerClass="col-editar-header">
+                        <f:facet name="header">
+                            <h:outputText value="Editar"/>
+                        </f:facet>
+                        <h:commandLink action="${tabelaINSSBean.edit(item)}">
+                            <i class="fa fa-pencil"></i> Editar
+                        </h:commandLink>
+                    </h:column>
+                    <h:column headerClass="col-excluir-header">
+                        <f:facet name="header">
+                            <h:outputText value="Excluir"/>
+                        </f:facet>
+                        <h:commandLink onclick="return confirm('Deseja realmente excluir a ${tabelaINSSBean.getsTitle()}?');" action="${tabelaINSSBean.delete(item)}">
+                            <i class="fa fa-trash"></i> Excluir
+                        </h:commandLink>
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>
