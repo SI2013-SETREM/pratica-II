@@ -1,4 +1,6 @@
+
 package csb.controller;
+import csb.controller.*;
 
 import csb.dao.EpiDAO;
 import csb.model.Epi;
@@ -10,14 +12,14 @@ import javax.faces.model.ListDataModel;
 @ManagedBean
 @RequestScoped
 public class EpiBean {
-
+    
     private final String sTitle = Epi.sTitle;
     private final String pTitle = Epi.pTitle;
-
-    private Epi cbsepi = new Epi();
+    
+    private Epi epi = new Epi();
     private EpiDAO dao = new EpiDAO();
-    private DataModel datamodel;
-
+    private DataModel epis;
+    
     public EpiBean() {
     }
 
@@ -28,60 +30,56 @@ public class EpiBean {
     public String getpTitle() {
         return pTitle;
     }
-
-    public Epi getCbsEpi() {
-        return cbsepi;
+    
+    public Epi getEpi() {
+        return epi;
     }
 
-    public DataModel getDatamodel() {
-        this.datamodel = new ListDataModel(dao.findAll());
-        return datamodel;
+    public void setEpi(Epi epi) {
+        this.epi = epi;
     }
 
-    public void setDatamodel(DataModel datamodel) {
-        this.datamodel = datamodel;
+    public DataModel getEpis() {
+        this.epis = new ListDataModel(dao.findAll());
+        return epis;
     }
 
-    public void setCbsEpi(Epi cbsepi) {
-        this.cbsepi = cbsepi;
+    public void setEpis(DataModel epis) {
+        this.epis = epis;
     }
-
-    public void setCbsEpiDM(DataModel cbsepidm) {
-        this.datamodel = cbsepidm;
-    }
-
+    
     public String insert() {
-        dao.insert(cbsepi);
-        return "cbsepilst";
+        dao.insert(epi);
+        return "epilst";
     }
-
-    public String edit(Epi i) {
-        cbsepi = (Epi) datamodel.getRowData();
-        return "csbepifrm";
+    
+    public String edit(Epi e) {
+        epi = (Epi) epis.getRowData();
+        return "epifrm";
     }
-
+    
     public String update() {
-        dao.update(cbsepi);
-        return "cbsepilst";
+        dao.update(epi);
+        return "epilst";
     }
-
-    public String delete(Epi i) {
-        dao.delete(i);
-        return "cbsepilst";
+    
+    public String delete(Epi e) {
+        dao.delete(e);
+        return "epilst";
     }
-
+    
     public String salvar() {
-        if (cbsepi.getEpi_codigo()> 0) {
-            dao.update(cbsepi);
-        } else {
-            dao.insert(cbsepi);
-        }
-
-        return "csbepilst";
+        if (epi.getEpi_codigo()> 0)
+            dao.update(epi);
+        else 
+            dao.insert(epi);
+        
+        return "epilst";
     }
-
+    
     public String listar() {
-        return "csbepilst";
+        return "epilst";
     }
-
+    
+    
 }

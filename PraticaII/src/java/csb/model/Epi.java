@@ -21,7 +21,7 @@ public class Epi implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "cbs_epi_pk_sequence")
     private int epi_codigo;
     private String epi_descricao;
-    private char epi_tipo;
+    private char epi_tipo; //individual, coletivo
     private boolean epi_situacao;
 
     public Epi() {
