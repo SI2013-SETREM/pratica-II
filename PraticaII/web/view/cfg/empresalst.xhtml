@@ -31,7 +31,13 @@
                                 </f:facet>
                                 <h:outputText value="${item.getEmp_codigo()}"/>
                             </h:column>
-                             <h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Nome"/>
+                                </f:facet>
+                                <h:outputText value="${item.getEmp_nome()}"/>
+                            </h:column>
+                            <h:column>
                                 <f:facet name="header">
                                     <h:outputText value="Descrição"/>
                                 </f:facet>

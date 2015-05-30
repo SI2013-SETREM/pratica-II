@@ -11,7 +11,7 @@
 
     <ui:define name="breadcrumb">
         <li>Configurações</li>
-        <li><h:link value="${empresaBean.pTitle}" outcome="/faces/view/cfg/idiomaslst" /></li>
+        <li><h:link value="${empresaBean.pTitle}" outcome="/faces/view/cfg/empresalst" /></li>
     </ui:define>
 
     <ui:define name="main-content">
@@ -20,6 +20,12 @@
             <f:view>
                 <h:form styleClass="form-horizontal">
                     <h:inputHidden id="empCodigo" value="#{empresaBean.empresa.emp_codigo}" />
+<!--                            <div class="form-group">
+                        <h:outputLabel value="Código:" for="empCodigo" styleClass="control-label col-sm-1" />
+                        <div class="col-md-6">
+                                                                                        <h:inputText id="empCodigo" value="#{empresaBean.empresa.emp_codigo}" title="empCodigo" styleClass="form-control" />
+                        </div>
+                    </div>-->
                     <div class="form-group">
                         <h:outputLabel value="Nome" for="empNome" styleClass="control-label col-sm-1" />
                         <div class="col-md-6 col-sm-12">
@@ -77,6 +83,12 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <h:outputLabel value="N. Endereço:" for="empNumeroENde" styleClass="control-label col-sm-1" />
+                        <div class="col-md-6 col-sm-12">
+                            <h:inputText id="empNumeroENde" value="#{empresaBean.empresa.emp_numeroendereco}" title="empNumeroENde" styleClass="form-control" pt:autofocus="" />
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <h:outputLabel value="Tipo" for="empTipo" styleClass="control-label col-sm-1" />
                         <div style="padding-top: 5px" class="col-md-6 col-sm-12">
                             <h:selectOneMenu value="#{empresaBean.empresa.emp_tipo}" id="empTipo" class="form-control">
@@ -86,11 +98,29 @@
                                 <f:selectItem itemValue="4" itemLabel="Escola Pública"/>
                             </h:selectOneMenu>
                         </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Empresa Sede" for="empSede" styleClass="control-label col-sm-1" />
+                        <div style="padding-top: 5px" class="col-md-6 col-sm-12">
+                            <h:selectOneMenu value="#{empresaBean.empresa.emp_sede}" id="empSede" class="form-control">
+                                <f:selectItem itemValue="1" itemLabel="Não"/>
+                                <f:selectItem itemValue="2" itemLabel="Sim"/>
+                                </h:selectOneMenu>
+                        </div>
+                    </div> 
+                    <div class="form-group">
+                        <h:outputLabel value="Empresa Sistema" for="empSistema" styleClass="control-label col-sm-1" />
+                        <div style="padding-top: 5px" class="col-md-6 col-sm-12">
+                            <h:selectOneMenu value="#{empresaBean.empresa.emp_empresa_sistema}" id="empSistema" class="form-control">
+                                <f:selectItem itemValue="1" itemLabel="Não"/>
+                                <f:selectItem itemValue="2" itemLabel="Sim"/>
+                                </h:selectOneMenu>
+                        </div>
                     </div> 
                     <div class="form-group">
                         <h:outputLabel value="Web Site:" for="empWebSite" styleClass="control-label col-sm-1" />
                         <div class="col-md-6 col-sm-12">
-                            <h:inputText id="empWebSite" value="#{empresaBean.empresa.emp_descricao}" title="empWebSite" styleClass="form-control" pt:autofocus="" />
+                            <h:inputText id="empWebSite" value="#{empresaBean.empresa.emp_website}" title="empWebSite" styleClass="form-control" pt:autofocus="" />
                         </div>
                     </div>
                     

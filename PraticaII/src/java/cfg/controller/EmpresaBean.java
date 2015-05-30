@@ -14,9 +14,9 @@ public class EmpresaBean {
     private final String sTitle = Empresa.sTitle;
     private final String pTitle = Empresa.pTitle;
 
-    private Empresa endereco = new Empresa();
+    private Empresa empresa = new Empresa();
     private EmpresaDAO dao = new EmpresaDAO();
-    private DataModel enderecos;
+    private DataModel empresas;
 
     public EmpresaBean() {
     }
@@ -30,54 +30,54 @@ public class EmpresaBean {
     }
 
     public Empresa getEmpresa() {
-        return endereco;
+        return empresa;
     }
 
-    public void setEmpresa(Empresa endereco) {
-        this.endereco = endereco;
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
     }
 
     public DataModel getEmpresas() {
-        this.enderecos = new ListDataModel(dao.findAll());
-        return enderecos;
+        this.empresas = new ListDataModel(dao.findAll());
+        return empresas;
     }
 
     public void setEmpresas(DataModel idiomas) {
-        this.enderecos = enderecos;
+        this.empresas = empresas;
     }
 
     public String insert() {
-        dao.insert(endereco);
-        return "enderecolst";
+        dao.insert(empresa);
+        return "empresalst";
     }
 
     public String edit(Empresa i) {
-        endereco = (Empresa) enderecos.getRowData();
-        return "enderecofrm";
+        empresa = (Empresa) empresas.getRowData();
+        return "empresafrm";
     }
 
     public String update() {
-        dao.update(endereco);
-        return "enderecolst";
+        dao.update(empresa);
+        return "empresalst";
     }
 
     public String delete(Empresa i) {
         dao.delete(i);
-        return "enderecolst";
+        return "empresalst";
     }
 
     public String salvar() {
-        if (endereco.getEmp_codigo() > 0) {
-            dao.update(endereco);
+        if (empresa.getEmp_codigo() > 0) {
+            dao.update(empresa);
         } else {
-            dao.insert(endereco);
+            dao.insert(empresa);
         }
 
-        return "enderecolst";
+        return "empresalst";
     }
 
     public String listar() {
-        return "enderecolst";
+        return "empresalst";
     }
 
 }
