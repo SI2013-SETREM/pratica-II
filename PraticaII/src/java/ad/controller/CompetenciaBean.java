@@ -15,9 +15,8 @@ public class CompetenciaBean {
     private final String sTitle = Competencia.sTitle;
     private final String pTitle = Competencia.pTitle;
     private List<TipoCompetencia> lstipocompetencia;
-    private TipoCompetencia tipocompetencia = new TipoCompetencia();
     private TipoCompetenciaDAO tipocompetenciadao = new TipoCompetenciaDAO();
-    private Competencia competencia = new Competencia();
+    private Competencia competencia;
     private CompetenciaDAO dao = new CompetenciaDAO();
     private DataModel competencias;
 
@@ -33,11 +32,11 @@ public class CompetenciaBean {
     }
 
     public Competencia getCompetencia() {
+        if (competencia == null) {
+            competencia = new Competencia();
+            competencia.setCmp_status(1);
+        }
         return competencia;
-    }
-
-    public void setIdioma(Competencia i) {
-        this.competencia = i;
     }
 
     public DataModel getCompetencias() {

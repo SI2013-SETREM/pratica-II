@@ -16,8 +16,28 @@
     </ui:define>
 
     <ui:define name="main-content">
+        <script>
+            $(function () {
+                $('.autoAva [type=checkbox]').change(function () {
+                    if ($(this).is(':checked')) {
+                        $('.avaliadores').slideUp();
+                    } else {
+                        $('.avaliadores').slideDown();
+                    }
+                });
+                $('.typeAval select').change(function () {
+                    if ($(this).val() != 1) {
+                        $('.trein').slideDown();
+                    } else {
+                        $('.trein').slideUp();
+                    }
+
+                });
+
+            });
+        </script>
         <style>
-            .autocomplete ul{
+            .autocomplete ul, .calendar input {
                 width: 100%;
                 border: 1px solid #CCC;
                 box-shadow: 0 0;
@@ -25,6 +45,16 @@
             }
             textarea{
                 width: 100% !important;
+                min-height: 100px;
+            }
+            input[type=checkbox], input[type=radio] {
+                margin: 10px 0 0;
+            }
+            .labelBool label{
+                text-align: left !important;
+            }
+            .labelBool [type=checkbox]{
+                float: right;
             }
         </style>
         <div class="panel panel-body">
@@ -35,7 +65,7 @@
                     <div class="row">
                         <div class="col-md-6 col-xs-12">
                             <div class="form-group">
-                                <h:outputLabel value="Nome: " for="nome" styleClass="control-label col-md-4" />
+                                <h:outputLabel value="Nome:" for="nome" styleClass="control-label col-md-4" />
                                 <div class="col-md-8 col-xs-12">
                                     <h:inputText id="nome" value="#{avaliacaoBean.avaliacao.ava_nome}" title="Nome" styleClass="form-control" pt:autofocus="" />
                                 </div>
@@ -43,9 +73,15 @@
                         </div>
                         <div class="col-md-6 col-xs-12">
                             <div class="form-group">
-                                <h:outputLabel value="Status: " for="status" styleClass="control-label col-md-4" />
+                                <h:outputLabel value="Status:" for="status" styleClass="control-label col-md-4" />
                                 <div class="col-md-8 col-xs-12">
-                                    <h:inputText id="status" value="#{avaliacaoBean.avaliacao.ava_status}" title="Status" styleClass="form-control" pt:autofocus="" />
+                                    <h:selectOneMenu pt:required="required" id="status" value="#{avaliacaoBean.avaliacao.ava_status}" title="Status" styleClass="form-control" pt:autofocus="">
+                                        <f:selectItem itemDisabled="true" itemValue="0" itemLabel="--selecione--"/>
+                                        <f:selectItem  itemValue="1" itemLabel="Aguardando Início"/>
+                                        <f:selectItem  itemValue="2" itemLabel="Em Andamento"/>
+                                        <f:selectItem  itemValue="3" itemLabel="Concluída"/>
+                                        <f:selectItem  itemValue="4" itemLabel="Cancelada"/>
+                                    </h:selectOneMenu>
                                 </div>
                             </div>
                         </div>
@@ -54,8 +90,8 @@
                     <div class="row">
                         <div class="col-md-6 col-xs-12">
                             <div class="form-group">
-                                <h:outputLabel value="Data de Início: " for="datainicio" styleClass="control-label col-md-4" />
-                                <div class="col-md-8 col-xs-12">
+                                <h:outputLabel value="Data de Início:" for="datainicio" styleClass="control-label col-md-4" />
+                                <div class="col-md-8 col-xs-12 ">
                                     <h:inputText pt:type="date" id="datainicio" value="#{avaliacaoBean.avaliacao.ava_dataInicial}" title="Data de Início" styleClass="form-control">
                                         <f:convertDateTime pattern="yyyy-MM-dd"/>
                                     </h:inputText>
@@ -64,7 +100,7 @@
                         </div>
                         <div class="col-md-6 col-xs-12">
                             <div class="form-group">
-                                <h:outputLabel value="Data de Término: " for="datafim" styleClass="control-label col-md-4" />
+                                <h:outputLabel value="Data de Término:" for="datafim" styleClass="control-label col-md-4" />
                                 <div class="col-md-8 col-xs-12">
                                     <h:inputText pt:type="date" id="datafim" value="#{avaliacaoBean.avaliacao.ava_dataFinal}" title="Data de Término" styleClass="form-control">
                                         <f:convertDateTime pattern="yyyy-MM-dd"/>
@@ -73,15 +109,71 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-6 col-xs-12">
+                            <div class="form-group labelBool">
+                                <div class="col-md-4 autoAva">
+                                    <h:selectBooleanCheckbox id="autoava" value="#{avaliacaoBean.bautoava}" title="Auto Avaliação" pt:autofocus="" />
+                                </div>
+                                <h:outputLabel value="Auto Avaliação" for="autoava" styleClass="control-label col-md-8" />
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xs-12">
+                            <div class="form-group labelBool">
+                                <div class="col-md-4">
+                                    <h:selectBooleanCheckbox id="bcomp" value="#{avaliacaoBean.bcomp}" title="Baseado em Competências" pt:autofocus="" />
+                                </div>
+                                <h:outputLabel value="Baseado em Competências" for="bcomp" styleClass="control-label col-md-8" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-xs-12">
+                            <div class="form-group">
+                                <h:outputLabel value="Tipo de Avaliação:" for="tipoaval" styleClass="control-label col-md-4" />
+                                <div class="col-md-8 col-xs-12 typeAval">
+                                    <h:selectOneMenu pt:required="required" id="tipoaval" value="#{avaliacaoBean.caval}" title="Tipo de Avaliação" styleClass="form-control" pt:autofocus="">
+                                        <f:selectItem itemValue="1" itemLabel="Avaliação de Desempenho"/>
+                                        <f:selectItem  itemValue="2" itemLabel="Avaliação de Treinamento"/>
+                                    </h:selectOneMenu>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xs-12">
+                            <div class="form-group">
+                                <h:outputLabel value="Tipo Questionário:" for="tipoquest" styleClass="control-label col-md-4" />
+                                <div class="col-md-8 col-xs-12">
+                                    <h:selectOneMenu pt:required="required" id="tipoquest" value="#{avaliacaoBean.ctipo}" title="Tipo de Questionário" styleClass="form-control" pt:autofocus="">
+                                        <f:selectItem itemDisabled="true" itemLabel="--selecione--"/>
+                                        <f:selectItem  itemValue="1" itemLabel="Quantitativo"/>
+                                        <f:selectItem  itemValue="2" itemLabel="Qualitativo"/>
+                                    </h:selectOneMenu>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row trein" style="display: none;">
+                        <div class="col-md-6 col-xs-12">
+                            <div class="form-group">
+                                <h:outputLabel value="Treinamento:" for="treinamento" styleClass="control-label col-md-4" />
+                                <div class="col-md-8 col-sm-12">
+                                    <h:selectOneMenu id="treinamento" converter="treinamentoConverter" value="#{avaliacaoBean.avaliacao.treinamento}" styleClass="form-control" pt:autofocus="" >
+                                        <f:selectItems value="#{avaliacaoBean.lstreinamento}" var="trein" itemLabel="#{trein.tre_descricao}" itemValue="#{trein}"/>
+                                    </h:selectOneMenu>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <div class="row">
                         <div class="col-md-6 col-xs-12">
-                            <div style="  border-bottom: 1px solid #ccc; font-size: 30px;">Avaliadores</div>
-                            <div class="row panel-body">
+                            <div style="  border-bottom: 1px solid #ccc; font-size: 30px;"><i class="fa fa-users" style="margin-right: 3px;"></i>Avaliadores</div>
+                            <div class="row panel-body avaliadores">
                                 <div class="row">
                                     <div class="col-md-12 col-xs-12">
                                         <div class="form-group">
-                                            <h:outputLabel value="Cargos: " for="cargo1" styleClass="control-label col-md-4" />
+                                            <h:outputLabel value="Cargos:" for="cargo1" styleClass="control-label col-md-4" />
                                             <div class="col-md-8 col-xs-12 autocomplete">
                                                 <p:autoComplete id="cargo1" multiple="true" completeMethod="#{avaliacaoBean.completeCargo}" value="#{avaliacaoBean.lsCargoAvaliador}"
                                                                 var="cargo" itemLabel="#{cargo.car_descricao}" itemValue="#{cargo}" converter="cargoConverter" forceSelection="true">
@@ -95,7 +187,7 @@
 
                                     <div class="col-md-12 col-xs-12">
                                         <div class="form-group">
-                                            <h:outputLabel value="Pessoas: " for="pessoa1" styleClass="control-label col-md-4" />
+                                            <h:outputLabel value="Pessoas:" for="pessoa1" styleClass="control-label col-md-4" />
                                             <div class="col-md-8 col-xs-12 autocomplete">
                                                 <p:autoComplete id="pessoa1" multiple="true" completeMethod="#{avaliacaoBean.completePessoa}" value="#{avaliacaoBean.lsPessoaAvaliador}"
                                                                 var="pessoa" itemLabel="#{pessoa.pes_nome}" itemValue="#{pessoa}" converter="pessoaConverter" forceSelection="true">
@@ -110,12 +202,12 @@
                             </div>
                         </div>
                         <div class="col-md-6 col-xs-12">
-                            <div style="border-bottom: 1px solid #ccc; font-size: 30px;">Colaboradores</div>
+                            <div style="border-bottom: 1px solid #ccc; font-size: 30px;"><i class="fa fa-user-plus" style="margin-right: 3px;"></i>Colaboradores Avaliados</div>
                             <div class="row panel-body">
                                 <div class="row">
                                     <div class="col-md-12 col-xs-12">
                                         <div class="form-group">
-                                            <h:outputLabel value="Cargos: " for="cargo2" styleClass="control-label col-md-4" />
+                                            <h:outputLabel value="Cargos:" for="cargo2" styleClass="control-label col-md-4" />
                                             <div class="col-md-8 col-xs-12 autocomplete">
                                                 <p:autoComplete id="cargo2" multiple="true" completeMethod="#{avaliacaoBean.completeCargo}" value="#{avaliacaoBean.lsCargoColaborador}"
                                                                 var="cargo" itemLabel="#{cargo.car_descricao}" itemValue="#{cargo}" converter="cargoConverter" forceSelection="true">
@@ -128,7 +220,7 @@
                                     </div>
                                     <div class="col-md-12 col-xs-12">
                                         <div class="form-group">
-                                            <h:outputLabel value="Pessoas: " for="pessoa2" styleClass="control-label col-md-4" />
+                                            <h:outputLabel value="Pessoas:" for="pessoa2" styleClass="control-label col-md-4" />
                                             <div class="col-md-8 col-xs-12 autocomplete">
                                                 <p:autoComplete id="pessoa2" multiple="true" completeMethod="#{avaliacaoBean.completePessoa}" value="#{avaliacaoBean.lsPessoaColaborador}"
                                                                 var="pessoa" itemLabel="#{pessoa.pes_nome}" itemValue="#{pessoa}" converter="pessoaConverter" forceSelection="true">
@@ -143,11 +235,12 @@
                             </div>
                         </div>
                     </div>
+                    <hr style="width: 100%; margin-top: 0; border-top-color: #ccc;"/>
                     <div class="row">
                         <div class="col-md-12 col-xs-12">
                             <div class="form-group">
-                                <h:outputLabel value="Observação: " for="observacao" styleClass="control-label col-md-2" />
-                                <div class="col-md-10 col-sm-12">
+                                <h:outputLabel value="Observação:" for="observacao" styleClass="control-label col-md-1" />
+                                <div class="col-md-12 col-sm-12">
                                     <h:inputTextarea id="observacao" value="#{avaliacaoBean.avaliacao.ava_observacao}" title="Observação" styleClass="form-control" pt:autofocus=""/>
                                 </div>
                             </div>
@@ -157,7 +250,7 @@
                     <div class="form-group">
                         <div class="col-md-offset-1 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
                             <h:link styleClass="btn btn-default" value="Cancelar" outcome="#{avaliacaoBean.listar()}" />
-                            <h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{avaliacaoBean.salvar()}"></h:commandButton>
+                            <h:commandButton styleClass="btn btn-primary" value="Salvar e Avançar" action="#{avaliacaoBean.salvar()}"></h:commandButton>
                         </div>
                     </div>
                 </h:form>

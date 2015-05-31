@@ -10,8 +10,8 @@
     </ui:define>
 
     <ui:define name="breadcrumb">
-        <li>Avaliação</li>
-        <li><h:link value="${tipoCompetenciaBean.pTitle}" outcome="/faces/view/ad/tipocompetencialst" /></li>
+        <li><h:link value="#{tipoCompetenciaBean.pTitle}" outcome="/faces/view/ad/tipocompetencialst" /></li>
+        <li><h:link value="${tipoCompetenciaBean.sTitle}"/></li>
     </ui:define>
 
     <ui:define name="main-content">

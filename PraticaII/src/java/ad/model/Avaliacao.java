@@ -35,10 +35,10 @@ public class Avaliacao implements Serializable {
 
     private int ava_status;
     private String ava_nome;
-    @Temporal(javax.persistence.TemporalType.DATE)
+//    @Temporal(javax.persistence.TemporalType.DATE)
     private Date ava_dataInicial;
     private String ava_observacao;
-    @Temporal(javax.persistence.TemporalType.DATE)
+//    @Temporal(javax.persistence.TemporalType.DATE)
     private Date ava_dataFinal;
 
     public Avaliacao() {
@@ -118,9 +118,15 @@ public class Avaliacao implements Serializable {
 
     public String getStatus() {
         if (ava_status == 1) {
-            return "Ativo";
+            return "Aguardando Início";
+        } else if (ava_status == 2) {
+            return "Em Andamento";
+        } else if (ava_status == 3) {
+            return "Concluída";
+        } else if (ava_status == 4) {
+            return "Cancelada";
         } else {
-            return "Inativo";
+            return "Nenhum";
         }
     }
 
@@ -128,5 +134,4 @@ public class Avaliacao implements Serializable {
         return "10%";
     }
 
-  
 }

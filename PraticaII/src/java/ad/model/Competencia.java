@@ -74,9 +74,11 @@ public class Competencia implements Serializable {
 ////////////////////////////////////////////////////////////////
     public String getStatus() {
         if (cmp_status == 1) {
-            return "Ativo";
+            return "Ativa";
+        } else if (cmp_status == 2) {
+            return "Inativa";
         } else {
-            return "Inativo";
+            return "Nenhum";
         }
     }
 

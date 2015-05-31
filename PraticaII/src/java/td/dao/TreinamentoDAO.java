@@ -8,13 +8,13 @@ import org.hibernate.Transaction;
 import util.HibernateUtil;
 
 public class TreinamentoDAO {
-    
+
     private Session session;
-    
+
     public TreinamentoDAO() {
         session = HibernateUtil.getSessionFactory().openSession();
     }
-    
+
     public void insert(Treinamento c) {
         Transaction t = session.beginTransaction();
         session.save(c);
@@ -33,7 +33,7 @@ public class TreinamentoDAO {
         t.commit();
     }
 
-    public Treinamento findById(String id) {
+    public Treinamento findById(int id) {
         return (Treinamento) session.load(Treinamento.class, id);
     }
 

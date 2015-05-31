@@ -12,15 +12,15 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="trd_treinamento")
-public class Treinamento implements Serializable{
-    
+@Table(name = "trd_treinamento")
+public class Treinamento implements Serializable {
+
     public static final String sTitle = "Treinamento";
     public static final String pTitle = "Treinamentos";
-    
+
     @Id
-    @SequenceGenerator(name="trd_treinamento_pk_sequence", sequenceName="trd_treinamento_id_seq")
-    @GeneratedValue(strategy=GenerationType.AUTO, generator="trd_treinamento_pk_sequence")
+    @SequenceGenerator(name = "trd_treinamento_pk_sequence", sequenceName = "trd_treinamento_id_seq")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "trd_treinamento_pk_sequence")
     private int tre_codigo;
     private String tre_descricao;
     private Time tre_cargahoraria;
@@ -69,7 +69,7 @@ public class Treinamento implements Serializable{
     public void setTre_status(int tre_status) {
         this.tre_status = tre_status;
     }
-      
+
     public Local getLocal() {
         return local;
     }
@@ -77,4 +77,27 @@ public class Treinamento implements Serializable{
     public void setLocal(Local local) {
         this.local = local;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 23 * hash + this.tre_codigo;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Treinamento other = (Treinamento) obj;
+        if (this.tre_codigo != other.tre_codigo) {
+            return false;
+        }
+        return true;
+    }
+
 }
