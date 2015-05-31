@@ -38,8 +38,8 @@ public class CidadeDAO {
         t.commit();
     }
 
-    public Cidade findById(String cid_cep) {
-        return (Cidade) session.load(Cidade.class, cid_cep);
+    public Cidade findById(int cid_codigo) {
+        return (Cidade) session.load(Cidade.class, cid_codigo);
     }
 
     public List<Cidade> findAll() {

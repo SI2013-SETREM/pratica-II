@@ -1,5 +1,6 @@
 package td.model;
 
+import cfg.model.Cidade;
 import cfg.model.Empresa;
 import java.io.Serializable;
 import javax.persistence.Entity;
@@ -27,6 +28,17 @@ public class Local implements Serializable{
     @ManyToOne
     @JoinColumn(name = "emp_codigo")
     private Empresa empresa;
+    @ManyToOne
+    @JoinColumn(name = "cid_codigo")
+    private Cidade cidade;
+
+    public Cidade getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(Cidade cidade) {
+        this.cidade = cidade;
+    }
 
     public int getLoc_codigo() {
         return loc_codigo;

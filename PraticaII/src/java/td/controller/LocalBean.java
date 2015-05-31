@@ -1,5 +1,9 @@
 package td.controller;
 
+import cfg.dao.CidadeDAO;
+import cfg.dao.EmpresaDAO;
+import cfg.model.Cidade;
+import cfg.model.Empresa;
 import java.util.List;
 import td.dao.LocalDAO;
 import td.model.Local;
@@ -15,10 +19,18 @@ public class LocalBean {
     private final String sTitle = Local.sTitle;
     private final String pTitle = Local.pTitle;
     
+    private List<Cidade> lstcidade;
+    private Cidade cidade = new Cidade();
+    private CidadeDAO cidadedao = new CidadeDAO();
+    
+    private List<Empresa> lstempresa;
+    private Empresa empresa = new Empresa();
+    private EmpresaDAO empresadao = new EmpresaDAO();
+    
     private Local local = new Local();
     private LocalDAO dao = new LocalDAO();
     private DataModel locais;
-
+   
     public String getsTitle() {
         return sTitle;
     }
@@ -75,5 +87,23 @@ public class LocalBean {
 
     public String listar() {
         return "locallst";
+    }
+    
+    public List<Cidade> getLstcidade() {
+        lstcidade = cidadedao.findAll();
+        return lstcidade;
+    }
+
+    public void setLstcidade(List<Cidade> lstcidade) {
+        this.lstcidade = lstcidade;
+    }
+
+    public List<Empresa> getLstempresa() {
+        lstempresa = empresadao.findAll();
+        return lstempresa;
+    }
+
+    public void setLstempresa(List<Empresa> lstempresa) {
+        this.lstempresa = lstempresa;
     }
 }

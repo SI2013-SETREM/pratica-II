@@ -41,6 +41,15 @@
                             </h:selectOneMenu>
                         </div>
                     </div>
+
+                    <div class="form-group">
+                        <h:outputLabel value="Curso: " for="curso" styleClass="control-label col-sm-1" />
+                        <div class="col-md-6 col-sm-12">
+                            <h:selectOneMenu id="curso" converter="cursoConverter" value="#{treinamentoBean.treinamento.curso}" styleClass="form-control" pt:autofocus="" >
+                                <f:selectItems value="#{treinamentoBean.lstcurso}" var="tipe" itemLabel="#{tipe.cur_nome}"/>
+                            </h:selectOneMenu>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <h:outputLabel value="Carga Horária: " for="tre_cargahoraria" styleClass="control-label col-sm-1" />
                         <div class="col-md-6 col-sm-12">

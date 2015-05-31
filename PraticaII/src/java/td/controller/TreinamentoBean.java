@@ -7,7 +7,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
+import td.dao.CursoDAO;
 import td.dao.LocalDAO;
+import td.model.Curso;
 import td.model.Local;
 
 @ManagedBean
@@ -20,6 +22,10 @@ public class TreinamentoBean {
     private List<Local> lstlocal;
     private Local local = new Local();
     private LocalDAO localdao = new LocalDAO();
+    
+    private List<Curso> lstcurso;
+    private Curso curso = new Curso();
+    private CursoDAO cursodao = new CursoDAO();
     
     private Treinamento treinamento = new Treinamento();
     private TreinamentoDAO dao = new TreinamentoDAO();
@@ -90,5 +96,14 @@ public class TreinamentoBean {
 
     public void setLstlocal(List<Local> i) {
         this.lstlocal = i;
+    }
+    
+    public List<Curso> getLstcurso() {
+        lstcurso = cursodao.findAll();
+        return lstcurso;
+    }
+
+    public void setLstcurso(List<Curso> lstcurso) {
+        this.lstcurso = lstcurso;
     }
 }

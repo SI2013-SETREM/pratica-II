@@ -33,7 +33,7 @@ public class CursoDAO {
         t.commit();
     }
 
-    public Curso findById(String id) {
+    public Curso findById(int id) {
         return (Curso) session.load(Curso.class, id);
     }
 

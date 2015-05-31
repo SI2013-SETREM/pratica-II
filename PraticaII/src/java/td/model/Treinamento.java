@@ -29,6 +29,17 @@ public class Treinamento implements Serializable {
     @ManyToOne
     @JoinColumn(name = "loc_codigo")
     private Local local;
+    @ManyToOne
+    @JoinColumn(name = "cur_codigo")
+    private Curso curso;
+
+    public Curso getCurso() {
+        return curso;
+    }
+
+    public void setCurso(Curso curso) {
+        this.curso = curso;
+    }
 
     public int getTre_codigo() {
         return tre_codigo;
