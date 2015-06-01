@@ -3,6 +3,7 @@ package csb.dao;
 import cfg.model.Pessoa;
 import csb.model.Cargo;
 import csb.model.Setor;
+import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -46,7 +47,26 @@ public class CargoDAO {
         return q.list();
     }
 
-    public TreeNode arvoreSetor() {
+    public List<Cargo> findTree(int id) {
+        String s = "from Cargo";
+        if (id != 0) {
+            s += " where car_pai="+id;
+        }
+        Query q = session.createQuery(s);
+        return q.list();
+    }
+    
+    public TreeNode arvoreCargo(List<Cargo> lista, int id, TreeNode node) {
+        List<Cargo> tree = this.findTree(id);
+        TreeNode f;
+        for (Cargo c : tree) {
+             f = new DefaultTreeNode(c.getCar_descricao(), node);
+            arvoreCargo(tree, c.getCar_codigo(), node);
+        }
+        return node;
+    }
+
+    public TreeNode arvoreSetorr() {
         TreeNode raiz = new DefaultTreeNode("raiz", null);
         List<Cargo> cargos = this.findAll();
         for (Cargo c : cargos) {
@@ -76,5 +96,4 @@ public class CargoDAO {
         return session.createQuery("from Cargo where 1 = 1 " + sqlCargo).list();
     }
 
-  
 }

@@ -38,7 +38,7 @@ public class RecrutamentoCargoBean {
 
     @PostConstruct
     public void init() {
-        arvoreCargos = daocargo.arvoreSetor();
+        arvoreCargos = daocargo.arvoreCargo(null, 0, null);
     }
 
     public String getsTitle() {
