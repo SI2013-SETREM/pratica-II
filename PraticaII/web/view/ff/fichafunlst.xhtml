@@ -37,7 +37,7 @@
                                 <f:facet name="header">
                                     <h:outputText value="Nome do Funcionário"/>
                                 </f:facet>
-                                 <h:outputText value="#{item.pes_nome}"/>
+                                 <h:outputText value="#{item.pessoa.pes_nome}"/>
                             </h:column>
                             <h:column headerClass="col-editar-header">
                                 <f:facet name="header">
@@ -51,7 +51,7 @@
                                 <f:facet name="header">
                                     <h:outputText value="Visualizar"/>
                                 </f:facet>
-                                <h:commandLink title="Visualalizar Fichafuncional" action="#{fichaFuncionalBean.formFicha(getPes_codigo())}" >
+                                <h:commandLink title="Visualalizar Fichafuncional" action="#{fichaFuncionalBean.select()}" >
                                     <i class="fa fa-file-text-o"></i> Visualizar
                                 </h:commandLink>
                             </h:column>
