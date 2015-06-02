@@ -15,6 +15,8 @@ import util.HibernateUtil;
 public class CargoDAO {
 
     private Session session;
+    private TreeNode root;
+     private TreeNode filho;
 
     public CargoDAO() {
         session = HibernateUtil.getSessionFactory().openSession();
@@ -51,40 +53,26 @@ public class CargoDAO {
         String s = "from Cargo";
         if (id != 0) {
             s += " where car_pai="+id;
+        }else{
+            s += " where car_pai=null";
         }
         Query q = session.createQuery(s);
         return q.list();
     }
     
-    public TreeNode arvoreCargo(List<Cargo> lista, int id, TreeNode node) {
+    public TreeNode arvoreCargo(){
+        root=new DefaultTreeNode("root",null);
+        filho=new DefaultTreeNode("Cargos", root);
+        treeCargo(null, 0, filho);
+        return root;
+    }
+    public void treeCargo(List<Cargo> lista, int id, TreeNode node) {
         List<Cargo> tree = this.findTree(id);
         TreeNode f;
         for (Cargo c : tree) {
              f = new DefaultTreeNode(c.getCar_descricao(), node);
-            arvoreCargo(tree, c.getCar_codigo(), node);
+            treeCargo(tree, c.getCar_codigo(), f);
         }
-        return node;
-    }
-
-    public TreeNode arvoreSetorr() {
-        TreeNode raiz = new DefaultTreeNode("raiz", null);
-        List<Cargo> cargos = this.findAll();
-        for (Cargo c : cargos) {
-            if (c.getCar_pai() == null) {
-                new DefaultTreeNode(c, raiz);
-            } else {
-//                Cargo p = new Cargo();
-//                p.setCar_descricao("raiz: " + c.getCar_descricao() + ":" + String.valueOf(raiz.getChildCount()));
-//                new DefaultTreeNode(p, raiz);
-                for (TreeNode t : raiz.getChildren()) {
-                    if (c.getCar_pai().getCar_codigo() == ((Cargo) t.getData()).getCar_codigo()) {
-                        new DefaultTreeNode(c, t);
-                        break;
-                    }
-                }
-            }
-        }
-        return raiz;
     }
 
     public List<Cargo> searchCargo(String name) {

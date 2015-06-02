@@ -31,6 +31,7 @@ public class RecrutamentoCargoBean {
     private DataModel recrutamentoCargos;
     private CargoDAO daocargo = new CargoDAO();
     private TreeNode arvoreCargos;
+    private TreeNode selectedNode;
 
     public RecrutamentoCargoBean() {
 
@@ -38,7 +39,7 @@ public class RecrutamentoCargoBean {
 
     @PostConstruct
     public void init() {
-        arvoreCargos = daocargo.arvoreCargo(null, 0, null);
+        arvoreCargos = daocargo.arvoreCargo();
     }
 
     public String getsTitle() {
@@ -77,6 +78,15 @@ public class RecrutamentoCargoBean {
     public TreeNode getArvoreCargos() {
         return arvoreCargos;
     }
+
+    public TreeNode getSelectedNode() {
+        return selectedNode;
+    }
+
+    public void setSelectedNode(TreeNode selectedNode) {
+        this.selectedNode = selectedNode;
+    }
+    
 
     public String insert() {
         dao.insert(recrutamentoCargo);
