@@ -27,14 +27,14 @@
                         </div>
                     </div>-->
                     <div class="form-group">
-                        <h:outputLabel value="Nome" for="repNome" styleClass="control-label col-sm-1" />
+                        <h:outputLabel value="Nome" for="repNome" styleClass="control-label col-sm-2" />
                         <div class="col-md-6 col-sm-12">
-                            <h:inputText id="repNome" value="#{repositorioBean.repositorio.rep_nome}" title="repNome" styleClass="form-control" pt:autofocus="" />
+                            <h:inputText id="repNome" value="#{repositorioBean.repositorio.rep_nome}" pt:required="required" title="Nome Arquivo" styleClass="form-control" pt:autofocus="" />
                         </div>
                     </div>
                     
                     <div class="form-group">
-                        <h:outputLabel value="Tipo" for="repTipo" styleClass="control-label col-sm-1" />
+                        <h:outputLabel value="Tipo" for="repTipo" styleClass="control-label col-sm-2" />
                         <div style="padding-top: 5px" class="col-md-6 col-sm-12">
                             <h:selectOneMenu value="#{repositorioBean.repositorio.rep_tipo}" id="repTipo" class="form-control">
                                 <f:selectItem itemValue="1" itemLabel="CV Gerado "/>
@@ -47,31 +47,31 @@
                     </div>        
                     
                     <div class="form-group">
-                        <h:outputLabel value="Data" for="repData" styleClass="control-label col-sm-1" />
+                        <h:outputLabel value="Data" for="repData" styleClass="control-label col-sm-2" />
                         <div class="col-md-6 col-sm-12">
-                            <h:inputText id="repData" pt:type="date" value="#{repositorioBean.repositorio.rep_data}" title="repData" styleClass="form-control" pt:autofocus="">
+                            <h:inputText id="repData" pt:type="date" value="#{repositorioBean.repositorio.rep_data}" title="Data" pt:required="required" styleClass="form-control" pt:autofocus="">
                                 <f:convertDateTime pattern="yyyy-MM-dd"/>
                             </h:inputText>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <h:outputLabel value="Nome Arquivo" for="repNomeArquivo" styleClass="control-label col-sm-1" />
+                        <h:outputLabel value="Nome Arquivo" for="repNomeArquivo" styleClass="control-label col-sm-2" />
                         <div class="col-md-6 col-sm-12">
-                            <h:inputText id="repNomeArquivo" value="#{repositorioBean.repositorio.rep_nomearquivo}" title="repNomeArquivo" styleClass="form-control" pt:autofocus="" />
+                            <h:inputText id="repNomeArquivo" value="#{repositorioBean.repositorio.rep_nomearquivo}" title="Nome do Arquivo" pt:required="required" styleClass="form-control" pt:autofocus="" />
                         </div>
                     </div>
                     
 
                     <div class="form-group">
-                        <h:outputLabel value="Extensão" for="repExtensao" styleClass="control-label col-sm-1" />
+                        <h:outputLabel value="Extensão" for="repExtensao" styleClass="control-label col-sm-2" />
                         <div class="col-md-6 col-sm-12">
-                            <h:inputText id="repExtensao" value="#{repositorioBean.repositorio.rep_extensao}" title="repExtensao" styleClass="form-control" pt:autofocus="" />
+                            <h:inputText id="repExtensao" value="#{repositorioBean.repositorio.rep_extensao}" title="Extensão" pt:required="required" styleClass="form-control" pt:autofocus="" />
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <div class="col-md-offset-1 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
+                        <div class="col-md-offset-2 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
                             <h:link styleClass="btn btn-default" value="Cancelar" outcome="#{repositorioBean.listar()}" />
                             <h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{repositorioBean.salvar()}"></h:commandButton>
                         </div>

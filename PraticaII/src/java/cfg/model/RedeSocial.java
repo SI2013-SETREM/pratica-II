@@ -32,7 +32,6 @@ public class RedeSocial implements Serializable {
     private String rsc_urlperfil;
     
     @ManyToOne
-    @JoinColumn(name = "rep_codigo_icone", referencedColumnName = "rep_codigo_icone")
     private Repositorio repositorio;
 
     public RedeSocial() {

@@ -27,12 +27,12 @@ public class Usuario implements Serializable {
     private int usu_codigo;
     private String usu_nome;
     private String usu_senha;
-    private int usu_status;
+    private boolean usu_status;
 
     public Usuario() {
     }
 
-    public Usuario(int usu_codigo, String usu_nome, String usu_senha, int usu_status) {
+    public Usuario(int usu_codigo, String usu_nome, String usu_senha, boolean usu_status) {
         this.usu_codigo = usu_codigo;
         this.usu_nome = usu_nome;
         this.usu_senha = usu_senha;
@@ -63,11 +63,11 @@ public class Usuario implements Serializable {
         this.usu_senha = usu_senha;
     }
 
-    public int getUsu_status() {
+    public boolean getUsu_status() {
         return usu_status;
     }
 
-    public void setUsu_status(int usu_status) {
+    public void setUsu_status(boolean usu_status) {
         this.usu_status = usu_status;
     }
 

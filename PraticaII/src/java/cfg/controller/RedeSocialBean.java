@@ -1,11 +1,14 @@
 package cfg.controller;
 
 import cfg.dao.RedeSocialDAO;
+import cfg.dao.RepositorioDAO;
 import cfg.model.RedeSocial;
+import cfg.model.Repositorio;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
+import java.util.List;
 
 @ManagedBean
 @RequestScoped
@@ -17,6 +20,18 @@ public class RedeSocialBean {
     private RedeSocial redesocial = new RedeSocial();
     private RedeSocialDAO dao = new RedeSocialDAO();
     private DataModel redessociais;
+    private RepositorioDAO repositorioDAO = new RepositorioDAO();
+
+    private List<Repositorio> repositorios;
+
+    public List<Repositorio> getRepositorios() {
+        repositorios = repositorioDAO.findAll();
+        return repositorios;
+    }
+
+    public void setRepositorios(List<Repositorio> repositorios) {
+        this.repositorios = repositorios;
+    }
 
     public RedeSocialBean() {
     }
@@ -48,36 +63,36 @@ public class RedeSocialBean {
 
     public String insert() {
         dao.insert(redesocial);
-        return "redesociallst";
+        return "redeSociallst";
     }
 
     public String edit(RedeSocial i) {
-        redesocial= (RedeSocial) redessociais.getRowData();
-        return "redesociallst";
+        redesocial = (RedeSocial) redessociais.getRowData();
+        return "redeSociallst";
     }
 
     public String update() {
         dao.update(redesocial);
-        return "redesociallst";
+        return "redeSociallst";
     }
 
     public String delete(RedeSocial i) {
         dao.delete(i);
-        return "redesociallst";
+        return "redeSociallst";
     }
 
     public String salvar() {
-        if (redesocial.getRsc_codigo()> 0) {
+        if (redesocial.getRsc_codigo() > 0) {
             dao.update(redesocial);
         } else {
             dao.insert(redesocial);
         }
 
-        return "redesociallst";
+        return "redeSociallst";
     }
 
     public String listar() {
-        return "redesociallst";
+        return "redeSociallst";
     }
 
 }
