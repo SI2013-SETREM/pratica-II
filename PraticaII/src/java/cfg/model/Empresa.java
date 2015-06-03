@@ -176,6 +176,4 @@ public class Empresa implements Serializable {
     public void setEmp_empresa_sistema(int emp_empresa_sistema) {
         this.emp_empresa_sistema = emp_empresa_sistema;
     }
-    
-    
 }
