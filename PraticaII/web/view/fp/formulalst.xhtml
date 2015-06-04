@@ -25,9 +25,9 @@
                 <h:dataTable value="${formulaBean.formulas}" var="item" rendered="${formulaBean.formulas.rowAvailable}" styleClass="dataTable table table-bordered table-striped">
                     <h:column>
                         <f:facet name="header">
-                            <h:outputText value="Código"/>
+                            <h:outputText value="Nome"/>
                         </f:facet>
-                        <h:outputText value="${item.getFor_codigo()}"/>
+                        <h:outputText value="${item.getFor_nome()}"/>
                     </h:column>           
                     <h:column>
                         <f:facet name="header">
