@@ -56,6 +56,7 @@ public class Evento implements Serializable {
     @ManyToOne
     @JoinColumn(name = "for_codigo", referencedColumnName = "for_codigo")
     private Formula formula;
+
     
     //@ManyToOne
     //private Beneficio ben_codigo;
