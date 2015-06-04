@@ -12,7 +12,7 @@
 
     <ui:define name="breadcrumb">
         <li><h:link value="#{avaliacaoBean.getpTitle()}" outcome="/faces/view/ad/avaliacaolst" /></li>
-        <li>#{avaliacaoBean.getsTitle()}</li>
+        <li><h:link value="${avaliacaoBean.getsTitle()}"/></li>
     </ui:define>
 
     <ui:define name="main-content">

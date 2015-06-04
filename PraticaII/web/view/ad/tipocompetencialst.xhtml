@@ -1,28 +1,27 @@
 <ui:composition template="../modelos/default.xhtml"
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-    xmlns:h="http://xmlns.jcp.org/jsf/html"
-    xmlns:f="http://xmlns.jcp.org/jsf/core">
-    
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
     <ui:define name="title">
-        ${tipoCompetenciaBean.pTitle}
+        ${tipoCompetenciaBean.getpTitle()}
     </ui:define>
 
     <ui:define name="breadcrumb">
-        <li>Avaliação</li>
-        <li>${tipoCompetenciaBean.pTitle}</li>
+        <li><h:link value="${tipoCompetenciaBean.getpTitle()}"/></li>
     </ui:define>
 
     <ui:define name="main-content">
         <div class="panel panel-body">
-            <h3><h:outputText value="Lista de ${tipoCompetenciaBean.pTitle}"/></h3>
+            <h3><h:outputText value="Lista de ${tipoCompetenciaBean.getpTitle()}"/></h3>
             <div class="btns-top-table">
                 <h:link outcome="tipocompetenciafrm" styleClass="btn btn-success">
-                    <i class="fa fa-plus"></i> Inserir ${tipoCompetenciaBean.sTitle}
+                    <i class="fa fa-plus"></i> Inserir ${tipoCompetenciaBean.getsTitle()}
                 </h:link>
             </div>
             <h:form>
-                <h:dataTable value="${tipoCompetenciaBean.tipoCompetencias}" var="item" rendered="${tipoCompetenciaBean.tipoCompetencias.rowAvailable}" styleClass="dataTable table table-bordered table-striped">
+                <h:dataTable value="${tipoCompetenciaBean.tipoCompetencias}" var="item" styleClass="dataTable table table-bordered table-striped">
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="Nome"/>
