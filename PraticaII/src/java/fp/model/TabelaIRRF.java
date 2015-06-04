@@ -27,6 +27,7 @@ public class TabelaIRRF implements Serializable{
     @SequenceGenerator (name= "genTabelaIRRF", sequenceName= "segTabelaIRRF", allocationSize = 1)
     @GeneratedValue (strategy = GenerationType.SEQUENCE, generator = "genTabelaIRRF")
     private int tif_codigo;
+    private String tif_nome;
     private Date tif_dataincial;
     private Date tif_datafinal;
     private double tif_valor_deducao;
@@ -42,6 +43,14 @@ public class TabelaIRRF implements Serializable{
         this.tif_codigo = tif_codigo;
     }
 
+    public String getTif_nome() {
+        return tif_nome;
+    }
+
+    public void setTif_nome(String tif_nome) {
+        this.tif_nome = tif_nome;
+    }
+    
     public Date getTif_dataincial() {
         return tif_dataincial;
     }

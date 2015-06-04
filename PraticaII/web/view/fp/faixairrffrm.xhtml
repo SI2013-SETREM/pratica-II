@@ -11,7 +11,7 @@
 
     <ui:define name="breadcrumb">
         <li>Configurações</li>
-        <li><h:link value="${faixaIRRFBean.pTitle}" outcome="/faces/view/fp/eventolst" /></li>
+        <li><h:link value="${faixaIRRFBean.pTitle}" outcome="/faces/view/fp/tabelairrflst" /></li>
     </ui:define>
 
     <ui:define name="main-content">
@@ -19,52 +19,49 @@
             <h3><h:outputText value="Dados de ${faixaIRRFBean.sTitle}"/></h3>
             <f:view>
                 <h:form styleClass="form-horizontal">
-                    <h:inputHidden id="tifCodigo" value="#{tabelaIRRFBean.tabelaIRRF.tif_codigo}" />
+                    <h:inputHidden id="frfCodigo" value="#{faixaIRRFBean.faixaIRRF.frf_codigo}" />
 <!--                            <div class="form-group">
-                        <h:outputLabel value="Código:" for="tifcodigo" styleClass="control-label col-sm-1" />
+                        <h:outputLabel value="Código:" for="frfcodigo" styleClass="control-label col-sm-1" />
                         <div class="col-md-6">
-                            <h:inputText id="tifcodigo" value="#{tabelaIRRFBean.tabelaIRRF.tif_codigo}" title="tifcodigo" styleClass="form-control" />
+                            <h:inputText id="frfcodigo" value="#{faixaIRRFBean.faixaIRRF.frf_codigo}" title="frfcodigo" styleClass="form-control" />
                         </div>
                     </div>-->
 
-                        <div class="col-md-6 col-xs-12">
-                            <div class="form-group">
-                                <h:outputLabel value="Data de Início: " for="datainicial" styleClass="control-label col-md-4" />
-                                <div class="col-md-8 col-xs-12">
-                                    <h:inputText id="datainicial" value="#{tabelaIRRFBean.tabelaIRRF.tif_dataincial}" title="Data de Início" styleClass="form-control" pt:autofocus="">
-                                        <f:convertDateTime pattern="dd/MM/yyyy"/></h:inputText>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 col-xs-12">
-                            <div class="form-group">
-                                <h:outputLabel value="Data Final: " for="datafinal" styleClass="control-label col-md-4" />
-                                <div class="col-md-8 col-xs-12">
-                                    <h:inputText id="datafinal" value="#{tabelaIRRFBean.tabelaIRRF.tif_datafinal}" title="Data Final" styleClass="form-control" pt:autofocus="">
-                                        <f:convertDateTime pattern="dd/MM/yyyy"/></h:inputText>
-                                </div>
-                            </div>
-                        </div>
-
                     <div class="form-group">
-                        <h:outputLabel value="Valor Dedução:" for="tifValorDeducao" styleClass="control-label col-sm-1" />
+                        <h:outputLabel value="Salário Inicial:" for="frfSalarioInicial" styleClass="control-label col-sm-1" />
                         <div class="col-md-6 col-sm-12">
-                            <h:inputText id="tifValorDeducao" value="#{tabelaIRRFBean.tabelaIRRF.tif_valor_deducao}" title="tifValorDeducao" styleClass="form-control" pt:autofocus="" />
+                            <h:inputText id="frfSalarioInicial" value="#{faixaIRRFBean.faixaIRRF.frf_salario_inicial}" title="frfSalarioInicial" styleClass="form-control" pt:autofocus="" />
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <h:outputLabel value="Valor Minimo Darf:" for="tifValorMminDarf" styleClass="control-label col-sm-1" />
+                        <h:outputLabel value="Salário Final:" for="frfSalarioFinal" styleClass="control-label col-sm-1" />
                         <div class="col-md-6 col-sm-12">
-                            <h:inputText id="tifValorMminDarf" value="#{tabelaIRRFBean.tabelaIRRF.tif_valor_min_darf}" title="tifValorMminDarf" styleClass="form-control" pt:autofocus="" />
+                            <h:inputText id="frfSalarioFinal" value="#{faixaIRRFBean.faixaIRRF.frf_salario_final}" title="frfSalarioFinal" styleClass="form-control" pt:autofocus="" />
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <h:outputLabel value="Valor Minimo Darf:" for="tifPorPisPasep" styleClass="control-label col-sm-1" />
+                        <h:outputLabel value="Alíquota:" for="frfAliquota" styleClass="control-label col-sm-1" />
                         <div class="col-md-6 col-sm-12">
-                            <h:inputText id="tifPorPisPasep" value="#{tabelaIRRFBean.tabelaIRRF.tif_por_pis_pasep}" title="tifPorPisPasep" styleClass="form-control" pt:autofocus="" />
+                            <h:inputText id="frfAliquota" value="#{faixaIRRFBean.faixaIRRF.frf_aliquota}" title="frfAliquota" styleClass="form-control" pt:autofocus="" />
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <h:outputLabel value="Valor Dedução:" for="frfDeducao" styleClass="control-label col-sm-1" />
+                        <div class="col-md-6 col-sm-12">
+                            <h:inputText id="frfDeducao" value="#{faixaIRRFBean.faixaIRRF.frf_deducao}" title="frfDeducao" styleClass="form-control" pt:autofocus="" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel value="Tabela IRRF: " for="tabelairrf" styleClass="control-label col-sm-2" />
+                        <div class="col-md-6 col-sm-12">
+                            <h:selectOneMenu id="tabelairrf" converter="tabelaIRRFConverter" value="#{faixaIRRFBean.faixaIRRF.tabelairrf}" styleClass="form-control" pt:autofocus="" >
+                                <f:selectItems value="#{faixaIRRFBean.lstTabelaIRRF}" var="tipe" itemLabel="#{tipe.tif_nome}"/>
+                            </h:selectOneMenu>
                         </div>
                     </div>
 
@@ -72,8 +69,8 @@
                    
                     <div class="form-group">
                         <div class="col-md-offset-1 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
-                            <h:link styleClass="btn btn-default" value="Cancelar" outcome="#{tabelaIRRFBean.listar()}" />
-                            <h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{tabelaIRRFBean.salvar()}"></h:commandButton>
+                            <h:link styleClass="btn btn-default" value="Cancelar" outcome="#{faixaIRRFBean.listar()}" />
+                            <h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{faixaIRRFBean.salvar()}"></h:commandButton>
                         </div>
                     </div>
                 </h:form>

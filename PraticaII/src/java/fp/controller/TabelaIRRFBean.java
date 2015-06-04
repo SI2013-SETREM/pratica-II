@@ -89,10 +89,6 @@ public class TabelaIRRFBean {
         return "tabelairrflst";
     }
     
-    public List<FaixaIRRF> getLstFaixaIRRF() {
-        lstfaixairrf = faixairrfdao.findAll();
-        return lstfaixairrf;
-    }
     
 }
 

@@ -55,8 +55,9 @@ public class SerieEventoBean {
     
     public String edit(SerieEvento i) {
         serieevento = (SerieEvento) serieeventos.getRowData();
-        return "serieeventosfrm";
+        return "serieeventofrm";
     }
+   
     
     public String update() {
         dao.update(serieevento);

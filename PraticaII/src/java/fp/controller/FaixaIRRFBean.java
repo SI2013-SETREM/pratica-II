@@ -4,6 +4,7 @@ package fp.controller;
 import fp.dao.FaixaIRRFDAO;
 import fp.dao.TabelaIRRFDAO;
 import fp.model.FaixaIRRF;
+import fp.model.SerieEvento;
 import fp.model.TabelaIRRF;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -22,6 +23,10 @@ public class FaixaIRRFBean {
     private FaixaIRRFDAO dao = new FaixaIRRFDAO();
     private DataModel faixairrfs;
     
+    
+    private List<TabelaIRRF> lsttabelairrf;
+    private TabelaIRRF tabelairrf = new TabelaIRRF();
+    private TabelaIRRFDAO tabelairrfdao = new TabelaIRRFDAO();
         
     public FaixaIRRFBean(){
     }
@@ -53,7 +58,7 @@ public class FaixaIRRFBean {
     
     public String insert() {
         dao.insert(faixairrf);
-        return "faixairrfslst";
+        return "tabelairrflst";
     }
     
     public String edit(FaixaIRRF i) {
@@ -63,27 +68,36 @@ public class FaixaIRRFBean {
     
     public String update() {
         dao.update(faixairrf);
-        return "faixairrflst";
+        return "tabelairrflst";
     }
     
     public String delete(FaixaIRRF i) {
         dao.delete(i);
-        return "faixairrflst";
+        return "tabelairrflst";
     }
     
-    public String salvar() {
+   public String salvar() {
         if (faixairrf.getFrf_codigo()> 0)
             dao.update(faixairrf);
         else 
             dao.insert(faixairrf);
         
-        return "faixairrflst";
+        return "tabelairrflst";
     }
     
     public String listar() {
-        return "faixairrflst";
+        return "tabelairrflst";
     }
     
+    
+     public List<TabelaIRRF> getLstTabelaIRRF() {
+        lsttabelairrf = tabelairrfdao.findAll();
+        return lsttabelairrf;
+    }
+
+    public void setLstTabelaIRRF(List<TabelaIRRF> i) {
+        this.lsttabelairrf = i;
+    }
     
     
 }

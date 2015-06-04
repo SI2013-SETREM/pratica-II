@@ -32,7 +32,7 @@ public class FaixaIRRF implements Serializable {
     private double frf_aliquota;
     private double frf_deducao;
    
-     @ManyToOne
+    @ManyToOne
     @JoinColumn(name = "tif_codigo", referencedColumnName = "tif_codigo")
     private TabelaIRRF tabelairrf;
     
