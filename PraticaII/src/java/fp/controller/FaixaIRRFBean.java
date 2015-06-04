@@ -43,7 +43,7 @@ public class FaixaIRRFBean {
         return faixairrf;
     }
 
-    public void setFaixaIRRF(FaixaIRRF tabelairrf) {
+    public void setFaixaIRRF(FaixaIRRF faixairrf) {
         this.faixairrf = faixairrf;
     }
 
@@ -52,7 +52,7 @@ public class FaixaIRRFBean {
         return faixairrfs;
     }
 
-    public void setFaixaIRRFs(DataModel tabelairrfs) {
+    public void setFaixaIRRFs(DataModel faixairrfs) {
         this.faixairrfs = faixairrfs;
     }
     
