@@ -20,7 +20,16 @@
             <f:view>
                 <h:form styleClass="form-horizontal">
                     <h:inputHidden id="tifCodigo" value="#{tabelaINSSBean.tabINSS.tbs_codigo}" />
-             
+              
+                    
+                        <div class="form-group">
+                            <h:outputLabel value="Nome da Tabela: " for="nometabelainss" styleClass="control-label col-md-3" />
+                            <div class="col-md-8 col-xs-12">
+                                <h:inputText id="datainicial" value="#{tabelaINSSBean.tabINSS.tbs_nome}" title="Nome da Tabela" styleClass="form-control" pt:autofocus="">
+                                    <f:convertDateTime pattern="dd/MM/yyyy"/></h:inputText>
+                            </div>
+                        </div>
+                 
 
                     <div class="col-md-6 col-xs-12">
                         <div class="form-group">
@@ -74,19 +83,19 @@
                             <h:inputText id="tisAbUni" value="#{tabelaINSSBean.tabINSS.tbs_ab_imp_uni}" title="tifPorPisPasep" styleClass="form-control" pt:autofocus="" />
                         </div>
                     </div>
-                     <div class="form-group">
+                    <div class="form-group">
                         <h:outputLabel value="Aliquota Normal:" for="tifPorPisPasep" styleClass="control-label col-sm-1" />
                         <div class="col-md-6 col-sm-12">
                             <h:inputText id="tisAlinormal" value="#{tabelaINSSBean.tabINSS.tbs_ali_normal}" title="tifPorPisPasep" styleClass="form-control" pt:autofocus="" />
                         </div>
                     </div>
-                     <div class="form-group">
+                    <div class="form-group">
                         <h:outputLabel value="Aliquota Lei 9.01/98:" for="tifPorPisPasep" styleClass="control-label col-sm-1" />
                         <div class="col-md-6 col-sm-12">
                             <h:inputText id="tisAlil1" value="#{tabelaINSSBean.tabINSS.tbs_ali_lei1}" title="tifPorPisPasep" styleClass="form-control" pt:autofocus="" />
                         </div>
                     </div>
-                     <div class="form-group">
+                    <div class="form-group">
                         <h:outputLabel value="Aliquota Lei 10.097/00:" for="tifPorPisPasep" styleClass="control-label col-sm-1" />
                         <div class="col-md-6 col-sm-12">
                             <h:inputText id="tisAlil2" value="#{tabelaINSSBean.tabINSS.tbs_ali_lei2}" title="tifPorPisPasep" styleClass="form-control" pt:autofocus="" />

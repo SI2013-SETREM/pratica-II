@@ -23,7 +23,12 @@
             </div>
             <h:form>
                 <h:dataTable value="${tabelaINSSBean.tabsINSS}" var="item" rendered="${tabelaINSSBean.tabsINSS.rowAvailable}" styleClass="dataTable table table-bordered table-striped">
-                    
+                      <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Nome"/>
+                        </f:facet>
+                        <h:outputText value="${item.getTbs_nome()}"/>
+                    </h:column>
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="Data Inicial"/>
@@ -74,24 +79,6 @@
                         </f:facet>
                         <h:outputText value="${item.getTbs_ali_normal()}"/>
                     </h:column>
-                      <!--<h:column>-->
-                        <!--<f:facet name="header">-->
-                            <!--<h:outputText value="Aliquota Lei 9.01/98"/>-->
-                        <!--</f:facet>-->
-                        <!--<h:outputText value="${item.getTbs_ali_lei1()}"/>-->
-                    <!--</h:column>-->
-                     <!--<h:column>-->
-                        <!--<f:facet name="header">-->
-                            <!--<h:outputText value="Aliquota Lei 10.097/00"/>-->
-                        <!--</f:facet>-->
-                        <!--<h:outputText value="${item.getTbs_ali_lei2()}"/>-->
-                    <!--</h:column>-->
-                    
-                    
-                    
-                    
-                    
-                    
                     <h:column headerClass="col-editar-header">
                         <f:facet name="header">
                             <h:outputText value="Editar"/>
