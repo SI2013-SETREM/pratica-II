@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
+
 @Table(name = "avd_pessoas_avaliacao")
 @IdClass(PessoasAvaliacao.PessoasAvaliacaoPK.class)
 public class PessoasAvaliacao implements Serializable {
@@ -19,6 +20,7 @@ public class PessoasAvaliacao implements Serializable {
     private static final String sTitle = "Avaliados";
     private static final String sTitleDetails = "Detalhes da Avaliação";
     private static final String pTitle = "Avaliações";
+
     @Id
     @ManyToOne
     @JoinColumn(name = "pes_codigo", referencedColumnName = "pes_codigo")
@@ -42,9 +44,8 @@ public class PessoasAvaliacao implements Serializable {
         protected Pessoa avaliador;
         protected Avaliacao avaliacao;
 
-        public PessoasAvaliacaoPK() {
-        }
-
+//        public PessoasAvaliacaoPK() {
+//        }
         public PessoasAvaliacaoPK(Pessoa colaboradorAvaliado, Pessoa avaliador, Avaliacao avaliacao) {
             this.colaboradorAvaliado = colaboradorAvaliado;
             this.avaliador = avaliador;
@@ -80,10 +81,18 @@ public class PessoasAvaliacao implements Serializable {
             }
             return true;
         }
-
     }
 
     public PessoasAvaliacao() {
+    }
+
+    public PessoasAvaliacao(Pessoa colaboradorAvaliado, Pessoa avaliador, Avaliacao avaliacao, double pea_media, String pea_observacao, Date pea_datahora_resposta) {
+        this.colaboradorAvaliado = colaboradorAvaliado;
+        this.avaliador = avaliador;
+        this.avaliacao = avaliacao;
+        this.pea_media = pea_media;
+        this.pea_observacao = pea_observacao;
+        this.pea_datahora_resposta = pea_datahora_resposta;
     }
 
     public Pessoa getColaboradorAvaliado() {
@@ -133,6 +142,7 @@ public class PessoasAvaliacao implements Serializable {
     public void setPea_datahora_resposta(Date pea_datahora_resposta) {
         this.pea_datahora_resposta = pea_datahora_resposta;
     }
+//------MAPEARRRR
 
     public static String getsTitle() {
         return sTitle;

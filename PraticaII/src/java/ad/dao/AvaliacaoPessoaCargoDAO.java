@@ -38,7 +38,24 @@ public class AvaliacaoPessoaCargoDAO {
     }
 
     public List<AvaliacaoPessoaCargo> findAll() {
-        Query q = session.createQuery("from Avaliacao_pessoa_cargo");
+        Query q = session.createQuery("from PerguntaPessoaAvaliacao");
         return q.list();
     }
+
+    public List<AvaliacaoPessoaCargo> getListAvaliacaoPessoaCargo(int ava_codigo, int pes_codigo, int car_codigo) {
+        String sql = "";
+        if (ava_codigo != 0) {
+            sql += " and ava_codigo = " + ava_codigo;
+        }
+        if (pes_codigo != 0) {
+            sql += " and pes_codigo = " + pes_codigo;
+        }
+        if (car_codigo != 0) {
+            sql += " and car_codigo = " + car_codigo;
+        }
+
+        Query q = session.createQuery("from PerguntaPessoaAvaliacao where 1=1 " + sql);
+        return q.list();
+    }
+
 }

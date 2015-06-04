@@ -88,6 +88,7 @@ public class PessoasAvaliacaoBean {
 
     public String getListPessoaAvaliacoes(int ava_id) {
         this.pessoas_avaliacoes = new ListDataModel(dao.GetListPessoasAvaliacao(ava_id, 0, 0));
+        
         return "pessoasavaliacaolst";
     }
 

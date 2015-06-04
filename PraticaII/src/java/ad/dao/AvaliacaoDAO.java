@@ -1,6 +1,7 @@
 package ad.dao;
 
 import ad.model.Avaliacao;
+import csb.model.CargosPessoa;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -42,4 +43,5 @@ public class AvaliacaoDAO {
         //return session.createSQLQuery("select * from avd_avaliacao").list();
     }
 
+   
 }
