@@ -19,7 +19,6 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
-import td.dao.TreinamentoDAO;
 import td.model.Treinamento;
 
 @ManagedBean
@@ -27,10 +26,9 @@ public class AvaliacaoBean {
 
     private final String sTitle = Avaliacao.sTitle;
     private final String pTitle = Avaliacao.pTitle;
+    private String Title = "Dados da " + sTitle;
     private boolean bautoava;
     private boolean bcomp;
-    private char ctipo;
-    private char caval;
     private List<Cargo> lsCargoAvaliador;
     private List<Cargo> lsCargoColaborador;
     private List<Pessoa> lsPessoaAvaliador;
@@ -38,8 +36,6 @@ public class AvaliacaoBean {
     private CargoDAO cargodao = new CargoDAO();
     private PessoaDAO pessoadao = new PessoaDAO();
     private List<AvaliacaoPessoaCargo> lsAvPesCargo;
-    private List<Treinamento> lstreinamento;
-    private TreinamentoDAO treinDAO = new TreinamentoDAO();
 
     private Avaliacao avaliacao;
     private AvaliacaoDAO dao = new AvaliacaoDAO();
@@ -50,6 +46,12 @@ public class AvaliacaoBean {
 
     private List<AvaliacaoPessoaCargo> lsAvaliacaoPessoaCargo;
     private List<PessoasAvaliacao> lsPessoasAvaliacao;///Lista de PessoasAvaliação
+
+    public String AvaliacaoTreinamento(Treinamento t) {
+        avaliacao.setTreinamento(t);
+        Title = "Dados do Treinamento " + t.getTre_descricao();
+        return "avaliacaofrm";
+    }
 
     public AvaliacaoBean() {
     }
@@ -67,10 +69,12 @@ public class AvaliacaoBean {
             avaliacao = new Avaliacao();
             avaliacao.setAva_dataInicial(new Date());
             avaliacao.setAva_dataFinal(new Date());
-            ctipo = 0;
             avaliacao.setAva_status(0);
         }
         return avaliacao;
+    }
+
+    private void Status() {
     }
 
     public void setAvaliacao(Avaliacao avaliacao) {
@@ -130,14 +134,13 @@ public class AvaliacaoBean {
         if (avaliacao.getAva_codigo() > 0) {
             dao.update(avaliacao);
         } else {
-            if (caval == 1) {
-                avaliacao.setTreinamento(null);
-            }
-            if (avaliacao.getStatus() != null) {
+            if (ValidaDados()) {
                 dao.insert(avaliacao);
-            }
-            if (SalvaListas()) {
-                return "questionariofrm";
+                if (SalvaListas()) {
+                    return "questionariofrm";
+                } else {
+                    return "avaliacaofrm";
+                }
             } else {
                 return "avaliacaofrm";
             }
@@ -155,6 +158,10 @@ public class AvaliacaoBean {
 
     public String getpTitle() {
         return pTitle;
+    }
+
+    public String getTitle() {
+        return Title;
     }
 
     public List<Cargo> getLsCargoAvaliador() {
@@ -205,28 +212,20 @@ public class AvaliacaoBean {
         this.bcomp = bcomp;
     }
 
-    public char getCtipo() {
-        return ctipo;
-    }
-
-    public void setCtipo(char ctipo) {
-        this.ctipo = ctipo;
-    }
-
-    public List<Treinamento> getLstreinamento() {
-        lstreinamento = treinDAO.findAll();
-        return lstreinamento;
-    }
-
-    public char getCaval() {
-        return caval;
-    }
-
-    public void setCaval(char caval) {
-        this.caval = caval;
-    }
-
     private boolean SalvaListas() {
+        try {
+            SalvarAvaPesCargo(filtraCargos(lsCargoColaborador), filtraPessoas(lsPessoaColaborador), 1);//filtraPessoas(
+            SalvarAvaPesCargo(filtraCargos(lsCargoAvaliador), filtraPessoas(lsPessoaAvaliador), 2);
+            SalvarPesAval(JuntarCargosComPessoas(lsCargoAvaliador, lsPessoaAvaliador), JuntarCargosComPessoas(lsCargoColaborador, lsPessoaColaborador));
+            return true;
+        } catch (Exception e) {
+            String erro = e.toString();
+            Title = erro;
+        }
+        return false;
+    }
+
+    private boolean ValidaDados() {//Verifica as Listas se não estão vazias
         if (lsCargoAvaliador == null) {
             lsCargoAvaliador = new ArrayList<>();
         }
@@ -239,19 +238,9 @@ public class AvaliacaoBean {
         if (lsPessoaColaborador == null) {
             lsPessoaColaborador = new ArrayList<>();
         }
-        if (ValidaListas()) {
-            try {
-                SalvarAvaPesCargo(filtraCargos(lsCargoColaborador), filtraPessoas(lsPessoaColaborador), 1);
-                SalvarAvaPesCargo(filtraCargos(lsCargoAvaliador), filtraPessoas(lsPessoaAvaliador), 2);
-                SalvarPesAval(JuntarCargosComPessoas(lsCargoAvaliador, lsPessoaAvaliador), JuntarCargosComPessoas(lsCargoColaborador, lsPessoaColaborador));
-                return true;
-            } catch (Exception e) {
-            }
+        if (avaliacao.getStatus() == null) {
+            return false;
         }
-        return false;
-    }
-
-    private boolean ValidaListas() {//Verifica as Listas se não estão vazias
         if (lsCargoColaborador.isEmpty() && lsPessoaColaborador.isEmpty()) {//Não pode ter uma lista vazia de colaboradores
             return false;
         }
@@ -282,7 +271,7 @@ public class AvaliacaoBean {
                 AvaliacaoPessoaCargo AvaPesCarg = new AvaliacaoPessoaCargo();
                 AvaPesCarg.setApc_status(status);
                 AvaPesCarg.setAvaliacao(avaliacao);
-                AvaPesCarg.setCargo(null);
+                //AvaPesCarg.setCargo(new Cargo());
                 AvaPesCarg.setPessoa(p);
                 avaliacaoPessoaCargoDAO.insert(AvaPesCarg);
             }
@@ -293,7 +282,7 @@ public class AvaliacaoBean {
                 AvaPesCarg.setApc_status(status);
                 AvaPesCarg.setAvaliacao(avaliacao);
                 AvaPesCarg.setCargo(c);
-                AvaPesCarg.setPessoa(null);
+                //AvaPesCarg.setPessoa(new Pessoa());
                 avaliacaoPessoaCargoDAO.insert(AvaPesCarg);
             }
         }
@@ -318,8 +307,9 @@ public class AvaliacaoBean {
         List<Pessoa> lsItens = new ArrayList<>();
         if (!lsPessoas.isEmpty()) {
             for (Pessoa p : lsPessoas) {
-                if (!lsCod.contains(p.getPes_codigo())) {
-                    lsCod.add(p.getPes_codigo());
+                int cod = p.getPes_codigo();
+                if (!lsCod.contains(cod)) {
+                    lsCod.add(cod);
                     lsItens.add(p);
                 }
             }

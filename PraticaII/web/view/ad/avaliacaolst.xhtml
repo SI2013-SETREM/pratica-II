@@ -5,30 +5,28 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:define name="title">
-        ${avaliacaoBean.pTitle}
+        ${avaliacaoBean.getpTitle()}
     </ui:define>
 
     <ui:define name="breadcrumb">
-        <li href="avaliacaolst">${avaliacaoBean.pTitle}</li>
+        <li href="avaliacaolst">${avaliacaoBean.getpTitle()}</li>
     </ui:define>
 
     <ui:define name="main-content">
         <div class="panel panel-body">
-            <h3><h:outputText value="Lista de ${avaliacaoBean.pTitle}"/></h3>
+            <h3><h:outputText value="Lista de ${avaliacaoBean.getpTitle()}"/></h3>
             <div class="btns-top-table">
                 <h:link outcome="avaliacaofrm" styleClass="btn btn-success">
-                    <i class="fa fa-plus"></i> Inserir ${avaliacaoBean.sTitle}
+                    <i class="fa fa-plus"></i> Inserir ${avaliacaoBean.getsTitle()}
                 </h:link>
             </div>
             <h:form>
-                <h:dataTable value="${avaliacaoBean.avaliacoes}" var="item" rendered="${avaliacaoBean.avaliacoes.rowAvailable}" styleClass="dataTable table table-bordered table-striped">
+                <h:dataTable value="${avaliacaoBean.avaliacoes}" var="item" styleClass="dataTable table table-bordered table-striped">
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="Nome"/>
                         </f:facet>
                         <h:outputText value="${item.getAva_nome()}"/>
-                        <!--getAva_nome-->
-
                     </h:column>
 
                     <h:column>
@@ -80,6 +78,7 @@
                             <i class="fa fa-pencil"></i> Editar
                         </h:commandLink>
                     </h:column>
+
                     <h:column headerClass="col-excluir-header">
                         <f:facet name="header">
                             <h:outputText value="Excluir"/>
@@ -88,6 +87,7 @@
                             <i class="fa fa-trash"></i> Excluir
                         </h:commandLink>
                     </h:column>
+
                 </h:dataTable>
             </h:form>
         </div>

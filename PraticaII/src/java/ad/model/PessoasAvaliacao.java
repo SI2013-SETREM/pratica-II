@@ -146,4 +146,11 @@ public class PessoasAvaliacao implements Serializable {
         return pTitle;
     }
 
+    public String getStatus() {
+        if (pea_datahora_resposta == null) {
+            return "Não respondida";
+        } else {
+            return "Respondida";
+        }
+    }
 }

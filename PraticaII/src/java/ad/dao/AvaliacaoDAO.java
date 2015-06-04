@@ -38,8 +38,8 @@ public class AvaliacaoDAO {
     }
 
     public List<Avaliacao> findAll() {
-        Query q = session.createQuery("from Avaliacao");
-        return q.list();
+        return session.createQuery("from Avaliacao").list();
+        //return session.createSQLQuery("select * from avd_avaliacao").list();
     }
 
 }
