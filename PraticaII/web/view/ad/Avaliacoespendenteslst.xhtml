@@ -1,0 +1,68 @@
+<ui:composition template="../modelos/default.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="title">
+        ${avaliacaoBean.getpTitle()}
+    </ui:define>
+
+    <ui:define name="breadcrumb">
+        <li href="avaliacaolst">${avaliacaoBean.getpTitle()}</li>
+    </ui:define>
+
+    <ui:define name="main-content">
+        <div class="panel panel-body">
+            <h3><h:outputText value="Lista de Avaliações Pendentes"/></h3>
+
+            <h:form>
+                <h:dataTable value="${avaliacaoBean.avaliacoes}" var="item" styleClass="dataTable table table-bordered table-striped">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Nome"/>
+                        </f:facet>
+                        <h:outputText value="${item.getAva_nome()}"/>
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Status"/>
+                        </f:facet>
+                        <h:outputText value="${item.getStatus()}"/>
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Data Inicial"/>
+                        </f:facet>
+                        <h:outputText value="${item.getAva_dataInicial()}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Data Final"/>
+                        </f:facet>
+                        <h:outputText value="${item.getAva_dataFinal()}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
+                    </h:column>
+
+
+                    <h:column headerClass="col-editar-header">
+                        <f:facet name="header">
+                            <h:outputText value="Editar"/>
+                        </f:facet>
+                        <h:commandLink action="${avaliacaoBean.edit(item)}">
+                            <i class="fa fa-calculator"></i> Avaliar
+                        </h:commandLink>
+                    </h:column>
+
+
+                </h:dataTable>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>
