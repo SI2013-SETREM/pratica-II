@@ -59,17 +59,17 @@
                             <h:outputText value="Avaliar"/>
                         </f:facet>
                         <h:commandLink action="${competenciaBean.edit(item)}">
-                            <i class="fa fa-pencil"></i> Editar
+                            <i class="fa fa-pencil"></i> Avaliar
                         </h:commandLink>
                     </h:column>
-                    <h:column headerClass="col-excluir-header">
+<!--                    <h:column headerClass="col-excluir-header">
                         <f:facet name="header">
                             <h:outputText value="Excluir"/>
                         </f:facet>
-                        <h:commandLink onclick="return confirm('Deseja realmente excluir o ${competenciaBean.sTitle}?');" action="${competenciaBean.delete(item)}">
+                        <h:commandLink onclick="return confirm('Deseja realmente excluir o {competenciaBean.sTitle}?');" action="{competenciaBean.delete(item)}">
                             <i class="fa fa-trash"></i> Excluir
                         </h:commandLink>
-                    </h:column>
+                    </h:column>-->
                 </h:dataTable>
             </h:form>
         </div>

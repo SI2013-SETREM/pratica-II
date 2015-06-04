@@ -125,13 +125,10 @@ public class Avaliacao implements Serializable {
             return "Concluída";
         } else if (ava_status == 4) {
             return "Cancelada";
+        } else if (ava_status == 5) {
+            return "Deletada";
         } else {
             return "Nenhum";
         }
     }
-
-    public String getTaxa() {
-        return "10%";
-    }
-
 }

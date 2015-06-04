@@ -42,7 +42,7 @@ public class PessoasAvaliacaoBean {
     }
 
     public DataModel getPessoaAvaliacoes() {
-        this.pessoas_avaliacoes = new ListDataModel(dao.findAll());
+        //this.pessoas_avaliacoes = new ListDataModel(dao.findAll());
         return pessoas_avaliacoes;
     }
 
@@ -92,14 +92,12 @@ public class PessoasAvaliacaoBean {
 
     ///---------------------------------- MApear
     public List<PessoasAvaliacao> GetListPessoasAvaliacao(int ava_id, int pes_codigo, int pes_codigo_avaliador) {
-
         lsPessoasAvaliacao = dao.GetListPessoasAvaliacao(ava_id, pes_codigo, pes_codigo_avaliador, false);
         return lsPessoasAvaliacao;
     }
 
     public String getListPessoaAvaliacoes(int ava_id) {
         this.pessoas_avaliacoes = new ListDataModel(dao.GetListPessoasAvaliacao(ava_id, 0, 0, false));
-
         return "pessoasavaliacaolst";
     }
 

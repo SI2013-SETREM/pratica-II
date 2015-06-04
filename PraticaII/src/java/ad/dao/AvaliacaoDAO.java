@@ -39,9 +39,8 @@ public class AvaliacaoDAO {
     }
 
     public List<Avaliacao> findAll() {
-        return session.createQuery("from Avaliacao").list();
+        return session.createQuery("from Avaliacao where ava_status < 5").list();
         //return session.createSQLQuery("select * from avd_avaliacao").list();
     }
 
-   
 }

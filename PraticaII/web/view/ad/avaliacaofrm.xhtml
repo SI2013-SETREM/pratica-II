@@ -127,7 +127,7 @@
                                         <div class="form-group">
                                             <h:outputLabel value="Cargos:" for="cargo1" styleClass="control-label col-md-4" />
                                             <div class="col-md-8 col-xs-12 autocomplete">
-                                                <p:autoComplete id="cargo1" multiple="true" completeMethod="#{avaliacaoBean.completeCargo}" value="#{avaliacaoBean.lsCargoAvaliador}"
+                                                <p:autoComplete pt:disabled="#{avaliacaoBean.avaliacao.ava_codigo > 0}" id="cargo1" multiple="true" completeMethod="#{avaliacaoBean.completeCargo}" value="#{avaliacaoBean.lsCargoAvaliador}"
                                                                 var="cargo" itemLabel="#{cargo.car_descricao}" itemValue="#{cargo}" converter="cargoConverter" forceSelection="true">
                                                     <p:column>
                                                         <h:outputText value="#{cargo.car_descricao}" />
@@ -136,12 +136,11 @@
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="col-md-12 col-xs-12">
                                         <div class="form-group">
                                             <h:outputLabel value="Pessoas:" for="pessoa1" styleClass="control-label col-md-4" />
                                             <div class="col-md-8 col-xs-12 autocomplete">
-                                                <p:autoComplete id="pessoa1" multiple="true" completeMethod="#{avaliacaoBean.completePessoa}" value="#{avaliacaoBean.lsPessoaAvaliador}"
+                                                <p:autoComplete pt:disabled="#{avaliacaoBean.avaliacao.ava_codigo > 0}" id="pessoa1" multiple="true" completeMethod="#{avaliacaoBean.completePessoa}" value="#{avaliacaoBean.lsPessoaAvaliador}"
                                                                 var="pessoa" itemLabel="#{pessoa.pes_nome}" itemValue="#{pessoa}" converter="pessoaConverter" forceSelection="true">
                                                     <p:column>
                                                         <h:outputText value="#{pessoa.pes_nome}" />
@@ -161,7 +160,7 @@
                                         <div class="form-group">
                                             <h:outputLabel value="Cargos:" for="cargo2" styleClass="control-label col-md-4" />
                                             <div class="col-md-8 col-xs-12 autocomplete">
-                                                <p:autoComplete id="cargo2" multiple="true" completeMethod="#{avaliacaoBean.completeCargo}" value="#{avaliacaoBean.lsCargoColaborador}"
+                                                <p:autoComplete pt:disabled="#{avaliacaoBean.avaliacao.ava_codigo > 0}" id="cargo2" multiple="true" completeMethod="#{avaliacaoBean.completeCargo}" value="#{avaliacaoBean.lsCargoColaborador}"
                                                                 var="cargo" itemLabel="#{cargo.car_descricao}" itemValue="#{cargo}" converter="cargoConverter" forceSelection="true">
                                                     <p:column>
                                                         <h:outputText value="#{cargo.car_descricao}" />
@@ -174,7 +173,7 @@
                                         <div class="form-group">
                                             <h:outputLabel value="Pessoas:" for="pessoa2" styleClass="control-label col-md-4" />
                                             <div class="col-md-8 col-xs-12 autocomplete">
-                                                <p:autoComplete id="pessoa2" multiple="true" completeMethod="#{avaliacaoBean.completePessoa}" value="#{avaliacaoBean.lsPessoaColaborador}"
+                                                <p:autoComplete pt:disabled="#{avaliacaoBean.avaliacao.ava_codigo > 0}" id="pessoa2" multiple="true" completeMethod="#{avaliacaoBean.completePessoa}" value="#{avaliacaoBean.lsPessoaColaborador}"
                                                                 var="pessoa" itemLabel="#{pessoa.pes_nome}" itemValue="#{pessoa}" converter="pessoaConverter" forceSelection="true">
                                                     <p:column>
                                                         <h:outputText value="#{pessoa.pes_nome}" />
@@ -187,7 +186,7 @@
                             </div>
                         </div>
                     </div>
-                    <hr style="width: 100%; margin-top: 0; border-top-color: #ccc;"/>
+                    <!--<hr style="width: 100%; margin-top: 0; border-top-color: #ccc;"/>-->
                     <div class="row">
                         <div class="col-md-12 col-xs-12">
                             <div class="form-group">

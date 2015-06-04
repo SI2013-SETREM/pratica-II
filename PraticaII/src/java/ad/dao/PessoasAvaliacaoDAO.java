@@ -61,5 +61,4 @@ public class PessoasAvaliacaoDAO {
         Query q = session.createQuery(" from PessoasAvaliacao where 1=1 " + sql);
         return q.list();
     }
-
 }

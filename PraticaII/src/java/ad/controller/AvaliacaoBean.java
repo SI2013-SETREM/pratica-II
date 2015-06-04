@@ -27,8 +27,8 @@ public class AvaliacaoBean {
     private final String sTitle = Avaliacao.sTitle;
     private final String pTitle = Avaliacao.pTitle;
     private String Title = "Dados da " + sTitle;
-    private boolean bautoava;
-    private boolean bcomp;
+    private boolean bautoava = false;
+    private boolean bcomp = false;
     private List<Cargo> lsCargoAvaliador;
     private List<Cargo> lsCargoColaborador;
     private List<Pessoa> lsPessoaAvaliador;
@@ -97,26 +97,6 @@ public class AvaliacaoBean {
 
     public String edit(Avaliacao i) {
         avaliacao = (Avaliacao) avaliacoes.getRowData();
-//        lsAvaliacaoPessoaCargo = avaliacaoPessoaCargoDAO.getListAvaliacaoPessoaCargo(avaliacao.getAva_codigo(), 0, 0);
-//
-//        for (int j = 0; j < lsAvaliacaoPessoaCargo.size(); j++) {
-//            AvaliacaoPessoaCargo VPC = new AvaliacaoPessoaCargo();
-//            VPC = lsAvaliacaoPessoaCargo.get(j);
-//            if (VPC.getApc_status() == 2) {// verifica se é AVALIADOR
-//                if (VPC.getCargo() != null && VPC.getCargo().getCar_codigo() != 0) {
-//                    lsCargoAvaliador.add(VPC.getCargo());
-//                } else {
-//                    lsPessoaAvaliador.add(VPC.getPessoa());
-//                }
-//            } else {///Se não, ele é COLABORADOR AVALIADO
-//                if (VPC.getCargo() != null && VPC.getCargo().getCar_codigo() != 0) {
-//                    lsCargoColaborador.add(VPC.getCargo());
-//                } else {
-//                    lsPessoaColaborador.add(VPC.getPessoa());
-//                }
-//            }
-//        }
-
         return "avaliacaofrm";
     }
 
@@ -126,7 +106,9 @@ public class AvaliacaoBean {
     }
 
     public String delete(Avaliacao i) {
-        dao.delete(i);
+        //dao.delete(i);
+        i.setAva_status(5);
+        dao.update(i);
         return "avaliacaolst";
     }
 
@@ -200,22 +182,39 @@ public class AvaliacaoBean {
         return bautoava;
     }
 
-    public void setBautoava(boolean bautoava) {
-        this.bautoava = bautoava;
-    }
-
     public boolean isBcomp() {
         return bcomp;
+    }
+
+    public void setBautoava(boolean bautoava) {
+        this.bautoava = bautoava;
     }
 
     public void setBcomp(boolean bcomp) {
         this.bcomp = bcomp;
     }
+//-----------------------MAPEAR
+
+    public String getTaxa(Avaliacao i) {
+        List<PessoasAvaliacao> lsPessoaAvaliacao = pessoaAvaliacaoDAO.GetListPessoasAvaliacao(i.getAva_codigo(), 0, 0, false);
+        if (lsPessoaAvaliacao != null && !lsPessoaAvaliacao.isEmpty()) {
+            int sizeAll = lsPessoaAvaliacao.size();
+            int size = 0;
+            int taxa = 0;
+            for (PessoasAvaliacao pa : lsPessoaAvaliacao) {
+                if (pa != null && pa.getPea_datahora_resposta() != null) {
+                    size += 1;
+                }
+            }
+            taxa = (int) ((size * 100) / sizeAll);
+            return taxa + "%";
+        }
+        return "nda";
+    }
 
     private boolean SalvaListas() {
         try {
             SalvarAvaPesCargo(filtraCargos(lsCargoColaborador), filtraPessoas(lsPessoaColaborador), 1);//filtraPessoas(
-            // SalvarAvaPesCargo(filtraCargos(lsCargoColaborador), lsPessoaColaborador, 1);//filtraPessoas(
             SalvarAvaPesCargo(filtraCargos(lsCargoAvaliador), lsPessoaAvaliador, 2);
             SalvarPesAval(JuntarCargosComPessoas(lsCargoAvaliador, lsPessoaAvaliador), JuntarCargosComPessoas(lsCargoColaborador, lsPessoaColaborador));
             return true;
@@ -239,18 +238,34 @@ public class AvaliacaoBean {
             lsPessoaColaborador = new ArrayList<>();
         }
         if (lsCargoColaborador.isEmpty() && lsPessoaColaborador.isEmpty()) {//Não pode ter uma lista vazia de colaboradores
+            Title = "Os colaboradores são obrigatórios! Selecione um cargo ou uma pessoa pelo menos";
             return false;
         }
         if (!bautoava && lsCargoAvaliador.isEmpty() && lsPessoaAvaliador.isEmpty()) {//Se não é autoavaliação não podem faltar os avaliadores
+            Title = "Os avaliadores são obrigatórios quando não tem auto avaliação! Selecione um cargo ou uma pessoa pelo menos";
             return false;
         }
         return true;
     }
 
     private void SalvarPesAval(List<Pessoa> lsAva, List<Pessoa> lsCol) {//Salva e relação entre avaliador e colaborador avaliado ,basta passar as duas listas de pessoas
+        List<Integer> lsAval = new ArrayList<>();
         if (!lsAva.isEmpty() && !lsCol.isEmpty()) {
             for (Pessoa a : lsAva) {
+                lsAval.add(a.getPes_codigo());
                 for (Pessoa c : lsCol) {
+                    PessoasAvaliacao pessoaAvaliacao = new PessoasAvaliacao();
+                    pessoaAvaliacao.setAvaliacao(avaliacao);
+                    pessoaAvaliacao.setAvaliador(a);
+                    pessoaAvaliacao.setColaboradorAvaliado(c);
+                    pessoaAvaliacao.setPea_media(0);
+                    pessoaAvaliacaoDAO.insert(pessoaAvaliacao);
+                }
+            }
+        }
+        if (bautoava && !lsCol.isEmpty()) {
+            for (Pessoa c : lsCol) {
+                if (!lsAval.contains(c.getPes_codigo())) {
                     PessoasAvaliacao pessoaAvaliacao = new PessoasAvaliacao();
                     pessoaAvaliacao.setAvaliacao(avaliacao);
                     pessoaAvaliacao.setAvaliador(c);
@@ -324,64 +339,4 @@ public class AvaliacaoBean {
         }
         return filtraPessoas(lsPessoas);
     }
-
-//    
-//        if (1 == 0) {
-//                dao.insert(avaliacao);
-//        for (int i = 0; i < lsCargoAvaliador.size(); i++) { ///realiza for para "pegar" todas as pessoas dos cargos relacionados
-//            AvaliacaoPessoaCargo VPC = new AvaliacaoPessoaCargo();/// Objeto AvaliacaoPessoaCargo, utilizado para verificar quais são os avaliados e avaliadores da Avaliação
-//            List<CargosPessoa> lscargosPessoa = cargosPessoaDAO.GetListCargoPessoa(0, lsCargoAvaliador.get(i).getCar_codigo());///Pega as pessoas daquele cargo
-//            for (int x = 0; x < lscargosPessoa.size(); x++) {
-//                lsPessoaAvaliador.add(lscargosPessoa.get(x).getPessoa());
-//            }
-//            VPC.setCargo(lsCargoAvaliador.get(i));
-//            VPC.setAvaliacao(avaliacao);
-//            VPC.setApc_status(2);//2 = status do Avaliadores
-//            lsAvaliacaoPessoaCargo.add(VPC);
-//        }
-//
-//        for (int j = 0; j < lsCargoColaborador.size(); j++) {
-//            AvaliacaoPessoaCargo VPCAavaliados = new AvaliacaoPessoaCargo();
-//            List<CargosPessoa> lscargosPessoa = cargosPessoaDAO.GetListCargoPessoa(0, lsCargoColaborador.get(j).getCar_codigo());///Pega as pessoas daquele cargo
-//            for (int z = 0; z < lscargosPessoa.size(); z++) {
-//                lsPessoaColaborador.add(lscargosPessoa.get(z).getPessoa());
-//            }
-//            VPCAavaliados.setCargo(lsCargoColaborador.get(j));
-//            VPCAavaliados.setAvaliacao(avaliacao);
-//            VPCAavaliados.setApc_status(1);//1 = status do Colaboradores, ou seja, os avaliados
-//            lsAvaliacaoPessoaCargo.add(VPCAavaliados);
-//        }
-//        //Até aki esta criado todas as AvaliaçõesPessoaCargo, e Agora deve-se cadastrar as PessoasAvaliações, Blz
-//
-//        for (int y = 0; y < lsPessoaAvaliador.size(); y++) {
-//            Pessoa Avaliador = lsPessoaAvaliador.get(y);
-//            for (int b = 0; b < lsPessoaColaborador.size(); b++) {
-//                Pessoa Colaborador = lsAvaliacaoPessoaCargo.get(b).getPessoa();
-//                PessoasAvaliacao pessoaAvaliacao = new PessoasAvaliacao();
-//                pessoaAvaliacao.setAvaliacao(avaliacao);
-//                pessoaAvaliacao.setAvaliador(Avaliador);
-//                pessoaAvaliacao.setColaboradorAvaliado(Colaborador);
-//                pessoaAvaliacao.setPea_media(0);
-//                lsPessoasAvaliacao.add(pessoaAvaliacao);
-//            }
-//        }
-/////Hora de Inserir :0
-//        dao.insert(avaliacao);//inseri a Avaliação
-//        for (int b = 0; b < lsAvaliacaoPessoaCargo.size(); b++) {
-//            avaliacaoPessoaCargoDAO.insert(lsAvaliacaoPessoaCargo.get(b)); //inseri a AvaliacaoPessoaCargo
-//        }
-//        for (int c = 0; c < lsPessoasAvaliacao.size(); c++) {
-//            pessoaAvaliacaoDAO.insert(lsPessoasAvaliacao.get(c));
-//        }
-//    }
-//              for (int i = 0; i < lsCargoAvaliador.size(); i++) { ///realiza for para "pegar" todas as pessoas dos cargos relacionados
-//                    AvaliacaoPessoaCargo VPC = new AvaliacaoPessoaCargo();/// Objeto AvaliacaoPessoaCargo, utilizado para verificar quais são os avaliados e avaliadores da Avaliação
-//                    List<CargosPessoa> lscargosPessoa = cargosPessoaDAO.GetListCargoPessoa(0, lsCargoAvaliador.get(i).getCar_codigo());///Pega as pessoas daquele cargo
-//                    for (int x = 0; x < lscargosPessoa.size(); x++) {
-//                        lsPessoaAvaliador.add(lscargosPessoa.get(x).getPessoa());
-//                    }
-//                    VPC.setCargo(lsCargoAvaliador.get(i));
-//                    VPC.setAvaliacao(avaliacao);
-//                    VPC.setApc_status(2);//2 = status do Avaliadores
-//                    lsAvaliacaoPessoaCargo.add(VPC);
 }
