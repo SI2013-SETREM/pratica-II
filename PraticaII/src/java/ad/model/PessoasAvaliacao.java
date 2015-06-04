@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @Entity
 
 @Table(name = "avd_pessoas_avaliacao")
-@IdClass(PessoasAvaliacao.PessoasAvaliacaoPK.class)
+//@IdClass(PessoasAvaliacao.PessoasAvaliacaoPK.class)
 public class PessoasAvaliacao implements Serializable {
 
     private static final String sTitle = "Avaliados";
@@ -38,50 +38,52 @@ public class PessoasAvaliacao implements Serializable {
     private String pea_observacao;
     private Date pea_datahora_resposta;
 
-    public class PessoasAvaliacaoPK implements Serializable {
-
-        protected Pessoa colaboradorAvaliado;
-        protected Pessoa avaliador;
-        protected Avaliacao avaliacao;
-
+//    public class PessoasAvaliacaoPK implements Serializable {
+//
+//        protected Pessoa colaboradorAvaliado;
+//        protected Pessoa avaliador;
+//        protected Avaliacao avaliacao;
+//
 //        public PessoasAvaliacaoPK() {
 //        }
-        public PessoasAvaliacaoPK(Pessoa colaboradorAvaliado, Pessoa avaliador, Avaliacao avaliacao) {
-            this.colaboradorAvaliado = colaboradorAvaliado;
-            this.avaliador = avaliador;
-            this.avaliacao = avaliacao;
-        }
-
-        @Override
-        public int hashCode() {
-            int hash = 7;
-            hash = 97 * hash + Objects.hashCode(this.colaboradorAvaliado);
-            hash = 97 * hash + Objects.hashCode(this.avaliador);
-            hash = 97 * hash + Objects.hashCode(this.avaliacao);
-            return hash;
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-            if (obj == null) {
-                return false;
-            }
-            if (getClass() != obj.getClass()) {
-                return false;
-            }
-            final PessoasAvaliacaoPK other = (PessoasAvaliacaoPK) obj;
-            if (!Objects.equals(this.colaboradorAvaliado, other.colaboradorAvaliado)) {
-                return false;
-            }
-            if (!Objects.equals(this.avaliador, other.avaliador)) {
-                return false;
-            }
-            if (!Objects.equals(this.avaliacao, other.avaliacao)) {
-                return false;
-            }
-            return true;
-        }
-    }
+//
+//        public PessoasAvaliacaoPK(Pessoa colaboradorAvaliado, Pessoa avaliador, Avaliacao avaliacao) {
+//            this.colaboradorAvaliado = colaboradorAvaliado;
+//            this.avaliador = avaliador;
+//            this.avaliacao = avaliacao;
+//        }
+//
+//        @Override
+//        public int hashCode() {
+//            int hash = 7;
+//            hash = 97 * hash + Objects.hashCode(this.colaboradorAvaliado);
+//            hash = 97 * hash + Objects.hashCode(this.avaliador);
+//            hash = 97 * hash + Objects.hashCode(this.avaliacao);
+//            return hash;
+//        }
+//
+//        @Override
+//        public boolean equals(Object obj) {
+//            if (obj == null) {
+//                return false;
+//            }
+//            if (getClass() != obj.getClass()) {
+//                return false;
+//            }
+//            final PessoasAvaliacaoPK other = (PessoasAvaliacaoPK) obj;
+//            if (!Objects.equals(this.colaboradorAvaliado, other.colaboradorAvaliado)) {
+//                return false;
+//            }
+//            if (!Objects.equals(this.avaliador, other.avaliador)) {
+//                return false;
+//            }
+//            if (!Objects.equals(this.avaliacao, other.avaliacao)) {
+//                return false;
+//            }
+//            return true;
+//        }
+//
+//    }
 
     public PessoasAvaliacao() {
     }

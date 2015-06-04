@@ -137,7 +137,7 @@ public class AvaliacaoBean {
             if (ValidaDados()) {
                 dao.insert(avaliacao);
                 if (SalvaListas()) {
-                    return "questionariofrm";
+                    //return "questionariofrm";
                 } else {
                     return "avaliacaofrm";
                 }
@@ -215,12 +215,12 @@ public class AvaliacaoBean {
     private boolean SalvaListas() {
         try {
             SalvarAvaPesCargo(filtraCargos(lsCargoColaborador), filtraPessoas(lsPessoaColaborador), 1);//filtraPessoas(
-            SalvarAvaPesCargo(filtraCargos(lsCargoAvaliador), filtraPessoas(lsPessoaAvaliador), 2);
+            // SalvarAvaPesCargo(filtraCargos(lsCargoColaborador), lsPessoaColaborador, 1);//filtraPessoas(
+            SalvarAvaPesCargo(filtraCargos(lsCargoAvaliador), lsPessoaAvaliador, 2);
             SalvarPesAval(JuntarCargosComPessoas(lsCargoAvaliador, lsPessoaAvaliador), JuntarCargosComPessoas(lsCargoColaborador, lsPessoaColaborador));
             return true;
         } catch (Exception e) {
-            String erro = e.toString();
-            Title = erro;
+            Title = e.toString();
         }
         return false;
     }
@@ -237,9 +237,6 @@ public class AvaliacaoBean {
         }
         if (lsPessoaColaborador == null) {
             lsPessoaColaborador = new ArrayList<>();
-        }
-        if (avaliacao.getStatus() == null) {
-            return false;
         }
         if (lsCargoColaborador.isEmpty() && lsPessoaColaborador.isEmpty()) {//Não pode ter uma lista vazia de colaboradores
             return false;
@@ -293,7 +290,7 @@ public class AvaliacaoBean {
         List<Cargo> lsItens = new ArrayList<>();
         if (!lsCargos.isEmpty()) {
             for (Cargo c : lsCargos) {
-                if (!lsCod.contains(c.getCar_codigo())) {
+                if (c != null && !lsCod.contains(c.getCar_codigo())) {
                     lsCod.add(c.getCar_codigo());
                     lsItens.add(c);
                 }
@@ -307,9 +304,8 @@ public class AvaliacaoBean {
         List<Pessoa> lsItens = new ArrayList<>();
         if (!lsPessoas.isEmpty()) {
             for (Pessoa p : lsPessoas) {
-                int cod = p.getPes_codigo();
-                if (!lsCod.contains(cod)) {
-                    lsCod.add(cod);
+                if (p != null && !lsCod.contains(p.getPes_codigo())) {
+                    lsCod.add(p.getPes_codigo());
                     lsItens.add(p);
                 }
             }
