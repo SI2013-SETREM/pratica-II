@@ -7,6 +7,8 @@ package csb.model;
 
 import cfg.model.*;
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,18 +28,17 @@ public class Beneficio implements Serializable {
     @Id
     @SequenceGenerator(name = "ben_codigo", sequenceName = "ben_codigo")
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "ben_codigo")
- 
+
     private int ben_codigo;
     private String ben_descricao;
     private Double ben_valor;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date ben_datainicio;
-    private Boolean ben_situacao;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date ben_datafim;
 
     public Beneficio() {
-        
+
     }
 
     public Beneficio(int ben_codigo, String ben_descricao, Double ben_valor, Double ben_valorpago, Date ben_datainicio, Boolean ben_situacao, Date ben_datafim) {
@@ -75,21 +76,16 @@ public class Beneficio implements Serializable {
         this.ben_datainicio = ben_datainicio;
     }
 
-    public Boolean getBen_situacao() {
-        return ben_situacao;
-    }
-
-    public void setBen_situacao(Boolean ben_situacao) {
-        this.ben_situacao = ben_situacao;
-    }
-
     public Date getBen_datafim() {
         return ben_datafim;
+    }
+
+    public String getBen_dataToString(Date data) {
+        return util.Utilidades.getDataString(data);
     }
 
     public void setBen_datafim(Date ben_datafim) {
         this.ben_datafim = ben_datafim;
     }
 
-    
 }
