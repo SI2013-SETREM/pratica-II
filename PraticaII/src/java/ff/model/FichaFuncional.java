@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -26,7 +27,8 @@ public class FichaFuncional implements Serializable {
     private int ffu_codigo;
  
     @ManyToOne
-    private Pessoa pes_codigo;
+    @JoinColumn (name = "pes_codigo", referencedColumnName = "pes_codigo")
+    private Pessoa pessoa;
     @Column(nullable = false)
     private int ffp_situacao_ficha;
     @Column(nullable = false)
@@ -66,13 +68,17 @@ public class FichaFuncional implements Serializable {
         this.ffp_data_desligamento = ffp_data_desligamento;
     }
 
-    public Pessoa getPes_codigo() {
-        return pes_codigo;
+    public Pessoa getPessoa() {
+        return pessoa;
     }
 
-    public void setPes_codigo(Pessoa pes_codigo) {
-        this.pes_codigo = pes_codigo;
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
     }
+
+  
+
+   
 
 
 }
