@@ -3,9 +3,13 @@ package fp.controller;
 
 import fp.dao.EventoDAO;
 import fp.dao.SerieEventoDAO;
+import fp.dao.TabINSSDAO;
+import fp.dao.TabelaIRRFDAO;
 import fp.dao.TipoEventoDAO;
 import fp.model.Evento;
 import fp.model.SerieEvento;
+import fp.model.TabINSS;
+import fp.model.TabelaIRRF;
 import fp.model.TipoEvento;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -27,6 +31,15 @@ public class EventoBean {
     private List<TipoEvento> lsttipoevento;
     private TipoEvento tipoevento = new TipoEvento();
     private TipoEventoDAO tipoeventodao = new TipoEventoDAO();
+    
+    private List<TabINSS> lsttabinss;
+    private TabINSS tabinss = new TabINSS();
+    private TabINSSDAO tabinssdao = new TabINSSDAO();
+    
+    private List<TabelaIRRF> lsttabirrf;
+    private TabelaIRRF tabelairrf = new TabelaIRRF();
+    private TabelaIRRFDAO tabelairrfdao = new TabelaIRRFDAO();
+    
     
     private Evento evento = new Evento();
     private EventoDAO dao = new EventoDAO();
@@ -112,4 +125,12 @@ public class EventoBean {
         this.lsttipoevento = i;
     }
     
+      public List<TabINSS> getLstTabinss() {
+        lsttabinss = tabinssdao.findAll();
+        return lsttabinss;
+    }
+       public List<TabelaIRRF> getLstTabirrf() {
+        lsttabirrf = tabelairrfdao.findAll();
+        return lsttabirrf;
+    }
 }
