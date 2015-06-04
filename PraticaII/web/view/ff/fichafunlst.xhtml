@@ -28,7 +28,6 @@
                 </script>
 
                 <div class="panel panel-body">
-
                     <h:form>
                         
                         <h:dataTable value="${fichaFuncionalBean.fichas}" rendered="${fichaFuncionalBean.fichas.rowAvailable}" var="item"  styleClass="dataTable table table-bordered table-striped">
@@ -39,13 +38,17 @@
                                 </f:facet>
                                  <h:outputText value="#{item.pessoa.pes_nome}"/>
                             </h:column>
-                            <h:column headerClass="col-editar-header">
+                            <h:column>
                                 <f:facet name="header">
-                                    <h:outputText value="Editar"/>
+                                    <h:outputText value="CPF"/>
                                 </f:facet>
-                                <h:commandLink action="#{fichaFuncionalBean.manutecao()}">
-                                    <i class="fa fa-pencil"></i> Editar
-                                </h:commandLink>
+                                <h:outputText value="#{item.pessoa.pes_cpf}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Cargo"/>
+                                </f:facet>
+                                <h:outputText value="Analista"/>
                             </h:column>
                             <h:column headerClass="col-visualizar-header">
                                 <f:facet name="header">
@@ -58,7 +61,6 @@
                         </h:dataTable>
                     </h:form>
                 </div>
-
             </ui:define>
 
         </ui:composition>
