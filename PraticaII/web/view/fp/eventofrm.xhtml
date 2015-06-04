@@ -34,13 +34,13 @@
                     <h:inputHidden id="eveCodigo" value="#{eventoBean.evento.eve_codigo}" />
 
                     <div class="form-group">
-                        <h:outputLabel value="Descrição" for="eveDescricaoo" styleClass="control-label col-sm-2" />
+                        <h:outputLabel value="Descrição:" for="eveDescricaoo" styleClass="control-label col-sm-2" />
                         <div class="col-md-6 col-sm-12">
                             <h:inputText id="eveDescricao" value="#{eventoBean.evento.eve_descricao}" title="Descrição" styleClass="form-control" pt:autofocus="" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <h:outputLabel value="Índice" for="eveIndice" styleClass="control-label col-sm-2" />
+                        <h:outputLabel value="Índice:" for="eveIndice" styleClass="control-label col-sm-2" />
                         <div class="col-md-6 col-sm-12">
                             <h:inputText id="eveIndice" value="#{eventoBean.evento.eve_indice}" title="Índice" styleClass="form-control" pt:autofocus="" />
                         </div>
@@ -69,14 +69,6 @@
                             </h:selectOneMenu>
                         </div>
                     </div>
-                     <div class="form-group">
-                        <h:outputLabel value="Tabela IRRF: " for="tabirrf" styleClass="control-label col-sm-2" />
-                        <div class="col-md-6 col-sm-12">
-                            <h:selectOneMenu id="tipoevento" converter="tabelaIRRFConverter" value="#{eventoBean.evento.tabelairrf}" styleClass="form-control" pt:autofocus="" >
-                                <f:selectItems value="#{eventoBean.lstTabirrf}" var="tipe" itemLabel="#{tipe.tif_nome}"/>
-                            </h:selectOneMenu>
-                        </div>
-                    </div>
                     
                      <div class="form-group">
                         <h:outputLabel value="Tabela IRRF: " for="tabirrf" styleClass="control-label col-sm-2" />
@@ -94,6 +86,8 @@
                             </h:selectOneMenu>
                         </div>
                     </div>
+               
+                    
                     
 
 
