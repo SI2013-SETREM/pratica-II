@@ -1,7 +1,9 @@
 package ad.controller;
 
 import ad.dao.PessoasAvaliacaoDAO;
+import ad.model.Avaliacao;
 import ad.model.PessoasAvaliacao;
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.model.DataModel;
@@ -16,6 +18,7 @@ public class PessoasAvaliacaoBean {
     private PessoasAvaliacao pessoas_avaliacao = new PessoasAvaliacao();
     private PessoasAvaliacaoDAO dao = new PessoasAvaliacaoDAO();
     private DataModel pessoas_avaliacoes;
+    private DataModel avaliacoes;
 
     private List<PessoasAvaliacao> lsPessoasAvaliacao;
 
@@ -24,6 +27,14 @@ public class PessoasAvaliacaoBean {
 
     public PessoasAvaliacao getPessoas_avaliacao() {
         return pessoas_avaliacao;
+    }
+
+    public DataModel getAvaliacoes() {
+        return avaliacoes;
+    }
+
+    public void setAvaliacoes(DataModel avaliacoes) {
+        this.avaliacoes = avaliacoes;
     }
 
     public void setPessoas_avaliacao(PessoasAvaliacao pessoas_avaliacao) {
@@ -82,13 +93,13 @@ public class PessoasAvaliacaoBean {
     ///---------------------------------- MApear
     public List<PessoasAvaliacao> GetListPessoasAvaliacao(int ava_id, int pes_codigo, int pes_codigo_avaliador) {
 
-        lsPessoasAvaliacao = dao.GetListPessoasAvaliacao(ava_id, pes_codigo, pes_codigo_avaliador);
+        lsPessoasAvaliacao = dao.GetListPessoasAvaliacao(ava_id, pes_codigo, pes_codigo_avaliador, false);
         return lsPessoasAvaliacao;
     }
 
     public String getListPessoaAvaliacoes(int ava_id) {
-        this.pessoas_avaliacoes = new ListDataModel(dao.GetListPessoasAvaliacao(ava_id, 0, 0));
-        
+        this.pessoas_avaliacoes = new ListDataModel(dao.GetListPessoasAvaliacao(ava_id, 0, 0, false));
+
         return "pessoasavaliacaolst";
     }
 
@@ -103,6 +114,29 @@ public class PessoasAvaliacaoBean {
 
     public String getpTitle() {
         return pTitle;
+    }
+
+////////////
+    public String GetAvaliacoesPendentes() {
+        List<PessoasAvaliacao> lsAvaliacaoPessoas = dao.GetListPessoasAvaliacao(0, 0, 1, true);
+        List<Avaliacao> lsAvaliacao = new ArrayList<>();
+        for (int i = 0; i < lsAvaliacaoPessoas.size(); i++) {
+            lsAvaliacao.add(lsAvaliacaoPessoas.get(i).getAvaliacao());
+        }
+        avaliacoes = new ListDataModel(lsAvaliacao);
+        return "Avaliacoespendenteslst";
+    }
+
+    public String GetAvaliados(Avaliacao avalicao) {
+///Pegar a 1º pessoa da lista de avaliados  não foram avaliador pelo user, 
+        /// Selecionar todas as perguntas daquela avalaição, juntamente com suas opções e tals 
+        /// e dai criar a tela
+        //  List<PessoasAvaliacao> lsPessoas = dao.GetListPessoasAvaliacao(avalicao.getAva_codigo(), 0, 0, true);
+
+        List<PessoasAvaliacao> lsAvaliacaoPessoas = dao.GetListPessoasAvaliacao(0, 0, 1, true);
+
+        return "PessoaAvaliacaofrm";
+
     }
 
 }

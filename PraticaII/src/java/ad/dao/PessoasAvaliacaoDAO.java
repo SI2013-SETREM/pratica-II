@@ -43,10 +43,10 @@ public class PessoasAvaliacaoDAO {
     }
 
 ////------MApear    
-    public List<PessoasAvaliacao> GetListPessoasAvaliacao(int ava_id, int pes_codigo, int pes_codigo_avaliador) {
+    public List<PessoasAvaliacao> GetListPessoasAvaliacao(int ava_codigo, int pes_codigo, int pes_codigo_avaliador, boolean mediaNull) {
         String sql = "";
-        if (ava_id != 0) {
-            sql += " and ava_codigo = " + ava_id;
+        if (ava_codigo != 0) {
+            sql += " and ava_codigo = " + ava_codigo;
         }
         if (pes_codigo != 0) {
             sql += " and pes_codigo = " + pes_codigo;
@@ -54,6 +54,10 @@ public class PessoasAvaliacaoDAO {
         if (pes_codigo_avaliador != 0) {
             sql += " and pes_codigo_avaliador = " + pes_codigo_avaliador;
         }
+        if (mediaNull) {
+            sql += " and pea_media is null";
+        }
+
         Query q = session.createQuery(" from PessoasAvaliacao where 1=1 " + sql);
         return q.list();
     }
