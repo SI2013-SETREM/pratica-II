@@ -2,11 +2,13 @@
 package fp.controller;
 
 import fp.dao.EventoDAO;
+import fp.dao.FormulaDAO;
 import fp.dao.SerieEventoDAO;
 import fp.dao.TabINSSDAO;
 import fp.dao.TabelaIRRFDAO;
 import fp.dao.TipoEventoDAO;
 import fp.model.Evento;
+import fp.model.Formula;
 import fp.model.SerieEvento;
 import fp.model.TabINSS;
 import fp.model.TabelaIRRF;
@@ -36,10 +38,14 @@ public class EventoBean {
     private TabINSS tabinss = new TabINSS();
     private TabINSSDAO tabinssdao = new TabINSSDAO();
     
+    
     private List<TabelaIRRF> lsttabirrf;
     private TabelaIRRF tabelairrf = new TabelaIRRF();
     private TabelaIRRFDAO tabelairrfdao = new TabelaIRRFDAO();
     
+    private List<Formula> lstformula;
+    private Formula formula = new Formula();
+    private FormulaDAO formuladao = new FormulaDAO();
     
     private Evento evento = new Evento();
     private EventoDAO dao = new EventoDAO();
@@ -132,5 +138,9 @@ public class EventoBean {
        public List<TabelaIRRF> getLstTabirrf() {
         lsttabirrf = tabelairrfdao.findAll();
         return lsttabirrf;
+    }
+        public List<Formula> getLstFormula() {
+        lstformula = formuladao.findAll();
+        return lstformula;
     }
 }
