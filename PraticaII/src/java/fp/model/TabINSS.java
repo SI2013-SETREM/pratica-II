@@ -35,6 +35,7 @@ public class TabINSS implements Serializable{
     private double tbs_ali_normal;
     private String tbs_ali_lei1;
     private String tbs_ali_lei2;
+    private String tbs_nome;
     
     public int getTbs_codigo() {
         return tbs_codigo;
@@ -133,6 +134,17 @@ public class TabINSS implements Serializable{
     public void setTbs_ali_lei2(String tbs_ali_lei2) {
         this.tbs_ali_lei2 = tbs_ali_lei2;
     }
+
+    public String getTbs_nome() {
+        return tbs_nome;
+    }
+
+    public void setTbs_nome(String tbs_nome) {
+        this.tbs_nome = tbs_nome;
+    }
+
+   
+    
 
     
 }

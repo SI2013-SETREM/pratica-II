@@ -12,10 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-/**
- *
- * @author Kelvin
- */
+
 @Entity
 @Table(name = "ffp_tabela_irrf")
 public class TabelaIRRF implements Serializable{

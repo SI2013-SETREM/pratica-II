@@ -24,6 +24,7 @@ public class Formula implements Serializable {
     @SequenceGenerator (name= "genFormula", sequenceName= "segFormula", allocationSize = 1)
     @GeneratedValue (strategy = GenerationType.SEQUENCE, generator = "genFormula")
     private int for_codigo;
+    private String for_nome;
     private double for_taxa;
     private int for_horas;
     private int for_horasmais;
@@ -58,6 +59,14 @@ public class Formula implements Serializable {
 
     public void setFor_horasmais(int for_horasmais) {
         this.for_horasmais = for_horasmais;
+    }
+
+    public String getFor_nome() {
+        return for_nome;
+    }
+
+    public void setFor_nome(String for_nome) {
+        this.for_nome = for_nome;
     }
     
     
