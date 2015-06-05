@@ -19,22 +19,26 @@
 ///// MIXINS /////
 // from http://lesselements.com
 .opacity(@opacity: 0.5) {
-  -moz-opacity: @opacity;
-  -khtml-opacity: @opacity;
-  -webkit-opacity: @opacity;
-  opacity: @opacity;
-  @opperc: @opacity * 100;
-  -ms-filter: ~"progid:DXImageTransform.Microsoft.Alpha(opacity=@{opperc})";
-  filter: ~"alpha(opacity=@{opperc})";
+    -moz-opacity: @opacity;
+    -khtml-opacity: @opacity;
+    -webkit-opacity: @opacity;
+    opacity: @opacity;
+    @opperc: @opacity * 100;
+    -ms-filter: ~"progid:DXImageTransform.Microsoft.Alpha(opacity=@{opperc})";
+    filter: ~"alpha(opacity=@{opperc})";
 }
 .box-shadow(...) {
-  -webkit-box-shadow: @arguments;
-  -moz-box-shadow: @arguments;
-  box-shadow: @arguments;
+    -webkit-box-shadow: @arguments;
+    -moz-box-shadow: @arguments;
+    box-shadow: @arguments;
 }
 
 ///// CSS /////
 // Alterações nos comportamento-padrão
+.top-offset-10 { margin-top: 10px; }
+.list-group-item-gray {
+    background-color: #fcf8e3;
+}
 .badge.badge-danger {
     background-color: @corRed;
 }
@@ -380,6 +384,42 @@ body {
         }
         
     }
+}
+
+// CSS específicos
+.prgTipo {
+    td {
+        padding: 10px;
+    }
+    
+    input, label {
+        cursor: pointer;
+    }
+    label {
+        padding-left: 5px;
+        font-weight: normal;
+    }
+}
+.pergunta-link {
+    line-height: 30px;
+    cursor: pointer;
+    
+    &:hover  {
+        //Para a div.pergunta-link funcionar como a.pergunta-link
+        background-color: #f5f5f5;
+        color: #555;
+        text-decoration: none;
+        
+        .btn-group {
+            display: inline-block;
+        }
+    }
+    .btn-group {
+        display: none;
+    }
+}
+.pergunta-opcao-wrapper {
+    margin: 0 10px;
 }
 
 .ripple {

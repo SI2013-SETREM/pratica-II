@@ -15,10 +15,12 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="cidade")
-public class Cidade implements Serializable{
+public class Cidade implements Serializable {
+    
     public static final String sTitle = "Cidade";
     public static final String pTitle = "Cidades";
-     @Id
+    
+    @Id
     @SequenceGenerator(name = "cid_codigo", sequenceName = "cid_codigo")
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "cid_codigo")
     private int cid_codigo;
@@ -26,12 +28,6 @@ public class Cidade implements Serializable{
     private String cid_uf;
 
     public Cidade() {
-    }
-
-    public Cidade(int cid_codigo, String cid_nome, String cid_uf) {
-        this.cid_codigo = cid_codigo;
-        this.cid_nome = cid_nome;
-        this.cid_uf = cid_uf;
     }
 
     public int getCid_codigo() {

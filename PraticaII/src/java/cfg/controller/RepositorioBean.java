@@ -43,7 +43,7 @@ public class RepositorioBean {
         return repositorios;
     }
 
-    public void setRepositorio(DataModel idiomas) {
+    public void setRepositorio(DataModel repositorios) {
         this.repositorios = repositorios;
     }
 
@@ -79,6 +79,10 @@ public class RepositorioBean {
 
     public String listar() {
         return "repositoriolst";
+    }
+    
+    public void upload() {
+        
     }
 
 }

@@ -8,14 +8,76 @@
 
     <ui:define name="header">
         <script type="text/javascript">
-            $(function() {
-                $('.pergunta-link').click(function(){
-                    $(this).hide();
-                    var $form = $('.pergunta-form[data-pergunta=' + $(this).data('pergunta') + ']');
-                    $form.show();
-                    $('.prgPergunta', $form).focus();
+            function bindClickPergunta() {
+                $('.pergunta-link').click(function(event){
+                    if (!($(event.target).hasClass('btn') || $(event.target).hasClass('fa'))) { //clique nos botões
+                        var $link = $(this);
+                        var $form = $('.pergunta-form[data-pergunta=' + $(this).data('pergunta') + ']');
+                        $link.addClass('hidden');
+                        $form.removeClass('hidden');
+                        $('.prgPergunta', $form).focus();
+                    }
                     return false;
                 });
+                $('.prgTipo input[type=radio]').change(function(){
+                    var $wrapper = $('.pergunta-opcao-wrapper[data-pergunta=' + $(this).data('pergunta') + ']');
+                    if ($(this).val() === '2') { //Objetiva
+                        $wrapper.fadeIn(200);
+                    } else {
+                        $wrapper.fadeOut(200);
+                    }
+                });
+                shPerguntaOpcao();
+            }
+            function shPerguntaOpcao() {
+                $('.prgTipo input[type=radio]:checked').each(function() {
+                    var $wrapper = $('.pergunta-opcao-wrapper[data-pergunta=' + $(this).data('pergunta') + ']');
+                    if ($(this).val() === '2') { //Objetiva
+                        $wrapper.show();
+                    } else {
+                        $wrapper.hide();
+                    }
+                });
+            }
+            function savePergunta(idPergunta) {
+                var $link = $('.pergunta-link[data-pergunta=' + idPergunta + ']');
+                var $form = $('.pergunta-form[data-pergunta=' + idPergunta + ']');
+                $('.prgPerguntaStatic', $link).html($('.prgOrdem', $form).html() + ' ' + $('.prgPergunta', $form).val());
+                $link.removeClass('hidden');
+                $form.addClass('hidden');
+                return false;
+            }
+            //http://stackoverflow.com/questions/13540298/proccess-onclick-function-after-ajax-call-fajax
+            function ajaxPergunta(data) {
+                switch(data.status) {
+                    case "begin":
+                        break;
+                    case "complete":
+                        break;
+                    case "success":
+                        bindClickPergunta();
+                        shPerguntaOpcao();
+                        break;
+                }
+            }
+            function ajaxSalvarPergunta(data) {
+                switch(data.status) {
+                    case "begin":
+                        break;
+                    case "complete":
+                        break;
+                    case "success":
+                        bindClickPergunta();
+                        shPerguntaOpcao();
+                        savePergunta($(data.source).data('pergunta'));
+                        break;
+                }
+            }
+            function errorPergunta(error) {
+                console.log(error);
+            }
+            $(function() {
+                bindClickPergunta();
             });
         </script>
     </ui:define>
@@ -33,14 +95,16 @@
         <div class="panel panel-body" style="overflow: hidden;">
             <h3><h:outputText value="${questionarioBean.sTitle}"/></h3>
             <f:view>
-                <h:form styleClass="form-horizontal">
+                <h:form id="frmQuestionario" styleClass="form-horizontal">
                     <h:inputHidden id="qstCodigo" value="#{questionarioBean.questionario.qstCodigo}" />
+                    <h:inputHidden id="qstPontuacaototal" value="#{questionarioBean.questionario.qstPontuacaototal}" />
                     <div class="form-group">
                         <h:outputLabel value="Título:" for="qstTitulo" styleClass="control-label col-sm-1 col-md-2" />
                         <div class="col-md-5 col-sm-12">
                             <h:inputText pt:required="required" id="qstTitulo" value="#{questionarioBean.questionario.qstTitulo}" title="QstTitulo" styleClass="form-control" />
                         </div>
                         
+                        <h:inputHidden id="qstPontuacaomax" value="#{questionarioBean.questionario.qstPontuacaomax}" />
                         <h:outputLabel value="Pontuação máxima (por questão):" for="qstPontuacaomax" styleClass="control-label col-sm-1 col-md-3" />
                         <div class="col-md-2 col-sm-12">
                             <p class="form-control-static">#{questionarioBean.questionario.qstPontuacaomax}</p>
@@ -57,22 +121,127 @@
                         </div>
                     </div>
                     <h4><h:outputText value="${perguntaBean.pTitle}"/></h4>
-                    <div class="col-xs-12">
-                        <div class="perguntas form-group list-group">
-                            <c:forEach items="#{questionarioBean.questionario.perguntas}" var="pergunta">
-                                <a class="pergunta-link list-group-item" href="#" data-pergunta="#{pergunta.prgCodigo}">
-                                    <span class="form-control-static">#{pergunta.prgPergunta}</span>
-                                </a>
-                                <div class="pergunta-form list-group-item" style="display:none;" data-pergunta="#{pergunta.prgCodigo}">
-                                    <h:inputText pt:placeholder="Pergunta" id="prgPergunta" value="#{pergunta.prgPergunta}" title="Pergunta" styleClass="form-control prgPergunta"/>
-                                </div>
-                            </c:forEach>
-                            <a class="list-group-item list-group-item-success text-center" href="#" onclick="$('.cliqueme').click(); return false;">
-                                <i class="fa fa-plus"></i> Adicionar pergunta
-                            </a>
-                            <h:commandButton styleClass="hidden cliqueme" action="#{questionarioBean.addPergunta()}"></h:commandButton>
+                    <h:panelGroup layout="block" id="forEachPerguntas">
+                        <div class="col-xs-12">
+                            <div class="perguntas form-group list-group">
+                                <c:forEach items="#{questionarioBean.questionario.perguntas}" var="pergunta" varStatus="loopPergunta">
+                                    <c:set var="idPergunta" value="#{pergunta.prgCodigo}_#{loopPergunta.index}" />
+                                    <div class="pergunta-link list-group-item #{empty pergunta.prgPergunta ? 'hidden' : ''}" data-pergunta="#{idPergunta}">
+                                        <span class="prgPerguntaStatic form-control-static">#{pergunta.prgOrdem}. #{pergunta.prgPergunta}</span>
+                                        <div class="btn-group pull-right">
+                                            <h:commandLink rendered="#{loopPergunta.index != 0}" immediate="true" styleClass="btn btn-info" action="#{questionarioBean.moveUpPergunta(pergunta)}">
+                                                <f:ajax execute="@form"
+                                                        render="frmQuestionario:forEachPerguntas" 
+                                                        onevent="ajaxPergunta" />
+                                                <i class="fa fa-arrow-up"></i>
+                                            </h:commandLink>
+                                            <h:commandLink rendered="#{loopPergunta.index != (questionarioBean.questionario.perguntas.size()-1)}" immediate="true" styleClass="btn btn-info" action="#{questionarioBean.moveDownPergunta(pergunta)}">
+                                                <f:ajax execute="@form"
+                                                        render="frmQuestionario:forEachPerguntas" 
+                                                        onevent="ajaxPergunta" />
+                                                <i class="fa fa-arrow-down"></i>
+                                            </h:commandLink>
+                                            <h:commandLink immediate="true" styleClass="btn btn-danger" action="#{questionarioBean.delPergunta(pergunta)}">
+                                                <f:ajax execute="@form"
+                                                        render="frmQuestionario:forEachPerguntas" 
+                                                        onevent="ajaxPergunta" />
+                                                <i class="fa fa-remove"></i>
+                                            </h:commandLink>
+                                        </div>
+                                    </div>
+                                    <div class="pergunta-form list-group-item #{empty pergunta.prgPergunta ? '' : 'hidden'}" data-pergunta="#{idPergunta}">
+                                        <div class="row">
+                                            <div class="col-xs-8 col-lg-10">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon prgOrdem">#{pergunta.prgOrdem}.</span>
+                                                    <h:inputText pt:placeholder="Pergunta" value="#{pergunta.prgPergunta}" title="Pergunta" styleClass="form-control prgPergunta"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-2 col-lg-2 btn-group">
+                                                <h:commandLink immediate="true" styleClass="btn btn-danger" action="#{questionarioBean.delPergunta(pergunta)}">
+                                                    <f:ajax execute="@form"
+                                                            render="frmQuestionario:forEachPerguntas" 
+                                                            onevent="ajaxPergunta" />
+                                                    <i class="fa fa-remove"></i>
+                                                </h:commandLink>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-3">
+                                                <h:selectOneRadio styleClass="prgTipo" value="#{pergunta.prgTipo}" pt:data-pergunta="#{idPergunta}">
+                                                    <f:selectItem itemValue="1" itemLabel="Descritiva" />
+                                                    <f:selectItem itemValue="2" itemLabel="Objetiva" />
+                                                </h:selectOneRadio>
+                                            </div>
+                                            <div class="col-xs-3">
+                                                <label class="checkbox checkbox-inline">
+                                                    <h:selectBooleanCheckbox value="#{pergunta.prgObrigatoria}" /> Obrigatória
+                                                </label>
+                                            </div>
+                                            <div class="col-xs-3">
+                                                <label class="checkbox checkbox-inline">
+                                                    <h:selectBooleanCheckbox value="#{pergunta.prgExibircandidato}" /> Exibir ao candidato
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <h:panelGroup layout="block" id="forEachPerguntaOpcao#{idPergunta}">
+                                            <div class="row">
+                                                <div class="col-xs-10 pergunta-opcao-wrapper" data-pergunta="#{idPergunta}" style="#{pergunta.prgTipo == 1 ? 'display:none;' : ''}">
+                                                    <div class="pergunta-opcoes form-group list-group list-group-stripped">
+                                                        <c:forEach items="#{pergunta.perguntaOpcoes}" var="perguntaOpcao" varStatus="loopPerguntaOpcao">
+                                                            <c:set var="idPerguntaOpcao" value="#{loopPerguntaOpcao.index}" />
+                                                            <div class="pergunta-opcao-form list-group-item" data-pergunta-opcao="#{idPerguntaOpcao}">
+                                                                <div class="row">
+                                                                    <div class="col-lg-8">
+                                                                        <h:inputText pt:placeholder="Opção" value="#{perguntaOpcao.opcNome}" title="Opção" styleClass="form-control opcOpcao"/>
+                                                                    </div>
+                                                                    <div class="col-lg-2">
+                                                                        <h:inputText pt:placeholder="Pontuação" pt:type="number" pt:min="0" pt:max="20" value="#{perguntaOpcao.opcPontuacao}" title="Pontuação" styleClass="form-control opcPontuacao"/>
+                                                                    </div>
+                                                                    <div class="col-lg-2">
+                                                                        <h:commandLink immediate="true" styleClass="btn btn-danger" action="#{questionarioBean.delPerguntaOpcao(perguntaOpcao)}">
+                                                                            <f:ajax execute="@form"
+                                                                                    render="frmQuestionario:forEachPerguntaOpcao#{idPergunta}" 
+                                                                                    onevent="ajaxPergunta" />
+                                                                            <i class="fa fa-remove"></i>
+                                                                        </h:commandLink>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </c:forEach>
+                                                        
+                                                        <h:commandLink immediate="true" styleClass="list-group-item list-group-item-success text-center" action="#{questionarioBean.addPerguntaOpcao(pergunta)}">
+                                                            <f:ajax execute="@all"
+                                                                    render="frmQuestionario:forEachPerguntaOpcao#{idPergunta}" 
+                                                                    onevent="ajaxPergunta" />
+                                                            <i class="fa fa-plus"></i> Adicionar Opção
+                                                        </h:commandLink>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </h:panelGroup>
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <!--<h:button pt:type="button" value="Salvar" styleClass="btn btn-success btn-save-pergunta" onclick="return savePergunta('#{idPergunta}');"></h:button>-->
+                                                <h:commandButton immediate="true" value="Salvar pergunta" styleClass="btn btn-success btn-save-pergunta" action="#{questionarioBean.savePergunta(pergunta)}" pt:data-pergunta="#{idPergunta}">
+                                                    <f:ajax execute="@form"
+                                                            render="frmQuestionario:forEachPerguntas" 
+                                                            onevent="ajaxSalvarPergunta" />
+                                                </h:commandButton>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </c:forEach>
+                                
+                                <h:commandLink immediate="true" styleClass="list-group-item list-group-item-success text-center" action="#{questionarioBean.addPergunta}">
+                                    <f:ajax execute="@all"
+                                            render="frmQuestionario:forEachPerguntas" 
+                                            onevent="ajaxPergunta" />
+                                    <i class="fa fa-plus"></i> Adicionar Pergunta
+                                </h:commandLink>
+                            </div>
                         </div>
-                    </div>
+                    </h:panelGroup>
                     <div class="form-group">
                         <div class="col-md-offset-1 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
                             <h:link styleClass="btn btn-default" value="Cancelar" outcome="#{questionarioBean.listar()}" />

@@ -22,6 +22,7 @@
     <mapping class="cfg.model.Conversa"/>
     <mapping class="cfg.model.Empresa"/>
     <mapping class="cfg.model.Endereco"/>
+    <mapping class="cfg.model.Grupo"/>
     <mapping class="cfg.model.Idioma"/>
     <mapping class="cfg.model.Log"/>
     <mapping class="cfg.model.Mensagem"/>

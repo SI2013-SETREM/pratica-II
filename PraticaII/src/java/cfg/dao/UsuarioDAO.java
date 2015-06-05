@@ -33,8 +33,8 @@ public class UsuarioDAO {
         t.commit();
     }
     
-    public Usuario findById(int bai_codigo) {
-        return (Usuario) session.load(Usuario.class, bai_codigo);
+    public Usuario findByLogin(String usu_login) {
+        return (Usuario) session.load(Usuario.class, usu_login);
     }
     
     public List<Usuario> findAll() {

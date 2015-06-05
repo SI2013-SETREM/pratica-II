@@ -1,3 +1,9 @@
+.top-offset-10 {
+  margin-top: 10px;
+}
+.list-group-item-gray {
+  background-color: #fcf8e3;
+}
 .badge.badge-danger {
   background-color: #f3565d;
 }
@@ -300,6 +306,35 @@ body {
   font-family: 'Signika', Tahoma, Arial, sans-serif;
   color: #00456a;
   margin: 10px 0;
+}
+.prgTipo td {
+  padding: 10px;
+}
+.prgTipo input,
+.prgTipo label {
+  cursor: pointer;
+}
+.prgTipo label {
+  padding-left: 5px;
+  font-weight: normal;
+}
+.pergunta-link {
+  line-height: 30px;
+  cursor: pointer;
+}
+.pergunta-link:hover {
+  background-color: #f5f5f5;
+  color: #555;
+  text-decoration: none;
+}
+.pergunta-link:hover .btn-group {
+  display: inline-block;
+}
+.pergunta-link .btn-group {
+  display: none;
+}
+.pergunta-opcao-wrapper {
+  margin: 0 10px;
 }
 .ripple {
   list-style-type: none;

@@ -16,7 +16,11 @@ public class PerguntaDAO {
     }
     
     public void insert(Pergunta obj) {
-        Transaction t = session.beginTransaction();
+        Transaction t = session.getTransaction();
+        if (!t.isActive()) {
+            t = session.beginTransaction();
+        }
+//        Transaction t = session.beginTransaction();
         session.save(obj);
         t.commit();
     }

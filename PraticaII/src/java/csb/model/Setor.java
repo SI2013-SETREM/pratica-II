@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -29,9 +30,11 @@ public class Setor implements Serializable {
     private String set_descricao;
 
     @OneToMany
+    @JoinTable(name = "csb_episetor")
     private List<Epi> epis;
 
     @OneToMany
+    @JoinTable(name = "csb_cargossetor")
     private List<Cargo> cargos;
 
     public Setor() {

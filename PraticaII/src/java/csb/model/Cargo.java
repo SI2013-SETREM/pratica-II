@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
@@ -30,9 +31,13 @@ public class Cargo implements Serializable, Comparable<Cargo> {
     private Double car_pisosalarial;
     @OneToOne
     private Cargo car_pai;
+    
     @OneToMany
+    @JoinTable(name = "csb_competencias_cargo")
     private List<Competencia> Competencia;
+    
     @OneToMany
+    @JoinTable(name = "csb_graduacoes_cargo")
     private List<Graduacao> Graduacao;
 
     public Cargo() {

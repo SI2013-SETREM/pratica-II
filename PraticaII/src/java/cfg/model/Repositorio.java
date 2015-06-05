@@ -11,8 +11,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
 
 @Entity
 @Table(name = "repositorio")
@@ -24,13 +26,16 @@ public class Repositorio implements Serializable {
     @Id
     @SequenceGenerator(name = "rep_codigo", sequenceName = "rep_codigo")
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "rep_codigo")
- 
     private int rep_codigo;
+    
     private int rep_tipo;
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date rep_data;
     private String rep_nome;
     private String rep_nomearquivo;
     private String rep_extensao;
+    @Lob
+    private byte[] rep_arquivo;
 
     public Repositorio() {
     }
@@ -91,8 +96,13 @@ public class Repositorio implements Serializable {
     public void setRep_extensao(String rep_extensao) {
         this.rep_extensao = rep_extensao;
     }
-    
-    
-    
 
+    public byte[] getRep_arquivo() {
+        return rep_arquivo;
+    }
+
+    public void setRep_arquivo(byte[] rep_arquivo) {
+        this.rep_arquivo = rep_arquivo;
+    }
+    
 }

@@ -1,16 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package cfg.model;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -21,55 +19,59 @@ public class Usuario implements Serializable {
     public static final String pTitle = "Usuários";
 
     @Id
-    @SequenceGenerator(name = "usu_codigo", sequenceName = "usu_codigo")
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "usu_codigo")
- 
-    private int usu_codigo;
-    private String usu_nome;
+    private String usu_login;
     private String usu_senha;
     private boolean usu_status;
 
+    @OneToOne(optional = false)
+    @JoinColumn(name = "pes_codigo", referencedColumnName = "pes_codigo", nullable = false)
+    private Pessoa pessoa;
+    
+    @OneToMany
+    @JoinColumn(name = "usu_login", referencedColumnName = "usu_login")
+    private List<Grupo> grupos;
+    
     public Usuario() {
     }
 
-    public Usuario(int usu_codigo, String usu_nome, String usu_senha, boolean usu_status) {
-        this.usu_codigo = usu_codigo;
-        this.usu_nome = usu_nome;
-        this.usu_senha = usu_senha;
-        this.usu_status = usu_status;
+    public String getUsuLogin() {
+        return usu_login;
     }
 
-    public int getUsu_codigo() {
-        return usu_codigo;
+    public void setUsuLogin(String usu_login) {
+        this.usu_login = usu_login;
     }
 
-    public void setUsu_codigo(int usu_codigo) {
-        this.usu_codigo = usu_codigo;
-    }
-
-    public String getUsu_nome() {
-        return usu_nome;
-    }
-
-    public void setUsu_nome(String usu_nome) {
-        this.usu_nome = usu_nome;
-    }
-
-    public String getUsu_senha() {
+    public String getUsuSenha() {
         return usu_senha;
     }
 
-    public void setUsu_senha(String usu_senha) {
+    public void setUsuSenha(String usu_senha) {
         this.usu_senha = usu_senha;
     }
 
-    public boolean getUsu_status() {
+    public boolean getUsuStatus() {
         return usu_status;
     }
 
-    public void setUsu_status(boolean usu_status) {
+    public void setUsuStatus(boolean usu_status) {
         this.usu_status = usu_status;
     }
 
+    public Pessoa getPessoa() {
+        return pessoa;
+    }
+
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
+    }
+
+    public List<Grupo> getGrupos() {
+        return grupos;
+    }
+
+    public void setGrupos(List<Grupo> grupos) {
+        this.grupos = grupos;
+    }
     
 }

@@ -5,7 +5,7 @@ import java.util.Objects;
 
 // From http://stackoverflow.com/questions/3585034/how-to-map-a-composite-key-with-hibernate
 public class PerguntaPK implements Serializable {
-
+    
     protected Questionario questionario;
     protected int prg_codigo;
 

@@ -43,8 +43,8 @@ public class UsuarioBean {
         return usuarios;
     }
 
-    public void setUsuario(DataModel idiomas) {
-        this.usuarios= usuarios;
+    public void setUsuario(DataModel usuarios) {
+        this.usuarios = usuarios;
     }
     
     public String insert() {
@@ -53,7 +53,7 @@ public class UsuarioBean {
     }
     
     public String edit(Usuario i) {
-        usuario= (Usuario) usuarios.getRowData();
+        usuario = (Usuario) usuarios.getRowData();
         return "usuariofrm";
     }
     
@@ -68,10 +68,11 @@ public class UsuarioBean {
     }
     
     public String salvar() {
-        if (usuario.getUsu_codigo()> 0)
+//        if (usuario.getUsu_codigo()> 0)
+        //Merge serve para insert também
             dao.update(usuario);
-        else 
-            dao.insert(usuario);
+//        else 
+//            dao.insert(usuario);
         
         return "usuariolst";
     }
@@ -79,6 +80,5 @@ public class UsuarioBean {
     public String listar() {
         return "usuariolst";
     }
-    
     
 }
