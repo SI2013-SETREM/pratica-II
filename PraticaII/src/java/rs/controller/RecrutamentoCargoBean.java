@@ -6,6 +6,7 @@
 package rs.controller;
 
 import csb.dao.CargoDAO;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -32,6 +33,7 @@ public class RecrutamentoCargoBean {
     private CargoDAO daocargo = new CargoDAO();
     private TreeNode arvoreCargos;
     private TreeNode selectedNode;
+    public List<RecrutamentoCargo> rc;
 
     public RecrutamentoCargoBean() {
 
@@ -118,7 +120,7 @@ public class RecrutamentoCargoBean {
         return "recrutamentocargolst";
     }
 
-    public String listar() {
+    public String listar() {        
         return "recrutamentocargolst";
     }
 

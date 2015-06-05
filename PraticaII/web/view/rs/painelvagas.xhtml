@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <body>
         <ui:composition template="../modelos/default.xhtml">
             <ui:define name="title">
@@ -35,58 +36,20 @@
                 <div class="panel panel-body">
                     <div class="row">
                     <div class="row">
-                        <div class="col-sm-6 col-md-4 col-lg-3">
+                        <c:forEach items="#{recrutamentoCargoBean.dao.findAll}" var="vagas">
+                             <div class="col-sm-6 col-md-4 col-lg-3">
                             <div class="thumbnail">
                                 <div class="caption">
-                                    <span class="setor">Setor</span><br/>
-                                    <span class="vaga">Vaga</span>
+                                    <span class="setor">#{vagas.cargo.car_pai.car_descricao}</span><br/>
+                                    <span class="vaga">#{vagas.cargo.car_descricao}</span>
                                     <p class="text-justify descricao-vaga">
-                                        <span>Número de Vagas:</span> <span>3</span><br/>
-                                        <span>Descrição:</span> <span>blá blá blá blablá blá blá blablá blá blá blablá blá blá blablá blá blá blablá blá blá blablá blá blá blablá blá blá blablá blá blá blablá blá blá blablá blá blá bla</span>
+                                        <span>Número de Vagas:</span> <span>#{vagas.recCarQuantidade}</span><br/>
+                                        <span>Descrição:</span> <span>#{vagas.recCarDescricao}</span>
                                     </p>
-                                     <p><a href="#">Mais...</a></p>
                                 </div>
                             </div>
                         </div>
-                       <div class="col-sm-6 col-md-4 col-lg-3">
-                            <div class="thumbnail">
-                                <div class="caption">
-                                    <span class="setor">Setor</span><br/>
-                                    <span class="vaga">Vaga</span>
-                                    <p class="text-justify descricao-vaga">
-                                        <span>Número de Vagas:</span> <span>3</span><br/>
-                                        <span>Descrição:</span> <span>blá blá blá blablá blá blá blablá blá blá blablá blá blá blablá blá blá blablá blá blá blablá blá blá blablá blá blá blablá blá blá blablá blá blá blablá blá blá bla</span>
-                                    </p>
-                                  <p><a href="#">Mais...</a></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-4 col-lg-3">
-                            <div class="thumbnail">
-                                <div class="caption">
-                                    <span class="setor">Setor</span><br/>
-                                    <span class="vaga">Vaga</span>
-                                    <p class="text-justify descricao-vaga">
-                                        <span>Número de Vagas:</span> <span>3</span><br/>
-                                        <span>Descrição:</span> <span>blá blá blá blablá blá blá blablá blá blá blablá blá blá blablá blá blá blablá blá blá blablá blá blá blablá blá blá blablá blá blá blablá blá blá blablá blá blá bla</span>
-                                    </p>
-                                   <p><a href="#">Mais...</a></p>
-                                </div>
-                            </div>
-                        </div>
-                         <div class="col-sm-6 col-md-4 col-lg-3">
-                            <div class="thumbnail">
-                                <div class="caption">
-                                    <span class="setor">Setor</span><br/>
-                                    <span class="vaga">Vaga</span>
-                                    <p class="text-justify descricao-vaga">
-                                        <span>Número de Vagas:</span> <span>3</span><br/>
-                                        <span>Descrição:</span> <span>blá blá blá blablá blá blá blablá blá blá blablá blá blá blablá blá blá blablá blá blá blablá blá blá blablá blá blá blablá blá blá blablá blá blá blablá blá blá bla</span>
-                                    </p>
-                                    <p><a href="#">Mais...</a></p>
-                                </div>
-                            </div>
-                        </div>
+                        </c:forEach>
                     </div>
                     </div>
                     <div class="row">

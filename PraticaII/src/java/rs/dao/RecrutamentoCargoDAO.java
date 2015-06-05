@@ -19,6 +19,7 @@ import util.HibernateUtil;
 public class RecrutamentoCargoDAO {
 
     private Session session;
+    public List<RecrutamentoCargo> rc;
 
     public RecrutamentoCargoDAO() {
         session = HibernateUtil.getSessionFactory().openSession();
@@ -49,6 +50,12 @@ public class RecrutamentoCargoDAO {
     public List<RecrutamentoCargo> findAll() {
         Query q = session.createQuery("from RecrutamentoCargo");
         return q.list();
+    }
+
+    public List<RecrutamentoCargo> findAtivos() {
+        Query q = session.createQuery("from RecrutamentoCargo where rec_staus=2");
+        rc = q.list();
+        return rc;
     }
 
 }
