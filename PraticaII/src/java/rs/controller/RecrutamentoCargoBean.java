@@ -33,7 +33,6 @@ public class RecrutamentoCargoBean {
     private CargoDAO daocargo = new CargoDAO();
     private TreeNode arvoreCargos;
     private TreeNode selectedNode;
-    public List<RecrutamentoCargo> rc;
 
     public RecrutamentoCargoBean() {
 

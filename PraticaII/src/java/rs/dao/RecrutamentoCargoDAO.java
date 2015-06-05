@@ -20,7 +20,7 @@ public class RecrutamentoCargoDAO {
 
     private Session session;
     public List<RecrutamentoCargo> rc;
-    
+
     public List<RecrutamentoCargo> getRc() {
         Query q = session.createQuery("from RecrutamentoCargo rc INNER JOIN rc.recrutamento AS r WHERE r.rec_status=2");
         rc = q.list();

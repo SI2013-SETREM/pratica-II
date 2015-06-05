@@ -2,7 +2,6 @@ package rs.model;
 
 import csb.model.Cargo;
 import java.io.Serializable;
-import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
@@ -12,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "rec_recrutamento_cargo")
-@IdClass(RecrutamentoCargo.RecrutamentoCargoPK.class)
+@IdClass(RecrutamentoCargoPK.class)
 public class RecrutamentoCargo implements Serializable {
 
     public static final String sTitle = "Cargo";
@@ -33,54 +32,6 @@ public class RecrutamentoCargo implements Serializable {
     private double rec_car_expectativasalario;
     private String rec_car_descricao;
 
-    // From http://stackoverflow.com/questions/3585034/how-to-map-a-composite-key-with-hibernate
-    public class RecrutamentoCargoPK implements Serializable {
-
-        protected Recrutamento recrutamento;
-        protected Cargo cargo;
-        protected int rec_car_codigo;
-
-        public RecrutamentoCargoPK() {
-        }
-
-        public RecrutamentoCargoPK(Recrutamento recrutamento, Cargo cargo, int rec_car_codigo) {
-            this.recrutamento = recrutamento;
-            this.cargo = cargo;
-            this.rec_car_codigo = rec_car_codigo;
-        }
-
-        @Override
-        public int hashCode() {
-            int hash = 7;
-            hash = 79 * hash + Objects.hashCode(this.recrutamento);
-            hash = 79 * hash + Objects.hashCode(this.cargo);
-            hash = 79 * hash + this.rec_car_codigo;
-            return hash;
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-            if (obj == null) {
-                return false;
-            }
-            if (getClass() != obj.getClass()) {
-                return false;
-            }
-            final RecrutamentoCargoPK other = (RecrutamentoCargoPK) obj;
-            if (!Objects.equals(this.recrutamento, other.recrutamento)) {
-                return false;
-            }
-            if (!Objects.equals(this.cargo, other.cargo)) {
-                return false;
-            }
-            if (this.rec_car_codigo != other.rec_car_codigo) {
-                return false;
-            }
-            return true;
-        }
-        
-
-    }
 
     public RecrutamentoCargo() {
     }

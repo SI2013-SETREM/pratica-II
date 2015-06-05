@@ -10,21 +10,21 @@
             <ui:define name="title">
                 Painel de Vagas
             </ui:define>
-             <ui:define name="header">
-                 <style>
-                     .setor{
-                         margin-top: 5px;
-                         font-size: 20px;
-                     }
-                     .vaga{
-                         font-size: 25px;
-                         font-weight: bolder;      
-                     }
-                     .descricao-vaga{
-                         margin-top: 25px;
-                     }
-                   
-                 </style>
+            <ui:define name="header">
+                <style>
+                    .setor{
+                        margin-top: 5px;
+                        font-size: 20px;
+                    }
+                    .vaga{
+                        font-size: 25px;
+                        font-weight: bolder;      
+                    }
+                    .descricao-vaga{
+                        margin-top: 25px;
+                    }
+
+                </style>
             </ui:define>
 
             <ui:define name="breadcrumb">
@@ -35,22 +35,20 @@
             <ui:define name="main-content">
                 <div class="panel panel-body">
                     <div class="row">
-                    <div class="row">
-                        <c:forEach items="${recrutamentoCargoBean.dao.rc}" var="vagas">
-                             <div class="col-sm-6 col-md-4 col-lg-3">
-                            <div class="thumbnail">
-                                <div class="caption">
-                                    <span class="setor">${vagas.cargo.car_pai.car_descricao}</span><br/>
-                                    <span class="vaga">${vagas.cargo.car_descricao}</span>
-                                    <p class="text-justify descricao-vaga">
-                                        <span>Número de Vagas:</span> <span>${vagas.recCarQuantidade}</span><br/>
-                                        <span>Descrição:</span> <span>${vagas.recCarDescricao}</span>
-                                    </p>
+                        <c:forEach items="#{recrutamentoCargoBean.dao.rc}" var="vagas">
+                            <div class="col-sm-6 col-md-4 col-lg-3">
+                                <div class="thumbnail">
+                                    <div class="caption">
+                                        <span class="setor">#{vagas.cargo.car_pai.car_descricao}</span><br/>
+                                        <span class="vaga">#{vagas.cargo.car_descricao}</span>
+                                        <p class="text-justify descricao-vaga">
+                                            <span>Número de Vagas:</span> <span>#{vagas.recCarQuantidade}</span><br/>
+                                            <span>Descrição:</span> <span>#{vagas.recCarDescricao}</span>
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         </c:forEach>
-                    </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-12">
