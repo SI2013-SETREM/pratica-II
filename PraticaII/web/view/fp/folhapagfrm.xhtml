@@ -18,8 +18,16 @@
     <ui:define name="main-content">
         <style>
             .bloco {
-                margin: 5px 10px 10px;
-                padding: 25px 25px 10px 2px;           
+                margin: 0px 10px 0px;
+                padding: 25px 25px 10px 0px;           
+                background: #f8f8f8;
+                border: 1px solid #ddd;
+                border-radius: .25em;
+                overflow: auto;
+            }
+             .bloco2 {
+                margin: 0px 10px 0px;
+                padding: 0px 0px 0px 0px;           
                 background: #f8f8f8;
                 border: 1px solid #ddd;
                 border-radius: .25em;
@@ -27,7 +35,7 @@
             }
         </style>
         <div class="panel panel-body">
-            <h3><h:outputText value="Dados do ${empresaBean.getsTitle()}"/></h3>
+            <h3><h:outputText value="Folha de Pagamento"/></h3>
             <f:view>
                 <h:form styleClass="form-horizontal">
 
@@ -53,24 +61,83 @@
                             </div>
 
                         </div>
-                        <div class="col-xs-1">
-                            <h:outputLabel value="Endereço:" for="emp" styleClass="control-label col-md-3" />
+                        <div class="form-group">
+                            <h:outputLabel value="Endereço:" for="emp" styleClass="control-label col-md-2" />
                         </div>
 
                     </div>
 
                     <div class="bloco">
+
                         <div class="form-group">
-                            <h:outputLabel value="Colaborador:" for="emp1" styleClass="control-label col-md-2" />
-                            <div class="col-md-8 col-xs-12 autocomplete">
-                                <p:autoComplete id="emp1" multiple="true" completeMethod="#{empresaBean.empresa}" value="#{empresaBean.lsEmpresa}"
-                                                var="cargo" itemLabel="#{empresaBean.empresa.emp_nome}" itemValue="#{empresa}" converter="empresaConverter" forceSelection="true">
+                            <h:outputLabel value="Colaborador:" for="col" styleClass="control-label col-md-2" />
+                            <div class="col-xs-2 autocomplete">
+                                <p:autoComplete  id="col" multiple="true" completeMethod="#{empresaBean.empresa}" value="#{empresaBean.lsEmpresa}"
+                                                 var="colaborador" itemLabel="#{empresaBean.empresa.emp_nome}" itemValue="#{empresa}" converter="empresaConverter" forceSelection="true">
                                     <p:column>
                                         <h:outputText value="#{empresaBean.empresa.emp_nome}" />
                                     </p:column>
                                 </p:autoComplete>
+
                             </div>
+                            <div class=" col-xs-offset-3 col-xs-3" >
+                                <h:outputLabel value="CPF:" for="col" styleClass="control-label col-md-2" />
+                                <div class="col-xs-8">
+                                    <h:outputLabel value="34.343.340-61" for="col" styleClass="control-label col-md-2 col-lg-12" />
+                                </div>
+
+                            </div>
+
                         </div>
+                        <div class="form-group">
+                            <h:outputLabel value="Cargo:" for="emp" styleClass="control-label col-md-2" />
+                        </div>
+
+                    </div>
+                    <div class="bloco2">
+
+                        <p:dataTable var="car" value="">
+                            <p:column headerText="Nome">
+                                <h:outputText value="Salário Base" /> <br />
+                                <h:outputText value="Insalubridade" />
+
+                            </p:column>
+
+                            <p:column headerText="Descrição">
+                                <h:outputText value="Salário do Colaborador" /> <br />
+                                <h:outputText value="Adicional de Insalubridade" />
+                            </p:column>
+
+                            <p:column headerText="Acréscimo"> 
+                                <h:outputText value="1.500,00 R$" /> <br />
+                                <h:outputText value="450,00 R$" /> <br />
+                            </p:column>
+
+                            <p:column headerText="Desconto">
+                                <h:outputText value="0,00 R$" /> <br />
+                                <h:outputText value="0,00 R$" /> <br />
+                            </p:column>
+                        </p:dataTable>
+                     
+                            <p:button  value="Adicionar Eventos a Folha" > </p:button>
+                             
+                           <div class="bloco2">
+                                <p:dataTable var="car" value="">
+                                    <p:column headerText="Total Acréscimo"> 
+                                        <h:outputText value="1.950,00 R$" /> <br />
+                                    </p:column>
+                                    <p:column headerText="Total Desconto">
+                                        <h:outputText value="0,00 R$" /> <br />                        
+                                    </p:column>
+                                </p:dataTable>
+                          
+                    
+                        <p:dataTable var="car" value="">
+                            <p:column headerText="Valor Liquido"> 
+                                <h:outputText value="1.950,00 R$" /> <br />
+                            </p:column>
+
+                        </p:dataTable>
                     </div>
 
                 </h:form>
