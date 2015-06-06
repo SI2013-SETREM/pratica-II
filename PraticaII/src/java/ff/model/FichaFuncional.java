@@ -32,7 +32,7 @@ public class FichaFuncional implements Serializable {
     @Column(nullable = false)
     private int ffp_situacao_ficha;
     @Column(nullable = false)
-    private Date ffp_data_adimissao;
+    private Date ffp_data_admissao;
     private Date ffp_data_desligamento;
     
 
@@ -52,14 +52,6 @@ public class FichaFuncional implements Serializable {
         this.ffp_situacao_ficha = ffp_situacao_ficha;
     }
 
-    public Date getFfp_data_adimissao() {
-        return ffp_data_adimissao;
-    }
-
-    public void setFfp_data_adimissao(Date ffp_data_adimissao) {
-        this.ffp_data_adimissao = ffp_data_adimissao;
-    }
-
     public Date getFfp_data_desligamento() {
         return ffp_data_desligamento;
     }
@@ -74,6 +66,14 @@ public class FichaFuncional implements Serializable {
 
     public void setPessoa(Pessoa pessoa) {
         this.pessoa = pessoa;
+    }
+
+    public Date getFfp_data_admissao() {
+        return ffp_data_admissao;
+    }
+
+    public void setFfp_data_admissao(Date ffp_data_admissao) {
+        this.ffp_data_admissao = ffp_data_admissao;
     }
 
   

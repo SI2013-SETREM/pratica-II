@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -25,9 +26,11 @@ public class Advertencia implements Serializable{
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "genAdvertencia")
     private int adv_codigo;
     @ManyToOne
-    private FichaFuncional ffu_codigo;
+    @JoinColumn (name = "ffu_codigo", referencedColumnName = "ffu_codigo")
+    private FichaFuncional fichaFuncional;
     @ManyToOne
-    private Pessoa pes_codigo_aplicador;
+    //@JoinColumn (name = "pes_codigo_aplicador", referencedColumnName = "pes_codigo_aplicador")
+    private Pessoa pessoa;
     private String adv_descricao;
     @Column(nullable = false)
     private Date adv_data;
@@ -84,19 +87,21 @@ public class Advertencia implements Serializable{
         this.adv_advertencia = adv_advertencia;
     }
 
-    public FichaFuncional getFfu_codigo() {
-        return ffu_codigo;
+    public FichaFuncional getFichaFuncional() {
+        return fichaFuncional;
     }
 
-    public void setFfu_codigo(FichaFuncional ffu_codigo) {
-        this.ffu_codigo = ffu_codigo;
+    public void setFichaFuncional(FichaFuncional fichaFuncional) {
+        this.fichaFuncional = fichaFuncional;
     }
 
-    public Pessoa getPes_codigo_aplicador() {
-        return pes_codigo_aplicador;
+    public Pessoa getPessoa() {
+        return pessoa;
     }
 
-    public void setPes_codigo_aplicador(Pessoa pes_codigo_aplicador) {
-        this.pes_codigo_aplicador = pes_codigo_aplicador;
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
     }
+
+   
 }

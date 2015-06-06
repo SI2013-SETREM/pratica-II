@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -22,8 +23,9 @@ public class Ferias implements Serializable {
     @SequenceGenerator(name = "genFerias", sequenceName = "genFerias", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "genFerias")
     private int fer_codigo;
-    @ManyToOne
-    private FichaFuncional ffu_codigo;
+    @ManyToOne   
+    @JoinColumn (name = "ffu_codigo", referencedColumnName = "ffu_codigo")
+    private FichaFuncional fichaFuncional;
     private Date fer_data_inicio;
     private Date fer_data_fim;
     private String fer_observacao;
@@ -60,11 +62,13 @@ public class Ferias implements Serializable {
         this.fer_observacao = fer_observacao;
     }
 
-    public FichaFuncional getFfu_codigo() {
-        return ffu_codigo;
+    public FichaFuncional getFichaFuncional() {
+        return fichaFuncional;
     }
 
-    public void setFfu_codigo(FichaFuncional ffu_codigo) {
-        this.ffu_codigo = ffu_codigo;
+    public void setFichaFuncional(FichaFuncional fichaFuncional) {
+        this.fichaFuncional = fichaFuncional;
     }
+
+ 
 }
