@@ -38,5 +38,27 @@ public class Curso implements Serializable{
         this.cur_nome = cur_nome;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 31 * hash + this.cur_codigo;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Curso other = (Curso) obj;
+        if (this.cur_codigo != other.cur_codigo) {
+            return false;
+        }
+        return true;
+    }
+
 
 }

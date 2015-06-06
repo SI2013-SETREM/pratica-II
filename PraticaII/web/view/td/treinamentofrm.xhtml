@@ -19,6 +19,7 @@
             <h3><h:outputText value="Dados do ${treinamentoBean.sTitle}"/></h3>
             <f:view>
                 <h:form styleClass="form-horizontal">
+                    <h:messages />
                     <h:inputHidden id="treCodigo" value="#{treinamentoBean.treinamento.tre_codigo}" />
 <!--                            <div class="form-group">
                         <h:outputLabel value="Código:" for="treCodigo" styleClass="control-label col-sm-1" />
