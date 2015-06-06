@@ -2,16 +2,20 @@ package cfg.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
+import td.model.Treinamento;
 
 @Entity
 @Table(name = "pessoa")
@@ -41,6 +45,10 @@ public class Pessoa implements Serializable {
     @ManyToOne
     @JoinColumn(name = "cid_cep_nasc")
     private Cidade cidadenasc;
+    
+    @ManyToMany
+    @JoinTable(name = "trd_instrutores_treinamento")
+    private List<Treinamento> treinamentos;
 
     @OneToOne(optional = true, mappedBy = "pessoa") //atributo na classe Usuario que faz o mapeamento
     private Usuario usuario;
@@ -270,7 +278,15 @@ public class Pessoa implements Serializable {
     public void setPes_cur_pretensaosalarial(Double pes_cur_pretensaosalarial) {
         this.pes_cur_pretensaosalarial = pes_cur_pretensaosalarial;
     }
+    
+    public List<Treinamento> getTreinamentos() {
+        return treinamentos;
+    }
 
+    public void setTreinamentos(List<Treinamento> treinamentos) {
+        this.treinamentos = treinamentos;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 5;

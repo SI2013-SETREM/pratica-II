@@ -2,11 +2,14 @@ package td.model;
 
 import java.io.Serializable;
 import java.sql.Time;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -32,7 +35,19 @@ public class Treinamento implements Serializable {
     @ManyToOne
     @JoinColumn(name = "cur_codigo")
     private Curso curso;
+    
+    @ManyToMany
+    @JoinTable(name = "trd_instrutores_treinamento")
+    private List<Treinamento> instrutores;
 
+    public List<Treinamento> getInstrutores() {
+        return instrutores;
+    }
+
+    public void setInstrutores(List<Treinamento> instrutores) {
+        this.instrutores = instrutores;
+    }
+    
     public Curso getCurso() {
         return curso;
     }
@@ -110,5 +125,5 @@ public class Treinamento implements Serializable {
         }
         return true;
     }
-
+    
 }

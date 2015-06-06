@@ -176,4 +176,28 @@ public class Empresa implements Serializable {
     public void setEmp_empresa_sistema(int emp_empresa_sistema) {
         this.emp_empresa_sistema = emp_empresa_sistema;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 19 * hash + this.emp_codigo;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Empresa other = (Empresa) obj;
+        if (this.emp_codigo != other.emp_codigo) {
+            return false;
+        }
+        return true;
+    }
+    
+    
 }

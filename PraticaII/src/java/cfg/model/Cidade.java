@@ -53,5 +53,28 @@ public class Cidade implements Serializable {
     public void setCid_uf(String cid_uf) {
         this.cid_uf = cid_uf;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 59 * hash + this.cid_codigo;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Cidade other = (Cidade) obj;
+        if (this.cid_codigo != other.cid_codigo) {
+            return false;
+        }
+        return true;
+    }
+    
     
 }

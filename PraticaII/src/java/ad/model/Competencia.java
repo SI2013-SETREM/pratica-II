@@ -82,4 +82,25 @@ public class Competencia implements Serializable {
         }
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 83 * hash + this.cmp_codigo;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Competencia other = (Competencia) obj;
+        if (this.cmp_codigo != other.cmp_codigo) {
+            return false;
+        }
+        return true;
+    }
 }
