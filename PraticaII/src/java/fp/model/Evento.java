@@ -37,13 +37,10 @@ public class Evento implements Serializable {
     private boolean eve_tributar_inss;
     private boolean eve_tributar_fgts;
     private boolean eve_calcular_media_agregada13;
-    private boolean eve_acumular_horas_n;
-    private boolean eve_acumular_rais_base;
-    private boolean eve_acumular_rais_horas;
     private boolean eve_horas_dias;
     @ManyToOne
     @JoinColumn(name = "tbs_codigo", referencedColumnName = "tbs_codigo")
-    private TabINSS tabelainss;
+    private TabelaINSS tabelainss;
     @ManyToOne
     @JoinColumn(name = "tif_codigo", referencedColumnName = "tif_codigo")
     private TabelaIRRF tabelairrf;
@@ -125,30 +122,6 @@ public class Evento implements Serializable {
         this.eve_calcular_media_agregada13 = eve_calcular_media_agregada13;
     }
 
-    public boolean isEve_acumular_horas_n() {
-        return eve_acumular_horas_n;
-    }
-
-    public void setEve_acumular_horas_n(boolean eve_acumular_horas_n) {
-        this.eve_acumular_horas_n = eve_acumular_horas_n;
-    }
-
-    public boolean isEve_acumular_rais_base() {
-        return eve_acumular_rais_base;
-    }
-
-    public void setEve_acumular_rais_base(boolean eve_acumular_rais_base) {
-        this.eve_acumular_rais_base = eve_acumular_rais_base;
-    }
-
-    public boolean isEve_acumular_rais_horas() {
-        return eve_acumular_rais_horas;
-    }
-
-    public void setEve_acumular_rais_horas(boolean eve_acumular_rais_horas) {
-        this.eve_acumular_rais_horas = eve_acumular_rais_horas;
-    }
-
     public boolean isEve_horas_dias() {
         return eve_horas_dias;
     }
@@ -165,11 +138,11 @@ public class Evento implements Serializable {
         this.serieevento = serieevento;
     }
 
-    public TabINSS getTabelainss() {
+    public TabelaINSS getTabelainss() {
         return tabelainss;
     }
 
-    public void setTabelainss(TabINSS tabelainss) {
+    public void setTabelainss(TabelaINSS tabelainss) {
         this.tabelainss = tabelainss;
     }
 

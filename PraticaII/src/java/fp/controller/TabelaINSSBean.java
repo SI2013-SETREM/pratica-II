@@ -4,7 +4,7 @@ package fp.controller;
 import fp.dao.FaixaINSSDAO;
 import fp.dao.TabINSSDAO;
 import fp.model.FaixaINSS;
-import fp.model.TabINSS;
+import fp.model.TabelaINSS;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -18,10 +18,10 @@ import javax.faces.model.ListDataModel;
 @RequestScoped
 public class TabelaINSSBean {
     
-    private final String sTitle = TabINSS.getsTitle();
-    private final String pTitle = TabINSS.getpTitle();
+    private final String sTitle = TabelaINSS.getsTitle();
+    private final String pTitle = TabelaINSS.getpTitle();
     
-    private TabINSS tabelainss = new TabINSS();
+    private TabelaINSS tabelainss = new TabelaINSS();
     private TabINSSDAO dao = new TabINSSDAO();
     private DataModel tabelasinss;
     
@@ -42,11 +42,11 @@ public class TabelaINSSBean {
         return pTitle;
     }
     
-    public TabINSS getTabINSS() {
+    public TabelaINSS getTabINSS() {
         return tabelainss;
     }
 
-    public void setTabINSS(TabINSS tabelainss) {
+    public void setTabINSS(TabelaINSS tabelainss) {
         this.tabelainss = tabelainss;
     }
 
@@ -64,8 +64,8 @@ public class TabelaINSSBean {
         return "tabelainsslst";
     }
     
-    public String edit(TabINSS i) {
-        tabelainss = (TabINSS) tabelasinss.getRowData();
+    public String edit(TabelaINSS i) {
+        tabelainss = (TabelaINSS) tabelasinss.getRowData();
         return "tabelainssfrm";
     }
     
@@ -74,7 +74,7 @@ public class TabelaINSSBean {
         return "tabelainsslst";
     }
     
-    public String delete(TabINSS i) {
+    public String delete(TabelaINSS i) {
         dao.delete(i);
         return "tabelainsslst";
     }

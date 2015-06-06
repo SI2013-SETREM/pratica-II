@@ -14,7 +14,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "ffp_tab_inss")
-public class TabINSS implements Serializable{
+public class TabelaINSS implements Serializable{
      
     private static final String sTitle = "Tabela INSS";
     private static final String pTitle = "Tabelas INSS";
@@ -31,8 +31,8 @@ public class TabINSS implements Serializable{
     private double tbs_ab_imp_uni;
     private double tbs_sal_fami_uni;
     private double tbs_ali_normal;
-    private String tbs_ali_lei1;
-    private String tbs_ali_lei2;
+    private double tbs_ali_lei1;
+    private double tbs_ali_lei2;
     private String tbs_nome;
     
     public int getTbs_codigo() {
@@ -117,19 +117,19 @@ public class TabINSS implements Serializable{
         this.tbs_ali_normal = tbs_ali_normal;
     }
 
-    public String getTbs_ali_lei1() {
+    public double getTbs_ali_lei1() {
         return tbs_ali_lei1;
     }
 
-    public void setTbs_ali_lei1(String tbs_ali_lei1) {
+    public void setTbs_ali_lei1(double tbs_ali_lei1) {
         this.tbs_ali_lei1 = tbs_ali_lei1;
     }
 
-    public String getTbs_ali_lei2() {
+    public double getTbs_ali_lei2() {
         return tbs_ali_lei2;
     }
 
-    public void setTbs_ali_lei2(String tbs_ali_lei2) {
+    public void setTbs_ali_lei2(double tbs_ali_lei2) {
         this.tbs_ali_lei2 = tbs_ali_lei2;
     }
 

@@ -27,7 +27,7 @@ public class Formula implements Serializable {
     private String for_nome;
     private double for_taxa;
     private int for_horas;
-    private int for_horasmais;
+    private double for_horasmais;
 
     public int getFor_codigo() {
         return for_codigo;
@@ -53,11 +53,11 @@ public class Formula implements Serializable {
         this.for_horas = for_horas;
     }
 
-    public int getFor_horasmais() {
+    public double getFor_horasmais() {
         return for_horasmais;
     }
 
-    public void setFor_horasmais(int for_horasmais) {
+    public void setFor_horasmais(double for_horasmais) {
         this.for_horasmais = for_horasmais;
     }
 

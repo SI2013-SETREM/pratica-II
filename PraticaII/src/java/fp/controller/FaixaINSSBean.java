@@ -8,7 +8,7 @@ package fp.controller;
 import fp.dao.FaixaINSSDAO;
 import fp.dao.TabINSSDAO;
 import fp.model.FaixaINSS;
-import fp.model.TabINSS;
+import fp.model.TabelaINSS;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -31,8 +31,8 @@ public class FaixaINSSBean {
     private DataModel faixainsss;
     
     
-    private List<TabINSS> lsttabelaINSS;
-    private TabINSS tabelainss = new TabINSS();
+    private List<TabelaINSS> lsttabelaINSS;
+    private TabelaINSS tabelainss = new TabelaINSS();
     private TabINSSDAO tabelainssdao = new TabINSSDAO();
         
     public FaixaINSSBean(){
@@ -72,19 +72,19 @@ public class FaixaINSSBean {
         this.faixainsss = faixainsss;
     }
 
-    public List<TabINSS> getLsttabelaINSS() {
+    public List<TabelaINSS> getLsttabelaINSS() {
         return lsttabelaINSS;
     }
 
-    public void setLsttabelaINSS(List<TabINSS> lsttabelaINSS) {
+    public void setLsttabelaINSS(List<TabelaINSS> lsttabelaINSS) {
         this.lsttabelaINSS = lsttabelaINSS;
     }
 
-    public TabINSS getTabelainss() {
+    public TabelaINSS getTabelainss() {
         return tabelainss;
     }
 
-    public void setTabelainss(TabINSS tabelainss) {
+    public void setTabelainss(TabelaINSS tabelainss) {
         this.tabelainss = tabelainss;
     }
 
@@ -131,12 +131,12 @@ public class FaixaINSSBean {
     }
     
     
-     public List<TabINSS> getLstTabelaINSS() {
+     public List<TabelaINSS> getLstTabelaINSS() {
         lsttabelaINSS = tabelainssdao.findAll();
         return lsttabelaINSS;
     }
 
-    public void setLstTabelaINSS(List<TabINSS> i) {
+    public void setLstTabelaINSS(List<TabelaINSS> i) {
         this.lsttabelaINSS = i;
     }
     

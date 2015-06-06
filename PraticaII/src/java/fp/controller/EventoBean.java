@@ -10,7 +10,7 @@ import fp.dao.TipoEventoDAO;
 import fp.model.Evento;
 import fp.model.Formula;
 import fp.model.SerieEvento;
-import fp.model.TabINSS;
+import fp.model.TabelaINSS;
 import fp.model.TabelaIRRF;
 import fp.model.TipoEvento;
 import java.util.List;
@@ -34,8 +34,8 @@ public class EventoBean {
     private TipoEvento tipoevento = new TipoEvento();
     private TipoEventoDAO tipoeventodao = new TipoEventoDAO();
     
-    private List<TabINSS> lsttabinss;
-    private TabINSS tabinss = new TabINSS();
+    private List<TabelaINSS> lsttabinss;
+    private TabelaINSS tabinss = new TabelaINSS();
     private TabINSSDAO tabinssdao = new TabINSSDAO();
     
     
@@ -131,7 +131,7 @@ public class EventoBean {
         this.lsttipoevento = i;
     }
     
-      public List<TabINSS> getLstTabinss() {
+      public List<TabelaINSS> getLstTabinss() {
         lsttabinss = tabinssdao.findAll();
         return lsttabinss;
     }

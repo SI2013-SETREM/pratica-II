@@ -33,7 +33,7 @@ public class FaixaINSS implements Serializable {
 
      @ManyToOne
     @JoinColumn(name = "tbs_codigo", referencedColumnName = "tbs_codigo")
-    private TabINSS tabelainss;
+    private TabelaINSS tabelainss;
     
     
     public int getFai_codigo() {
@@ -76,11 +76,11 @@ public class FaixaINSS implements Serializable {
         this.fai_ab_imp_renda = fai_ab_imp_renda;
     }
 
-    public TabINSS getTabelainss() {
+    public TabelaINSS getTabelainss() {
         return tabelainss;
     }
 
-    public void setTabelainss(TabINSS tabelainss) {
+    public void setTabelainss(TabelaINSS tabelainss) {
         this.tabelainss = tabelainss;
     }
     

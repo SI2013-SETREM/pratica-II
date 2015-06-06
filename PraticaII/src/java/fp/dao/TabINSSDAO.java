@@ -6,7 +6,7 @@
 package fp.dao;
 
 
-import fp.model.TabINSS;
+import fp.model.TabelaINSS;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -30,33 +30,33 @@ public class TabINSSDAO {
 
     }
 
-    public void insert(TabINSS tabInss) {
+    public void insert(TabelaINSS tabInss) {
 
         Transaction t = session.beginTransaction();
         session.save(tabInss);
         t.commit();
     }
 
-    public void update(TabINSS tabInss) {
+    public void update(TabelaINSS tabInss) {
 
         Transaction t = session.beginTransaction();
         session.merge(tabInss);
         t.commit();
     }
 
-    public void delete(TabINSS tabInss) {
+    public void delete(TabelaINSS tabInss) {
 
         Transaction t = session.beginTransaction();
         session.delete(tabInss);
         t.commit();
     }
 
-    public TabINSS findById(int id) {
+    public TabelaINSS findById(int id) {
 
-        return (TabINSS) session.load(TabINSS.class, id);
+        return (TabelaINSS) session.load(TabelaINSS.class, id);
     }
 
-    public List<TabINSS> findAll() {
+    public List<TabelaINSS> findAll() {
 
         Query query = session.createQuery("from TabINSS");
         return query.list();
