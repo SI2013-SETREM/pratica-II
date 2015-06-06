@@ -41,7 +41,7 @@ public class BeneficiosPessoa implements Serializable {
     private Date ben_datafim;
     private double ben_valor;
 
-    public class BeneficiosPessoaPK implements Serializable {
+    public static class BeneficiosPessoaPK implements Serializable {
 
         protected Beneficio beneficio;
         protected Pessoa pessoa;
