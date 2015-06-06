@@ -28,6 +28,7 @@
                     }
                 });
                 shPerguntaOpcao();
+                shPerguntas();
             }
             function shPerguntaOpcao() {
                 $('.prgTipo input[type=radio]:checked').each(function() {
@@ -39,13 +40,36 @@
                     }
                 });
             }
+            function shPerguntas() {
+                $('.prgPergunta').each(function(i, e) {
+                    var idPergunta = $(e).data('pergunta');
+                    var $link = $('.pergunta-link[data-pergunta=' + idPergunta + ']');
+                    var $form = $('.pergunta-form[data-pergunta=' + idPergunta + ']');
+                    if ($(e).val() === "") {
+                        $form.removeClass('hidden');
+                        $link.addClass('hidden');
+                    } else {
+                        fillPerguntaStatic($form, $link);
+                        $link.removeClass('hidden');
+                        $form.addClass('hidden');
+                    }
+                });
+            }
             function savePergunta(idPergunta) {
                 var $link = $('.pergunta-link[data-pergunta=' + idPergunta + ']');
                 var $form = $('.pergunta-form[data-pergunta=' + idPergunta + ']');
-                $('.prgPerguntaStatic', $link).html($('.prgOrdem', $form).html() + ' ' + $('.prgPergunta', $form).val());
-                $link.removeClass('hidden');
-                $form.addClass('hidden');
+                if ($('.prgPergunta', $form).val() === "") {
+                    $('.prgPergunta', $form).parent().addClass('has-error has-feedback');
+                    $('.prgPergunta', $form).attr('placeholder', 'Por favor, preencha a pergunta');
+                } else {
+                    fillPerguntaStatic($form, $link);
+                    $link.removeClass('hidden');
+                    $form.addClass('hidden');
+                }
                 return false;
+            }
+            function fillPerguntaStatic($form, $link) {
+                $('.prgPerguntaStatic', $link).html($('.prgOrdem', $form).html() + ' ' + $('.prgPergunta', $form).val());
             }
             //http://stackoverflow.com/questions/13540298/proccess-onclick-function-after-ajax-call-fajax
             function ajaxPergunta(data) {
@@ -56,7 +80,6 @@
                         break;
                     case "success":
                         bindClickPergunta();
-                        shPerguntaOpcao();
                         break;
                 }
             }
@@ -68,7 +91,6 @@
                         break;
                     case "success":
                         bindClickPergunta();
-                        shPerguntaOpcao();
                         savePergunta($(data.source).data('pergunta'));
                         break;
                 }
@@ -126,8 +148,8 @@
                             <div class="perguntas form-group list-group">
                                 <c:forEach items="#{questionarioBean.questionario.perguntas}" var="pergunta" varStatus="loopPergunta">
                                     <c:set var="idPergunta" value="#{pergunta.prgCodigo}_#{loopPergunta.index}" />
-                                    <div class="pergunta-link list-group-item #{empty pergunta.prgPergunta ? 'hidden' : ''}" data-pergunta="#{idPergunta}">
-                                        <span class="prgPerguntaStatic form-control-static">#{pergunta.prgOrdem}. #{pergunta.prgPergunta}</span>
+                                    <div class="pergunta-link list-group-item hidden" data-pergunta="#{idPergunta}">
+                                        <span class="prgPerguntaStatic form-control-static"><!--Alimentado via JavaScript--></span>
                                         <div class="btn-group pull-right">
                                             <h:commandLink rendered="#{loopPergunta.index != 0}" immediate="true" styleClass="btn btn-info" action="#{questionarioBean.moveUpPergunta(pergunta)}">
                                                 <f:ajax execute="@form"
@@ -149,12 +171,12 @@
                                             </h:commandLink>
                                         </div>
                                     </div>
-                                    <div class="pergunta-form list-group-item #{empty pergunta.prgPergunta ? '' : 'hidden'}" data-pergunta="#{idPergunta}">
+                                    <div class="pergunta-form list-group-item hidden" data-pergunta="#{idPergunta}">
                                         <div class="row">
                                             <div class="col-xs-8 col-lg-10">
                                                 <div class="input-group">
-                                                    <span class="input-group-addon prgOrdem">#{pergunta.prgOrdem}.</span>
-                                                    <h:inputText pt:placeholder="Pergunta" value="#{pergunta.prgPergunta}" title="Pergunta" styleClass="form-control prgPergunta"/>
+                                                    <span class="input-group-addon prgOrdem" pt:data-pergunta="#{idPergunta}">#{pergunta.prgOrdem}.</span>
+                                                    <h:inputText pt:placeholder="Pergunta" value="#{pergunta.prgPergunta}" title="Pergunta" styleClass="form-control prgPergunta" pt:data-pergunta="#{idPergunta}" />
                                                 </div>
                                             </div>
                                             <div class="col-xs-2 col-lg-2 btn-group">

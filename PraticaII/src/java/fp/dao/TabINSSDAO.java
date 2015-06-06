@@ -58,7 +58,7 @@ public class TabINSSDAO {
 
     public List<TabelaINSS> findAll() {
 
-        Query query = session.createQuery("from TabINSS");
+        Query query = session.createQuery("from TabelaINSS");
         return query.list();
 
     }

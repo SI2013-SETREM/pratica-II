@@ -60,7 +60,7 @@
     <mapping class="fp.model.Formula"/>
     <mapping class="fp.model.HistoricoFolha"/>
     <mapping class="fp.model.SerieEvento"/>
-    <mapping class="fp.model.TabINSS"/>
+    <mapping class="fp.model.TabelaINSS"/>
     <mapping class="fp.model.TabelaIRRF"/>
     <mapping class="fp.model.TipoEvento"/>
     <mapping class="rs.model.AreaInteresse"/>

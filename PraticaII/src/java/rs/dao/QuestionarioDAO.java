@@ -40,29 +40,7 @@ public class QuestionarioDAO {
         qst.setQstTipo(obj.getQstTipo());
         s.save(qst);
         
-        for (Pergunta pergunta : arrPerguntas) {
-            Pergunta prg = new Pergunta();
-            prg.setQuestionario(qst);
-            if (pergunta.getCompetencia() != null) {
-                prg.setCompetencia(pergunta.getCompetencia());
-            }
-            prg.setPrgPergunta(pergunta.getPrgPergunta());
-            prg.setPrgOrdem(pergunta.getPrgOrdem());
-            prg.setPrgTipo(pergunta.getPrgTipo());
-            prg.setPrgOpcaooutros(pergunta.isPrgOpcaooutros());
-            prg.setPrgExibircandidato(pergunta.isPrgExibircandidato());
-            prg.setPrgObrigatoria(pergunta.isPrgObrigatoria());
-            s.save(prg);
-            
-            for (PerguntaOpcao perguntaOpcao : pergunta.getPerguntaOpcoes()) {
-                PerguntaOpcao prgOpc = new PerguntaOpcao();
-                prgOpc.setOpcNome(perguntaOpcao.getOpcNome());
-                prgOpc.setOpcDescricao(perguntaOpcao.getOpcDescricao());
-                prgOpc.setOpcPontuacao(perguntaOpcao.getOpcPontuacao());
-                
-                s.save(prgOpc);
-            }
-        }
+        saveLevels(qst, arrPerguntas);
         
         //s.refresh(obj); //Não sei se preciso disso
         
@@ -71,23 +49,71 @@ public class QuestionarioDAO {
     }
     
     public void update(Questionario obj) {
-        Session s = this.getSession();
-        Transaction t = s.getTransaction();
-        if (!t.isActive()) {
-            t = s.beginTransaction();
+        if (obj.getQstCodigo() == 0) {
+            insert(obj);
+        } else {
+            Session s = this.getSession();
+            Transaction t = s.getTransaction();
+            if (!t.isActive()) {
+                t = s.beginTransaction();
+            }
+            
+            ArrayList<Pergunta> arrPerguntas = (ArrayList<Pergunta>) obj.getPerguntas();
+            Questionario qst = findById(obj.getQstCodigo());
+            qst.setQstTitulo(obj.getQstTitulo());
+            qst.setQstPontuacaototal(obj.getQstPontuacaototal());
+            qst.setQstPontuacaomax(obj.getQstPontuacaomax());
+            qst.setQstTipoQuestoes(arrPerguntas);
+            qst.setQstTipo(obj.getQstTipo());
+            s.merge(obj);
+            
+            saveLevels(qst, arrPerguntas);
+            
+            //s.flush(); //Não sei se preciso disso
+            
+            t.commit();
+            s.close();
         }
-//        for (int i = 0; i < obj.getPerguntas().size(); i++) {
-//            Pergunta p = obj.getPerguntas().get(i);
-//            if (p.getPrgCodigo() > 0) {
-//                s.merge(p);
-//            } else {
-//                s.save(p);
-//            }
-//        }
-        s.merge(obj);
-        s.flush();
-        t.commit();
-        s.close();
+    }
+    
+    public void saveLevels(Questionario qst, ArrayList<Pergunta> arrPerguntas) {
+        Session s = this.getSession();
+        
+        // Remove as peguntas antes de cadastrar de novo
+        Query qPergunta = s.createQuery("DELETE FROM Pergunta WHERE Pergunta.questionario.qst_codigo = " + String.valueOf(qst.getQstCodigo()));
+        qPergunta.executeUpdate();
+        
+        for (Pergunta pergunta : arrPerguntas) {
+            if (!"".equals(pergunta.getPrgPergunta())) {
+                Pergunta prg = new Pergunta();
+                prg.setQuestionario(qst);
+                if (pergunta.getCompetencia() != null) {
+                    prg.setCompetencia(pergunta.getCompetencia());
+                }
+                prg.setPrgPergunta(pergunta.getPrgPergunta());
+                prg.setPrgOrdem(pergunta.getPrgOrdem());
+                prg.setPrgTipo(pergunta.getPrgTipo());
+                prg.setPrgOpcaooutros(pergunta.isPrgOpcaooutros());
+                prg.setPrgExibircandidato(pergunta.isPrgExibircandidato());
+                prg.setPrgObrigatoria(pergunta.isPrgObrigatoria());
+                s.save(prg);
+
+                // Isso provavelmente vai dar problema, tem que revisar
+                Query qPrgOpcao = s.createQuery("DELETE FROM PerguntaOpcao po WHERE po.qst_codigo = :qst AND po.prg_codigo = :prg");
+                qPrgOpcao.setParameter("qst", pergunta.getQuestionario().getQstCodigo());
+                qPrgOpcao.setParameter("prg", pergunta.getPrgCodigo());
+                qPrgOpcao.executeUpdate();
+
+                for (PerguntaOpcao perguntaOpcao : pergunta.getPerguntaOpcoes()) {
+                    PerguntaOpcao prgOpc = new PerguntaOpcao();
+                    prgOpc.setOpcNome(perguntaOpcao.getOpcNome());
+                    prgOpc.setOpcDescricao(perguntaOpcao.getOpcDescricao());
+                    prgOpc.setOpcPontuacao(perguntaOpcao.getOpcPontuacao());
+
+                    s.save(prgOpc);
+                }
+            }
+        }
     }
     
     public void delete(Questionario obj) {

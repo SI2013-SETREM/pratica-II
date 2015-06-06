@@ -6,7 +6,7 @@
 package fp.converter;
 
 import fp.dao.TabINSSDAO;
-import fp.model.TabINSS;
+import fp.model.TabelaINSS;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.FacesConverter;
@@ -25,6 +25,6 @@ public class TabelaINSSConverter implements javax.faces.convert.Converter{
 
     @Override
     public String getAsString(FacesContext facesContext, UIComponent uIComponent, Object object) {
-        return "" + ((TabINSS) object).getTbs_codigo();
+        return "" + ((TabelaINSS) object).getTbs_codigo();
     }
 }

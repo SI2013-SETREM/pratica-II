@@ -170,9 +170,9 @@ public class Questionario implements Serializable {
     }
 
     public void setPerguntas(List<Pergunta> perguntas) {
-//        if (perguntas.size() > 1) {
-//            Collections.sort(perguntas);
-//        }
+        if (perguntas.size() > 1) {
+            Collections.sort(perguntas);
+        }
         this.perguntas = perguntas;
     }
     
