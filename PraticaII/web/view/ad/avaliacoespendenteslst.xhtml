@@ -9,7 +9,7 @@
     </ui:define>
 
     <ui:define name="breadcrumb">
-        <li href="avaliacaolst">${pessoasAvaliacaoBean.getpTitle()}</li>
+        <li><h:link value="${pessoasAvaliacaoBean.getpTitle()}"/></li>
     </ui:define>
 
     <ui:define name="main-content">
@@ -53,7 +53,7 @@
 
                     <h:column headerClass="col-editar-header">
                         <f:facet name="header">
-                            <h:outputText value="Editar"/>
+                            <h:outputText value="Avaliar"/>
                         </f:facet>
                         <h:commandLink action="${pessoasAvaliacaoBean.GetAvaliados(item)}">
                             <i class="fa fa-calculator"></i> Avaliar

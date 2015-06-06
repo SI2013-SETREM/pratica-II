@@ -19,6 +19,9 @@
                 <h:link outcome="avaliacaofrm" styleClass="btn btn-success">
                     <i class="fa fa-plus"></i> Inserir ${avaliacaoBean.getsTitle()}
                 </h:link>
+                <h:link outcome="avaliacoespendenteslst" styleClass="btn btn-success">
+                    Avaliações Pendentes
+                </h:link>
             </div>
             <h:form>
                 <h:dataTable value="${avaliacaoBean.avaliacoes}" var="item" styleClass="dataTable table table-bordered table-striped">

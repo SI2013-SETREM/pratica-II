@@ -57,7 +57,8 @@ public class AvaliacaoBean {
     }
 
     public List<Cargo> completeCargo(String query) {
-        return cargodao.searchCargo(query);
+        List<Cargo> lsC = cargodao.searchCargo(query);
+        return lsC;
     }
 
     public List<Pessoa> completePessoa(String query) {

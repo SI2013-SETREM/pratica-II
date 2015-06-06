@@ -40,7 +40,7 @@ public class Avaliacao implements Serializable {
     private String ava_observacao;
 //    @Temporal(javax.persistence.TemporalType.DATE)
     private Date ava_dataFinal;
-
+    
     public Avaliacao() {
     }
 

@@ -16,7 +16,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "avd_avaliacao_pessoa_cargo")
-//@IdClass(AvaliacaoPessoaCargo.AvaliacaoPessoaCargoPK.class)
+@IdClass(AvaliacaoPessoaCargo.AvaliacaoPessoaCargoPK.class)
 public class AvaliacaoPessoaCargo implements Serializable {
 //acho q nau precisa do sTitle aki, pois aqui n'ao vai ter nenhuma tela
 
@@ -39,46 +39,45 @@ public class AvaliacaoPessoaCargo implements Serializable {
     public AvaliacaoPessoaCargo() {
     }
 
-//    public class AvaliacaoPessoaCargoPK implements Serializable {
-//
-//        protected Avaliacao avaliacao;
-//        protected int apc_codigo;
-//
-//        public AvaliacaoPessoaCargoPK() {
-//        }
-//
-//        public AvaliacaoPessoaCargoPK(Avaliacao avaliacao, int apc_codigo) {
-//            this.avaliacao = avaliacao;
-//            this.apc_codigo = apc_codigo;
-//        }
-//
-//        @Override
-//        public int hashCode() {
-//            int hash = 7;
-//            hash = 19 * hash + Objects.hashCode(this.avaliacao);
-//            hash = 19 * hash + this.apc_codigo;
-//            return hash;
-//        }
-//
-//        @Override
-//        public boolean equals(Object obj) {
-//            if (obj == null) {
-//                return false;
-//            }
-//            if (getClass() != obj.getClass()) {
-//                return false;
-//            }
-//            final AvaliacaoPessoaCargoPK other = (AvaliacaoPessoaCargoPK) obj;
-//            if (!Objects.equals(this.avaliacao, other.avaliacao)) {
-//                return false;
-//            }
-//            if (this.apc_codigo != other.apc_codigo) {
-//                return false;
-//            }
-//            return true;
-//        }
-//
-//    }
+    public static class AvaliacaoPessoaCargoPK implements Serializable {
+
+        protected Avaliacao avaliacao;
+        protected int apc_codigo;
+
+        public AvaliacaoPessoaCargoPK() {
+        }
+
+        public AvaliacaoPessoaCargoPK(Avaliacao avaliacao, int apc_codigo) {
+            this.avaliacao = avaliacao;
+            this.apc_codigo = apc_codigo;
+        }
+
+        @Override
+        public int hashCode() {
+            int hash = 7;
+            hash = 19 * hash + Objects.hashCode(this.avaliacao);
+            hash = 19 * hash + this.apc_codigo;
+            return hash;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (obj == null) {
+                return false;
+            }
+            if (getClass() != obj.getClass()) {
+                return false;
+            }
+            final AvaliacaoPessoaCargoPK other = (AvaliacaoPessoaCargoPK) obj;
+            if (!Objects.equals(this.avaliacao, other.avaliacao)) {
+                return false;
+            }
+            if (this.apc_codigo != other.apc_codigo) {
+                return false;
+            }
+            return true;
+        }
+    }
 
     public int getApc_codigo() {
         return apc_codigo;

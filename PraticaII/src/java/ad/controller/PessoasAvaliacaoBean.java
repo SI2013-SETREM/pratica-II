@@ -31,6 +31,16 @@ public class PessoasAvaliacaoBean {
     }
 
     public DataModel getAvaliacoes() {
+        List<PessoasAvaliacao> lsAvaliacaoPessoas = dao.GetListPessoasAvaliacao(0, 0, 3, true);
+        List<Avaliacao> lsAvaliacao = new ArrayList<>();
+        List<Integer> lsCod = new ArrayList<>();
+        for (PessoasAvaliacao pa : lsAvaliacaoPessoas) {
+            if (!lsCod.contains(pa.getAvaliacao().getAva_codigo())) {
+                lsCod.add(pa.getAvaliacao().getAva_codigo());
+                lsAvaliacao.add(pa.getAvaliacao());
+            }
+        }
+        avaliacoes = new ListDataModel(lsAvaliacao);
         return avaliacoes;
     }
 
@@ -95,7 +105,6 @@ public class PessoasAvaliacaoBean {
     }
 
     public String listar() {
-
         return "pessoasavaliacaolst";
     }
 
@@ -112,6 +121,7 @@ public class PessoasAvaliacaoBean {
 
     public String Details(PessoasAvaliacao item) {
         // pessoas_avaliacao = dao.findById(item.get)
+        this.pessoas_avaliacoes = new ListDataModel(dao.GetListPessoasAvaliacao(item.getAvaliacao().getAva_codigo(), 0, 0, false));
         return "pessoasavaliacaodls";
     }
 
@@ -127,11 +137,11 @@ public class PessoasAvaliacaoBean {
     public String GetAvaliacoesPendentes() {
         List<PessoasAvaliacao> lsAvaliacaoPessoas = dao.GetListPessoasAvaliacao(0, 0, 1, true);
         List<Avaliacao> lsAvaliacao = new ArrayList<>();
-        for (int i = 0; i < lsAvaliacaoPessoas.size(); i++) {
-            lsAvaliacao.add(lsAvaliacaoPessoas.get(i).getAvaliacao());
+        for (PessoasAvaliacao pa : lsAvaliacaoPessoas) {
+            lsAvaliacao.add(pa.getAvaliacao());
         }
         avaliacoes = new ListDataModel(lsAvaliacao);
-        return "Avaliacoespendenteslst";
+        return "avaliacoespendenteslst";
     }
 
     public String GetAvaliados(Avaliacao avalicao) {
@@ -142,7 +152,7 @@ public class PessoasAvaliacaoBean {
 
         List<PessoasAvaliacao> lsAvaliacaoPessoas = dao.GetListPessoasAvaliacao(0, 0, 1, true);
 
-        return "PessoaAvaliacaofrm";
+        return "pessoasavaliacaofrm";
 
     }
 
