@@ -5,6 +5,7 @@
  */
 package rs.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -19,11 +20,13 @@ import util.HibernateUtil;
 public class RecrutamentoCargoDAO {
 
     private Session session;
-    public List<RecrutamentoCargo> rc;
+    public List<RecrutamentoCargo> rc = new ArrayList<>();
 
     public List<RecrutamentoCargo> getRc() {
-        Query q = session.createQuery("from RecrutamentoCargo rc INNER JOIN rc.recrutamento AS r WHERE r.rec_status=2");
-        rc = q.list();
+        if (rc.isEmpty()) {
+            Query q = session.createQuery("from RecrutamentoCargo rc INNER JOIN rc.recrutamento AS r WHERE r.rec_status=2");
+            rc = q.list();
+        }
         return rc;
     }
 

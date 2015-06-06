@@ -21,10 +21,11 @@ public class RecrutamentoCargo implements Serializable {
     @ManyToOne
     @JoinColumn(name = "rec_codigo", referencedColumnName = "rec_codigo")
     private Recrutamento recrutamento;
+    
     @Id
     @ManyToOne
     @JoinColumn(name = "car_codigo", referencedColumnName = "car_codigo")
-     private Cargo cargo;
+    private Cargo cargo;
 
     @Id
     private int rec_car_codigo;
