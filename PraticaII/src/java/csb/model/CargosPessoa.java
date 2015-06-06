@@ -39,7 +39,7 @@ public class CargosPessoa implements Serializable {
     private Date car_data_fim;
     private boolean car_status;
     
-    public class CargosPessoaPK implements Serializable {
+    public static class CargosPessoaPK implements Serializable {
         protected Cargo cargo;
         protected Pessoa pessoa;
 
