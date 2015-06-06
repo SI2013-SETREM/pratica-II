@@ -18,8 +18,6 @@ public class TabINSS implements Serializable{
      
     private static final String sTitle = "Tabela INSS";
     private static final String pTitle = "Tabelas INSS";
-
-  
     
     @Id
     @SequenceGenerator (name= "genTabINSS", sequenceName= "segTabINSS", allocationSize = 1)

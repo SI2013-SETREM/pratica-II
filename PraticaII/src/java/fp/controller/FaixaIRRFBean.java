@@ -63,7 +63,7 @@ public class FaixaIRRFBean {
     
     public String edit(FaixaIRRF i) {
         faixairrf = (FaixaIRRF) faixairrfs.getRowData();
-        return "faixairrfsfrm";
+        return "faixairrffrm";
     }
     
     public String update() {

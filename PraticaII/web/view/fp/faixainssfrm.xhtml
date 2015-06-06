@@ -13,7 +13,7 @@
 
     <ui:define name="breadcrumb">
         <li>Configurações</li>
-        <li><h:link value="${faixaINSSBean.getsTitle()}" outcome="/faces/view/fp/faixainsslst" /></li>
+        <li><h:link value="${faixaINSSBean.getsTitle()}" outcome="/faces/view/fp/tabelainsslst" /></li>
     </ui:define>
 
     <ui:define name="main-content">
@@ -46,13 +46,15 @@
                             <h:inputText id="Fxir" value="#{faixaINSSBean.faixainss.fai_ab_imp_renda}" title="TpeNome" styleClass="form-control" pt:autofocus="" />
                         </div> 
                       </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Tabela INSS: " for="tabelainss" styleClass="control-label col-sm-2" />
+                        <div class="col-md-6 col-sm-12">
+                            <h:selectOneMenu id="tabelainss" converter="tabelaINSSConverter" value="#{faixaINSSBean.faixainss.tabelainss}" styleClass="form-control" pt:autofocus="" >
+                                <f:selectItems value="#{faixaINSSBean.lstTabelaINSS}" var="tipe" itemLabel="#{tipe.tbs_nome}"/>
+                            </h:selectOneMenu>
+                        </div>
+                    </div>
                     
-                    
-                  
-
-
-
-
                     <div class="form-group">
                         <div class="col-md-offset-1 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
                             <h:link styleClass="btn btn-default" value="Cancelar" outcome="#{faixaINSSBean.listar()}" />

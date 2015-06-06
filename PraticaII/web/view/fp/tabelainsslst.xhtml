@@ -22,6 +22,9 @@
                 </h:link>
             </div>
             <h:form>
+                
+                <h:panelGroup layout="block" style="overflow-y:scroll">
+  
                 <h:dataTable value="${tabelaINSSBean.tabsINSS}" var="item" rendered="${tabelaINSSBean.tabsINSS.rowAvailable}" styleClass="dataTable table table-bordered table-striped">
                       <h:column>
                         <f:facet name="header">
@@ -31,54 +34,67 @@
                     </h:column>
                     <h:column>
                         <f:facet name="header">
-                            <h:outputText value="Data Inicial"/>
+                            <h:outputText value="Data Ini."/>
                         </f:facet>
                         <h:outputText value="${item.getTbs_data_inicial()}">
                             <f:convertDateTime pattern="dd/MM/yyyy"/></h:outputText>
                     </h:column>
                     <h:column>
                         <f:facet name="header">
-                            <h:outputText value="Data Final"/>
+                            <h:outputText value="Data Fim"/>
                         </f:facet>
                         <h:outputText value="${item.getTbs_data_final()}">
                         <f:convertDateTime pattern="dd/MM/yyyy"/></h:outputText>
                     </h:column>
                     <h:column>
                         <f:facet name="header">
-                            <h:outputText value="Salário Familia de"/>
+                            <h:outputText value="Salário. Fam. de"/>
                         </f:facet>
                         <h:outputText value="${item.getTbs_sal_fami_ini() }"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">
-                            <h:outputText value="Salário Familia até"/>
+                            <h:outputText value="Salário Fam. até"/>
                         </f:facet>
                         <h:outputText value="${item.getTbs_sal_fami_fin()}"/>
                     </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Ab. Imp Renda"/>
-                        </f:facet>
-                        <h:outputText value="${item.getTbs_ab_imp_ini_fin()}"/>
-                    </h:column>
                      <h:column>
                         <f:facet name="header">
-                            <h:outputText value="Salário Familia até"/>
+                            <h:outputText value="Salário Fam. Uni."/>
                         </f:facet>
                         <h:outputText value="${item.getTbs_sal_fami_uni()}"/>
                     </h:column>
-                     <h:column>
+                    <h:column>
                         <f:facet name="header">
-                            <h:outputText value="Ab Imp Renda"/>
+                            <h:outputText value="Ab. Imp. Renda"/>
+                        </f:facet>
+                        <h:outputText value="${item.getTbs_ab_imp_ini_fin()}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Ab Imposto Uni."/>
                         </f:facet>
                         <h:outputText value="${item.getTbs_ab_imp_uni()}"/>
                     </h:column>
                      <h:column>
                         <f:facet name="header">
-                            <h:outputText value="Aliquota Normal"/>
+                            <h:outputText value="Aliquota Norm."/>
                         </f:facet>
                         <h:outputText value="${item.getTbs_ali_normal()}"/>
                     </h:column>
+                     <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Aliquota Lei 1."/>
+                        </f:facet>
+                        <h:outputText value="${item.getTbs_ali_lei1()}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Aliquota Lei 2."/>
+                        </f:facet>
+                        <h:outputText value="${item.getTbs_ali_lei2()}"/>
+                    </h:column>
+                    
                     <h:column headerClass="col-editar-header">
                         <f:facet name="header">
                             <h:outputText value="Editar"/>
@@ -96,7 +112,87 @@
                         </h:commandLink>
                     </h:column>
                 </h:dataTable>
+                    </h:panelGroup>
             </h:form>
+            
+            
+             <h:form>
+           
+        <div >
+            <h3><h:outputText value="Lista de ${faixaINSSBean.getpTitle()}"/></h3>
+            <div class="btns-top-table">
+                <h:link outcome="faixainssfrm" styleClass="btn btn-success">
+                    <i class="fa fa-plus"></i> Inserir ${faixaINSSBean.getpTitle()}
+                </h:link>
+                <h:outputText value="  "/>
+                
+            </div>
+            <h:dataTable value="${faixaINSSBean.faixainsss}" var="item" rendered="${faixaINSSBean.faixainsss.rowAvailable}" styleClass="dataTable table table-bordered table-striped">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Código"/>
+                        </f:facet>
+                        <h:outputText value="${item.getFai_codigo()}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Salário inic."/>
+                        </f:facet>
+                        <h:outputText value="${item.getFai_sal_ini()}"/>
+                        </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Salário fim"/>
+                        </f:facet>
+                        <h:outputText value="${item.getFai_sal_fin()}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Aliquota"/>
+                        </f:facet>
+                        <h:outputText value="${item.getFai_aliquota() }"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Ab. Imp. Renda"/>
+                        </f:facet>
+                        <h:outputText value="${item.getFai_ab_imp_renda()}"/>
+                    </h:column>
+                    
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Tabela INSS"/>
+                        </f:facet>
+                        <h:outputText converter="tabelaINSSConverter" value="${item.tabelainss}"/>
+                    </h:column>
+                    
+                    <h:column headerClass="col-editar-header">
+                        <f:facet name="header">
+                            <h:outputText value="Editar"/>
+                        </f:facet>
+                        <h:commandLink action="${faixaINSSBean.edit(item)}">
+                            <i class="fa fa-pencil"></i> Editar
+                        </h:commandLink>
+                    </h:column>
+                    <h:column headerClass="col-excluir-header">
+                        <f:facet name="header">
+                            <h:outputText value="Excluir"/>
+                        </f:facet>
+                        <h:commandLink onclick="return confirm('Deseja realmente excluir o ${faixaINSSBean.getsTitle()}?');" action="${faixaINSSBean.delete(item)}">
+                            <i class="fa fa-trash"></i> Excluir
+                        </h:commandLink>
+                    </h:column>
+                </h:dataTable>
+            
+             </div>
+            
+            </h:form>
+            
+            
+            
+            
+            
+            
         </div>
     </ui:define>
 </ui:composition>
