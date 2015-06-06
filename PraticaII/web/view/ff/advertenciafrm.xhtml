@@ -1,0 +1,76 @@
+<ui:composition template="./../modelos/default.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:p="http://primefaces.org/ui">
+
+
+    <ui:define name="title">
+        Advertência
+    </ui:define>
+
+    <ui:define name="breadcrumb">
+        <li>Configurações </li>
+
+    </ui:define>
+
+
+    <ui:define name="main-content">
+
+
+        <div class="panel panel-body">
+            <h3><h:outputText value="Registro de Advertência"/></h3>
+            <f:view>
+                <h:form styleClass="form-horizontal">
+                    <h:inputHidden id="faltCodigo" value="#{advertenciaBean.advertencia.adv_codigo}" />
+
+                    <div class="form-group">
+
+                        <h:outputLabel value="Descrição:" for="idiDescricao" styleClass="control-label col-sm-2 " />
+                        <div class="col-md-4 col-sm-6">
+                            <h:inputText pt:autofocus=""  id="idiDescricao" value="${advertenciaBean.advertencia.adv_descricao}" title="Descrição da Advertência" styleClass="form-control" />
+                        </div>
+                        <h:outputLabel value="Nome do Aplicador:" for="idiAvaliador" styleClass="control-label col-sm-2 " />
+                        <div class="col-md-8 col-xs-12 autocomplete">
+                            <p:autoComplete pt:disabled="" id="cargo" multiple="true" completeMethod="" value=""
+                                            var="aplicador" itemLabel="" itemValue="" converter="cargoConverter" forceSelection="true">
+                                <p:column>
+                                    <h:outputText value="#{aplicador}" />
+                                </p:column>
+                            </p:autoComplete>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel value="Data:" for="idiData" styleClass="control-label col-sm-2" />
+                        <div class="col-md-3 col-sm-6">
+
+                            <h:inputText pt:type="date" id="idiData" value="${advertenciaBean.advertencia.adv_data}" title="Data da Advertência" styleClass="form-control">
+                                <f:convertDateTime pattern="yyyy-MM-dd"/>
+                            </h:inputText>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel value="Observaçôes" for="idiObs" styleClass=" control-label col-xs-2" />
+                        <div class="col-md-6 col-sm-12">
+                            <h:inputText pt:autofocus="" pt:required="required" id="idiObs" value="${advertenciaBean.advertencia.adv_observacao}" title="Quantidade de Horas" styleClass="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-9 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
+                            <h:link styleClass="btn btn-default" value="Cancelar"  />
+                            <h:commandButton styleClass="btn btn-primary" value="Salvar"  ></h:commandButton>
+                        </div>
+                    </div>
+                </h:form>
+            </f:view>
+        </div>
+    </ui:define>
+
+</ui:composition>
