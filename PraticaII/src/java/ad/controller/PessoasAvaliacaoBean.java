@@ -19,6 +19,7 @@ public class PessoasAvaliacaoBean {
     private PessoasAvaliacaoDAO dao = new PessoasAvaliacaoDAO();
     private DataModel pessoas_avaliacoes;
     private DataModel avaliacoes;
+    private DataModel Perguntas;
 
     private List<PessoasAvaliacao> lsPessoasAvaliacao;
 
@@ -48,6 +49,14 @@ public class PessoasAvaliacaoBean {
 
     public void setPessoaAvaliacoes(DataModel pessoas_avaliacoes) {
         this.pessoas_avaliacoes = pessoas_avaliacoes;
+    }
+
+    public DataModel getPerguntas() {
+        return Perguntas;
+    }
+
+    public void setPerguntas(DataModel Perguntas) {
+        this.Perguntas = Perguntas;
     }
 
     public String insert() {
