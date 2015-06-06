@@ -48,11 +48,11 @@ public class FichaFuncionalBean {
     public String select() {
         fichaFuncional = fichas.getRowData();
         fichaFuncional = fichaFuncionalDAO.findById(fichaFuncional.getFfu_codigo());
-        if (fichaFuncional != null && fichaFuncional.getPessoa() != null) {
-            beneficios = beneficiosPessoaDAO.findByPessoaId(fichaFuncional.getPessoa().getPes_codigo());
-        } else {
-            beneficios = new ArrayList<>();
-        }
+//        if (fichaFuncional != null && fichaFuncional.getPessoa() != null) {
+//            beneficios = beneficiosPessoaDAO.findByPessoaId(fichaFuncional.getPessoa().getPes_codigo());
+//        } else {
+//            beneficios = new ArrayList<>();
+//        }
         return "fichafunfrm";
     }
 

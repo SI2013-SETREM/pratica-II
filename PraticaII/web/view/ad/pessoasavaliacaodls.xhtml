@@ -13,11 +13,11 @@
 
 
     <ui:define name="title">
-        ${pessoas_avaliacaoBean.sTitleDetails}  
+
     </ui:define>
 
     <ui:define name="breadcrumb">
-        <li>${pessoas_avaliacaoBean.sTitleDetails}</li>
+
     </ui:define>
     <ui:define name="header">
         <script type="text/javascript" src="http://code.highcharts.com/highcharts.js"></script>
@@ -26,63 +26,75 @@
 
     <ui:define name="main-content">
         <h:form>
-            <h:dataTable value="${pessoasAvaliacaoBean.Perguntas}" var="item"  styleClass="dataTable table table-bordered table-striped">
 
-                <script>
-                    $(function () {
-                        $(document).ready(function () {
-                            // Build the chart
-                            $('#container').highcharts({
-                                chart: {
-                                    plotBackgroundColor: null,
-                                    plotBorderWidth: null,
-                                    plotShadow: false
-                                },
-                                title: {
-                                    text: 'Pergunta a ser "Perguntada"'
-                                },
-                                tooltip: {
-                                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                                },
-                                plotOptions: {
-                                    pie: {
-                                        allowPointSelect: true,
-                                        cursor: 'pointer',
-                                        dataLabels: {
-                                            enabled: false
-                                        },
-                                        showInLegend: true
-                                    }
-                                },
-                                series: [{
-                                        type: 'pie',
-                                        name: 'Browser share',
-                                        data: [
-                                            ['Firefox', 45.0],
-                                            ['IE', 26.8],
-                                            {
-                                                name: 'Chrome',
-                                                y: 12.8,
-                                                sliced: true,
-                                                selected: true
+            <h:dataTable value="${avaliacaoBean.avaliacoes}" var="item"  styleClass="dataTable table table-bordered table-striped">
+
+
+                <h:column>
+                    <script>
+                        $(function () {
+                            $(document).ready(function () {
+                                // Build the chart
+                                $('.${item.getAva_codigo()}').highcharts({
+                                    chart: {
+                                        plotBackgroundColor: null,
+                                        plotBorderWidth: null,
+                                        plotShadow: false
+                                    },
+                                    title: {
+                                        text: '${item.getAva_nome()}'
+                                    },
+                                    tooltip: {
+                                        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                                    },
+                                    plotOptions: {
+                                        pie: {
+                                            allowPointSelect: true,
+                                            cursor: 'pointer',
+                                            dataLabels: {
+                                                enabled: false
                                             },
-                                            ['Opção ', 8.5],
-                                            ['Opção 2', 6.2],
-                                            ['Opção 3', 0.7]
+                                            showInLegend: true
+                                        }
+                                    },
+                                    series: [{
+                                            type: 'pie',
+                                            name: 'Browser share',
+                                            data: [
+                                                ['Firefox', 45.0],
+                                                ['IE', 26.8],
+                                                {
+                                                    name: 'Chrome',
+                                                    y: 12.8,
+                                                    sliced: true,
+                                                    selected: true
+                                                },
+                                                ['Opção ', 8.5],
+                                                ['Opção 2', 6.2],
+                                                ['Opção 3', 0.7]
 
-                                        ]
+                                            ]
 
 
-                                    }]
+                                        }]
+                                });
                             });
+
                         });
+                    </script>
+                    <f:facet name="header">
+                        <h:outputText value="Nome"/>
+                    </f:facet>
+                    <h:outputText value="${item.getAva_codigo()}"/>
+                </h:column>
+                <h:column>
+                    <div id="container" class="${item.getAva_codigo()}" style="min-width: 250px; height: 350px; max-width: 600px; margin: 0 auto"></div>
+                </h:column>
+                <!--                <div class="panel panel-body">
+                                    <div id="container" class="1" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+                                </div>  </h:dataTable>-->
+            </h:dataTable>
 
-                    });
-                </script>
-
-                <div class="panel panel-body">
-                    <div id="container" class='${item.getAva_nome()}' style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
-                </div>  </h:dataTable>
         </h:form>
 
 

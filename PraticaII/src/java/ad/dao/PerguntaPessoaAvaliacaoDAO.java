@@ -41,4 +41,6 @@ public class PerguntaPessoaAvaliacaoDAO {
         Query q = session.createQuery("from Pergunta_pessoa_avaliacao");
         return q.list();
     }
+    
+    
 }
