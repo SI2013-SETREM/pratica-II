@@ -52,11 +52,13 @@ public class FeriasDAO {
         t.commit();
     }
 
-    public Ferias findById(int id) {
 
-        return (Ferias) session.load(Ferias.class, id);
+      public List<Ferias> findById(int ffu_codigo) {
+        Query q = session.createQuery("from Ferias where ffu_codigo = :ffu_codigo");
+        return q.setParameter("ffu_codigo", ffu_codigo).list();
+       
     }
-
+    
     public List<Ferias> finAll() {
 
         Query query = session.createQuery("from Ferias");

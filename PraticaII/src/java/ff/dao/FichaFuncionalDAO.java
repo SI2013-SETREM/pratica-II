@@ -51,9 +51,8 @@ public class FichaFuncionalDAO {
         return (FichaFuncional) session.load(FichaFuncional.class, id);
     }
 
-    public List<FichaFuncional> finAll() {
-
-        Query query = session.createQuery("from FichaFuncional");
+    public List<FichaFuncional> findAll() {
+        Query query = session.createQuery("from FichaFuncional ");
         return query.list();
 
     }
