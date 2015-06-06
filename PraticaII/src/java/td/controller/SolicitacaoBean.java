@@ -1,5 +1,8 @@
 package td.controller;
 
+import cfg.dao.PessoaDAO;
+import cfg.model.Pessoa;
+import java.util.List;
 import td.dao.SolicitacaoDAO;
 import td.model.Solicitacao;
 import javax.faces.bean.ManagedBean;
@@ -13,6 +16,10 @@ public class SolicitacaoBean {
 
     private final String sTitle = Solicitacao.sTitle;
     private final String pTitle = Solicitacao.pTitle;
+    
+    private List<Pessoa> lstpessoa;
+    private Pessoa pessoa = new Pessoa();
+    private PessoaDAO pessoadao = new PessoaDAO();
 
     private Solicitacao solicitacao = new Solicitacao();
     private SolicitacaoDAO dao = new SolicitacaoDAO();
@@ -74,5 +81,14 @@ public class SolicitacaoBean {
 
     public String listar() {
         return "solicitacaolst";
+    }
+    
+    public List<Pessoa> getLstpessoa() {
+        lstpessoa = pessoadao.findAll();
+        return lstpessoa;
+    }
+
+    public void setLstpessoa(List<Pessoa> lstpessoa) {
+        this.lstpessoa = lstpessoa;
     }
 }

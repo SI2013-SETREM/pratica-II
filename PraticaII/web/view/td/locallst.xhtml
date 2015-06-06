@@ -29,6 +29,18 @@
                         </f:facet>
                         <h:outputText value="${item.getLoc_descricao()}"/>
                     </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Cidade"/>
+                        </f:facet>
+                        <h:outputText value="${item.getCidade().getCid_nome()}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Empresa"/>
+                        </f:facet>
+                        <h:outputText value="${item.getEmpresa().getEmp_nome()}"/>
+                    </h:column>
                     <h:column headerClass="col-editar-header">
                         <f:facet name="header">
                             <h:outputText value="Editar"/>

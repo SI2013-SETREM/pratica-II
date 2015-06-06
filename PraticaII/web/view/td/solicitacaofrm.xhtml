@@ -32,16 +32,29 @@
                             <h:inputText id="solDescricao" value="#{solicitacaoBean.solicitacao.sol_descricao}" title="SolDescricao" styleClass="form-control" pt:autofocus="" />
                         </div>
                     </div>
-                  <!--  <div class="form-group">
+                    <div class="form-group">
+                        <h:outputLabel value="Pessoa: " for="pessoa" styleClass="control-label col-sm-1" />
+                        <div class="col-md-6 col-sm-12">
+                            <h:selectOneMenu id="pessoa" converter="pessoaConverter" value="#{solicitacaoBean.solicitacao.pessoa}" styleClass="form-control" pt:autofocus="" >
+                                <f:selectItems value="#{solicitacao.lstpessoa}" var="tipe" itemLabel="#{tipe.pes_nome}"/>
+                            </h:selectOneMenu>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <h:outputLabel value="Data:" for="sol_data" styleClass="control-label col-sm-1" />
                         <div class="col-md-6 col-sm-12">
                             <h:inputText id="solData" value="#{solicitacaoBean.solicitacao.sol_data}" title="SolData" styleClass="form-control" pt:autofocus="" />
                         </div>
-                    </div>-->
+                    </div>
                     <div class="form-group">
-                        <h:outputLabel value="Prioridade:" for="sol_Prioridade" styleClass="control-label col-sm-1" />
+                        <h:outputLabel value="Prioridade" for="solPrioridade" styleClass="control-label col-sm-1" />
                         <div class="col-md-6 col-sm-12">
-                            <h:inputText id="solPrioridade" value="#{solicitacaoBean.solicitacao.sol_prioridade}" title="SolPrioridade" styleClass="form-control" pt:autofocus="" />
+                            <h:selectOneMenu pt:required="required" id="epiTipo" value="#{solicitacaoBean.solicitacao.sol_prioridade}" title="Prioridade" styleClass="form-control" pt:autofocus="">
+                                <f:selectItem  itemValue="1" itemLabel="Baixa"/>
+                                <f:selectItem  itemValue="2" itemLabel="Normal"/>
+                                <f:selectItem  itemValue="3" itemLabel="Alta"/>
+                                <f:selectItem  itemValue="4" itemLabel="Urgente"/>
+                            </h:selectOneMenu>
                         </div>
                     </div>
                     <div class="form-group">

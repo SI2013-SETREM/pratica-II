@@ -25,7 +25,7 @@ public class Treinamento implements Serializable {
     private String tre_descricao;
     private Time tre_cargahoraria;
     private double tre_custototal;
-    private int tre_status;
+    private boolean tre_status;
     @ManyToOne
     @JoinColumn(name = "loc_codigo")
     private Local local;
@@ -73,11 +73,11 @@ public class Treinamento implements Serializable {
         this.tre_custototal = tre_custototal;
     }
 
-    public int getTre_status() {
+    public boolean getTre_status() {
         return tre_status;
     }
 
-    public void setTre_status(int tre_status) {
+    public void setTre_status(boolean tre_status) {
         this.tre_status = tre_status;
     }
 

@@ -77,7 +77,7 @@ public class LocalBean {
     }
     
     public String salvar() {
-         if (local.getLoc_codigo()> 0)
+        if (local.getLoc_codigo()> 0)
             dao.update(local);
         else 
             dao.insert(local);
