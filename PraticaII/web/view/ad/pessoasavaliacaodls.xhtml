@@ -27,7 +27,11 @@
                 <h:column>
                     <script>
                         $(function () {
-                                                     
+
+                            var lsValores = '${item.getQuestionario().getPerguntas()}';
+
+                            console.log(lsValores);
+
                             $(document).ready(function () {
                                 // Build the chart
                                 $('.${item.getAva_codigo()}').highcharts({
@@ -37,7 +41,14 @@
                                         plotShadow: false
                                     },
                                     title: {
-                                        text: '${item.getAva_nome()}'
+                                        text: '${item.getAva_nome()}',
+                                        align: 'left',
+                                        x: 0,
+                                        y: 30
+                                    },
+                                    subtitle: {
+                                        text: '${item.getAva_observacao()}',
+                                        align: 'left'
                                     },
                                     tooltip: {
                                         pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
