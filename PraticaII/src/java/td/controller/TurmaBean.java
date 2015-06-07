@@ -14,9 +14,9 @@ import td.model.Turma;
 @RequestScoped
 public class TurmaBean {
 
-    private final String sTitle = AlunosTurma.sTitle;
+    private final String sTitle = Turma.sTitle;
 
-    private final String pTitle = AlunosTurma.pTitle;
+    private final String pTitle = Turma.pTitle;
     
     private List<Treinamento> lsttreinamento;
     
