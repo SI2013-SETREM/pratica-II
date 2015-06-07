@@ -168,11 +168,26 @@
                                     <span class="fa dropdown-chevron pull-right"></span>
                                 </a>
                                 <ul class="submenu">
-                                    <li class="#{view.viewId.contains('/td/alunostreinamento') ? 'active' : ''}">
-                                        <h:link outcome="/faces/view/td/alunostreinamentolst">
+                                    <li class="menu-dropdown #{view.viewId.contains('/curso') || view.viewId.contains('/cursospessoa') ? 'open' : ''}">
+                                        <a href="javascript:void(0);">
                                             <span class="fa fa-users"></span>
-                                            <span class="menu-text">Turmas</span>                                       
-                                        </h:link>
+                                            <span class="menu-text">Turmas</span>
+                                            <span class="fa dropdown-chevron pull-right"></span>
+                                        </a>
+                                        <ul class="submenu">
+                                            <li class="#{view.viewId.contains('/curso') ? 'active' : ''}">
+                                                <h:link outcome="/faces/view/td/turmalst">
+                                                    <span class="fa fa-cube"></span>
+                                                    <span class="menu-text">Nova Turma</span>
+                                                </h:link>
+                                            </li>
+                                            <li class="#{view.viewId.contains('/cursospessoa') ? 'active' : ''}">
+                                                <h:link outcome="/faces/view/td/alunosturmalst">
+                                                    <span class="fa fa-male"></span>
+                                                    <span class="menu-text">Alunos por Turma</span>
+                                                </h:link>
+                                            </li>
+                                        </ul>
                                     </li>
                                     <li class="#{view.viewId.contains('/td/treinamento') ? 'active' : ''}">
                                         <h:link outcome="/faces/view/td/treinamentolst">

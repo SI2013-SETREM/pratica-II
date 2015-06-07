@@ -1,44 +1,44 @@
 package td.dao;
 
-import td.model.AlunosTreinamento;
+import td.model.AlunosTurma;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import util.HibernateUtil;
 
-public class AlunosTreinamentoDAO {
+public class AlunosTurmaDAO {
     
     private Session session;
     
-    public AlunosTreinamentoDAO() {
+    public AlunosTurmaDAO() {
         session = HibernateUtil.getSessionFactory().openSession();
     }
     
-    public void insert(AlunosTreinamento c) {
+    public void insert(AlunosTurma c) {
         Transaction t = session.beginTransaction();
         session.save(c);
         t.commit();
     }
 
-    public void update(AlunosTreinamento c) {
+    public void update(AlunosTurma c) {
         Transaction t = session.beginTransaction();
         session.merge(c);
         t.commit();
     }
 
-    public void delete(AlunosTreinamento c) {
+    public void delete(AlunosTurma c) {
         Transaction t = session.beginTransaction();
         session.delete(c);
         t.commit();
     }
 
-    public AlunosTreinamento findById(String id) {
-        return (AlunosTreinamento) session.load(AlunosTreinamento.class, id);
+    public AlunosTurma findById(String id) {
+        return (AlunosTurma) session.load(AlunosTurma.class, id);
     }
 
-    public List<AlunosTreinamento> findAll() {
-        Query q = session.createQuery("from Alunos_treinamento");
+    public List<AlunosTurma> findAll() {
+        Query q = session.createQuery("from Alunos_turma");
         return q.list();
     }
 }

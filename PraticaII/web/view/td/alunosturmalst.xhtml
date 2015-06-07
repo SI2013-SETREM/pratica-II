@@ -1,0 +1,52 @@
+<ui:composition template="../modelos/default.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    <ui:define name="title">
+        ${alunosTurmaBean.pTitle}
+    </ui:define>
+
+    <ui:define name="breadcrumb">
+        <li>Treinamento e Desenvolvimento</li>
+        <li>${alunosTurmaBean.pTitle}</li>
+    </ui:define>
+
+    <ui:define name="main-content">
+        <div class="panel panel-body">
+            <h3><h:outputText value="Lista de ${alunosTurmaBean.pTitle}"/></h3>
+            <div class="btns-top-table">
+                <h:link outcome="alunosturmafrm" styleClass="btn btn-success">
+                    <i class="fa fa-plus"></i> Inserir ${alunosTurmaBean.sTitle}
+                </h:link>
+            </div>
+            <h:form>
+                <h:dataTable value="${alunosTurmaBean.alunos_turmas}" var="item" rendered="${alunosTurmaBean.alunos_turmas.rowAvailable}" styleClass="dataTable table table-bordered table-striped">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Nome"/>
+                        </f:facet>
+                        <h:outputText value="${alunosTurmaBean.alunos_turma.pessoa.pes_nome}"/>
+                    </h:column>
+                    <h:column headerClass="col-editar-header">
+                        <f:facet name="header">
+                            <h:outputText value="Editar"/>
+                        </f:facet>
+                        <h:commandLink action="${alunosTurmaBean.edit(item)}">
+                            <i class="fa fa-pencil"></i> Editar
+                        </h:commandLink>
+                    </h:column>
+                    <h:column headerClass="col-excluir-header">
+                        <f:facet name="header">
+                            <h:outputText value="Excluir"/>
+                        </f:facet>
+                        <h:commandLink onclick="return confirm('Deseja realmente excluir o ${alunosTurmaBean.sTitle}?');" action="${alunosTurmaBean.delete(item)}">
+                            <i class="fa fa-trash"></i> Excluir
+                        </h:commandLink>
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>
