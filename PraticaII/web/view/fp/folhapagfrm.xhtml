@@ -107,18 +107,16 @@
 
                             <div class="form-group">
                                 <h:outputLabel value="Cargo:" for="idCargo" styleClass="control-label col-md-2" />
-                                <div class=" col-xs-4" >
+                                <div class=" col-xs-6" >
                                     <h:outputLabel value="Desenvolvedor Web" for="idcargo" styleClass="control-label" />
                                 </div>
 
-                                <h:outputLabel value="Eventos Padrão:" for="idPadrao" styleClass="control-label col-md-2" />
-                                <div class="col-md-4 col-xs-3 autocomplete">
-                                    <p:autoComplete >
-                                        <p:column>
-                                            <h:outputText value="" />
-                                        </p:column>
-                                    </p:autoComplete>
-                                </div>
+                                <div class="btns-top-table col-xs-3">
+                                <h:link value="Adicionar Eventos Padrão" styleClass="btn btn-success">
+                                    <f:param name="codigoFolha" value=""/>
+                                    <i class="fa fa-plus"></i> 
+                                </h:link>
+                            </div>
 
                             </div>
                             <div class="form-group">
