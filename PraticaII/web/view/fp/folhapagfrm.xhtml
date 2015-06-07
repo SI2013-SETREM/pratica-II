@@ -33,9 +33,13 @@
                 border-radius: .25em;
                 overflow: auto;
             }
+            .table{
+                margin-bottom: 1px;
+            }
 
             .detalhes{
-                margin-left: 512px;
+                float: right;
+                padding: 15px 14px 0px;
 
             }
         </style>
@@ -53,20 +57,26 @@
 
                             <div class="form-group">
                                 <h:outputLabel value="Empresa:" for="emp" styleClass="control-label col-md-2" />
-                                <div class=" col-xs-offset-1 col-xs-3" >
 
+                                <div class="col-md-4 col-xs-3 autocomplete">
+                                    <p:autoComplete >
+                                        <p:column>
+                                            <h:outputText value="" />
+                                        </p:column>
+                                    </p:autoComplete>
                                 </div>
-                                <h:outputLabel value="CNPJ:" for="emp" styleClass="control-label col-md-2" />
-                                <div class=" col-xs-offset-1 col-xs-3" >
 
+
+                                <h:outputLabel value="CNPJ:" for="idcnpj" styleClass="control-label col-md-2" />
+                                <div class=" col-xs-3" >
+                                    <h:outputLabel value="89.008.435/0030-67" for="idcnpj" styleClass="control-label col-md-1" />
                                 </div>
                             </div>
                             <div class="form-group">
                                 <h:outputLabel value="Endereço:" for="idEndereco" styleClass="control-label col-md-2" />
-                                <div class=" col-xs-offset-1 col-xs-3" >
-
+                                <div class=" col-xs-6" >
+                                    <h:outputLabel value="AV Santo Augosto" for="idendereco" styleClass="control-label" />
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -82,34 +92,43 @@
 
                             <div class="form-group">
                                 <h:outputLabel value="Colaborador:" for="idColaborador" styleClass="control-label col-md-2" />
-                                <div class="col-xs-offset-1  col-xs-3" >
-
+                                <div class="col-md-4 col-xs-3 autocomplete">
+                                    <p:autoComplete >
+                                        <p:column>
+                                            <h:outputText value="" />
+                                        </p:column>
+                                    </p:autoComplete>
                                 </div>
                                 <h:outputLabel value="CPF:" for="idCPF" styleClass="control-label col-md-2" />
-                                <div class="col-xs-offset-1  col-xs-3" >
-
+                                <div class=" col-xs-3" >
+                                    <h:outputLabel value="049.123.000-00" for="idcpf" styleClass="control-label" />
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <h:outputLabel value="Cargo:" for="idCargo" styleClass="control-label col-md-2" />
-                                <div class=" col-xs-offset-1 col-xs-3" >
-
+                                <div class=" col-xs-4" >
+                                    <h:outputLabel value="Desenvolvedor Web" for="idcargo" styleClass="control-label" />
                                 </div>
 
                                 <h:outputLabel value="Eventos Padrão:" for="idPadrao" styleClass="control-label col-md-2" />
-                                <div class=" col-xs-offset-1 col-xs-3" >
-
+                                <div class="col-md-4 col-xs-3 autocomplete">
+                                    <p:autoComplete >
+                                        <p:column>
+                                            <h:outputText value="" />
+                                        </p:column>
+                                    </p:autoComplete>
                                 </div>
 
                             </div>
                             <div class="form-group">
                                 <h:outputLabel value="Data de Adimição:" for="idiAdimicao" styleClass="control-label col-md-2" />
-                                <div class=" col-xs-offset-1 col-xs-3" >
-
+                                <div class=" col-xs-6" >
+                                    <h:outputLabel value="17/02/2000" for="idAdmicao" styleClass="control-label" />
                                 </div>
 
                             </div>
+                            <hr style="border-top: 1px solid #D7D3F5"></hr>
 
                             <div class="table-striped">
                                 <div class="">
@@ -149,13 +168,13 @@
                                     </h:dataTable>
 
                                 </div>
-                                <div class="form-group">
-                                    <div class="col-md-offset-1 ">
+                                <div class="form-group" >
+                                    <div class="col-xs-4 " style="padding: 37px 0px 5px 90px;">
                                         <div class=" btn btn-sm btn-primary"  >                               
                                             <i class="fa fa-plus"></i> Adicionar evendos na Folha
                                         </div>
                                     </div>
-                                    <div class="detalhes col-xs-6 ">
+                                    <div class="detalhes col-xs-8 ">
 
                                         <h:dataTable var="car" value="" styleClass=" table table-bordered table-striped">
                                             <h:column>
