@@ -25,7 +25,7 @@
                 border-radius: .25em;
                 overflow: auto;
             }
-             .bloco2 {
+            .bloco2 {
                 margin: 0px 10px 0px;
                 padding: 0px 0px 0px 0px;           
                 background: #f8f8f8;
@@ -33,111 +33,214 @@
                 border-radius: .25em;
                 overflow: auto;
             }
+            .table{
+                margin-bottom: 1px;
+            }
+            .detalhes{
+                margin-left: 512px;
+
+            }
         </style>
         <div class="panel panel-body">
             <h3><h:outputText value="Folha de Pagamento"/></h3>
             <f:view>
                 <h:form styleClass="form-horizontal">
 
-                    <div class="bloco">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h2 class="panel-title tex-primary">Dados da Empresa</h2>
+                        </div>
 
-                        <div class="form-group">
-                            <h:outputLabel value="Empresa:" for="emp" styleClass="control-label col-md-2" />
-                            <div class="col-xs-2 autocomplete">
-                                <p:autoComplete  id="emp" multiple="true" completeMethod="#{empresaBean.empresa}" value="#{empresaBean.lsEmpresa}"
-                                                 var="empresa" itemLabel="#{empresaBean.empresa.emp_nome}" itemValue="#{empresa}" converter="empresaConverter" forceSelection="true">
-                                    <p:column>
-                                        <h:outputText value="#{empresaBean.empresa.emp_nome}" />
-                                    </p:column>
-                                </p:autoComplete>
+                        <div class="panel-body">
+
+                            <div class="form-group">
+                                <h:outputLabel value="Empresa:" for="emp" styleClass="control-label col-md-2" />
+                                <div class=" col-xs-offset-1 col-xs-3" >
+
+                                </div>
+                                <h:outputLabel value="CNPJ:" for="emp" styleClass="control-label col-md-2" />
+                                <div class=" col-xs-offset-1 col-xs-3" >
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <h:outputLabel value="Endereço:" for="idEndereco" styleClass="control-label col-md-2" />
+                                <div class=" col-xs-offset-1 col-xs-3" >
+
+                                </div>
 
                             </div>
-                            <div class=" col-xs-offset-3 col-xs-3" >
-                                <h:outputLabel value="CNPJ:" for="emp2" styleClass="control-label col-md-2" />
-                                <div class="col-xs-8">
-                                    <h:outputLabel value="098.0977.090.00" for="emp" styleClass="control-label col-md-2" />
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h2 class="panel-title tex-primary">Dados do Colaborador</h2>
+                        </div>
+                        <div class="panel-body">
+
+                            <div class="form-group">
+                                <h:outputLabel value="Colaborador:" for="idColaborador" styleClass="control-label col-md-2" />
+                                <div class="col-xs-offset-1  col-xs-3" >
+
+                                </div>
+                                <h:outputLabel value="CPF:" for="idCPF" styleClass="control-label col-md-2" />
+                                <div class="col-xs-offset-1  col-xs-3" >
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <h:outputLabel value="Cargo:" for="idCargo" styleClass="control-label col-md-2" />
+                                <div class=" col-xs-offset-1 col-xs-3" >
+
+                                </div>
+
+                                <h:outputLabel value="Eventos Padrão:" for="idPadrao" styleClass="control-label col-md-2" />
+                                <div class=" col-xs-offset-1 col-xs-3" >
+
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <h:outputLabel value="Data de Adimição:" for="idiAdimicao" styleClass="control-label col-md-2" />
+                                <div class=" col-xs-offset-1 col-xs-3" >
+
                                 </div>
 
                             </div>
 
-                        </div>
-                        <div class="form-group">
-                            <h:outputLabel value="Endereço:" for="emp" styleClass="control-label col-md-2" />
-                        </div>
+                            <div class="table-striped">
+                                <div class="">
+                                    <h:dataTable var="car" value="" styleClass=" table table-bordered table-striped">
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Código"/>
+                                            </f:facet>
+                                            <h:outputText value="001" /> <br />
+                                            <h:outputText value="005" />
+                                        </h:column>
 
-                    </div>
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Descrição"/>
+                                            </f:facet>
+                                            <h:outputText value="Salário Base" /> <br />
+                                            <h:outputText value="Insalubridade" />
+                                        </h:column>
 
-                    <div class="bloco">
 
-                        <div class="form-group">
-                            <h:outputLabel value="Colaborador:" for="col" styleClass="control-label col-md-2" />
-                            <div class="col-xs-2 autocomplete">
-                                <p:autoComplete  id="col" multiple="true" completeMethod="#{empresaBean.empresa}" value="#{empresaBean.lsEmpresa}"
-                                                 var="colaborador" itemLabel="#{empresaBean.empresa.emp_nome}" itemValue="#{empresa}" converter="empresaConverter" forceSelection="true">
-                                    <p:column>
-                                        <h:outputText value="#{empresaBean.empresa.emp_nome}" />
-                                    </p:column>
-                                </p:autoComplete>
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Acréscimos"/>
+                                            </f:facet>
+                                            <h:outputText value="1.500,00 R$" /> <br />
+                                            <h:outputText value="450,00 R$" /> <br />
+                                        </h:column>
 
-                            </div>
-                            <div class=" col-xs-offset-3 col-xs-3" >
-                                <h:outputLabel value="CPF:" for="col" styleClass="control-label col-md-2" />
-                                <div class="col-xs-8">
-                                    <h:outputLabel value="34.343.340-61" for="col" styleClass="control-label col-md-2 col-lg-12" />
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Descontos"/>
+                                            </f:facet>
+                                            <h:outputText value="0,00 R$" /> <br />
+                                            <h:outputText value="0,00 R$" /> <br />
+                                        </p:column>
+                                    </h:dataTable>
+
+                                </div>
+                                <div class="center_content">
+                                    <div class=" col-xs-3 btn btn-sm btn-primary" style="clear: both">                               
+                                        <i class="fa fa-plus"></i> Adicionar evendos na Folha
+                                    </div>
                                 </div>
 
+                                <div class="detalhes col-xs-offset-6 col-xs-6">
+                                    <h:dataTable var="car" value="" styleClass=" table table-bordered table-striped">
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Total de Acréscimos"/>
+                                            </f:facet>
+
+                                            <h:outputText value="1.950,00 R$" /> <br />
+
+                                        </h:column>
+
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Total de Descontos"/>
+                                            </f:facet>
+                                            <h:outputText value="0,00 R$" /> <br />
+
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Valor Liquido"/>
+                                            </f:facet>
+                                            <h:outputText value="0,00 R$" /> <br />
+
+                                        </p:column>
+                                    </h:dataTable>
+
+                                </div>
+                                <h:dataTable var="car" value="" styleClass=" table table-bordered table-striped">
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Salário Base"/>
+                                        </f:facet>
+                                        <h:outputText value="900 R$" /> <br />
+
+                                    </h:column>
+
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Salário Contr.INSS"/>
+                                        </f:facet>
+                                        <h:outputText value="Salário Base" /> <br />
+
+                                    </h:column>
+
+
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Base Cálc. FGTS"/>
+                                        </f:facet>
+                                        <h:outputText value="1.500,00 R$" /> <br />
+
+                                    </h:column>
+
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="FGTS Mês"/>
+                                        </f:facet>
+                                        <h:outputText value="0,00 R$" /> <br />                                  
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Base Cálc. IRRF"/>
+                                        </f:facet>
+                                        <h:outputText value="0,00 R$" /> <br />                                  
+                                    </p:column>
+                                    <p:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Faixa IRRF"/>
+                                        </f:facet>
+                                        <h:outputText value="0,00 R$" /> <br />                                  
+                                    </p:column>
+                                </h:dataTable>
+
+
                             </div>
 
                         </div>
                         <div class="form-group">
-                            <h:outputLabel value="Cargo:" for="emp" styleClass="control-label col-md-2" />
+                            <div class="col-md-offset-9 col-md-11 col-xs-offset-10 col-sm-12 btn-group-separated">
+                                <h:link styleClass="btn btn-default" value="Cancelar" />
+                                <h:commandButton styleClass="btn btn-primary" value="Gerar" ></h:commandButton>
+                            </div>
                         </div>
-
-                    </div>
-                    <div class="bloco2">
-
-                        <p:dataTable var="car" value="">
-                            <p:column headerText="Nome">
-                                <h:outputText value="Salário Base" /> <br />
-                                <h:outputText value="Insalubridade" />
-
-                            </p:column>
-
-                            <p:column headerText="Descrição">
-                                <h:outputText value="Salário do Colaborador" /> <br />
-                                <h:outputText value="Adicional de Insalubridade" />
-                            </p:column>
-
-                            <p:column headerText="Acréscimo"> 
-                                <h:outputText value="1.500,00 R$" /> <br />
-                                <h:outputText value="450,00 R$" /> <br />
-                            </p:column>
-
-                            <p:column headerText="Desconto">
-                                <h:outputText value="0,00 R$" /> <br />
-                                <h:outputText value="0,00 R$" /> <br />
-                            </p:column>
-                        </p:dataTable>
-                     
-                            <p:button  value="Adicionar Eventos a Folha" > </p:button>
-                             
-                           <div class="bloco2">
-                                <p:dataTable var="car" value="">
-                                    <p:column headerText="Total Acréscimo"> 
-                                        <h:outputText value="1.950,00 R$" /> <br />
-                                    </p:column>
-                                    <p:column headerText="Total Desconto">
-                                        <h:outputText value="0,00 R$" /> <br />                        
-                                    </p:column>
-                                </p:dataTable>
-                          
-                    
-                        <p:dataTable var="car" value="">
-                            <p:column headerText="Valor Liquido"> 
-                                <h:outputText value="1.950,00 R$" /> <br />
-                            </p:column>
-
-                        </p:dataTable>
                     </div>
 
                 </h:form>
