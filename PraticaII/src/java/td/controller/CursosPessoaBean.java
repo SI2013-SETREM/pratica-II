@@ -1,11 +1,18 @@
 package td.controller;
 
+import cfg.dao.EmpresaDAO;
+import cfg.dao.PessoaDAO;
+import cfg.model.Empresa;
+import cfg.model.Pessoa;
+import java.util.List;
 import td.dao.CursosPessoaDAO;
 import td.model.CursosPessoa;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
+import td.dao.CursoDAO;
+import td.model.Curso;
 
 @ManagedBean
 @RequestScoped
@@ -13,6 +20,45 @@ public class CursosPessoaBean {
 
     private final String sTitle = CursosPessoa.sTitle;
     private final String pTitle = CursosPessoa.pTitle;
+    
+    private List<Empresa> lstempresa;
+    private Empresa empresa = new Empresa();
+    private EmpresaDAO empresadao = new EmpresaDAO();
+    
+    private List<Curso> lstcurso;
+    
+    private List<Pessoa> lstpessoa;
+
+    private Pessoa pessoa = new Pessoa();
+    private PessoaDAO pessoadao = new PessoaDAO();
+
+    public List<Empresa> getLstempresa() {
+        lstempresa = empresadao.findAll();
+        return lstempresa;
+    }
+
+    public void setLstempresa(List<Empresa> lstempresa) {
+        this.lstempresa = lstempresa;
+    }
+
+    public List<Curso> getLstcurso() {
+        lstcurso = cursodao.findAll();
+        return lstcurso;
+    }
+
+    public List<Pessoa> getLstpessoa() {
+        lstpessoa = pessoadao.findAll();
+        return lstpessoa;
+    }
+
+    public void setLstpessoa(List<Pessoa> lstpessoa) {
+        this.lstpessoa = lstpessoa;
+    }
+    public void setLstcurso(List<Curso> lstcurso) {
+        this.lstcurso = lstcurso;
+    }
+    private Curso curso = new Curso();
+    private CursoDAO cursodao = new CursoDAO();
 
     private CursosPessoa cursos_pessoa = new CursosPessoa();
     private CursosPessoaDAO dao = new CursosPessoaDAO();
@@ -63,14 +109,14 @@ public class CursosPessoaBean {
         return "cursospessoalst";
     }
     
-  /*  public String salvar() {
+    public String salvar() {
         if (cursos_pessoa.getCurso().getCur_codigo() > 0)
             dao.update(cursos_pessoa);
         else 
             dao.insert(cursos_pessoa);
         
-        return "idiomalst";
-    }*/
+        return "cursospessoalst";
+    }
 
     public String listar() {
         return "cursospessoalst";

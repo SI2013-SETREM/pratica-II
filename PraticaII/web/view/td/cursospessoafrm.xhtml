@@ -1,16 +1,111 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>TODO supply a title</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
-</html>
+<ui:composition template="./../modelos/default.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+    xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="title">
+        ${cursosPessoaBean.pTitle}
+    </ui:define>
+
+    <ui:define name="breadcrumb">
+        <li>Treinamento e Desenvolvimento</li>
+        <li><h:link value="${cursosPessoaBean.pTitle}" outcome="/faces/view/td/cursospessoalst" /></li>
+    </ui:define>
+
+    <ui:define name="main-content">
+        <div class="panel panel-body">
+            <h3><h:outputText value="Dados de ${cursosPessoaBean.sTitle}"/></h3>
+            <f:view>
+                <h:form styleClass="form-horizontal">
+                    <h:inputHidden id="curCodigo" value="#{cursosPessoaBean.cursos_pessoa.curso.cur_codigo}" />
+<!--                            <div class="form-group">
+                        <h:outputLabel value="Código:" for="curCodigo" styleClass="control-label col-sm-1" />
+                        <div class="col-md-6">
+                            <h:inputText id="curCodigo" value="#{cursosPessoaBean.cursos_pessoa.curso.cur_codigo}" title="CurCodigo" styleClass="form-control" />
+                        </div>
+                    </div>-->
+
+                    <div class="form-group">
+                        <h:outputLabel value="Pessoa: " for="pessoa" styleClass="control-label col-sm-1" />
+                        <div class="col-md-6 col-sm-12">
+                            <h:selectOneMenu id="cidade" converter="pessoaConverter" value="#{cursosPessoaBean.cursos_pessoa.pessoa.pes_nome}" styleClass="form-control" pt:autofocus="" >
+                                <f:selectItems value="#{cursosPessoaBean.lstpessoa}" var="tipe" itemLabel="#{tipe.pes_nome}"/>
+                            </h:selectOneMenu>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <p:outputLabel value="Adicionar Curso:" for="themes" styleClass="control-label col-sm-1" />
+                        <div class="col-md-6 col-sm-12">
+                            <p:autoComplete id="themes" multiple="true" value="#{solicitacaoBean.solicitacao.solicitacoes}" completeMethod="#{autoCompleteView.completeTheme}"
+                                            var="theme" itemLabel="#{solicitacaoBean.solicitacao.sol_descricao}" itemValue="#{sol_codigo}" converter="solicitacaoConverter" forceSelection="true">
+                        <p:column style="width:10%">
+                            <h:outputText styleClass="ui-theme ui-theme-#{solicitacaoBean.solicitacao.sol_descricao}" />
+                        </p:column>
+
+                         <p:column>
+                        <h:outputText value="#{solicitacaoBean.solicitacao.sol_descricao}" />
+                        </p:column>
+                        </p:autoComplete>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel value="Empresa: " for="empresa" styleClass="control-label col-sm-1" />
+                        <div class="col-md-6 col-sm-12">
+                            <h:selectOneMenu id="cidade" converter="empresaConverter" value="#{cursosPessoaBean.cursos_pessoa.empresa.emp_nome}" styleClass="form-control" pt:autofocus="" >
+                                <f:selectItems value="#{cursosPessoaBean.lstempresa}" var="tipe" itemLabel="#{tipe.emp_nome}"/>
+                            </h:selectOneMenu>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Descrição:" for="crp_Descricao" styleClass="control-label col-sm-1" />
+                        <div class="col-md-6 col-sm-12">
+                            <h:inputText pt:required="required" id="crpDescricao" value="#{cursosPessoaBean.cursos_pessoa.crp_descricao}" title="CrpDescricao" styleClass="form-control" pt:autofocus="" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Carga Horária:" for="crp_carga_horaria" styleClass="control-label col-sm-1" />
+                        <div class="col-md-6 col-sm-12">
+                            <h:inputText pt:required="required" id="crpCargaHoraria" value="#{cursosPessoaBean.cursos_pessoa.crp_carga_horaria}" title="CrpCargaHoraria" styleClass="form-control" pt:autofocus="" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Data Inicial:" for="crp_data_inicio" styleClass="control-label col-sm-1" />
+                        <div class="col-md-6 col-sm-12">
+                            <h:inputText pt:required="required" id="crpDataInicial" value="#{cursosPessoaBean.cursos_pessoa.crp_data_inicio}" title="CrpDataInicio" styleClass="form-control" pt:autofocus="" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Data Final:" for="crp_data_fim" styleClass="control-label col-sm-1" />
+                        <div class="col-md-6 col-sm-12">
+                            <h:inputText pt:required="required" id="crpDataFinal" value="#{cursosPessoaBean.cursos_pessoa.crp_data_fim}" title="CrpDataFim" styleClass="form-control" pt:autofocus="" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Validade: " for="crp_status_validade" styleClass="control-label col-sm-1" />
+                        <div class="col-md-6 col-sm-12">
+                            <h:selectBooleanCheckbox id="treStatusValidade" value="#{cursosPessoaBean.cursos_pessoa.crp_status_validade}" title="CrpStatusValidade" pt:autofocus="" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Data Validade:" for="crp_data_validade" styleClass="control-label col-sm-1" />
+                        <div class="col-md-6 col-sm-12">
+                            <h:inputText pt:required="required" id="crpDataValidade" value="#{cursosPessoaBean.cursos_pessoa.crp_data_validade}" title="CrpDataValidade" styleClass="form-control" pt:autofocus="" />
+                        </div>
+                    </div>
+                    <div class="form-group" id="teste">
+                        <div class="col-md-offset-1 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
+                            <h:link styleClass="btn btn-default" value="Cancelar" outcome="#{cursosPessoaBean.listar()}" />
+                            <h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{cursosPessoaBean.salvar()}"></h:commandButton>
+                        </div>
+                    </div>
+                </h:form>
+            </f:view>
+        </div>
+    </ui:define>
+
+</ui:composition>

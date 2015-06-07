@@ -34,7 +34,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <h:outputLabel value="Pessoa: " for="pessoa" styleClass="control-label col-sm-1" />
+                        <h:outputLabel value="Solicitante: " for="pessoa" styleClass="control-label col-sm-1" />
                         <div class="col-md-6 col-sm-12">
                             <h:selectOneMenu id="pessoa" converter="pessoaConverter" value="#{solicitacaoBean.solicitacao.pessoa}" styleClass="form-control" pt:autofocus="" >
                                 <f:selectItems value="#{solicitacao.lstpessoa}" var="tipe" itemLabel="#{tipe.pes_nome}"/>
@@ -63,11 +63,18 @@
 
 
 
+
+
+
+
+
+
+
                         <div class="form-group">
-                        <p:outputLabel value="Adicionar Solicitacao:" for="themes" styleClass="control-label col-sm-1" />
+                        <p:outputLabel value="Adicionar Pessoas:" for="themes" styleClass="control-label col-sm-1" />
                         <div class="col-md-6 col-sm-12">
                             <p:autoComplete id="themes" multiple="true" value="#{solicitacaoBean.solicitacao.solicitacoes}" completeMethod="#{autoCompleteView.completeTheme}"
-                                            var="theme" itemLabel="#{solicitacaoBean.solicitacao.sol_descricao}" itemValue="#{sol_codigo}" converter="pessoaConverter" forceSelection="true">
+                                            var="theme" itemLabel="#{solicitacaoBean.solicitacao.sol_descricao}" itemValue="#{sol_codigo}" converter="solicitacaoConverter" forceSelection="true">
                         <p:column style="width:10%">
                             <h:outputText styleClass="ui-theme ui-theme-#{solicitacaoBean.solicitacao.sol_descricao}" />
                         </p:column>
@@ -77,7 +84,35 @@
                         </p:column>
                         </p:autoComplete>
                         </div>
-                    </div>
+                        </div>
+
+
+                        <div class="form-group">
+                        <p:outputLabel value="Adicionar Competências:" for="themes" styleClass="control-label col-sm-1" />
+                        <div class="col-md-6 col-sm-12">
+                            <p:autoComplete id="themes" multiple="true" value="#{solicitacaoBean.solicitacao.solicitacoes}" completeMethod="#{autoCompleteView.completeTheme}"
+                                            var="theme" itemLabel="#{solicitacaoBean.solicitacao.sol_descricao}" itemValue="#{sol_codigo}" converter="solicitacaoConverter" forceSelection="true">
+                        <p:column style="width:10%">
+                            <h:outputText styleClass="ui-theme ui-theme-#{solicitacaoBean.solicitacao.sol_descricao}" />
+                        </p:column>
+
+                         <p:column>
+                        <h:outputText value="#{solicitacaoBean.solicitacao.sol_descricao}" />
+                        </p:column>
+                        </p:autoComplete>
+                        </div>
+                        </div>
+
+
+
+
+
+
+
+
+
+
+
 
 
 

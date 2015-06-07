@@ -24,12 +24,12 @@ public class CursosPessoa implements Serializable {
     @SequenceGenerator(name="trd_cursos_pessoa_pk_sequence", sequenceName="trd_cursos_pessoa_id_seq")
     @GeneratedValue(strategy=GenerationType.AUTO, generator="trd_cursos_pessoa_pk_sequence")
     
-    private int crp_observacao;
+    private String crp_descricao;
     private int crp_carga_horaria;
     private Date crp_data_inicio;
     private Date crp_data_fim;
     private Date crp_data_validade;
-    private int crp_status_validade;
+    private boolean crp_status_validade;
     @ManyToOne
     @JoinColumn(name = "codigo_curso")
     private Curso curso;
@@ -66,12 +66,12 @@ public class CursosPessoa implements Serializable {
         this.curso = curso;
     }
 
-    public int getCrp_observacao() {
-        return crp_observacao;
+    public String getCrp_descricao() {
+        return crp_descricao;
     }
 
-    public void setCrp_observacao(int crp_observacao) {
-        this.crp_observacao = crp_observacao;
+    public void setCrp_observacao(String crp_descricao) {
+        this.crp_descricao = crp_descricao;
     }
 
     public int getCrp_carga_horaria() {
@@ -106,11 +106,11 @@ public class CursosPessoa implements Serializable {
         this.crp_data_validade = crp_data_validade;
     }
 
-    public int getCrp_status_validade() {
+    public boolean getCrp_status_validade() {
         return crp_status_validade;
     }
 
-    public void setCrp_status_validade(int crp_status_validade) {
+    public void setCrp_status_validade(boolean crp_status_validade) {
         this.crp_status_validade = crp_status_validade;
     }
    
