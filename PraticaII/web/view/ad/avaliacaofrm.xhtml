@@ -201,7 +201,7 @@
                     <div class="form-group">
                         <div class="col-md-offset-1 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
                             <h:link styleClass="btn btn-default" value="Cancelar" outcome="#{avaliacaoBean.listar()}" />
-                            <h:commandButton styleClass="btn btn-primary" value="Salvar e Avançar" action="#{avaliacaoBean.salvar()}"></h:commandButton>
+                            <h:commandButton styleClass="btn btn-primary" value="Salvar e Avançar" action="#{avaliacaoBean.salvar()}" onclick="return confirm('Deseja realmente salvar a ${avaliacaoBean.getsTitle()}? Não poderá mais editar as listas de avaliadores e avaliados.');"></h:commandButton>
                         </div>
                     </div>
                 </h:form>

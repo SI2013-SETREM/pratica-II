@@ -45,7 +45,7 @@ public class PerguntaPessoaAvaliacao implements Serializable {
     private String ppa_pergunta;
     private int ppa_pontuacao;
 
-    public class PerguntaPessoaAvaliacaoPK implements Serializable {
+    public static class PerguntaPessoaAvaliacaoPK implements Serializable {
 
         protected Pessoa avaliador;
         protected Pessoa colaboradorAvaliado;

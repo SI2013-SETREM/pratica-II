@@ -3,32 +3,80 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
-                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
-                xmlns:p="http://primefaces.org/ui">
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
     <ui:define name="title">
-        #{pessoasAvaliacaoBean.getpTitle()}
+        #{perguntaPessoaAvaliacaoBean.getpTitle()}
     </ui:define>
 
     <ui:define name="breadcrumb">
-        <li>${pessoasAvaliacaoBean.getsTitle()}</li>
+        <li>${perguntaPessoaAvaliacaoBean.getsTitle()}</li>
     </ui:define>
 
     <ui:define name="main-content">
-
+        <script>
+            $(function () {
+                $('.FieldRemove').remove();
+            });
+        </script>
+        <style>
+            textarea{
+                width: 100% !important;
+            }
+            .lbl{
+                text-align: right;
+            }
+            .field{
+                text-align: left;               
+            }
+        </style>
         <div class="panel panel-body">
-            <h3><h:outputText value="#{pessoasAvaliacaoBean.getsTitle()}"/></h3>
             <f:view>
-                <h:form styleClass="form-horizontal">
-                    <h:inputHidden id="idiCodigo" value="#{avaliacaoBean.avaliacao.ava_codigo}" />
-
-                    <div class="form-group">
-                        <div class="col-md-offset-1 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
-                            <h:link styleClass="btn btn-default" value="Cancelar" outcome="#{avaliacaoBean.listar()}" />
-                            <h:commandButton styleClass="btn btn-primary" value="Salvar e Avançar" action="#{avaliacaoBean.salvar()}"></h:commandButton>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label style="font-size: 20px;">Dados da Pessoa:</label>
+                        <div class="row">
+                            <div class="col-md-6 col-xs-12">
+                                <div class="form-group">
+                                    <h:outputLabel value="Nome:" for="nome" styleClass="lbl col-md-4"/>
+                                    <div class="col-md-8 col-xs-12">
+                                        <h:outputText id="nome" value="#{perguntaPessoaAvaliacaoBean.avaliado.pes_nome}" styleClass="field"/>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
+                </div>
+                <h:form styleClass="form-horizontal">
+                    <label style="font-size: 20px;">Questionário: </label>
+                    <div class="col-md-12" style="margin-bottom: 15px;">
+                        <!--<c:forEach items="{perguntaPessoaAvaliacaoBean.lsPerguntasPessoa}" var="item" varStatus="loopPergunta">-->
+                        <ui:repeat value="#{perguntaPessoaAvaliacaoBean.lsPerguntasPessoa}" var="item">
+                            <div class="form-group list-group-item" >
+                                <div class="row">
+                                    <h:outputLabel value="${item.getPergunta().getPrgPergunta()}" for="per_${item.getPergunta().getPrgCodigo()}" styleClass="col-md-12"/>
+                                    <div class="col-md-7">
+                                        <h:inputTextarea pt:required="${item.getPergunta().isPrgObrigatoria()}" id="per_${item.getPergunta().getPrgCodigo()}" value="#{item.ppa_resposta}" styleClass="form-control ${item.getPergunta().getPrgTipo() != 1 ? 'FieldRemove' : ''}"/>
+                                        <h:selectOneMenu pt:required="${item.getPergunta().isPrgObrigatoria()}" id="per_${item.getPergunta().getPrgCodigo()}"  value="#{item.ppa_resposta}" styleClass="form-control ${item.getPergunta().getPrgTipo() != 2 ? 'FieldRemove' : ''}">
+                                            <f:selectItems value="#{item.getPergunta().getPerguntaOpcoes()}" var="opcao" itemLabel="#{opcao.getOpcDescricao()}" itemValue="#{opcao.getOpcDescricao()}" pt:autofocus=""/>
+                                        </h:selectOneMenu>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <h:outputLabel value="Nota entre 0 e 10:" styleClass="col-md-8 lbl"/>
+                                        <h:inputText pt:required="true" pt:type="number" pt:max="10" pt:min="0" style="width: 50px" value="#{item.ppa_pontuacao}"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </ui:repeat>
+                        <!--</c:forEach>-->
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-1 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
+                            <h:link styleClass="btn btn-default" value="Cancelar" outcome="#{perguntaPessoaAvaliacaoBean.listar()}" />
+                            <h:commandButton styleClass="btn btn-primary" value="Salvar e Avançar" action="#{perguntaPessoaAvaliacaoBean.salvar()}"></h:commandButton>
+                        </div>
+                    </div>
                 </h:form>
             </f:view>
         </div>

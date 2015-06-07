@@ -75,9 +75,6 @@ public class AvaliacaoBean {
         return avaliacao;
     }
 
-    private void Status() {
-    }
-
     public void setAvaliacao(Avaliacao avaliacao) {
         this.avaliacao = avaliacao;
     }

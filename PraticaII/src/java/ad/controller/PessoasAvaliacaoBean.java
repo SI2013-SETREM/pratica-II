@@ -19,8 +19,7 @@ public class PessoasAvaliacaoBean {
     private PessoasAvaliacaoDAO dao = new PessoasAvaliacaoDAO();
     private DataModel pessoas_avaliacoes;
     private DataModel avaliacoes;
-    private DataModel Perguntas;
-
+    private int user = 3;
     private List<PessoasAvaliacao> lsPessoasAvaliacao;
 
     public PessoasAvaliacaoBean() {
@@ -31,7 +30,7 @@ public class PessoasAvaliacaoBean {
     }
 
     public DataModel getAvaliacoes() {
-        List<PessoasAvaliacao> lsAvaliacaoPessoas = dao.GetListPessoasAvaliacao(0, 0, 3, true);
+        List<PessoasAvaliacao> lsAvaliacaoPessoas = dao.GetListPessoasAvaliacao(0, 0, user, true);
         List<Avaliacao> lsAvaliacao = new ArrayList<>();
         List<Integer> lsCod = new ArrayList<>();
         for (PessoasAvaliacao pa : lsAvaliacaoPessoas) {
@@ -59,14 +58,6 @@ public class PessoasAvaliacaoBean {
 
     public void setPessoaAvaliacoes(DataModel pessoas_avaliacoes) {
         this.pessoas_avaliacoes = pessoas_avaliacoes;
-    }
-
-    public DataModel getPerguntas() {
-        return Perguntas;
-    }
-
-    public void setPerguntas(DataModel Perguntas) {
-        this.Perguntas = Perguntas;
     }
 
     public String insert() {
@@ -135,25 +126,13 @@ public class PessoasAvaliacaoBean {
 
 ////////////
     public String GetAvaliacoesPendentes() {
-        List<PessoasAvaliacao> lsAvaliacaoPessoas = dao.GetListPessoasAvaliacao(0, 0, 1, true);
+        List<PessoasAvaliacao> lsAvaliacaoPessoas = dao.GetListPessoasAvaliacao(0, 0, user, true);
         List<Avaliacao> lsAvaliacao = new ArrayList<>();
         for (PessoasAvaliacao pa : lsAvaliacaoPessoas) {
             lsAvaliacao.add(pa.getAvaliacao());
         }
         avaliacoes = new ListDataModel(lsAvaliacao);
         return "avaliacoespendenteslst";
-    }
-
-    public String GetAvaliados(Avaliacao avalicao) {
-///Pegar a 1º pessoa da lista de avaliados  não foram avaliador pelo user, 
-        /// Selecionar todas as perguntas daquela avalaição, juntamente com suas opções e tals 
-        /// e dai criar a tela
-        //  List<PessoasAvaliacao> lsPessoas = dao.GetListPessoasAvaliacao(avalicao.getAva_codigo(), 0, 0, true);
-
-        List<PessoasAvaliacao> lsAvaliacaoPessoas = dao.GetListPessoasAvaliacao(0, 0, 1, true);
-
-        return "pessoasavaliacaofrm";
-
     }
 
 }

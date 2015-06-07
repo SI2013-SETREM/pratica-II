@@ -58,7 +58,6 @@ public class PessoasAvaliacaoDAO {
             //sql += " and pea_media is null";
             sql += " and pea_media = 0";
         }
-
         Query q = session.createQuery(" from PessoasAvaliacao where 1=1 " + sql);
         return q.list();
     }
