@@ -41,10 +41,42 @@
                                     <div class="caption">
                                         <span class="setor">#{vagas[loopVaga.index].cargo.car_pai.car_descricao}</span><br/>
                                         <span class="vaga">#{vagas[loopVaga.index].cargo.car_descricao}</span>
-                                        <p class="text-justify descricao-vaga">
+                                        <p class="text-left descricao-vaga">
                                             <span>Número de Vagas:</span> <span>#{vagas[loopVaga.index].recCarQuantidade}</span><br/>
-                                            <span>Descrição:</span> <span>#{vagas[loopVaga.index].recCarDescricao}</span>
+                                            <span>Descrição:</span> <span>#{vagas[loopVaga.index].recCarDescricaoResumida}</span>
                                         </p>
+                                        <div>
+                                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+                                                Mais...
+                                            </button>
+
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                            <h4 class="modal-title" id="myModalLabel">#{vagas[loopVaga.index].cargo.car_pai.car_descricao} </h4>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="thumbnail">
+                                                                <div class="caption">
+                                                                    <span class="vaga">#{vagas[loopVaga.index].cargo.car_descricao}</span>
+                                                                    <p class="text-left descricao-vaga">
+                                                                        <span>Número de Vagas:</span> <span>#{vagas[loopVaga.index].recCarQuantidade}</span><br/>
+                                                                        <span>Descrição Detalhada:</span> <span>#{vagas[loopVaga.index].recCarDescricao}</span>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                                                            <button type="button" class="btn btn-primary">Save changes</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
