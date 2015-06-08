@@ -7,21 +7,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 
 @Entity
-@Table(name = "ffp_tab_inss")
+@Table(name = "ffp_tabela_inss")
 public class TabelaINSS implements Serializable{
      
-    private static final String sTitle = "Tabela INSS";
-    private static final String pTitle = "Tabelas INSS";
+    public static final String sTitle = "Tabela INSS";
+    public static final String pTitle = "Tabelas INSS";
     
     @Id
-    @SequenceGenerator (name= "genTabINSS", sequenceName= "segTabINSS", allocationSize = 1)
-    @GeneratedValue (strategy = GenerationType.SEQUENCE, generator = "genTabINSS")
+    @SequenceGenerator (name= "genTabelaINSS", sequenceName= "segTabelaINSS", allocationSize = 1)
+    @GeneratedValue (strategy = GenerationType.SEQUENCE, generator = "genTabelaINSS")
     private int tbs_codigo;
     private Date tbs_data_inicial;
     private Date tbs_data_final;
