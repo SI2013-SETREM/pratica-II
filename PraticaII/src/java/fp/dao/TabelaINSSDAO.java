@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package fp.dao;
 
 
@@ -19,35 +15,35 @@ import util.HibernateUtil;
  *
  * @author Max
  */
-public class TabINSSDAO {
+public class TabelaINSSDAO {
     
     
      private Session session;
 
-    public TabINSSDAO() {
+    public TabelaINSSDAO() {
 
         session = HibernateUtil.getSessionFactory().openSession();
 
     }
 
-    public void insert(TabelaINSS tabInss) {
+    public void insert(TabelaINSS tabelaInss) {
 
         Transaction t = session.beginTransaction();
-        session.save(tabInss);
+        session.save(tabelaInss);
         t.commit();
     }
 
-    public void update(TabelaINSS tabInss) {
+    public void update(TabelaINSS tabelaInss) {
 
         Transaction t = session.beginTransaction();
-        session.merge(tabInss);
+        session.merge(tabelaInss);
         t.commit();
     }
 
-    public void delete(TabelaINSS tabInss) {
+    public void delete(TabelaINSS tabelaInss) {
 
         Transaction t = session.beginTransaction();
-        session.delete(tabInss);
+        session.delete(tabelaInss);
         t.commit();
     }
 
