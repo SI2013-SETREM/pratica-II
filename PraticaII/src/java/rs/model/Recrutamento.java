@@ -1,4 +1,3 @@
-
 package rs.model;
 
 import java.io.Serializable;
@@ -18,10 +17,12 @@ import javax.persistence.Temporal;
 @Entity
 @Table(name = "rec_recrutamento")
 public class Recrutamento implements Serializable {
-    
+
+    public static final String sTitle = "Recrutamento";
+    public static final String pTitle = "Recrutamentos";
     @Id
-    @SequenceGenerator(name="recrutamento_pk_sequence", sequenceName="seq_rs_recrutamento")
-    @GeneratedValue(strategy=GenerationType.AUTO, generator="recrutamento_pk_sequence")
+    @SequenceGenerator(name = "recrutamento_pk_sequence", sequenceName = "seq_rs_recrutamento")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "recrutamento_pk_sequence")
     private int rec_codigo;
     private String rec_titulo;
     private int rec_tipo;
@@ -81,6 +82,5 @@ public class Recrutamento implements Serializable {
     public void setRecStatus(int rec_status) {
         this.rec_status = rec_status;
     }
-    
-    
+
 }
