@@ -37,7 +37,7 @@ public class Evento implements Serializable {
     private boolean eve_tributar_inss;
     private boolean eve_tributar_fgts;
     private boolean eve_calcular_media_agregada13;
-    private boolean eve_horas_dias;
+    
     @ManyToOne
     @JoinColumn(name = "tbs_codigo", referencedColumnName = "tbs_codigo")
     private TabelaINSS tabelainss;
@@ -120,14 +120,6 @@ public class Evento implements Serializable {
 
     public void setEve_calcular_media_agregada13(boolean eve_calcular_media_agregada13) {
         this.eve_calcular_media_agregada13 = eve_calcular_media_agregada13;
-    }
-
-    public boolean isEve_horas_dias() {
-        return eve_horas_dias;
-    }
-
-    public void setEve_horas_dias(boolean eve_horas_dias) {
-        this.eve_horas_dias = eve_horas_dias;
     }
 
     public SerieEvento getSerieevento() {

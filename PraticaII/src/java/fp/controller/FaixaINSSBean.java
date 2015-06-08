@@ -6,7 +6,7 @@
 package fp.controller;
 
 import fp.dao.FaixaINSSDAO;
-import fp.dao.TabINSSDAO;
+import fp.dao.TabelaINSSDAO;
 import fp.model.FaixaINSS;
 import fp.model.TabelaINSS;
 import java.util.List;
@@ -33,7 +33,7 @@ public class FaixaINSSBean {
     
     private List<TabelaINSS> lsttabelaINSS;
     private TabelaINSS tabelainss = new TabelaINSS();
-    private TabINSSDAO tabelainssdao = new TabINSSDAO();
+    private TabelaINSSDAO tabelainssdao = new TabelaINSSDAO();
         
     public FaixaINSSBean(){
         
@@ -88,11 +88,11 @@ public class FaixaINSSBean {
         this.tabelainss = tabelainss;
     }
 
-    public TabINSSDAO getTabelainssdao() {
+    public TabelaINSSDAO getTabelainssdao() {
         return tabelainssdao;
     }
 
-    public void setTabelainssdao(TabINSSDAO tabelainssdao) {
+    public void setTabelainssdao(TabelaINSSDAO tabelainssdao) {
         this.tabelainssdao = tabelainssdao;
     }
     

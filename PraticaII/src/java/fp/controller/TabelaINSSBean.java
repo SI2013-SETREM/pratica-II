@@ -2,7 +2,7 @@
 package fp.controller;
 
 import fp.dao.FaixaINSSDAO;
-import fp.dao.TabINSSDAO;
+import fp.dao.TabelaINSSDAO;
 import fp.model.FaixaINSS;
 import fp.model.TabelaINSS;
 import java.util.List;
@@ -18,18 +18,12 @@ import javax.faces.model.ListDataModel;
 @RequestScoped
 public class TabelaINSSBean {
     
-    private final String sTitle = TabelaINSS.getsTitle();
-    private final String pTitle = TabelaINSS.getpTitle();
+    private final String sTitle = TabelaINSS.sTitle;
+    private final String pTitle = TabelaINSS.pTitle;
     
     private TabelaINSS tabelainss = new TabelaINSS();
-    private TabINSSDAO dao = new TabINSSDAO();
-    private DataModel tabelasinss;
-    
-    
-    private List<FaixaINSS> lstfaixainss;
-    private FaixaINSS faixainss = new FaixaINSS();
-    private FaixaINSSDAO faixainssdao = new FaixaINSSDAO();
-    
+    private TabelaINSSDAO dao = new TabelaINSSDAO();
+    private DataModel tabelainsss;
     
     public TabelaINSSBean(){
     }
@@ -42,31 +36,31 @@ public class TabelaINSSBean {
         return pTitle;
     }
     
-    public TabelaINSS getTabINSS() {
+    public TabelaINSS getTabelaINSS() {
         return tabelainss;
     }
 
-    public void setTabINSS(TabelaINSS tabelainss) {
+    public void setTabelaINSS(TabelaINSS tabelainss) {
         this.tabelainss = tabelainss;
     }
 
-    public DataModel getTabsINSS() {
-        this.tabelasinss = new ListDataModel(dao.findAll());
-        return tabelasinss;
+    public DataModel getTabelasINSS() {
+        this.tabelainsss = new ListDataModel(dao.findAll());
+        return tabelainsss;
     }
 
-    public void setTabsINSS(DataModel tabelasinss) {
-        this.tabelasinss = tabelasinss;
+    public void setTabelasINSS(DataModel tabelainsss) {
+        this.tabelainsss = tabelainsss;
     }
     
     public String insert() {
         dao.insert(tabelainss);
-        return "tabelainsslst";
+        return "tabelainssslst";
     }
     
     public String edit(TabelaINSS i) {
-        tabelainss = (TabelaINSS) tabelasinss.getRowData();
-        return "tabelainssfrm";
+        tabelainss = (TabelaINSS) tabelainsss.getRowData();
+        return "tabelainsssfrm";
     }
     
     public String update() {
@@ -91,11 +85,7 @@ public class TabelaINSSBean {
     public String listar() {
         return "tabelainsslst";
     }
-    
-    public List<FaixaINSS> getLstFaixaINSS() {
-        lstfaixainss = faixainssdao.findAll();
-        return lstfaixainss;
-    }
+   
     
 }
 

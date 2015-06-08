@@ -10,7 +10,6 @@
     </ui:define>
 
     <ui:define name="breadcrumb">
-            <li>Folha de Pagamento</li>
         <li><h:link value="${eventoBean.getsTitle()}" outcome="/faces/view/fp/eventolst" /></li>
     </ui:define>
 
@@ -120,11 +119,7 @@
                             <div class="col-md-2 col-sm-4">
                                 <h:selectBooleanCheckbox id="evetirrf" value="#{eventoBean.evento.eve_tributar_irrf}" title="1" pt:autofocus="" />
                             </div>
-                            <h:outputLabel value="Contar Horas Normais" for="eveChr" styleClass="control-label col-sm-4" />
-                            <div class="col-md-2 col-sm-4">
-                                <h:selectBooleanCheckbox id="evehorasnormais" value="#{eventoBean.evento.eve_horas_dias}" title="1" 
-                                                         pt:autofocus="" />
-                            </div>
+                            
                         </div>
                     </div>
 

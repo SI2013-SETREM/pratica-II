@@ -1,22 +1,129 @@
-<?xml version='1.0' encoding='UTF-8' ?> 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+<ui:composition template="../modelos/default.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    <ui:define name="title">
+        ${eventoBean.getpTitle()}
+    </ui:define>
 
-    <h:head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <h:outputStylesheet name="./css/default.css"/>
-        <h:outputStylesheet name="./css/cssLayout.css"/>
-        <title>Listagem de Eventos</title>
-    </h:head>
+    <ui:define name="breadcrumb">
+        <li>Configurações</li>
+        <li>${eventoBean.getpTitle()}</li>
+    </ui:define>
 
-    <h:body>
-
-       
-        Em Andamento
-        
-
-    </h:body>
-
-</html>
+    <ui:define name="main-content">
+        <div class="panel panel-body">
+            <h3><h:outputText value="Lista de ${eventoBean.getpTitle()}"/></h3>
+            <div class="btns-top-table">
+                <h:link outcome="eventofrm" styleClass="btn btn-success">
+                    <i class="fa fa-plus"></i> Inserir ${eventoBean.getsTitle()}
+                </h:link>
+                <h:outputText value="  "/>
+                
+            </div>
+            <h:form>
+                
+                <h:panelGroup layout="block" style="overflow-y:scroll">
+                
+                <h:dataTable value="${eventoBean.eventos}" var="item" rendered="${eventoBean.eventos.rowAvailable}" styleClass="dataTable table table-bordered table-striped">
+                 
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Descrição"/>
+                        </f:facet>
+                        <h:outputText value="${item.getEve_descricao()}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Indice"/>
+                        </f:facet>
+                        <h:outputText value="${item.getEve_indice()}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Imprime"/>
+                        </f:facet>
+                        <h:outputText value="${item.isEve_imprimir()}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Tributa IRRF"/>
+                        </f:facet>
+                        <h:outputText value="${item.isEve_tributar_irrf() }"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Tributa INSS"/>
+                        </f:facet>
+                        <h:outputText value="${item.isEve_tributar_inss()}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Tributa FGTS"/>
+                        </f:facet>
+                        <h:outputText value="${item.isEve_tributar_fgts()}"/>
+                    </h:column>
+                    
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Calcula média 13"/>
+                        </f:facet>
+                        <h:outputText value="${item.isEve_calcular_media_agregada13()}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Série eve."/>
+                        </f:facet>
+                        <h:outputText value="${item.serieevento.sev_nome}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Tabela INSS"/>
+                        </f:facet>
+                        <h:outputText value="${item.tabelainss.tbs_nome}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Tabela IRRF"/>
+                        </f:facet>
+                        <h:outputText value="${item.tabelairrf.tif_nome}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Tipo eve."/>
+                        </f:facet>
+                        <h:outputText value="${item.tipoevento.tpe_nome}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Fórmula"/>
+                        </f:facet>
+                        <h:outputText value="${item.formula.for_nome}"/>
+                    </h:column>
+                    
+                    <h:column headerClass="col-editar-header">
+                        <f:facet name="header">
+                            <h:outputText value="Editar"/>
+                        </f:facet>
+                        <h:commandLink action="${eventoBean.edit(item)}">
+                            <i class="fa fa-pencil"></i> Editar
+                        </h:commandLink>
+                    </h:column>
+                    <h:column headerClass="col-excluir-header">
+                        <f:facet name="header">
+                            <h:outputText value="Excluir"/>
+                        </f:facet>
+                        <h:commandLink onclick="return confirm('Deseja realmente excluir o ${eventoBean.getsTitle()}?');" action="${eventoBean.delete(item)}">
+                            <i class="fa fa-trash"></i> Excluir
+                        </h:commandLink>
+                    </h:column>
+                </h:dataTable>
+                     </h:panelGroup>
+            </h:form>
+                
+         
+                 </div>
+       </ui:define>
+</ui:composition>

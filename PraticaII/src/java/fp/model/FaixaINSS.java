@@ -20,7 +20,7 @@ import javax.persistence.Table;
 public class FaixaINSS implements Serializable {
     
     public static final String sTitle = "Faixa INSS";
-    public static final String pTitle = "Faixa INSSS";
+    public static final String pTitle = "Faixas INSS";
     
     @Id
     @SequenceGenerator (name= "genFaixaINSS", sequenceName= "segFaixaINSS", allocationSize = 1)

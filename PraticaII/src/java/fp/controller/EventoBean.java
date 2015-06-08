@@ -4,7 +4,7 @@ package fp.controller;
 import fp.dao.EventoDAO;
 import fp.dao.FormulaDAO;
 import fp.dao.SerieEventoDAO;
-import fp.dao.TabINSSDAO;
+import fp.dao.TabelaINSSDAO;
 import fp.dao.TabelaIRRFDAO;
 import fp.dao.TipoEventoDAO;
 import fp.model.Evento;
@@ -36,7 +36,7 @@ public class EventoBean {
     
     private List<TabelaINSS> lsttabinss;
     private TabelaINSS tabinss = new TabelaINSS();
-    private TabINSSDAO tabinssdao = new TabINSSDAO();
+    private TabelaINSSDAO tabinssdao = new TabelaINSSDAO();
     
     
     private List<TabelaIRRF> lsttabirrf;

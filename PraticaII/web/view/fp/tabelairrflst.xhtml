@@ -26,12 +26,7 @@
             </div>
             <h:form>
                 <h:dataTable value="${tabelaIRRFBean.tabelaIRRFs}" var="item" rendered="${tabelaIRRFBean.tabelaIRRFs.rowAvailable}" styleClass="dataTable table table-bordered table-striped">
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Código"/>
-                        </f:facet>
-                        <h:outputText value="${item.getTif_codigo()}"/>
-                    </h:column>
+                    
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="Nome"/>
@@ -103,12 +98,7 @@
                 
             </div>
                 <h:dataTable value="${faixaIRRFBean.faixaIRRFs}" var="item" rendered="${faixaIRRFBean.faixaIRRFs.rowAvailable}" styleClass="dataTable table table-bordered table-striped">
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Código"/>
-                        </f:facet>
-                        <h:outputText value="${item.getFrf_codigo()}"/>
-                    </h:column>
+                    
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="Aliquota"/>
