@@ -89,6 +89,14 @@ $(document).ready(function(){
     });
     
     if (typeof($.fn.dataTable) !== 'undefined') {
+        // Fuck you Java
+        // http://stackoverflow.com/questions/20549752/empty-hdatatable-in-jsf-renders-empty-row-with-invalid-number-of-columns
+        $('.dataTable tbody').each(function(idx, item) {
+            if ($(this).children('tr:first').children().length === 1) { //Quer dizer que o Java fez cagada no HTML (<tbody><tr><td></td></tr></tbody>)
+                $(this).html('');
+            }
+        });
+        
         $('.dataTable').DataTable();
     }
     
