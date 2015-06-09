@@ -29,14 +29,14 @@
                         </div>
                     </div>-->
                     <div class="form-group">
-                        <h:outputLabel value="Descrição: " for="tre_descricao" styleClass="control-label col-sm-1" />
+                        <h:outputLabel value="Descrição: " for="tre_descricao" styleClass="control-label col-sm-2" />
                         <div class="col-md-6 col-sm-12">
                             <h:inputText id="treDescricao" value="#{treinamentoBean.treinamento.tre_descricao}" title="TreDescricao" styleClass="form-control" pt:autofocus="" />
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <h:outputLabel value="Local: " for="local" styleClass="control-label col-sm-1" />
+                        <h:outputLabel value="Local: " for="local" styleClass="control-label col-sm-2" />
                         <div class="col-md-6 col-sm-12">
                             <h:selectOneMenu id="local" converter="localConverter" value="#{treinamentoBean.treinamento.local}" styleClass="form-control" pt:autofocus="" >
                                 <f:selectItems value="#{treinamentoBean.lstlocal}" var="tipe" itemLabel="#{tipe.loc_descricao}"/>
@@ -44,7 +44,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <h:outputLabel value="Curso: " for="curso" styleClass="control-label col-sm-1" />
+                        <h:outputLabel value="Curso: " for="curso" styleClass="control-label col-sm-2" />
                         <div class="col-md-6 col-sm-12">
                             <h:selectOneMenu id="curso" converter="cursoConverter" value="#{treinamentoBean.treinamento.curso}" styleClass="form-control" pt:autofocus="" >
                                 <f:selectItems value="#{treinamentoBean.lstcurso}" var="tipe" itemLabel="#{tipe.cur_nome}"/>
@@ -52,19 +52,19 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <h:outputLabel value="Carga Horária: " for="tre_cargahoraria" styleClass="control-label col-sm-1" />
+                        <h:outputLabel value="Carga Horária: " for="tre_cargahoraria" styleClass="control-label col-sm-2" />
                         <div class="col-md-6 col-sm-12">
-                            <h:inputText id="treCargaHoraria" value="#{treinamentoBean.treinamento.tre_cargahoraria}" title="TreCargaHoraria" styleClass="form-control" pt:autofocus="" />
+                            <h:inputText pt:type="time" id="treCargaHoraria" value="#{treinamentoBean.treinamento.tre_cargahoraria}" title="TreCargaHoraria" styleClass="form-control" pt:autofocus="" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <h:outputLabel value="Custo Total: " for="tre_custotoal" styleClass="control-label col-sm-1" />
+                        <h:outputLabel value="Custo Total: " for="tre_custotoal" styleClass="control-label col-sm-2" />
                         <div class="col-md-6 col-sm-12">
                             <h:inputText id="treCustoTotal" value="#{treinamentoBean.treinamento.tre_custototal}" title="TreCustoTotal" styleClass="form-control" pt:autofocus="" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <h:outputLabel value="Ativo: " for="tre_status" styleClass="control-label col-sm-1" />
+                        <h:outputLabel value="Ativo: " for="tre_status" styleClass="control-label col-sm-2" />
                         <div class="col-md-6 col-sm-12">
                             <h:selectBooleanCheckbox id="treStatus" value="#{treinamentoBean.treinamento.tre_status}" title="TreStatus" pt:autofocus="" />
                         </div>
@@ -73,10 +73,10 @@
 
 
                         <div class="form-group">
-                        <p:outputLabel value="Adicionar Instrutores:" for="themes" styleClass="control-label col-sm-1" />
+                        <p:outputLabel value="Adicionar Instrutores:" for="themes" styleClass="control-label col-sm-2" />
                         <div class="col-md-6 col-sm-12">
                             <p:autoComplete id="themes" multiple="true" value="#{solicitacaoBean.solicitacao.solicitacoes}" completeMethod="#{autoCompleteView.completeTheme}"
-                                            var="theme" itemLabel="#{solicitacaoBean.solicitacao.sol_descricao}" itemValue="#{sol_codigo}" converter="solicitacaoConverter" forceSelection="true">
+                                            var="theme" itemLabel="#{solicitacaoBean.solicitacao.sol_descricao}" itemValue="#{sol_codigo}" converter="pessoaConverter" forceSelection="true">
                         <p:column style="width:10%">
                             <h:outputText styleClass="ui-theme ui-theme-#{solicitacaoBean.solicitacao.sol_descricao}" />
                         </p:column>
@@ -90,10 +90,10 @@
 
 
                         <div class="form-group">
-                        <p:outputLabel value="Adicionar Competências:" for="themes" styleClass="control-label col-sm-1" />
+                        <p:outputLabel value="Adicionar Competências:" for="themes" styleClass="control-label col-sm-2" />
                         <div class="col-md-6 col-sm-12">
                             <p:autoComplete id="themes" multiple="true" value="#{solicitacaoBean.solicitacao.solicitacoes}" completeMethod="#{autoCompleteView.completeTheme}"
-                                            var="theme" itemLabel="#{solicitacaoBean.solicitacao.sol_descricao}" itemValue="#{sol_codigo}" converter="solicitacaoConverter" forceSelection="true">
+                                            var="theme" itemLabel="#{solicitacaoBean.solicitacao.sol_descricao}" itemValue="#{sol_codigo}" converter="pessoaConverter" forceSelection="true">
                         <p:column style="width:10%">
                             <h:outputText styleClass="ui-theme ui-theme-#{solicitacaoBean.solicitacao.sol_descricao}" />
                         </p:column>

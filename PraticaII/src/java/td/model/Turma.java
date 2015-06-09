@@ -90,4 +90,26 @@ public class Turma implements Serializable {
         this.treinamento = treinamento;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 89 * hash + this.tur_codigo;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Turma other = (Turma) obj;
+        if (this.tur_codigo != other.tur_codigo) {
+            return false;
+        }
+        return true;
+    }
+
 }

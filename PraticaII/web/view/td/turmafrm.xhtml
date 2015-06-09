@@ -19,6 +19,7 @@
             <h3><h:outputText value="Dados da ${turmaBean.sTitle}"/></h3>
             <f:view>
                 <h:form styleClass="form-horizontal">
+                    <h:messages/>
                     <h:inputHidden id="curCodigo" value="#{turmaBean.turma.tur_codigo}" />
 <!--                            <div class="form-group">
                         <h:outputLabel value="Código:" for="turCodigo" styleClass="control-label col-sm-1" />
@@ -27,41 +28,50 @@
                         </div>
                     </div>-->
                     <div class="form-group">
-                        <h:outputLabel value="Treinamento: " for="tre_codigo" styleClass="control-label col-sm-1" />
+                        <h:outputLabel value="Treinamento: " for="tre_codigo" styleClass="control-label col-sm-2" />
                         <div class="col-md-6 col-sm-12">
                             <h:selectOneMenu id="pessoa" converter="treinamentoConverter" value="#{turmaBean.turma.treinamento}" styleClass="form-control" pt:autofocus="" >
-                                <f:selectItems value="#{turmaBean.lsttreinamento}" var="tipe" itemLabel="#{tipe.tur_}"/>
+                                <f:selectItems value="#{turmaBean.lsttreinamento}" var="tipe" itemLabel="#{tipe.tre_descricao}"/>
                             </h:selectOneMenu>
                         </div>
                     </div>
                     <div class="form-group">
-                        <h:outputLabel value="Data Inicial" for="tur_datainicio" styleClass="control-label col-sm-1" />
+                        <h:outputLabel value="Data Inicial" for="tur_datainicio" styleClass="control-label col-sm-2" />
                         <div class="col-md-6 col-sm-12">
-                            <h:inputText pt:required="required" id="turDataInicio" value="#{turmaBean.turma.tur_datainicio}" title="TurDataInicio" styleClass="form-control" pt:autofocus="" />
+                            <h:inputText pt:type="date" pt:required="required" id="turDataInicio" value="#{turmaBean.turma.tur_datainicio}" title="TurDataInicio" styleClass="form-control" pt:autofocus=""> 
+                                <f:convertDateTime pattern="yyyy-MM-dd" />
+                            </h:inputText>
                         </div>
                     </div>
                     <div class="form-group">
-                        <h:outputLabel value="Data Final" for="tur_datafim" styleClass="control-label col-sm-1" />
+                        <h:outputLabel value="Data Final" for="tur_datafim" styleClass="control-label col-sm-2" />
                         <div class="col-md-6 col-sm-12">
-                            <h:inputText pt:required="required" id="turDataFim" value="#{turmaBean.turma.tur_datafim}" title="TurDataFim" styleClass="form-control" pt:autofocus="" />
+                            <h:inputText pt:type="date" pt:required="required" id="turDataFim" value="#{turmaBean.turma.tur_datafim}" title="TurDataFim" styleClass="form-control" pt:autofocus="" >
+                                <f:convertDateTime pattern="yyyy-MM-dd" />
+                            </h:inputText>
                         </div>
                     </div>
                     <div class="form-group">
-                        <h:outputLabel value="Limite de Alunos:" for="tur_limite_alunos" styleClass="control-label col-sm-1" />
+                        <h:outputLabel value="Limite de Alunos:" for="tur_limite_alunos" styleClass="control-label col-sm-2" />
                         <div class="col-md-6 col-sm-12">
                             <h:inputText pt:required="required" id="turLimiteAlunos" value="#{turmaBean.turma.tur_limite_alunos}" title="TurLimiteAlunos" styleClass="form-control" pt:autofocus="" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <h:outputLabel value="Status da Turma:" for="tur_status_turma" styleClass="control-label col-sm-1" />
+                        <h:outputLabel value="Status da Turma:" for="tur_status_turma" styleClass="control-label col-sm-2" />
                         <div class="col-md-6 col-sm-12">
-                            <h:inputText pt:required="required" id="turStatusTurma" value="#{turmaBean.turma.tur_status_turma}" title="TurStatusTurma" styleClass="form-control" pt:autofocus="" />
+                            <h:selectOneMenu pt:required="required" id="epiTipo" value="#{turmaBean.turma.tur_status_turma}" title="Prioridade" styleClass="form-control" pt:autofocus="">
+                                <f:selectItem  itemValue="1" itemLabel="Em Formação"/>
+                                <f:selectItem  itemValue="2" itemLabel="Em Andamento"/>
+                                <f:selectItem  itemValue="3" itemLabel="Finalizado"/>
+                                <f:selectItem  itemValue="4" itemLabel="Cancelado"/>
+                            </h:selectOneMenu>
                         </div>
                     </div>
                     <div class="form-group">
-                        <h:outputLabel value="Carga Horária por Seção:" for="tur_cargahoraria_secao" styleClass="control-label col-sm-1" />
+                        <h:outputLabel value="Carga Horária por Seção:" for="tur_cargahoraria_secao" styleClass="control-label col-sm-2" />
                         <div class="col-md-6 col-sm-12">
-                            <h:inputText pt:required="required" id="turCargaHorariaSecao" value="#{turmaBean.turma.tur_cargahoraria_secao}" title="TurCargaHorariaSecao" styleClass="form-control" pt:autofocus="" />
+                            <h:inputText pt:type="time" pt:required="required" id="turCargaHorariaSecao" value="#{turmaBean.turma.tur_cargahoraria_secao}" title="TurCargaHorariaSecao" styleClass="form-control" pt:autofocus="" />
                         </div>
                     </div>
                     <div class="form-group">

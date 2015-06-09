@@ -22,12 +22,24 @@
                 </h:link>
             </div>
             <h:form>
-                <h:dataTable value="${treinamentoBean.treinamentos}" var="item" rendered="${treinamentoBean.treinamento.rowAvailable}" styleClass="dataTable table table-bordered table-striped">
+                <h:dataTable value="${treinamentoBean.treinamentos}" var="item" rendered="${treinamentoBean.treinamentos.rowAvailable}" styleClass="dataTable table table-bordered table-striped">
                     <h:column>
                         <f:facet name="header">
-                            <h:outputText value="Nome"/>
+                            <h:outputText value="Descrição"/>
                         </f:facet>
                         <h:outputText value="${item.getTre_descricao()}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Local"/>
+                        </f:facet>
+                        <h:outputText value="${item.getLocal().getLoc_descricao()}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Curso"/>
+                        </f:facet>
+                        <h:outputText value="${item.getCurso().getCur_nome()}"/>
                     </h:column>
                     <h:column headerClass="col-editar-header">
                         <f:facet name="header">

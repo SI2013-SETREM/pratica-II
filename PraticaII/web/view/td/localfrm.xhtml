@@ -28,13 +28,13 @@
                         </div>
                     </div>-->
                     <div class="form-group">
-                        <h:outputLabel value="Descrição:" for="loc_Descricao" styleClass="control-label col-sm-1" />
+                        <h:outputLabel value="Descrição:" for="loc_Descricao" styleClass="control-label col-sm-2" />
                         <div class="col-md-6 col-sm-12">
                             <h:inputText pt:required="required" id="locDescricao" value="#{localBean.local.loc_descricao}" title="LocDescricao" styleClass="form-control" pt:autofocus="" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <h:outputLabel value="Empresa: " for="empresa" styleClass="control-label col-sm-1" />
+                        <h:outputLabel value="Empresa: " for="empresa" styleClass="control-label col-sm-2" />
                         <div class="col-md-6 col-sm-12">
                             <h:selectOneMenu id="empresa" converter="empresaConverter" value="#{localBean.local.empresa}" styleClass="form-control" pt:autofocus="" >
                                 <f:selectItems value="#{localBean.lstempresa}" var="tipe" itemLabel="#{tipe.emp_nome}"/>
@@ -42,7 +42,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <h:outputLabel value="Cidade: " for="cidade" styleClass="control-label col-sm-1" />
+                        <h:outputLabel value="Cidade: " for="cidade" styleClass="control-label col-sm-2" />
                         <div class="col-md-6 col-sm-12">
                             <h:selectOneMenu id="cidade" converter="cidadeConverter" value="#{localBean.local.cidade}" styleClass="form-control" pt:autofocus="" >
                                 <f:selectItems value="#{localBean.lstcidade}" var="tipe" itemLabel="#{tipe.cid_nome}"/>
@@ -50,7 +50,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <h:outputLabel value="Infra-estrutura:" for="loc_infraestrutura" styleClass="control-label col-sm-1" />
+                        <h:outputLabel value="Infra-estrutura:" for="loc_infraestrutura" styleClass="control-label col-sm-2" />
                         <div class="col-md-6 col-sm-12">
                             <h:inputText pt:required="required" id="locInfraEstrutura" value="#{localBean.local.loc_infraestrutura}" title="LocInfraEstrutura" styleClass="form-control" pt:autofocus="" />
                         </div>

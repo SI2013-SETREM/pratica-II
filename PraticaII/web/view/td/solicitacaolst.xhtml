@@ -2,7 +2,8 @@
     xmlns="http://www.w3.org/1999/xhtml"
     xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
     xmlns:h="http://xmlns.jcp.org/jsf/html"
-    xmlns:f="http://xmlns.jcp.org/jsf/core">
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
     
     <ui:define name="title">
         ${solicitacaoBean.pTitle}
@@ -25,9 +26,23 @@
                 <h:dataTable value="${solicitacaoBean.solicitacoes}" var="item" rendered="${solicitacaoBean.solicitacoes.rowAvailable}" styleClass="dataTable table table-bordered table-striped">
                     <h:column>
                         <f:facet name="header">
-                            <h:outputText value="Nome"/>
+                            <h:outputText value="Descrição"/>
                         </f:facet>
                         <h:outputText value="${item.getSol_descricao()}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Solicitante"/>
+                        </f:facet>
+                        <h:outputText value="${item.getPessoa().getPes_nome()}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText pt:type="date" value="Data"/>
+                        </f:facet>
+                        <h:outputText value="${item.getSol_data()}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
                     </h:column>
                     <h:column headerClass="col-editar-header">
                         <f:facet name="header">
