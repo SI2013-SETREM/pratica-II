@@ -29,13 +29,12 @@
                     <div class="form-group">
 
                         <h:outputLabel value="Descrição:" for="idiDescricao" styleClass="control-label col-sm-2 " />
-                        <div class="col-md-4 col-sm-6">
+                        <div class="col-md-3 col-sm-6">
                             <h:inputText pt:autofocus=""  id="idiDescricao" value="${advertenciaBean.advertencia.adv_descricao}" title="Descrição da Advertência" styleClass="form-control" />
                         </div>
                         <h:outputLabel value="Nome do Aplicador:" for="idiAvaliador" styleClass="control-label col-sm-2 " />
-                        <div class="col-md-8 col-xs-12 autocomplete">
-                            <p:autoComplete pt:disabled="" id="cargo" multiple="true" completeMethod="" value=""
-                                            var="aplicador" itemLabel="" itemValue="" converter="cargoConverter" forceSelection="true">
+                        <div class="col-md-4 col-xs-12 autocomplete">
+                            <p:autoComplete>
                                 <p:column>
                                     <h:outputText value="#{aplicador}" />
                                 </p:column>

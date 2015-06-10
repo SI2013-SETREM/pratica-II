@@ -13,9 +13,9 @@
 
     <ui:define name="breadcrumb">
         <f:metadata>
-            <f:viewParam name="codigoFicha" value="bean"/>          
+            <f:viewParam name="codigoFicha" value="${faltaBean.falta.ffu_codigo}"/>          
     </f:metadata>
-        <f:event listener="busca do produto" type="prefenderComponet"/>
+        <f:event listener="metodo de lista por id " type="preRenderComponent"/>
         <li>Configurações </li>
 
     </ui:define>
@@ -63,7 +63,7 @@
                     <div class="form-group">
                         <div class="col-md-offset-9 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
                             <h:link styleClass="btn btn-default" value="Cancelar"  />
-                            <h:commandButton styleClass="btn btn-primary" value="Salvar"  ></h:commandButton>
+                            <h:commandButton styleClass="btn btn-primary" value="Salvar" action="${faltaBean.salvar()}"  ></h:commandButton>
                         </div>
                     </div>
                 </h:form>

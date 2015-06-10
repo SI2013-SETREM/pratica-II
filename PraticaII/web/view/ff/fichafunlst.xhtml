@@ -30,25 +30,25 @@
                 <div class="panel panel-body">
                     <h:form>
                         
-                        <h:dataTable value="${fichaFuncionalBean.fichas}" var="item"  styleClass="dataTable table table-bordered table-striped">
+                        <h:dataTable value="${fichaFuncionalBean.funcionarios}" var="item"  styleClass="dataTable table table-bordered table-striped">
 
                              <h:column>
                                 <f:facet name="header">
                                     <h:outputText value="Nome do Funcionário"/>
                                 </f:facet>
-                                 <h:outputText value="#{item.pessoa.pes_nome}"/>
+                                 <h:outputText value="#{item.pes_nome}"/>
                             </h:column>
                             <h:column>
                                 <f:facet name="header">
                                     <h:outputText value="CPF"/>
                                 </f:facet>
-                                <h:outputText value="#{item.pessoa.pes_cpf}"/>
+                                <h:outputText value="#{item.pes_cpf}"/>
                             </h:column>
                             <h:column>
                                 <f:facet name="header">
                                     <h:outputText value="Cargo"/>
                                 </f:facet>
-                                <h:outputText value="Gerente"/>
+                                <h:outputText value=""/>
                             </h:column>
                             <h:column headerClass="col-visualizar-header">
                                 <f:facet name="header">
