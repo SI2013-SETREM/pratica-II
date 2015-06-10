@@ -27,7 +27,7 @@ public class Advertencia implements Serializable{
     private int adv_codigo;
 
     @ManyToOne
-    @JoinColumn (name = "pes_codigo_aplicador", referencedColumnName = "pes_codigo_aplicador")
+    @JoinColumn (name = "pes_codigo_aplicador", referencedColumnName = "pes_codigo")
     private Pessoa pessoaAplicador;
     
     @ManyToOne
