@@ -24,7 +24,7 @@ public class SolicitacaoBean {
     private Solicitacao solicitacao = new Solicitacao();
     private SolicitacaoDAO dao = new SolicitacaoDAO();
     private DataModel solicitacoes;
-
+    
     public String getsTitle() {
         return sTitle;
     }
