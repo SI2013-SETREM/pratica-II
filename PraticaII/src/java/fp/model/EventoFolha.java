@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -20,7 +21,8 @@ public class EventoFolha implements Serializable {
     private Evento eve_evento;
     @Id
     @ManyToOne
-    private HistoricoFolha hif_codigo;
+    @JoinColumn(name="hif_codigo", referencedColumnName ="hif_codigo")
+    private HistoricoFolha historicoFolha;
     private double evf_valor;
     private String evf_indice;
     private boolean evf_imprimir;
@@ -125,13 +127,15 @@ public class EventoFolha implements Serializable {
         this.eve_evento = eve_evento;
     }
 
-    public HistoricoFolha getHif_codigo() {
-        return hif_codigo;
+    public HistoricoFolha getHistoricoFolha() {
+        return historicoFolha;
     }
 
-    public void setHif_codigo(HistoricoFolha hif_codigo) {
-        this.hif_codigo = hif_codigo;
+    public void setHistoricoFolha(HistoricoFolha historicoFolha) {
+        this.historicoFolha = historicoFolha;
     }
+
+    
     
     
 }

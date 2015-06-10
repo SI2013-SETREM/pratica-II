@@ -1,5 +1,6 @@
 package ff.model;
 
+import cfg.model.Pessoa;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
@@ -23,9 +24,10 @@ public class Ferias implements Serializable {
     @SequenceGenerator(name = "genFerias", sequenceName = "genFerias", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "genFerias")
     private int fer_codigo;
-    @ManyToOne   
-    @JoinColumn (name = "ffu_codigo", referencedColumnName = "ffu_codigo")
-    private FichaFuncional fichaFuncional;
+   @ManyToOne
+    @JoinColumn (name = "pes_codigo", referencedColumnName = "pes_codigo")
+    private Pessoa pessoa;
+  
     private Date fer_data_inicio;
     private Date fer_data_fim;
     private String fer_observacao;
@@ -62,13 +64,15 @@ public class Ferias implements Serializable {
         this.fer_observacao = fer_observacao;
     }
 
-    public FichaFuncional getFichaFuncional() {
-        return fichaFuncional;
+    public Pessoa getPessoa() {
+        return pessoa;
     }
 
-    public void setFichaFuncional(FichaFuncional fichaFuncional) {
-        this.fichaFuncional = fichaFuncional;
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
     }
+
+
 
  
 }

@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -24,7 +25,8 @@ public class HistoricoFolha implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "genHistoricoFolha")
     private int hif_codigo;
     @ManyToOne
-    private Pessoa pes_codigo;
+     @JoinColumn(name = "pes_codigo", referencedColumnName = "pes_codigo")
+    private Pessoa pessoa;
     private double hif_valor_acre;
     private double hif_valor_desc;
     @Column(nullable = false)
@@ -82,13 +84,17 @@ public class HistoricoFolha implements Serializable {
         this.hif_valor_liquido = hif_valor_liquido;
     }
 
-    public Pessoa getPes_codigo() {
-        return pes_codigo;
+    public Pessoa getPessoa() {
+        return pessoa;
     }
 
-    public void setPes_codigo(Pessoa pes_codigo) {
-        this.pes_codigo = pes_codigo;
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
     }
+
+   
+
+   
     
     
 

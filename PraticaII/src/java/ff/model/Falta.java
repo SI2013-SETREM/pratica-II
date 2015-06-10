@@ -1,5 +1,6 @@
 package ff.model;
 
+import cfg.model.Pessoa;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
@@ -7,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -26,7 +28,8 @@ public class Falta implements Serializable {
     private int flt_codigo;
     
     @ManyToOne
-    private FichaFuncional ffu_codigo;
+    @JoinColumn (name = "pes_codigo", referencedColumnName = "pes_codigo")
+    private Pessoa pessoa;
     
     @ManyToOne
     private Advertencia adv_codigo;
@@ -82,19 +85,19 @@ public class Falta implements Serializable {
         this.flt_justificativa = flt_justificativa;
     }
 
-    public FichaFuncional getFfu_codigo() {
-        return ffu_codigo;
-    }
-
-    public void setFfu_codigo(FichaFuncional ffu_codigo) {
-        this.ffu_codigo = ffu_codigo;
-    }
-
     public Advertencia getAdv_codigo() {
         return adv_codigo;
     }
 
     public void setAdv_codigo(Advertencia adv_codigo) {
         this.adv_codigo = adv_codigo;
+    }
+
+    public Pessoa getPessoa() {
+        return pessoa;
+    }
+
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
     }
 }

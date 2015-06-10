@@ -25,12 +25,15 @@ public class Advertencia implements Serializable{
     @SequenceGenerator(name = "genAdvertencia", sequenceName = "genAdvertencia", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "genAdvertencia")
     private int adv_codigo;
+
     @ManyToOne
-    @JoinColumn (name = "ffu_codigo", referencedColumnName = "ffu_codigo")
-    private FichaFuncional fichaFuncional;
+    @JoinColumn (name = "pes_codigo_aplicador", referencedColumnName = "pes_codigo_aplicador")
+    private Pessoa pessoaAplicador;
+    
     @ManyToOne
-    //@JoinColumn (name = "pes_codigo_aplicador", referencedColumnName = "pes_codigo_aplicador")
+    @JoinColumn (name = "pes_codigo", referencedColumnName = "pes_codigo")
     private Pessoa pessoa;
+    
     private String adv_descricao;
     @Column(nullable = false)
     private Date adv_data;
@@ -87,13 +90,7 @@ public class Advertencia implements Serializable{
         this.adv_advertencia = adv_advertencia;
     }
 
-    public FichaFuncional getFichaFuncional() {
-        return fichaFuncional;
-    }
-
-    public void setFichaFuncional(FichaFuncional fichaFuncional) {
-        this.fichaFuncional = fichaFuncional;
-    }
+ 
 
     public Pessoa getPessoa() {
         return pessoa;
@@ -101,6 +98,14 @@ public class Advertencia implements Serializable{
 
     public void setPessoa(Pessoa pessoa) {
         this.pessoa = pessoa;
+    }
+
+    public Pessoa getPessoaAplicador() {
+        return pessoaAplicador;
+    }
+
+    public void setPessoaAplicador(Pessoa pessoaAplicador) {
+        this.pessoaAplicador = pessoaAplicador;
     }
 
    

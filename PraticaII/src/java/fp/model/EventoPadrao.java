@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -26,7 +27,8 @@ public class EventoPadrao implements Serializable {
     @ManyToOne
     private Evento eve_codigo;
     @ManyToOne
-    private Pessoa pes_codigo;
+    @JoinColumn(name = "pes_codigo", referencedColumnName = "pes_codigo")
+    private Pessoa pessoa;
 
     public int getEvp_codigo() {
         return evp_codigo;
@@ -44,13 +46,15 @@ public class EventoPadrao implements Serializable {
         this.eve_codigo = eve_codigo;
     }
 
-    public Pessoa getPes_codigo() {
-        return pes_codigo;
+    public Pessoa getPessoa() {
+        return pessoa;
     }
 
-    public void setPes_codigo(Pessoa pes_codigo) {
-        this.pes_codigo = pes_codigo;
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
     }
+
+
 
 
     

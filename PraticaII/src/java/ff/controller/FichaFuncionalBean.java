@@ -7,10 +7,10 @@ import csb.model.BeneficiosPessoa;
 import csb.model.CargosPessoa;
 import ff.dao.FaltaDAO;
 import ff.dao.FeriasDAO;
-import ff.dao.FichaFuncionalDAO;
+
 import ff.model.Falta;
 import ff.model.Ferias;
-import ff.model.FichaFuncional;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.model.DataModel;
@@ -20,11 +20,7 @@ import javax.faces.bean.ManagedBean;
 @ManagedBean
 public class FichaFuncionalBean {
 
-    private List<Pessoa> pessoas;
-    private FichaFuncional fichaFuncional = new FichaFuncional();
-    
-    private final FichaFuncionalDAO fichaFuncionalDAO = new FichaFuncionalDAO();
-    private DataModel<FichaFuncional> fichas;
+    private List<Pessoa> pessoas;    
 
     private final BeneficiosPessoaDAO beneficiosPessoaDAO = new BeneficiosPessoaDAO();
     private List<BeneficiosPessoa> beneficios;
@@ -56,65 +52,7 @@ public class FichaFuncionalBean {
     public String manutecao() {
         return "fichafunfrm";
     }
-
-    public String insert() {
-        fichaFuncionalDAO.insert(fichaFuncional);
-        return "fichafunlst";
-    }
-
-    public String select() {
-        fichaFuncional = fichas.getRowData();
-        fichaFuncional = fichaFuncionalDAO.findById(fichaFuncional.getFfu_codigo());
-        if (fichaFuncional != null && fichaFuncional.getPessoa() != null) {
-            beneficios = beneficiosPessoaDAO.findByPessoaId(fichaFuncional.getPessoa().getPes_codigo());
-            ferias = feriasDAO.findById(fichaFuncional.getFfu_codigo());
-            cargos = cargosDAO.GetListCargoPessoa(fichaFuncional.getPessoa().getPes_codigo(),0);
-            faltas = faltaDAO.findFaltas(fichaFuncional.getFfu_codigo());
-        } else {
-            beneficios = new ArrayList<>();
-            ferias = new ArrayList<>();
-            cargos = new ArrayList<>();
-            faltas = new ArrayList<>();
-            
-        }
-        return "fichafunfrm";
-    }
-
-    public String editar() {
-        fichaFuncionalDAO.update(fichaFuncional);
-        return "fichafunlst";
-    }
-
-    public String salvar() {
-        if (fichaFuncional.getFfu_codigo() > 0) {
-            fichaFuncionalDAO.update(fichaFuncional);
-        } else {
-            fichaFuncionalDAO.insert(fichaFuncional);
-        }
-        return "fichafunlst";
-    }
-
-    public DataModel<FichaFuncional> getFichas() {
-        fichas = new ListDataModel<>(fichaFuncionalDAO.findAll());
-        return fichas;
-    }
-
-    public void setFichas(DataModel<FichaFuncional> fichas) {
-        this.fichas = fichas;
-    }
-
-    public FichaFuncional getFichaFuncional() {
-        return fichaFuncional;
-    }
-
-    public void setFichaFuncional(FichaFuncional fichaFuncional) {
-        this.fichaFuncional = fichaFuncional;
-    }
-
-    public FichaFuncionalDAO getFichaFuncionalDAO() {
-        return fichaFuncionalDAO;
-    }
-
+    
     public void setPessoas(List<Pessoa> pessoas) {
         this.pessoas = pessoas;
     }

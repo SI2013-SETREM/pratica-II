@@ -5,6 +5,7 @@
  */
 package fp.model;
 
+import csb.model.Beneficio;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -53,10 +54,10 @@ public class Evento implements Serializable {
     @ManyToOne
     @JoinColumn(name = "for_codigo", referencedColumnName = "for_codigo")
     private Formula formula;
-
+    @ManyToOne
+    @JoinColumn(name = "ben_codigo", referencedColumnName = "ben_codigo")
+    private Beneficio beneficio;
     
-    //@ManyToOne
-    //private Beneficio ben_codigo;
 
     public int getEve_codigo() {
         return eve_codigo;
@@ -160,6 +161,14 @@ public class Evento implements Serializable {
 
     public void setFormula(Formula formula) {
         this.formula = formula;
+    }
+
+    public Beneficio getBeneficio() {
+        return beneficio;
+    }
+
+    public void setBeneficio(Beneficio beneficio) {
+        this.beneficio = beneficio;
     }
 
 }
