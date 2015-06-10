@@ -65,14 +65,14 @@
                     <div class="form-group">
                         <p:outputLabel value="Adicionar Pessoas:" for="pessoa" styleClass="control-label col-sm-2" />
                         <div class="col-md-6 col-sm-12">
-                            <p:autoComplete id="pessoa" multiple="true" value="#{pessoaBean.pessoa.pes_nome}" completeMethod="#{pessoaBean.lista()}"
-                                            var="theme" itemLabel="#{pessoaBean.pessoa.pes_nome}" itemValue="#{pessoaBean.pessoa}" converter="pessoaConverter" forceSelection="true">
+                            <p:autoComplete id="pessoa" multiple="true" value="#{solicitacaoBean.lstpessoa}" completeMethod="#{solicitacaoBean.lstpessoa}"
+                                            var="pessoa" itemLabel="#{pessoa.pes_nome}" itemValue="#{pessoa}" converter="pessoaConverter" forceSelection="true">
                         <p:column style="width:10%">
-                            <h:outputText styleClass="ui-theme ui-theme-#{pessoaBean.pessoa.pes_nome}" />
+                            <h:outputText styleClass="ui-theme ui-theme-#{pessoa.pes_nome}"/>
                         </p:column>
 
                          <p:column>
-                        <h:outputText value="#{pessoaBean.pessoa.pes_nome}" />
+                             <h:outputText value="#{pessoa.pes_nome}" />
                         </p:column>
                         </p:autoComplete>
                         </div>

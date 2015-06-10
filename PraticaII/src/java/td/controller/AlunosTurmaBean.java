@@ -6,6 +6,7 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import td.dao.AlunosTurmaDAO;
+import td.dao.TurmaDAO;
 import td.model.AlunosTurma;
 import td.model.Turma;
 
@@ -17,8 +18,9 @@ public class AlunosTurmaBean {
 
     private final String pTitle = AlunosTurma.pTitle;
 
-    private List<Turma> lsturma;
-    
+    private List<Turma> lstturma;
+    private TurmaDAO turmadao = new TurmaDAO();
+
     private AlunosTurma alunos_turma = new AlunosTurma();
     private AlunosTurmaDAO dao = new AlunosTurmaDAO();
     private DataModel alunos_turmas;
@@ -48,14 +50,23 @@ public class AlunosTurmaBean {
         this.alunos_turmas = alunos_turmas;
     }
     
-    public List<Turma> getLsturma() {
-        return lsturma;
+    public TurmaDAO getTurmadao() {
+        return turmadao;
     }
 
-    public void setLsturma(List<Turma> lsturma) {
-        this.lsturma = lsturma;
+    public void setTurmadao(TurmaDAO turmadao) {
+        this.turmadao = turmadao;
     }
     
+ 
+    public List<Turma> getLstturma() {
+        //lstturma = turmadao.findAll();
+        return lstturma;
+    }
+
+    public void setLstturma(List<Turma> lstturma) {
+        this.lstturma = lstturma;
+    }
     public String insert() {
         dao.insert(alunos_turma);
         return "alunosturmalst";

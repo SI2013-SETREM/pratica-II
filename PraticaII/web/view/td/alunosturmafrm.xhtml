@@ -31,7 +31,7 @@
                         <h:outputLabel value="Turma: " for="tur_codigo" styleClass="control-label col-sm-2" />
                         <div class="col-md-6 col-sm-12">
                             <h:selectOneMenu id="curso" converter="treinamentoConverter" value="#{alunosTurmaBean.alunos_turma.turma}" styleClass="form-control" pt:autofocus="" >
-                                <f:selectItems value="#{alunosTurmaBean.lsturma}" var="tipe" itemLabel="#{tipe.tur_codigo}"/>
+                                <f:selectItems value="#{alunosTurmaBean.lstturma}" var="tipe" itemLabel="#{tipe.tur_codigo}"/>
                             </h:selectOneMenu>
                         </div>
                     </div>

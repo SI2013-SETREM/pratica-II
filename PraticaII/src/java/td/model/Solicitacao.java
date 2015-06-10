@@ -35,14 +35,14 @@ public class Solicitacao implements Serializable{
     
     @ManyToMany
     @JoinTable(name = "trd_pessoas_recebertreinamento")
-    private List<Solicitacao> solicitacoes;
+    private List<Pessoa> funcionarios;
 
-    public List<Solicitacao> getSolicitacoes() {
-        return solicitacoes;
+    public List<Pessoa> getFuncionarios() {
+        return funcionarios;
     }
 
-    public void setSolicitacoes(List<Solicitacao> solicitacoes) {
-        this.solicitacoes = solicitacoes;
+    public void setFuncionarios(List<Pessoa> funcionarios) {
+        this.funcionarios = funcionarios;
     }
 
     public Pessoa getPessoa() {
