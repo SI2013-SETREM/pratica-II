@@ -82,5 +82,4 @@ public class Recrutamento implements Serializable {
     public void setRecStatus(int rec_status) {
         this.rec_status = rec_status;
     }
-
 }
