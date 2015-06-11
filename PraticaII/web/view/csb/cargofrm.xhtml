@@ -1,46 +1,98 @@
 <ui:composition template="./../modelos/default.xhtml"
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-    xmlns:h="http://xmlns.jcp.org/jsf/html"
-    xmlns:f="http://xmlns.jcp.org/jsf/core"
-    xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
-
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
     <ui:define name="title">
-        ${idiomasBean.pTitle}
+        ${cargosBean.pTitle}
     </ui:define>
-
+    <ui:define name="header">
+        <script type="text/javascript">
+            $(function () {
+                $(".car_pisosalarial").blur(function () {
+                    var piso = parseFloat($(".car_pisosalarial")[0].value).toString();
+                    var teto = parseFloat($(".car_tetosalarial")[0].value).toString();
+                    if (piso !== 'NaN') {
+                        if (teto !== 'NaN') {
+                            if (parseFloat(piso) > parseFloat(teto)) {
+                                $(".car_pisosalarial")[0].value = '';
+                                bootbox.alert("O Piso Salarial deve ser menor que o Teto Salarial!");
+                            }
+                        }
+                    }
+                });
+                $(".car_tetosalarial").blur(function () {
+                    var piso = parseFloat($(".car_pisosalarial")[0].value).toString();
+                    var teto = parseFloat($(".car_tetosalarial")[0].value).toString();
+                    if (piso !== 'NaN') {
+                        if (teto !== 'NaN') {
+                            if (parseFloat(piso) > parseFloat(teto)) {
+                                $(".car_tetosalarial")[0].value = '';
+                                bootbox.alert("O Teto Salarial deve ser maior que o Piso Salarial!");
+                            }
+                        }
+                    }
+                });                
+            });
+        </script>
+    </ui:define>
     <ui:define name="breadcrumb">
         <li>Configurações</li>
-        <li><h:link value="${idiomasBean.pTitle}" outcome="/faces/view/cfg/idiomaslst" /></li>
+        <li><h:link value="${cargosBean.pTitle}" outcome="/faces/view/csb/cargolst" /></li>
     </ui:define>
-
     <ui:define name="main-content">
         <div class="panel panel-body">
-            <h3><h:outputText value="Dados do ${idiomasBean.sTitle}"/></h3>
+            <h3><h:outputText value="Dados do ${cargosBean.sTitle}"/></h3>
             <f:view>
                 <h:form styleClass="form-horizontal">
-                    <h:inputHidden id="idiCodigo" value="#{idiomasBean.idioma.idiCodigo}" />
-<!--                            <div class="form-group">
-                        <h:outputLabel value="Código:" for="idiCodigo" styleClass="control-label col-sm-1" />
-                        <div class="col-md-6">
-                            <h:inputText id="idiCodigo" value="#{idiomasBean.idioma.idiCodigo}" title="IdiCodigo" styleClass="form-control" />
-                        </div>
-                    </div>-->
+                    <h:inputHidden id="idiCodigo" value="#{cargosBean.cargo.car_codigo}" />
                     <div class="form-group">
-                        <h:outputLabel value="Descrição:" for="idiDescricao" styleClass="control-label col-sm-1" />
+                        <h:outputLabel value="Descrição:" for="carDescricao" styleClass="control-label col-sm-1" />
                         <div class="col-md-6 col-sm-12">
-                            <h:inputText id="idiDescricao" value="#{idiomasBean.idioma.idiDescricao}" title="IdiDescricao" styleClass="form-control" pt:autofocus="" />
+                            <h:inputText id="carDescricao" value="#{cargosBean.cargo.car_descricao}" title="Descrição" pt:required="true" styleClass="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="CBO" for="carCbo" styleClass="control-label col-sm-1" />
+                        <div class="col-md-6 col-sm-12">
+                            <h:inputText id="carCbo" value="#{cargosBean.cargo.car_cbo}" title="CBO" pt:required="true" styleClass="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Piso Salarial" for="carPisosalarial" styleClass="control-label col-sm-1" />
+                        <div class="col-md-6 col-sm-12">
+                            <div class="input-group">
+                                <div class="input-group-addon">R$</div>
+                                <h:inputText pt:type="number" pt:min="1" pt:max="100000" pt:step="1" pt:required="required" id="carPisosalarial" value="#{cargosBean.cargo.car_pisosalarial}" title="Piso Salarial (R$)" styleClass="form-control car_pisosalarial" />
+                                <div class="input-group-addon">,00</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Teto Salarial" for="carTetosalarial" styleClass="control-label col-sm-1" />
+                        <div class="col-md-6 col-sm-12">
+                            <div class="input-group">
+                                <div class="input-group-addon">R$</div>
+                                <h:inputText pt:type="number" pt:min="1" pt:max="100000" pt:step="1" pt:required="required" id="carTetosalarial" value="#{cargosBean.cargo.car_tetosalarial}" title="Teto Salarial (R$)" styleClass="form-control car_tetosalarial" />
+                                <div class="input-group-addon">,00</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Ativo?:" for="carAtivo" styleClass="control-label col-sm-1" />
+                        <div style="padding-top: 5px" class="col-md-6 col-sm-12">
+                            <h:selectBooleanCheckbox value="#{cargosBean.cargo.car_ativo}" id="carAtivo" class="carAtivo" title="Ativo" />
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-md-offset-1 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
-                            <h:link styleClass="btn btn-default" value="Cancelar" outcome="#{idiomasBean.listar()}" />
-                            <h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{idiomasBean.salvar()}"></h:commandButton>
+                            <h:link styleClass="btn btn-default" value="Cancelar" outcome="#{cargosBean.listar()}" />
+                            <h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{cargosBean.salvar()}"></h:commandButton>
                         </div>
                     </div>
                 </h:form>
             </f:view>
         </div>
     </ui:define>
-
 </ui:composition>

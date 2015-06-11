@@ -7,9 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -25,17 +26,22 @@ public class Cargo implements Serializable, Comparable<Cargo> {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "car_codigo")
     private int car_codigo;
     private String car_descricao;
-    private int car_ativo;
+    private boolean car_ativo;
     private String car_cbo;
     private Double car_tetosalarial;
     private Double car_pisosalarial;
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "car_pai", referencedColumnName = "car_codigo")
     private Cargo car_pai;
-    
+
+    @ManyToOne
+    @JoinColumn(name = "set_codigo", referencedColumnName = "set_codigo")
+    private Setor setor;
+
     @OneToMany
     @JoinTable(name = "csb_competencias_cargo")
     private List<Competencia> Competencia;
-    
+
     @OneToMany
     @JoinTable(name = "csb_graduacoes_cargo")
     private List<Graduacao> Graduacao;
@@ -44,7 +50,7 @@ public class Cargo implements Serializable, Comparable<Cargo> {
 
     }
 
-    public Cargo(int car_codigo, String car_descricao, int car_ativo, String car_cbo, Double car_tetosalarial, Double car_pisosalarial, Cargo car_pai) {
+    public Cargo(int car_codigo, String car_descricao, boolean car_ativo, String car_cbo, Double car_tetosalarial, Double car_pisosalarial, Cargo car_pai) {
         this.car_codigo = car_codigo;
         this.car_descricao = car_descricao;
         this.car_ativo = car_ativo;
@@ -70,11 +76,11 @@ public class Cargo implements Serializable, Comparable<Cargo> {
         this.car_descricao = car_descricao;
     }
 
-    public int getCar_ativo() {
+    public boolean isCar_ativo() {
         return car_ativo;
     }
 
-    public void setCar_ativo(int car_ativo) {
+    public void setCar_ativo(boolean car_ativo) {
         this.car_ativo = car_ativo;
     }
 
@@ -108,6 +114,14 @@ public class Cargo implements Serializable, Comparable<Cargo> {
 
     public void setCar_pai(Cargo car_pai) {
         this.car_pai = car_pai;
+    }
+
+    public Setor getSetor() {
+        return setor;
+    }
+
+    public void setSetor(Setor setor) {
+        this.setor = setor;
     }
 
     public List<Competencia> getCompetencia() {
