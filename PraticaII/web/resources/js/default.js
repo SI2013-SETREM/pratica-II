@@ -64,6 +64,12 @@ $(document).ready(function(){
         return false;
     });
     
+    $('.ui-treenode-label').click(function(){
+        if ($(this).parent().children('.ui-tree-toggler').length) {
+            $(this).parent().children('.ui-tree-toggler').click();
+        }
+    });
+    
     //Login
     $('.form-login input')
         .focus(function() {

@@ -85,6 +85,7 @@
   border-radius: 0;
   text-indent: 0;
   overflow: auto;
+  margin-top: 5px;
 }
 .dataTables_wrapper .col-editar-header,
 .dataTables_wrapper .col-excluir-header {
