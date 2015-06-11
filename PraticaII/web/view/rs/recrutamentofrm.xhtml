@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+    <body>
+
+        <ui:composition template="./../modelos/default.xhtml">
+
+            <ui:define name="title">
+                Manutenção Recrutamentos
+            </ui:define>
+
+            <ui:define name="breadcrumb">
+                <li>Recrutamento</li>
+                <li><h:link value="${recrutamentoBean.pTitle}" outcome="/faces/view/rs/recrutamentolst" /></li>
+            </ui:define>
+
+            <ui:define name="main-content">
+                <div class="panel panel-body">
+                    <h3><h:outputText value="Dados do ${recrutamentoBean.sTitle}"/></h3>
+                    <f:view>
+                        <h:form styleClass="form-horizontal">
+                            <h:inputHidden id="RecCodigo" value="#{recrutamentoBean.recrutamento.recCodigo}" />
+                            <div class="form-group">
+                                <h:outputLabel value="Título:" for="recTitulo" styleClass="control-label col-sm-1" />
+                                <div class="col-md-6 col-sm-12">
+                                    <h:inputText pt:autofocus="" pt:required="required" id="recTitulo" value="#{recrutamentoBean.recrutamento.recTitulo}" title="Título do Recrutamento" styleClass="form-control" />
+                                </div> 
+                            </div>
+                            <div class="form-group">
+                                <h:outputLabel value="Tipo" for="recTipo" styleClass="control-label col-sm-1" />
+                                <div style="padding-top: 5px" class="col-md-6 col-sm-12">
+                                    <h:selectOneMenu value="#{recrutamentoBean.recrutamento.recTipo}" id="recTipo" class="form-control">
+                                        <f:selectItem itemValue="1" itemLabel="Interno"/>
+                                        <f:selectItem itemValue="2" itemLabel="Externo"/>
+                                        <f:selectItem itemValue="3" itemLabel="Misto"/>
+                                    </h:selectOneMenu>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <h:outputLabel value="Início" for="recInicio" styleClass="control-label col-sm-1" />
+                                <div class="col-md-6 col-sm-12">
+                                    <h:inputText pt:type="date" id="datainicial" value="#{recrutamentoBean.recrutamento.recInicio}" title="Data Início" styleClass="form-control">
+                                        <f:convertDateTime pattern="yyyy-MM-dd"/>
+                                    </h:inputText>
+
+                                </div> 
+                            </div>
+                        </h:form>
+
+                    </f:view>
+                </div>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

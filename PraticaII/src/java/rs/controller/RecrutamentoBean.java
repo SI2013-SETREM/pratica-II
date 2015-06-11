@@ -5,6 +5,7 @@
  */
 package rs.controller;
 
+import java.util.Date;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.model.DataModel;
@@ -41,6 +42,10 @@ public class RecrutamentoBean {
     }
 
     public Recrutamento getRecrutamento() {
+        if (recrutamento == null) {
+            recrutamento = new Recrutamento();
+            recrutamento.setRecInicio(new Date());
+        }
         return recrutamento;
     }
 

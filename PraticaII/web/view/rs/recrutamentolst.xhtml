@@ -16,7 +16,7 @@
                 <div class="panel panel-body">
                     <h3><h:outputText value="Lista de ${recrutamentoBean.pTitle}"/></h3>
                     <div class="btns-top-table">
-                        <h:link outcome="recrutamentlst" styleClass="btn btn-success">
+                        <h:link outcome="recrutamentofrm" styleClass="btn btn-success">
                             <i class="fa fa-plus"></i> Inserir ${recrutamentoBean.sTitle}
                         </h:link>
                     </div>
@@ -32,9 +32,9 @@
                                 <f:facet name="header">
                                     <h:outputText value="Tipo"/>
                                 </f:facet>
-                                <c:if test="${item.getRecStatus()}=1">
-                                    <h:outputText value="Interno"/>
-                                </c:if>
+                                <h:outputText rendered="${item.getRecTipo()==1}" value="Interno"/>
+                                <h:outputText rendered="${item.getRecTipo()==2}" value="Externo"/>
+                                <h:outputText rendered="${item.getRecTipo()==3}" value="Misto"/>
                             </h:column>
                             <h:column>
                                 <f:facet name="header">
@@ -56,7 +56,13 @@
                                 <f:facet name="header">
                                     <h:outputText value="Status"/>
                                 </f:facet>
-                                <h:outputText value="${item.getRecStatus()}"/>
+                                <h:outputText rendered="${item.getRecStatus()==1}" value="Aguardando início"/>
+                                <h:outputText rendered="${item.getRecStatus()==2}" value="Buscando candidatos"/>
+                                <h:outputText rendered="${item.getRecStatus()==3}" value="Avaliando candidatos"/>
+                                <h:outputText rendered="${item.getRecStatus()==4}" value="Candidatos selecionados"/>
+                                <h:outputText rendered="${item.getRecStatus()==5}" value="Treinamento"/>
+                                <h:outputText rendered="${item.getRecStatus()==6}" value="Concluído"/>
+                                <h:outputText rendered="${item.getRecStatus()==7}" value="Cancelado"/>
                             </h:column>
                             <h:column headerClass="col-editar-header">
                                 <f:facet name="header">
