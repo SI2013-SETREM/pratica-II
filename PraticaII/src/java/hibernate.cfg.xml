@@ -48,10 +48,8 @@
     <mapping class="csb.model.Setor"/>
     <mapping class="csb.model.TipoExame"/>
     <mapping class="ff.model.Advertencia"/>
-    <mapping class="ff.model.Dependente"/>
     <mapping class="ff.model.Falta"/>
     <mapping class="ff.model.Ferias"/>
-    <mapping class="ff.model.FichaFuncional"/>
     <mapping class="fp.model.Evento"/>
     <mapping class="fp.model.EventoFolha"/>
     <mapping class="fp.model.EventoPadrao"/>
