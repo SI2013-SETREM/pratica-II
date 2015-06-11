@@ -64,6 +64,14 @@
                                 <h:outputText rendered="${item.getRecStatus()==6}" value="Concluído"/>
                                 <h:outputText rendered="${item.getRecStatus()==7}" value="Cancelado"/>
                             </h:column>
+                            <h:column headerClass="col-concluir-header">
+                                <f:facet name="header">
+                                    <h:outputText value="Concluir"/>
+                                </f:facet>
+                                <h:commandLink onclick="return confirm('Deseja realmente concluir o ${recrutamentoBean.sTitle}?');" action="${recrutamentoBean.delete(item)}">
+                                    <i class="fa fa-trash"></i> Concluir
+                                </h:commandLink>
+                            </h:column>
                             <h:column headerClass="col-editar-header">
                                 <f:facet name="header">
                                     <h:outputText value="Editar"/>
@@ -80,6 +88,7 @@
                                     <i class="fa fa-trash"></i> Excluir
                                 </h:commandLink>
                             </h:column>
+                            
                         </h:dataTable>
                     </h:form>
                 </div>

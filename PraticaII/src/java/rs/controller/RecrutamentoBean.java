@@ -24,11 +24,9 @@ public class RecrutamentoBean {
     private final String sTitle = Recrutamento.sTitle;
     private final String pTitle = Recrutamento.pTitle;
 
-    private Recrutamento recrutamento = new Recrutamento();
+    private Recrutamento recrutamento;
     private RecrutamentoDAO dao = new RecrutamentoDAO();
     private DataModel recrutamentos;
-    private String rec_tipoDesc;
-    private String rec_statusDesc;
 
     public RecrutamentoBean() {
     }
@@ -42,7 +40,7 @@ public class RecrutamentoBean {
     }
 
     public Recrutamento getRecrutamento() {
-        if (recrutamento == null) {
+        if (recrutamento==null){
             recrutamento = new Recrutamento();
             recrutamento.setRecInicio(new Date());
         }
@@ -104,41 +102,4 @@ public class RecrutamentoBean {
         return "recrutamentolst";
     }
 
-    public String getRec_tipoDesc() {
-        if (recrutamento.getRecTipo() == 1) {
-            rec_tipoDesc = "Interno";
-        } else if (recrutamento.getRecTipo() == 2) {
-            rec_tipoDesc = "Externo";
-        } else if (recrutamento.getRecTipo() == 3) {
-            rec_tipoDesc = "Misto";
-        }
-        return rec_tipoDesc;
-    }
-
-    public void setRec_tipoDesc(String rec_tipoDesc) {
-        this.rec_tipoDesc = rec_tipoDesc;
-    }
-
-    public String getRec_statusDesc() {
-        if (recrutamento.getRecStatus() == 1) {
-            rec_statusDesc = "Aguardando início";
-        } else if (recrutamento.getRecStatus() == 2) {
-            rec_statusDesc = "Buscando candidatos";
-        } else if (recrutamento.getRecStatus() == 3) {
-            rec_statusDesc = "Avaliando candidatos";
-        } else if (recrutamento.getRecStatus() == 4) {
-            rec_statusDesc = "Candidatos selecionados";
-        } else if (recrutamento.getRecStatus() == 5) {
-            rec_statusDesc = "Treinamento";
-        } else if (recrutamento.getRecStatus() == 6) {
-            rec_statusDesc = "Concluído";
-        } else if (recrutamento.getRecStatus() == 7) {
-            rec_statusDesc = "Cancelado";
-        }
-        return rec_statusDesc;
-    }
-
-    public void setRec_statusDesc(String rec_statusDesc) {
-        this.rec_statusDesc = rec_statusDesc;
-    }
-}
+  }
