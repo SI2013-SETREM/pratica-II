@@ -5,20 +5,28 @@
 
     <ui:define name="main-content">
         <div class="panel panel-body">
-            <h3><h:outputText value="MODELO DE RECRUTAMENTO"/></h3>
             <div class="row">
                 <div class="col-lg-8">
                     <ui:insert name="content"></ui:insert>
                 </div>
                 <div class="col-lg-3">
                     <ul class="nav nav-pills nav-stacked pull-right" style="width: 100%">
-                        <li role="presentation" class="active"><a href="/faces/view/rs/recrutamentofrm}">Recrutamento</a></li>
-                        <li role="presentation"><a href="#">Profile</a></li>
+                        <li class="#{view.viewId.contains('/rs/recrutamentofrm') ? 'active' : ''}">
+                            <h:link outcome="/faces/view/rs/recrutamentofrm">
+                                <span class="fa fa-bullhorn"></span>
+                                <span class="menu-text">Recrutamento</span>
+                            </h:link>
+                        </li>
+                        <li class="#{view.viewId.contains('/rs/recrutamentoCandidatos') ? 'active' : ''}">
+                            <h:link outcome="/faces/view/rs/recrutamentoCandidatos">
+                                <span class="fa fa-users"></span>
+                                <span class="menu-text">Selecionar Candidatos</span>
+                            </h:link>
+                        </li>
                         <li role="presentation"><a href="#">Messages</a></li>
                     </ul>
                 </div>
             </div>
         </div>
     </ui:define>
-
 </ui:composition>
