@@ -50,4 +50,9 @@ public class PessoaDAO {
         }
         return session.createQuery("from Pessoa where 1 = 1 " + sqlPessoa).list();
     }
+      public List<Pessoa> findAllFuncionarios() {
+        Query q = session.createQuery("from Pessoa where pes_tipo  = 1 ");
+      
+        return q.list();
+    }
 }
