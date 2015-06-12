@@ -7,7 +7,7 @@ import java.util.List;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
  
-@ManagedBean(name="aaa", eager = true)
+@ManagedBean(name="pessoaMBAC", eager = true)
 @ApplicationScoped
 public class PessoaBeanAC {
      

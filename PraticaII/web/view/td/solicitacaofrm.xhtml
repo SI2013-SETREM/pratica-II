@@ -65,18 +65,33 @@
                     <div class="form-group">
                         <p:outputLabel value="Adicionar Pessoas:" for="pessoa" styleClass="control-label col-sm-2" />
                         <div class="col-md-6 col-sm-12">
-                            <p:autoComplete id="pessoa" multiple="true" value="#{autoCompleteBean.funcionarios}" completeMethod="#{autoCompleteBean.completaNome}"
+                            <p:autoComplete id="pessoa" multiple="true" value="#{autoCompletePessoaBean.funcionarios}" completeMethod="#{autoCompletePessoaBean.completaNomePessoa}"
                                             var="pessoa" itemLabel="#{pessoa.pes_nome}" itemValue="#{pessoa}" converter="pessoaConverter" forceSelection="true">
                         <p:column style="width:10%">
                             <h:outputText styleClass="ui-theme ui-theme-#{pessoa.pes_nome}"/>
                         </p:column>
-
                          <p:column>
                              <h:outputText value="#{pessoa.pes_nome}" />
                         </p:column>
                         </p:autoComplete>
                         </div>
+                    </div>                       
+                    <h:form>
+                    <div class="form-group">
+                        <p:outputLabel value="Competências:" for="competencia" styleClass="control-label col-sm-2" />
+                        <div class="col-md-6 col-sm-12">
+                            <p:autoComplete id="competencia" multiple="true" value="#{autoCompleteCompetenciaBean.competencias}" completeMethod="#{autoCompleteCompetenciaBean.completaNomeCompetencia}"
+                                            var="competencia" itemLabel="#{competencia.cmp_descricao}" itemValue="#{competencia}" converter="CompetenciaConverter" forceSelection="true">
+                        <p:column style="width:10%">
+                            <h:outputText styleClass="ui-theme ui-theme-#{competencia.cmp_descricao}"/>
+                        </p:column>
+                         <p:column>
+                             <h:outputText value="#{competencia.cmp_descricao}" />
+                        </p:column>
+                        </p:autoComplete>
+                        </div>
                         </div>  
+                    </h:form>
                     </h:form>
 
                     <div class="form-group">

@@ -37,21 +37,22 @@
                         </div>
                     </div>
 
+                    <h:form>
                     <div class="form-group">
-                        <p:outputLabel value="Adicionar Curso:" for="themes" styleClass="control-label col-sm-2" />
+                        <p:outputLabel value="Cursos:" for="curso" styleClass="control-label col-sm-2" />
                         <div class="col-md-6 col-sm-12">
-                            <p:autoComplete id="themes" multiple="true" value="#{solicitacaoBean.solicitacao.solicitacoes}" completeMethod="#{autoCompleteView.completeTheme}"
-                                            var="theme" itemLabel="#{solicitacaoBean.solicitacao.sol_descricao}" itemValue="#{sol_codigo}" converter="pessoaConverter" forceSelection="true">
+                            <p:autoComplete id="curso" multiple="true" value="#{autoCompleteCursoBean.cursos}" completeMethod="#{autoCompleteCursoBean.completaNomeCurso(query)}"
+                                            var="curso" itemLabel="#{curso.cur_nome}" itemValue="#{curso}" converter="cursoConverter" forceSelection="true">
                         <p:column style="width:10%">
-                            <h:outputText styleClass="ui-theme ui-theme-#{solicitacaoBean.solicitacao.sol_descricao}" />
+                            <h:outputText styleClass="ui-theme ui-theme-#{curso.cur_nome}"/>
                         </p:column>
-
                          <p:column>
-                        <h:outputText value="#{solicitacaoBean.solicitacao.sol_descricao}" />
+                             <h:outputText value="#{curso.cur_nome}" />
                         </p:column>
                         </p:autoComplete>
                         </div>
-                    </div>
+                        </div>                        
+                    </h:form>
 
                     <div class="form-group">
                         <h:outputLabel value="Empresa: " for="empresa" styleClass="control-label col-sm-2" />

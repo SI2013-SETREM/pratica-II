@@ -1,4 +1,5 @@
 package td.controller;
+import ad.model.Competencia;
 import cfg.model.Pessoa;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,19 +9,22 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
  
 @ManagedBean
-public class autoCompleteBean {
+public class AutoCompletePessoaBean {
      
     @ManyToMany
     @JoinTable(name = "trd_pessoas_recebertreinamento")
     private List<Pessoa> funcionarios;
   //private List<Pessoa> lstpessoas;
 
-    @ManagedProperty("#{aaa}")
-    private PessoaBeanAC service;
-  
+    @ManyToMany
+    @JoinTable(name = "trd_instrutores_treinamento")
+    private List<Pessoa> instrutores;
+    
+    @ManagedProperty("#{pessoaMBAC}")
+    private PessoaBeanAC servicePessoa;
      
-    public List<Pessoa> completaNome(String query) {
-        List<Pessoa> allThemes = service.getPessoas();
+    public List<Pessoa> completaNomePessoa(String query) {
+        List<Pessoa> allThemes = servicePessoa.getPessoas();
         List<Pessoa> filteredThemes = new ArrayList<Pessoa>();
          
         for (int i = 0; i < allThemes.size(); i++) {
@@ -40,9 +44,16 @@ public class autoCompleteBean {
     public void setFuncionarios(List<Pessoa> funcionarios) {
         this.funcionarios = funcionarios;
     }
-     
-     
-    public void setService(PessoaBeanAC service) {
-        this.service = service;
+    
+    public List<Pessoa> getInstrutores() {
+        return instrutores;
+    }
+
+    public void setInstrutores(List<Pessoa> instrutores) {
+        this.instrutores = instrutores;
+    }
+    
+    public void setServicePessoa(PessoaBeanAC servicePessoa) {
+        this.servicePessoa = servicePessoa;
     }
 }
