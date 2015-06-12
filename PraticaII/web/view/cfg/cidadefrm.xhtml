@@ -29,13 +29,13 @@
                     <div class="form-group">
                         <h:outputLabel value="Cidade" for="cidNome" styleClass="control-label col-sm-1" />
                         <div class="col-md-6 col-sm-12">
-                            <h:inputText id="cidNome" value="#{cidadeBean.cidade.cid_nome}" title="Nome da Cidade" pt:required="required" styleClass="form-control" pt:autofocus="" />
+                            <h:inputText id="cidNome" style="text-transform: uppercase" value="#{cidadeBean.cidade.cid_nome}" title="Nome da Cidade" pt:required="required" styleClass="form-control" pt:autofocus="" />
                         </div>
                     </div>
                     <div class="form-group">
                         <h:outputLabel value="UF:" for="cidUF" styleClass="control-label col-sm-1" />
                         <div class="col-md-6 col-sm-12">
-                            <h:inputText id="cidUF" value="#{cidadeBean.cidade.cid_uf}" title="UF da Cidade" pt:required="required" styleClass="form-control" pt:autofocus="" />
+                            <h:inputText id="cidUF" maxlength="2" style="text-transform: uppercase" value="#{cidadeBean.cidade.cid_uf}" title="UF da Cidade" pt:required="required" styleClass="form-control" pt:autofocus="" />
                         </div>
                     </div>
                     <div class="form-group">

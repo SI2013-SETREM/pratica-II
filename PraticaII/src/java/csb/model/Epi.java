@@ -22,7 +22,7 @@ public class Epi implements Serializable {
     private int epi_codigo;
     private String epi_descricao;
     private char epi_tipo; //individual, coletivo
-    private boolean epi_situacao;
+    private boolean epi_situacao; // 
 
     public Epi() {
     }
