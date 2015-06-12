@@ -32,6 +32,7 @@ public class RedeSocial implements Serializable {
     private String rsc_urlperfil;
     
     @ManyToOne
+    @JoinColumn(name = "rep_codigo_icone")
     private Repositorio repositorio;
 
     public RedeSocial() {
@@ -86,4 +87,29 @@ public class RedeSocial implements Serializable {
     }
     
     
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 19 * hash + this.rsc_codigo;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final RedeSocial other = (RedeSocial) obj;
+        if (this.rsc_codigo != other.rsc_codigo) {
+            return false;
+        }
+        return true;
+    }
+    @Override
+    public String toString() {
+        return getRsc_nome();
+    }
 }

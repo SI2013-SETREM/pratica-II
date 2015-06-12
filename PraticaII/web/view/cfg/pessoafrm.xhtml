@@ -1,17 +1,33 @@
 <ui:composition template="./../modelos/default.xhtml"
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-    xmlns:h="http://xmlns.jcp.org/jsf/html"
-    xmlns:f="http://xmlns.jcp.org/jsf/core"
-    xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
+    <ui:define name="header">
+        <script type="text/javascript">
+            $(function () {
+                $(".pesNecEsp").click(function () {
+                    if ($(".pesNecEsp").is(':checked')) {
+                        $("#pesNecessidadeEspecial").fadeIn();
+                        $(".pesDesNec").attr("required", "required");
+                    }else{
+                        $("#pesNecessidadeEspecial").fadeOut();
+                        $(".pesDesNec").removeAttr("required");
+                    } 
+                });
+            });
+        </script>
+    </ui:define>
+    
     <ui:define name="title">
         ${pessoaBean.pTitle}
     </ui:define>
 
     <ui:define name="breadcrumb">
         <li>Configurações</li>
-        <li><h:link value="${pessoaBean.pTitle}" outcome="/faces/view/cfg/idiomaslst" /></li>
+        <li><h:link value="${pessoaBean.pTitle}" outcome="/faces/view/cfg/pessoalst" /></li>
     </ui:define>
 
     <ui:define name="main-content">
@@ -20,20 +36,159 @@
             <f:view>
                 <h:form styleClass="form-horizontal">
                     <h:inputHidden id="pesCodigo" value="#{pessoaBean.pessoa.pes_codigo}" />
-<!--                            <div class="form-group">
-                        <h:outputLabel value="Código:" for="pesCodigo" styleClass="control-label col-sm-1" />
-                        <div class="col-md-6">
-                                                <h:inputText id="pesCodigo" value="#{pessoaBean.pessoa.pes_codigo}" title="IdiCodigo" styleClass="form-control" />
-                        </div>
-                    </div>-->
+                    <!--                            <div class="form-group">
+                                            <h:outputLabel value="Código:" for="pesCodigo" styleClass="control-label col-sm-1" />
+                                            <div class="col-md-6">
+                                                                    <h:inputText id="pesCodigo" value="#{pessoaBean.pessoa.pes_codigo}" title="IdiCodigo" styleClass="form-control" />
+                                            </div>
+                                        </div>-->
                     <div class="form-group">
-                        <h:outputLabel value="Nome:" for="pesNome" styleClass="control-label col-sm-1" />
+                        <h:outputLabel value="Nome:" for="pesNome" styleClass="control-label col-sm-2" />
                         <div class="col-md-6 col-sm-12">
                             <h:inputText id="pesNome" value="#{pessoaBean.pessoa.pes_nome}" title="Nome da Pessoa" pt:required="required" styleClass="form-control" pt:autofocus="" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-md-offset-1 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
+                        <h:outputLabel value="CPF:" for="pesCPF" styleClass="control-label col-sm-2" />
+                        <div class="col-md-6 col-sm-12">
+                            <h:inputText id="pesCPF" value="#{pessoaBean.pessoa.pes_cpf}" title="CPF da Pessoa" pt:required="required" styleClass="form-control" pt:autofocus="" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Identidade:" for="pesIdentidade" styleClass="control-label col-sm-2" />
+                        <div class="col-md-6 col-sm-12">
+                            <h:inputText id="pesIdentidade" value="#{pessoaBean.pessoa.pes_cpf}" title="Identidade da Pessoa" pt:required="" styleClass="form-control" pt:autofocus="" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Data Nasc:" for="pesDataNasc" styleClass="control-label col-sm-2" />
+                        <div class="col-md-6 col-sm-12">
+                            <h:inputText id="pesDataNasc" pt:type="date" value="#{pessoaBean.pessoa.pes_datanasc}" title="Data de nascimento da pessoa" pt:required="required" styleClass="form-control" pt:autofocus="">
+                                <f:convertDateTime pattern="yyyy-MM-dd"/>
+                            </h:inputText>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Telefone:" for="pesTelefone" styleClass="control-label col-sm-2" />
+                        <div class="col-md-6 col-sm-12">
+                            <h:inputText id="pesTelefone" value="#{pessoaBean.pessoa.pes_telefone}" title="Telefone da Pessoa" pt:required="" styleClass="form-control" pt:autofocus="" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Email:" for="pesEmail" styleClass="control-label col-sm-2" />
+                        <div class="col-md-6 col-sm-12">
+                            <h:inputText id="pesEmail" value="#{pessoaBean.pessoa.pes_email}" title="Email da Pessoa" pt:required="" styleClass="form-control" pt:autofocus="" />
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <h:outputLabel value="Cidade:" for="pesCidade" styleClass="control-label col-sm-2" />
+                        <div style="padding-top: 5px" class="col-md-6 col-sm-12">
+                            <h:selectOneMenu value="#{pessoaBean.pessoa.cidade}" converter="cidadeConverter" id="pesCidade" class="form-control">
+                                <f:selectItems value="#{cidadeBean.cidades}" var="cidade" />
+                            </h:selectOneMenu>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Bairro:" for="pesBairro" styleClass="control-label col-sm-2" />
+                        <div style="padding-top: 5px" class="col-md-6 col-sm-12">
+                            <h:selectOneMenu value="#{pessoaBean.pessoa.bairro}" converter="bairroConverter" id="pesBairro" class="form-control">
+                                <f:selectItems value="#{bairroBean.bairros}" var="bairro" />
+                            </h:selectOneMenu>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Endereço" for="pesEndereco" styleClass="control-label col-sm-2" />
+                        <div style="padding-top: 5px" class="col-md-6 col-sm-12">
+                            <h:selectOneMenu value="#{pessoaBean.pessoa.endereco}" converter="enderecoConverter" id="pesEndereco" class="form-control">
+                                <f:selectItems value="#{enderecoBean.enderecos}" var="endereco"/>
+                            </h:selectOneMenu>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="N. Endereço:" for="pesNumeroENde" styleClass="control-label col-sm-2" />
+                        <div class="col-md-6 col-sm-12">
+                            <h:inputText id="pesNumeroENde" value="#{pessoaBean.pessoa.pes_numeroend}" title="Número do enderço da pessoa" styleClass="form-control" pt:autofocus="" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Complemento End:" for="pesComplementoEnd" styleClass="control-label col-sm-2" />
+                        <div class="col-md-6 col-sm-12">
+                            <h:inputText id="pesComplementoEnd" value="#{pessoaBean.pessoa.pes_complementoend}" title="Complemento do enderço da pessoa" styleClass="form-control" pt:autofocus="" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Pai:" for="pesPai" styleClass="control-label col-sm-2" />
+                        <div class="col-md-6 col-sm-12">
+                            <h:inputText id="pesPai" value="#{pessoaBean.pessoa.pes_pai}" title="Pai da Pessoa"  styleClass="form-control" pt:autofocus="" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Mãe:" for="pesMae" styleClass="control-label col-sm-2" />
+                        <div class="col-md-6 col-sm-12">
+                            <h:inputText id="pesMae" value="#{pessoaBean.pessoa.pes_mae}" title="Mãe da Pessoa" styleClass="form-control" pt:autofocus="" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Cidade Nasc:" for="pesCidadeNas" styleClass="control-label col-sm-2" />
+                        <div style="padding-top: 5px" class="col-md-6 col-sm-12">
+                            <h:selectOneMenu value="#{pessoaBean.pessoa.cidadenasc}" converter="cidadeConverter" id="pesCidadeNas" class="form-control">
+                                <f:selectItems value="#{cidadeBean.cidades}" var="cidadenasc" />
+                            </h:selectOneMenu>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Tipo Pessoa:" for="pesTipo" styleClass="control-label col-sm-2" />
+                        <div style="padding-top: 5px" class="col-md-6 col-sm-12">
+                            <h:selectOneMenu value="#{pessoaBean.pessoa.pes_tipo}" id="pesTipo" class="form-control">
+                                <f:selectItem itemValue="1" itemLabel="Funcionário"/>
+                                <f:selectItem itemValue="2" itemLabel="Ex-Funcionário"/>
+                                <f:selectItem itemValue="3" itemLabel="Pessoa Externa (Candidatos)"/>
+                                <f:selectItem itemValue="4" itemLabel="Instrutores"/>
+                            </h:selectOneMenu>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Estado Civil:" for="pesEC" styleClass="control-label col-sm-2" />
+                        <div style="padding-top: 5px" class="col-md-6 col-sm-12">
+                            <h:selectOneMenu value="#{pessoaBean.pessoa.pes_estadocivil}" id="pesEC" class="form-control">
+                                <f:selectItem itemValue="1" itemLabel="Solteiro(a)"/>
+                                <f:selectItem itemValue="2" itemLabel="Casado(a)"/>
+                                <f:selectItem itemValue="3" itemLabel="Separado(a)"/>
+                                <f:selectItem itemValue="4" itemLabel="Outros"/>
+                            </h:selectOneMenu>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Observações:" for="pesObs" styleClass="control-label col-sm-2" />
+                        <div class="col-md-6 col-sm-12">
+                            <h:inputTextarea id="pesObs" value="#{pessoaBean.pessoa.pes_observacoes}" title="Observações da Pessoa" styleClass="form-control" pt:autofocus="" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Necessidades Especiais:" for="pesNecEsp" styleClass="control-label col-sm-2" />
+                        <div style="padding-top: 5px" class="col-md-6 col-sm-12">
+                            <h:selectBooleanCheckbox value="#{pessoaBean.pessoa.pes_necessidadeespecial}" id="pesNecEsp" class="pesNecEsp" title="Pessoa com necessidades especiais" />
+                        </div>
+                    </div>
+                    <div id="pesNecessidadeEspecial" style="display: none;" class="form-group">
+                        <h:outputLabel value="Desc Nec Esp:" for="pesDesNec" styleClass="control-label col-sm-2" />
+                        <div class="col-md-6 col-sm-12">
+                            <h:inputText id="pesDesNec" value="#{pessoaBean.pessoa.pes_necessidadeespecialdsc}" title="Descrição da Necessidade Especial" styleClass="form-control" pt:autofocus="" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Data Cad:" for="pesDataCad" styleClass="control-label col-sm-2" />
+                        <div class="col-md-6 col-sm-12">
+                            <h:inputText id="pesDataCad" pt:type="date" value="#{pessoaBean.pessoa.pes_datacadastro}" title="Data do Cadastro da pessoa" pt:required="required" styleClass="form-control" pt:autofocus="">
+                                <f:convertDateTime pattern="yyyy-MM-dd"/>
+                            </h:inputText>
+                        </div>
+                    </div>
+                    
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
                             <h:link styleClass="btn btn-default" value="Cancelar" outcome="#{pessoaBean.listar()}" />
                             <h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{pessoaBean.salvar()}"></h:commandButton>
                         </div>

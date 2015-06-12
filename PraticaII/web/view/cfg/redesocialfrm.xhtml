@@ -53,14 +53,6 @@
                         </div>
                     </div> 
                     <div class="form-group">
-                        <h:outputLabel value="Repositório" for="empRepositorio" styleClass="control-label col-sm-1" />
-                        <div style="padding-top: 5px" class="col-md-6 col-sm-12">
-                            <h:selectOneMenu value="#{empresaBean.empresa.repositorio}" converter="repositorioConverter" id="empRepositorio" class="form-control">
-                                <f:selectItems value="#{repositorioBean.repositorios}" var="repositorio" />
-                            </h:selectOneMenu>
-                        </div>
-                    </div> 
-                    <div class="form-group">
                         <div class="col-md-offset-1 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
                             <h:link styleClass="btn btn-default" value="Cancelar" outcome="#{redeSocialBean.listar()}" />
                             <h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{redeSocialBean.salvar()}"></h:commandButton>
