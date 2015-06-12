@@ -1,5 +1,6 @@
 package ff.controller;
 
+import cfg.dao.PessoaDAO;
 import cfg.model.Pessoa;
 import csb.dao.BeneficiosPessoaDAO;
 import csb.dao.CargosPessoaDAO;
@@ -14,23 +15,45 @@ import ff.model.Ferias;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.model.DataModel;
-import javax.faces.model.ListDataModel;
+
 import javax.faces.bean.ManagedBean;
+import javax.faces.model.ListDataModel;
 
 @ManagedBean
 public class FichaFuncionalBean {
 
-    private List<Pessoa> pessoas;    
+  
+
+    private Pessoa pessoa = new Pessoa();
+    private final PessoaDAO pessoaDAO = new PessoaDAO();
+    private DataModel<Pessoa> funcionarios;
 
     private final BeneficiosPessoaDAO beneficiosPessoaDAO = new BeneficiosPessoaDAO();
     private List<BeneficiosPessoa> beneficios;
-   
+
     private final FeriasDAO feriasDAO = new FeriasDAO();
     private List<Ferias> ferias;
 
     private final CargosPessoaDAO cargosDAO = new CargosPessoaDAO();
     private List<CargosPessoa> cargos;
-    
+    private CargosPessoa cargosPessoa = new CargosPessoa();
+
+    public List<CargosPessoa> getCargos() {
+        return cargos;
+    }
+
+    public void setCargos(List<CargosPessoa> cargos) {
+        this.cargos = cargos;
+    }
+
+    public CargosPessoa getCargosPessoa() {
+        return cargosPessoa;
+    }
+
+    public void setCargosPessoa(CargosPessoa cargosPessoa) {
+        this.cargosPessoa = cargosPessoa;
+    }
+
     private final FaltaDAO faltaDAO = new FaltaDAO();
     private List<Falta> faltas;
 
@@ -45,56 +68,38 @@ public class FichaFuncionalBean {
     public FichaFuncionalBean() {
     }
 
-    public String visualizar() {
+    public String select() {
+        pessoa = funcionarios.getRowData();
+        pessoa = pessoaDAO.findById(pessoa.getPes_codigo());
+        if (pessoa != null) {
+            beneficios = beneficiosPessoaDAO.findByPessoaId(pessoa.getPes_codigo());
+            ///ferias = feriasDAO.findById(fichaFuncional.getFfu_codigo());
+            cargos = cargosDAO.GetListCargoPessoa(pessoa.getPes_codigo(),0);
+//            faltas = faltaDAO.findFaltas(fichaFuncional.getFfu_codigo());
+        } else {
+            beneficios = new ArrayList<>();
+            
+            cargos = new ArrayList<>();
+            
+            
+        }
         return "fichafunfrm";
     }
-
-    public String manutecao() {
-        return "fichafunfrm";
-    }
-    
-    public void setPessoas(List<Pessoa> pessoas) {
-        this.pessoas = pessoas;
+    public Pessoa getPessoa() {
+        return pessoa;
     }
 
-    public List<CargosPessoa> getCargos() {
-        return cargos;
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
     }
 
-    public CargosPessoaDAO getCargosDAO() {
-        return cargosDAO;
+    public DataModel<Pessoa> getFuncionarios() {
+        this.funcionarios = new ListDataModel<>(pessoaDAO.findAllFuncionarios());
+        return funcionarios;
     }
 
-    public List<Pessoa> getPessoas() {
-        return pessoas;
+    public void setFuncionarios(DataModel<Pessoa> funcionarios) {
+        this.funcionarios = funcionarios;
     }
-
-    public BeneficiosPessoaDAO getBeneficiosPessoaDAO() {
-        return beneficiosPessoaDAO;
-    }
-
-    public FeriasDAO getFeriasDAO() {
-        return feriasDAO;
-    }
-
-    public void setBeneficios(List<BeneficiosPessoa> beneficios) {
-        this.beneficios = beneficios;
-    }
-
-    public void setFerias(List<Ferias> ferias) {
-        this.ferias = ferias;
-    }
-
-    public void setCargos(List<CargosPessoa> cargos) {
-        this.cargos = cargos;
-    }
-
-    public List<Falta> getFaltas() {
-        return faltas;
-    }
-
-    public void setFaltas(List<Falta> faltas) {
-        this.faltas = faltas;
-    }  
 
 }
