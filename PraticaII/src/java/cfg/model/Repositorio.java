@@ -105,4 +105,29 @@ public class Repositorio implements Serializable {
         this.rep_arquivo = rep_arquivo;
     }
     
+     @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 59 * hash + this.rep_codigo;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Repositorio other = (Repositorio) obj;
+        if (this.rep_codigo != other.rep_codigo) {
+            return false;
+        }
+        return true;
+    }
+    @Override
+    public String toString() {
+        return getRep_nome();
+    }
 }

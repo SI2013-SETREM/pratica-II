@@ -26,6 +26,7 @@ public class Endereco implements Serializable {
     private int end_codigo;
     private String end_descricao;
     private String end_cep;
+
     public Endereco() {
     }
 
@@ -58,6 +59,32 @@ public class Endereco implements Serializable {
     public void setEnd_cep(String end_cep) {
         this.end_cep = end_cep;
     }
-    
-    
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 19 * hash + this.end_codigo;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Endereco other = (Endereco) obj;
+        if (this.end_codigo != other.end_codigo) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return getEnd_descricao();
+    }
+
 }

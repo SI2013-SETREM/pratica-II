@@ -198,6 +198,9 @@ public class Empresa implements Serializable {
         }
         return true;
     }
-    
+    @Override
+    public String toString() {
+        return getEmp_nome();
+    }
     
 }

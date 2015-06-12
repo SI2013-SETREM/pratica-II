@@ -51,5 +51,29 @@ public class Bairro implements Serializable {
         this.bai_descricao = bai_descricao;
     }
 
-    
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 59 * hash + this.bai_codigo;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Bairro other = (Bairro) obj;
+        if (this.bai_codigo != other.bai_codigo) {
+            return false;
+        }
+        return true;
+    }
+    @Override
+    public String toString() {
+        return getBai_descricao();
+    }
 }

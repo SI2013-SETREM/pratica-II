@@ -54,7 +54,7 @@
                         <h:outputLabel value="Repositório" for="empRepositorio" styleClass="control-label col-sm-1" />
                         <div style="padding-top: 5px" class="col-md-6 col-sm-12">
                             <h:selectOneMenu value="#{empresaBean.empresa.repositorio}" converter="repositorioConverter" id="empRepositorio" class="form-control">
-                                <f:selectItems value="#{repositorioBean.repositorios}" itemLabel="#{repositorio.rep_nome}" var="repositorio" itemValue="#{repositorio}"/>
+                                <f:selectItems value="#{repositorioBean.repositorios}" var="repositorio" />
                             </h:selectOneMenu>
                         </div>
                     </div>  
@@ -62,7 +62,7 @@
                         <h:outputLabel value="Cidade" for="empCidade" styleClass="control-label col-sm-1" />
                         <div style="padding-top: 5px" class="col-md-6 col-sm-12">
                             <h:selectOneMenu value="#{empresaBean.empresa.cidade}" converter="cidadeConverter" id="empCidade" class="form-control">
-                                <f:selectItems value="#{cidadeBean.cidades}" itemLabel="#{cidade.cid_nome}" var="cidade" itemValue="#{cidade}"/>
+                                <f:selectItems value="#{cidadeBean.cidades}" var="cidade" />
                             </h:selectOneMenu>
                         </div>
                     </div>
@@ -70,7 +70,7 @@
                         <h:outputLabel value="Bairro" for="empBairro" styleClass="control-label col-sm-1" />
                         <div style="padding-top: 5px" class="col-md-6 col-sm-12">
                             <h:selectOneMenu value="#{empresaBean.empresa.bairro}" converter="bairroConverter" id="empBairro" class="form-control">
-                                <f:selectItems value="#{bairroBean.bairros}" itemLabel="#{bairro.bai_descricao}" var="bairro" itemValue="#{bairro}"/>
+                                <f:selectItems value="#{bairroBean.bairros}" var="bairro" />
                             </h:selectOneMenu>
                         </div>
                     </div>
@@ -78,7 +78,7 @@
                         <h:outputLabel value="Endereço" for="empEndereco" styleClass="control-label col-sm-1" />
                         <div style="padding-top: 5px" class="col-md-6 col-sm-12">
                             <h:selectOneMenu value="#{empresaBean.empresa.endereco}" converter="enderecoConverter" id="empEndereco" class="form-control">
-                                <f:selectItems value="#{enderecoBean.enderecos}" itemLabel="#{endereco.end_descricao}" var="endereco" itemValue="#{endereco}"/>
+                                <f:selectItems value="#{enderecoBean.enderecos}" var="endereco"/>
                             </h:selectOneMenu>
                         </div>
                     </div>
