@@ -1,4 +1,3 @@
-
 package rs.model;
 
 import java.io.Serializable;
@@ -19,42 +18,40 @@ import org.hibernate.annotations.SQLInsert;
 import org.hibernate.annotations.SQLUpdate;
 
 @Entity
-@Table(name="rec_questionario")
+@Table(name = "rec_questionario")
 //@SQLInsert(sql = "INSERT INTO rec_questionario(qst_titulo,qst_pontuacaototal,qst_pontuacaomax,qst_tipo_questoes,qst_tipo,qst_codigo) VALUES (?,?,?,?,?,?)", check = ResultCheckStyle.NONE)
 //@SQLUpdate(sql = "UPDATE rec_questionario SET qst_titulo=?,qst_pontuacaototal=?,qst_pontuacaomax=?,qst_tipo_questoes=?,qst_tipo=? WHERE qst_codigo=?", check = ResultCheckStyle.NONE)
 public class Questionario implements Serializable {
-    
+
     public static final String sTitle = "Questionário";
     public static final String pTitle = "Questionários";
-    
+
     @Id
-    @SequenceGenerator(name="questionario_pk_sequence", sequenceName="seq_rs_questionario")
-    @GeneratedValue(strategy=GenerationType.AUTO, generator="questionario_pk_sequence")
+    @SequenceGenerator(name = "questionario_pk_sequence", sequenceName = "seq_rs_questionario")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "questionario_pk_sequence")
     private int qst_codigo;
-    
+
     private String qst_titulo;
-    
+
     /**
-     * Pontuação máxima que poderá ser atingida pelo candidato. Para as questões dissertativas soma o valor de qst_pontuacaomax.
+     * Pontuação máxima que poderá ser atingida pelo candidato. Para as questões
+     * dissertativas soma o valor de qst_pontuacaomax.
      */
     private int qst_pontuacaototal;
-    
+
     /**
-     * Pontuação máxima para cada questão. Por padrão, parametro.par_qst_pontuacaomax_padrao
+     * Pontuação máxima para cada questão. Por padrão,
+     * parametro.par_qst_pontuacaomax_padrao
      */
     private int qst_pontuacaomax;
-    
+
     /**
-     * 1 = Questões descritivas
-     * 2 = Questões objetivas
-     * 3 = Misto
+     * 1 = Questões descritivas 2 = Questões objetivas 3 = Misto
      */
     private int qst_tipo_questoes = 1;
-    
+
     /**
-     * 1 = Normal
-     * 2 = Avaliação 180º
-     * 3 = Avaliação 360º
+     * 1 = Normal 2 = Avaliação 180º 3 = Avaliação 360º
      */
     private int qst_tipo;
 
@@ -62,7 +59,7 @@ public class Questionario implements Serializable {
     @JoinColumn(name = "qst_codigo", referencedColumnName = "qst_codigo")
     @OrderBy(value = "prg_ordem")
     private List<Pergunta> perguntas = new ArrayList<>();
-    
+
     public Questionario() {
     }
 
@@ -134,14 +131,14 @@ public class Questionario implements Serializable {
         }
         this.qst_tipo_questoes = qst_tipo_questoes;
     }
-    
+
     public int getQstTipo() {
         return qst_tipo;
     }
-    
+
     public String getQstTipoDsc(int qst_tipo) {
         String r = "";
-        switch(qst_tipo) {
+        switch (qst_tipo) {
             case 1:
                 r = "Normal";
                 break;
@@ -154,6 +151,7 @@ public class Questionario implements Serializable {
         }
         return r;
     }
+
     public String getQstTipoDsc() {
         return this.getQstTipoDsc(this.qst_tipo);
     }
@@ -175,7 +173,7 @@ public class Questionario implements Serializable {
         }
         this.perguntas = perguntas;
     }
-    
+
     public void addPergunta() {
         List<Pergunta> arrPerguntas = this.getPerguntas();
         if (arrPerguntas == null) {
@@ -183,14 +181,14 @@ public class Questionario implements Serializable {
             arrPerguntas = this.perguntas;
         }
         Pergunta p = new Pergunta();
-        p.setPrgOrdem(arrPerguntas.size()+1);
+        p.setPrgOrdem(arrPerguntas.size() + 1);
         if (this.qst_tipo_questoes == 1 || this.qst_tipo_questoes == 2) {
             p.setPrgTipo(qst_tipo_questoes);
         }
         arrPerguntas.add(p);
         this.perguntas = arrPerguntas;
     }
-    
+
     public void delPergunta(Pergunta p) {
         int prgOrdem = p.getPrgOrdem();
         this.perguntas.remove(p);
@@ -198,43 +196,65 @@ public class Questionario implements Serializable {
         for (int i = 0; i < arrPerguntas.size(); i++) {
             Pergunta pergunta = arrPerguntas.get(i);
             if (pergunta.getPrgOrdem() > prgOrdem) {
-                pergunta.setPrgOrdem(pergunta.getPrgOrdem()-1);
+                pergunta.setPrgOrdem(pergunta.getPrgOrdem() - 1);
             }
         }
     }
-    
+
     public void moveUpPergunta(Pergunta p) {
         int prgOrdem = p.getPrgOrdem();
         List<Pergunta> arrPerguntas = this.getPerguntas();
         for (int i = 0; i < arrPerguntas.size(); i++) {
             Pergunta pergunta = arrPerguntas.get(i);
             if (pergunta.getPrgOrdem() == prgOrdem) {
-                pergunta.setPrgOrdem(prgOrdem-1);
-            } else if (pergunta.getPrgOrdem() == (prgOrdem-1)) {
+                pergunta.setPrgOrdem(prgOrdem - 1);
+            } else if (pergunta.getPrgOrdem() == (prgOrdem - 1)) {
                 pergunta.setPrgOrdem(prgOrdem);
             }
         }
 //        Collections.sort(perguntas);
     }
-    
+
     public void moveDownPergunta(Pergunta p) {
         int prgOrdem = p.getPrgOrdem();
         List<Pergunta> arrPerguntas = this.getPerguntas();
         for (int i = 0; i < arrPerguntas.size(); i++) {
             Pergunta pergunta = arrPerguntas.get(i);
             if (pergunta.getPrgOrdem() == prgOrdem) {
-                pergunta.setPrgOrdem(prgOrdem+1);
-            } else if (pergunta.getPrgOrdem() == (prgOrdem+1)) {
+                pergunta.setPrgOrdem(prgOrdem + 1);
+            } else if (pergunta.getPrgOrdem() == (prgOrdem + 1)) {
                 pergunta.setPrgOrdem(prgOrdem);
             }
         }
 //        Collections.sort(perguntas);
     }
-    
+
     public void addPerguntaOpcao(Pergunta p) {
 //        Pergunta pergunta = this.perguntas.get(this.perguntas.indexOf(p));
 //        pergunta.addPerguntaOpcao();
         this.perguntas.get(this.perguntas.indexOf(p)).addPerguntaOpcao();
     }
-    
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 59 * hash + this.qst_codigo;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Questionario other = (Questionario) obj;
+        if (this.qst_codigo != other.qst_codigo) {
+            return false;
+        }
+        return true;
+    }
+
 }
