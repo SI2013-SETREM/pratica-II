@@ -20,7 +20,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.model.ListDataModel;
 
 @ManagedBean
-public class FichaFuncionalBean {
+public class FuncionarioBean {
 
   
 
@@ -65,7 +65,7 @@ public class FichaFuncionalBean {
         return beneficios;
     }
 
-    public FichaFuncionalBean() {
+    public FuncionarioBean() {
     }
 
     public String select() {
@@ -85,6 +85,13 @@ public class FichaFuncionalBean {
         }
         return "fichafunfrm";
     }
+    public String select2() {
+
+        return "folhapagfrm";
+    }
+    
+    
+    
     public Pessoa getPessoa() {
         return pessoa;
     }
