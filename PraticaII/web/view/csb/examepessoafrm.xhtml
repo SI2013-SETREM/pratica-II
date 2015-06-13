@@ -1,0 +1,81 @@
+<ui:composition template="./../modelos/default.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+    <ui:define name="title">
+        ${examePessoaBean.pTitle}
+    </ui:define>
+
+    <ui:define name="breadcrumb">
+        <li>Cargos, salários, benefícios</li>
+        <li><h:link value="${examePessoaBean.pTitle}" outcome="/faces/view/csb/examepessoalst" /></li>
+    </ui:define>
+
+    <ui:define name="main-content">
+        <div class="panel panel-body">
+            <h3><h:outputText value="Dados do ${examePessoaBean.sTitle}"/></h3>
+            <f:view>
+                <h:form styleClass="form-horizontal">
+                    <h:inputHidden id="exaCodigo" value="#{examePessoaBean.examePessoa.exa_codigo}" />
+                    <div class="form-group">
+                        <h:outputLabel value="Tipo Exame:" for="tipExame" styleClass="control-label col-sm-2" />
+                        <div style="padding-top: 5px" class="col-md-6 col-sm-12">
+                            <h:selectOneMenu value="#{examePessoaBean.examePessoa.tipoExame}" converter="TipoExameConverter" id="tipExame" class="form-control">
+                                <f:selectItems value="#{tipoExameBean.tipoexames}" var="tipoexame" />
+                            </h:selectOneMenu>
+                        </div>
+                    </div>
+                  <div class="form-group">
+                        <h:outputLabel value="Pessoa:" for="exaPessoa" styleClass="control-label col-sm-2" />
+                        <div style="padding-top: 5px" class="col-md-6 col-sm-12">
+                            <h:selectOneMenu value="#{examePessoaBean.examePessoa.pessoa}" converter="pessoaConverter" id="exaPessoa" class="form-control">
+                                <f:selectItems value="#{pessoaBean.pessoas}" var="pessoa" />
+                            </h:selectOneMenu>
+                        </div>
+                    </div>
+                      <div class="form-group">
+                        <h:outputLabel value="Data Exame:" for="exaDataExame" styleClass="control-label col-sm-2" />
+                        <div class="col-md-3 col-sm-6">
+
+                            <h:inputText pt:type="date" id="exaDataExame" value="${examePessoaBean.examePessoa.eps_dataexame}" title="Data do Exame" styleClass="form-control">
+                                <f:convertDateTime pattern="yyyy-MM-dd"/>
+                            </h:inputText>
+
+                        </div>
+                    </div>
+                     <div class="form-group">
+                        <h:outputLabel value="Data Validade" for="exaDataValidade" styleClass="control-label col-sm-2" />
+                        <div class="col-md-3 col-sm-6">
+
+                            <h:inputText pt:type="date" id="exaDataValidade" value="${examePessoaBean.examePessoa.eps_datavalidade}" title="Data de Validade" styleClass="form-control">
+                                <f:convertDateTime pattern="yyyy-MM-dd"/>
+                            </h:inputText>
+
+                        </div>
+                    </div>
+                        <div class="form-group">
+                        <h:outputLabel value="Ativo?:" for="exaSituacao" styleClass="control-label col-sm-1" />
+                        <div style="padding-top: 5px" class="col-md-6 col-sm-12">
+                            <h:selectBooleanCheckbox value="#{examePessoaBean.examePessoa.eps_situacao}" id="exaSituacao"  title="Ativo" />
+                        </div>
+                    </div>
+                      <div class="form-group">
+                        <h:outputLabel value="Observações:" for="exaObs" styleClass="control-label col-sm-2" />
+                        <div class="col-md-6 col-sm-12">
+                            <h:inputTextarea id="exaObs" value="#{examePessoaBean.examePessoa.eps_observacao}" title="Observações do Exame" styleClass="form-control" pt:autofocus="" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-1 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
+                            <h:link styleClass="btn btn-default" value="Cancelar" outcome="#{examePessoaBean.listar()}" />
+                            <h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{examePessoaBean.salvar()}"></h:commandButton>
+                        </div>
+                    </div>
+                </h:form>
+            </f:view>
+        </div>
+    </ui:define>
+</ui:composition>

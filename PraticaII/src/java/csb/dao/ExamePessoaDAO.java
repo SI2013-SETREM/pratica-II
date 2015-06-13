@@ -32,8 +32,8 @@ public class ExamePessoaDAO {
         t.commit();
     }
     
-    public ExamePessoa findById(int pes_codigo) {
-        return (ExamePessoa) session.load(ExamePessoa.class, pes_codigo);
+    public ExamePessoa findById(int exa_codigo) {
+        return (ExamePessoa) session.load(ExamePessoa.class, exa_codigo);
     }
     
     public List<ExamePessoa> findAll() {

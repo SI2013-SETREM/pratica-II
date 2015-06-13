@@ -1,0 +1,83 @@
+<ui:composition template="../modelos/default.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="title">
+        ${examePessoaBean.pTitle}
+    </ui:define>
+
+    <ui:define name="breadcrumb">
+        <li>Cargos, salários, benefícios</li>
+        <li>${examePessoaBean.pTitle}</li>
+    </ui:define>
+
+    <ui:define name="main-content">
+        <div class="panel panel-body">
+            <h3><h:outputText value="Lista de ${examePessoaBean.pTitle}"/></h3>
+            <div class="btns-top-table">
+                <h:link outcome="examepessoafrm" styleClass="btn btn-success">
+                    <i class="fa fa-plus"></i> Inserir ${examePessoaBean.sTitle}
+                </h:link>
+            </div>
+            <h:form>
+                <h:dataTable value="${examePessoaBean.exames}" var="item" rendered="${examePessoaBean.exames.rowAvailable}" styleClass="dataTable table table-bordered table-striped">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Tipo do Exame"/>
+                        </f:facet>
+                        <h:outputText value="${item.getEme_codigo()}"/>
+                    </h:column>
+                      <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Pessoa"/>
+                        </f:facet>
+                        <h:outputText value="${item.getPes_codigo()}"/>
+                    </h:column>
+                      <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Data Exame"/>
+                        </f:facet>
+                        <h:outputText value="${item.getEps_dataexame()}"/>
+                    </h:column>
+                       <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Data Validade"/>
+                        </f:facet>
+                        <h:outputText value="${item.getEps_datavalidade()}"/>
+                    </h:column>
+                        <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Situação"/>
+                        </f:facet>
+                        <h:outputText value="${item.isEps_situacao() == true ? 'ATIVO' : 'INATIVO' }"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Observação"/>
+                        </f:facet>
+                        <h:outputText value="${item.getEps_observacao()} dias"/>
+                    </h:column>
+                   
+                    <h:column headerClass="col-editar-header">
+                        <f:facet name="header">
+                            <h:outputText value="Editar"/>
+                        </f:facet>
+                        <h:commandLink action="${examePessoaBean.edit(item)}">
+                            <i class="fa fa-pencil"></i> Editar
+                        </h:commandLink>
+                    </h:column>
+                    <h:column headerClass="col-excluir-header">
+                        <f:facet name="header">
+                            <h:outputText value="Excluir"/>
+                        </f:facet>
+                        <h:commandLink onclick="return confirm('Deseja realmente excluir o ${examePessoaBean.sTitle}?');" action="${examePessoaBean.delete(item)}">
+                            <i class="fa fa-trash"></i> Excluir
+                        </h:commandLink>
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>

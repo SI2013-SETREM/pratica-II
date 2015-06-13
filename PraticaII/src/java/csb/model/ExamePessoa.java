@@ -5,10 +5,13 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
@@ -24,6 +27,19 @@ public class ExamePessoa implements Serializable {
     public static final String sTitle = "Exame";
     public static final String pTitle = "Exames";
 
+    @Id
+    @SequenceGenerator(name = "exa_codigo", sequenceName = "exa_codigo")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "exa_codigo")
+    private int exa_codigo;
+
+    public int getExa_codigo() {
+        return exa_codigo;
+    }
+
+    public void setExa_codigo(int exa_codigo) {
+        this.exa_codigo = exa_codigo;
+    }
+    
     @Id
     @ManyToOne
     @JoinColumn(name = "eme_codigo", referencedColumnName = "eme_codigo")
