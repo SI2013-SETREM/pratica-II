@@ -7,20 +7,72 @@
 
     <ui:define name="header">
         <script type="text/javascript">
+            /*<![CDATA[*/
             $(function () {
                 $(".pesNecEsp").click(function () {
                     if ($(".pesNecEsp").is(':checked')) {
                         $("#pesNecessidadeEspecial").fadeIn();
                         $(".pesDesNec").attr("required", "required");
-                    }else{
+                    } else {
                         $("#pesNecessidadeEspecial").fadeOut();
                         $(".pesDesNec").removeAttr("required");
-                    } 
+                    }
                 });
             });
+            function formataCpfCnpj() {
+                var valor = document.getElementById('frmPessoa:pesCPF').value;
+                valor = valor.replace(".", "").replace(".", "").replace("-", "").replace("/", "");
+                valor = valor.replace(/\D/g, "")
+                valor = valor.replace(/(\d{3})(\d)/, "$1.$2")
+                valor = valor.replace(/(\d{3})(\d)/, "$1.$2")
+                valor = valor.replace(/(\d{3})(\d{1,2})$/, "$1-$2")
+                document.getElementById('frmPessoa:pesCPF').value = valor;
+            }
+            
+            function validaCpf() {
+                var valor = document.getElementById('frmPessoa:pesCPF').value;
+                valor = valor.replace(".", "");
+                valor = valor.replace(".", "");
+                valor = valor.replace("-", "");
+
+                if (valor != "") {
+                    if (vercpf(valor)) {
+                        /*valor.submit(); Comentado, pois estava dando erro undefined*/
+                    } else {
+                        errors = "1";
+                        if (errors)
+                            alert('CPF Inválido');
+                        document.getElementById('frmPessoa:pesCPF').value = '';
+                    }
+                }
+            }
+
+
+            function vercpf(cpf) {
+                if (cpf.length != 11 || cpf == "00000000000" || cpf == "11111111111" || cpf == "22222222222" || cpf == "33333333333" || cpf == "44444444444" || cpf == "55555555555" || cpf == "66666666666" || cpf == "77777777777" || cpf == "88888888888" || cpf == "99999999999")
+                    return false;
+                add = 0;
+                for (i = 0; i < 9; i++)
+                    add += parseInt(cpf.charAt(i)) * (10 - i);
+                rev = 11 - (add % 11);
+                if (rev == 10 || rev == 11)
+                    rev = 0;
+                if (rev != parseInt(cpf.charAt(9)))
+                    return false;
+                add = 0;
+                for (i = 0; i < 10; i++)
+                    add += parseInt(cpf.charAt(i)) * (11 - i);
+                rev = 11 - (add % 11);
+                if (rev == 10 || rev == 11)
+                    rev = 0;
+                if (rev != parseInt(cpf.charAt(10)))
+                    return false;
+                return true;
+            }
+            /*]]>*/
         </script>
     </ui:define>
-    
+
     <ui:define name="title">
         ${pessoaBean.pTitle}
     </ui:define>
@@ -34,7 +86,7 @@
         <div class="panel panel-body">
             <h3><h:outputText value="Dados do ${pessoaBean.sTitle}"/></h3>
             <f:view>
-                <h:form styleClass="form-horizontal">
+                <h:form styleClass="form-horizontal" id="frmPessoa">
                     <h:inputHidden id="pesCodigo" value="#{pessoaBean.pessoa.pes_codigo}" />
                     <!--                            <div class="form-group">
                                             <h:outputLabel value="Código:" for="pesCodigo" styleClass="control-label col-sm-1" />
@@ -50,37 +102,35 @@
                     </div>
                     <div class="form-group">
                         <h:outputLabel value="CPF:" for="pesCPF" styleClass="control-label col-sm-2" />
-                        <div class="col-md-6 col-sm-12">
-                            <h:inputText id="pesCPF" value="#{pessoaBean.pessoa.pes_cpf}" title="CPF da Pessoa" pt:required="required" styleClass="form-control" pt:autofocus="" />
+                        <div class="col-xs-2 col-sm-3">
+                            <h:inputText id="pesCPF" value="#{pessoaBean.pessoa.pes_cpf}" title="CPF da Pessoa" pt:required="required"
+                                         styleClass="form-control" pt:autofocus="" onkeypress="formataCpfCnpj();" onblur="validaCpf();"/>
+                        </div>
+                        <h:outputLabel value="Identidade:" for="pesIdentidade" styleClass="control-label col-sm-1" />
+                        <div class="col-xs-2">
+                            <h:inputText id="pesIdentidade" value="#{pessoaBean.pessoa.pes_rg}" title="Identidade da Pessoa" pt:required="" styleClass="form-control" pt:autofocus="" />
                         </div>
                     </div>
+                    
                     <div class="form-group">
-                        <h:outputLabel value="Identidade:" for="pesIdentidade" styleClass="control-label col-sm-2" />
-                        <div class="col-md-6 col-sm-12">
-                            <h:inputText id="pesIdentidade" value="#{pessoaBean.pessoa.pes_cpf}" title="Identidade da Pessoa" pt:required="" styleClass="form-control" pt:autofocus="" />
+                        <h:outputLabel value="Telefone:" for="pesTelefone" styleClass="control-label col-sm-2" />
+                        <div class="col-xs-2 col-sm-3">
+                            <h:inputText id="pesTelefone" value="#{pessoaBean.pessoa.pes_telefone}" title="Telefone da Pessoa" pt:required="" styleClass="form-control" pt:autofocus="" />
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <h:outputLabel value="Data Nasc:" for="pesDataNasc" styleClass="control-label col-sm-2" />
-                        <div class="col-md-6 col-sm-12">
+                        <h:outputLabel value="Nascimento:" for="pesDataNasc" styleClass="control-label col-sm-1" />
+                        <div class="col-xs-2 ">
                             <h:inputText id="pesDataNasc" pt:type="date" value="#{pessoaBean.pessoa.pes_datanasc}" title="Data de nascimento da pessoa" pt:required="required" styleClass="form-control" pt:autofocus="">
                                 <f:convertDateTime pattern="yyyy-MM-dd"/>
                             </h:inputText>
                         </div>
                     </div>
                     <div class="form-group">
-                        <h:outputLabel value="Telefone:" for="pesTelefone" styleClass="control-label col-sm-2" />
-                        <div class="col-md-6 col-sm-12">
-                            <h:inputText id="pesTelefone" value="#{pessoaBean.pessoa.pes_telefone}" title="Telefone da Pessoa" pt:required="" styleClass="form-control" pt:autofocus="" />
-                        </div>
-                    </div>
-                    <div class="form-group">
                         <h:outputLabel value="Email:" for="pesEmail" styleClass="control-label col-sm-2" />
                         <div class="col-md-6 col-sm-12">
-                            <h:inputText id="pesEmail" value="#{pessoaBean.pessoa.pes_email}" title="Email da Pessoa" pt:required="" styleClass="form-control" pt:autofocus="" />
+                            <h:inputText pt:type="email" id="pesEmail" value="#{pessoaBean.pessoa.pes_email}" title="Email da Pessoa" pt:required="" styleClass="form-control" pt:autofocus="" />
                         </div>
                     </div>
-                    
+
                     <div class="form-group">
                         <h:outputLabel value="Cidade:" for="pesCidade" styleClass="control-label col-sm-2" />
                         <div style="padding-top: 5px" class="col-md-6 col-sm-12">
@@ -99,15 +149,13 @@
                     </div>
                     <div class="form-group">
                         <h:outputLabel value="Endereço" for="pesEndereco" styleClass="control-label col-sm-2" />
-                        <div style="padding-top: 5px" class="col-md-6 col-sm-12">
+                        <div style="padding-top: 5px" class="col-xs-2 col-sm-3">
                             <h:selectOneMenu value="#{pessoaBean.pessoa.endereco}" converter="enderecoConverter" id="pesEndereco" class="form-control">
                                 <f:selectItems value="#{enderecoBean.enderecos}" var="endereco"/>
                             </h:selectOneMenu>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <h:outputLabel value="N. Endereço:" for="pesNumeroENde" styleClass="control-label col-sm-2" />
-                        <div class="col-md-6 col-sm-12">
+                        <h:outputLabel value="Núm End:" for="pesNumeroENde" styleClass="control-label col-sm-1" />
+                        <div class="col-xs-2">
                             <h:inputText id="pesNumeroENde" value="#{pessoaBean.pessoa.pes_numeroend}" title="Número do enderço da pessoa" styleClass="form-control" pt:autofocus="" />
                         </div>
                     </div>
@@ -139,7 +187,7 @@
                     </div>
                     <div class="form-group">
                         <h:outputLabel value="Tipo Pessoa:" for="pesTipo" styleClass="control-label col-sm-2" />
-                        <div style="padding-top: 5px" class="col-md-6 col-sm-12">
+                        <div style="padding-top: 5px" class="col-xs-2 col-sm-3">
                             <h:selectOneMenu value="#{pessoaBean.pessoa.pes_tipo}" id="pesTipo" class="form-control">
                                 <f:selectItem itemValue="1" itemLabel="Funcionário"/>
                                 <f:selectItem itemValue="2" itemLabel="Ex-Funcionário"/>
@@ -147,10 +195,8 @@
                                 <f:selectItem itemValue="4" itemLabel="Instrutores"/>
                             </h:selectOneMenu>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <h:outputLabel value="Estado Civil:" for="pesEC" styleClass="control-label col-sm-2" />
-                        <div style="padding-top: 5px" class="col-md-6 col-sm-12">
+                        <h:outputLabel value="Est Civíl:" for="pesEC" styleClass="control-label col-sm-1" />
+                        <div style="padding-top: 5px" class="col-xs-2">
                             <h:selectOneMenu value="#{pessoaBean.pessoa.pes_estadocivil}" id="pesEC" class="form-control">
                                 <f:selectItem itemValue="1" itemLabel="Solteiro(a)"/>
                                 <f:selectItem itemValue="2" itemLabel="Casado(a)"/>
@@ -185,7 +231,7 @@
                             </h:inputText>
                         </div>
                     </div>
-                    
+
 
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
