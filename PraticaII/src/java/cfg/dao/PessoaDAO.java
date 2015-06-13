@@ -55,4 +55,10 @@ public class PessoaDAO {
       
         return q.list();
     }
+      
+      public List<Pessoa> findPessoasTreinamento(){
+          //Query q = session.createQuery("SELECT * FROM PESSOA P JOIN TRD_ALUNOS_TURMA AT ON P.PES_CODIGO = AT.PES_CODIGO JOIN TRD_TURMA TUR ON TUR.TUR_CODIGO = AT.TUR_CODIGO WHERE TUR.TUR_STATUS_TURMA = 3");
+          Query q = session.createQuery("from Pessoa");
+          return q.list();     
+      }
 }

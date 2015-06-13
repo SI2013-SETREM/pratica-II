@@ -15,7 +15,7 @@ public class PessoaBeanAC {
     private PessoaDAO dao = new PessoaDAO();
      
     public List<Pessoa> getPessoas() {
-        listapessoas = dao.findAll();
+        listapessoas = dao.findPessoasTreinamento();
         return listapessoas;
     } 
 

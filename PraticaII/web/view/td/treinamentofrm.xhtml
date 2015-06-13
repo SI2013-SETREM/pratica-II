@@ -20,7 +20,7 @@
             <h3><h:outputText value="Dados do ${treinamentoBean.sTitle}"/></h3>
             <f:view>
                 <h:form styleClass="form-horizontal">
-                    <h:messages />
+                    <h:messages showDetail="true" />
                     <h:inputHidden id="treCodigo" value="#{treinamentoBean.treinamento.tre_codigo}" />
 <!--                            <div class="form-group">
                         <h:outputLabel value="Código:" for="treCodigo" styleClass="control-label col-sm-1" />
@@ -60,7 +60,11 @@
                     <div class="form-group">
                         <h:outputLabel value="Custo Total: " for="tre_custotoal" styleClass="control-label col-sm-2" />
                         <div class="col-md-6 col-sm-12">
-                            <h:inputText id="treCustoTotal" value="#{treinamentoBean.treinamento.tre_custototal}" title="TreCustoTotal" styleClass="form-control" pt:autofocus="" />
+                            <div class="input-group">
+                                <div class="input-group-addon">R$</div>
+                                <h:inputText pt:type="number" pt:min="1" pt:max="100000" pt:step="1" id="treCustoTotal" value="#{treinamentoBean.treinamento.tre_custototal}" title="TreCustoTotal" styleClass="form-control" pt:autofocus="" />
+                                <div class="input-group-addon">,00</div>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">

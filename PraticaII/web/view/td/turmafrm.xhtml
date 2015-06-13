@@ -60,7 +60,7 @@
                     <div class="form-group">
                         <h:outputLabel value="Status da Turma:" for="tur_status_turma" styleClass="control-label col-sm-2" />
                         <div class="col-md-6 col-sm-12">
-                            <h:selectOneMenu pt:required="required" id="epiTipo" value="#{turmaBean.turma.tur_status_turma}" title="Prioridade" styleClass="form-control" pt:autofocus="">
+                            <h:selectOneMenu pt:required="required" id="turStatusTurma" value="#{turmaBean.turma.tur_status_turma}" title="TurStatusTurma" styleClass="form-control" pt:autofocus="">
                                 <f:selectItem  itemValue="1" itemLabel="Em Formação"/>
                                 <f:selectItem  itemValue="2" itemLabel="Em Andamento"/>
                                 <f:selectItem  itemValue="3" itemLabel="Finalizado"/>
@@ -71,7 +71,7 @@
                     <div class="form-group">
                         <h:outputLabel value="Carga Horária por Seção:" for="tur_cargahoraria_secao" styleClass="control-label col-sm-2" />
                         <div class="col-md-6 col-sm-12">
-                            <h:inputText pt:type="time" pt:required="required" id="turCargaHorariaSecao" value="#{turmaBean.turma.tur_cargahoraria_secao}" title="TurCargaHorariaSecao" styleClass="form-control" pt:autofocus="" />
+                            <h:inputText pt:type="time" id="turCargaHorariaSecao" value="#{turmaBean.turma.tur_cargahoraria_secao}" title="TurCargaHorariaSecao" styleClass="form-control" pt:autofocus="" />
                         </div>
                     </div>
                     <div class="form-group">

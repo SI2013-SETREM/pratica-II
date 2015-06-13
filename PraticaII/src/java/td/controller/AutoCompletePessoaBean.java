@@ -20,6 +20,10 @@ public class AutoCompletePessoaBean {
     @JoinTable(name = "trd_instrutores_treinamento")
     private List<Pessoa> instrutores;
     
+    @ManyToMany
+    @JoinTable(name = "trd_alunos_turma")
+    private List<Pessoa> alunos;
+    
     @ManagedProperty("#{pessoaMBAC}")
     private PessoaBeanAC servicePessoa;
      
@@ -51,6 +55,14 @@ public class AutoCompletePessoaBean {
 
     public void setInstrutores(List<Pessoa> instrutores) {
         this.instrutores = instrutores;
+    }
+    
+    public List<Pessoa> getAlunos() {
+        return alunos;
+    }
+
+    public void setAlunos(List<Pessoa> alunos) {
+        this.alunos = alunos;
     }
     
     public void setServicePessoa(PessoaBeanAC servicePessoa) {
