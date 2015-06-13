@@ -23,7 +23,12 @@
                                 <span class="menu-text">Selecionar Candidatos</span>
                             </h:link>
                         </li>
-                        <li role="presentation"><a href="#">Messages</a></li>
+                         <li class="#{view.viewId.contains('/rs/recrutamentoCandidatos') ? 'active' : ''}">
+                            <h:link outcome="/faces/view/rs/recrutamentoCandidatos">
+                                <span class="fa fa-users"></span>
+                                <span class="menu-text">Entrevistas</span>
+                            </h:link>
+                        </li>
                     </ul>
                 </div>
             </div>

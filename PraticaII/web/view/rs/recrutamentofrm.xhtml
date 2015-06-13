@@ -26,7 +26,7 @@
                 </div>
                 <div class="form-group">
                     <h:outputLabel value="Tipo:" for="recTipo" styleClass="control-label col-sm-1" />
-                    <div style="padding-top: 5px" class="col-md-2 col-sm-12">
+                    <div style="padding-top: 5px" class="col-md-4 col-sm-12">
                         <h:selectOneMenu value="#{recrutamentoBean.recrutamento.recTipo}" id="recTipo" class="form-control">
                             <f:selectItem itemValue="1" itemLabel="Interno"/>
                             <f:selectItem itemValue="2" itemLabel="Externo"/>
@@ -36,14 +36,19 @@
                 </div>
                 <div class="form-group">
                     <h:outputLabel value="Início:" for="recInicio" styleClass="control-label col-sm-1" />
-                    <div class="col-md-2 col-sm-12">
+                    <div class="col-md-4 col-sm-12">
                         <h:inputText pt:type="date" id="datainicial" value="#{recrutamentoBean.recrutamento.recInicio}" title="Data Início" styleClass="form-control">
                             <f:convertDateTime pattern="yyyy-MM-dd"/>
                         </h:inputText>
                     </div> 
                 </div>
+                <div class="form-group">
+                    <div class="col-md-offset-1 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated" style="text-align: right">
+                        <h:link styleClass="btn btn-default" style="" value="Cancelar" outcome="#{recrutamentoBean.listar()}" />
+                        <h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{recrutamentoBean.salvar('recrutamentolst')}"/>
+                    </div>
+                </div>
             </h:form>
-
         </f:view>
     </ui:define>
 

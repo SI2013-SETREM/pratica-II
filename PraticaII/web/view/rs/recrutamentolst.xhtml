@@ -68,8 +68,19 @@
                                 <f:facet name="header">
                                     <h:outputText value="Concluir"/>
                                 </f:facet>
-                                <h:commandLink onclick="return confirm('Deseja realmente concluir o ${recrutamentoBean.sTitle}?');" action="${recrutamentoBean.delete(item)}">
-                                    <i class="fa fa-trash"></i> Concluir
+                                <h:outputText rendered="${item.getRecStatus()==6}" value="Concluir"/>
+                                <c:if test="${!item.getRecStatus()=6}">
+                                    <h:commandLink  onclick="return confirm('Deseja realmente concluir o ${recrutamentoBean.sTitle}?');" action="${recrutamentoBean.altera_status(6,item)}">
+                                        <i class="fa fa-legal"></i> Concluir
+                                    </h:commandLink>
+                                </c:if>
+                            </h:column>
+                            <h:column headerClass="col-excluir-header">
+                                <f:facet name="header">
+                                    <h:outputText value="Cancelar"/>
+                                </f:facet>
+                                <h:commandLink onclick="return confirm('Deseja realmente excluir o ${recrutamentoBean.sTitle}?');" action="${recrutamentoBean.altera_status(7,item)}">
+                                    <i class="fa fa-trash"></i> Cancelar
                                 </h:commandLink>
                             </h:column>
                             <h:column headerClass="col-editar-header">
@@ -80,20 +91,11 @@
                                     <i class="fa fa-pencil"></i> Editar
                                 </h:commandLink>
                             </h:column>
-                            <h:column headerClass="col-excluir-header">
-                                <f:facet name="header">
-                                    <h:outputText value="Excluir"/>
-                                </f:facet>
-                                <h:commandLink onclick="return confirm('Deseja realmente excluir o ${recrutamentoBean.sTitle}?');" action="${recrutamentoBean.delete(item)}">
-                                    <i class="fa fa-trash"></i> Excluir
-                                </h:commandLink>
-                            </h:column>
-                            
+
                         </h:dataTable>
                     </h:form>
                 </div>
             </ui:define>
-
         </ui:composition>
     </body>
 </html>

@@ -27,6 +27,8 @@ public class RecrutamentoBean {
     private Recrutamento recrutamento;
     private RecrutamentoDAO dao = new RecrutamentoDAO();
     private DataModel recrutamentos;
+    private boolean showNewButton = true;  
+  
 
     public RecrutamentoBean() {
     }
@@ -82,24 +84,40 @@ public class RecrutamentoBean {
         dao.update(recrutamento);
         return "recrutamentolst";
     }
+    
+    public String altera_status(int status, Recrutamento r) {
+        this.setRecrutamento(r);
+        recrutamento.setRecStatus(status);
+        dao.update(recrutamento);
+        return "recrutamentolst";
+    }
 
     public String delete(Recrutamento r) {
         dao.delete(r);
         return "recrutamentolst";
     }
 
-    public String salvar() {
+    public String salvar(String pagina) {
         if (recrutamento.getRecCodigo() > 0) {
             dao.update(recrutamento);
         } else {
             dao.insert(recrutamento);
         }
-
-        return "recrutamentolst";
+        return pagina;
     }
 
     public String listar() {
         return "recrutamentolst";
     }
-
+public boolean getShowNewButton(){  
+   return showNewButton;  
+}  
+  
+public void showForm(){  
+    this.showNewButton = false;  
+}  
+  
+public void saveForm(){  
+     this.showNewButton = true;  
+}  
   }

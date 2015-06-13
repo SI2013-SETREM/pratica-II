@@ -26,6 +26,7 @@ public class RecrutamentoDAO {
 
     public void insert(Recrutamento r) {
         Transaction t = session.beginTransaction();
+        r.setRecStatus(2);
         session.save(r);
         t.commit();
     }
