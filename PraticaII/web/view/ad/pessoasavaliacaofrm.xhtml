@@ -48,29 +48,41 @@
                         </div>
                     </div>
                 </div>
-                <h:form styleClass="form-horizontal">
+                <h:form styleClass="form-horizontal" id="frmQuestionario">
                     <label style="font-size: 20px;">Questionário: </label>
-                    <div class="col-md-12" style="margin-bottom: 15px;">
-                        <!--<c:forEach items="{perguntaPessoaAvaliacaoBean.lsPerguntasPessoa}" var="item" varStatus="loopPergunta">-->
-                        <ui:repeat value="#{perguntaPessoaAvaliacaoBean.lsPerguntasPessoa}" var="item">
-                            <div class="form-group list-group-item" >
-                                <div class="row">
-                                    <h:outputLabel value="${item.getPergunta().getPrgPergunta()}" for="per_${item.getPergunta().getPrgCodigo()}" styleClass="col-md-12"/>
-                                    <div class="col-md-7">
-                                        <h:inputTextarea pt:required="${item.getPergunta().isPrgObrigatoria()}" id="per_${item.getPergunta().getPrgCodigo()}" value="#{item.ppa_resposta}" styleClass="form-control ${item.getPergunta().getPrgTipo() != 1 ? 'FieldRemove' : ''}"/>
-                                        <h:selectOneMenu pt:required="${item.getPergunta().isPrgObrigatoria()}" id="per_${item.getPergunta().getPrgCodigo()}"  value="#{item.ppa_resposta}" styleClass="form-control ${item.getPergunta().getPrgTipo() != 2 ? 'FieldRemove' : ''}">
-                                            <f:selectItems value="#{item.getPergunta().getPerguntaOpcoes()}" var="opcao" itemLabel="#{opcao.getOpcDescricao()}" itemValue="#{opcao.getOpcDescricao()}" pt:autofocus=""/>
-                                        </h:selectOneMenu>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <h:outputLabel value="Nota entre 0 e 10:" styleClass="col-md-8 lbl"/>
-                                        <h:inputText pt:required="true" pt:type="number" pt:max="10" pt:min="0" style="width: 50px" value="#{item.ppa_pontuacao}"/>
+                    <h:panelGroup id="forEachPerguntas">
+                        <div class="col-md-12" style="margin-bottom: 15px;" id="forEachPerguntas">
+                            <c:forEach items="#{perguntaPessoaAvaliacaoBean.lsPerguntasPessoa}" var="item" varStatus="loopPergunta">
+                                <!--<ui:repeat value="{perguntaPessoaAvaliacaoBean.lsPerguntasPessoa}" var="item">-->
+                                <div class="form-group list-group-item" >
+                                    <div class="row">
+                                        <div class="col-md-7">
+                                            <h:inputHidden value="${item.avaliacao.ava_codigo}"/>
+                                            <h:inputHidden value="${item.avaliacao}"/>
+                                            <h:inputHidden value="${item.avaliador.pes_codigo}"/>
+                                            <h:inputHidden value="${item.colaboradorAvaliado.pes_codigo}"/>
+                                            <h:inputHidden value="${item.getPergunta().getPrgCodigo()}"/>
+
+                                            <h:outputLabel value="${item.getPergunta().getPrgPergunta()}" styleClass="col-md-12"/>
+                                            <h:inputTextarea pt:required="${item.getPergunta().isPrgObrigatoria()}" value="#{item.ppa_resposta}" styleClass="form-control ${item.getPergunta().getPrgTipo() != 1 ? 'FieldRemove' : ''}"/>
+                                            <h:selectOneMenu pt:required="${item.getPergunta().isPrgObrigatoria()}"  value="#{item.ppa_resposta}" styleClass="form-control ${item.getPergunta().getPrgTipo() != 2 ? 'FieldRemove' : ''}">
+                                                <f:selectItems value="#{item.getPergunta().getPerguntaOpcoes()}" var="opcao" itemLabel="#{opcao.getOpcNome()}" itemValue="#{opcao.getOpcPontuacao()}" pt:autofocus=""/>
+                                            </h:selectOneMenu>
+                                        </div>
+                                        <div class="col-md-4 ${item.getPergunta().getPrgTipo() != 1 ? 'FieldRemove' : ''}">
+                                            <h:outputLabel value="Nota entre 0 e 10:" styleClass="col-md-8 lbl"/>
+                                            <h:inputText pt:required="true" pt:type="number" pt:max="10" pt:min="0" style="width: 50px" value="#{item.ppa_pontuacao}"/>
+                                        </div>
+
                                     </div>
                                 </div>
+                                <!--</ui:repeat>-->
+                            </c:forEach>
+                            <div class="col-md-2">
+
                             </div>
-                        </ui:repeat>
-                        <!--</c:forEach>-->
-                    </div>
+                        </div>
+                    </h:panelGroup>
                     <div class="form-group">
                         <div class="col-md-offset-1 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
                             <h:link styleClass="btn btn-default" value="Cancelar" outcome="#{perguntaPessoaAvaliacaoBean.listar()}" />

@@ -19,6 +19,8 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
+import rs.dao.QuestionarioDAO;
+import rs.model.Questionario;
 import td.model.Treinamento;
 
 @ManagedBean
@@ -33,6 +35,8 @@ public class AvaliacaoBean {
     private List<Cargo> lsCargoColaborador;
     private List<Pessoa> lsPessoaAvaliador;
     private List<Pessoa> lsPessoaColaborador;
+    private List<Questionario> lsQuestionario;
+    private QuestionarioDAO questDAO = new QuestionarioDAO();
     private CargoDAO cargodao = new CargoDAO();
     private PessoaDAO pessoadao = new PessoaDAO();
     private List<AvaliacaoPessoaCargo> lsAvPesCargo;
@@ -191,8 +195,8 @@ public class AvaliacaoBean {
     public void setBcomp(boolean bcomp) {
         this.bcomp = bcomp;
     }
-//-----------------------MAPEAR
 
+//-----------------------MAPEAR
     public String getTaxa(Avaliacao i) {
         List<PessoasAvaliacao> lsPessoaAvaliacao = pessoaAvaliacaoDAO.GetListPessoasAvaliacao(i.getAva_codigo(), 0, 0, false);
         if (lsPessoaAvaliacao != null && !lsPessoaAvaliacao.isEmpty()) {
@@ -336,5 +340,10 @@ public class AvaliacaoBean {
             }
         }
         return filtraPessoas(lsPessoas);
+    }
+
+    public List<Questionario> getLsQuestionario() {
+        lsQuestionario = questDAO.findAll();
+        return lsQuestionario;
     }
 }

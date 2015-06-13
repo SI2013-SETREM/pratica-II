@@ -110,7 +110,7 @@ public class PessoasAvaliacaoBean {
         return "pessoasavaliacaolst";
     }
 
-    public String Details(PessoasAvaliacao item) {
+    public String getDetails(PessoasAvaliacao item) {
         // pessoas_avaliacao = dao.findById(item.get)
         this.pessoas_avaliacoes = new ListDataModel(dao.GetListPessoasAvaliacao(item.getAvaliacao().getAva_codigo(), 0, 0, false));
         return "pessoasavaliacaodls";

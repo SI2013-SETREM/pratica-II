@@ -1,5 +1,6 @@
 package ad.controller;
 
+import ad.dao.AvaliacaoDAO;
 import ad.dao.PerguntaPessoaAvaliacaoDAO;
 import ad.dao.PessoasAvaliacaoDAO;
 import ad.model.Avaliacao;
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import rs.dao.QuestionarioDAO;
@@ -17,6 +19,7 @@ import rs.model.Pergunta;
 import rs.model.Questionario;
 
 @ManagedBean
+@SessionScoped
 public class PerguntaPessoaAvaliacaoBean {
 
     private final String sTitle = "Avaliado";
@@ -26,6 +29,7 @@ public class PerguntaPessoaAvaliacaoBean {
     private PessoasAvaliacaoDAO PesAvaldao = new PessoasAvaliacaoDAO();
     private Pessoa avaliado;
     private Avaliacao avaliacao;
+    private AvaliacaoDAO avaDao = new AvaliacaoDAO();
     private List<PerguntaPessoaAvaliacao> lsPerguntasP;
     private DataModel lsPerguntasPessoa;
     private DataModel LsPerguntasAvaliacao;
@@ -72,25 +76,30 @@ public class PerguntaPessoaAvaliacaoBean {
         return "pessoasavaliacaofrm";
     }
 
-    public DataModel getLsPerguntasPessoa() {
-        List<PerguntaPessoaAvaliacao> lsPergPes = new ArrayList<>();
-        List<PessoasAvaliacao> lsPessoas = PesAvaldao.GetListPessoasAvaliacao(avaliacao.getAva_codigo(), 0, userId, true);
-        if (lsPessoas != null && !lsPessoas.isEmpty()) {
-            avaliado = lsPessoas.get(0).getColaboradorAvaliado();
-        }
-        if (avaliacao.getQuestionario() != null && avaliacao.getQuestionario().getPerguntas() != null && !avaliacao.getQuestionario().getPerguntas().isEmpty()) {
-            for (Pergunta pergunt : avaliacao.getQuestionario().getPerguntas()) {
-                PerguntaPessoaAvaliacao PergPes = new PerguntaPessoaAvaliacao();
-                PergPes.setAvaliacao(avaliacao);
-                PergPes.setAvaliador(avaliado);
-                PergPes.setColaboradorAvaliado(avaliado);
-                PergPes.setPergunta(pergunt);
-                lsPergPes.add(PergPes);
+    public List<PerguntaPessoaAvaliacao> getLsPerguntasPessoa() {
+        LsPerguntas();
+        return lsPerguntasP;
+    }
+
+    private void LsPerguntas() {
+        if (lsPerguntasP == null) {
+            List<PerguntaPessoaAvaliacao> lsPergPes = new ArrayList<>();
+            List<PessoasAvaliacao> lsPessoas = PesAvaldao.GetListPessoasAvaliacao(avaliacao.getAva_codigo(), 0, userId, true);
+            if (lsPessoas != null && !lsPessoas.isEmpty()) {
+                avaliado = lsPessoas.get(0).getColaboradorAvaliado();
             }
-            //lsPerguntasP = lsPergPes;
-            LsPerguntasAvaliacao = new ListDataModel(lsPergPes);
+            if (avaliacao.getQuestionario() != null && avaliacao.getQuestionario().getPerguntas() != null && !avaliacao.getQuestionario().getPerguntas().isEmpty()) {
+                for (Pergunta pergunt : avaliacao.getQuestionario().getPerguntas()) {
+                    PerguntaPessoaAvaliacao PergPes = new PerguntaPessoaAvaliacao();
+                    PergPes.setAvaliacao(avaliacao);
+                    PergPes.setAvaliador(avaliado);
+                    PergPes.setColaboradorAvaliado(avaliado);
+                    PergPes.setPergunta(pergunt);
+                    lsPergPes.add(PergPes);
+                }
+                lsPerguntasP = lsPergPes;
+            }
         }
-        return LsPerguntasAvaliacao;
     }
 
     public Pessoa getAvaliado() {

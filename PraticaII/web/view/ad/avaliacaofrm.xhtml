@@ -110,13 +110,23 @@
                             </div>
                         </div>
                         <div class="col-md-6 col-xs-12">
-                            <div class="form-group labelBool">
-                                <div class="col-md-4">
-                                    <h:selectBooleanCheckbox id="bcomp" value="#{avaliacaoBean.bcomp}" title="Baseado em Competências" pt:autofocus="" />
+                            <div class="form-group">
+                                <h:outputLabel value="Questionário: " for="questionario" styleClass="control-label col-md-4" />
+                                <div class="col-md-8 col-sm-12">
+                                    <h:selectOneMenu id="questionario" converter="QuestionarioConverter" value="#{avaliacaoBean.avaliacao.questionario}" styleClass="form-control" pt:autofocus="" >
+                                        <f:selectItems value="#{avaliacaoBean.lsQuestionario}" var="qst" itemLabel="#{qst.getQstTitulo()}" itemValue="#{qst}"/>
+                                    </h:selectOneMenu>
                                 </div>
-                                <h:outputLabel value="Baseado em Competências" for="bcomp" styleClass="control-label col-md-8" />
                             </div>
                         </div>
+                        <!--                        <div class="col-md-6 col-xs-12">
+                                                    <div class="form-group labelBool">
+                                                        <div class="col-md-4">
+                                                            <h:selectBooleanCheckbox id="bcomp" value="#{avaliacaoBean.bcomp}" title="Baseado em Competências" pt:autofocus="" />
+                                                        </div>
+                                                        <h:outputLabel value="Baseado em Competências" for="bcomp" styleClass="control-label col-md-8" />
+                                                    </div>
+                                                </div>-->
                     </div>
                     <div class="row">
                         <div class="col-md-6 col-xs-12">
