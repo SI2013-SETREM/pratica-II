@@ -33,7 +33,7 @@ public class TurmaDAO {
         t.commit();
     }
 
-    public Turma findById(String id) {
+    public Turma findById(int id) {
         return (Turma) session.load(Turma.class, id);
     }
 

@@ -60,7 +60,7 @@ public class AlunosTurmaBean {
     
  
     public List<Turma> getLstturma() {
-        //lstturma = turmadao.findAll();
+        lstturma = turmadao.findAll();
         return lstturma;
     }
 
