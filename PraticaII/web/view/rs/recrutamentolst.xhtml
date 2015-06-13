@@ -64,22 +64,21 @@
                                 <h:outputText rendered="${item.getRecStatus()==6}" value="Concluído"/>
                                 <h:outputText rendered="${item.getRecStatus()==7}" value="Cancelado"/>
                             </h:column>
-                            <h:column headerClass="col-concluir-header">
+                            <h:column>
                                 <f:facet name="header">
                                     <h:outputText value="Concluir"/>
                                 </f:facet>
-                                <h:outputText rendered="${item.getRecStatus()==6}" value="Concluir"/>
-                                <c:if test="${!item.getRecStatus()=6}">
-                                    <h:commandLink  onclick="return confirm('Deseja realmente concluir o ${recrutamentoBean.sTitle}?');" action="${recrutamentoBean.altera_status(6,item)}">
-                                        <i class="fa fa-legal"></i> Concluir
-                                    </h:commandLink>
-                                </c:if>
+                                <h:outputText rendered="${item.getRecStatus() == 6 or item.getRecStatus() == 7}" escape="false" value="&lt;i class='fa fa-legal'&gt;&lt;/i&gt; Concluir indisponível" />
+                                <h:commandLink rendered="${item.getRecStatus() != 6 and item.getRecStatus() != 7}" onclick="return confirm('Deseja realmente concluir o recrutamento ${recrutamentoBean.sTitle}?');" action="${recrutamentoBean.altera_status(6,item)}">
+                                    <i class="fa fa-legal"></i> Concluir
+                                </h:commandLink>
                             </h:column>
-                            <h:column headerClass="col-excluir-header">
+                            <h:column>
                                 <f:facet name="header">
                                     <h:outputText value="Cancelar"/>
                                 </f:facet>
-                                <h:commandLink onclick="return confirm('Deseja realmente excluir o ${recrutamentoBean.sTitle}?');" action="${recrutamentoBean.altera_status(7,item)}">
+                                <h:outputText rendered="${item.getRecStatus() == 6 or item.getRecStatus() == 7}" escape="false" value="&lt;i class='fa fa-trash'&gt;&lt;/i&gt; Cancelar indisponível" />
+                                <h:commandLink rendered="${item.getRecStatus() != 6 and item.getRecStatus() != 7}" onclick="return confirm('Deseja realmente cancelar o recrutamento ${recrutamentoBean.sTitle}?');" action="${recrutamentoBean.altera_status(7,item)}">
                                     <i class="fa fa-trash"></i> Cancelar
                                 </h:commandLink>
                             </h:column>
