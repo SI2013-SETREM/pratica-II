@@ -46,6 +46,16 @@ public class PerguntaPessoaAvaliacaoBean {
         this.LsPerguntasAvaliacao = LsPerguntasAvaliacao;
     }
 
+//    public DataModel getLsPerguntasPessoa() {
+//        LsPerguntas();
+//        return lsPerguntasPessoa;
+//    }
+
+    public List<PerguntaPessoaAvaliacao> getLsPerguntasPessoa() {
+        LsPerguntas();
+        return lsPerguntasP;
+    }
+
     public String GetPerguntasAvaliacao(Avaliacao avalicao) {
         QuestionarioDAO questionarioDAO = new QuestionarioDAO();
         Questionario questionario = questionarioDAO.findById(avalicao.getQuestionario().getQstCodigo());
@@ -59,7 +69,8 @@ public class PerguntaPessoaAvaliacaoBean {
         return "pessoasavaliacaodls";
     }
 
-    public String salvar() {
+    public String salvar(PerguntaPessoaAvaliacao ava) {
+        perguntaPessoaAvaliacao = ava;
         if (lsPerguntasP != null && !lsPerguntasP.isEmpty()) {
             int media = 0;
             int length = 0;
@@ -74,11 +85,6 @@ public class PerguntaPessoaAvaliacaoBean {
             PesAvaldao.update(pessoA);
         }
         return "pessoasavaliacaofrm";
-    }
-
-    public List<PerguntaPessoaAvaliacao> getLsPerguntasPessoa() {
-        LsPerguntas();
-        return lsPerguntasP;
     }
 
     private void LsPerguntas() {
@@ -98,6 +104,7 @@ public class PerguntaPessoaAvaliacaoBean {
                     lsPergPes.add(PergPes);
                 }
                 lsPerguntasP = lsPergPes;
+//                lsPerguntasPessoa = new ListDataModel(lsPerguntasP);
             }
         }
     }

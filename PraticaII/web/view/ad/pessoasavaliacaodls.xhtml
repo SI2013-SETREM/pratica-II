@@ -6,19 +6,26 @@
                 xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
                 xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
-    <ui:define name="title">
 
+
+    <ui:define name="title">
     </ui:define>
 
     <ui:define name="breadcrumb">
-
     </ui:define>
+
     <ui:define name="header">
+        <f:metadata>
+            <f:viewParam name="id" value="#{pessoasAvaliacaoBean.idAvaliacao}"/>
+        </f:metadata>
+        <f:event listener="#{pessoasAvaliacaoBean.getDetails()}" type="preRenderView"/>
         <script type="text/javascript" src="http://code.highcharts.com/highcharts.js"></script>
         <script type="text/javascript" src="http://code.highcharts.com/modules/exporting.js"></script>
+
     </ui:define>
 
     <ui:define name="main-content">
+
         <div class="row">
             <div class="col-md-12">
                 <label style="font-size: 20px;">Dados da Pessoa:</label>

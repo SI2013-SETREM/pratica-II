@@ -21,6 +21,7 @@ public class PessoasAvaliacaoBean {
     private DataModel avaliacoes;
     private int user = 3;
     private List<PessoasAvaliacao> lsPessoasAvaliacao;
+    private int idAvaliacao;
 
     public PessoasAvaliacaoBean() {
     }
@@ -52,7 +53,6 @@ public class PessoasAvaliacaoBean {
     }
 
     public DataModel getPessoaAvaliacoes() {
-        //this.pessoas_avaliacoes = new ListDataModel(dao.findAll());
         return pessoas_avaliacoes;
     }
 
@@ -105,15 +105,14 @@ public class PessoasAvaliacaoBean {
         return lsPessoasAvaliacao;
     }
 
-    public String getListPessoaAvaliacoes(int ava_id) {
-        this.pessoas_avaliacoes = new ListDataModel(dao.GetListPessoasAvaliacao(ava_id, 0, 0, false));
-        return "pessoasavaliacaolst";
+    public void getListPessoaAvaliacoes() {
+        this.pessoas_avaliacoes = new ListDataModel(dao.GetListPessoasAvaliacao(idAvaliacao, 0, 0, false));
+       // return "pessoasavaliacaolst";
     }
 
-    public String getDetails(PessoasAvaliacao item) {
-        // pessoas_avaliacao = dao.findById(item.get)
-        this.pessoas_avaliacoes = new ListDataModel(dao.GetListPessoasAvaliacao(item.getAvaliacao().getAva_codigo(), 0, 0, false));
-        return "pessoasavaliacaodls";
+    public void getDetails() {
+        this.pessoas_avaliacoes = new ListDataModel(dao.GetListPessoasAvaliacao(idAvaliacao, 0, 0, false));
+        //return "pessoasavaliacaodls";
     }
 
     public String getsTitle() {
@@ -133,6 +132,14 @@ public class PessoasAvaliacaoBean {
         }
         avaliacoes = new ListDataModel(lsAvaliacao);
         return "avaliacoespendenteslst";
+    }
+
+    public int getIdAvaliacao() {
+        return idAvaliacao;
+    }
+
+    public void setIdAvaliacao(int idAvaliacao) {
+        this.idAvaliacao = idAvaliacao;
     }
 
 }

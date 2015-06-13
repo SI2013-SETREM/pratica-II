@@ -52,7 +52,8 @@
                     <label style="font-size: 20px;">Questionário: </label>
                     <h:panelGroup id="forEachPerguntas">
                         <div class="col-md-12" style="margin-bottom: 15px;" id="forEachPerguntas">
-                            <c:forEach items="#{perguntaPessoaAvaliacaoBean.lsPerguntasPessoa}" var="item" varStatus="loopPergunta">
+                            <!--<h:dataTable value="{perguntaPessoaAvaliacaoBean.lsPerguntasPessoa}"></h:dataTable>-->
+                            <ui:repeat value="#{perguntaPessoaAvaliacaoBean.lsPerguntasPessoa}" var="item" varStatus="index">
                                 <!--<ui:repeat value="{perguntaPessoaAvaliacaoBean.lsPerguntasPessoa}" var="item">-->
                                 <div class="form-group list-group-item" >
                                     <div class="row">
@@ -64,7 +65,7 @@
                                             <h:inputHidden value="${item.getPergunta().getPrgCodigo()}"/>
 
                                             <h:outputLabel value="${item.getPergunta().getPrgPergunta()}" styleClass="col-md-12"/>
-                                            <h:inputTextarea pt:required="${item.getPergunta().isPrgObrigatoria()}" value="#{item.ppa_resposta}" styleClass="form-control ${item.getPergunta().getPrgTipo() != 1 ? 'FieldRemove' : ''}"/>
+                                            <h:inputTextarea rendered="true" pt:required="${item.getPergunta().isPrgObrigatoria()}" value="#{item.ppa_resposta}" styleClass="form-control ${item.getPergunta().getPrgTipo() != 1 ? 'FieldRemove' : ''}"/>
                                             <h:selectOneMenu pt:required="${item.getPergunta().isPrgObrigatoria()}"  value="#{item.ppa_resposta}" styleClass="form-control ${item.getPergunta().getPrgTipo() != 2 ? 'FieldRemove' : ''}">
                                                 <f:selectItems value="#{item.getPergunta().getPerguntaOpcoes()}" var="opcao" itemLabel="#{opcao.getOpcNome()}" itemValue="#{opcao.getOpcPontuacao()}" pt:autofocus=""/>
                                             </h:selectOneMenu>
@@ -76,8 +77,7 @@
 
                                     </div>
                                 </div>
-                                <!--</ui:repeat>-->
-                            </c:forEach>
+                            </ui:repeat>
                             <div class="col-md-2">
 
                             </div>
@@ -85,8 +85,8 @@
                     </h:panelGroup>
                     <div class="form-group">
                         <div class="col-md-offset-1 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
-                            <h:link styleClass="btn btn-default" value="Cancelar" outcome="#{perguntaPessoaAvaliacaoBean.listar()}" />
-                            <h:commandButton styleClass="btn btn-primary" value="Salvar e Avançar" action="#{perguntaPessoaAvaliacaoBean.salvar()}"></h:commandButton>
+                            <h:link styleClass="btn btn-default" value="Cancelar" outcome="${perguntaPessoaAvaliacaoBean.listar()}" />
+                            <h:commandButton styleClass="btn btn-primary" value="Salvar e Avançar" action="${perguntaPessoaAvaliacaoBean.salvar()}"></h:commandButton>
                         </div>
                     </div>
                 </h:form>
