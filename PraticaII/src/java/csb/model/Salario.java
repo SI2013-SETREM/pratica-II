@@ -3,6 +3,7 @@ package csb.model;
 import cfg.model.Pessoa;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -50,6 +51,7 @@ public class Salario implements Serializable {
 
     public Salario() {
     }
+    
 
     public int getSal_codigo() {
         return sal_codigo;
@@ -89,6 +91,33 @@ public class Salario implements Serializable {
 
     public void setSal_datainicio(Date sal_datainicio) {
         this.sal_datainicio = sal_datainicio;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int hash = 7;
+        hash = 19 * hash + Objects.hashCode(this.motivoAlteracaoSalarial);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (obj == null)
+        {
+            return false;
+        }
+        if (getClass() != obj.getClass())
+        {
+            return false;
+        }
+        final Salario other = (Salario) obj;
+        if (!Objects.equals(this.motivoAlteracaoSalarial, other.motivoAlteracaoSalarial))
+        {
+            return false;
+        }
+        return true;
     }
 
     public Date getSal_datafim() {
