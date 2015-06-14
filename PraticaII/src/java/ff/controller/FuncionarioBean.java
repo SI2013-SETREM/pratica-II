@@ -4,8 +4,13 @@ import cfg.dao.PessoaDAO;
 import cfg.model.Pessoa;
 import csb.dao.BeneficiosPessoaDAO;
 import csb.dao.CargosPessoaDAO;
+import csb.dao.GraduacoesPessoaDAO;
+import csb.dao.SalarioDAO;
 import csb.model.BeneficiosPessoa;
 import csb.model.CargosPessoa;
+import csb.model.Graduacao;
+import csb.model.GraduacoesPessoa;
+import csb.model.Salario;
 import ff.dao.FaltaDAO;
 import ff.dao.FeriasDAO;
 
@@ -22,8 +27,6 @@ import javax.faces.model.ListDataModel;
 @ManagedBean
 public class FuncionarioBean {
 
-  
-
     private Pessoa pessoa = new Pessoa();
     private final PessoaDAO pessoaDAO = new PessoaDAO();
     private DataModel<Pessoa> funcionarios;
@@ -37,6 +40,58 @@ public class FuncionarioBean {
     private final CargosPessoaDAO cargosDAO = new CargosPessoaDAO();
     private List<CargosPessoa> cargos;
     private CargosPessoa cargosPessoa = new CargosPessoa();
+
+    private final FaltaDAO faltaDAO = new FaltaDAO();
+    private Falta falta = new Falta();
+    private List<Falta> faltas;
+
+    private final GraduacoesPessoaDAO graduacoesPessoaDAO = new GraduacoesPessoaDAO();
+    private List<GraduacoesPessoa> graduacoes;
+
+    private final SalarioDAO salarioDAO = new SalarioDAO();
+    private List<Salario> salarios;
+
+    public FuncionarioBean() {
+    }
+
+    public String select() {
+        pessoa = funcionarios.getRowData();
+        pessoa = pessoaDAO.findById(pessoa.getPes_codigo());
+        if (pessoa != null) {
+            salarios = salarioDAO.findBySalPessoaId(pessoa.getPes_codigo());
+            beneficios = beneficiosPessoaDAO.findByPessoaId(pessoa.getPes_codigo());
+            ferias = feriasDAO.findById(pessoa.getPes_codigo());
+            cargos = cargosDAO.GetListCargoPessoa(pessoa.getPes_codigo(), 0);
+            faltas = faltaDAO.findFaltas(pessoa.getPes_codigo());
+            graduacoes = graduacoesPessoaDAO.findByGraduacoesId(pessoa.getPes_codigo());
+            
+        } else {
+            beneficios = new ArrayList<>();
+            faltas = new ArrayList<>();
+            ferias = new ArrayList<>();
+            cargos = new ArrayList<>();
+            graduacoes = new ArrayList<>();
+            salarios = new ArrayList<>();
+        }
+        return "fichafunfrm";
+    }
+
+    public String select2() {
+
+        return "folhapagfrm";
+    }
+
+    public String cancelar() {
+        return "fichafulst";
+    }
+
+    public List<GraduacoesPessoa> getGraduacoes() {
+        return graduacoes;
+    }
+
+    public void setGraduacoes(List<GraduacoesPessoa> graduacoes) {
+        this.graduacoes = graduacoes;
+    }
 
     public List<CargosPessoa> getCargos() {
         return cargos;
@@ -54,9 +109,6 @@ public class FuncionarioBean {
         this.cargosPessoa = cargosPessoa;
     }
 
-    private final FaltaDAO faltaDAO = new FaltaDAO();
-    private List<Falta> faltas;
-
     public List<Ferias> getFerias() {
         return ferias;
     }
@@ -65,33 +117,6 @@ public class FuncionarioBean {
         return beneficios;
     }
 
-    public FuncionarioBean() {
-    }
-
-    public String select() {
-        pessoa = funcionarios.getRowData();
-        pessoa = pessoaDAO.findById(pessoa.getPes_codigo());
-        if (pessoa != null) {
-            beneficios = beneficiosPessoaDAO.findByPessoaId(pessoa.getPes_codigo());
-            ///ferias = feriasDAO.findById(fichaFuncional.getFfu_codigo());
-            cargos = cargosDAO.GetListCargoPessoa(pessoa.getPes_codigo(),0);
-//            faltas = faltaDAO.findFaltas(fichaFuncional.getFfu_codigo());
-        } else {
-            beneficios = new ArrayList<>();
-            
-            cargos = new ArrayList<>();
-            
-            
-        }
-        return "fichafunfrm";
-    }
-    public String select2() {
-
-        return "folhapagfrm";
-    }
-    
-    
-    
     public Pessoa getPessoa() {
         return pessoa;
     }
@@ -107,6 +132,22 @@ public class FuncionarioBean {
 
     public void setFuncionarios(DataModel<Pessoa> funcionarios) {
         this.funcionarios = funcionarios;
+    }
+
+    public List<Falta> getFaltas() {
+        return faltas;
+    }
+
+    public void setFaltas(List<Falta> faltas) {
+        this.faltas = faltas;
+    }
+
+    public List<Salario> getSalarios() {
+        return salarios;
+    }
+
+    public void setSalarios(List<Salario> salarios) {
+        this.salarios = salarios;
     }
 
 }
