@@ -27,8 +27,6 @@ public class RecrutamentoBean {
     private Recrutamento recrutamento;
     private RecrutamentoDAO dao = new RecrutamentoDAO();
     private DataModel recrutamentos;
-    private boolean showNewButton = true;  
-  
 
     public RecrutamentoBean() {
     }
@@ -42,7 +40,7 @@ public class RecrutamentoBean {
     }
 
     public Recrutamento getRecrutamento() {
-        if (recrutamento==null){
+        if (recrutamento == null) {
             recrutamento = new Recrutamento();
             recrutamento.setRecInicio(new Date());
         }
@@ -75,16 +73,16 @@ public class RecrutamentoBean {
         return "recrutamentolst";
     }
 
-    public String edit(Recrutamento r) {
+    public String edit(Recrutamento r, String pagina) {
         recrutamento = (Recrutamento) recrutamentos.getRowData();
-        return "recrutamentolst";
+        return pagina;
     }
 
     public String update() {
         dao.update(recrutamento);
         return "recrutamentolst";
     }
-    
+
     public String altera_status(int status, Recrutamento r) {
         this.setRecrutamento(r);
         recrutamento.setRecStatus(status);
@@ -109,15 +107,4 @@ public class RecrutamentoBean {
     public String listar() {
         return "recrutamentolst";
     }
-public boolean getShowNewButton(){  
-   return showNewButton;  
-}  
-  
-public void showForm(){  
-    this.showNewButton = false;  
-}  
-  
-public void saveForm(){  
-     this.showNewButton = true;  
-}  
-  }
+}

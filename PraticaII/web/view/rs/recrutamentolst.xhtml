@@ -86,11 +86,11 @@
                                 <f:facet name="header">
                                     <h:outputText value="Editar"/>
                                 </f:facet>
-                                <h:commandLink action="${recrutamentoBean.edit(item)}">
+                                <h:outputText rendered="${item.getRecStatus() == 6 or item.getRecStatus() == 7}" escape="false" value="&lt;i class='fa fa-pencil'&gt;&lt;/i&gt; Editar indisponível" />
+                                <h:commandLink rendered="${item.getRecStatus() != 6 and item.getRecStatus() != 7 and item.getRecStatus()==2}" action="${recrutamentoBean.edit(item,'recrutamentoCandidatos')}">
                                     <i class="fa fa-pencil"></i> Editar
                                 </h:commandLink>
                             </h:column>
-
                         </h:dataTable>
                     </h:form>
                 </div>

@@ -10,37 +10,32 @@
 
     <ui:define name="breadcrumb">
         <li>Recrutamento</li>
-        <li><h:link value="${recrutamentoBean.pTitle}" outcome="/faces/view/rs/recrutamentolst" /></li>
+        <li><h:link value="${RecrutamentoPessoaBean.pTitle}" outcome="/faces/view/rs/recrutamentolst" /></li>
     </ui:define>
 
     <ui:define name="content">
-        <h3><h:outputText value="Dados do ${recrutamentoBean.sTitle}"/></h3>
+        <h3><h:outputText value="Dados do ${RecrutamentoPessoaBean.sTitle}"/></h3>
         <f:view>
             <h:form styleClass="form-horizontal">
-                <h:inputHidden id="RecCodigo" value="#{recrutamentoBean.recrutamento.recCodigo}" />
                 <div class="form-group">
-                    <h:outputLabel value="Título:" for="recTitulo" styleClass="control-label col-sm-1" />
-                    <div class="col-md-6 col-sm-12">
-                        <h:inputText pt:autofocus="" pt:required="required" id="recTitulo" value="#{recrutamentoBean.recrutamento.recTitulo}" title="Título do Recrutamento" styleClass="form-control" />
-                    </div> 
+                    <h:dataTable value="${recrutamentoPessoaBean.pessoas}" var="item" styleClass="dataTable table table-bordered table-striped">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Nome"/>
+                            </f:facet>
+                            <h:outputText value="${item.getPes_nome()}"/>
+                        </h:column>
+                    </h:dataTable>
                 </div>
-                <div class="form-group">
-                    <h:outputLabel value="Tipo:" for="recTipo" styleClass="control-label col-sm-1" />
-                    <div style="padding-top: 5px" class="col-md-2 col-sm-12">
-                        <h:selectOneMenu value="#{recrutamentoBean.recrutamento.recTipo}" id="recTipo" class="form-control">
-                            <f:selectItem itemValue="1" itemLabel="Interno"/>
-                            <f:selectItem itemValue="2" itemLabel="Externo"/>
-                            <f:selectItem itemValue="3" itemLabel="Misto"/>
-                        </h:selectOneMenu>
+                <div class="form-group row">
+                    <div class="col-lg-6 btn-group-separated">
+                        <h:link styleClass="btn btn-default" style="" value="Cancelar" outcome="#{recrutamentoBean.listar()}" />
+                        <h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{recrutamentoBean.salvar('recrutamentolst')}"/>
                     </div>
-                </div>
-                <div class="form-group">
-                    <h:outputLabel value="Início:" for="recInicio" styleClass="control-label col-sm-1" />
-                    <div class="col-md-2 col-sm-12">
-                        <h:inputText pt:type="date" id="datainicial" value="#{recrutamentoBean.recrutamento.recInicio}" title="Data Início" styleClass="form-control">
-                            <f:convertDateTime pattern="yyyy-MM-dd"/>
-                        </h:inputText>
-                    </div> 
+                    <div class="col-lg-6" style="text-align: right">
+                        <h:commandButton styleClass="btn btn-info" value="Voltar" action="#{recrutamentoBean.salvar('recrutamentofrm')}"/>
+                        <h:commandButton styleClass="btn btn-info" value="Avançar" action="#{recrutamentoBean.salvar('recrutamentoCandidatos')}"/>
+                    </div>
                 </div>
             </h:form>
 

@@ -42,10 +42,13 @@
                         </h:inputText>
                     </div> 
                 </div>
-                <div class="form-group">
-                    <div class="col-md-offset-1 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated" style="text-align: right">
+                <div class="form-group row">
+                    <div class="col-lg-6 btn-group-separated">
                         <h:link styleClass="btn btn-default" style="" value="Cancelar" outcome="#{recrutamentoBean.listar()}" />
                         <h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{recrutamentoBean.salvar('recrutamentolst')}"/>
+                    </div>
+                    <div class="col-lg-6" style="text-align: right">
+                        <h:commandButton styleClass="btn btn-info" value="Avançar" action="#{recrutamentoBean.salvar('recrutamentoCandidatos')}"/>
                     </div>
                 </div>
             </h:form>

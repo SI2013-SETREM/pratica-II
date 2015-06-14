@@ -9,46 +9,41 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import rs.model.Recrutamento;
+import rs.model.RecrutamentoPessoa;
 import util.HibernateUtil;
 
 /**
  *
  * @author NADINE
  */
-public class RecrutamentoDAO {
+public class RecrutamentoPessoasDAO {
+      private Session session;
 
-    private Session session;
-
-    public RecrutamentoDAO() {
+    public RecrutamentoPessoasDAO() {
         session = HibernateUtil.getSessionFactory().openSession();
     }
 
-    public void insert(Recrutamento r) {
+    public void insert(RecrutamentoPessoa r) {
         Transaction t = session.beginTransaction();
-        r.setRecStatus(2);
         session.save(r);
         t.commit();
     }
 
-    public void update(Recrutamento r) {
+    public void update(RecrutamentoPessoa r) {
         Transaction t = session.beginTransaction();
         session.merge(r);
         t.commit();
     }
 
-    public void delete(Recrutamento r) {
+    public void delete(RecrutamentoPessoa r) {
         Transaction t = session.beginTransaction();
         session.delete(r);
         t.commit();
     }
 
-    public Recrutamento findById(int rec_codigo, int pes_codigo) {
-        return (Recrutamento) session.load(Recrutamento.class, rec_codigo);
-    }
-
-    public List<Recrutamento> findAll() {
-        Query q = session.createQuery("from Recrutamento");
+    public List<RecrutamentoPessoa> findAll() {
+        Query q = session.createQuery("from RecrutamentoPessoa");
         return q.list();
     }
+   
 }
