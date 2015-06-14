@@ -15,13 +15,13 @@
         <h:outputScript name="./js/jquery-2.1.3.min.js"></h:outputScript>
         <h:outputScript name="./bootstrap/js/bootstrap.min.js"></h:outputScript>
         <h:outputScript name="./data-tables/dataTables.min.js"></h:outputScript>
-        <h:outputScript name="./js/default.js"></h:outputScript>
-        <h:outputScript name="./js/bootbox.js"></h:outputScript>
         <h:outputScript name="./js/bootbox.min.js"></h:outputScript>
+        <h:outputScript name="./js/default.js"></h:outputScript>
         <ui:insert name="header"> </ui:insert>
     </h:head>
     
     <h:body>
+        #{loginBean.setUsuarioByLogin(request.getRemoteUser())}
         <div class="page-container">
             <div class="page-header navbar navbar-static-top">
                 <div class="page-logo">
@@ -50,7 +50,7 @@
                         </li>
                         <li class="dropdown dropdown-user">
                             <a href="javascript:void(0);">
-                                <span>Admin</span>
+                                <span>${loginBean.usuario.pessoa.pes_nome}</span>
                                 <h:graphicImage class="user-photo" name="img/user.jpg"></h:graphicImage>
                             </a>
                         </li>
@@ -153,6 +153,12 @@
                                         <h:link outcome="/faces/view/csb/beneficiolst">
                                             <span class="fa fa-user-md"></span>
                                             <span class="menu-text">Benefícios</span>
+                                        </h:link>
+                                    </li>
+                                    <li class="#{view.viewId.contains('/examepessoa') ? 'active' : ''}">
+                                        <h:link outcome="/faces/view/csb/examepessoalst">
+                                            <span class="fa fa-medkit"></span>
+                                            <span class="menu-text">Exames</span>
                                         </h:link>
                                     </li>
                                 </ul>

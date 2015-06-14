@@ -1,6 +1,8 @@
 
 package rs.controller;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -23,6 +25,27 @@ public class QuestionarioBean {
     private QuestionarioDAO dao = new QuestionarioDAO();
     private DataModel questionarios;
     
+//    private List<Pergunta> arrPerguntas;
+
+    public QuestionarioDAO getDao() {
+        return dao;
+    }
+
+    public void setDao(QuestionarioDAO dao) {
+        this.dao = dao;
+    }
+
+//    public List<Pergunta> getArrPerguntas() {
+//        return arrPerguntas;
+//    }
+//
+//    public void setArrPerguntas(List<Pergunta> arrPerguntas) {
+////        if (arrPerguntas != null) {
+////            Collections.sort(arrPerguntas);
+////        }
+//        this.arrPerguntas = arrPerguntas;
+//    }
+
     public QuestionarioBean() {
     }
 
@@ -53,24 +76,16 @@ public class QuestionarioBean {
     
     public String novo() {
         this.questionario = new Questionario();
+//        this.arrPerguntas = null;
         return "questionariofrm?faces-redirect=true";
-    }
-    
-    public String insert() {
-        dao.insert(questionario);
-        return "questionariolst?faces-redirect=true";
     }
     
     public String edit(Questionario obj) {
 //        questionario = (Questionario) questionarios.getRowData();
 //        questionario = dao.findById(questionario.getQstCodigo());
         questionario = obj;
+//        arrPerguntas = questionario.getPerguntas();
         return "questionariofrm?faces-redirect=true";
-    }
-    
-    public String update() {
-        dao.update(questionario);
-        return "questionariolst?faces-redirect=true";
     }
     
     public String delete(Questionario obj) {
@@ -79,6 +94,7 @@ public class QuestionarioBean {
     }
     
     public String salvar() {
+//        questionario.setPerguntas(getArrPerguntas());
         if (questionario.getQstCodigo() > 0)
             dao.update(questionario);
         else 
@@ -92,6 +108,15 @@ public class QuestionarioBean {
     }
     
     public void addPergunta() {
+//        if (arrPerguntas == null) {
+//            arrPerguntas = new ArrayList<>();
+//        }
+//        Pergunta p = new Pergunta();
+//        p.setPrgOrdem(arrPerguntas.size()+1);
+//        if (questionario.getQstTipoQuestoes() == 1 || questionario.getQstTipoQuestoes() == 2) {
+//            p.setPrgTipo(questionario.getQstTipoQuestoes());
+//        }
+//        this.arrPerguntas.add(p);
         this.questionario.addPergunta();
     }
     
@@ -99,15 +124,13 @@ public class QuestionarioBean {
         this.questionario.delPergunta(p);
     }
     
-    public String getVersao() {
-        return FacesContext.class.getPackage().getImplementationVersion();
-    }
-    
     public void savePergunta(Pergunta p) {
         List<Pergunta> arrPerguntas = this.questionario.getPerguntas();
-        int idx = arrPerguntas.indexOf(p);
-        arrPerguntas.set(idx, p);
-        this.questionario.setPerguntas(arrPerguntas);
+        if (arrPerguntas != null) {
+            int idx = arrPerguntas.indexOf(p);
+            arrPerguntas.set(idx, p);
+            this.questionario.setPerguntas(arrPerguntas);
+        }
     }
     
     public void moveUpPergunta(Pergunta p) {

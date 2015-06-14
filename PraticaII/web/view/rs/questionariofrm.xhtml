@@ -61,6 +61,7 @@
                 if ($('.prgPergunta', $form).val() === "") {
                     $('.prgPergunta', $form).parent().addClass('has-error has-feedback');
                     $('.prgPergunta', $form).attr('placeholder', 'Por favor, preencha a pergunta');
+                    $('.prgPergunta', $form).focus();
                 } else {
                     fillPerguntaStatic($form, $link);
                     $link.removeClass('hidden');
@@ -98,6 +99,28 @@
             function errorPergunta(error) {
                 console.log(error);
             }
+            function movePergunta(direction, idPergunta) {
+                console.log('MOVE', direction, idPergunta);
+                var $link = $('.pergunta-link[data-pergunta=' + idPergunta + ']');
+                var $form = $('.pergunta-form[data-pergunta=' + idPergunta + ']');
+                var $dst_form, $dst_link;
+                if (direction === 'up') {
+                    $dst_form = $link.prev();
+                    $dst_link = $dst_form.prev();
+                } else {
+                    $dst_form = $link.next();
+                    $dst_link = $dst_form.next();
+                }
+                $dst_form.replaceWith($form);
+                $dst_link.replaceWith($link);
+                if (direction === 'up') {
+                    $form.insertAfter($dst_form);
+                } else {
+                    $form.insertBefore($dst_form);
+                }
+                $dst_form.insertAfter($dst_link);
+                
+            }
             $(function() {
                 bindClickPergunta();
             });
@@ -131,16 +154,6 @@
                         <div class="col-md-2 col-sm-12">
                             <p class="form-control-static">#{questionarioBean.questionario.qstPontuacaomax}</p>
                         </div>
-                    <div class="form-group">
-                    </div>
-                        <h:outputLabel value="Tipo do Questionário:" for="qstTipo" styleClass="control-label col-sm-1 col-md-2" />
-                        <div class="col-md-3 col-sm-12">
-                            <h:selectOneMenu pt:required="required" id="qstTipo" styleClass="form-control" value="#{questionarioBean.questionario.qstTipo}">
-                                <f:selectItem itemValue="1" itemLabel="Normal" />
-                                <f:selectItem itemValue="2" itemLabel="Avaliação 180º" />
-                                <f:selectItem itemValue="3" itemLabel="Avaliação 360º" />
-                            </h:selectOneMenu>
-                        </div>
                     </div>
                     <h4><h:outputText value="${perguntaBean.pTitle}"/></h4>
                     <h:panelGroup layout="block" id="forEachPerguntas">
@@ -151,13 +164,13 @@
                                     <div class="pergunta-link list-group-item hidden" data-pergunta="#{idPergunta}">
                                         <span class="prgPerguntaStatic form-control-static"><!--Alimentado via JavaScript--></span>
                                         <div class="btn-group pull-right">
-                                            <h:commandLink rendered="#{loopPergunta.index != 0}" immediate="true" styleClass="btn btn-info" action="#{questionarioBean.moveUpPergunta(pergunta)}">
+                                            <h:commandLink onclick="movePergunta('up', '#{idPergunta}');" rendered="#{loopPergunta.index != 0}" immediate="true" styleClass="btn btn-info" action="#{questionarioBean.moveUpPergunta(pergunta)}">
                                                 <f:ajax execute="@form"
                                                         render="frmQuestionario:forEachPerguntas" 
                                                         onevent="ajaxPergunta" />
                                                 <i class="fa fa-arrow-up"></i>
                                             </h:commandLink>
-                                            <h:commandLink rendered="#{loopPergunta.index != (questionarioBean.questionario.perguntas.size()-1)}" immediate="true" styleClass="btn btn-info" action="#{questionarioBean.moveDownPergunta(pergunta)}">
+                                            <h:commandLink onclick="movePergunta('down', '#{idPergunta}');" rendered="#{loopPergunta.index != (questionarioBean.questionario.perguntas.size()-1)}" immediate="true" styleClass="btn btn-info" action="#{questionarioBean.moveDownPergunta(pergunta)}">
                                                 <f:ajax execute="@form"
                                                         render="frmQuestionario:forEachPerguntas" 
                                                         onevent="ajaxPergunta" />

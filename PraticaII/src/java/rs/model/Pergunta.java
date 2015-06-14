@@ -23,8 +23,8 @@ import org.hibernate.annotations.SQLUpdate;
 @Entity
 @Table(name="rec_pergunta")
 @IdClass(PerguntaPK.class)
-//@SQLInsert(sql = "INSERT INTO rec_pergunta(prg_pergunta,prg_ordem,prg_tipo,prg_opcaooutros,prg_exibircandidato,prg_obrigatoria,prg_codigo,qst_codigo) VALUES (?,?,?,?,?,?,?,?)", check = ResultCheckStyle.NONE)
-//@SQLUpdate(sql = "UPDATE rec_pergunta SET prg_pergunta = ?,prg_ordem = ?,prg_tipo = ?,prg_opcaooutros = ?,prg_exibircandidato = ?,prg_obrigatoria = ? WHERE prg_codigo = ? AND qst_codigo = ?", check = ResultCheckStyle.NONE)
+@SQLInsert(sql = "insert into rec_pergunta (cmp_codigo, prg_exibircandidato, prg_obrigatoria, prg_opcaooutros, prg_ordem, prg_pergunta, prg_tipo, prg_codigo, qst_codigo)  values (?, ?, ?, ?, ?, ?, ?, ?, ?)", check = ResultCheckStyle.NONE)
+@SQLUpdate(sql = "update rec_pergunta set cmp_codigo=?, prg_exibircandidato=?, prg_obrigatoria=?, prg_opcaooutros=?, prg_ordem=?, prg_pergunta=?, prg_tipo=? where prg_codigo=? and qst_codigo=?", check = ResultCheckStyle.NONE)
 public class Pergunta implements Serializable, Comparable<Pergunta> {
     
     public static final String sTitle = "Pergunta";

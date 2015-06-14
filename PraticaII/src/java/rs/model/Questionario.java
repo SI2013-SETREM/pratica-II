@@ -19,7 +19,7 @@ import org.hibernate.annotations.SQLUpdate;
 
 @Entity
 @Table(name = "rec_questionario")
-//@SQLInsert(sql = "INSERT INTO rec_questionario(qst_titulo,qst_pontuacaototal,qst_pontuacaomax,qst_tipo_questoes,qst_tipo,qst_codigo) VALUES (?,?,?,?,?,?)", check = ResultCheckStyle.NONE)
+@SQLInsert(sql = "insert into rec_questionario (qst_pontuacaomax, qst_pontuacaototal, qst_tipo_questoes, qst_titulo, qst_codigo) values (?, ?, ?, ?, ?)", check = ResultCheckStyle.NONE)
 //@SQLUpdate(sql = "UPDATE rec_questionario SET qst_titulo=?,qst_pontuacaototal=?,qst_pontuacaomax=?,qst_tipo_questoes=?,qst_tipo=? WHERE qst_codigo=?", check = ResultCheckStyle.NONE)
 public class Questionario implements Serializable {
 
@@ -50,15 +50,10 @@ public class Questionario implements Serializable {
      */
     private int qst_tipo_questoes = 1;
 
-    /**
-     * 1 = Normal 2 = Avaliação 180º 3 = Avaliação 360º
-     */
-    private int qst_tipo;
-
     @OneToMany
     @JoinColumn(name = "qst_codigo", referencedColumnName = "qst_codigo")
     @OrderBy(value = "prg_ordem")
-    private List<Pergunta> perguntas = new ArrayList<>();
+    private List<Pergunta> perguntas;
 
     public Questionario() {
     }
@@ -106,127 +101,107 @@ public class Questionario implements Serializable {
         this.qst_tipo_questoes = qst_tipo_questoes;
     }
 
-    public void setQstTipoQuestoes(ArrayList<Pergunta> perguntas) {
-        int qst_tipo_questoes = 0;
-        for (Pergunta pergunta : perguntas) {
-            switch (pergunta.getPrgTipo()) {
-                case 1: //Descritiva
-                    if (qst_tipo_questoes == 2) { //Objetivas
-                        qst_tipo_questoes = 3; //Misto
-                    } else {
-                        qst_tipo_questoes = 1; //Descritivas
-                    }
+    public void setQstTipoQuestoes(List<Pergunta> perguntas) {
+        int qstTipoQuestoes = 0;
+        if (perguntas != null) {
+            for (Pergunta pergunta : perguntas) {
+                switch (pergunta.getPrgTipo()) {
+                    case 1: //Descritiva
+                        if (qstTipoQuestoes == 2) { //Objetivas
+                            qstTipoQuestoes = 3; //Misto
+                        } else {
+                            qstTipoQuestoes = 1; //Descritivas
+                        }
+                        break;
+                    case 2: //Objetiva
+                        if (qstTipoQuestoes == 1) { //Descritivas
+                            qstTipoQuestoes = 3; //Misto
+                        } else {
+                            qstTipoQuestoes = 2; //Objetivas
+                        }
+                        break;
+                }
+                if (qstTipoQuestoes == 3) { //Misto
                     break;
-                case 2: //Objetiva
-                    if (qst_tipo_questoes == 1) { //Descritivas
-                        qst_tipo_questoes = 3; //Misto
-                    } else {
-                        qst_tipo_questoes = 2; //Objetivas
-                    }
-                    break;
-            }
-            if (qst_tipo_questoes == 3) { //Misto
-                break;
+                }
             }
         }
-        this.qst_tipo_questoes = qst_tipo_questoes;
-    }
-
-    public int getQstTipo() {
-        return qst_tipo;
-    }
-
-    public String getQstTipoDsc(int qst_tipo) {
-        String r = "";
-        switch (qst_tipo) {
-            case 1:
-                r = "Normal";
-                break;
-            case 2:
-                r = "Avaliação 180º";
-                break;
-            case 3:
-                r = "Avaliação 360º";
-                break;
-        }
-        return r;
-    }
-
-    public String getQstTipoDsc() {
-        return this.getQstTipoDsc(this.qst_tipo);
-    }
-
-    public void setQstTipo(int qst_tipo) {
-        this.qst_tipo = qst_tipo;
+        this.qst_tipo_questoes = qstTipoQuestoes;
     }
 
     public List<Pergunta> getPerguntas() {
-//        if (perguntas.size() > 1) {
+//        if (perguntas != null && perguntas.size() > 1) {
 //            Collections.sort(perguntas);
 //        }
         return perguntas;
     }
 
     public void setPerguntas(List<Pergunta> perguntas) {
-        if (perguntas.size() > 1) {
-            Collections.sort(perguntas);
-        }
+//        if (perguntas != null && perguntas.size() > 1) {
+//            Collections.sort(perguntas);
+//        }
         this.perguntas = perguntas;
     }
 
     public void addPergunta() {
-        List<Pergunta> arrPerguntas = this.getPerguntas();
-        if (arrPerguntas == null) {
+        if (this.perguntas == null) {
             this.perguntas = new ArrayList<>();
-            arrPerguntas = this.perguntas;
         }
         Pergunta p = new Pergunta();
-        p.setPrgOrdem(arrPerguntas.size() + 1);
+        p.setPrgOrdem(this.perguntas.size()+1);
         if (this.qst_tipo_questoes == 1 || this.qst_tipo_questoes == 2) {
             p.setPrgTipo(qst_tipo_questoes);
         }
-        arrPerguntas.add(p);
-        this.perguntas = arrPerguntas;
+        this.perguntas.add(p);
     }
 
     public void delPergunta(Pergunta p) {
-        int prgOrdem = p.getPrgOrdem();
-        this.perguntas.remove(p);
-        List<Pergunta> arrPerguntas = this.getPerguntas();
-        for (int i = 0; i < arrPerguntas.size(); i++) {
-            Pergunta pergunta = arrPerguntas.get(i);
-            if (pergunta.getPrgOrdem() > prgOrdem) {
-                pergunta.setPrgOrdem(pergunta.getPrgOrdem() - 1);
+        if (this.perguntas != null) {
+            int prgOrdem = p.getPrgOrdem();
+            this.perguntas.remove(p);
+            for (int i = 0; i < this.perguntas.size(); i++) {
+                Pergunta pergunta = this.perguntas.get(i);
+                if (pergunta.getPrgOrdem() > prgOrdem) {
+                    pergunta.setPrgOrdem(pergunta.getPrgOrdem()-1);
+                }
             }
         }
     }
 
     public void moveUpPergunta(Pergunta p) {
         int prgOrdem = p.getPrgOrdem();
-        List<Pergunta> arrPerguntas = this.getPerguntas();
-        for (int i = 0; i < arrPerguntas.size(); i++) {
-            Pergunta pergunta = arrPerguntas.get(i);
-            if (pergunta.getPrgOrdem() == prgOrdem) {
-                pergunta.setPrgOrdem(prgOrdem - 1);
-            } else if (pergunta.getPrgOrdem() == (prgOrdem - 1)) {
-                pergunta.setPrgOrdem(prgOrdem);
+        if (this.perguntas != null) {
+//            int idx_org = 0;
+//            int idx_dst = 0;
+            for (int i = 0; i < this.perguntas.size(); i++) {
+                Pergunta pergunta = this.perguntas.get(i);
+                if (pergunta.getPrgOrdem() == prgOrdem) {
+//                    idx_org = i;
+                    pergunta.setPrgOrdem(prgOrdem-1);
+                } else if (pergunta.getPrgOrdem() == (prgOrdem-1)) {
+//                    idx_dst = i;
+                    pergunta.setPrgOrdem(prgOrdem);
+                }
             }
+//            Pergunta per = this.perguntas.set(idx_dst, this.perguntas.get(idx_org));
+//            this.perguntas.set(idx_org, per);
+            Collections.sort(perguntas);
         }
-//        Collections.sort(perguntas);
     }
 
     public void moveDownPergunta(Pergunta p) {
         int prgOrdem = p.getPrgOrdem();
-        List<Pergunta> arrPerguntas = this.getPerguntas();
-        for (int i = 0; i < arrPerguntas.size(); i++) {
-            Pergunta pergunta = arrPerguntas.get(i);
-            if (pergunta.getPrgOrdem() == prgOrdem) {
-                pergunta.setPrgOrdem(prgOrdem + 1);
-            } else if (pergunta.getPrgOrdem() == (prgOrdem + 1)) {
-                pergunta.setPrgOrdem(prgOrdem);
+        if (this.perguntas != null) {
+            for (int i = 0; i < this.perguntas.size(); i++) {
+                Pergunta pergunta = this.perguntas.get(i);
+                if (pergunta.getPrgOrdem() == prgOrdem) {
+                    pergunta.setPrgOrdem(prgOrdem+1);
+                } else if (pergunta.getPrgOrdem() == (prgOrdem+1)) {
+                    pergunta.setPrgOrdem(prgOrdem);
+                }
             }
+            Collections.sort(perguntas);
         }
-//        Collections.sort(perguntas);
     }
 
     public void addPerguntaOpcao(Pergunta p) {
@@ -234,6 +209,12 @@ public class Questionario implements Serializable {
 //        pergunta.addPerguntaOpcao();
         this.perguntas.get(this.perguntas.indexOf(p)).addPerguntaOpcao();
     }
+
+    @Override
+    public String toString() {
+        return this.qst_titulo;
+    }
+    
 
     @Override
     public int hashCode() {

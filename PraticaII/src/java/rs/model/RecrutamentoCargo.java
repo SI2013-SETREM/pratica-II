@@ -8,7 +8,6 @@ import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import jdk.nashorn.internal.objects.NativeString;
 
 @Entity
 @Table(name = "rec_recrutamento_cargo")
@@ -33,8 +32,6 @@ public class RecrutamentoCargo implements Serializable {
     private int rec_car_quantidade;
     private double rec_car_expectativasalario;
     private String rec_car_descricao;
-    private String rec_car_descricao_resumida;
-
 
     public RecrutamentoCargo() {
     }
@@ -88,12 +85,7 @@ public class RecrutamentoCargo implements Serializable {
     }
 
     public String getRecCarDescricaoResumida() {
-        rec_car_descricao_resumida=NativeString.substr(this.rec_car_descricao, 0, 50);
-        return rec_car_descricao_resumida;
-    }
-
-    public void setRecCarDescricaoResumida(String rec_car_descricao_resumida) {
-        this.rec_car_descricao_resumida = rec_car_descricao_resumida;
+        return this.rec_car_descricao.substring(0, 50);
     }
 
 }
