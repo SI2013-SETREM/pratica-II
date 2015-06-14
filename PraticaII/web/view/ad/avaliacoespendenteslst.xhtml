@@ -55,9 +55,13 @@
                         <f:facet name="header">
                             <h:outputText value="Avaliar"/>
                         </f:facet>
-                        <h:commandLink action="${perguntaPessoaAvaliacaoBean.GetAvaliados(item)}">
-                            <i class="fa fa-calculator"></i> Avaliar
-                        </h:commandLink>
+                        <!--                        <h:commandLink action="{perguntaPessoaAvaliacaoBean.GetAvaliados(item)}">
+                                                    <i class="fa fa-calculator"></i> Avaliar
+                                                </h:commandLink>-->
+                        <h:link outcome="pessoasavaliacaofrm">
+                            <f:param name="id" value="#{item.ava_codigo}"></f:param>
+                            <i class="fa fa-calculator"></i>Avaliar
+                        </h:link>
                     </h:column>
 
 

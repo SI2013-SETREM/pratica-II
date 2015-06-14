@@ -19,7 +19,7 @@ public class PessoasAvaliacaoBean {
     private PessoasAvaliacaoDAO dao = new PessoasAvaliacaoDAO();
     private DataModel pessoas_avaliacoes;
     private DataModel avaliacoes;
-    private int user = 3;
+    private int userId = 2;
     private List<PessoasAvaliacao> lsPessoasAvaliacao;
     private int idAvaliacao;
 
@@ -31,7 +31,7 @@ public class PessoasAvaliacaoBean {
     }
 
     public DataModel getAvaliacoes() {
-        List<PessoasAvaliacao> lsAvaliacaoPessoas = dao.GetListPessoasAvaliacao(0, 0, user, true);
+        List<PessoasAvaliacao> lsAvaliacaoPessoas = dao.GetListPessoasAvaliacao(0, 0, userId, true);
         List<Avaliacao> lsAvaliacao = new ArrayList<>();
         List<Integer> lsCod = new ArrayList<>();
         for (PessoasAvaliacao pa : lsAvaliacaoPessoas) {
@@ -106,13 +106,33 @@ public class PessoasAvaliacaoBean {
     }
 
     public void getListPessoaAvaliacoes() {
-        this.pessoas_avaliacoes = new ListDataModel(dao.GetListPessoasAvaliacao(idAvaliacao, 0, 0, false));
-       // return "pessoasavaliacaolst";
+        List<Integer> ids = new ArrayList<>();
+        List<PessoasAvaliacao> lsPesA = new ArrayList<>();
+        List<PessoasAvaliacao> lsPesA2 = dao.GetListPessoasAvaliacao(idAvaliacao, 0, 0, false);
+        if (lsPesA2 != null && !lsPesA2.isEmpty()) {
+            for (PessoasAvaliacao pessoaA : lsPesA2) {
+                int id = pessoaA.getColaboradorAvaliado().getPes_codigo();
+                if (!ids.contains(id)) {
+                    ids.add(id);
+                    double mediaG = 0;
+                    int size = 0;
+                    for (PessoasAvaliacao pesB : lsPesA2) {
+                        if (pesB.getPea_datahora_resposta() != null && pesB.getPea_media() != 0 && pesB.getColaboradorAvaliado().getPes_codigo() == id) {
+                            mediaG += pesB.getPea_media();
+                            size++;
+                        }
+                    }
+                    pessoaA.setPea_media(mediaG / size);
+                    lsPesA.add(pessoaA);
+                }
+            }
+        }
+        this.pessoas_avaliacoes = new ListDataModel(lsPesA);
+
     }
 
     public void getDetails() {
         this.pessoas_avaliacoes = new ListDataModel(dao.GetListPessoasAvaliacao(idAvaliacao, 0, 0, false));
-        //return "pessoasavaliacaodls";
     }
 
     public String getsTitle() {
@@ -124,15 +144,15 @@ public class PessoasAvaliacaoBean {
     }
 
 ////////////
-    public String GetAvaliacoesPendentes() {
-        List<PessoasAvaliacao> lsAvaliacaoPessoas = dao.GetListPessoasAvaliacao(0, 0, user, true);
-        List<Avaliacao> lsAvaliacao = new ArrayList<>();
-        for (PessoasAvaliacao pa : lsAvaliacaoPessoas) {
-            lsAvaliacao.add(pa.getAvaliacao());
-        }
-        avaliacoes = new ListDataModel(lsAvaliacao);
-        return "avaliacoespendenteslst";
-    }
+//    public String GetAvaliacoesPendentes() {
+//        List<PessoasAvaliacao> lsAvaliacaoPessoas = dao.GetListPessoasAvaliacao(0, 0, user, true);
+//        List<Avaliacao> lsAvaliacao = new ArrayList<>();
+//        for (PessoasAvaliacao pa : lsAvaliacaoPessoas) {
+//            lsAvaliacao.add(pa.getAvaliacao());
+//        }
+//        avaliacoes = new ListDataModel(lsAvaliacao);
+//        return "avaliacoespendenteslst";
+//    }
 
     public int getIdAvaliacao() {
         return idAvaliacao;

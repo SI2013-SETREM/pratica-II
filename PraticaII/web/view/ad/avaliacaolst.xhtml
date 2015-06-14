@@ -68,9 +68,6 @@
                         <f:facet name="header">
                             <h:outputText value="Detalhes"/>
                         </f:facet>
-<!--                        <h:commandLink action="{pessoasAvaliacaoBean.getListPessoaAvaliacoes(item.getAva_codigo())}">
-                            <i class="fa fa-server"></i> Detalhes
-                        </h:commandLink>-->
                         <h:link outcome="pessoasavaliacaolst">
                             <f:param name="id" value="#{item.ava_codigo}"></f:param>
                             <i class="fa fa-server"></i>Detalhes
