@@ -23,7 +23,7 @@
                     <div class="form-group">
                         <h:outputLabel value="Tipo Exame:" for="tipExame" styleClass="control-label col-sm-2" />
                         <div style="padding-top: 5px" class="col-md-6 col-sm-12">
-                            <h:selectOneMenu value="#{examePessoaBean.examePessoa.tipoExame}" converter="TipoExameConverter" id="tipExame" class="form-control">
+                            <h:selectOneMenu value="#{examePessoaBean.examePessoa.tipoExame}" converter="tipoExameConverter" id="tipExame" class="form-control">
                                 <f:selectItems value="#{tipoExameBean.tipoexames}" var="tipoexame" />
                             </h:selectOneMenu>
                         </div>

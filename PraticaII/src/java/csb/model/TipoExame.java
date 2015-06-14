@@ -84,4 +84,9 @@ public class TipoExame implements Serializable {
     public void setEme_intervalorepeticao(int eme_intervalorepeticao) {
         this.eme_intervalorepeticao = eme_intervalorepeticao;
     }
+    
+    @Override
+    public String toString() {
+        return getEme_descricao();
+    }
 }

@@ -1,7 +1,10 @@
 package csb.controller;
 
 import csb.dao.TipoExameDAO;
+
+
 import csb.model.TipoExame;
+import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.model.DataModel;
@@ -21,7 +24,8 @@ public class TipoExameBean {
     private TipoExame tipoexame = new TipoExame();
     private TipoExameDAO dao = new TipoExameDAO();
     private DataModel tipoexames;
-
+ 
+  
     public TipoExameBean() {
     }
 
@@ -82,4 +86,6 @@ public class TipoExameBean {
     public String listar() {
         return "tipoexamelst";
     }
+    
+   
 }

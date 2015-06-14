@@ -7,7 +7,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.FacesConverter;
 
-@FacesConverter("TipoExameConverter")
+@FacesConverter("tipoExameConverter")
 public class TipoExameConverter implements javax.faces.convert.Converter {
 
     @Override
@@ -16,10 +16,8 @@ public class TipoExameConverter implements javax.faces.convert.Converter {
         return new TipoExameDAO().findById(id);
     }
 
-      @Override
-    public String getAsString(FacesContext facesContext, UIComponent uIComponent, Object object)
-    {
-
-        return "" + (((TipoExame) object) == null ? "" : ((TipoExame) object).getEme_codigo());
+    @Override
+    public String getAsString(FacesContext facesContext, UIComponent uIComponent, Object object) {
+        return "" + ((TipoExame) object).getEme_codigo();
     }
 }

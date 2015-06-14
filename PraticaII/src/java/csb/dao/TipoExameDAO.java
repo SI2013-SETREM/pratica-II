@@ -37,8 +37,9 @@ public class TipoExameDAO {
         return (TipoExame) session.load(TipoExame.class, eme_codigo);
     }
 
-    public List<TipoExame> findAll() {
+    public  List<TipoExame> findAll() {
         Query q = session.createQuery("from TipoExame");
         return q.list();
     }
 }
+
