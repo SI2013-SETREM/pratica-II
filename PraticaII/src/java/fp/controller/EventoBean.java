@@ -1,13 +1,14 @@
-
 package fp.controller;
 
 import fp.dao.EventoDAO;
+import fp.dao.EventoPadraoDAO;
 import fp.dao.FormulaDAO;
 import fp.dao.SerieEventoDAO;
 import fp.dao.TabelaINSSDAO;
 import fp.dao.TabelaIRRFDAO;
 import fp.dao.TipoEventoDAO;
 import fp.model.Evento;
+import fp.model.EventoPadrao;
 import fp.model.Formula;
 import fp.model.SerieEvento;
 import fp.model.TabelaINSS;
@@ -38,7 +39,6 @@ public class EventoBean {
     private TabelaINSS tabinss = new TabelaINSS();
     private TabelaINSSDAO tabinssdao = new TabelaINSSDAO();
     
-    
     private List<TabelaIRRF> lsttabirrf;
     private TabelaIRRF tabelairrf = new TabelaIRRF();
     private TabelaIRRFDAO tabelairrfdao = new TabelaIRRFDAO();
@@ -51,14 +51,17 @@ public class EventoBean {
     private EventoDAO dao = new EventoDAO();
     private DataModel eventos;
     
-    public EventoBean(){
+    private EventoPadrao eventoPadrao = new EventoPadrao();
+    private EventoPadraoDAO eventoPadraoDAO = new EventoPadraoDAO();
     
-}
+    public EventoBean() {
+        
+    }
     
     public String getsTitle() {
         return sTitle;
     }
-
+    
     public String getpTitle() {
         return pTitle;
     }
@@ -66,16 +69,16 @@ public class EventoBean {
     public Evento getEvento() {
         return evento;
     }
-
+    
     public void setEvento(Evento evento) {
         this.evento = evento;
     }
-
-    public DataModel getEventos() {
+    
+    public DataModel<Evento> getEventos() {
         this.eventos = new ListDataModel(dao.findAll());
         return eventos;
     }
-
+    
     public void setEventos(DataModel eventos) {
         this.eventos = eventos;
     }
@@ -101,12 +104,19 @@ public class EventoBean {
     }
     
     public String salvar() {
-        if (evento.getEve_codigo()> 0)
+        if (evento.getEve_codigo() > 0) {
             dao.update(evento);
-        else 
+        } else {
             dao.insert(evento);
+        }
         
         return "eventolst";
+    }
+
+    public String salvarEventoPad(EventoPadrao e) {
+        
+        eventoPadraoDAO.insert(e);      
+        return "folhapagfrm";
     }
     
     public String listar() {
@@ -117,29 +127,31 @@ public class EventoBean {
         lstserieevento = serieeventodao.findAll();
         return lstserieevento;
     }
-
+    
     public void setLstSerieEvento(List<SerieEvento> i) {
         this.lstserieevento = i;
     }
     
-     public List<TipoEvento> getLstTipoEvento() {
+    public List<TipoEvento> getLstTipoEvento() {
         lsttipoevento = tipoeventodao.findAll();
         return lsttipoevento;
     }
-
+    
     public void setLstTipoEvento(List<TipoEvento> i) {
         this.lsttipoevento = i;
     }
     
-      public List<TabelaINSS> getLstTabinss() {
+    public List<TabelaINSS> getLstTabinss() {
         lsttabinss = tabinssdao.findAll();
         return lsttabinss;
     }
-       public List<TabelaIRRF> getLstTabirrf() {
+
+    public List<TabelaIRRF> getLstTabirrf() {
         lsttabirrf = tabelairrfdao.findAll();
         return lsttabirrf;
     }
-        public List<Formula> getLstFormula() {
+
+    public List<Formula> getLstFormula() {
         lstformula = formuladao.findAll();
         return lstformula;
     }
