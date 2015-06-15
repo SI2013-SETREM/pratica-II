@@ -10,15 +10,15 @@
 
     <ui:define name="breadcrumb">
         <li>Recrutamento</li>
-        <li><h:link value="${RecrutamentoPessoaBean.pTitle}" outcome="/faces/view/rs/recrutamentolst" /></li>
+        <li><h:link value="${recrutamentoPessoaBean.pTitle}" outcome="/faces/view/rs/recrutamentolst" /></li>
     </ui:define>
 
     <ui:define name="content">
-        <h3><h:outputText value="Dados do ${RecrutamentoPessoaBean.sTitle}"/></h3>
+        <h3><h:outputText value="Dados do ${recrutamentoPessoaBean.sTitle}"/></h3>
         <f:view>
             <h:form styleClass="form-horizontal">
                 <div class="form-group">
-                    <h:dataTable value="${RecrutamentoPessoaBean.pessoas}" var="item" styleClass="dataTable table table-bordered table-striped">
+                    <h:dataTable value="${recrutamentoPessoaBean.pessoas}" var="item" styleClass="dataTable table table-bordered table-striped">
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="Código"/>

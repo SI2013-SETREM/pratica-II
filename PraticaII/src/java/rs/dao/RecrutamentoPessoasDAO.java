@@ -5,6 +5,7 @@
  */
 package rs.dao;
 
+import cfg.model.Pessoa;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -45,5 +46,6 @@ public class RecrutamentoPessoasDAO {
         Query q = session.createQuery("from RecrutamentoPessoa");
         return q.list();
     }
+    
    
 }

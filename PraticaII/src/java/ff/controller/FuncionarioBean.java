@@ -60,29 +60,29 @@ public class FuncionarioBean {
     public FuncionarioBean() {
     }
 
-    public String select() {
-        pessoa = funcionarios.getRowData();
-        pessoa = pessoaDAO.findById(pessoa.getPes_codigo());
-        if (pessoa != null) {
-            salarios = salarioDAO.findBySalPessoaId(pessoa.getPes_codigo());
-            beneficios = beneficiosPessoaDAO.findByPessoaId(pessoa.getPes_codigo());
-            ferias = feriasDAO.findById(pessoa.getPes_codigo());
-            cargos = cargosDAO.GetListCargoPessoa(pessoa.getPes_codigo(), 0);
-            faltas = faltaDAO.findFaltas(pessoa.getPes_codigo());
-            graduacoes = graduacoesPessoaDAO.findByGraduacoesId(pessoa.getPes_codigo());
-            advertencias = advertenciaDAO.findByAvertId(pessoa.getPes_codigo());
-
-        } else {
-            beneficios = new ArrayList<>();
-            faltas = new ArrayList<>();
-            ferias = new ArrayList<>();
-            cargos = new ArrayList<>();
-            graduacoes = new ArrayList<>();
-            salarios = new ArrayList<>();
-            advertencias = new ArrayList<>();
-        }
-        return "fichafunfrm";
-    }
+//    public String select() {
+//        pessoa = funcionarios.getRowData();
+//        pessoa = pessoaDAO.findById(pessoa.getPes_codigo());
+//        if (pessoa != null) {
+//            salarios = salarioDAO.findBySalPessoaId(pessoa.getPes_codigo());
+//            beneficios = beneficiosPessoaDAO.findByPessoaId(pessoa.getPes_codigo());
+//            ferias = feriasDAO.findById(pessoa.getPes_codigo());
+//            cargos = cargosDAO.GetListCargoPessoa(pessoa.getPes_codigo(), 0);
+//            faltas = faltaDAO.findFaltas(pessoa.getPes_codigo());
+//            graduacoes = graduacoesPessoaDAO.findByGraduacoesId(pessoa.getPes_codigo());
+//            advertencias = advertenciaDAO.findByAvertId(pessoa.getPes_codigo());
+//
+//        } else {
+//            beneficios = new ArrayList<>();
+//            faltas = new ArrayList<>();
+//            ferias = new ArrayList<>();
+//            cargos = new ArrayList<>();
+//            graduacoes = new ArrayList<>();
+//            salarios = new ArrayList<>();
+//            advertencias = new ArrayList<>();
+//        }
+//        return "fichafunfrm";
+//    }
 
     public String select2() {
         pessoa = funcionarios.getRowData();
