@@ -11,8 +11,10 @@ import csb.model.CargosPessoa;
 import csb.model.Graduacao;
 import csb.model.GraduacoesPessoa;
 import csb.model.Salario;
+import ff.dao.AdvertenciaDAO;
 import ff.dao.FaltaDAO;
 import ff.dao.FeriasDAO;
+import ff.model.Advertencia;
 
 import ff.model.Falta;
 import ff.model.Ferias;
@@ -51,6 +53,9 @@ public class FuncionarioBean {
 
     private final SalarioDAO salarioDAO = new SalarioDAO();
     private List<Salario> salarios;
+    
+    private final AdvertenciaDAO advertenciaDAO = new AdvertenciaDAO();
+    private List<Advertencia> advertencias;
 
     public FuncionarioBean() {
     }
@@ -65,6 +70,7 @@ public class FuncionarioBean {
             cargos = cargosDAO.GetListCargoPessoa(pessoa.getPes_codigo(), 0);
             faltas = faltaDAO.findFaltas(pessoa.getPes_codigo());
             graduacoes = graduacoesPessoaDAO.findByGraduacoesId(pessoa.getPes_codigo());
+            advertencias = advertenciaDAO.findByAvertId(pessoa.getPes_codigo());
 
         } else {
             beneficios = new ArrayList<>();
@@ -73,6 +79,7 @@ public class FuncionarioBean {
             cargos = new ArrayList<>();
             graduacoes = new ArrayList<>();
             salarios = new ArrayList<>();
+            advertencias = new ArrayList<>();
         }
         return "fichafunfrm";
     }
@@ -156,6 +163,22 @@ public class FuncionarioBean {
 
     public void setSalarios(List<Salario> salarios) {
         this.salarios = salarios;
+    }
+
+    public Falta getFalta() {
+        return falta;
+    }
+
+    public void setFalta(Falta falta) {
+        this.falta = falta;
+    }
+
+    public List<Advertencia> getAdvertencias() {
+        return advertencias;
+    }
+
+    public void setAdvertencias(List<Advertencia> advertencias) {
+        this.advertencias = advertencias;
     }
 
 }
