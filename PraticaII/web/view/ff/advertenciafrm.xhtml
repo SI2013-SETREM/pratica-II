@@ -12,7 +12,12 @@
     </ui:define>
 
     <ui:define name="breadcrumb">
-        <li>Configurações </li>
+        <f:metadata>
+            <f:viewParam name="id" value="${advertenciaBean.idPessoa}"/>          
+        </f:metadata>
+        <f:event listener="${advertenciaBean}" type="preRenderComponent"/>
+        <li>Cadastro de Advertêcia </li>
+        
 
     </ui:define>
 
@@ -34,9 +39,10 @@
                         </div>
                         <h:outputLabel value="Nome do Aplicador:" for="idiAvaliador" styleClass="control-label col-sm-2 " />
                         <div class="col-md-4 col-xs-12 autocomplete">
-                            <p:autoComplete>
+                            <p:autoComplete pt:disabled="#{avaliacaoBean.avaliacao.ava_codigo > 0}" id="cargo1" multiple="true" completeMethod="#{advertenciaBean.completePessoa}" value="#{advertenciaBean.pesAplicador}"
+                                            var="pessoa" itemLabel="#{pessoa.pes_nome}" itemValue="#{pessoa}" converter="pessoaConverter" forceSelection="true">
                                 <p:column>
-                                    <h:outputText value="#{aplicador}" />
+                                    <h:outputText value="#{pessoa.pes_nome}" />
                                 </p:column>
                             </p:autoComplete>
                         </div>
@@ -63,8 +69,8 @@
 
                     <div class="form-group">
                         <div class="col-md-offset-9 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
-                            <h:link styleClass="btn btn-default" value="Cancelar"  />
-                            <h:commandButton styleClass="btn btn-primary" value="Salvar"  ></h:commandButton>
+                            <h:link styleClass="btn btn-default" value="Cancelar" outcome="${advertenciaBean.listar()}" />
+                            <h:commandButton styleClass="btn btn-primary" value="Salvar" action="${advertenciaBean.insert()}"  ></h:commandButton>
                         </div>
                     </div>
                 </h:form>
