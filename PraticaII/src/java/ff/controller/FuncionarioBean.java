@@ -37,6 +37,7 @@ public class FuncionarioBean {
     private final FeriasDAO feriasDAO = new FeriasDAO();
     private List<Ferias> ferias;
 
+  
     private final CargosPessoaDAO cargosDAO = new CargosPessoaDAO();
     private List<CargosPessoa> cargos;
     private CargosPessoa cargosPessoa = new CargosPessoa();
@@ -64,7 +65,7 @@ public class FuncionarioBean {
             cargos = cargosDAO.GetListCargoPessoa(pessoa.getPes_codigo(), 0);
             faltas = faltaDAO.findFaltas(pessoa.getPes_codigo());
             graduacoes = graduacoesPessoaDAO.findByGraduacoesId(pessoa.getPes_codigo());
-            
+
         } else {
             beneficios = new ArrayList<>();
             faltas = new ArrayList<>();
@@ -77,7 +78,14 @@ public class FuncionarioBean {
     }
 
     public String select2() {
-
+        pessoa = funcionarios.getRowData();
+        pessoa = pessoaDAO.findById(pessoa.getPes_codigo());
+        //cargosPessoa = cargosDAO.cargo(pessoa.getPes_codigo());
+        
+        //cargosPessoa = cargosDAO.GetListCargoPessoa(pessoa.getPes_codigo(),0).get(1);
+        
+ 
+        
         return "folhapagfrm";
     }
 

@@ -22,7 +22,7 @@ public class FaltaBean {
     private List<Falta> faltas;
     private Pessoa pessoa = new Pessoa();
     private PessoaDAO pessoaDAO = new PessoaDAO();
-    private DataModel pessoas;
+    private DataModel<Pessoa> pessoas;
     private int parametro;
 
     public FaltaBean() {
@@ -30,7 +30,7 @@ public class FaltaBean {
 
     public String inicia() {
 
-        pessoa = pessoaDAO.findByPessoaId(parametro);
+       // pessoas = (DataModel<Pessoa>) pessoaDAO.findByPessoaId(getParametro());
         pessoa = pessoaDAO.findById(pessoa.getPes_codigo());
         falta.setPessoa(pessoa);
 
