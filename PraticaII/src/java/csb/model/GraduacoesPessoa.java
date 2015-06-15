@@ -34,7 +34,7 @@ public class GraduacoesPessoa implements Serializable {
     
     private boolean grd_status;
 
-    public class GraduacoesPessoaPK implements Serializable {
+    public static class GraduacoesPessoaPK  implements Serializable {
 
         protected Graduacao graduacao;
         protected Pessoa pessoa;
