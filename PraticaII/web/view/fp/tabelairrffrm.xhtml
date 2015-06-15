@@ -39,14 +39,14 @@
                         <div class="form-group">
                             <h:outputLabel value="Data de Início: " for="datainicial" styleClass="control-label col-sm-1" />
                             <div class="col-xs-2">
-                                <h:inputText id="datainicial" value="#{tabelaIRRFBean.tabelaIRRF.tif_dataincial}" title="Data de Início" styleClass="form-control" pt:autofocus="">
+                                <h:inputText pt:type="date" id="datainicial" value="#{tabelaIRRFBean.tabelaIRRF.tif_dataincial}" title="Data de Início" styleClass="form-control" pt:autofocus="">
                                     <f:convertDateTime pattern="dd/MM/yyyy"/></h:inputText>
                             </div>
 
 
                             <h:outputLabel value="Data Final:" for="datafinal" styleClass="control-label col-md-4" />
                             <div class="col-xs-2">
-                                <h:inputText id="datafinal" value="#{tabelaIRRFBean.tabelaIRRF.tif_datafinal}" title="Data Final" styleClass="form-control" pt:autofocus="">
+                                <h:inputText pt:type="date" id="datafinal" value="#{tabelaIRRFBean.tabelaIRRF.tif_datafinal}" title="Data Final" styleClass="form-control" pt:autofocus="">
                                     <f:convertDateTime pattern="dd/MM/yyyy"/></h:inputText>
                             </div>
 

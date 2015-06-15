@@ -59,11 +59,7 @@
                                 <h:outputLabel value="Empresa:" for="emp" styleClass="control-label col-md-2" />
 
                                 <div class="col-md-4 col-xs-3 autocomplete">
-                                    <p:autoComplete >
-                                        <p:column>
-                                            <h:outputText value="" />
-                                        </p:column>
-                                    </p:autoComplete>
+                                    <h:inputText pt:autofocus=""  id="idEmpresa" value="" title="Nome da Empresa" styleClass="form-control" readonly="true" />
                                 </div>
 
 
@@ -94,36 +90,34 @@
 
                                 <h:outputLabel value="Colaborador:" for="idColaborador" styleClass="control-label col-md-2" />
                                 <div class="col-md-4 col-xs-3 autocomplete">
-                                    <p:autoComplete >
-                                        <p:column>
-                                            <h:outputText value="" />
-                                        </p:column>
-                                    </p:autoComplete>
+                                    <h:inputText readonly="true" pt:autofocus=""  id="idNome" value="#{funcionarioBean.pessoa.pes_nome}" title="Nome do colaborador" styleClass="form-control" />
                                 </div>
                                 <h:outputLabel value="CPF:" for="idCPF" styleClass="control-label col-md-2" />
                                 <div class=" col-xs-3" >
-                                    <h:outputLabel value="049.123.000-00" for="idcpf" styleClass="control-label" />
+                                    <h:outputLabel value="${funcionarioBean.pessoa.pes_cpf}" for="idcpf" styleClass="control-label"  />
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <h:outputLabel value="Cargo:" for="idCargo" styleClass="control-label col-md-2" />
                                 <div class=" col-xs-6" >
-                                    <h:outputLabel value="Desenvolvedor Web" for="idcargo" styleClass="control-label" />
+                                    <h:outputLabel value="${funcionarioBean.cargosPessoa.cargo.car_descricao}" for="idcargo" styleClass="control-label" />
                                 </div>
 
                                 <div class="btns-top-table col-xs-3">
-                                    <h:link value="Adicionar Eventos Padrão" styleClass="btn btn-success">
-                                        <f:param name="codigoFolha" value=""/>
+                                    <h:link outcome="eventopadfrm" value="Adicionar Eventos Padrão" styleClass="btn btn-success">
+                                        <f:param name="codigoFolha" value="${funcionarioBean.pessoa.pes_codigo}"/>
                                         <i class="fa fa-plus"></i> 
                                     </h:link>
                                 </div>
-
+                               
                             </div>
                             <div class="form-group">
                                 <h:outputLabel value="Data de Adimição:" for="idiAdimicao" styleClass="control-label col-md-2" />
                                 <div class=" col-xs-6" >
-                                    <h:outputLabel value="17/02/2000" for="idAdmicao" styleClass="control-label" />
+                                    <h:outputLabel pt:type="date" value="${funcionarioBean.pessoa.pes_datacadastro}" for="idAdmicao" styleClass="control-label" >
+                                        <f:convertDateTime pattern="yyyy-MM-dd"/>
+                                    </h:outputLabel>
                                 </div>
 
                             </div>
@@ -168,10 +162,17 @@
 
                                 </div>
                                 <div class="form-group" >
-                                    <div class="col-xs-4 " style="padding: 37px 0px 5px 90px;">
+<!--                                    <div class="col-xs-4 " style="padding: 37px 0px 5px 90px;">
                                         <div class=" btn btn-sm btn-primary"  >                               
                                             <i class="fa fa-plus"></i> Adicionar evendos na Folha
                                         </div>
+                                    </div>-->
+                                    <div class="btns-top-table col-xs-4" style="padding: 37px 0px 5px 90px;">
+                                        <h:link outcome="eventopadfrm" value="Adicionar evendos na Folha" styleClass="btn btn-success" >
+                                            <f:param name="id" value="${funcionarioBean.pessoa.pes_codigo}"/>
+                                            <i class="fa fa-plus"></i> 
+                                        </h:link>                             
+
                                     </div>
                                     <div class="detalhes col-xs-8 ">
 
