@@ -33,7 +33,14 @@
                             }
                         }
                     }
-                });                
+                });
+                $(".carTempaiChck").click(function () {
+                    if ($(".carTempaiChck").is(':checked')) {
+                        $("#haveParent").remove();
+                    } else {
+                        window.location.reload();
+                    }
+                });
             });
         </script>
     </ui:define>
@@ -46,21 +53,30 @@
             <h3><h:outputText value="Dados do ${cargosBean.sTitle}"/></h3>
             <f:view>
                 <h:form styleClass="form-horizontal">
-                    <h:inputHidden id="idiCodigo" value="#{cargosBean.cargo.car_codigo}" />
+                    <h:messages showDetail="true" />
+                    <h:inputHidden id="carCodigo" value="#{cargosBean.cargo.car_codigo}" />
                     <div class="form-group">
-                        <h:outputLabel value="Descrição:" for="carDescricao" styleClass="control-label col-sm-1" />
+                        <h:outputLabel value="Descrição:" for="car_descricao" styleClass="control-label col-sm-1" />
                         <div class="col-md-6 col-sm-12">
                             <h:inputText id="carDescricao" value="#{cargosBean.cargo.car_descricao}" title="Descrição" pt:required="true" styleClass="form-control" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <h:outputLabel value="CBO" for="carCbo" styleClass="control-label col-sm-1" />
+                        <h:outputLabel value="CBO" for="car_cbo" styleClass="control-label col-sm-1" />
                         <div class="col-md-6 col-sm-12">
                             <h:inputText id="carCbo" value="#{cargosBean.cargo.car_cbo}" title="CBO" pt:required="true" styleClass="form-control" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <h:outputLabel value="Piso Salarial" for="carPisosalarial" styleClass="control-label col-sm-1" />
+                        <h:outputLabel value="Setor: " for="setor" styleClass="control-label col-sm-1" />
+                        <div class="col-md-6 col-sm-12">
+                            <h:selectOneMenu id="setor" converter="setorConverter" value="#{cargosBean.cargo.setor}" styleClass="form-control" pt:autofocus="" >
+                                <f:selectItems value="#{cargosBean.lstsetor}" var="tipe" itemLabel="#{tipe.set_descricao}"/>
+                            </h:selectOneMenu>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Piso Salarial" for="car_pisosalarial" styleClass="control-label col-sm-1" />
                         <div class="col-md-6 col-sm-12">
                             <div class="input-group">
                                 <div class="input-group-addon">R$</div>
@@ -70,7 +86,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <h:outputLabel value="Teto Salarial" for="carTetosalarial" styleClass="control-label col-sm-1" />
+                        <h:outputLabel value="Teto Salarial" for="car_tetosalarial" styleClass="control-label col-sm-1" />
                         <div class="col-md-6 col-sm-12">
                             <div class="input-group">
                                 <div class="input-group-addon">R$</div>
@@ -80,15 +96,38 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <h:outputLabel value="Ativo?:" for="carAtivo" styleClass="control-label col-sm-1" />
+                        <h:outputLabel value="Ativo?:" for="car_ativo" styleClass="control-label col-sm-1" />
                         <div style="padding-top: 5px" class="col-md-6 col-sm-12">
                             <h:selectBooleanCheckbox value="#{cargosBean.cargo.car_ativo}" id="carAtivo" class="carAtivo" title="Ativo" />
                         </div>
                     </div>
                     <div class="form-group">
+                        <h:outputLabel value="Cargo Pai?:" for="car_tempai" styleClass="control-label col-sm-1" />
+                        <div style="padding-top: 5px" class="col-md-6 col-sm-12">
+                            <h:selectBooleanCheckbox value="false" styleClass="carTempaiChck" title="Tem Pai" />
+                        </div>
+                    </div>
+                    <div id="haveParent">
+                        <div class="form-group">
+                            <h:outputLabel value="Cargo: " for="car_pai" styleClass="control-label col-sm-1" />
+                            <div class="col-md-6 col-sm-12">
+                                <h:selectOneMenu id="cargoPai" pt:required="false" converter="cargoConverter" value="#{cargosBean.cargo.car_pai}" styleClass="form-control cargoPaiCbo" pt:autofocus="" >
+                                    <f:selectItems value="#{cargosBean.lscargo}" var="tipe" itemLabel="#{tipe.car_descricao}"/>
+                                </h:selectOneMenu>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <h:outputLabel value="Ordem" for="carOrdem" styleClass="control-label col-sm-1" />
+                            <div class="col-md-6 col-sm-12">
+                                <h:inputText pt:type="number" pt:min="1" pt:max="100" pt:step="1" id="carOrdem" value="#{cargosBean.cargo.car_ordem}" title="Ordem do Cargo" styleClass="form-control carOrdemNumber" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <div class="col-md-offset-1 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
                             <h:link styleClass="btn btn-default" value="Cancelar" outcome="#{cargosBean.listar()}" />
-                            <h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{cargosBean.salvar()}"></h:commandButton>
+                            <h:commandButton type="submit" styleClass="btn btn-primary" value="Salvar" action="#{cargosBean.salvar()}"></h:commandButton>
                         </div>
                     </div>
                 </h:form>

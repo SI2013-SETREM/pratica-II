@@ -71,4 +71,34 @@ public class Setor implements Serializable {
     public void setCargos(List<Cargo> cargos) {
         this.cargos = cargos;
     }
+    
+    
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 79 * hash + this.set_codigo;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Setor other = (Setor) obj;
+        if (this.set_codigo != other.set_codigo) {
+            return false;
+        }
+        return true;
+    }
+
+    
+    @Override
+    public String toString() {
+        return this.getSet_descricao();
+    }
+
 }

@@ -13,7 +13,7 @@ public class CargoDAO {
 
     private Session session;
     private TreeNode root;
-     private TreeNode filho;
+    private TreeNode filho;
 
     public CargoDAO() {
         session = HibernateUtil.getSessionFactory().openSession();
@@ -46,28 +46,34 @@ public class CargoDAO {
         return q.list();
     }
 
+    public List<Cargo> findAllParents() {
+        Query q = session.createQuery("from Cargo where car_pai is null order by car_descricao asc");
+        return q.list();
+    }
+
     public List<Cargo> findTree(int id) {
         String s = "from Cargo";
         if (id != 0) {
-            s += " where car_pai="+id;
-        }else{
+            s += " where car_pai=" + id;
+        } else {
             s += " where car_pai=null";
         }
         Query q = session.createQuery(s);
         return q.list();
     }
-    
-    public TreeNode arvoreCargo(){
-        root=new DefaultTreeNode("root",null);
-        filho=new DefaultTreeNode("Cargos", root);
+
+    public TreeNode arvoreCargo() {
+        root = new DefaultTreeNode("root", null);
+        filho = new DefaultTreeNode("Cargos", root);
         treeCargo(null, 0, filho);
         return root;
     }
+
     public void treeCargo(List<Cargo> lista, int id, TreeNode node) {
         List<Cargo> tree = this.findTree(id);
         TreeNode f;
         for (Cargo c : tree) {
-             f = new DefaultTreeNode(c.getCar_descricao(), node);
+            f = new DefaultTreeNode(c.getCar_descricao(), node);
             treeCargo(tree, c.getCar_codigo(), f);
         }
     }
