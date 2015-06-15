@@ -32,9 +32,8 @@ public class FeriasBean {
     }
 
     public String inicio() {
-
-        pessoas =  (DataModel<Pessoa>) pessoaDAO.findByPessoaId(getIdPessoa());
-        pessoa = pessoaDAO.findById(pessoa.getPes_codigo());
+       // pessoas =  (DataModel<Pessoa>) pessoaDAO.findByPessoaId(getIdPessoa());
+        pessoa = pessoaDAO.findById(getIdPessoa());
         return "faltafrm";
     }
 
