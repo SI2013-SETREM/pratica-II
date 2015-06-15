@@ -1,0 +1,72 @@
+<ui:composition template="./../modelos/default.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+
+
+    <ui:define name="title">
+        Ferias
+    </ui:define>
+
+    <ui:define name="breadcrumb">
+        <f:metadata>
+            <f:viewParam name="id" value="${feriasBean.idPessoa}"/>          
+        </f:metadata>
+        <f:event listener="${feriasBean.inicio()}" type="preRenderComponent"/>
+        <li>Cadastro de Ferias </li>
+
+    </ui:define>
+
+
+    <ui:define name="main-content">
+
+
+        <div class="panel panel-body">
+            <h3><h:outputText value="Registro de Férias"/></h3>
+            <f:view>
+                <h:form styleClass="form-horizontal">
+                    <h:inputHidden id="feriasCodigo" value="${feriasBean.ferias.fer_codigo}" />
+
+                    <div class="form-group">
+
+                        <h:outputLabel value="Observação:" for="idiObs" styleClass="control-label col-sm-2 " />
+                        <div class="col-md-4 col-sm-6">
+                            <h:inputText pt:autofocus=""  id="idiObs" value="${feriasBean.ferias.fer_observacao}" title="Observação" styleClass="form-control" />
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel value="Data de Inicio:" for="idiDataInic" styleClass="control-label col-sm-2" />
+                        <div class="col-md-3 col-sm-6">
+
+                            <h:inputText pt:type="date" id="idiData" pt:required="required" value="${feriasBean.ferias.fer_data_inicio}" title="Data inicio de ferias" styleClass="form-control">
+                                <f:convertDateTime pattern="yyyy-MM-dd"/>
+                            </h:inputText>
+
+                        </div>
+                        <h:outputLabel value="Data Fim:" for="idiDataFim" styleClass="control-label col-sm-2" />
+                        <div class="col-md-3 col-sm-6">
+
+                            <h:inputText pt:type="date" id="idiData" pt:required="required" value="${feriasBean.ferias.fer_data_fim}" title="Data fim de ferias" styleClass="form-control">
+                                <f:convertDateTime pattern="yyyy-MM-dd"/>
+                            </h:inputText>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-9 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
+                            <h:link styleClass="btn btn-default" value="Cancelar" outcome="${feriasBean.cancelar()}"  />
+                            <h:commandButton styleClass="btn btn-primary" value="Salvar" action="${feriasBean.insert()}"   ></h:commandButton>
+                        </div>
+                    </div>
+                </h:form>
+            </f:view>
+        </div>
+    </ui:define>
+
+</ui:composition>

@@ -44,9 +44,12 @@
         </style>
         <script>
             $(function () {
-                $("#dtnasc").mask("99/99/9999");
+                alert('resertre')
+
             });
         </script>
+
+
         <div class="panel panel-body">          
             <f:view>
                 <h:form styleClass="form-horizontal">
@@ -60,10 +63,10 @@
                                     <label  for="nome" styleClass="control-label col-sm-1" >Nome Completo:</label>
                                 </div>
                                 <div class="col-md-2 text-right">
-                                    <input  id="nome" value="${fichaFuncionalBean.pessoa.pes_nome}"  style="border: none" title="Nome do Funcionário" styleClass="form-control col-md-3" readonly="true" />
+                                    <input  id="nome" value="${funcionarioBean.pessoa.pes_nome}"  style="border: none" title="Nome do Funcionário" styleClass="form-control col-md-3" readonly="true" />
                                 </div>
                                 <div class="imag">                                   
-<!--                                    <h:graphicImage class="user-photo" name="img/user.jpg"></h:graphicImage>-->
+                                    <!--                                    <h:graphicImage class="user-photo" name="img/user.jpg"></h:graphicImage>-->
                                 </div>
 
                             </div>
@@ -72,7 +75,7 @@
                                     <label  for="cpf" styleClass="control-label col-sm-1" >CPF:</label>
                                 </div>
                                 <div class="col-md-2 text-right">
-                                    <input id="cpf" value="${fichaFuncionalBean.pessoa.pes_cpf}"  style="border: none" title="CPF" styleClass="form-control" readonly="true" />
+                                    <input id="cpf" value="${funcionarioBean.pessoa.pes_cpf}"  style="border: none" title="CPF" styleClass="form-control" readonly="true" />
                                 </div>
 
                             </div>
@@ -82,7 +85,7 @@
                                     <label  for="dtnas" styleClass="control-label col-sm-2" >Data de Nascimento:</label>
                                 </div>
                                 <div class="col-md-2  text-right">
-                                    <input id="dtnas" value="${fichaFuncionalBean.pessoa.pes_datanasc}"  style="border: none" title="Data de Nascimeto" styleClass="form-control" readonly="true" />
+                                    <input id="dtnas" value="${funcionarioBean.pessoa.pes_datanasc}"  style="border: none" title="Data de Nascimeto" styleClass="form-control" readonly="true" />
                                 </div>
 
                             </div>
@@ -91,7 +94,7 @@
                                     <label  for="estCv" styleClass="control-label col-sm-2" >Data De Cadastro:</label>
                                 </div>
                                 <div class="col-md-2 text-right">
-                                    <input id="estCv" value="${fichaFuncionalBean.pessoa.pes_datacadastro}"  style="border: none" title="Data Admissional" styleClass="form-control" readonly="true" />
+                                    <input id="estCv" value="${funcionarioBean.pessoa.pes_datacadastro}"  style="border: none" title="Data Admissional" styleClass="form-control" readonly="true" />
                                 </div>                    
                             </div>
 
@@ -100,7 +103,7 @@
                                     <label  for="estCv" styleClass="control-label col-sm-2" >Estado Civíl:</label>
                                 </div>
                                 <div class="col-md-2 text-right">
-                                    <input id="estCv" value="${fichaFuncionalBean.pessoa.pes_estadocivil}"  style="border: none" title="Estado Civíl" styleClass="form-control" readonly="true" />
+                                    <input id="estCv" value="${funcionarioBean.pessoa.pes_estadocivil}"  style="border: none" title="Estado Civíl" styleClass="form-control" readonly="true" />
                                 </div> 
                             </div>
                             <div class="form-group">
@@ -109,7 +112,7 @@
                                     <label  for="tipPessoa" styleClass="control-label col-sm-2" >Tipo Pessoa:</label>
                                 </div>
                                 <div class="col-md-2 text-right">
-                                    <input id="tipPessoa" value="${fichaFuncionalBean.pessoa.pes_tipo}"  style="border: none" title="Tipo Pessoa" styleClass="form-control" readonly="true" />
+                                    <input id="tipPessoa" value="${funcionarioBean.pessoa.pes_tipo}"  style="border: none" title="Tipo Pessoa" styleClass="form-control" readonly="true" />
                                 </div>
                             </div>
 
@@ -118,13 +121,13 @@
                                     <label  for="cdd" styleClass="control-label col-sm-1" >Cidade:</label>
                                 </div>
                                 <div class="col-md-2 text-right">
-                                    <input id="cdd" value="${fichaFuncionalBean.pessoa.cidade.cid_nome}"  style="border: none" title="Cidade" styleClass="form-control" readonly="true" />
+                                    <input id="cdd" value="${funcionarioBean.pessoa.cidade.cid_nome}"  style="border: none" title="Cidade" styleClass="form-control" readonly="true" />
                                 </div> 
                                 <div class="col-md-2 col-xs-offset-1 text-right">
                                     <label  for="ndp" styleClass="control-label col-sm-2" >Nome do Pai:</label>
                                 </div>
                                 <div class="col-md-2 text-right">
-                                    <input id="ndp" value="${fichaFuncionalBean.pessoa.pes_pai}"  style="border: none" title="Filiação" styleClass="form-control" readonly="true" />
+                                    <input id="ndp" value="${funcionarioBean.pessoa.pes_pai}"  style="border: none" title="Filiação" styleClass="form-control" readonly="true" />
                                 </div> 
                             </div>
 
@@ -133,14 +136,14 @@
                                     <label  for="brr" styleClass="control-label col-sm-1" >Bairro:</label>
                                 </div>
                                 <div class="col-md-2 text-right">
-                                    <input id="brr" value="${fichaFuncionalBean.pessoa.bairro.bai_descricao} "  style="border: none" title="Bairro" styleClass="form-control" readonly="true" />
+                                    <input id="brr" value="${funcionarioBean.pessoa.bairro.bai_descricao} "  style="border: none" title="Bairro" styleClass="form-control" readonly="true" />
                                 </div> 
 
                                 <div class="col-md-2 col-xs-offset-1 text-right">
                                     <label  for="ndm" styleClass="control-label col-sm-2" >Nome da Mãe:</label>
                                 </div>
                                 <div class="col-md-2 text-right">
-                                    <input id="ndm" value="${fichaFuncionalBean.pessoa.pes_mae}"  style="border: none" title="Filiação" styleClass="form-control" readonly="true" />
+                                    <input id="ndm" value="${funcionarioBean.pessoa.pes_mae}"  style="border: none" title="Filiação" styleClass="form-control" readonly="true" />
                                 </div> 
                             </div>
 
@@ -149,13 +152,13 @@
                                     <label  for="edr" styleClass="control-label col-sm-1" >Endereço:</label>
                                 </div>
                                 <div class="col-md-2 text-right">
-                                    <input id="edr" value="${fichaFuncionalBean.pessoa}"  style="border: none" title="Endereço" styleClass="form-control" readonly="true" />
+                                    <input id="edr" value="${funcionarioBean.pessoa.endereco}"  style="border: none" title="Endereço" styleClass="form-control" readonly="true" />
                                 </div> 
                                 <div class="col-md-2 col-xs-offset-1 text-right">
                                     <label  for="eml" styleClass="control-label col-sm-1" >E-mail:</label>
                                 </div>
                                 <div class="col-md-2 text-right">
-                                    <input id="eml" value="${fichaFuncionalBean.pessoa.pes_email}"  style="border: none" title="E-mail" styleClass="form-control" readonly="true" />
+                                    <input id="eml" value="${funcionarioBean.pessoa.pes_email}"  style="border: none" title="E-mail" styleClass="form-control" readonly="true" />
                                 </div> 
 
                             </div>
@@ -165,7 +168,7 @@
                                     <label  for="nmr" styleClass="control-label col-sm-1" >Número:</label>
                                 </div>
                                 <div class="col-md-2 text-right">
-                                    <input id="nmr" value="${fichaFuncionalBean.pessoa.pes_numeroend}"  style="border: none" title="Número da casa" styleClass="form-control" readonly="true" />
+                                    <input id="nmr" value="${funcionarioBean.pessoa.pes_numeroend}"  style="border: none" title="Número da casa" styleClass="form-control" readonly="true" />
                                 </div> 
 
 
@@ -173,7 +176,7 @@
                                     <label  for="tlf" styleClass="control-label col-sm-2" >Telefone:</label>
                                 </div>
                                 <div class="col-md-2 text-right">
-                                    <input id="tlf" value="${fichaFuncionalBean.pessoa.pes_telefone}"  style="border: none" title="Telefone" styleClass="form-control" readonly="true" />
+                                    <input id="tlf" value="${funcionarioBean.pessoa.pes_telefone}"  style="border: none" title="Telefone" styleClass="form-control" readonly="true" />
                                 </div> 
                             </div>
 
@@ -185,14 +188,14 @@
                                     <label  for="cde" styleClass="control-label col-sm-1" >Complemento:</label>
                                 </div>
                                 <div class="col-md-2 text-right">
-                                    <input id="cde" value="${fichaFuncionalBean.pessoa.pes_complementoend}"  style="border: none" title="Complemento" styleClass="form-control" readonly="true" />
+                                    <input id="cde" value="${funcionarioBean.pessoa.pes_complementoend}"  style="border: none" title="Complemento" styleClass="form-control" readonly="true" />
                                 </div>
 
                                 <div class="col-md-2 col-xs-offset-1 text-right">
                                     <label  for="cep" styleClass="control-label col-sm-1" >CEP:</label>
                                 </div>
                                 <div class="col-md-2 text-right">
-                                    <input id="cep" value="${fichaFuncionalBean.pessoa.pes_cpf}"  style="border: none" title="CEP" styleClass="form-control" readonly="true" />
+                                    <input id="cep" value="${funcionarioBean.pessoa.pes_cpf}"  style="border: none" title="CEP" styleClass="form-control" readonly="true" />
                                 </div> 
 
                             </div>
@@ -204,7 +207,7 @@
                                     <h:outputLabel value="Observação:" for="obs" styleClass="control-label col-sm-1 text-right" />
                                 </div>
                                 <div class="col-md-2 text-left">
-                                    <p:inputTextarea rows="4" cols="75" readonly="true" value="${fichaFuncionalBean.pessoa.pes_observacoes}" />
+                                    <p:inputTextarea rows="4" cols="75" readonly="true" value="${funcionarioBean.pessoa.pes_observacoes}" />
                                 </div> 
 
                             </div>
@@ -214,7 +217,7 @@
                                 <h3>Lista de Benefícios</h3>
                             </div>
 
-                            <h:dataTable value="${fichaFuncionalBean.beneficios}"  var="item"  styleClass="dataTable table table-bordered table-striped">
+                            <h:dataTable class="table" value="${funcionarioBean.beneficios}"  var="item"  styleClass="dataTable table table-bordered table-striped">
 
                                 <h:column>
                                     <f:facet name="header">
@@ -231,12 +234,12 @@
                             </h:dataTable>
 
                         </div>
-                        <div class="bloco2">
+                        <div  id="cargos" class="bloco2">
                             <div class="form-group">
                                 <h3>Cargos</h3>
                             </div>
 
-                            <h:dataTable value="${fichaFuncionalBean.cargos}"  var="itens"  styleClass="dataTable table table-bordered table-striped">
+                            <h:dataTable id="tblcargo" value="${funcionarioBean.cargos}"  var="itens"  styleClass="dataTable table table-bordered table-striped">
 
                                 <h:column>
                                     <f:facet name="header">
@@ -252,26 +255,55 @@
                                 <h3>Graduações</h3>
                             </div>
 
-                            <h:dataTable value=""  var="item"  styleClass="dataTable table table-bordered table-striped">
+                            <h:dataTable value="${funcionarioBean.graduacoes}"  var="it"  styleClass="dataTable table table-bordered table-striped">
 
                                 <h:column>
                                     <f:facet name="header">
-                                        <h:outputText value="Observação"/>
+                                        <h:outputText value="Código"/>
                                     </f:facet>
-                                    <h:outputText value="#{item}"/>
+                                    <h:outputText value="#{it.graduacao.grd_codigo}"/>
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">
-                                        <h:outputText value="Data Inicio"/>
+                                        <h:outputText value="Descrição"/>
                                     </f:facet>
-                                    <h:outputText value="#{item}"/>
+                                    <h:outputText value="#{it.graduacao.grd_descricao}"/>
+                                </h:column>
+
+                            </h:dataTable>
+                        </div>
+                        <div class="bloco2">
+                            <div class="form-group">
+                                <h3>Salário</h3>
+                            </div>
+
+                            <h:dataTable value="${funcionarioBean.salarios}"  var="var"  styleClass="dataTable table table-bordered table-striped">
+
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Cargo"/>
+                                    </f:facet>
+                                    <h:outputText value="#{var.cargo.car_descricao}"/>
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">
-                                        <h:outputText value="Data Final"/>
+                                        <h:outputText value="Data de Inicio"/>
                                     </f:facet>
-                                    <h:outputText value="#{item}"/>
+                                    <h:outputText value="#{var.sal_datainicio}"/>
                                 </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Data Fim"/>
+                                    </f:facet>
+                                    <h:outputText value="#{var.sal_datafim}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Valor Bruto"/>
+                                    </f:facet>
+                                    <h:outputText value="#{var.sal_valorbruto}"/>
+                                </h:column>
+
                             </h:dataTable>
                         </div>
                         <div class="bloco2">
@@ -279,11 +311,13 @@
                                 <h3>Férias</h3>  
                             </div>
                             <div class="btns-top-table col-xs-offset-10">
-                                <h:link outcome="fichafunlst" styleClass="btn btn-success">
-                                    <i class="fa fa-plus"></i> Inserir
-                                </h:link>
+                                <h:link outcome="feriasfrm" value="Insert" styleClass="btn btn-success" >
+                                    <f:param name="id" value="${funcionarioBean.pessoa.pes_codigo}"/>
+                                    <i class="fa fa-plus"></i> 
+                                </h:link>                             
+
                             </div>
-                            <h:dataTable value="${fichaFuncionalBean.ferias}"  var="item"  styleClass="dataTable table table-bordered table-striped">
+                            <h:dataTable value="${funcionarioBean.ferias}"  var="item"  styleClass="dataTable table table-bordered table-striped">
 
                                 <h:column>
                                     <f:facet name="header">
@@ -339,51 +373,49 @@
                             <div class="col-xs-3">
                                 <h3>Faltas</h3>  
                             </div>
+
                             <div class="btns-top-table col-xs-offset-10">
-                                <h:link outcome="faltafrm" value="Inserir" styleClass="btn btn-success">
-                                    <f:param name="codigoFicha" value="${fichaFuncionalBean.fichaFuncional.ffu_codigo}"/>
+                                <h:link outcome="faltafrm" value="Insert" styleClass="btn btn-success" >
+                                    <f:param name="id" value="${funcionarioBean.pessoa.pes_codigo}"/>
                                     <i class="fa fa-plus"></i> 
-                                </h:link>
+                                </h:link>                             
+
                             </div>
-                            <h:dataTable value=""  var="itm"  styleClass="dataTable table table-bordered table-striped">
+
+                            <h:dataTable value="${funcionarioBean.faltas}"  var="itm"  styleClass="dataTable table table-bordered table-striped">
 
                                 <h:column>
                                     <f:facet name="header">
                                         <h:outputText value="Data"/>
                                     </f:facet>
-                                    <h:outputText value="#{itm}"/>
+                                    <h:outputText value="#{itm.flt_data}"/>
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">
                                         <h:outputText value="Quantidade em Horas"/>
                                     </f:facet>
-                                    <h:outputText value="#{itm}"/>
+                                    <h:outputText value="#{itm.flt_qtd_horas}"/>
                                 </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Quantidade em Horas"/>
-                                    </f:facet>
-                                    <h:outputText value="#{itm}"/>
-                                </h:column>
+
                                 <h:column>
                                     <f:facet name="header">
                                         <h:outputText value="Justificativa"/>
                                     </f:facet>
-                                    <h:outputText value="#{itm}"/>
+                                    <h:outputText value="#{itm.flt_justificativa}"/>
                                 </h:column>
 
                                 <h:column>
                                     <f:facet name="header">
                                         <h:outputText value="Observção"/>
                                     </f:facet>
-                                    <h:outputText value="#{itm}"/>
+                                    <h:outputText value="#{itm.observacao}"/>
                                 </h:column>
                             </h:dataTable>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-md-offset-9 col-md-11 col-xs-offset-10 col-sm-12 btn-group-separated">
-                            <h:link styleClass="btn btn-default" value="Cancelar" />
+                            <h:link styleClass="btn btn-default" value="Cancelar" outcome="${funcionarioBean.cancelar()}" />
                             <h:commandButton styleClass="btn btn-primary" value="Salvar" ></h:commandButton>
                         </div>
                     </div>
