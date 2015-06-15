@@ -6,6 +6,7 @@
 package rs.controller;
 
 import cfg.dao.PessoaDAO;
+import cfg.model.Pessoa;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.model.DataModel;
@@ -27,9 +28,27 @@ public class RecrutamentoPessoaBean {
 
     private RecrutamentoPessoa recrutamentoPessoa;
     private RecrutamentoPessoasDAO dao = new RecrutamentoPessoasDAO();
-    private PessoaDAO pessoaDAO = new PessoaDAO();
     private DataModel recrutamentoPessoas;
+    private Pessoa pessoa = new Pessoa();
+    private PessoaDAO daoPes = new PessoaDAO();
     private DataModel pessoas;
+
+    public Pessoa getPessoa() {
+        return pessoa;
+    }
+
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
+    }
+
+    public DataModel getPessoas() {
+        this.pessoas = new ListDataModel(daoPes.findAll());
+        return pessoas;
+    }
+
+    public void setPessoas(DataModel pessoas) {
+        this.pessoas = pessoas;
+    }
 
     public String getsTitle() {
         return sTitle;
@@ -63,15 +82,6 @@ public class RecrutamentoPessoaBean {
 
     public void setRecrutamentosPessoa(DataModel recrutamentosPessoa) {
         this.recrutamentoPessoas = recrutamentosPessoa;
-    }
-
-    public DataModel getPessoas() {
-        this.pessoas = new ListDataModel(pessoaDAO.findAll());
-        return pessoas;
-    }
-
-    public void setPessoas(DataModel pessoas) {
-        this.pessoas = pessoas;
     }
 
     public String insert() {

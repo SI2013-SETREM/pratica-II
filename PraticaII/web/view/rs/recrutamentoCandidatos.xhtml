@@ -18,14 +18,38 @@
         <f:view>
             <h:form styleClass="form-horizontal">
                 <div class="form-group">
-                    <h:dataTable value="${recrutamentoPessoaBean.pessoas}" var="item" styleClass="dataTable table table-bordered table-striped">
+                    <h:dataTable value="${RecrutamentoPessoaBean.pessoas}" var="item" styleClass="dataTable table table-bordered table-striped">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Código"/>
+                            </f:facet>
+                            <h:outputText value="${item.getPes_codigo()}"/>
+                        </h:column>
                         <h:column>
                             <f:facet name="header">
                                 <h:outputText value="Nome"/>
                             </f:facet>
                             <h:outputText value="${item.getPes_nome()}"/>
                         </h:column>
-                    </h:dataTable>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="CPF"/>
+                            </f:facet>
+                            <h:outputText value="${item.getPes_cpf()}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="RG"/>
+                            </f:facet>
+                            <h:outputText value="${item.getPes_rg()}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Cidade"/>
+                            </f:facet>
+                            <h:outputText value="${item.cidade.getCid_nome()}"/>
+                        </h:column>
+                    </h:dataTable>s
                 </div>
                 <div class="form-group row">
                     <div class="col-lg-6 btn-group-separated">
