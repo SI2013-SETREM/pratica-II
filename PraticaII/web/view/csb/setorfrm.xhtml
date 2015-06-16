@@ -9,7 +9,21 @@
     <ui:define name="title">
         ${setorBean.pTitle}
     </ui:define>
-
+    <ui:define name="header">
+        <script type="text/javascript">
+            $(function () {
+                $("#epcLst").click(function () {
+                    var width = 550;
+                    var height = 400;
+                    var URL = document.URL;
+                    var left = 150;
+                    var top = 100;
+                    URL = URL.replace("setorfrm.xhtml", "pop-epclst.xhtml");
+                    window.open(URL, 'janela', 'width=' + width + ', height=' + height + ', top=' + top + ', left=' + left + ', scrollbars=yes, status=no, toolbar=no, location=no, directories=no, menubar=no, resizable=no, fullscreen=no');
+                });
+            });
+        </script>
+    </ui:define>
     <ui:define name="breadcrumb">
         <li>Cargos, salários, benefícios</li>
         <li><h:link value="${setorBean.pTitle}" outcome="/faces/view/csb/setorlst" /></li>
@@ -31,15 +45,16 @@
                     <div class="form-group">
                         <p:outputLabel value="Epis:" for="epis" styleClass="control-label col-sm-1" />
                         <div class="col-md-6 col-sm-12">
-                            <p:autoComplete id="epis" multiple="true" value="#{setorBean.setor.epis}" completeMethod="#{autoCompleteEpiBean.completaDescricaoEpi}"
+                            <p:autoComplete pt:style="float: left;" id="epis" multiple="true" value="#{setorBean.setor.epis}" completeMethod="#{autoCompleteEpiBean.completaDescricaoEpi}"
                                             var="epi" itemLabel="#{epi.epi_descricao}" itemValue="#{epi}" converter="epiConverter" forceSelection="true">
-                                <p:column style="width:10%">
+                                <p:column>
                                     <h:outputText styleClass="ui-theme ui-theme-#{epi.epi_descricao}"/>
                                 </p:column>
                                 <p:column>
                                     <h:outputText value="#{epi.epi_descricao}" />
                                 </p:column>
                             </p:autoComplete>
+                            <button style="float: right;" id="epcLst" class="btn btn-mini btn-info" type="button">?</button>
                         </div>
                     </div>  
                     <div class="form-group">
