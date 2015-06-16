@@ -3,14 +3,11 @@ package td.model;
 import cfg.model.Pessoa;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -32,18 +29,6 @@ public class Solicitacao implements Serializable{
     @ManyToOne
     @JoinColumn(name = "pes_codigo_solicitou")
     private Pessoa pessoa;
-    /*
-    @ManyToMany
-    @JoinTable(name = "trd_pessoas_recebertreinamento")
-    private List<Pessoa> funcionarios;
-
-    public List<Pessoa> getFuncionarios() {
-        return funcionarios;
-    }
-
-    public void setFuncionarios(List<Pessoa> funcionarios) {
-        this.funcionarios = funcionarios;
-    }*/
 
     public Pessoa getPessoa() {
         return pessoa;

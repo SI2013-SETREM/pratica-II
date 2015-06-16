@@ -62,39 +62,6 @@
                     </h:column>
                 </h:dataTable>
             </h:form>
-            
-            <h:form>
-                <h:dataTable value="${solicitacaoBean.solicitacao.funcionarios}" var="item2" styleClass="dataTable table table-bordered table-striped">
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Solicitante"/>
-                        </f:facet>
-                        <h:outputText value="${item2.pes_nome}"/>
-                    </h:column>
-                   <!-- <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Treinamento"/>
-                        </f:facet>
-                        <h:outputText value="${item2.treinamentos}"/>
-                    </h:column>-->
-                    <h:column headerClass="col-editar-header">
-                        <f:facet name="header">
-                            <h:outputText value="Editar"/>
-                        </f:facet>
-                        <h:commandLink action="${solicitacaoBean.edit(item)}">
-                            <i class="fa fa-pencil"></i> Editar
-                        </h:commandLink>
-                    </h:column>
-                    <h:column headerClass="col-excluir-header">
-                        <f:facet name="header">
-                            <h:outputText value="Excluir"/>
-                        </f:facet>
-                        <h:commandLink onclick="return confirm('Deseja realmente excluir o ${solicitacaoBean.sTitle}?');" action="${solicitacaoBean.delete(item)}">
-                            <i class="fa fa-trash"></i> Excluir
-                        </h:commandLink>
-                    </h:column>
-                </h:dataTable>
-            </h:form>
         </div>
     </ui:define>
 </ui:composition>
