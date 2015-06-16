@@ -1,5 +1,7 @@
 package td.controller;
 
+import ad.dao.CompetenciaDAO;
+import ad.model.Competencia;
 import cfg.dao.PessoaDAO;
 import cfg.model.Pessoa;
 import java.util.List;
@@ -18,8 +20,12 @@ public class SolicitacaoBean {
     private final String pTitle = Solicitacao.pTitle;
     
     private List<Pessoa> lstpessoa;
+    private List<Pessoa> lstUmapessoa;
+    private List<Competencia> lstcompetencia;
+    
     private Pessoa pessoa = new Pessoa();
     private PessoaDAO pessoadao = new PessoaDAO();
+    private CompetenciaDAO compdao = new CompetenciaDAO();
 
     private Solicitacao solicitacao = new Solicitacao();
     private SolicitacaoDAO dao = new SolicitacaoDAO();
@@ -82,13 +88,37 @@ public class SolicitacaoBean {
     public String listar() {
         return "solicitacaolst";
     }
+
+    public List<Pessoa> getLstUmapessoa() {
+        lstUmapessoa = pessoadao.findAll();
+        return lstUmapessoa;
+    }
+
+    public void setLstUmapessoa(List<Pessoa> lstUmapessoa) {
+        this.lstUmapessoa = lstUmapessoa;
+    }
     
     public List<Pessoa> getLstpessoa() {
-        lstpessoa = pessoadao.findAll();
         return lstpessoa;
     }
 
     public void setLstpessoa(List<Pessoa> lstpessoa) {
         this.lstpessoa = lstpessoa;
+    }
+
+    public List<Competencia> getLstcompetencia() {
+        return lstcompetencia;
+    }
+
+    public void setLstcompetencia(List<Competencia> lstcompetencia) {
+        this.lstcompetencia = lstcompetencia;
+    }
+    
+    public List<Pessoa> completePessoa(String query) {
+        return pessoadao.searchPessoa(query);
+    }
+    
+    public List<Competencia> completeCompetencia(String query) {
+        return compdao.searchCompetencia(query);
     }
 }

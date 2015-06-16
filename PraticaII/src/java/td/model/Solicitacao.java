@@ -32,7 +32,7 @@ public class Solicitacao implements Serializable{
     @ManyToOne
     @JoinColumn(name = "pes_codigo_solicitou")
     private Pessoa pessoa;
-    
+    /*
     @ManyToMany
     @JoinTable(name = "trd_pessoas_recebertreinamento")
     private List<Pessoa> funcionarios;
@@ -43,7 +43,7 @@ public class Solicitacao implements Serializable{
 
     public void setFuncionarios(List<Pessoa> funcionarios) {
         this.funcionarios = funcionarios;
-    }
+    }*/
 
     public Pessoa getPessoa() {
         return pessoa;

@@ -41,4 +41,13 @@ public class CompetenciaDAO {
         Query q = session.createQuery("from Competencia");
         return q.list();
     }
+    
+    public List<Competencia> searchCompetencia(String name) {
+        String sqlCompetencia = "";
+        if (name != null && name != "") {
+            sqlCompetencia = " and upper (translate(cmp_descricao, 'ÁÇÉÍÓÚÀÈÌÒÙÂÊÎÔÛÃÕËÜáçéíóúàèìòùâêîôûãõëü', 'ACEIOUAEIOUAEIOUAOEUaceiouaeiouaeiouaoeu'))"
+                    + " LIKE upper(translate('%" + name + "%', 'ÁÇÉÍÓÚÀÈÌÒÙÂÊÎÔÛÃÕËÜáçéíóúàèìòùâêîôûãõëü', 'ACEIOUAEIOUAEIOUAOEUaceiouaeiouaeiouaoeu'))";
+        }
+        return session.createQuery("from Competencia where 1 = 1 " + sqlCompetencia).list();
+    }
 }
