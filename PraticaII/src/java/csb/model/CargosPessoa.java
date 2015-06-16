@@ -17,7 +17,7 @@ import javax.persistence.Temporal;
  * @author Juliano Pires
  */
 @Entity
-@Table(name = "csb_cargos_pessoa")
+@Table(name = "csb_cargospessoa")
 @IdClass(CargosPessoa.CargosPessoaPK.class)
 public class CargosPessoa implements Serializable {
     public static final String sTitle = "Cargo";

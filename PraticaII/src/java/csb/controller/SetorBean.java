@@ -1,11 +1,15 @@
 package csb.controller;
 
+import csb.dao.EpiDAO;
 import csb.dao.SetorDAO;
+import csb.model.Epi;
 import csb.model.Setor;
+import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
+
 /**
  *
  * @author Juliano Pires
@@ -20,6 +24,11 @@ public class SetorBean {
     private Setor setor = new Setor();
     private SetorDAO dao = new SetorDAO();
     private DataModel setores;
+
+    /* PARA FAZER A COMBO DE EPIS */
+    private List<Epi> lsEpi;
+    private Epi epi = new Epi();
+    private EpiDAO epidao = new EpiDAO();
 
     public SetorBean() {
     }
@@ -75,11 +84,20 @@ public class SetorBean {
         } else {
             dao.insert(setor);
         }
-       return "setorlst";
+        return "setorlst";
     }
 
     public String listar() {
         return "setorlst";
+    }
+
+    public List<Epi> getLsEpi() {
+        lsEpi = epidao.findEpc();
+        return lsEpi;
+    }
+
+    public void setLsEpi(List<Epi> lsepi) {
+        this.lsEpi = lsepi;
     }
 
 }

@@ -6,7 +6,7 @@
     <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
     <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/praticaII</property>
     <property name="hibernate.connection.username">postgres</property>
-    <property name="hibernate.connection.password"></property>
+    <property name="hibernate.connection.password">ha6dqqvd</property>
     <property name="hibernate.show_sql">true</property>
     <property name="hibernate.format_sql">true</property>
     <property name="hibernate.hbm2ddl.auto">update</property>
@@ -38,7 +38,6 @@
     <mapping class="csb.model.Cargo"/>
     <mapping class="csb.model.CargosPessoa"/>
     <mapping class="csb.model.Epi"/>
-    <mapping class="csb.model.EpiCargo"/>
     <mapping class="csb.model.EquipamentosPessoa"/>
     <mapping class="csb.model.ExamePessoa"/>
     <mapping class="csb.model.Graduacao"/>

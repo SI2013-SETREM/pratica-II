@@ -59,5 +59,30 @@ public class Epi implements Serializable {
         this.epi_situacao = epi_situacao;
     }
 
-    
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 79 * hash + this.epi_codigo;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Epi other = (Epi) obj;
+        if (this.epi_codigo != other.epi_codigo) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return this.getEpi_descricao();
+    }
 }

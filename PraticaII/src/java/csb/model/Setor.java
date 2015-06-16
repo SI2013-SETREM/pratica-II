@@ -7,8 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -29,13 +32,9 @@ public class Setor implements Serializable {
     private int set_codigo;
     private String set_descricao;
 
-    @OneToMany
+    @ManyToMany
     @JoinTable(name = "csb_episetor")
     private List<Epi> epis;
-
-    @OneToMany
-    @JoinTable(name = "csb_cargossetor")
-    private List<Cargo> cargos;
 
     public Setor() {
     }
@@ -62,16 +61,7 @@ public class Setor implements Serializable {
 
     public void setEpis(List<Epi> epis) {
         this.epis = epis;
-    }
-
-    public List<Cargo> getCargos() {
-        return cargos;
-    }
-
-    public void setCargos(List<Cargo> cargos) {
-        this.cargos = cargos;
-    }
-    
+    }  
     
     @Override
     public int hashCode() {

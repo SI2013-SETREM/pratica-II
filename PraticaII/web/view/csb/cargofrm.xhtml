@@ -102,7 +102,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <h:outputLabel value="Cargo Pai?:" for="car_tempai" styleClass="control-label col-sm-1" />
+                        <h:outputLabel value="É Cargo Pai?:" for="car_tempai" styleClass="control-label col-sm-1" />
                         <div style="padding-top: 5px" class="col-md-6 col-sm-12">
                             <h:selectBooleanCheckbox value="false" styleClass="carTempaiChck" title="Tem Pai" />
                         </div>
@@ -124,6 +124,20 @@
                             </div>
                         </div>
                     </div>
+                    <h:dataTable value="${cargosBean.cargo.graduacao}" var="item" rendered="${cargosBean.cargo.graduacao.rowAvailable}" styleClass="dataTable table table-bordered table-striped">
+                        <h:column pt:style="display: none;">
+                            <f:facet name="header">
+                                <h:outputText value="Descrição"/>
+                            </f:facet>
+                            <h:outputText value="${item.grd_codigo()}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="CBO"/>
+                            </f:facet>
+                            <h:outputText value="${item.grd_descricao()}"/>
+                        </h:column>
+                    </h:dataTable>
                     <div class="form-group">
                         <div class="col-md-offset-1 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
                             <h:link styleClass="btn btn-default" value="Cancelar" outcome="#{cargosBean.listar()}" />
