@@ -6,7 +6,7 @@
     <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
     <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/praticaII</property>
     <property name="hibernate.connection.username">postgres</property>
-    <property name="hibernate.connection.password">ha6dqqvd</property>
+    <property name="hibernate.connection.password">123</property>
     <property name="hibernate.show_sql">true</property>
     <property name="hibernate.format_sql">true</property>
     <property name="hibernate.hbm2ddl.auto">update</property>
@@ -83,5 +83,10 @@
     <mapping class="td.model.Local"/>
     <mapping class="td.model.Solicitacao"/>
     <mapping class="td.model.Treinamento"/>
+    <mapping class="td.model.PessoasReceberTreinamento"/>
+    <mapping class="td.model.AlunosTurma"/>
+    <mapping class="td.model.Turma"/>
+    <mapping class="td.model.CompetenciasSolicitacao"/>
+    <mapping class="td.model.CursosPessoa"/>
   </session-factory>
 </hibernate-configuration>
