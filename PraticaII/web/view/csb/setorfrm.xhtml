@@ -28,7 +28,6 @@
                             <h:inputText pt:required="required" id="setDescricao" value="#{setorBean.setor.set_descricao}" title="Descrição" styleClass="form-control" pt:autofocus="" />
                         </div>
                     </div>
-
                     <div class="form-group">
                         <p:outputLabel value="Epis:" for="epis" styleClass="control-label col-sm-1" />
                         <div class="col-md-6 col-sm-12">
@@ -43,22 +42,12 @@
                             </p:autoComplete>
                         </div>
                     </div>  
-
-
-
-
-
-
-
-
                     <div class="form-group">
                         <div class="col-md-offset-1 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
                             <h:link styleClass="btn btn-default" value="Cancelar" outcome="#{setorBean.listar()}" />
                             <h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{setorBean.salvar()}"></h:commandButton>
                         </div>
                     </div>
-
-
                 </h:form>
             </f:view>
         </div>

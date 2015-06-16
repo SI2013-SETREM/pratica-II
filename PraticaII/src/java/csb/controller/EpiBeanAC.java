@@ -1,7 +1,5 @@
 package csb.controller;
 
-import ad.dao.CompetenciaDAO;
-import ad.model.Competencia;
 import csb.dao.EpiDAO;
 import csb.model.Epi;
 import java.util.List;

@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
@@ -39,13 +40,13 @@ public class Cargo implements Serializable, Comparable<Cargo> {
     @JoinColumn(name = "set_codigo")
     private Setor setor;
 
-    @OneToMany
+    @ManyToMany
     @JoinTable(name = "csb_competencias_cargo")
     private List<Competencia> Competencia;
 
-    @OneToMany
+    @ManyToMany
     @JoinTable(name = "csb_graduacoes_cargo")
-    private List<Graduacao> Graduacao;
+    private List<Graduacao> Graduacoes;
 
     public Cargo() {
 
@@ -131,12 +132,12 @@ public class Cargo implements Serializable, Comparable<Cargo> {
         this.Competencia = Competencia;
     }
 
-    public List<Graduacao> getGraduacao() {
-        return Graduacao;
+    public List<Graduacao> getGraduacoes() {
+        return Graduacoes;
     }
 
-    public void setGraduacao(List<Graduacao> Graduacao) {
-        this.Graduacao = Graduacao;
+    public void setGraduacoes(List<Graduacao> Graduacoes) {
+        this.Graduacoes = Graduacoes;
     }
 
     @Override

@@ -3,8 +3,10 @@ package csb.controller;
 import csb.controller.*;
 
 import csb.dao.CargoDAO;
+import csb.dao.GraduacaoDAO;
 import csb.dao.SetorDAO;
 import csb.model.Cargo;
+import csb.model.Graduacao;
 import csb.model.Setor;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -22,16 +24,21 @@ public class CargosBean {
     private Cargo cargo = new Cargo();
     private CargoDAO dao = new CargoDAO();
     private DataModel cargos;
-    
+
 
     /* PARA FAZER A COMBO DE CARGOS */
     private DataModel lsCargosParents;
     private List<Cargo> lsCargo;
-    
+
     /* PARA FAZER A COMBO DE SETORES */
     private List<Setor> lstsetor;
     private Setor setor = new Setor();
     private SetorDAO setordao = new SetorDAO();
+
+    /* PARA FAZER O AUTOCOMPLETE DE GRADUAÇÕES */
+    private List<Graduacao> lsGraduacao;
+    private Graduacao graduacao = new Graduacao();
+    private GraduacaoDAO graduacaodao = new GraduacaoDAO();
 
     public CargosBean() {
     }
@@ -62,14 +69,14 @@ public class CargosBean {
     }
 
     public DataModel getLsCargosParents() {
-       this.lsCargosParents = new ListDataModel(dao.findAllParents());
-       return this.lsCargosParents;
+        this.lsCargosParents = new ListDataModel(dao.findAllParents());
+        return this.lsCargosParents;
     }
 
     public void setLsCargosParents(DataModel lsCargosParents) {
         this.lsCargosParents = lsCargosParents;
     }
-    
+
     public String insert() {
         dao.insert(cargo);
         return "cargolst";
@@ -112,7 +119,7 @@ public class CargosBean {
     public void setLstsetor(List<Setor> lstsetor) {
         this.lstsetor = lstsetor;
     }
-    
+
     public List<Cargo> getLscargo() {
         lsCargo = dao.findAllParents();
         return lsCargo;
@@ -120,5 +127,14 @@ public class CargosBean {
 
     public void setLscargo(List<Cargo> lscargo) {
         this.lsCargo = lscargo;
+    }
+    
+     public List<Graduacao> getLsGraduacao() {
+        lsGraduacao = graduacaodao.findAll();
+        return lsGraduacao;
+    }
+
+    public void setLsGraduacao(List<Graduacao> lsgraduacao) {
+        this.lsGraduacao = lsgraduacao;
     }
 }
