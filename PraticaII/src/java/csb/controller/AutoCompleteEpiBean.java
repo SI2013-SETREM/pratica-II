@@ -23,10 +23,22 @@ public class AutoCompleteEpiBean {
 
     public List<Epi> completaDescricaoEpi(String query) {
         List<Epi> allThemes = serviceEpi.getEpis();
-        List<Epi> filteredThemes = new ArrayList<Epi>();
+        List<Epi> filteredThemes = new ArrayList<>();
          
-        for (int i = 0; i < allThemes.size(); i++) {
-            Epi skin = allThemes.get(i);
+        for (Epi skin : allThemes) {
+            if(skin.getEpi_descricao().toLowerCase().startsWith(query)) {
+                filteredThemes.add(skin);
+            }
+        }
+         
+        return filteredThemes;
+    }
+    
+    public List<Epi> completaDescricaoEpc(String query) {
+        List<Epi> allThemes = serviceEpi.getEpcs();
+        List<Epi> filteredThemes = new ArrayList<>();
+         
+        for (Epi skin : allThemes) {
             if(skin.getEpi_descricao().toLowerCase().startsWith(query)) {
                 filteredThemes.add(skin);
             }

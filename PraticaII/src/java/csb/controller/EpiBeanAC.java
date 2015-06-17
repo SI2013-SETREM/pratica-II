@@ -15,9 +15,14 @@ import javax.faces.bean.ManagedBean;
 public class EpiBeanAC {
 
     private List<Epi> lsEpi;
-    private EpiDAO dao = new EpiDAO();
+    private final EpiDAO dao = new EpiDAO();
 
     public List<Epi> getEpis() {
+        lsEpi = dao.findEpi();
+        return lsEpi;
+    }
+    
+    public List<Epi> getEpcs() {
         lsEpi = dao.findEpc();
         return lsEpi;
     }

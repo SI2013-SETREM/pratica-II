@@ -48,6 +48,10 @@ public class Cargo implements Serializable, Comparable<Cargo> {
     @JoinTable(name = "csb_graduacoes_cargo")
     private List<Graduacao> Graduacoes;
 
+    @ManyToMany
+    @JoinTable(name = "csb_epicargo")
+    private List<Epi> Epis;
+
     public Cargo() {
 
     }
@@ -138,6 +142,14 @@ public class Cargo implements Serializable, Comparable<Cargo> {
 
     public void setGraduacoes(List<Graduacao> Graduacoes) {
         this.Graduacoes = Graduacoes;
+    }
+
+    public List<Epi> getEpis() {
+        return Epis;
+    }
+
+    public void setEpis(List<Epi> Epis) {
+        this.Epis = Epis;
     }
 
     @Override

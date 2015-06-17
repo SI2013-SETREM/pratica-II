@@ -43,9 +43,9 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <p:outputLabel value="Epis:" for="epis" styleClass="control-label col-sm-1" />
+                        <p:outputLabel value="Epcs:" for="epis" styleClass="control-label col-sm-1" />
                         <div class="col-md-6 col-sm-12">
-                            <p:autoComplete pt:style="float: left;" id="epis" multiple="true" value="#{setorBean.setor.epis}" completeMethod="#{autoCompleteEpiBean.completaDescricaoEpi}"
+                            <p:autoComplete pt:style="float: left;" id="epis" multiple="true" value="#{setorBean.setor.epis}" completeMethod="#{autoCompleteEpiBean.completaDescricaoEpc}"
                                             var="epi" itemLabel="#{epi.epi_descricao}" itemValue="#{epi}" converter="epiConverter" forceSelection="true">
                                 <p:column>
                                     <h:outputText styleClass="ui-theme ui-theme-#{epi.epi_descricao}"/>
