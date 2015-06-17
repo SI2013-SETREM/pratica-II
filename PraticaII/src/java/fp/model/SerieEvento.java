@@ -9,10 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-/**
- *
- * @author Max
- */
+
 @Entity
 @Table(name = "ffp_serie_evento")
 public class SerieEvento implements Serializable{
@@ -51,4 +48,32 @@ public class SerieEvento implements Serializable{
     public void setSev_nome(String sev_nome) {
         this.sev_nome = sev_nome;
     }
+    
+    @Override
+    public int hashCode(){
+    int hash = 7;
+    hash = 59* hash + this.sev_codigo;
+    return hash;
+    }
+    
+    @Override
+    public boolean equals (Object obj){
+    if (obj == null){
+    return false;
+    }
+    if(getClass() != obj.getClass()){
+    return false;
+    }
+    final SerieEvento other = (SerieEvento) obj;
+    if(this.sev_codigo != other.sev_codigo){
+    return false;
+    }
+    return true;
+    }
+    
+    @Override
+    public String toString(){
+    return getSev_nome();
+    }
+    
 }

@@ -1,17 +1,12 @@
 
 package fp.converter;
-
-
-
 import fp.dao.TabelaINSSDAO;
-
-
-
 import fp.model.TabelaINSS;
-
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.FacesConverter;
+
+
 
 @FacesConverter("tabelaINSSConverter")
 public class TabelaINSSConverter implements javax.faces.convert.Converter{

@@ -139,6 +139,32 @@ public class TabelaINSS implements Serializable{
     public void setTbs_nome(String tbs_nome) {
         this.tbs_nome = tbs_nome;
     }
+    @Override
+    public int hashCode(){
+    int hash = 7;
+    hash = 59* hash + this.tbs_codigo;
+    return hash;
+    }
+    
+    @Override
+    public boolean equals (Object obj){
+    if (obj == null){
+    return false;
+    }
+    if(getClass() != obj.getClass()){
+    return false;
+    }
+    final TabelaINSS other = (TabelaINSS) obj;
+    if(this.tbs_codigo != other.tbs_codigo){
+    return false;
+    }
+    return true;
+    }
+    
+    @Override
+    public String toString(){
+    return getTbs_nome();
+    }
 
    
     

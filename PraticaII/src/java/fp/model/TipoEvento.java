@@ -50,4 +50,30 @@ public class TipoEvento implements Serializable{
     public void setTpe_nome(String tpe_nome) {
         this.tpe_nome = tpe_nome;
     }
+    @Override
+    public int hashCode(){
+    int hash = 7;
+    hash = 59* hash + this.tpe_codigo;
+    return hash;
+    }
+    
+    @Override
+    public boolean equals (Object obj){
+    if (obj == null){
+    return false;
+    }
+    if(getClass() != obj.getClass()){
+    return false;
+    }
+    final TipoEvento other = (TipoEvento) obj;
+    if(this.tpe_codigo != other.tpe_codigo){
+    return false;
+    }
+    return true;
+    }
+    
+    @Override
+    public String toString(){
+    return getTpe_nome();
+    }
 }

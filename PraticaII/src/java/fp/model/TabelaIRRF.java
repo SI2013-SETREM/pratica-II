@@ -85,6 +85,31 @@ public class TabelaIRRF implements Serializable{
     public void setTif_por_pis_pasep(double tif_por_pis_pasep) {
         this.tif_por_pis_pasep = tif_por_pis_pasep;
     }
-
+@Override
+    public int hashCode(){
+    int hash = 7;
+    hash = 59* hash + this.tif_codigo;
+    return hash;
+    }
+    
+    @Override
+    public boolean equals (Object obj){
+    if (obj == null){
+    return false;
+    }
+    if(getClass() != obj.getClass()){
+    return false;
+    }
+    final TabelaIRRF other = (TabelaIRRF) obj;
+    if(this.tif_codigo != other.tif_codigo){
+    return false;
+    }
+    return true;
+    }
+    
+    @Override
+    public String toString(){
+    return getTif_nome();
+    }
     
 }

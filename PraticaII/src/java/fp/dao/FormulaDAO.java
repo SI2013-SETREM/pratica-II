@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package fp.dao;
 
 
@@ -15,14 +10,9 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import util.HibernateUtil;
 
-/**
- *
- * @author Max
- */
 public class FormulaDAO {
     
-    
-     private Session session;
+   private Session session;
 
     public FormulaDAO() {
 
@@ -53,7 +43,7 @@ public class FormulaDAO {
 
     public Formula findById(int id) {
 
-        return (Formula) session.load(FormulaDAO.class, id);
+        return (Formula) session.load(Formula.class, id);
     }
 
     public List<Formula> findAll() {
@@ -62,5 +52,6 @@ public class FormulaDAO {
         return query.list();
 
     }
+    
     
 }

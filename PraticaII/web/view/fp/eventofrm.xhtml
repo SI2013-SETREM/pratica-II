@@ -14,17 +14,17 @@
     </ui:define>
 
     <ui:define name="main-content">
-             <style>
-                    .eventoSit{
-                        border: 1px solid #ccc;
-                        border-radius: 4px;
-                        padding: 10px 0px 3px 0px;
-                        margin: 0px 0px 10px 0px;
-                    }
-                    input[type=checkbox], input[type=radio] {
-                        margin: 10px 0 0;
-                    }
-                </style>
+        <style>
+            .eventoSit{
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                padding: 10px 0px 3px 0px;
+                margin: 0px 0px 10px 0px;
+            }
+            input[type=checkbox], input[type=radio] {
+                margin: 10px 0 0;
+            }
+        </style>
 
         <div class="panel panel-body">
             <h3><h:outputText value="Dados de ${eventoBean.getsTitle()}"/></h3>
@@ -44,52 +44,61 @@
                             <h:inputText id="eveIndice" value="#{eventoBean.evento.eve_indice}" title="Índice" styleClass="form-control" pt:autofocus="" />
                         </div>
                     </div>
+   
                     <div class="form-group">
                         <h:outputLabel value="Série: " for="serieevento" styleClass="control-label col-sm-2" />
-                        <div class="col-md-6 col-sm-12">
-                            <h:selectOneMenu id="serieevento" converter="serieEventoConverter" value="#{eventoBean.evento.serieevento}" styleClass="form-control" pt:autofocus="" >
-                                <f:selectItems value="#{eventoBean.lstSerieEvento}" var="tipe" itemLabel="#{tipe.sev_nome}"/>
+                        <div style="padding-top: 5px" class="col-md-6 col-sm-12">
+                            <h:selectOneMenu value="#{eventoBean.evento.serieevento}" converter="serieEventoConverter" id="serieevento"   class="form-control" pt:autofocus="" >
+                                <f:selectItems value="#{eventoBean.lstSerieEvento}" var="serieevento"/>
                             </h:selectOneMenu>
                         </div>
                     </div>
+
                     <div class="form-group">
                         <h:outputLabel value="Tipo: " for="tipoevento" styleClass="control-label col-sm-2" />
-                        <div class="col-md-6 col-sm-12">
-                            <h:selectOneMenu id="tipoevento" converter="tipoEventoConverter" value="#{eventoBean.evento.tipoevento}" styleClass="form-control" pt:autofocus="" >
-                                <f:selectItems value="#{eventoBean.lstTipoEvento}" var="tipe" itemLabel="#{tipe.tpe_nome}"/>
+                        <div style="padding-top: 5px" class="col-md-6 col-sm-12">
+                            <h:selectOneMenu value="#{eventoBean.evento.tipoevento}" converter="tipoEventoConverter" id="tipoevento"   class="form-control" pt:autofocus="" >
+                                <f:selectItems value="#{eventoBean.lstTipoEvento}" var="tipoevento"/>
                             </h:selectOneMenu>
                         </div>
                     </div>
-                      <div class="form-group">
-                        <h:outputLabel value="Tabela INSS: " for="tabinss" styleClass="control-label col-sm-2" />
-                        <div class="col-md-6 col-sm-12">
-                            <h:selectOneMenu id="tabelainss" converter="tabelaINSSConverter" value="#{eventoBean.evento.tabelainss}" styleClass="form-control" pt:autofocus="" >
-                                <f:selectItems value="#{eventoBean.lstTabinss}" var="tipe" itemLabel="#{tipe.tbs_nome}"/>
+
+                    <div class="form-group">
+                        <h:outputLabel value="Tabela INSS: " for="tabelainss" styleClass="control-label col-sm-2" />
+                        <div style="padding-top: 5px" class="col-md-6 col-sm-12">
+                            <h:selectOneMenu value="#{eventoBean.evento.tabelainss}" converter="tabelaINSSConverter" id="tabelainss"   class="form-control" pt:autofocus="" >
+                                <f:selectItems value="#{eventoBean.lstTabinss}" var="tabelainss"/>
                             </h:selectOneMenu>
                         </div>
                     </div>
-                    
-                     <div class="form-group">
-                        <h:outputLabel value="Tabela IRRF: " for="tabirrf" styleClass="control-label col-sm-2" />
-                        <div class="col-md-6 col-sm-12">
-                            <h:selectOneMenu id="tabelairrf" converter="tabelaIRRFConverter" value="#{eventoBean.evento.tabelairrf}" styleClass="form-control" pt:autofocus="" >
-                                <f:selectItems value="#{eventoBean.lstTabirrf}" var="tipe" itemLabel="#{tipe.tif_nome}"/>
+
+                    <div class="form-group">
+                        <h:outputLabel value="Tabela IRRF: " for="tabelairrf" styleClass="control-label col-sm-2" />
+                        <div style="padding-top: 5px" class="col-md-6 col-sm-12">
+                            <h:selectOneMenu value="#{eventoBean.evento.tabelairrf}" converter="tabelaIRRFConverter" id="tabelairrf"   class="form-control" pt:autofocus="" >
+                                <f:selectItems value="#{eventoBean.lstTabirrf}" var="tabelairrf"/>
                             </h:selectOneMenu>
                         </div>
                     </div>
-                     <div class="form-group">
+
+
+                    <div class="form-group">
                         <h:outputLabel value="Formula: " for="eveformula" styleClass="control-label col-sm-2" />
-                        <div class="col-md-6 col-sm-12">
-                            <h:selectOneMenu id="tipoevento" converter="formulaConverter" value="#{eventoBean.evento.formula}" styleClass="form-control" pt:autofocus="" >
-                                <f:selectItems value="#{eventoBean.lstFormula}" var="tipe" itemLabel="#{tipe.for_nome}"/>
+                        <div style="padding-top: 5px" class="col-md-6 col-sm-12">
+                            <h:selectOneMenu value="#{eventoBean.evento.formula}" converter="formulaConverter" id="eveformula"   class="form-control" pt:autofocus="" >
+                                <f:selectItems value="#{eventoBean.lstFormula}" var="eveformula"/>
                             </h:selectOneMenu>
                         </div>
                     </div>
-               
                     
-                    
-
-
+                     <div class="form-group">
+                        <h:outputLabel value="Beneficio " for="serieevento" styleClass="control-label col-sm-2" />
+                        <div style="padding-top: 5px" class="col-md-6 col-sm-12">
+                            <h:selectOneMenu value="#{eventoBean.evento.serieevento}" converter="serieEventoConverter" id="serieevento"   class="form-control" pt:autofocus="" >
+                                <f:selectItems value="#{eventoBean.lstSerieEvento}" var="serieevento"/>
+                            </h:selectOneMenu>
+                        </div>
+                    </div>
 
                     <div class="col-md-1"></div>
                     <div class="eventoSit col-md-10">
@@ -119,7 +128,7 @@
                             <div class="col-md-2 col-sm-4">
                                 <h:selectBooleanCheckbox id="evetirrf" value="#{eventoBean.evento.eve_tributar_irrf}" title="1" pt:autofocus="" />
                             </div>
-                            
+
                         </div>
                     </div>
 
