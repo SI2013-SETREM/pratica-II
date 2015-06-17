@@ -43,11 +43,7 @@ public class RecrutamentoDAO {
         t.commit();
     }
 
-    public Recrutamento findById(int rec_codigo, int pes_codigo) {
-        return (Recrutamento) session.load(Recrutamento.class, rec_codigo);
-    }
-
-    public List<Recrutamento> findAll() {
+      public List<Recrutamento> findAll() {
         Query q = session.createQuery("from Recrutamento");
         return q.list();
     }

@@ -17,7 +17,7 @@
         <h3><h:outputText value="Candidatos do Recrutamento"/></h3>
         <f:view>
             <h:form styleClass="form-horizontal">
-                <h:dataTable value="${recrutamentoBean.recrutamentoPessoas}" var="item" styleClass="dataTable table table-bordered table-striped">
+                <h:dataTable value="${recrutamentoBean.candidatosRecrutamento}" var="item" styleClass="dataTable table table-bordered table-striped">
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="Código"/>
@@ -46,13 +46,13 @@
                         <f:facet name="header">
                             <h:outputText value="Selecionar"/>
                         </f:facet>
-                       
+                        <h:selectBooleanCheckbox value="#{item.selecionado}"/>
                     </h:column>
-                </h:dataTable>3
+                </h:dataTable>
                 <div class="form-group row">
                     <div class="col-lg-6 btn-group-separated">
                         <h:link styleClass="btn btn-default" style="" value="Cancelar" outcome="#{recrutamentoBean.listar()}" />
-                        <h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{recrutamentoBean.salvar('recrutamentolst?faces-redirect=true')}"/>
+                        <h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{recrutamentoBean.salvarCandidatos('recrutamentolst?faces-redirect=true')}"/>
                     </div>
                     <div class="col-lg-6 btn-group-separated" style="text-align: right">
                         <h:commandButton styleClass="btn btn-info" value="Voltar" action="#{recrutamentoBean.salvar('recrutamentofrm?faces-redirect=true')}"/>

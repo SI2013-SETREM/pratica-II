@@ -61,5 +61,10 @@ public class RecrutamentoPessoasDAO {
         return q.list();
     }
     
+      public RecrutamentoPessoa findById(int rec_codigo, int pes_codigo) {
+        return (RecrutamentoPessoa) session.load(RecrutamentoPessoa.class, rec_codigo);
+    }
+
+    
    
 }

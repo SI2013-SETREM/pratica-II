@@ -17,6 +17,7 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import rs.dao.RecrutamentoDAO;
 import rs.dao.RecrutamentoPessoasDAO;
+import rs.model.CandidatoRecrutamento;
 import rs.model.Recrutamento;
 import rs.model.RecrutamentoPessoa;
 
@@ -36,9 +37,9 @@ public class RecrutamentoBean {
     private RecrutamentoDAO dao = new RecrutamentoDAO();
     private PessoaDAO pesDao = new PessoaDAO();
     private DataModel recrutamentos;
-    private DataModel recrutamentoPessoas;
+    private List<CandidatoRecrutamento> candidatosRecrutamento;
 
-    public DataModel getRecrutamentoPessoas() {
+    public DataModel getCandidatosRecrutamento() {
         String pes_tipo = "1,2,3";
         if (recrutamento.getRecTipo() == 1) {
             pes_tipo = "1";
@@ -47,31 +48,29 @@ public class RecrutamentoBean {
         }
         List<Pessoa> pessoas = pesDao.findCandidatos(pes_tipo);
         List<RecrutamentoPessoa> recPessoasBanco = recrutamentoPessoaDAO.findByRecrutamento(recrutamento.getRecCodigo());
-        List<RecrutamentoPessoa> recPessoasList = new ArrayList<RecrutamentoPessoa>();
-        
+        List<CandidatoRecrutamento> candidatosRecrutamento = new ArrayList<>();
+
         for (Pessoa pes : pessoas) {
-            RecrutamentoPessoa recPes = new RecrutamentoPessoa();
-            recPes.setPessoa(pes);
-            recPes.setRecrutamento(recrutamento);
-            recPes.setRecPesStatus(3);
-            
+            CandidatoRecrutamento cdtRec = new CandidatoRecrutamento();
+            cdtRec.setPessoa(pes);
+            cdtRec.setSelecionado(false);
+
             for (RecrutamentoPessoa rp : recPessoasBanco) {
                 if (rp.getPessoa().getPes_codigo() == pes.getPes_codigo()) {
-                    recPes.setRecPesStatus(rp.getRecPesStatus());
+                    cdtRec.setSelecionado(true);
                     break;
                 }
             }
-            
-            recPessoasList.add(recPes);
+
+            candidatosRecrutamento.add(cdtRec);
         }
-        
-        this.recrutamentoPessoas = new ListDataModel(recPessoasList);
+
+        return new ListDataModel(candidatosRecrutamento);
 //        this.pessoas = new ListDataModel(pesDao.findCandidatos(pes_tipo));
-        return this.recrutamentoPessoas;
     }
 
-    public void setRecrutamentoPessoas(DataModel recrutamentoPessoas) {
-        this.recrutamentoPessoas = recrutamentoPessoas;
+    public void setCandidatosRecrutamento(DataModel candidatosRecrutamento) {
+        this.candidatosRecrutamento = (List<CandidatoRecrutamento>) candidatosRecrutamento;
     }
 
     public RecrutamentoBean() {
@@ -160,8 +159,21 @@ public class RecrutamentoBean {
         return pg;
     }
 
-    public String addCandidato(String pagina,Pessoa p) {
-        this.recrutamento.addPessoa(p);
-        return pagina;
+    public String salvarCandidatos(String pg) {
+        List<RecrutamentoPessoa> rp = new ArrayList<>();
+        for (CandidatoRecrutamento cr : candidatosRecrutamento) {
+            if (cr.isSelecionado()) {
+                
+                RecrutamentoPessoa recruta = new RecrutamentoPessoa();
+                recruta.setPessoa(cr.getPessoa());
+                recruta.setRecPesStatus(1);
+                recruta.setRecrutamento(recrutamento);
+                rp.add(recruta);
+            }
+        }
+        recrutamento.setRecrutamentoPessoa(rp);
+        dao.update(recrutamento);
+        return pg;
     }
+
 }
