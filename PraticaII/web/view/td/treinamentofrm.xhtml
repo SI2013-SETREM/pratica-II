@@ -79,35 +79,27 @@
 
                     
                         <div class="form-group">
-                            <p:outputLabel value="Instrutores:" for="pessoa" styleClass="control-label col-sm-2" />
-                            <div class="col-md-6 col-sm-12">
-                                <p:autoComplete id="pessoa" multiple="true" value="#{autoCompletePessoaBean.instrutores}" completeMethod="#{autoCompletePessoaBean.completaNomePessoa}"
-                                                var="pessoa" itemLabel="#{pessoa.pes_nome}" itemValue="#{pessoa}" converter="pessoaConverter" forceSelection="true">
-                            <p:column style="width:10%">
-                                <h:outputText styleClass="ui-theme ui-theme-#{pessoa.pes_nome}"/>
-                            </p:column>
-                             <p:column>
-                                 <h:outputText value="#{pessoa.pes_nome}" />
+                        <h:outputLabel value="Instrutores:" for="pessoa" styleClass="control-label col-md-2" />
+                        <div class="col-md-8 col-xs-12 autocomplete">
+                            <p:autoComplete pt:disabled="#{treinamentoBean.treinamento.tre_codigo > 0}" id="solicitacao" multiple="true" completeMethod="#{treinamentoBean.completePessoa}" value="#{treinamentoBean.lstpessoa}"
+                                            var="pessoa" itemLabel="#{pessoa.pes_nome}" itemValue="#{pessoa}" converter="pessoaConverter" forceSelection="true">
+                                <p:column>
+                                    <h:outputText value="#{pessoa.pes_nome}" />
+                                </p:column>
+                            </p:autoComplete>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <p:outputLabel value="Competências:" for="competencia" styleClass="control-label col-sm-2" />
+                        <div class="col-md-6 col-sm-12">
+                            <p:autoComplete pt:disabled="#{treinamentoBean.treinamento.tre_codigo > 0}" id="competencia" multiple="true" completeMethod="#{treinamentoBean.completeCompetencia}" value="#{treinamentoBean.lstcompetencia}" 
+                                            var="competencia" itemLabel="#{competencia.cmp_descricao}" itemValue="#{competencia}" converter="CompetenciaConverter" forceSelection="true">
+                            <p:column>
+                                <h:outputText value="#{competencia.cmp_descricao}" />
                             </p:column>
                             </p:autoComplete>
-                            </div>
-                        </div> 
-                        
-                            <div class="form-group">
-                                <p:outputLabel value="Competências:" for="competencia" styleClass="control-label col-sm-2" />
-                                <div class="col-md-6 col-sm-12">
-                                    <p:autoComplete id="competencia" multiple="true" value="#{autoCompleteCompetenciaBean.competenciastre}" completeMethod="#{autoCompleteCompetenciaBean.completaNomeCompetencia}"
-                                                    var="competencia" itemLabel="#{competencia.cmp_descricao}" itemValue="#{competencia}" converter="CompetenciaConverter" forceSelection="true">
-                                    <p:column style="width:10%">
-                                        <h:outputText styleClass="ui-theme ui-theme-#{competencia.cmp_descricao}"/>
-                                    </p:column>
-
-                                     <p:column>
-                                         <h:outputText value="#{competencia.cmp_descricao}" />
-                                    </p:column>
-                                    </p:autoComplete>
-                                </div>
-                            </div>  
+                        </div>
+                    </div>  
                       
 
 

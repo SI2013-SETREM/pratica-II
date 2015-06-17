@@ -152,15 +152,17 @@ public class SolicitacaoBean {
     
     private boolean SalvaListas() {
         try {
-            SalvarCompSol(filtraCompetencia(lstcompetencia));
-            SalvarPesTre(filtraPessoas(lstpessoa));
+            SalvarPesComp(filtraCompetencia(lstcompetencia),filtraPessoas(lstpessoa));
+           // SalvarCompSol(filtraCompetencia(lstcompetencia));
+           // SalvarPesTre(filtraPessoas(lstpessoa));
+            
             return true;
         } catch (Exception e) {
             Title = e.toString();
         }
-        return false;
+        return true;
     }
-
+    
     private List<Competencia> filtraCompetencia(List<Competencia> lstCompetencia) {
         List<Integer> lsCod = new ArrayList<>();
         List<Competencia> lsItens = new ArrayList<>();
@@ -188,7 +190,7 @@ public class SolicitacaoBean {
         }
         return lsItens;
     }
-
+/*
     private void SalvarCompSol(List<Competencia> lsComp) {
         List<Integer> lsAval = new ArrayList<>();
         if (!lsComp.isEmpty()) {
@@ -217,6 +219,26 @@ public class SolicitacaoBean {
                 }
             }
         } 
+    }
+    */
+    
+    private void SalvarPesComp(List<Competencia> lsCompetencia, List<Pessoa> lsPessoa) {//Salva a lista de cargos e pessoas que fazem parte da avlaiação, basta passar a lista de Cargos e Pessoas e o Tipo (Colaborador= 1 ou Avaliador = 2)
+        if (!lsPessoa.isEmpty()) {
+            for (Pessoa p : lsPessoa) {
+                PessoasReceberTreinamento pes = new PessoasReceberTreinamento();
+                pes.setPessoa(p);
+                pes.setSolicitacao(solicitacao);
+                pesTreDao.insert(pes);
+            }
+        }
+        if (!lsCompetencia.isEmpty()) {
+            for (Competencia c : lsCompetencia) {
+                CompetenciasSolicitacao comp = new CompetenciasSolicitacao();
+                comp.setCompetencia(c);
+                comp.setSolicitacao(solicitacao);
+                compSolDao.insert(comp);
+            }
+        }
     }
     
 }
