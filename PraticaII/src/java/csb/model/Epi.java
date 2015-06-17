@@ -1,7 +1,6 @@
 package csb.model;
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,7 +22,7 @@ public class Epi implements Serializable {
     private String epi_descricao;
     private char epi_tipo; //individual, coletivo
     private boolean epi_situacao; // 
-
+    
     public Epi() {
     }
 
@@ -58,7 +57,7 @@ public class Epi implements Serializable {
     public void setEpi_situacao(boolean epi_situacao) {
         this.epi_situacao = epi_situacao;
     }
-
+    
     @Override
     public int hashCode() {
         int hash = 5;

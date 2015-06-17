@@ -2,7 +2,6 @@ package csb.model;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,8 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -33,7 +30,14 @@ public class Setor implements Serializable {
     private String set_descricao;
 
     @ManyToMany
-    @JoinTable(name = "csb_episetor")
+    @JoinTable(name = "csb_episetor",
+            joinColumns = {
+                @JoinColumn(name = "set_codigo")
+            },
+            inverseJoinColumns = {
+                @JoinColumn(name = "epi_codigo")
+            }
+    )
     private List<Epi> epis;
 
     public Setor() {
@@ -61,8 +65,8 @@ public class Setor implements Serializable {
 
     public void setEpis(List<Epi> epis) {
         this.epis = epis;
-    }  
-    
+    }
+
     @Override
     public int hashCode() {
         int hash = 5;
@@ -85,7 +89,6 @@ public class Setor implements Serializable {
         return true;
     }
 
-    
     @Override
     public String toString() {
         return this.getSet_descricao();

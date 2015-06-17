@@ -11,7 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -41,15 +40,36 @@ public class Cargo implements Serializable, Comparable<Cargo> {
     private Setor setor;
 
     @ManyToMany
-    @JoinTable(name = "csb_competencias_cargo")
+    @JoinTable(name = "csb_competencias_cargo",
+            joinColumns = {
+                @JoinColumn(name = "car_codigo")
+            },
+            inverseJoinColumns = {
+                @JoinColumn(name = "cmp_codigo")
+            }
+    )
     private List<Competencia> Competencias;
 
     @ManyToMany
-    @JoinTable(name = "csb_graduacoes_cargo")
+    @JoinTable(name = "csb_graduacoes_cargo",
+            joinColumns = {
+                @JoinColumn(name = "car_codigo")
+            },
+            inverseJoinColumns = {
+                @JoinColumn(name = "grd_codigo")
+            }
+    )
     private List<Graduacao> Graduacoes;
 
     @ManyToMany
-    @JoinTable(name = "csb_epicargo")
+    @JoinTable(name = "csb_epicargo",
+            joinColumns = {
+                @JoinColumn(name = "car_codigo")
+            },
+            inverseJoinColumns = {
+                @JoinColumn(name = "epi_codigo")
+            }
+    )
     private List<Epi> Epis;
 
     public Cargo() {
