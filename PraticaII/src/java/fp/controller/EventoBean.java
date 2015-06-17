@@ -1,5 +1,6 @@
 package fp.controller;
 
+import cfg.dao.LogDAO;
 import fp.dao.EventoDAO;
 import fp.dao.EventoPadraoDAO;
 import fp.dao.FormulaDAO;
@@ -100,14 +101,26 @@ public class EventoBean {
     
     public String delete(Evento i) {
         dao.delete(i);
+        LogDAO.insert("Evento", "Deletou evento código: " + i.getEve_codigo() + ", descrição: " + i.getEve_descricao()+
+        ", índice: "+i.getEve_indice()+", código benefício: "+i.getBeneficio().getBen_codigo()+", fórmula: "+i.getFormula()+
+        ", série evento: "+i.getSerieevento()+", código tabela inss: "+i.getTabelainss().getTbs_codigo()+
+        ", código tabela irrf: "+i.getTabelairrf().getTif_codigo());
         return "eventolst";
     }
     
     public String salvar() {
         if (evento.getEve_codigo() > 0) {
             dao.update(evento);
+            LogDAO.insert("Evento", "Alterou evento código: " + evento.getEve_codigo() + ", descrição: " + evento.getEve_descricao()+
+        ", índice: "+evento.getEve_indice()+", código benefício: "+evento.getBeneficio().getBen_codigo()+", fórmula: "+evento.getFormula()+
+        ", série evento: "+evento.getSerieevento()+", código tabela inss: "+evento.getTabelainss().getTbs_codigo()+
+        ", código tabela irrf: "+evento.getTabelairrf().getTif_codigo());
         } else {
             dao.insert(evento);
+                LogDAO.insert("Evento", "Cadastrou evento código: " + evento.getEve_codigo() + ", descrição: " + evento.getEve_descricao()+
+        ", índice: "+evento.getEve_indice()+", código benefício: "+evento.getBeneficio().getBen_codigo()+", fórmula: "+evento.getFormula()+
+        ", série evento: "+evento.getSerieevento()+", código tabela inss: "+evento.getTabelainss().getTbs_codigo()+
+        ", código tabela irrf: "+evento.getTabelairrf().getTif_codigo());
         }
         
         return "eventolst";
