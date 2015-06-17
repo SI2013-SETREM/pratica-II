@@ -5,28 +5,50 @@
  */
 package rs.controller;
 
+import cfg.dao.PessoaDAO;
+import cfg.model.Pessoa;
 import java.util.Date;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import rs.dao.RecrutamentoDAO;
+import rs.dao.RecrutamentoPessoasDAO;
 import rs.model.Recrutamento;
+import rs.model.RecrutamentoPessoa;
 
 /**
  *
  * @author NADINE
  */
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class RecrutamentoBean {
 
     private final String sTitle = Recrutamento.sTitle;
     private final String pTitle = Recrutamento.pTitle;
 
     private Recrutamento recrutamento;
+    private RecrutamentoPessoasDAO recrutamentoPessoaDAO = new RecrutamentoPessoasDAO();
     private RecrutamentoDAO dao = new RecrutamentoDAO();
+    private PessoaDAO pesDao = new PessoaDAO();
     private DataModel recrutamentos;
+    private DataModel pessoas;
+
+    public DataModel getPessoas() {
+        String pes_tipo = "1,2,3";
+        if (recrutamento.getRecTipo() == 1) {
+            pes_tipo = "1";
+        } else if (recrutamento.getRecTipo() == 2) {
+            pes_tipo = "2,3";
+        }
+        this.pessoas = new ListDataModel(pesDao.findCandidatos(pes_tipo));
+        return pessoas;
+    }
+
+    public void setPessoas(DataModel pessoas) {
+        this.pessoas = pessoas;
+    }
 
     public RecrutamentoBean() {
     }
@@ -106,5 +128,16 @@ public class RecrutamentoBean {
 
     public String listar() {
         return "recrutamentolst";
+    }
+
+    public String novo(String pg) {
+        this.recrutamento = new Recrutamento();
+        recrutamento.setRecInicio(new Date());
+        return pg;
+    }
+
+    public String addCandidato(String pagina,Pessoa p) {
+        this.recrutamento.addPessoa(p);
+        return pagina;
     }
 }

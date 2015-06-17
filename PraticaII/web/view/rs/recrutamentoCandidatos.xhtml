@@ -10,59 +10,60 @@
 
     <ui:define name="breadcrumb">
         <li>Recrutamento</li>
-        <li><h:link value="${recrutamentoPessoaBean.pTitle}" outcome="/faces/view/rs/recrutamentolst" /></li>
+        <li><h:link value="Candidatos do Recrutamento" outcome="/faces/view/rs/recrutamentolst" /></li>
     </ui:define>
 
     <ui:define name="content">
-        <h3><h:outputText value="Dados do ${recrutamentoPessoaBean.sTitle}"/></h3>
+        <h3><h:outputText value="Candidatos do Recrutamento"/></h3>
         <f:view>
             <h:form styleClass="form-horizontal">
-                <div class="form-group">
-                    <h:dataTable value="${recrutamentoPessoaBean.pessoas}" var="item" styleClass="dataTable table table-bordered table-striped">
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Código"/>
-                            </f:facet>
-                            <h:outputText value="${item.getPes_codigo()}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Nome"/>
-                            </f:facet>
-                            <h:outputText value="${item.getPes_nome()}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="CPF"/>
-                            </f:facet>
-                            <h:outputText value="${item.getPes_cpf()}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="RG"/>
-                            </f:facet>
-                            <h:outputText value="${item.getPes_rg()}"/>
-                        </h:column>
-                        <h:column>
-                            <f:facet name="header">
-                                <h:outputText value="Cidade"/>
-                            </f:facet>
-                            <h:outputText value="${item.cidade.getCid_nome()}"/>
-                        </h:column>
-                    </h:dataTable>s
-                </div>
+                <h:dataTable value="${recrutamentoBean.pessoas}" var="item" styleClass="dataTable table table-bordered table-striped">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Código"/>
+                        </f:facet>
+                        <h:outputText value="${item.getPes_codigo()}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Nome"/>
+                        </f:facet>
+                        <h:outputText value="${item.getPes_nome()}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="CPF"/>
+                        </f:facet>
+                        <h:outputText value="${item.getPes_cpf()}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="RG"/>
+                        </f:facet>
+                        <h:outputText value="${item.getPes_rg()}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Selecionar"/>
+                        </f:facet>
+                        <h:selectManyCheckbox value="#{recruatementoBean.favNumber1}">
+                            <f:selectItem itemValue="1" itemLabel="Number1 - 1" />
+                            <f:selectItem itemValue="2" itemLabel="Number1 - 2" />
+                            <f:selectItem itemValue="3" itemLabel="Number1 - 3" />
+                        </h:selectManyCheckbox>
+                    </h:column>
+                </h:dataTable>3
                 <div class="form-group row">
                     <div class="col-lg-6 btn-group-separated">
                         <h:link styleClass="btn btn-default" style="" value="Cancelar" outcome="#{recrutamentoBean.listar()}" />
-                        <h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{recrutamentoBean.salvar('recrutamentolst')}"/>
+                        <h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{recrutamentoBean.salvar('recrutamentolst?faces-redirect=true')}"/>
                     </div>
-                    <div class="col-lg-6" style="text-align: right">
-                        <h:commandButton styleClass="btn btn-info" value="Voltar" action="#{recrutamentoBean.salvar('recrutamentofrm')}"/>
-                        <h:commandButton styleClass="btn btn-info" value="Avançar" action="#{recrutamentoBean.salvar('recrutamentoCandidatos')}"/>
+                    <div class="col-lg-6 btn-group-separated" style="text-align: right">
+                        <h:commandButton styleClass="btn btn-info" value="Voltar" action="#{recrutamentoBean.salvar('recrutamentofrm?faces-redirect=true')}"/>
+                        <h:commandButton styleClass="btn btn-info" value="Avançar" action="#{recrutamentoBean.salvar('recrutamentoCandidatos?faces-redirect=true')}"/>
                     </div>
                 </div>
             </h:form>
-
         </f:view>
     </ui:define>
 

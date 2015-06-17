@@ -45,10 +45,10 @@
                 <div class="form-group row">
                     <div class="col-lg-6 btn-group-separated">
                         <h:link styleClass="btn btn-default" style="" value="Cancelar" outcome="#{recrutamentoBean.listar()}" />
-                        <h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{recrutamentoBean.salvar('recrutamentolst')}"/>
+                        <h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{recrutamentoBean.salvar('recrutamentolst?faces-redirect=true')}"/>
                     </div>
                     <div class="col-lg-6" style="text-align: right">
-                        <h:commandButton styleClass="btn btn-info" value="Avançar" action="#{recrutamentoBean.salvar('recrutamentoCandidatos')}"/>
+                        <h:commandButton styleClass="btn btn-info" value="Avançar" action="#{recrutamentoBean.salvar('recrutamentoCandidatos?faces-redirect=true')}"/>
                     </div>
                 </div>
             </h:form>

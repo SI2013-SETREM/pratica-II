@@ -30,17 +30,7 @@ public class RecrutamentoPessoaBean {
     private RecrutamentoPessoasDAO dao = new RecrutamentoPessoasDAO();
     private PessoaDAO pesDao = new PessoaDAO();
     private DataModel recrutamentoPessoas;
-    private DataModel pessoas;
-
-    public DataModel getPessoas() {
-        this.pessoas = new ListDataModel(dao.findAll());
-        return pessoas;
-    }
-
-    public void setPessoas(DataModel pessoas) {
-        this.pessoas = pessoas;
-    }
-
+   
     public String getsTitle() {
         return sTitle;
     }

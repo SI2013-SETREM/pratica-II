@@ -1,7 +1,10 @@
 package rs.model;
 
+import cfg.model.Pessoa;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,8 +34,24 @@ public class Recrutamento implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date rec_fim;
     private int rec_status;
+    private List<Pessoa> pessoas;
 
     public Recrutamento() {
+    }
+
+    public List<Pessoa> getPessoas() {
+        return pessoas;
+    }
+
+    public void setPessoas(List<Pessoa> pessoas) {
+        this.pessoas = pessoas;
+    }
+
+    public void addPessoa(Pessoa p) {
+        if (this.pessoas == null) {
+            this.pessoas = new ArrayList<>();
+        }
+        this.pessoas.add(p);
     }
 
     public int getRecCodigo() {

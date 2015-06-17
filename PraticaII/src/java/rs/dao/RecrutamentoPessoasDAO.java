@@ -41,6 +41,15 @@ public class RecrutamentoPessoasDAO {
         session.delete(r);
         t.commit();
     }
+    
+     public String salvar() {
+//        if (RecrutamentoPessoa. > 0)
+//            dao.update(questionario);
+//        else 
+//            dao.insert(questionario);
+        
+        return "questionariolst?faces-redirect=true";
+    }
 
     public List<RecrutamentoPessoa> findAll() {
         Query q = session.createQuery("from RecrutamentoPessoa");

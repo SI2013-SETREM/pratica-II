@@ -56,8 +56,8 @@ public class PessoaDAO {
         return q.list();
     }
     
-    public List<Pessoa> findCandidatos() {
-        Query q = session.createQuery("from Pessoa");
+    public List<Pessoa> findCandidatos(String pes_tipo) {
+        Query q = session.createQuery("from Pessoa where pes_tipo in("+pes_tipo+")");
         return q.list();
     }
 }
