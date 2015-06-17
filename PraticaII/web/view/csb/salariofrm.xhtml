@@ -1,5 +1,3 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition template="./../modelos/default.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
@@ -21,60 +19,16 @@
             <h3><h:outputText value="Dados do ${salarioBean.sTitle}"/></h3>
             <f:view>
                 <h:form styleClass="form-horizontal">
-                    <h:messages style="color:red;margin:8px;" showDetail="true"/>
-
-
-                    <h:inputHidden id="salCodigo" value="#{salarioBean.salario.sal_codigo}" />
-
-                    <!--CARGO-->
-                    <div class="form-group">
-                        <h:outputLabel value="Cargo:" for="cargo" styleClass="control-label col-sm-2" />
-                        <div style="padding-top: 5px" class="col-md-6 col-sm-12">
-                            <h:selectOneMenu value="#{salarioBean.salario.cargo}" required="required" converter="cargoConverter" id="cargo" class="form-control">
-                                <f:selectItems value="#{salarioBean.lstCargo}" var="car"/>
-                            </h:selectOneMenu>
-                        </div>
-                    </div>
-
-                    <!--PESSOA-->
-                    <div class="form-group">
-                        <h:outputLabel value="Pessoa:" for="pessoa" styleClass="control-label col-sm-2" />
-                        <div style="padding-top: 5px" class="col-md-6 col-sm-12">
-                            <h:selectOneMenu value="#{salarioBean.salario.pessoa}" required="required" converter="pessoaConverter" id="pessoa" class="form-control">
-                                <f:selectItems value="#{salarioBean.lstPessoa}" var="pes"/>
-                            </h:selectOneMenu>
-                        </div>
-                    </div>
-
-                    <!--DATAFIM-->
-                    <div class="form-group">
-                        <h:outputLabel value="Data Fim" for="salDataFim" styleClass="control-label col-sm-2" />
-                        <div class="col-md-6 col-sm-12">
-                            <h:inputText id="repData" pt:type="date" value="#{salarioBean.salario.sal_datafim}" title="Data Fim" pt:required="required" styleClass="form-control" pt:autofocus="">
-                                <f:convertDateTime pattern="yyyy-MM-dd"/>
-                            </h:inputText>
-                        </div>
-                    </div>
-
-                    <!--DATAINICIAL-->
-                    <div class="form-group">
-                        <h:outputLabel value="Data Inicial" for="sal_datafim" styleClass="control-label col-sm-2" />
-                        <div class="col-md-6 col-sm-12">
-                            <h:inputText id="repData" pt:type="date" value="#{salarioBean.salario.sal_datainicio}" title="Data Inicial" pt:required="required" styleClass="form-control" pt:autofocus="">
-                                <f:convertDateTime pattern="yyyy-MM-dd"/>
-                            </h:inputText>
-                        </div>
-                    </div>
-
-                    <!--SITUACAO-->
-                    <h:inputHidden id="salSituacao" value="#{salarioBean.salario.sal_situacao}" />
-                    <div class="form-group">
-                        <h:outputLabel value="Situação:" for="sal_situacao" styleClass="control-label col-sm-2" />
-                        <div style="padding-top: 5px" class="col-md-6 col-sm-12">
-                            <h:selectBooleanCheckbox value="#{salarioBean.salario.sal_situacao}" id="sal_situacao" title="Situação" />
-                        </div>
-                    </div>
-
+                    <h:inputHidden id="sal_codigo" value="#{salarioBean.salario.sal_codigo}"/>
+                    <h:inputHidden id="cargo" value="#{salarioBean.salario.cargo}" converter="cargoConverter"/>
+                    <h:inputHidden id="pessoa" value="#{salarioBean.salario.pessoa}" converter="pessoaConverter"/>
+                    <h:inputHidden id="sal_datafim" value="#{salarioBean.salario.sal_datafim}">
+                        <f:convertDateTime pattern="yyyy-MM-dd"/>
+                    </h:inputHidden>
+                    <h:inputHidden id="sal_datainicio" value="#{salarioBean.salario.sal_datainicio}">
+                        <f:convertDateTime pattern="yyyy-MM-dd"/>
+                    </h:inputHidden>
+                    <h:inputHidden id="sal_situacao" value="#{salarioBean.salario.sal_situacao}"/>
                     <!--SALARIO-->
                     <div class="form-group">
                         <h:outputLabel value="Novo salário:" for="sal_valorbruto" styleClass="control-label col-sm-2" />
@@ -82,7 +36,7 @@
                             <h:inputText required="required" id="sal_valorbruto" value="#{salarioBean.salario.sal_valorbruto}" title="Novo Salário" styleClass="form-control"/>
                         </div>
                     </div>
-                    
+
                     <!--MOTIVOALTERACAOSALARIO-->
                     <div class="form-group">
                         <h:outputLabel value="Motivo de Alteração Salarial:" for="motivoAlteracaoSalarial" styleClass="control-label col-sm-2" />
@@ -92,7 +46,7 @@
                             </h:selectOneMenu>
                         </div>
                     </div>
-                    
+
                     <div class="form-group">
                         <div class="col-md-offset-1 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
                             <h:link styleClass="btn btn-default" value="Cancelar" outcome="#{salarioBean.listar()}" />

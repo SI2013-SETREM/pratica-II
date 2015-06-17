@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
-    
+
     <h:head>
         <link rel="icon" href="#{resource['img/favicon.ico']}" sizes="16x16" />
         <title><ui:insert name="title">Início</ui:insert> - GRH</title>
@@ -19,7 +19,7 @@
         <h:outputScript name="./js/default.js"></h:outputScript>
         <ui:insert name="header"> </ui:insert>
     </h:head>
-    
+
     <h:body>
         #{loginBean.setUsuarioByLogin(request.getRemoteUser())}
         <div class="page-container">
@@ -46,6 +46,12 @@
                                         Nova mensagem
                                     </a>
                                 </li>
+                                <!--                                <li class="messages-top">
+                                                                    <span>Você tem 9 novas mensagens</span>
+                                                                    <a href="#">Ver todas</a>
+                                                                </li>
+                                                                <li>
+                                                                </li>-->
                             </ul>
                         </li>
                         <li class="dropdown dropdown-user">
@@ -143,7 +149,7 @@
                                             <span class="menu-text">Tipo de Exame</span>
                                         </h:link>
                                     </li>
-                                    <li class="#{view.viewId.contains('/sim') ? 'active' : ''}">
+                                    <li class="#{view.viewId.contains('/motivoalteracaosalarial') ? 'active' : ''}">
                                         <h:link outcome="/faces/view/csb/motivoalteracaosalariallst">
                                             <span class="fa fa-usd"></span>
                                             <span class="menu-text">Motivo Alteração Salarial</span>
@@ -159,6 +165,12 @@
                                         <h:link outcome="/faces/view/csb/examepessoalst">
                                             <span class="fa fa-medkit"></span>
                                             <span class="menu-text">Exames</span>
+                                        </h:link>
+                                    </li>
+                                    <li class="#{view.viewId.contains('/salario') ? 'active' : ''}">
+                                        <h:link outcome="/faces/view/csb/salariolst">
+                                            <span class="fa fa-money"></span>
+                                            <span class="menu-text">Salários</span>
                                         </h:link>
                                     </li>
                                 </ul>

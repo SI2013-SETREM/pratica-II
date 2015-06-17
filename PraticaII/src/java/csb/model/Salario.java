@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
+import javax.persistence.Transient;
 
 /**
  *
@@ -48,6 +49,18 @@ public class Salario implements Serializable {
     private Date sal_datafim;
     private boolean sal_situacao;
     private double sal_valorbruto;
+    @Transient
+    private double sal_valorbrutoNovo;
+
+    public double getSal_valorbrutoNovo()
+    {
+        return sal_valorbrutoNovo;
+    }
+
+    public void setSal_valorbrutoNovo(double sal_valorbrutoNovo)
+    {
+        this.sal_valorbrutoNovo = sal_valorbrutoNovo;
+    }
 
     public Salario() {
     }
