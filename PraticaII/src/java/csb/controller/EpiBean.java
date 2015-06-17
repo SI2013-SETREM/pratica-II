@@ -1,5 +1,6 @@
-
 package csb.controller;
+
+import cfg.dao.LogDAO;
 import csb.controller.*;
 
 import csb.dao.EpiDAO;
@@ -12,14 +13,14 @@ import javax.faces.model.ListDataModel;
 @ManagedBean
 @RequestScoped
 public class EpiBean {
-    
+
     private final String sTitle = Epi.sTitle;
     private final String pTitle = Epi.pTitle;
-    
+
     private Epi epi = new Epi();
     private EpiDAO dao = new EpiDAO();
     private DataModel epis;
-    
+
     public EpiBean() {
     }
 
@@ -30,7 +31,7 @@ public class EpiBean {
     public String getpTitle() {
         return pTitle;
     }
-    
+
     public Epi getEpi() {
         return epi;
     }
@@ -47,39 +48,42 @@ public class EpiBean {
     public void setEpis(DataModel epis) {
         this.epis = epis;
     }
-    
+
     public String insert() {
         dao.insert(epi);
         return "epilst";
     }
-    
+
     public String edit(Epi e) {
         epi = (Epi) epis.getRowData();
         return "epifrm";
     }
-    
+
     public String update() {
         dao.update(epi);
         return "epilst";
     }
-    
+
     public String delete(Epi e) {
         dao.delete(e);
+        LogDAO.insert("EPI", "Deletou epi código: " + e.getEpi_codigo() + ", descrição: " + e.getEpi_descricao() + ", tipo: " + e.getEpi_tipo());
         return "epilst";
     }
-    
+
     public String salvar() {
-        if (epi.getEpi_codigo()> 0)
+        if (epi.getEpi_codigo() > 0) {
             dao.update(epi);
-        else 
+            LogDAO.insert("EPI", "Alterou epi código: " + epi.getEpi_codigo() + ", descrição: " + epi.getEpi_descricao() + ", tipo: " + epi.getEpi_tipo());
+        } else {
             dao.insert(epi);
-        
+            LogDAO.insert("EPI", "Cadastrou epi código: " + epi.getEpi_codigo() + ", descrição: " + epi.getEpi_descricao() + ", tipo: " + epi.getEpi_tipo());
+        }
+
         return "epilst";
     }
-    
+
     public String listar() {
         return "epilst";
     }
-    
-    
+
 }

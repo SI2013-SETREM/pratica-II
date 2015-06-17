@@ -1,5 +1,6 @@
 package csb.controller;
 
+import cfg.dao.LogDAO;
 import csb.dao.TipoExameDAO;
 
 
@@ -71,14 +72,23 @@ public class TipoExameBean {
 
     public String delete(TipoExame i) {
         dao.delete(i);
+        LogDAO.insert("TipoExame", "Deletou tipo exame código: " + i.getEme_codigo()+ ", descrição: " + i.getEme_descricao()+
+                ", tipo: "+i.getEme_tipo()+", periódico: "+i.isEme_periodico()+", validade: "+i.getEme_validade()+", obrigatório: "+i.isEme_obrigatorio()+
+                ", intervalo de repetição: "+i.getEme_intervalorepeticao());
         return "tipoexamelst";
     }
 
     public String salvar() {
         if (tipoexame.getEme_codigo() > 0) {
             dao.update(tipoexame);
+            LogDAO.insert("TipoExame", "Alterou tipo exame código: " + tipoexame.getEme_codigo()+ ", descrição: " + tipoexame.getEme_descricao()+
+                ", tipo: "+tipoexame.getEme_tipo()+", periódico: "+tipoexame.isEme_periodico()+", validade: "+tipoexame.getEme_validade()+", obrigatório: "+tipoexame.isEme_obrigatorio()+
+                ", intervalo de repetição: "+tipoexame.getEme_intervalorepeticao());
         } else {
             dao.insert(tipoexame);
+            LogDAO.insert("TipoExame", "Cadastrou tipo exame código: " + tipoexame.getEme_codigo()+ ", descrição: " + tipoexame.getEme_descricao()+
+                ", tipo: "+tipoexame.getEme_tipo()+", periódico: "+tipoexame.isEme_periodico()+", validade: "+tipoexame.getEme_validade()+", obrigatório: "+tipoexame.isEme_obrigatorio()+
+                ", intervalo de repetição: "+tipoexame.getEme_intervalorepeticao());
         }
         return "tipoexamelst";
     }

@@ -1,5 +1,6 @@
 package csb.controller;
 
+import cfg.dao.LogDAO;
 import csb.dao.MotivoAlteracaoSalarialDAO;
 import csb.model.MotivoAlteracaoSalarial;
 import javax.faces.bean.ManagedBean;
@@ -67,14 +68,17 @@ public class MotivoAlteracaoSalarialBean {
 
     public String delete(MotivoAlteracaoSalarial i) {
         dao.delete(i);
+        LogDAO.insert("MotivoAlteracaoSalarial", "Deletou motivo alteração salarial código: " + i.getMas_codigo()+ ", descrição: " + i.getMas_descricao());
         return "motivoalteracaosalariallst";
     }
 
     public String salvar() {
         if (motivo.getMas_codigo()> 0) {
             dao.update(motivo);
+            LogDAO.insert("MotivoAlteracaoSalarial", "Alterou motivo alteração salarial código: " + motivo.getMas_codigo()+ ", descrição: " + motivo.getMas_descricao());
         } else {
             dao.insert(motivo);
+            LogDAO.insert("MotivoAlteracaoSalarial", "Cadastrou motivo alteração salarial código: " + motivo.getMas_codigo()+ ", descrição: " + motivo.getMas_descricao());
         }
        return "motivoalteracaosalariallst";
     }

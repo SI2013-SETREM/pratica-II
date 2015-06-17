@@ -1,5 +1,6 @@
 package csb.controller;
 
+import cfg.dao.LogDAO;
 import csb.dao.EpiDAO;
 import csb.dao.SetorDAO;
 import csb.model.Epi;
@@ -75,14 +76,17 @@ public class SetorBean {
 
     public String delete(Setor i) {
         dao.delete(i);
+        LogDAO.insert("Setor", "Deletou setor código: " + i.getSet_codigo()+ ", descrição: " + i.getSet_descricao());
         return "setorlst";
     }
 
     public String salvar() {
         if (setor.getSet_codigo() > 0) {
             dao.update(setor);
+            LogDAO.insert("Setor", "Alterou setor código: " + setor.getSet_codigo()+ ", descrição: " + setor.getSet_descricao());
         } else {
             dao.insert(setor);
+            LogDAO.insert("Setor", "Cadastrou setor código: " + setor.getSet_codigo()+ ", descrição: " + setor.getSet_descricao());
         }
         return "setorlst";
     }
