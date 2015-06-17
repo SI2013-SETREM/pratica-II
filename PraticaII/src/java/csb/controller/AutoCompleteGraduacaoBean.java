@@ -23,10 +23,9 @@ public class AutoCompleteGraduacaoBean {
     
     public List<Graduacao> completaDescricaoGraduacao(String query) {
         List<Graduacao> allThemes = serviceGraduacao.getGraduacoes();
-        List<Graduacao> filteredThemes = new ArrayList<Graduacao>();
+        List<Graduacao> filteredThemes = new ArrayList<>();
          
-        for (int i = 0; i < allThemes.size(); i++) {
-            Graduacao skin = allThemes.get(i);
+        for (Graduacao skin : allThemes) {
             if(skin.getGrd_descricao().toLowerCase().startsWith(query)) {
                 filteredThemes.add(skin);
             }

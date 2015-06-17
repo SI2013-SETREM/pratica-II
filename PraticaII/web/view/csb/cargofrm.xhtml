@@ -49,8 +49,19 @@
                     var left = 150;
                     var top = 100;
                     URL = URL.replace("cargofrm.xhtml", "pop-graduacoeslst.xhtml");
+                    URL = URL.replace("cargolst.xhtml", "pop-graduacoeslst.xhtml");
                     window.open(URL, 'janela', 'width=' + width + ', height=' + height + ', top=' + top + ', left=' + left + ', scrollbars=yes, status=no, toolbar=no, location=no, directories=no, menubar=no, resizable=no, fullscreen=no');
                 });
+                $("#competenciasList").click(function () {
+                    var width = 550;
+                    var height = 400;
+                    var URL = document.URL;
+                    var left = 150;
+                    var top = 100;
+                    URL = URL.replace("cargofrm.xhtml", "pop-competenciaslst.xhtml");
+                    URL = URL.replace("cargolst.xhtml", "pop-competenciaslst.xhtml");
+                    window.open(URL, 'janela', 'width=' + width + ', height=' + height + ', top=' + top + ', left=' + left + ', scrollbars=yes, status=no, toolbar=no, location=no, directories=no, menubar=no, resizable=no, fullscreen=no');
+                });                
             });
         </script>
     </ui:define>
@@ -147,6 +158,21 @@
                                 </p:column>
                             </p:autoComplete>
                             <button style="float: right;" id="graduacaoList" class="btn btn-mini btn-info" type="button">?</button>
+                        </div>
+                    </div>  
+                    <div class="form-group">
+                        <p:outputLabel value="Competências" for="competencias" styleClass="control-label col-sm-1" />
+                        <div class="col-md-6 col-sm-12">
+                            <p:autoComplete pt:style="float: left;" id="competencias" multiple="true" value="#{cargosBean.cargo.competencias}" completeMethod="#{autoCompleteCompetenciaBean.completaDescricaoCompetencia}"
+                                            var="competencia" itemLabel="#{competencia.cmp_descricao}" itemValue="#{competencia}" converter="CompetenciaConverter" forceSelection="true">
+                                <p:column>
+                                    <h:outputText styleClass="ui-theme ui-theme-#{competencia.cmp_descricao}"/>
+                                </p:column>
+                                <p:column>
+                                    <h:outputText value="#{competencia.cmp_descricao}" />
+                                </p:column>
+                            </p:autoComplete>
+                            <button style="float: right;" id="competenciasList" class="btn btn-mini btn-info" type="button">?</button>
                         </div>
                     </div>  
                     <div class="form-group">

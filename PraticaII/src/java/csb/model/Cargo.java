@@ -42,7 +42,7 @@ public class Cargo implements Serializable, Comparable<Cargo> {
 
     @ManyToMany
     @JoinTable(name = "csb_competencias_cargo")
-    private List<Competencia> Competencia;
+    private List<Competencia> Competencias;
 
     @ManyToMany
     @JoinTable(name = "csb_graduacoes_cargo")
@@ -124,12 +124,12 @@ public class Cargo implements Serializable, Comparable<Cargo> {
         this.setor = setor;
     }
 
-    public List<Competencia> getCompetencia() {
-        return Competencia;
+    public List<Competencia> getCompetencias() {
+        return Competencias;
     }
 
-    public void setCompetencia(List<Competencia> Competencia) {
-        this.Competencia = Competencia;
+    public void setCompetencias(List<Competencia> Competencias) {
+        this.Competencias = Competencias;
     }
 
     public List<Graduacao> getGraduacoes() {

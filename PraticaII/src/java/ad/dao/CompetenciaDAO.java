@@ -42,6 +42,11 @@ public class CompetenciaDAO {
         return q.list();
     }
     
+    public List<Competencia> findAllActive() {
+        Query q = session.createQuery("from Competencia where cmp_status = 1 order by cmp_descricao asc");
+        return q.list();
+    }
+    
     public List<Competencia> searchCompetencia(String name) {
         String sqlCompetencia = "";
         if (name != null && name != "") {
