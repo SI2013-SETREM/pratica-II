@@ -58,7 +58,7 @@ public class LogDAO {
     }
 
     public List<Log> findAll() {
-        Query q = session.createQuery("from Log");
+        Query q = session.createQuery("from Log ");
         return q.list();
     }
 }
