@@ -60,7 +60,7 @@ public class TabelaINSSBean {
     
     public String edit(TabelaINSS i) {
         tabelainss = (TabelaINSS) tabelainsss.getRowData();
-        return "tabelainsssfrm";
+        return "tabelainssfrm";
     }
     
     public String update() {

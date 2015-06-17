@@ -63,7 +63,7 @@ public class TabelaIRRFBean {
     
     public String edit(TabelaIRRF i) {
         tabelairrf = (TabelaIRRF) tabelairrfs.getRowData();
-        return "tabelairrfsfrm";
+        return "tabelairrffrm";
     }
     
     public String update() {
