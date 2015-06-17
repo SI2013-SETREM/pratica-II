@@ -17,40 +17,36 @@
         <h3><h:outputText value="Candidatos do Recrutamento"/></h3>
         <f:view>
             <h:form styleClass="form-horizontal">
-                <h:dataTable value="${recrutamentoBean.pessoas}" var="item" styleClass="dataTable table table-bordered table-striped">
+                <h:dataTable value="${recrutamentoBean.recrutamentoPessoas}" var="item" styleClass="dataTable table table-bordered table-striped">
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="Código"/>
                         </f:facet>
-                        <h:outputText value="${item.getPes_codigo()}"/>
+                        <h:outputText value="${item.getPessoa().getPes_codigo()}"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="Nome"/>
                         </f:facet>
-                        <h:outputText value="${item.getPes_nome()}"/>
+                        <h:outputText value="${item.getPessoa().getPes_nome()}"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="CPF"/>
                         </f:facet>
-                        <h:outputText value="${item.getPes_cpf()}"/>
+                        <h:outputText value="${item.getPessoa().getPes_cpf()}"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="RG"/>
                         </f:facet>
-                        <h:outputText value="${item.getPes_rg()}"/>
+                        <h:outputText value="${item.getPessoa().getPes_rg()}"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="Selecionar"/>
                         </f:facet>
-                        <h:selectManyCheckbox value="#{recruatementoBean.favNumber1}">
-                            <f:selectItem itemValue="1" itemLabel="Number1 - 1" />
-                            <f:selectItem itemValue="2" itemLabel="Number1 - 2" />
-                            <f:selectItem itemValue="3" itemLabel="Number1 - 3" />
-                        </h:selectManyCheckbox>
+                       
                     </h:column>
                 </h:dataTable>3
                 <div class="form-group row">

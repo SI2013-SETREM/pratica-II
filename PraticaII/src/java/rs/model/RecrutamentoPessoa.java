@@ -28,6 +28,12 @@ public class RecrutamentoPessoa implements Serializable {
     @JoinColumn(name = "pes_codigo", referencedColumnName = "pes_codigo")
     private Pessoa pessoa;
     
+    /**
+     * 1 - Aguardando avaliação
+     * 2 - Em avaliação
+     * 3 - Eliminado
+     * 4 - Selecionado
+     */
     private int rec_pes_status;
 
     public RecrutamentoPessoa() {

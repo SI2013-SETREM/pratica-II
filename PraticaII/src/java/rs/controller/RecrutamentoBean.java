@@ -7,8 +7,11 @@ package rs.controller;
 
 import cfg.dao.PessoaDAO;
 import cfg.model.Pessoa;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
@@ -33,21 +36,42 @@ public class RecrutamentoBean {
     private RecrutamentoDAO dao = new RecrutamentoDAO();
     private PessoaDAO pesDao = new PessoaDAO();
     private DataModel recrutamentos;
-    private DataModel pessoas;
+    private DataModel recrutamentoPessoas;
 
-    public DataModel getPessoas() {
+    public DataModel getRecrutamentoPessoas() {
         String pes_tipo = "1,2,3";
         if (recrutamento.getRecTipo() == 1) {
             pes_tipo = "1";
         } else if (recrutamento.getRecTipo() == 2) {
             pes_tipo = "2,3";
         }
-        this.pessoas = new ListDataModel(pesDao.findCandidatos(pes_tipo));
-        return pessoas;
+        List<Pessoa> pessoas = pesDao.findCandidatos(pes_tipo);
+        List<RecrutamentoPessoa> recPessoasBanco = recrutamentoPessoaDAO.findByRecrutamento(recrutamento.getRecCodigo());
+        List<RecrutamentoPessoa> recPessoasList = new ArrayList<RecrutamentoPessoa>();
+        
+        for (Pessoa pes : pessoas) {
+            RecrutamentoPessoa recPes = new RecrutamentoPessoa();
+            recPes.setPessoa(pes);
+            recPes.setRecrutamento(recrutamento);
+            recPes.setRecPesStatus(3);
+            
+            for (RecrutamentoPessoa rp : recPessoasBanco) {
+                if (rp.getPessoa().getPes_codigo() == pes.getPes_codigo()) {
+                    recPes.setRecPesStatus(rp.getRecPesStatus());
+                    break;
+                }
+            }
+            
+            recPessoasList.add(recPes);
+        }
+        
+        this.recrutamentoPessoas = new ListDataModel(recPessoasList);
+//        this.pessoas = new ListDataModel(pesDao.findCandidatos(pes_tipo));
+        return this.recrutamentoPessoas;
     }
 
-    public void setPessoas(DataModel pessoas) {
-        this.pessoas = pessoas;
+    public void setRecrutamentoPessoas(DataModel recrutamentoPessoas) {
+        this.recrutamentoPessoas = recrutamentoPessoas;
     }
 
     public RecrutamentoBean() {

@@ -9,6 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -34,24 +37,12 @@ public class Recrutamento implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date rec_fim;
     private int rec_status;
-    private List<Pessoa> pessoas;
 
+    @OneToMany
+    @JoinColumn(name = "rec_codigo", referencedColumnName = "rec_codigo")
+    private List<RecrutamentoPessoa> recrutamentoPessoa;
+    
     public Recrutamento() {
-    }
-
-    public List<Pessoa> getPessoas() {
-        return pessoas;
-    }
-
-    public void setPessoas(List<Pessoa> pessoas) {
-        this.pessoas = pessoas;
-    }
-
-    public void addPessoa(Pessoa p) {
-        if (this.pessoas == null) {
-            this.pessoas = new ArrayList<>();
-        }
-        this.pessoas.add(p);
     }
 
     public int getRecCodigo() {
@@ -101,4 +92,13 @@ public class Recrutamento implements Serializable {
     public void setRecStatus(int rec_status) {
         this.rec_status = rec_status;
     }
+
+    public List<RecrutamentoPessoa> getRecrutamentoPessoa() {
+        return recrutamentoPessoa;
+    }
+
+    public void setRecrutamentoPessoa(List<RecrutamentoPessoa> recrutamentoPessoa) {
+        this.recrutamentoPessoa = recrutamentoPessoa;
+    }
+    
 }

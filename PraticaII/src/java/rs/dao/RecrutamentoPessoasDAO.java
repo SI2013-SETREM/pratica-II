@@ -55,6 +55,11 @@ public class RecrutamentoPessoasDAO {
         Query q = session.createQuery("from RecrutamentoPessoa");
         return q.list();
     }
+
+    public List<RecrutamentoPessoa> findByRecrutamento(int recCodigo) {
+        Query q = session.createQuery("from RecrutamentoPessoa where recrutamento.rec_codigo = " + String.valueOf(recCodigo));
+        return q.list();
+    }
     
    
 }
