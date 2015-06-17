@@ -2,6 +2,7 @@
 package cfg.controller;
 
 import cfg.dao.EnderecoDAO;
+import cfg.dao.LogDAO;
 import cfg.model.Endereco;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -64,15 +65,19 @@ public class EnderecoBean {
     
     public String delete(Endereco i) {
         dao.delete(i);
+        LogDAO.insert("Endereco", "Deletou endereço código: " + i.getEnd_codigo() + ", descrição: " + i.getEnd_descricao() + ", cep: " + i.getEnd_cep());
         return "enderecolst";
     }
-    
+
     public String salvar() {
-        if (endereco.getEnd_codigo()> 0)
+        if (endereco.getEnd_codigo() > 0) {
             dao.update(endereco);
-        else 
+            LogDAO.insert("Endereco", "Alterou endereço código: " + endereco.getEnd_codigo() + ", descrição: " + endereco.getEnd_descricao() + ", cep: " + endereco.getEnd_cep());
+        } else {
             dao.insert(endereco);
-        
+            LogDAO.insert("Endereco", "Cadastrou endereço código: " + endereco.getEnd_codigo() + ", descrição: " + endereco.getEnd_descricao() + ", cep: " + endereco.getEnd_cep());
+        }
+
         return "enderecolst";
     }
     

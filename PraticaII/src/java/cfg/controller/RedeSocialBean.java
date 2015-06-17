@@ -1,5 +1,6 @@
 package cfg.controller;
 
+import cfg.dao.LogDAO;
 import cfg.dao.RedeSocialDAO;
 import cfg.dao.RepositorioDAO;
 import cfg.model.RedeSocial;
@@ -78,14 +79,20 @@ public class RedeSocialBean {
 
     public String delete(RedeSocial i) {
         dao.delete(i);
+        LogDAO.insert("RedeSocial", "Deletou rede social código: " + i.getRsc_codigo()+ ", nome: " + i.getRsc_nome()+
+                    ", url: "+i.getRsc_url()+", url perfil: "+i.getRsc_urlperfil()+", repositório: "+i.getRepositorio().getRep_codigo());
         return "redeSociallst";
     }
 
     public String salvar() {
         if (redesocial.getRsc_codigo() > 0) {
             dao.update(redesocial);
+            LogDAO.insert("RedeSocial", "Alterou rede social código: " + redesocial.getRsc_codigo()+ ", nome: " + redesocial.getRsc_nome()+
+                    ", url: "+redesocial.getRsc_url()+", url perfil: "+redesocial.getRsc_urlperfil()+", repositório: "+redesocial.getRepositorio().getRep_codigo());
         } else {
             dao.insert(redesocial);
+            LogDAO.insert("RedeSocial", "Cadastrou rede social código: " + redesocial.getRsc_codigo()+ ", nome: " + redesocial.getRsc_nome()+
+                    ", url: "+redesocial.getRsc_url()+", url perfil: "+redesocial.getRsc_urlperfil()+", repositório: "+redesocial.getRepositorio().getRep_codigo());
         }
 
         return "redeSociallst";

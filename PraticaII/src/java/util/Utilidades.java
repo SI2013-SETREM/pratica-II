@@ -8,6 +8,9 @@ import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.jdbc.Work;
@@ -141,5 +144,11 @@ public class Utilidades {
             else if (o == null) //Deficiência do Java, null = Integer. Não tente entender
                 st.setNull(count, java.sql.Types.INTEGER);
         }
+    }
+    public static Object getSessionObject(String objName) {
+        FacesContext ctx = FacesContext.getCurrentInstance();
+        ExternalContext extCtx = ctx.getExternalContext();
+        Map<String, Object> sessionMap = extCtx.getSessionMap();
+        return sessionMap.get(objName);
     }
 }

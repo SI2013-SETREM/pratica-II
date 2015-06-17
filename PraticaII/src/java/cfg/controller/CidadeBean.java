@@ -2,6 +2,7 @@
 package cfg.controller;
 
 import cfg.dao.CidadeDAO;
+import cfg.dao.LogDAO;
 import cfg.model.Cidade;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -64,15 +65,18 @@ public class CidadeBean {
     
     public String delete(Cidade i) {
         dao.delete(i);
+        LogDAO.insert("Cidade", "Deletou cidade código: " + i.getCid_codigo() + ", nome: " + i.getCid_nome() + ", uf: " + i.getCid_uf());
         return "cidadelst";
     }
-    
+
     public String salvar() {
-        if (cidade.getCid_codigo()!=0)
+        if (cidade.getCid_codigo() != 0) {
             dao.update(cidade);
-        else 
+            LogDAO.insert("Cidade", "Alterou cidade código: " + cidade.getCid_codigo() + ", nome: " + cidade.getCid_nome() + ", uf: " + cidade.getCid_uf());
+        } else {
             dao.insert(cidade);
-        
+            LogDAO.insert("Cidade", "Cadastrou cidade código: " + cidade.getCid_codigo() + ", nome: " + cidade.getCid_nome() + ", uf: " + cidade.getCid_uf());
+        }
         return "cidadelst";
     }
     

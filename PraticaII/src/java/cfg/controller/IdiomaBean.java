@@ -2,6 +2,7 @@
 package cfg.controller;
 
 import cfg.dao.IdiomaDAO;
+import cfg.dao.LogDAO;
 import cfg.model.Idioma;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -64,15 +65,19 @@ public class IdiomaBean {
     
     public String delete(Idioma i) {
         dao.delete(i);
+        LogDAO.insert("Idioma", "Deletou idioma código: " + i.getIdiCodigo() + ", descrição: " + i.getIdiDescricao());
         return "idiomalst";
     }
-    
+
     public String salvar() {
-        if (idioma.getIdiCodigo()> 0)
+        if (idioma.getIdiCodigo() > 0) {
             dao.update(idioma);
-        else 
+            LogDAO.insert("Idioma", "Alterou idioma código: " + idioma.getIdiCodigo() + ", descrição: " + idioma.getIdiDescricao());
+        } else {
             dao.insert(idioma);
-        
+            LogDAO.insert("Idioma", "Cadastrou idioma código: " + idioma.getIdiCodigo() + ", descrição: " + idioma.getIdiDescricao());
+        }
+
         return "idiomalst";
     }
     

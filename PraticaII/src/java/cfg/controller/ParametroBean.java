@@ -1,5 +1,6 @@
 package cfg.controller;
 
+import cfg.dao.LogDAO;
 import cfg.dao.ParametroDAO;
 import cfg.model.Parametro;
 import javax.faces.bean.ManagedBean;
@@ -63,14 +64,17 @@ public class ParametroBean {
 
     public String delete(Parametro i) {
         dao.delete(i);
+        LogDAO.insert("Parametro", "Deletou parâmetro código: " + parametro.getPar_codigo()+ ", pontuação máxima: " + parametro.getPar_qst_pontuacaomax_padrao());
         return "parametrolst";
     }
 
     public String salvar() {
         if (parametro.getPar_codigo() > 0) {
             dao.update(parametro);
+            LogDAO.insert("Parametro", "Alterou parâmetro código: " + parametro.getPar_codigo()+ ", pontuação máxima: " + parametro.getPar_qst_pontuacaomax_padrao());
         } else {
             dao.insert(parametro);
+            LogDAO.insert("Parametro", "Cadastrou parâmetro código: " + parametro.getPar_codigo()+ ", pontuação máxima: " + parametro.getPar_qst_pontuacaomax_padrao());
         }
 
         return "parametrolst";

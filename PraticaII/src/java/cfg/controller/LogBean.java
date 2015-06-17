@@ -47,11 +47,6 @@ public class LogBean {
         this.logs= logs;
     }
     
-    public String insert() {
-        dao.insert(log);
-        return "loglst";
-    }
-    
     public String edit(Log i) {
         log= (Log) logs.getRowData();
         return "logfrm";
@@ -67,14 +62,6 @@ public class LogBean {
         return "loglst";
     }
     
-    public String salvar() {
-        if (log.getLog_codigo()> 0)
-            dao.update(log);
-        else 
-            dao.insert(log);
-        
-        return "loglst";
-    }
     
     public String listar() {
         return "loglst";

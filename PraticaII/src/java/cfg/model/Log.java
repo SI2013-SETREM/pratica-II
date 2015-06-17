@@ -27,7 +27,7 @@ public class Log implements Serializable {
     private int log_codigo;
     
     @ManyToOne
-    @JoinColumn(name = "usu_codigo")
+    @JoinColumn(name = "usu_login")
     private Usuario usuario;
 
     private String log_tabela;

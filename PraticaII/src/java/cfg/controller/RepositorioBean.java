@@ -1,5 +1,6 @@
 package cfg.controller;
 
+import cfg.dao.LogDAO;
 import cfg.dao.RepositorioDAO;
 import cfg.model.Repositorio;
 import cfg.model.Repositorio;
@@ -64,14 +65,20 @@ public class RepositorioBean {
 
     public String delete(Repositorio i) {
         dao.delete(i);
+        LogDAO.insert("Repositório", "Deletou repositório código: " + repositorio.getRep_codigo() + ", nome: " + repositorio.getRep_nome()
+                    + ", nome arquivo: " + repositorio.getRep_nomearquivo() + ", extesão: " + repositorio.getRep_extensao() + ", tipo: " + repositorio.getRep_tipo() + ", data: " + repositorio.getRep_data());
         return "repositoriolst";
     }
 
     public String salvar() {
-        if (repositorio.getRep_codigo()> 0) {
+        if (repositorio.getRep_codigo() > 0) {
             dao.update(repositorio);
+            LogDAO.insert("Repositório", "Alterou repositório código: " + repositorio.getRep_codigo() + ", nome: " + repositorio.getRep_nome()
+                    + ", nome arquivo: " + repositorio.getRep_nomearquivo() + ", extesão: " + repositorio.getRep_extensao() + ", tipo: " + repositorio.getRep_tipo() + ", data: " + repositorio.getRep_data());
         } else {
             dao.insert(repositorio);
+            LogDAO.insert("Repositório", "Cadastrou repositório código: " + repositorio.getRep_codigo() + ", nome: " + repositorio.getRep_nome()
+                    + ", nome arquivo: " + repositorio.getRep_nomearquivo() + ", extesão: " + repositorio.getRep_extensao() + ", tipo: " + repositorio.getRep_tipo() + ", data: " + repositorio.getRep_data());
         }
 
         return "repositoriolst";
