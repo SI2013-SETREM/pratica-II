@@ -3,6 +3,7 @@ package cfg.dao;
 import cfg.model.Pessoa;
 import java.util.List;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import util.HibernateUtil;
@@ -10,6 +11,7 @@ import util.HibernateUtil;
 public class PessoaDAO {
 
     private Session session;
+    public int idSol;//ID da solicitalção, quando o usuário quer editar uma solicitação, ele busca as competências por esse ID
 
     public PessoaDAO() {
         session = HibernateUtil.getSessionFactory().openSession();
@@ -58,6 +60,11 @@ public class PessoaDAO {
     
     public List<Pessoa> findCandidatos(String pes_tipo) {
         Query q = session.createQuery("from Pessoa where pes_tipo in("+pes_tipo+")");
+        return q.list();
+    }
+    
+    public List<Pessoa> findPesSol() {//Procura as pessoas de uma determinada solicitação
+        SQLQuery q = session.createSQLQuery("select pe.* from pessoa pe, trd_pessoas_recebertreinamento ir where pe.pes_codigo = ir.pes_codigo and ir.sol_codigo ="+idSol).addEntity(Pessoa.class);
         return q.list();
     }
 }

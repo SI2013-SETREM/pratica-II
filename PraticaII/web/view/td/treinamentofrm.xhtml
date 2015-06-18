@@ -68,7 +68,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <h:outputLabel value="Starus:" for="tre_status" styleClass="control-label col-sm-2" />
+                        <h:outputLabel value="Status:" for="tre_status" styleClass="control-label col-sm-2" />
                         <div class="col-md-6 col-sm-12">
                             <h:selectOneMenu pt:required="required" id="turStatusTurma" value="#{treinamentoBean.treinamento.tre_status}" title="TreStatus" styleClass="form-control" pt:autofocus="">
                                 <f:selectItem  itemValue="1" itemLabel="Ativo"/>
@@ -82,7 +82,7 @@
                         <h:outputLabel value="Instrutores:" for="pessoa" styleClass="control-label col-md-2" />
                         <div class="col-md-8 col-xs-12 autocomplete">
                             <p:autoComplete pt:disabled="#{treinamentoBean.treinamento.tre_codigo > 0}" id="solicitacao" multiple="true" completeMethod="#{treinamentoBean.completePessoa}" value="#{treinamentoBean.lstpessoa}"
-                                            var="pessoa" itemLabel="#{pessoa.pes_nome}" itemValue="#{pessoa}" converter="pessoaConverter" forceSelection="true">
+                                            var="pessoa" itemLabel="#{pessoa.pes_nome}" itemValue="#{pessoa}" converter="pessoaConverter" forceSelection="true" disabled="false">
                                 <p:column>
                                     <h:outputText value="#{pessoa.pes_nome}" />
                                 </p:column>
@@ -93,7 +93,7 @@
                         <p:outputLabel value="Competências:" for="competencia" styleClass="control-label col-sm-2" />
                         <div class="col-md-6 col-sm-12">
                             <p:autoComplete pt:disabled="#{treinamentoBean.treinamento.tre_codigo > 0}" id="competencia" multiple="true" completeMethod="#{treinamentoBean.completeCompetencia}" value="#{treinamentoBean.lstcompetencia}" 
-                                            var="competencia" itemLabel="#{competencia.cmp_descricao}" itemValue="#{competencia}" converter="CompetenciaConverter" forceSelection="true">
+                                            var="competencia" itemLabel="#{competencia.cmp_descricao}" itemValue="#{competencia}" converter="CompetenciaConverter" forceSelection="true" disabled="false">
                             <p:column>
                                 <h:outputText value="#{competencia.cmp_descricao}" />
                             </p:column>

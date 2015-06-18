@@ -3,6 +3,7 @@ package ad.dao;
 import ad.model.Competencia;
 import java.util.List;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import util.HibernateUtil;
@@ -10,6 +11,7 @@ import util.HibernateUtil;
 public class CompetenciaDAO {
 
     private Session session;
+    public int idSol; //ID da solicitalção, quando o usuário quer editar uma solicitação, ele busca as competências por esse ID
 
     public CompetenciaDAO() {
         session = HibernateUtil.getSessionFactory().openSession();
@@ -55,4 +57,9 @@ public class CompetenciaDAO {
         }
         return session.createQuery("from Competencia where 1 = 1 " + sqlCompetencia).list();
     } 
+
+    public List<Competencia> findCompSol() {//Procura as competencias de uma determinada solicitação
+        SQLQuery q = session.createSQLQuery("select cp.* from avd_competencia cp, trd_competencias_solicitacao cs where cp.cmp_codigo = cs.cmp_codigo and cs.sol_codigo ="+idSol).addEntity(Competencia.class);
+        return q.list();
+    }
 }

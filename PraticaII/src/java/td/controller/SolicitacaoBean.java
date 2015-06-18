@@ -86,7 +86,15 @@ public class SolicitacaoBean {
     
     public String salvar() {
         if (solicitacao.getSol_codigo()> 0){
-            dao.update(solicitacao);
+           // dao.update(solicitacao);
+            if (ValidaDados()) {
+                dao.update(solicitacao);
+                if (SalvaListas()) {
+                    return "solicitacaolst";
+                } else {
+                    return "solicitacaolst";
+                }
+            }
         } else {
             if (ValidaDados()) {
                 dao.insert(solicitacao);
@@ -116,6 +124,11 @@ public class SolicitacaoBean {
     }
     
     public List<Pessoa> getLstpessoa() {
+        int i = solicitacao.getSol_codigo();
+        if(i > 0){
+            pessoadao.idSol = i;
+            lstpessoa = pessoadao.findPesSol();
+        }
         return lstpessoa;
     }
 
@@ -126,7 +139,8 @@ public class SolicitacaoBean {
     public List<Competencia> getLstcompetencia() {
         int i = solicitacao.getSol_codigo();
         if(i > 0){
-           // lstcompetencia = compdao.findAll();
+            compdao.idSol = i;
+            lstcompetencia = compdao.findCompSol();
         }
         return lstcompetencia;
     }
@@ -157,8 +171,6 @@ public class SolicitacaoBean {
     private boolean SalvaListas() {
         try {
             SalvarPesComp(filtraCompetencia(lstcompetencia),filtraPessoas(lstpessoa));
-           // SalvarCompSol(filtraCompetencia(lstcompetencia));
-           // SalvarPesTre(filtraPessoas(lstpessoa));
             return true;
         } catch (Exception e) {
             Title = e.toString();
@@ -193,38 +205,7 @@ public class SolicitacaoBean {
         }
         return lsItens;
     }
-/*
-    private void SalvarCompSol(List<Competencia> lsComp) {
-        List<Integer> lsAval = new ArrayList<>();
-        if (!lsComp.isEmpty()) {
-            for (Competencia a : lsComp) {
-                lsAval.add(a.getCmp_codigo());
-                for (Competencia c : lsComp) {
-                    CompetenciasSolicitacao aa = new CompetenciasSolicitacao();
-                    aa.setCompetencia(c);
-                    aa.setSolicitacao(solicitacao);
-                    compSolDao.insert(aa);
-                }
-            }
-        } 
-    }
-    
-    private void SalvarPesTre(List<Pessoa> lsPesTre) {
-        List<Integer> lsAval = new ArrayList<>();
-        if (!lsPesTre.isEmpty()) {
-            for (Pessoa a : lsPesTre) {
-                lsAval.add(a.getPes_codigo());
-                for (Pessoa c : lsPesTre) {
-                    PessoasReceberTreinamento aa = new PessoasReceberTreinamento();
-                    aa.setPessoa(c);
-                    aa.setSolicitacao(solicitacao);
-                    pesTreDao.insert(aa);
-                }
-            }
-        } 
-    }
-    */
-    
+   
     private void SalvarPesComp(List<Competencia> lsCompetencia, List<Pessoa> lsPessoa) {//Salva a lista de cargos e pessoas que fazem parte da avlaiação, basta passar a lista de Cargos e Pessoas e o Tipo (Colaborador= 1 ou Avaliador = 2)
         if (!lsPessoa.isEmpty()) {
             for (Pessoa p : lsPessoa) {
@@ -242,6 +223,6 @@ public class SolicitacaoBean {
                 compSolDao.insert(comp);
             }
         }
-    }
+   }
       
 }
