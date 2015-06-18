@@ -87,19 +87,19 @@
                     <h:messages showDetail="true" />
                     <h:inputHidden id="carCodigo" value="#{cargosBean.cargo.car_codigo}" />
                     <div class="form-group">
-                        <h:outputLabel value="Descrição:" for="car_descricao" styleClass="control-label col-sm-1" />
+                        <h:outputLabel style="width: 133px" value="Descrição:" for="car_descricao" styleClass="control-label col-sm-1" />
                         <div class="col-md-6 col-sm-12">
                             <h:inputText id="carDescricao" value="#{cargosBean.cargo.car_descricao}" title="Descrição" pt:required="true" styleClass="form-control" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <h:outputLabel value="CBO" for="car_cbo" styleClass="control-label col-sm-1" />
+                        <h:outputLabel style="width: 133px" value="CBO" for="car_cbo" styleClass="control-label col-sm-1" />
                         <div class="col-md-6 col-sm-12">
                             <h:inputText id="carCbo" value="#{cargosBean.cargo.car_cbo}" title="CBO" pt:required="true" styleClass="form-control" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <h:outputLabel value="Setor: " for="setor" styleClass="control-label col-sm-1" />
+                        <h:outputLabel style="width: 133px" value="Setor: " for="setor" styleClass="control-label col-sm-1" />
                         <div class="col-md-6 col-sm-12">
                             <h:selectOneMenu id="setor" converter="setorConverter" value="#{cargosBean.cargo.setor}" styleClass="form-control" pt:autofocus="" >
                                 <f:selectItems value="#{cargosBean.lstsetor}" var="tipe" itemLabel="#{tipe.set_descricao}"/>
@@ -107,7 +107,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <h:outputLabel value="Piso Salarial" for="car_pisosalarial" styleClass="control-label col-sm-1" />
+                        <h:outputLabel style="width: 133px" value="Piso Salarial" for="car_pisosalarial" styleClass="control-label col-sm-1" />
                         <div class="col-md-6 col-sm-12">
                             <div class="input-group">
                                 <div class="input-group-addon">R$</div>
@@ -117,7 +117,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <h:outputLabel value="Teto Salarial" for="car_tetosalarial" styleClass="control-label col-sm-1" />
+                        <h:outputLabel style="width: 133px" value="Teto Salarial" for="car_tetosalarial" styleClass="control-label col-sm-1" />
                         <div class="col-md-6 col-sm-12">
                             <div class="input-group">
                                 <div class="input-group-addon">R$</div>
@@ -127,20 +127,20 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <h:outputLabel value="Ativo?:" for="car_ativo" styleClass="control-label col-sm-1" />
+                        <h:outputLabel style="width: 133px" value="Ativo?:" for="car_ativo" styleClass="control-label col-sm-1" />
                         <div style="padding-top: 5px" class="col-md-6 col-sm-12">
                             <h:selectBooleanCheckbox value="#{cargosBean.cargo.car_ativo}" id="carAtivo" class="carAtivo" title="Ativo" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <h:outputLabel value="É Cargo Pai?:" for="car_tempai" styleClass="control-label col-sm-1" />
+                        <h:outputLabel style="width: 133px" value="É Cargo Pai?:" for="car_tempai" styleClass="control-label col-sm-1" />
                         <div style="padding-top: 5px" class="col-md-6 col-sm-12">
                             <h:selectBooleanCheckbox value="false" styleClass="carTempaiChck" title="Tem Pai" />
                         </div>
                     </div>
                     <div id="haveParent">
                         <div class="form-group">
-                            <h:outputLabel value="Cargo: " for="car_pai" styleClass="control-label col-sm-1" />
+                            <h:outputLabel style="width: 133px" value="Cargo: " for="car_pai" styleClass="control-label col-sm-1" />
                             <div class="col-md-6 col-sm-12">
                                 <h:selectOneMenu id="cargoPai" pt:required="false" converter="cargoConverter" value="#{cargosBean.cargo.car_pai}" styleClass="form-control cargoPaiCbo" pt:autofocus="" >
                                     <f:selectItems value="#{cargosBean.lscargo}" var="tipe" itemLabel="#{tipe.car_descricao}"/>
@@ -149,14 +149,14 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <h:outputLabel value="Ordem" for="carOrdem" styleClass="control-label col-sm-1" />
+                            <h:outputLabel style="width: 133px" value="Ordem" for="carOrdem" styleClass="control-label col-sm-1" />
                             <div class="col-md-6 col-sm-12">
                                 <h:inputText pt:type="number" pt:min="1" pt:max="100" pt:step="1" id="carOrdem" value="#{cargosBean.cargo.car_ordem}" title="Ordem do Cargo" styleClass="form-control carOrdemNumber" />
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <p:outputLabel value="Graduações" for="graduacoes" styleClass="control-label col-sm-1" />
+                        <p:outputLabel style="width: 133px" value="Graduações" for="graduacoes" styleClass="control-label col-sm-1" />
                         <div class="col-md-6 col-sm-12">
                             <p:autoComplete pt:style="float: left;" id="graduacoes" multiple="true" value="#{cargosBean.cargo.graduacoes}" completeMethod="#{autoCompleteGraduacaoBean.completaDescricaoGraduacao}"
                                             var="graduacao" itemLabel="#{graduacao.grd_descricao}" itemValue="#{graduacao}" converter="graduacaoConverter" forceSelection="true">
@@ -171,7 +171,7 @@
                         </div>
                     </div>  
                     <div class="form-group">
-                        <p:outputLabel value="Competências" for="competencias" styleClass="control-label col-sm-1" />
+                        <p:outputLabel style="width: 133px" value="Competências" for="competencias" styleClass="control-label col-sm-1" />
                         <div class="col-md-6 col-sm-12">
                             <p:autoComplete pt:style="float: left;" id="competencias" multiple="true" value="#{cargosBean.cargo.competencias}" completeMethod="#{autoCompleteCompetenciaBean.completaDescricaoCompetencia}"
                                             var="competencia" itemLabel="#{competencia.cmp_descricao}" itemValue="#{competencia}" converter="CompetenciaConverter" forceSelection="true">
@@ -186,7 +186,7 @@
                         </div>
                     </div>  
                     <div class="form-group">
-                        <p:outputLabel value="Epis:" for="epis" styleClass="control-label col-sm-1" />
+                        <p:outputLabel style="width: 133px" value="Epis:" for="epis" styleClass="control-label col-sm-1" />
                         <div class="col-md-6 col-sm-12">
                             <p:autoComplete pt:style="float: left;" id="epis" multiple="true" value="#{cargosBean.cargo.epis}" completeMethod="#{autoCompleteEpiBean.completaDescricaoEpi}"
                                             var="epi" itemLabel="#{epi.epi_descricao}" itemValue="#{epi}" converter="epiConverter" forceSelection="true">
