@@ -5,10 +5,7 @@
  */
 package csb.model;
 
-import cfg.model.*;
 import java.io.Serializable;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -39,9 +36,6 @@ public class Beneficio implements Serializable {
 
     public Beneficio() {
 
-    }
-
-    public Beneficio(int ben_codigo, String ben_descricao, Double ben_valor, Double ben_valorpago, Date ben_datainicio, Boolean ben_situacao, Date ben_datafim) {
     }
 
     public int getBen_codigo() {

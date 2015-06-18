@@ -72,6 +72,16 @@
                     URL = URL.replace("cargolst.xhtml", "pop-epilst.xhtml");
                     window.open(URL, 'janela', 'width=' + width + ', height=' + height + ', top=' + top + ', left=' + left + ', scrollbars=yes, status=no, toolbar=no, location=no, directories=no, menubar=no, resizable=no, fullscreen=no');
                 });
+                $("#beneficioLst").click(function () {
+                    var width = 550;
+                    var height = 400;
+                    var URL = document.URL;
+                    var left = 150;
+                    var top = 100;
+                    URL = URL.replace("cargofrm.xhtml", "pop-beneficiolst.xhtml");
+                    URL = URL.replace("cargolst.xhtml", "pop-beneficiolst.xhtml");
+                    window.open(URL, 'janela', 'width=' + width + ', height=' + height + ', top=' + top + ', left=' + left + ', scrollbars=yes, status=no, toolbar=no, location=no, directories=no, menubar=no, resizable=no, fullscreen=no');
+                });
             });
         </script>
     </ui:define>
@@ -198,6 +208,21 @@
                                 </p:column>
                             </p:autoComplete>
                             <button style="float: right;" id="epiLst" class="btn btn-mini btn-info" type="button">?</button>
+                        </div>
+                    </div>  
+                    <div class="form-group">
+                        <p:outputLabel value="Benefício:" for="epis" styleClass="control-label col-sm-1" />
+                        <div class="col-md-6 col-sm-12">
+                            <p:autoComplete pt:style="float: left;" id="beneficios" multiple="true" value="#{cargosBean.cargo.beneficios}" completeMethod="#{autoCompleteBeneficioBean.completaDescricaoBeneficio}"
+                                            var="beneficio" itemLabel="#{beneficio.ben_descricao}" itemValue="#{beneficio}" converter="beneficioConverter" forceSelection="true">
+                                <p:column>
+                                    <h:outputText styleClass="ui-theme ui-theme-#{epi.epi_descricao}"/>
+                                </p:column>
+                                <p:column>
+                                    <h:outputText value="#{beneficio.ben_descricao}" />
+                                </p:column>
+                            </p:autoComplete>
+                            <button style="float: right;" id="beneficioLst" class="btn btn-mini btn-info" type="button">?</button>
                         </div>
                     </div>  
                     <div class="form-group">

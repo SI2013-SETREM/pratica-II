@@ -72,6 +72,17 @@ public class Cargo implements Serializable, Comparable<Cargo> {
     )
     private List<Epi> Epis;
 
+    @ManyToMany
+    @JoinTable(name = "csb_beneficios_cargo",
+            joinColumns = {
+                @JoinColumn(name = "car_codigo")
+            },
+            inverseJoinColumns = {
+                @JoinColumn(name = "ben_codigo")
+            }
+    )
+    private List<Beneficio> beneficios;
+
     public Cargo() {
 
     }
@@ -148,6 +159,14 @@ public class Cargo implements Serializable, Comparable<Cargo> {
         this.setor = setor;
     }
 
+    public List<Beneficio> getBeneficios() {
+        return beneficios;
+    }
+
+    public void setBeneficios(List<Beneficio> beneficios) {
+        this.beneficios = beneficios;
+    }
+    
     public List<Competencia> getCompetencias() {
         return Competencias;
     }
