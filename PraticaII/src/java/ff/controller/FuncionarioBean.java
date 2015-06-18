@@ -56,6 +56,9 @@ public class FuncionarioBean {
     
     private final AdvertenciaDAO advertenciaDAO = new AdvertenciaDAO();
     private List<Advertencia> advertencias;
+    
+    private String estadoCivil;
+    private String tipoPessoa;
 
     public FuncionarioBean() {
     }
@@ -179,6 +182,24 @@ public class FuncionarioBean {
 
     public void setAdvertencias(List<Advertencia> advertencias) {
         this.advertencias = advertencias;
+    }
+
+    public String getEstadoCivil() {
+        return estadoCivil;
+    }
+
+    public void setEstadoCivil(String estadoCivil) {
+        this.estadoCivil = estadoCivil;
+    }
+
+    public String getTipoPessoa(String p) {
+     
+                
+        return tipoPessoa;
+    }
+
+    public void setTipoPessoa(String tipoPessoa) {
+        this.tipoPessoa = tipoPessoa;
     }
 
 }

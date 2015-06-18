@@ -11,12 +11,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.servlet.http.HttpServletRequest;
 
 @ManagedBean
+@SessionScoped
 public class AdvertenciaBean {
     
     private AdvertenciaDAO advertenciaDAO = new AdvertenciaDAO();
@@ -32,7 +34,8 @@ public class AdvertenciaBean {
     
     public String inicia() {
 
-        // pessoas = (DataModel<Pessoa>) pessoaDAO.findByPessoaId(getParametro());
+        this.pessoas = new ListDataModel<>(pessoaDAO.findByPessoaId(getIdPessoa()));
+        pessoa = pessoas.getRowData();
         pessoa = pessoaDAO.findById(pessoa.getPes_codigo());
         advertencia.setPessoa(pessoa);
         

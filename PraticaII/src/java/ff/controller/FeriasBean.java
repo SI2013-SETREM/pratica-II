@@ -11,12 +11,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.servlet.http.HttpServletRequest;
 
 @ManagedBean
+@SessionScoped
 public class FeriasBean {
 
    
@@ -32,8 +34,9 @@ public class FeriasBean {
     }
 
     public String inicio() {
-       // pessoas =  (DataModel<Pessoa>) pessoaDAO.findByPessoaId(getIdPessoa());
-        pessoa = pessoaDAO.findById(getIdPessoa());
+       this.pessoas = new ListDataModel<>(pessoaDAO.findByPessoaId(getIdPessoa()));
+        pessoa = pessoas.getRowData();
+        pessoa = pessoaDAO.findById(pessoa.getPes_codigo());
         return "faltafrm";
     }
 

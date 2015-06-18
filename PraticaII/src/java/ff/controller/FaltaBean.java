@@ -9,12 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.servlet.http.HttpServletRequest;
 
 @ManagedBean
+@SessionScoped
 public class FaltaBean {
 
     private final FaltaDAO faltaDAO = new FaltaDAO();
@@ -28,13 +30,11 @@ public class FaltaBean {
     public FaltaBean() {
     }
 
-    public String inicia() {
-
-       // pessoas = (DataModel<Pessoa>) pessoaDAO.findByPessoaId(getParametro());
+    public void inicia() {
+        this.pessoas = new ListDataModel<>(pessoaDAO.findByPessoaId(getParametro()));
+        pessoa = pessoas.getRowData();
         pessoa = pessoaDAO.findById(pessoa.getPes_codigo());
         falta.setPessoa(pessoa);
-
-        return "faltafrm";
     }
 
     public String insert() {
@@ -60,10 +60,9 @@ public class FaltaBean {
         return faltas;
     }
 
-
     public void getPessoas() {
         this.pessoa = pessoaDAO.findById(parametro);
-       // return pessoas;
+        // return pessoas;
     }
 
     public void setPessoas(DataModel pessoas) {
