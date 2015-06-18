@@ -54,5 +54,5 @@ public class CompetenciaDAO {
                     + " LIKE upper(translate('%" + name + "%', 'ÁÇÉÍÓÚÀÈÌÒÙÂÊÎÔÛÃÕËÜáçéíóúàèìòùâêîôûãõëü', 'ACEIOUAEIOUAEIOUAOEUaceiouaeiouaeiouaoeu'))";
         }
         return session.createQuery("from Competencia where 1 = 1 " + sqlCompetencia).list();
-    }
+    } 
 }

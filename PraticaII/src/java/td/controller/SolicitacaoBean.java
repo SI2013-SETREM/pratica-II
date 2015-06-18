@@ -124,6 +124,10 @@ public class SolicitacaoBean {
     }
 
     public List<Competencia> getLstcompetencia() {
+        int i = solicitacao.getSol_codigo();
+        if(i > 0){
+           // lstcompetencia = compdao.findAll();
+        }
         return lstcompetencia;
     }
 
@@ -155,7 +159,6 @@ public class SolicitacaoBean {
             SalvarPesComp(filtraCompetencia(lstcompetencia),filtraPessoas(lstpessoa));
            // SalvarCompSol(filtraCompetencia(lstcompetencia));
            // SalvarPesTre(filtraPessoas(lstpessoa));
-            
             return true;
         } catch (Exception e) {
             Title = e.toString();
@@ -240,5 +243,5 @@ public class SolicitacaoBean {
             }
         }
     }
-    
+      
 }
