@@ -52,7 +52,8 @@
 
         <div class="panel panel-body">          
             <f:view>
-                <h:form styleClass="form-horizontal">
+                <h:form styleClass="form-horizontal" >
+
                     <div class="bloco">
                         <h3>Informações Pessoais</h3>
 
@@ -412,55 +413,55 @@
                                 </h:column>
                             </h:dataTable>
                         </div>
-                    </div>
-                    <div class="bloco2">
-                        <div class="col-xs-3">
-                            <h3>Faltas</h3>  
+
+                        <div class="bloco2">
+                            <div class="col-xs-3">
+                                <h3>Advertências</h3>  
+                            </div>
+
+                            <div class="btns-top-table col-xs-offset-10">
+                                <h:link outcome="advertenciafrm" value="Insert" styleClass="btn btn-success" >
+                                    <f:param name="id" value="${funcionarioBean.pessoa.pes_codigo}"/>
+                                    <i class="fa fa-plus"></i> 
+                                </h:link>                             
+
+                            </div>
+
+                            <h:dataTable value="${funcionarioBean.advertencias}"  var="vr"  styleClass="dataTable table table-bordered table-striped">
+
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Aplicador"/>
+                                    </f:facet>
+                                    <h:outputText value="#{vr.pessoaAplicador.pes_nome}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Descrição"/>
+                                    </f:facet>
+                                    <h:outputText value="#{vr.adv_descricao}"/>
+                                </h:column>
+
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Data"/>
+                                    </f:facet>
+                                    <h:outputText value="#{vr.adv_data}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Motivo"/>
+                                    </f:facet>
+                                    <h:outputText value="#{vr.adv_data}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Observção"/>
+                                    </f:facet>
+                                    <h:outputText value="#{vr.adv_observacao}"/>
+                                </h:column>
+                            </h:dataTable>
                         </div>
-
-                        <div class="btns-top-table col-xs-offset-10">
-                            <h:link outcome="advertenciafrm" value="Insert" styleClass="btn btn-success" >
-                                <f:param name="id" value="${funcionarioBean.pessoa.pes_codigo}"/>
-                                <i class="fa fa-plus"></i> 
-                            </h:link>                             
-
-                        </div>
-
-                        <h:dataTable value="${funcionarioBean.advertencias}"  var="vr"  styleClass="dataTable table table-bordered table-striped">
-
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Aplicador"/>
-                                </f:facet>
-                                <h:outputText value="#{vr.pessoaAplicador.pes_nome}"/>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Descrição"/>
-                                </f:facet>
-                                <h:outputText value="#{vr.adv_descricao}"/>
-                            </h:column>
-
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Data"/>
-                                </f:facet>
-                                <h:outputText value="#{vr.adv_data}"/>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Motivo"/>
-                                </f:facet>
-                                <h:outputText value="#{vr.adv_data}"/>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Observção"/>
-                                </f:facet>
-                                <h:outputText value="#{vr.adv_observacao}"/>
-                            </h:column>
-                        </h:dataTable>
-                    </div>
                     </div>
                     <div class="form-group">
                         <div class="col-md-offset-9 col-md-11 col-xs-offset-10 col-sm-12 btn-group-separated">
