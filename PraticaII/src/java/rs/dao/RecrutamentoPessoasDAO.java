@@ -5,7 +5,6 @@
  */
 package rs.dao;
 
-import cfg.model.Pessoa;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -57,7 +56,7 @@ public class RecrutamentoPessoasDAO {
     }
 
     public List<RecrutamentoPessoa> findByRecrutamento(int recCodigo) {
-        Query q = session.createQuery("from RecrutamentoPessoa where recrutamento.rec_codigo = " + String.valueOf(recCodigo));
+        Query q = session.createQuery("from RecrutamentoPessoa where recrutamentoPessoaPK.recrutamento = " + String.valueOf(recCodigo));
         return q.list();
     }
     

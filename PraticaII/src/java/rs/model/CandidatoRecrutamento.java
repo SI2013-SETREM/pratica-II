@@ -6,10 +6,19 @@ public class CandidatoRecrutamento {
 
     private Pessoa pessoa;
     private boolean selecionado;
+    private int status;
 
     public CandidatoRecrutamento() {
     }
 
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+    
     public Pessoa getPessoa() {
         return pessoa;
     }

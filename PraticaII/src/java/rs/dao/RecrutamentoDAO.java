@@ -33,7 +33,7 @@ public class RecrutamentoDAO {
 
     public void update(Recrutamento r) {
         Transaction t = session.beginTransaction();
-        session.merge(r);
+        session.update(r);
         t.commit();
     }
 
