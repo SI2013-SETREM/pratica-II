@@ -20,6 +20,11 @@ import javax.persistence.Table;
 @Table(name = "ffp_evento_padrao")
 public class EventoPadrao implements Serializable {
     
+    
+    public static final String sTitle = "Evento Padrão";
+    public static final String pTitle = "Eventos Padrões";
+
+ 
     @Id
     @SequenceGenerator (name= "genEventoPadrao", sequenceName= "segEventoPadrao", allocationSize = 1)
     @GeneratedValue (strategy = GenerationType.SEQUENCE, generator = "genEventoPadrao")
@@ -53,7 +58,13 @@ public class EventoPadrao implements Serializable {
     public void setPessoa(Pessoa pessoa) {
         this.pessoa = pessoa;
     }
+   public static String getsTitle() {
+        return sTitle;
+    }
 
+    public static String getpTitle() {
+        return pTitle;
+    }
 
 
 

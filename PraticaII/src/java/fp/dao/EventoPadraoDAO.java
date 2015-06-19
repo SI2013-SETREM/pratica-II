@@ -70,5 +70,9 @@ public class EventoPadraoDAO {
         return  query.setParameter("pes_codigo", pes_codigo).list();
 
     }
+          public EventoPadrao findByPessoa(int id) {
+
+        return (EventoPadrao) session.load(EventoPadrao.class, id);
+    }
     
 }
