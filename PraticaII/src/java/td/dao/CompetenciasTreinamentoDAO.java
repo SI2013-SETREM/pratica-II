@@ -10,6 +10,7 @@ import util.HibernateUtil;
 public class CompetenciasTreinamentoDAO {
     
         private Session session;
+        public int idTre;
     
     public CompetenciasTreinamentoDAO() {
         session = HibernateUtil.getSessionFactory().openSession();
@@ -52,5 +53,21 @@ public class CompetenciasTreinamentoDAO {
         }
         Query q = session.createQuery(" from CompetenciasTreinamento where 1=1 " + sql);
         return q.list();
+    }
+    
+    public void deletaCompTre(){
+        
+        Transaction transaction = session.beginTransaction();
+        try {
+            String hql = "delete from CompetenciasTreinamento where tre_codigo = :uid";
+            Query query = session.createQuery(hql);
+            //System.out.println(idSol);
+            query.setInteger("uid", idTre);
+            query.executeUpdate();
+            transaction.commit();
+        } catch (Throwable t) {
+            transaction.rollback();
+        throw t;
+        }
     }
 }

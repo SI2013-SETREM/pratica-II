@@ -72,4 +72,9 @@ public class PessoaDAO {
         Query q = session.createQuery("from Pessoa where pes_codigo = :pes_codigo");
         return q.setParameter("pes_codigo", pes_codigo).list();
     }
+    
+    public List<Pessoa> findPesTre() {//Procura as pessoas de um determinado treinamento
+        SQLQuery q = session.createSQLQuery("select pe.* from pessoa pe, trd_instrutores_treinamento it where pe.pes_codigo = it.pes_codigo and it.tre_codigo =" + idSol).addEntity(Pessoa.class);
+        return q.list();
+    }
 }

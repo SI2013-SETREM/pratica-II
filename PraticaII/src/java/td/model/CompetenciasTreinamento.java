@@ -2,7 +2,6 @@ package td.model;
 
 import ad.model.Competencia;
 import java.io.Serializable;
-import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -22,7 +21,7 @@ public class CompetenciasTreinamento implements Serializable{
     @ManyToOne
     @JoinColumn(name = "tre_codigo", referencedColumnName = "tre_codigo")
     private Treinamento treinamento;
-    
+    /*
       public static class CompetenciasTreinamentoPK implements Serializable {
 
         protected Competencia competencia;
@@ -59,7 +58,7 @@ public class CompetenciasTreinamento implements Serializable{
             return true;
         }
 
-    }
+    }*/
    
        public CompetenciasTreinamento() {
     }

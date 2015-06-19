@@ -10,12 +10,13 @@ import util.HibernateUtil;
 public class InstrutoresTreinamentoDAO {
     
     private Session session;
+    public int idTre;
     
-    public InstrutoresTreinamentoDAO() {
+    public InstrutoresTreinamentoDAO(){
         session = HibernateUtil.getSessionFactory().openSession();
     }
     
-     public void insert(InstrutoresTreinamento i) {
+    public void insert(InstrutoresTreinamento i) {
         Transaction t = session.beginTransaction();
         session.save(i);
         t.commit();
@@ -38,19 +39,35 @@ public class InstrutoresTreinamentoDAO {
     }
 
     public List<InstrutoresTreinamento> findAll() {
-        Query q = session.createQuery("from CompetenciasTreinamento");
+        Query q = session.createQuery("from InstrutoresTreinamento");
         return q.list();
     }
     
-    public List<InstrutoresTreinamento> GetListInstrutoresTreinamento(int pes_codigo_instrutor, int tre_codigo) {
+    public List<InstrutoresTreinamento> GetListInstrutoresTreinamento(int pes_codigo, int sol_codigo) {
         String sql = "";
-        if (pes_codigo_instrutor != 0) {
-            sql += " and pes_codigo_instrutor = " + pes_codigo_instrutor;
+        if (pes_codigo != 0) {
+            sql += " and pes_codigo = " + pes_codigo;
         }
-        if (tre_codigo != 0) {
-            sql += " and tre_codigo = " + tre_codigo;
+        if (sol_codigo != 0) {
+            sql += " and sol_codigo = " + sol_codigo;
         }
         Query q = session.createQuery(" from InstrutoresTreinamento where 1=1 " + sql);
         return q.list();
+    }
+    
+    public void deletaPesTre(){
+        
+        Transaction transaction = session.beginTransaction();
+        try {
+            String hql = "delete from InstrutoresTreinamento where tre_codigo = :uid";
+            Query query = session.createQuery(hql);
+            //System.out.println(idSol);
+            query.setInteger("uid", idTre);
+            query.executeUpdate();
+            transaction.commit();
+        } catch (Throwable t) {
+            transaction.rollback();
+        throw t;
+        }
     }
 }

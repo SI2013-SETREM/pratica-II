@@ -62,4 +62,10 @@ public class CompetenciaDAO {
         SQLQuery q = session.createSQLQuery("select cp.* from avd_competencia cp, trd_competencias_solicitacao cs where cp.cmp_codigo = cs.cmp_codigo and cs.sol_codigo ="+idSol).addEntity(Competencia.class);
         return q.list();
     }
+    
+    public List<Competencia> findCompTre() {//Procura as competencias de uma determinada solicitação
+        SQLQuery q = session.createSQLQuery("select cp.* from avd_competencia cp, trd_competencias_treinamento ct where cp.cmp_codigo = ct.cmp_codigo and ct.tre_codigo ="+idSol).addEntity(Competencia.class);
+        return q.list();
+    }
+    
 }

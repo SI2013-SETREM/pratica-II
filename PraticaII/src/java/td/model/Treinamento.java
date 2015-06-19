@@ -1,15 +1,12 @@
 package td.model;
 
 import java.io.Serializable;
-import java.sql.Time;
-import java.util.List;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -26,28 +23,16 @@ public class Treinamento implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "trd_treinamento_pk_sequence")
     private int tre_codigo;
     private String tre_descricao;
-    private Time tre_cargahoraria;
+    private Date tre_cargahoraria;
     private Double tre_custototal;
-    private boolean tre_status;
+    private int tre_status;
     @ManyToOne
     @JoinColumn(name = "loc_codigo")
     private Local local;
     @ManyToOne
     @JoinColumn(name = "cur_codigo")
     private Curso curso;
-    
-    @ManyToMany
-    @JoinTable(name = "trd_instrutores_treinamento")
-    private List<Treinamento> instrutores;
 
-    public List<Treinamento> getInstrutores() {
-        return instrutores;
-    }
-
-    public void setInstrutores(List<Treinamento> instrutores) {
-        this.instrutores = instrutores;
-    }
-    
     public Curso getCurso() {
         return curso;
     }
@@ -72,11 +57,11 @@ public class Treinamento implements Serializable {
         this.tre_descricao = tre_descricao;
     }
 
-    public Time getTre_cargahoraria() {
+    public Date getTre_cargahoraria() {
         return tre_cargahoraria;
     }
 
-    public void setTre_cargahoraria(Time tre_cargahoraria) {
+    public void setTre_cargahoraria(Date tre_cargahoraria) {
         this.tre_cargahoraria = tre_cargahoraria;
     }
 
@@ -88,11 +73,11 @@ public class Treinamento implements Serializable {
         this.tre_custototal = tre_custototal;
     }
 
-    public boolean getTre_status() {
+    public int getTre_status() {
         return tre_status;
     }
 
-    public void setTre_status(boolean tre_status) {
+    public void setTre_status(int tre_status) {
         this.tre_status = tre_status;
     }
 

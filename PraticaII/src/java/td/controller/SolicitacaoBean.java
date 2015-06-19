@@ -169,11 +169,21 @@ public class SolicitacaoBean {
     }
     
     private boolean SalvaListas() {
-        try {
-            SalvarPesComp(filtraCompetencia(lstcompetencia),filtraPessoas(lstpessoa));
-            return true;
-        } catch (Exception e) {
-            Title = e.toString();
+        int i = solicitacao.getSol_codigo();
+        if (i == 0){
+            try {
+                SalvarPesCompNovo(filtraCompetencia(lstcompetencia),filtraPessoas(lstpessoa));
+                return true;
+            } catch (Exception e) {
+                Title = e.toString();
+            }
+        }else{
+            try {
+                SalvarPesCompExistente(filtraCompetencia(lstcompetencia),filtraPessoas(lstpessoa));
+                return true;
+            } catch (Exception e) {
+                Title = e.toString();
+            }
         }
         return true;
     }
@@ -206,7 +216,7 @@ public class SolicitacaoBean {
         return lsItens;
     }
    
-    private void SalvarPesComp(List<Competencia> lsCompetencia, List<Pessoa> lsPessoa) {//Salva a lista de cargos e pessoas que fazem parte da avlaiação, basta passar a lista de Cargos e Pessoas e o Tipo (Colaborador= 1 ou Avaliador = 2)
+    private void SalvarPesCompNovo(List<Competencia> lsCompetencia, List<Pessoa> lsPessoa) {//Salva a lista de cargos e pessoas que fazem parte da avlaiação, basta passar a lista de Cargos e Pessoas e o Tipo (Colaborador= 1 ou Avaliador = 2)
         if (!lsPessoa.isEmpty()) {
             for (Pessoa p : lsPessoa) {
                 PessoasReceberTreinamento pes = new PessoasReceberTreinamento();
@@ -225,4 +235,28 @@ public class SolicitacaoBean {
         }
    }
       
+    
+     private void SalvarPesCompExistente(List<Competencia> lsCompetencia, List<Pessoa> lsPessoa) {//Salva a lista de cargos e pessoas que fazem parte da avlaiação, basta passar a lista de Cargos e Pessoas e o Tipo (Colaborador= 1 ou Avaliador = 2)
+         int i = solicitacao.getSol_codigo();
+         compSolDao.idSol = i;
+         pesTreDao.idSol = i;
+         compSolDao.deletaCompSol();
+         pesTreDao.deletaPesSol();
+        if (!lsPessoa.isEmpty()) {
+            for (Pessoa p : lsPessoa) {
+                PessoasReceberTreinamento pes = new PessoasReceberTreinamento();
+                pes.setPessoa(p);
+                pes.setSolicitacao(solicitacao);
+                pesTreDao.insert(pes);
+            }
+        }
+        if (!lsCompetencia.isEmpty()) {
+            for (Competencia c : lsCompetencia) {
+                CompetenciasSolicitacao comp = new CompetenciasSolicitacao();
+                comp.setCompetencia(c);
+                comp.setSolicitacao(solicitacao);
+                compSolDao.insert(comp);
+            }
+        }
+   }
 }

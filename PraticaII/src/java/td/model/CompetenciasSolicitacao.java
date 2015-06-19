@@ -3,7 +3,6 @@ package td.model;
 
 import ad.model.Competencia;
 import java.io.Serializable;
-import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -26,7 +25,7 @@ public class CompetenciasSolicitacao implements Serializable{
 
 
     
-   public static class CompetenciasSolicitacaoPK implements Serializable {
+  /* public static class CompetenciasSolicitacaoPK implements Serializable {
 
         protected Competencia competencia;
         protected Solicitacao solicitacao;
@@ -62,7 +61,7 @@ public class CompetenciasSolicitacao implements Serializable{
             return true;
         }
 
-    }
+    }*/
    
        public CompetenciasSolicitacao() {
     }

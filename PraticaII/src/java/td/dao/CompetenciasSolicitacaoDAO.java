@@ -2,6 +2,7 @@ package td.dao;
 
 import java.util.List;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import td.model.CompetenciasSolicitacao;
@@ -10,6 +11,7 @@ import util.HibernateUtil;
 public class CompetenciasSolicitacaoDAO {
 
     private Session session;
+    public int idSol;
     
     public CompetenciasSolicitacaoDAO() {
         session = HibernateUtil.getSessionFactory().openSession();
@@ -52,5 +54,21 @@ public class CompetenciasSolicitacaoDAO {
         }
         Query q = session.createQuery(" from CompetenciasSolicitacao where 1=1 " + sql);
         return q.list();
+    }
+    
+    public void deletaCompSol(){
+        
+        Transaction transaction = session.beginTransaction();
+        try {
+            String hql = "delete from CompetenciasSolicitacao where sol_codigo = :uid";
+            Query query = session.createQuery(hql);
+            //System.out.println(idSol);
+            query.setInteger("uid", idSol);
+            query.executeUpdate();
+            transaction.commit();
+        } catch (Throwable t) {
+            transaction.rollback();
+        throw t;
+        }
     }
 }

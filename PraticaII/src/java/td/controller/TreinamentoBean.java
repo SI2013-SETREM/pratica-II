@@ -14,9 +14,9 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import td.dao.CompetenciasTreinamentoDAO;
 import td.dao.CursoDAO;
+import td.model.CompetenciasTreinamento;
 import td.dao.InstrutoresTreinamentoDAO;
 import td.dao.LocalDAO;
-import td.model.CompetenciasTreinamento;
 import td.model.Curso;
 import td.model.InstrutoresTreinamento;
 import td.model.Local;
@@ -42,7 +42,7 @@ public class TreinamentoBean {
     
     private PessoaDAO pessoadao = new PessoaDAO();
     private CompetenciaDAO compdao = new CompetenciaDAO();
-    private CompetenciasTreinamentoDAO compSolDao = new CompetenciasTreinamentoDAO();
+    private CompetenciasTreinamentoDAO compTreDao = new CompetenciasTreinamentoDAO();
     private InstrutoresTreinamentoDAO insTreDao = new InstrutoresTreinamentoDAO();
     
     private Treinamento treinamento = new Treinamento();
@@ -104,7 +104,15 @@ public class TreinamentoBean {
     
     public String salvar() {
         if (treinamento.getTre_codigo()> 0){
-            dao.update(treinamento);
+           // dao.update(solicitacao);
+            if (ValidaDados()) {
+                dao.update(treinamento);
+                if (SalvaListas()) {
+                    return "treinamentolst";
+                } else {
+                    return "treinamentolst";
+                }
+            }
         } else {
             if (ValidaDados()) {
                 dao.insert(treinamento);
@@ -114,12 +122,12 @@ public class TreinamentoBean {
                     return "treinamentolst";
                 }
             } else {
-                return "solicitacaofrm";
+                return "treinamentofrm";
             }
         }
         return "treinamentolst";
     }
-
+    
     public String listar() {
         return "treinamentolst";
     }
@@ -143,6 +151,11 @@ public class TreinamentoBean {
     }
     
     public List<Competencia> getLstcompetencia() {
+        int i = treinamento.getTre_codigo();
+        if(i > 0){
+            compdao.idSol = i;
+            lstcompetencia = compdao.findCompTre();
+        }
         return lstcompetencia;
     }
 
@@ -151,6 +164,11 @@ public class TreinamentoBean {
     }
 
     public List<Pessoa> getLstpessoa() {
+        int i = treinamento.getTre_codigo();
+        if(i > 0){
+            pessoadao.idSol = i;
+            lstpessoa = pessoadao.findPesTre();
+        }
         return lstpessoa;
     }
 
@@ -167,16 +185,22 @@ public class TreinamentoBean {
         }
         return true;
     }
-    
     private boolean SalvaListas() {
-        try {
-            SalvarPesComp(filtraCompetencia(lstcompetencia),filtraPessoas(lstpessoa));
-           // SalvarCompSol(filtraCompetencia(lstcompetencia));
-           // SalvarPesTre(filtraPessoas(lstpessoa));
-            
-            return true;
-        } catch (Exception e) {
-            Title = e.toString();
+        int i = treinamento.getTre_codigo();
+        if (i == 0){
+            try {
+                SalvarPesCompNovo(filtraCompetencia(lstcompetencia),filtraPessoas(lstpessoa));
+                return true;
+            } catch (Exception e) {
+                Title = e.toString();
+            }
+        }else{
+            try {
+                SalvarPesCompExistente(filtraCompetencia(lstcompetencia),filtraPessoas(lstpessoa));
+                return true;
+            } catch (Exception e) {
+                Title = e.toString();
+            }
         }
         return true;
     }
@@ -208,8 +232,8 @@ public class TreinamentoBean {
         }
         return lsItens;
     }
-     
-     private void SalvarPesComp(List<Competencia> lsCompetencia, List<Pessoa> lsPessoa) {//Salva a lista de cargos e pessoas que fazem parte da avlaiação, basta passar a lista de Cargos e Pessoas e o Tipo (Colaborador= 1 ou Avaliador = 2)
+   
+    private void SalvarPesCompNovo(List<Competencia> lsCompetencia, List<Pessoa> lsPessoa) {//Salva a lista de cargos e pessoas que fazem parte da avlaiação, basta passar a lista de Cargos e Pessoas e o Tipo (Colaborador= 1 ou Avaliador = 2)
         if (!lsPessoa.isEmpty()) {
             for (Pessoa p : lsPessoa) {
                 InstrutoresTreinamento pes = new InstrutoresTreinamento();
@@ -223,8 +247,33 @@ public class TreinamentoBean {
                 CompetenciasTreinamento comp = new CompetenciasTreinamento();
                 comp.setCompetencia(c);
                 comp.setTreinamento(treinamento);
-                compSolDao.insert(comp);
+                compTreDao.insert(comp);
             }
         }
-    }
+   }
+      
+    
+     private void SalvarPesCompExistente(List<Competencia> lsCompetencia, List<Pessoa> lsPessoa) {//Salva a lista de cargos e pessoas que fazem parte da avlaiação, basta passar a lista de Cargos e Pessoas e o Tipo (Colaborador= 1 ou Avaliador = 2)
+         int i = treinamento.getTre_codigo();
+         compTreDao.idTre = i;
+         insTreDao.idTre = i;
+         compTreDao.deletaCompTre();
+         insTreDao.deletaPesTre();
+        if (!lsPessoa.isEmpty()) {
+            for (Pessoa p : lsPessoa) {
+                InstrutoresTreinamento pes = new InstrutoresTreinamento();
+                pes.setPessoa(p);
+                pes.setTreinamento(treinamento);
+                insTreDao.insert(pes);
+            }
+        }
+        if (!lsCompetencia.isEmpty()) {
+            for (Competencia c : lsCompetencia) {
+                CompetenciasTreinamento comp = new CompetenciasTreinamento();
+                comp.setCompetencia(c);
+                comp.setTreinamento(treinamento);
+                compTreDao.insert(comp);
+            }
+        }
+   }
 }

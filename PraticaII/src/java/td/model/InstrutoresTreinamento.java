@@ -2,7 +2,6 @@ package td.model;
 
 import cfg.model.Pessoa;
 import java.io.Serializable;
-import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -15,14 +14,22 @@ public class InstrutoresTreinamento implements Serializable{
     
     @Id
     @ManyToOne
-    @JoinColumn(name = "pes_codigo_instrutor", referencedColumnName = "pes_codigo_instrutor")
+    @JoinColumn(name = "pes_codigo", referencedColumnName = "pes_codigo")
     private Pessoa pessoa;
 
     @Id
     @ManyToOne
     @JoinColumn(name = "tre_codigo", referencedColumnName = "tre_codigo")
     private Treinamento treinamento;
-
+    
+     public InstrutoresTreinamento() {
+    }
+     
+     public InstrutoresTreinamento(Treinamento treinamento, Pessoa pessoa){
+         this.treinamento = treinamento;
+         this.pessoa = pessoa;
+     }
+/*
     public static class InstrutoresTreinamentoPK implements Serializable {
 
         protected Pessoa pessoa;
@@ -59,9 +66,8 @@ public class InstrutoresTreinamento implements Serializable{
             return true;
         }
 
-    }
-   
-    
+    }*/
+
     public Pessoa getPessoa() {
         return pessoa;
     }
@@ -77,9 +83,4 @@ public class InstrutoresTreinamento implements Serializable{
     public void setTreinamento(Treinamento treinamento) {
         this.treinamento = treinamento;
     }
-
-    public InstrutoresTreinamento() {
-    }
-    
-    
 }

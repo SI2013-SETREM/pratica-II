@@ -2,6 +2,7 @@ package td.dao;
 
 import java.util.List;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import td.model.PessoasReceberTreinamento;
@@ -10,6 +11,7 @@ import util.HibernateUtil;
 public class PessoasReceberTreinamentoDAO {
     
     private Session session;
+    public int idSol;
     
     public PessoasReceberTreinamentoDAO(){
         session = HibernateUtil.getSessionFactory().openSession();
@@ -50,7 +52,23 @@ public class PessoasReceberTreinamentoDAO {
         if (sol_codigo != 0) {
             sql += " and sol_codigo = " + sol_codigo;
         }
-        Query q = session.createQuery(" from CompetenciasSolicitacao where 1=1 " + sql);
+        Query q = session.createQuery(" from PessoasReceberTreinamento where 1=1 " + sql);
         return q.list();
+    }
+    
+    public void deletaPesSol(){
+        
+        Transaction transaction = session.beginTransaction();
+        try {
+            String hql = "delete from PessoasReceberTreinamento where sol_codigo = :uid";
+            Query query = session.createQuery(hql);
+            //System.out.println(idSol);
+            query.setInteger("uid", idSol);
+            query.executeUpdate();
+            transaction.commit();
+        } catch (Throwable t) {
+            transaction.rollback();
+        throw t;
+        }
     }
 }

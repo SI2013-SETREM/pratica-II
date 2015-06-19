@@ -26,7 +26,7 @@ public class PessoasReceberTreinamento implements Serializable{
     public PessoasReceberTreinamento() {
     }
     
-    public static class PessoasReceberTreinamentoPK implements Serializable {
+   /* public static class PessoasReceberTreinamentoPK implements Serializable {
 
         protected Pessoa pessoa;
         protected Solicitacao solicitacao;
@@ -62,7 +62,7 @@ public class PessoasReceberTreinamento implements Serializable{
             return true;
         }
 
-    }
+    }*/
    
      public PessoasReceberTreinamento(Pessoa pessoa, Solicitacao solicitacao) {
         this.pessoa = pessoa;
