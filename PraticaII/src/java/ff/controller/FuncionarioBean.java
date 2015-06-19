@@ -18,6 +18,8 @@ import ff.model.Advertencia;
 
 import ff.model.Falta;
 import ff.model.Ferias;
+import fp.dao.EventoPadraoDAO;
+import fp.model.EventoPadrao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,6 +59,10 @@ public class FuncionarioBean {
     private final AdvertenciaDAO advertenciaDAO = new AdvertenciaDAO();
     private List<Advertencia> advertencias;
     
+    private EventoPadrao eventopadrao = new EventoPadrao();
+    private EventoPadraoDAO eventopadraoDAO = new EventoPadraoDAO();
+    private DataModel eventospadroes;
+    
     private String estadoCivil;
     private String tipoPessoa;
 
@@ -87,9 +93,93 @@ public class FuncionarioBean {
 //        return "fichafunfrm";
 //    }
 
+    
+    
+    
+    
+    
+    
+    
+    
+   
+      public String deleteEventoPadrao(EventoPadrao f) {
+        eventopadraoDAO.delete(f);
+    //    LogDAO.insert("Formula", "Deletou fórmula código: " + f.getFor_codigo() + ", taxa: " + f.getFor_taxa()
+        //            + ", horas: " + f.getFor_horas() + ", horas mais: " + f.getFor_horasmais() + ", nome: " + f.getFor_nome());
+        return "eventopadlst";
+    }
+
+     public String listarEventosPadroes() {
+        return "eventopadlst";
+    }
+    
+    public void setEventospadroes(DataModel eventospadroes) {
+        this.eventospadroes = eventospadroes;
+    }
+ public String salvarEventospadroes() {
+        if (eventopadrao.getEvp_codigo() > 0) {
+            eventopadraoDAO.update(eventopadrao);
+      //      LogDAO.insert("Formula", "Alterou fórmula código: " + formula.getFor_codigo() + ", taxa: " + formula.getFor_taxa()
+            //              + ", horas: " + formula.getFor_horas() + ", horas mais: " + formula.getFor_horasmais() + ", nome: " + formula.getFor_nome());
+        } else {
+            eventopadraoDAO.insert(eventopadrao);
+       //     LogDAO.insert("Formula", "Cadastrou fórmula código: " + formula.getFor_codigo() + ", taxa: " + formula.getFor_taxa()
+            //             + ", horas: " + formula.getFor_horas() + ", horas mais: " + formula.getFor_horasmais() + ", nome: " + formula.getFor_nome());
+        }
+
+        return "eventopadlst";
+    }
+     public String deleteEventospadroes(EventoPadrao f) {
+        eventopadraoDAO.delete(f);
+    //    LogDAO.insert("Formula", "Deletou fórmula código: " + f.getFor_codigo() + ", taxa: " + f.getFor_taxa()
+        //            + ", horas: " + f.getFor_horas() + ", horas mais: " + f.getFor_horasmais() + ", nome: " + f.getFor_nome());
+        return "eventopadlst";
+    }
+     public String updateEventosPadroes() {
+        eventopadraoDAO.update(eventopadrao);
+        return "eventopadlst";
+    }
+    
+      public String editEventosPadroes(EventoPadrao ep) {
+        eventopadrao = (EventoPadrao) eventospadroes.getRowData();
+        return "eventopadfrm";
+    }
+     public String insertEventospadroes() {
+        eventopadraoDAO.insert(eventopadrao);
+        return "eventopadlst";
+    }
+
+    public String insert2EventosPadroes(EventoPadrao f) {
+       eventopadraoDAO.insert(f);
+        return "eventopadlst";
+    }
+    public DataModel<EventoPadrao> getEventosPadroes() {
+        this.eventospadroes = new ListDataModel(eventopadraoDAO.EventoPessoa(pessoa.getPes_codigo()));
+        return eventospadroes;
+    }
+
+    public void setEventosPadroes(DataModel eventospadroes) {
+        this.eventospadroes = eventospadroes;
+    }
+    
+      public EventoPadraoDAO getEventoPadraoDao() {
+        return eventopadraoDAO;
+    }
+
+    public void setEventoPadroesDao(EventoPadraoDAO eventopadraoDAO) {
+        this.eventopadraoDAO = eventopadraoDAO;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
     public String select2() {
         pessoa = funcionarios.getRowData();
-        pessoa = pessoaDAO.findById(pessoa.getPes_codigo());
+        //pessoa = pessoaDAO.findById(pessoa.getPes_codigo());
         //cargosPessoa = cargosDAO.cargo(pessoa.getPes_codigo());
         
         //cargosPessoa = cargosDAO.GetListCargoPessoa(pessoa.getPes_codigo(),0).get(1);
@@ -97,6 +187,10 @@ public class FuncionarioBean {
  
         
         return "folhapagfrm";
+    }
+    
+    public String gerarFolha() {
+        return "eventopadlst";
     }
 
     public String cancelar() {
