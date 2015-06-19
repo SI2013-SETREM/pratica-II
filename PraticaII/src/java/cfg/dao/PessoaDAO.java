@@ -57,14 +57,19 @@ public class PessoaDAO {
         Query q = session.createQuery("from Pessoa where pes_tipo  = 1 ");
         return q.list();
     }
-    
+
     public List<Pessoa> findCandidatos(String pes_tipo) {
-        Query q = session.createQuery("from Pessoa where pes_tipo in("+pes_tipo+")");
+        Query q = session.createQuery("from Pessoa where pes_tipo in(" + pes_tipo + ")");
         return q.list();
     }
-    
+
     public List<Pessoa> findPesSol() {//Procura as pessoas de uma determinada solicitação
-        SQLQuery q = session.createSQLQuery("select pe.* from pessoa pe, trd_pessoas_recebertreinamento ir where pe.pes_codigo = ir.pes_codigo and ir.sol_codigo ="+idSol).addEntity(Pessoa.class);
+        SQLQuery q = session.createSQLQuery("select pe.* from pessoa pe, trd_pessoas_recebertreinamento ir where pe.pes_codigo = ir.pes_codigo and ir.sol_codigo =" + idSol).addEntity(Pessoa.class);
         return q.list();
+    }
+
+    public List<Pessoa> findByPessoaId(int pes_codigo) {
+        Query q = session.createQuery("from Pessoa where pes_codigo = :pes_codigo");
+        return q.setParameter("pes_codigo", pes_codigo).list();
     }
 }
