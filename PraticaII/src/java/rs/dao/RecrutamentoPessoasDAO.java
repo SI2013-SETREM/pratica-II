@@ -56,12 +56,12 @@ public class RecrutamentoPessoasDAO {
     }
 
     public List<RecrutamentoPessoa> findByRecrutamento(int recCodigo) {
-        Query q = session.createQuery("from RecrutamentoPessoa where recrutamentoPessoaPK.recrutamento = " + String.valueOf(recCodigo));
+        Query q = session.createQuery("from RecrutamentoPessoa where recrutamento = " + String.valueOf(recCodigo));
         return q.list();
     }
     
-      public RecrutamentoPessoa findById(int rec_codigo, int pes_codigo) {
-        return (RecrutamentoPessoa) session.load(RecrutamentoPessoa.class, rec_codigo);
+      public RecrutamentoPessoa findById(RecrutamentoPessoa rp) {
+        return (RecrutamentoPessoa) session.load(RecrutamentoPessoa.class, rp);
     }
 
     

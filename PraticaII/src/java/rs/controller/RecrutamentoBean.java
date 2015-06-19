@@ -39,7 +39,6 @@ public class RecrutamentoBean {
     private DataModel recrutamentos;
     private List<CandidatoRecrutamento> candidatosRecrutamento;
 
-
     public RecrutamentoBean() {
     }
 
@@ -82,7 +81,7 @@ public class RecrutamentoBean {
 
     public String insert() {
         dao.insert(recrutamento);
-        return "recrutamentolst";
+        return "recrutamentolst?faces-redirect=true";
     }
 
     public String edit(Recrutamento r, String pagina) {
@@ -92,19 +91,19 @@ public class RecrutamentoBean {
 
     public String update() {
         dao.update(recrutamento);
-        return "recrutamentolst";
+        return "recrutamentolst?faces-redirect=true";
     }
 
     public String altera_status(int status, Recrutamento r) {
         this.setRecrutamento(r);
         recrutamento.setRecStatus(status);
         dao.update(recrutamento);
-        return "recrutamentolst";
+        return "recrutamentolst?faces-redirect=true";
     }
 
     public String delete(Recrutamento r) {
         dao.delete(r);
-        return "recrutamentolst";
+        return "recrutamentolst?faces-redirect=true";
     }
 
     public String salvar(String pagina) {
@@ -117,7 +116,7 @@ public class RecrutamentoBean {
     }
 
     public String listar() {
-        return "recrutamentolst";
+        return "recrutamentolst?faces-redirect=true";
     }
 
     public String novo(String pg) {
@@ -127,25 +126,34 @@ public class RecrutamentoBean {
     }
 
     public String salvarCandidatos(String pg) {
-        List<RecrutamentoPessoa> rp = new ArrayList<>();
+//        List<RecrutamentoPessoa> rp = new ArrayList<>();
         for (CandidatoRecrutamento cr : candidatosRecrutamento) {
+            RecrutamentoPessoa recruta = new RecrutamentoPessoa();
+            recruta.setPessoa(cr.getPessoa());
+            recruta.setRecrutamento(recrutamento);
             if (cr.isSelecionado()) {
-                RecrutamentoPessoa recruta = new RecrutamentoPessoa();
-                if (recruta.getRecrutamentoPessoaPK() == null) {
-                    recruta.setRecrutamentoPessoaPK(new RecrutamentoPessoaPK());
+                if (cr.getStatus() == 0) {
+                    recruta.setRecPesStatus(1);
+                    recrutamentoPessoaDAO.insert(recruta);
                 }
-                recruta.getRecrutamentoPessoaPK().setPessoa(cr.getPessoa());
-                recruta.setRecPesStatus(cr.getStatus());
-                recruta.getRecrutamentoPessoaPK().setRecrutamento(recrutamento);
-                rp.add(recruta);
+//                if (recruta.getRecrutamentoPessoaPK() == null) {
+//                    recruta.setRecrutamentoPessoaPK(new RecrutamentoPessoaPK());
+//                }
+//                recruta.getRecrutamentoPessoaPK().setPessoa(cr.getPessoa().getPes_codigo());
+//                recruta.setRecPesStatus(cr.getStatus());
+//                recruta.getRecrutamentoPessoaPK().setRecrutamento(recrutamento.getRecCodigo());
+//                rp.add(recruta);
+            } else if (cr.getStatus() != 0) {
+                recruta = recrutamentoPessoaDAO.findById(recruta);
+                recrutamentoPessoaDAO.delete(recruta);
             }
         }
-        recrutamento.setRecrutamentoPessoa(rp);
-        dao.update(recrutamento);
+//        recrutamento.setRecrutamentoPessoa(rp);
+//        dao.update(recrutamento);
         return pg;
     }
-    
-     public DataModel getCandidatosRecrutamento() {
+
+    public DataModel getCandidatosRecrutamento() {
         String pes_tipo = "1,2,3";
         if (recrutamento.getRecTipo() == 1) {
             pes_tipo = "1";
@@ -161,7 +169,7 @@ public class RecrutamentoBean {
             cdtRec.setPessoa(pes);
             cdtRec.setSelecionado(false);
             for (RecrutamentoPessoa rp : recPessoasBanco) {
-                if (rp.getRecrutamentoPessoaPK().getPessoa().getPes_codigo() == pes.getPes_codigo()) {
+                if (rp.getPessoa().getPes_codigo() == pes.getPes_codigo()) {
                     cdtRec.setSelecionado(true);
                     cdtRec.setStatus(rp.getRecPesStatus());
                     break;

@@ -10,19 +10,25 @@ import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  *
  * @author NADINE
  */
  // From http://stackoverflow.com/questions/3585034/how-to-map-a-composite-key-with-hibernate
-@Embeddable
+//@Embeddable
 public class RecrutamentoPessoaPK implements Serializable {
 
-    @Column(name = "rec_codigo", nullable = false)
+//    @Column(name = "rec_codigo", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "rec_codigo", referencedColumnName = "rec_codigo")
     protected Recrutamento recrutamento;
     
-    @Column(name = "pes_codigo", nullable = false)
+//    @Column(name = "pes_codigo", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "pes_codigo", referencedColumnName = "pes_codigo")
     protected Pessoa pessoa;
 
     public RecrutamentoPessoaPK() {
