@@ -38,7 +38,7 @@
         <div class="panel panel-body">
             <f:view>
                 <label style="color: red; font-size: 16px;">#{perguntaPessoaAvaliacaoBean.getErroMsg()}</label>
-                <div class="#{perguntaPessoaAvaliacaoBean.avaliado == null ? 'FieldRemove' : ''}">
+                <div class="#{perguntaPessoaAvaliacaoBean.avaliado == null ? 'FieldRemove' : ''}" style="margin-top: -15px;">
                     <div class="row">
                         <div class="col-md-12">
                             <label style="font-size: 20px;">Dados da Pessoa:</label>
@@ -56,20 +56,14 @@
                     </div>
                     <h:form styleClass="form-horizontal">
                         <label style="font-size: 20px;">Questionário: </label>
-                        <h:panelGroup id="forEachPerguntas">
+                        <h:panelGroup>
                             <div class="col-md-12" style="margin-bottom: 15px;">
                                 <!--<h:dataTable value="{perguntaPessoaAvaliacaoBean.lsPerguntasPessoa}"></h:dataTable>-->
                                 <ui:repeat value="#{perguntaPessoaAvaliacaoBean.lsPerguntasPessoa}" var="item" varStatus="loop">
-                                    <!--<ui:repeat value="{perguntaPessoaAvaliacaoBean.lsPerguntasPessoa}" var="item">-->
                                     <div class="form-group list-group-item" >
                                         <div class="row">
                                             <div class="col-md-7">
-                                                <!--                                            <h:inputHidden value="{item.pergunta.prgCodigo}"/>
-                                                                                            <h:inputHidden value="{item.avaliacao.ava_codigo}"/>
-                                                                                            <h:inputHidden value="{item.avaliador.pes_codigo}"/>
-                                                                                            <h:inputHidden value="{item.colaboradorAvaliado.pes_codigo}"/>-->
-
-                                                <h:outputLabel value="#{item.pergunta.prgPergunta}" styleClass="col-md-12"/>
+                                                <h:outputLabel value="#{loop.index + 1}. #{item.pergunta.prgPergunta}" styleClass="col-md-12"/>
                                                 <h:inputTextarea rendered="#{item.pergunta.prgTipo == 1}" pt:required="#{item.pergunta.prgObrigatoria}" value="#{perguntaPessoaAvaliacaoBean.lsPerguntasPessoa[loop.index].ppa_resposta}" styleClass="form-control"/>
                                                 <h:selectOneMenu rendered="#{item.pergunta.prgTipo == 2}" pt:required="#{item.pergunta.prgObrigatoria}"  value="#{perguntaPessoaAvaliacaoBean.lsPerguntasPessoa[loop.index].ppa_resposta}" styleClass="form-control">
                                                     <f:selectItems value="#{item.pergunta.perguntaOpcoes}" var="opcao" itemLabel="#{opcao.getOpcNome()}" itemValue="#{opcao.getOpcPontuacao()}" pt:autofocus=""/>
@@ -77,7 +71,7 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <h:outputLabel value="Nota entre 0 e #{item.pergunta.getQuestionario().getQstPontuacaomax()}:" styleClass="col-md-8 lbl" rendered="#{item.pergunta.prgTipo == 1}"/>
-                                                <h:inputText pt:required="true" pt:type="number" pt:max="#{item.pergunta.questionario.qstPontuacaomax}" pt:min="0" style="width: 50px" value="#{perguntaPessoaAvaliacaoBean.lsPerguntasPessoa[loop.index].ppa_pontuacao}" rendered="#{item.pergunta.prgTipo == 1}"/>
+                                                <h:inputText pt:required="true" pt:type="number" pt:max="#{item.pergunta.questionario.qstPontuacaomax}" pt:min="1" pt:step="1" style="width: 50px" value="#{perguntaPessoaAvaliacaoBean.lsPerguntasPessoa[loop.index].ppa_pontuacao}" rendered="#{item.pergunta.prgTipo == 1}"/>
                                                 <h:inputHidden rendered="#{item.pergunta.prgTipo == 2}" value="#{item.ppa_pontuacao}"/>
                                             </div>
                                         </div>
@@ -90,8 +84,8 @@
                         </h:panelGroup>
                         <div class="form-group">
                             <div class="col-md-offset-1 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
-                                <h:link styleClass="btn btn-default" value="Cancelar" outcome="${perguntaPessoaAvaliacaoBean.listar()}" />
-                                <h:commandButton styleClass="btn btn-primary" value="Salvar e Avançar" action="${perguntaPessoaAvaliacaoBean.salvar()}"></h:commandButton>
+                                <h:link styleClass="btn btn-default" value="Cancelar" outcome="#{perguntaPessoaAvaliacaoBean.listar()}" />
+                                <h:commandButton styleClass="btn btn-primary" value="Salvar e Avançar" action="#{perguntaPessoaAvaliacaoBean.salvar()}"></h:commandButton>
                             </div>
                         </div>
                     </h:form>
@@ -100,3 +94,4 @@
         </div>
     </ui:define>
 </ui:composition>
+<!--onclick="return confirm('Deseja realmente salvar estas resposta? Não poderá mais editá-las!')"-->

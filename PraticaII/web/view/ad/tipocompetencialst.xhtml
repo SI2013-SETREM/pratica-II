@@ -14,6 +14,7 @@
 
     <ui:define name="main-content">
         <div class="panel panel-body">
+            <label style="color: red; font-size: 16px;">#{tipoCompetenciaBean.getErroMsg()}</label>
             <h3><h:outputText value="Lista de ${tipoCompetenciaBean.getpTitle()}"/></h3>
             <div class="btns-top-table">
                 <h:link outcome="tipocompetenciafrm" styleClass="btn btn-success">

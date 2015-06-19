@@ -41,6 +41,22 @@ public class PerguntaPessoaAvaliacaoDAO {
         Query q = session.createQuery("from Pergunta_pessoa_avaliacao");
         return q.list();
     }
-    
-    
+
+    public List<PerguntaPessoaAvaliacao> ListPerguntasPessoasAvaliacao(int ava_id, int col_id, int per_id) {
+        String sql = "";
+        if (ava_id != 0) {
+            sql += " and ava_codigo = " + ava_id;
+        }
+        if (col_id != 0) {
+            sql += " and pes_codigo = " + col_id;
+        }
+        if (per_id != 0) {
+            sql += " and prg_codigo = " + per_id;
+        }
+//        if (user_id != 0) {
+//            sql += " and pes_codigo_avaliador = " + user_id;
+//        }
+        Query q = session.createQuery(" from PerguntaPessoaAvaliacao where 1=1 " + sql);
+        return q.list();
+    }
 }

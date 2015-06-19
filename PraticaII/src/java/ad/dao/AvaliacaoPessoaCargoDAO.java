@@ -38,7 +38,23 @@ public class AvaliacaoPessoaCargoDAO {
     }
 
     public List<AvaliacaoPessoaCargo> findAll() {
-        Query q = session.createQuery("from PerguntaPessoaAvaliacao");
+        Query q = session.createQuery("from AvaliacaoPessoaCargo");
+        return q.list();
+    }
+//BcarOrPes se for true quando o cargo é null, quando for false é quando a pessoa é null se for null ignora
+
+    public List<AvaliacaoPessoaCargo> SelectListAva(int ava_id, Boolean BcarOrPes, int type) {
+        String sql = "";
+        if (ava_id != 0) {
+            sql += " and ava_codigo = " + ava_id;
+        }
+        if (BcarOrPes != null) {
+            sql += " and car_codigo" + (BcarOrPes ? "car_codigo" : "pes_codigo") + " is null";
+        }
+        if (type != 0) {
+            sql += " and apc_status = " + type;
+        }
+        Query q = session.createQuery("from AvaliacaoPessoaCargo where 1 = 1" + sql);
         return q.list();
     }
 
@@ -54,7 +70,7 @@ public class AvaliacaoPessoaCargoDAO {
             sql += " and car_codigo = " + car_codigo;
         }
 
-        Query q = session.createQuery("from PerguntaPessoaAvaliacao where 1=1 " + sql);
+        Query q = session.createQuery("from AvaliacaoPessoaCargo where 1=1 " + sql);
         return q.list();
     }
 

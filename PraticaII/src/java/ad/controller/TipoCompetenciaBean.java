@@ -11,7 +11,7 @@ public class TipoCompetenciaBean {
 
     private final String sTitle = TipoCompetencia.sTitle;
     private final String pTitle = TipoCompetencia.pTitle;
-
+    private String ErroMsg = "";
     private TipoCompetencia tipocompetencia = new TipoCompetencia();
     private TipoCompetenciaDAO dao = new TipoCompetenciaDAO();
     private DataModel tipocompetencias;
@@ -60,7 +60,11 @@ public class TipoCompetenciaBean {
     }
 
     public String delete(TipoCompetencia i) {
-        dao.delete(i);
+        try {
+            dao.delete(i);
+        } catch (Exception e) {
+            ErroMsg = "Não é possível excluir este Tipo de Competência!";
+        }
         return "tipocompetencialst";
     }
 
@@ -75,6 +79,14 @@ public class TipoCompetenciaBean {
 
     public String listar() {
         return "tipocompetencialst";
+    }
+
+    public String getErroMsg() {
+        return ErroMsg;
+    }
+
+    public void setErroMsg(String ErroMsg) {
+        this.ErroMsg = ErroMsg;
     }
 
 }

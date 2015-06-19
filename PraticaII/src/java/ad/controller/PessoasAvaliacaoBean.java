@@ -3,15 +3,19 @@ package ad.controller;
 import ad.dao.PessoasAvaliacaoDAO;
 import ad.model.Avaliacao;
 import ad.model.PessoasAvaliacao;
+import cfg.controller.LoginBean;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
+import util.Utilidades;
 
 @ManagedBean
 public class PessoasAvaliacaoBean {
 
+//    @ManagedProperty("#{loginBean}")
+//    private LoginBean loginBean;
     private final String sTitle = PessoasAvaliacao.getsTitle();
     private final String pTitle = PessoasAvaliacao.getpTitle();
 
@@ -19,9 +23,18 @@ public class PessoasAvaliacaoBean {
     private PessoasAvaliacaoDAO dao = new PessoasAvaliacaoDAO();
     private DataModel pessoas_avaliacoes;
     private DataModel avaliacoes;
-    private int userId = 2;
+    private LoginBean loginB = (LoginBean) Utilidades.getSessionObject("loginBean");
+    private int userId = UserCod();
     private List<PessoasAvaliacao> lsPessoasAvaliacao;
     private int idAvaliacao;
+
+    private int UserCod() {
+        if (loginB != null && loginB.getUsuario() != null && loginB.getUsuario().getPessoa() != null) {
+            return loginB.getUsuario().getPessoa().getPes_codigo();
+        } else {
+            return -1;
+        }
+    }
 
     public PessoasAvaliacaoBean() {
     }
@@ -153,7 +166,6 @@ public class PessoasAvaliacaoBean {
 //        avaliacoes = new ListDataModel(lsAvaliacao);
 //        return "avaliacoespendenteslst";
 //    }
-
     public int getIdAvaliacao() {
         return idAvaliacao;
     }

@@ -21,6 +21,7 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import rs.dao.QuestionarioDAO;
 import rs.model.Questionario;
+import td.dao.TreinamentoDAO;
 import td.model.Treinamento;
 
 @ManagedBean
@@ -29,6 +30,7 @@ public class AvaliacaoBean {
     private final String sTitle = Avaliacao.sTitle;
     private final String pTitle = Avaliacao.pTitle;
     private String Title = "Dados da " + sTitle;
+    private String ErroMsg = "";
     private boolean bautoava = false;
     private boolean bcomp = false;
     private List<Cargo> lsCargoAvaliador;
@@ -40,6 +42,8 @@ public class AvaliacaoBean {
     private CargoDAO cargodao = new CargoDAO();
     private PessoaDAO pessoadao = new PessoaDAO();
     private List<AvaliacaoPessoaCargo> lsAvPesCargo;
+    private int idTtreino;
+    private TreinamentoDAO treinoDAO = new TreinamentoDAO();
 
     private Avaliacao avaliacao;
     private AvaliacaoDAO dao = new AvaliacaoDAO();
@@ -51,10 +55,11 @@ public class AvaliacaoBean {
     private List<AvaliacaoPessoaCargo> lsAvaliacaoPessoaCargo;
     private List<PessoasAvaliacao> lsPessoasAvaliacao;///Lista de PessoasAvaliação
 
-    public String AvaliacaoTreinamento(Treinamento t) {
-        avaliacao.setTreinamento(t);
-        Title = "Dados do Treinamento " + t.getTre_descricao();
-        return "avaliacaofrm";
+    public void AvaliacaoTreinamento(int id) {
+        idTtreino = id;
+        Treinamento treino = treinoDAO.findById(idTtreino);
+        avaliacao.setTreinamento(treino);
+        Title = "Dados do Treinamento " + treino.getTre_descricao();
     }
 
     public AvaliacaoBean() {
@@ -99,6 +104,36 @@ public class AvaliacaoBean {
 
     public String edit(Avaliacao i) {
         avaliacao = (Avaliacao) avaliacoes.getRowData();
+        if (lsCargoAvaliador == null) {
+            lsCargoAvaliador = new ArrayList();
+        }
+        if (lsCargoColaborador == null) {
+            lsCargoColaborador = new ArrayList();
+        }
+        if (lsPessoaAvaliador == null) {
+            lsPessoaAvaliador = new ArrayList();
+        }
+        if (lsPessoaColaborador == null) {
+            lsPessoaColaborador = new ArrayList();
+        }
+        List<AvaliacaoPessoaCargo> lsPesCar = avaliacaoPessoaCargoDAO.SelectListAva(avaliacao.getAva_codigo(), null, 0);
+        if (lsPesCar != null && !lsPesCar.isEmpty()) {
+            for (AvaliacaoPessoaCargo APC : lsPesCar) {
+                if (APC.getApc_status() == 1) {
+                    if (APC.getPessoa() == null) {
+                        lsCargoColaborador.add(APC.getCargo());
+                    } else {
+                        lsPessoaColaborador.add(APC.getPessoa());
+                    }
+                } else if (APC.getApc_status() == 2) {
+                    if (APC.getPessoa() == null) {
+                        lsCargoAvaliador.add(APC.getCargo());
+                    } else {
+                        lsPessoaAvaliador.add(APC.getPessoa());
+                    }
+                }
+            }
+        }
         return "avaliacaofrm";
     }
 
@@ -240,11 +275,11 @@ public class AvaliacaoBean {
             lsPessoaColaborador = new ArrayList<>();
         }
         if (lsCargoColaborador.isEmpty() && lsPessoaColaborador.isEmpty()) {//Não pode ter uma lista vazia de colaboradores
-            Title = "Os colaboradores são obrigatórios! Selecione um cargo ou uma pessoa pelo menos";
+            ErroMsg = "Os colaboradores são obrigatórios! Selecione um cargo ou uma pessoa pelo menos";
             return false;
         }
         if (!bautoava && lsCargoAvaliador.isEmpty() && lsPessoaAvaliador.isEmpty()) {//Se não é autoavaliação não podem faltar os avaliadores
-            Title = "Os avaliadores são obrigatórios quando não tem auto avaliação! Selecione um cargo ou uma pessoa pelo menos";
+            ErroMsg = "Os avaliadores são obrigatórios quando não tem auto avaliação! Selecione um cargo ou uma pessoa pelo menos";
             return false;
         }
         return true;
@@ -345,5 +380,17 @@ public class AvaliacaoBean {
     public List<Questionario> getLsQuestionario() {
         lsQuestionario = questDAO.findAll();
         return lsQuestionario;
+    }
+
+    public int getIdTtreino() {
+        return idTtreino;
+    }
+
+    public void setIdTtreino(int idTtreino) {
+        this.idTtreino = idTtreino;
+    }
+
+    public String getErroMsg() {
+        return ErroMsg;
     }
 }
