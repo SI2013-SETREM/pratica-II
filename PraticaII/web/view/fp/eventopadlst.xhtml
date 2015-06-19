@@ -36,13 +36,13 @@ and open the template in the editor.
                             </h:link>
                         </div>
 
-                        <h:dataTable id="tblEvent" value="${funcionarioBean.eventospadroes}" var="item"  styleClass="dataTable table table-bordered table-striped">
+                        <h:dataTable id="tblEvent" value="${funcionarioBean.eventosPadroes}" var="item"  styleClass="dataTable table table-bordered table-striped">
 
                             <h:column>
                                 <f:facet name="header">
                                     <h:outputText value="Evento"/>
                                 </f:facet>
-                                <h:outputText value="${item.eve_descricao}"/>
+                                <h:outputText value="${item.eve_codigo.eve_descricao}"/>
                             </h:column>
                             <h:column headerClass="col-excluir-header">
                                 <f:facet name="header">
