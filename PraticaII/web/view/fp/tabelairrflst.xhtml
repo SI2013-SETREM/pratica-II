@@ -9,7 +9,7 @@
     </ui:define>
 
     <ui:define name="breadcrumb">
-        <li>Configurações</li>
+        <li>Folha de Pagamento</li>
         <li>${tabelaIRRFBean.getpTitle()}</li>
         <li>${faixaIRRFBean.getpTitle()}</li>
     </ui:define>
@@ -55,7 +55,7 @@
                     </h:column>
                     <h:column>
                         <f:facet name="header">
-                            <h:outputText value="Valor Minimo Darf."/>
+                            <h:outputText value="Valor Mínimo Darf."/>
                         </f:facet>
                         <h:outputText value="${item.getTif_valor_min_darf()}"/>
                     </h:column>
@@ -97,20 +97,9 @@
                 <h:outputText value="  "/>
                 
             </div>
-                <h:dataTable value="${faixaIRRFBean.faixaIRRFs}" var="item" rendered="${faixaIRRFBean.faixaIRRFs.rowAvailable}" styleClass="dataTable table table-bordered table-striped">
+                <h:dataTable value="${faixaIRRFBean.faixaIRRFs}" var="item"  rendered="${faixaIRRFBean.faixaIRRFs.rowAvailable}" styleClass="dataTable table table-bordered table-striped">
                     
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Aliquota"/>
-                        </f:facet>
-                        <h:outputText value="${item.getFrf_aliquota()}"/>
-                        </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Dedução"/>
-                        </f:facet>
-                        <h:outputText value="${item.getFrf_deducao()}"/>
-                    </h:column>
+                    
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="Salário Inicial"/>
@@ -123,12 +112,24 @@
                         </f:facet>
                         <h:outputText value="${item.getFrf_salario_final()}"/>
                     </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Aliquota"/>
+                        </f:facet>
+                        <h:outputText value="${item.getFrf_aliquota()}"/>
+                        </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Dedução"/>
+                        </f:facet>
+                        <h:outputText value="${item.getFrf_deducao()}"/>
+                    </h:column>
                     
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="Tabela IRRF"/>
                         </f:facet>
-                        <h:outputText converter="tabelaIRRFConverter" value="${item.tabelairrf}"/>
+                        <h:outputText value="${item.tabelairrf.tif_nome}"/>
                     </h:column>
                     
                     <h:column headerClass="col-editar-header">

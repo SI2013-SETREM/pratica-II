@@ -9,8 +9,9 @@
     </ui:define>
 
     <ui:define name="breadcrumb">
-        <li>Configurações</li>
+        <li>Folha de Pagamento</li>
         <li>${tabelaINSSBean.getpTitle()}</li>
+        <li>${faixaINSSBean.getpTitle()}</li>
     </ui:define>
 
     <ui:define name="main-content">
@@ -73,7 +74,7 @@
                     </h:column>
                     <h:column>
                         <f:facet name="header">
-                            <h:outputText value="Ab Imposto Uni."/>
+                            <h:outputText value="Ab. Imposto Uni."/>
                         </f:facet>
                         <h:outputText value="${item.getTbs_ab_imp_uni()}"/>
                     </h:column>
@@ -155,11 +156,11 @@
                         <h:outputText value="${item.getFai_ab_imp_renda()}"/>
                     </h:column>
                     
-                    <h:column>
+                   <h:column>
                         <f:facet name="header">
                             <h:outputText value="Tabela INSS"/>
                         </f:facet>
-                        <h:outputText converter="tabelaINSSConverter" value="${item.tabelainss}"/>
+                        <h:outputText value="${item.tabelainss.tbs_nome}"/>
                     </h:column>
                     
                     <h:column headerClass="col-editar-header">

@@ -10,20 +10,20 @@
     </ui:define>
 
     <ui:define name="breadcrumb">
-        <li>Configurações</li>
-        <li><h:link value="${tabelaINSSBean.getpTitle()}" outcome="/faces/view/fp/eventolst" /></li>
+        <li>Folha de Pagamento</li>
+        <li><h:link value="${tabelaINSSBean.getpTitle()}" outcome="/faces/view/fp/tabelainsslst" /></li>
     </ui:define>
 
     <ui:define name="main-content">
         <div class="panel panel-body">
-            <h3><h:outputText value="Dados da ${tabelaINSSBean.getsTitle()}"/></h3>
+            <h3><h:outputText value="Cadastro de ${tabelaINSSBean.getsTitle()}"/></h3>
             <f:view>
                 <h:form styleClass="form-horizontal">
                     <h:inputHidden id="tifCodigo" value="#{tabelaINSSBean.tabelaINSS.tbs_codigo}" />
               
                     
                         <div class="form-group">
-                            <h:outputLabel value="Nome da Tabela: " for="nometabelainss" styleClass="control-label col-md-3" />
+                            <h:outputLabel value="Nome da Tabela: " for="nometabelainss" styleClass="control-label col-sm-2" />
                             <div class="col-md-6 col-xs-12">
                                 <h:inputText id="nometabelainss" value="#{tabelaINSSBean.tabelaINSS.tbs_nome}" title="Nome da Tabela" styleClass="form-control" pt:autofocus=""/>
                                </div>
@@ -32,7 +32,7 @@
 
                     <div>
                         <div class="form-group">
-                            <h:outputLabel value="Data de Início: " for="datainicial" styleClass="control-label col-sm-1" />
+                            <h:outputLabel value="Data Inicial: " for="datainicial" styleClass="control-label col-sm-2" />
                             <div class="col-xs-2">
                                 <h:inputText id="datainicial" value="#{tabelaINSSBean.tabelaINSS.tbs_data_inicial}" title="Data de Início" styleClass="form-control" pt:autofocus="">
                                     <f:convertDateTime pattern="dd/MM/yyyy"/></h:inputText>
@@ -41,7 +41,7 @@
                    
 
                         
-                            <h:outputLabel value="Data Final: " for="datafinal" styleClass="control-label col-md-4"  />
+                            <h:outputLabel value="Data Final: " for="datafinal" styleClass="control-label col-md-2"  />
                            <div class="col-xs-2">
                                 <h:inputText id="datafinal" value="#{tabelaINSSBean.tabelaINSS.tbs_data_final}" title="Data Final" styleClass="form-control" pt:autofocus="">
                                     <f:convertDateTime pattern="dd/MM/yyyy"/></h:inputText>
@@ -51,26 +51,26 @@
                 
 
                     <div class="form-group">
-                        <h:outputLabel value="Salário Família De:" for="tifValorDeducao" styleClass="control-label col-sm-1" />
+                        <h:outputLabel value="Salário Família De:" for="tifValorDeducao" styleClass="control-label col-sm-2" />
                         <div class="col-xs-2">
                             <h:inputText id="tisSalFini" value="#{tabelaINSSBean.tabelaINSS.tbs_sal_fami_ini}" title="tifValorDeducao" styleClass="form-control" pt:autofocus="" />
                         </div>
                    
 
                     
-                        <h:outputLabel value="Salário Família Até:" for="tifValorMminDarf" styleClass="control-label col-sm-1" />
+                        <h:outputLabel value="Salário Família Até:" for="tifValorMminDarf" styleClass="control-label col-sm-2" />
                         <div class="col-xs-2">
                             <h:inputText id="tisSalFfin" value="#{tabelaINSSBean.tabelaINSS.tbs_sal_fami_fin}" title="tifValorMminDarf" styleClass="form-control" pt:autofocus="" />
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <h:outputLabel value="Ab. Imp ini/fim:" for="tbsAbImpIniFin" styleClass="control-label col-sm-1" />
+                        <h:outputLabel value="Abatimento. Imp. ini/fim:" for="tbsAbImpIniFin" styleClass="control-label col-sm-2" />
                         <div class="col-xs-2">
                             <h:inputText id="tisIRif" value="#{tabelaINSSBean.tabelaINSS.tbs_ab_imp_ini_fin}" title="tifPorPisPasep" styleClass="form-control" pt:autofocus="" />
                         </div>
                     
-                        <h:outputLabel value="Salário Familia uni:" for="tifPorPisPasep" styleClass="control-label col-sm-1" />
+                        <h:outputLabel value="Salário Familia unico:" for="tifPorPisPasep" styleClass="control-label col-sm-2" />
                         <div class="col-xs-2">
                             <h:inputText id="tisSaalIni" value="#{tabelaINSSBean.tabelaINSS.tbs_sal_fami_uni}" title="tifPorPisPasep" styleClass="form-control" pt:autofocus="" />
                         </div>
@@ -78,24 +78,24 @@
                     
                     
                     <div class="form-group">
-                        <h:outputLabel value="Ab. Imp uni:" for="tbsAbImpUni" styleClass="control-label col-sm-1" />
+                        <h:outputLabel value="Abatimento. Imp. unico:" for="tbsAbImpUni" styleClass="control-label col-sm-2" />
                         <div class="col-xs-2">
                             <h:inputText id="tisAbUni" value="#{tabelaINSSBean.tabelaINSS.tbs_ab_imp_uni}" title="tifPorPisPasep" styleClass="form-control" pt:autofocus="" />
                         </div>
                     
-                        <h:outputLabel value="Aliquota Normal:" for="tifPorPisPasep" styleClass="control-label col-sm-1" />
+                        <h:outputLabel value="Aliquota Normal:" for="tifPorPisPasep" styleClass="control-label col-sm-2" />
                         <div class="col-xs-2">
                             <h:inputText id="tisAlinormal" value="#{tabelaINSSBean.tabelaINSS.tbs_ali_normal}" title="tifPorPisPasep" styleClass="form-control" pt:autofocus="" />
                         </div>
                     </div>
                     
                     <div class="form-group">
-                        <h:outputLabel value="Aliquota Lei 9.01/98:" for="tifPorPisPasep" styleClass="control-label col-sm-1" />
+                        <h:outputLabel value="Aliquota Lei 9.01/98:" for="tifPorPisPasep" styleClass="control-label col-sm-2" />
                         <div class="col-xs-2">
                             <h:inputText id="tisAlil1" value="#{tabelaINSSBean.tabelaINSS.tbs_ali_lei1}" title="tifPorPisPasep" styleClass="form-control" pt:autofocus="" />
                         </div>
                     
-                        <h:outputLabel value="Aliquota Lei 10.097/00:" for="tifPorPisPasep" styleClass="control-label col-sm-1" />
+                        <h:outputLabel value="Aliquota Lei 10.097/00:" for="tifPorPisPasep" styleClass="control-label col-sm-2" />
                        <div class="col-xs-2">
                             <h:inputText id="tisAlil2" value="#{tabelaINSSBean.tabelaINSS.tbs_ali_lei2}" title="tifPorPisPasep" styleClass="form-control" pt:autofocus="" />
                         </div>
