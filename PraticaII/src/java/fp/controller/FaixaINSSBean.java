@@ -113,23 +113,23 @@ public class FaixaINSSBean {
 
     public String delete(FaixaINSS i) {
         dao.delete(i);
-        LogDAO.insert("FaixaINSS", "Deletou faixa inss código: " + i.getFai_codigo() + ", faixa inicial: " + i.getFai_sal_ini()
-                + ", faixa final: " + i.getFai_sal_fin() + ", faixa aliquota: " + i.getFai_aliquota() + ", faixa importo de renda"
-                + i.getFai_ab_imp_renda() + ", codidog tabela inss: " + i.getTabelainss().getTbs_codigo());
+     //   LogDAO.insert("FaixaINSS", "Deletou faixa inss código: " + i.getFai_codigo() + ", faixa inicial: " + i.getFai_sal_ini()
+      //          + ", faixa final: " + i.getFai_sal_fin() + ", faixa aliquota: " + i.getFai_aliquota() + ", faixa importo de renda"
+      //          + i.getFai_ab_imp_renda() + ", codidog tabela inss: " + i.getTabelainss().getTbs_codigo());
         return "tabelainsslst";
     }
 
     public String salvar() {
         if (faixainss.getFai_codigo() > 0) {
             dao.update(faixainss);
-            LogDAO.insert("FaixaINSS", "Alterou faixa inss código: " + faixainss.getFai_codigo() + ", faixa inicial: " + faixainss.getFai_sal_ini()
-                    + ", faixa final: " + faixainss.getFai_sal_fin() + ", faixa aliquota: " + faixainss.getFai_aliquota() + ", faixa importo de renda"
-                    + faixainss.getFai_ab_imp_renda() + ", codidog tabela inss: " + faixainss.getTabelainss().getTbs_codigo());
+    //        LogDAO.insert("FaixaINSS", "Alterou faixa inss código: " + faixainss.getFai_codigo() + ", faixa inicial: " + faixainss.getFai_sal_ini()
+    //                + ", faixa final: " + faixainss.getFai_sal_fin() + ", faixa aliquota: " + faixainss.getFai_aliquota() + ", faixa importo de renda"
+    //                + faixainss.getFai_ab_imp_renda() + ", codidog tabela inss: " + faixainss.getTabelainss().getTbs_codigo());
         } else {
             dao.insert(faixainss);
-            LogDAO.insert("FaixaINSS", "Cadastrou faixa inss código: " + faixainss.getFai_codigo() + ", faixa inicial: " + faixainss.getFai_sal_ini()
-                    + ", faixa final: " + faixainss.getFai_sal_fin() + ", faixa aliquota: " + faixainss.getFai_aliquota() + ", faixa importo de renda"
-                    + faixainss.getFai_ab_imp_renda() + ", codidog tabela inss: " + faixainss.getTabelainss().getTbs_codigo());
+        //    LogDAO.insert("FaixaINSS", "Cadastrou faixa inss código: " + faixainss.getFai_codigo() + ", faixa inicial: " + faixainss.getFai_sal_ini()
+         //           + ", faixa final: " + faixainss.getFai_sal_fin() + ", faixa aliquota: " + faixainss.getFai_aliquota() + ", faixa importo de renda"
+         //           + faixainss.getFai_ab_imp_renda() + ", codidog tabela inss: " + faixainss.getTabelainss().getTbs_codigo());
         }
 
         return "tabelainsslst";

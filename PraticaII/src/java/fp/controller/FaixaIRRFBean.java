@@ -72,23 +72,23 @@ public class FaixaIRRFBean {
 
     public String delete(FaixaIRRF i) {
         dao.delete(i);
-        LogDAO.insert("FaixaIRRF", "Deletou faixa irrf código: " + i.getFrf_codigo() + ", faixa inicial: " + i.getFrf_salario_inicial()
-                + ", faixa final: " + i.getFrf_salario_final() + ", faixa aliquota: " + i.getFrf_aliquota() + ", dedução: "
-                + i.getFrf_deducao() + ", codidog tabela irrf: " + i.getTabelairrf().getTif_codigo());
+    //    LogDAO.insert("FaixaIRRF", "Deletou faixa irrf código: " + i.getFrf_codigo() + ", faixa inicial: " + i.getFrf_salario_inicial()
+    //            + ", faixa final: " + i.getFrf_salario_final() + ", faixa aliquota: " + i.getFrf_aliquota() + ", dedução: "
+    //            + i.getFrf_deducao() + ", codidog tabela irrf: " + i.getTabelairrf().getTif_codigo());
         return "tabelairrflst";
     }
 
     public String salvar() {
         if (faixairrf.getFrf_codigo() > 0) {
             dao.update(faixairrf);
-            LogDAO.insert("FaixaIRRF", "Alterou faixa irrf código: " + faixairrf.getFrf_codigo() + ", faixa inicial: " + faixairrf.getFrf_salario_inicial()
-                    + ", faixa final: " + faixairrf.getFrf_salario_final() + ", faixa aliquota: " + faixairrf.getFrf_aliquota() + ", dedução: "
-                    + faixairrf.getFrf_deducao() + ", codidog tabela irrf: " + faixairrf.getTabelairrf().getTif_codigo());
+       //     LogDAO.insert("FaixaIRRF", "Alterou faixa irrf código: " + faixairrf.getFrf_codigo() + ", faixa inicial: " + faixairrf.getFrf_salario_inicial()
+       //             + ", faixa final: " + faixairrf.getFrf_salario_final() + ", faixa aliquota: " + faixairrf.getFrf_aliquota() + ", dedução: "
+       //             + faixairrf.getFrf_deducao() + ", codidog tabela irrf: " + faixairrf.getTabelairrf().getTif_codigo());
         } else {
             dao.insert(faixairrf);
-            LogDAO.insert("FaixaIRRF", "Cadastrou faixa irrf código: " + faixairrf.getFrf_codigo() + ", faixa inicial: " + faixairrf.getFrf_salario_inicial()
-                + ", faixa final: " + faixairrf.getFrf_salario_final() + ", faixa aliquota: " + faixairrf.getFrf_aliquota() + ", dedução: "
-                + faixairrf.getFrf_deducao() + ", codidog tabela irrf: " + faixairrf.getTabelairrf().getTif_codigo());
+      //      LogDAO.insert("FaixaIRRF", "Cadastrou faixa irrf código: " + faixairrf.getFrf_codigo() + ", faixa inicial: " + faixairrf.getFrf_salario_inicial()
+      //          + ", faixa final: " + faixairrf.getFrf_salario_final() + ", faixa aliquota: " + faixairrf.getFrf_aliquota() + ", dedução: "
+      //          + faixairrf.getFrf_deducao() + ", codidog tabela irrf: " + faixairrf.getTabelairrf().getTif_codigo());
         }
 
         return "tabelairrflst";

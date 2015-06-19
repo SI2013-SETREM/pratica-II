@@ -65,17 +65,17 @@ public class SerieEventoBean {
 
     public String delete(SerieEvento i) {
         dao.delete(i);
-        LogDAO.insert("SerieEvento", "Deletou série evento código: " + i.getSev_codigo() + ", descrição: " + i.getSev_descricao() + ", nome: " + i.getSev_nome());
+      //  LogDAO.insert("SerieEvento", "Deletou série evento código: " + i.getSev_codigo() + ", descrição: " + i.getSev_descricao() + ", nome: " + i.getSev_nome());
         return "serieeventolst";
     }
 
     public String salvar() {
         if (serieevento.getSev_codigo() > 0) {
             dao.update(serieevento);
-            LogDAO.insert("SerieEvento", "Alterou série evento código: " + serieevento.getSev_codigo()+ ", descrição: " + serieevento.getSev_descricao()+", nome: "+serieevento.getSev_nome());
+         //   LogDAO.insert("SerieEvento", "Alterou série evento código: " + serieevento.getSev_codigo()+ ", descrição: " + serieevento.getSev_descricao()+", nome: "+serieevento.getSev_nome());
         } else {
             dao.insert(serieevento);
-            LogDAO.insert("SerieEvento", "Cadastrou série evento código: " + serieevento.getSev_codigo()+ ", descrição: " + serieevento.getSev_descricao()+", nome: "+serieevento.getSev_nome());
+          //  LogDAO.insert("SerieEvento", "Cadastrou série evento código: " + serieevento.getSev_codigo()+ ", descrição: " + serieevento.getSev_descricao()+", nome: "+serieevento.getSev_nome());
         }
 
         return "serieeventolst";

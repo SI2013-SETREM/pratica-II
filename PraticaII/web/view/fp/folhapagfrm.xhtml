@@ -105,12 +105,17 @@
                                 </div>
 
                                 <div class="btns-top-table col-xs-3">
-                                    <h:link outcome="eventopadfrm" value="Adicionar Eventos Padrão" styleClass="btn btn-success">
-                                        <f:param name="codigoFolha" value="${funcionarioBean.pessoa.pes_codigo}"/>
-                                        <i class="fa fa-plus"></i> 
-                                    </h:link>
+
+                                    <!--                                    <h:link outcome="eventopadlst" value="Gerenciar Eventos Padrão" styleClass="btn btn-success">
+                                                                            <f:param name="codigoFolha" value="${funcionarioBean.pessoa.pes_codigo}"/>
+                                                                            <i class="fa fa-plus"></i> 
+                                                                        </h:link>-->
+                                    <h:commandLink styleClass="btn btn-success" action="#{funcionarioBean.gerarFolha()}">
+                                        <i class="fa fa-plus"></i> Gerenciar Eventos Padrão
+                                    </h:commandLink>
+
                                 </div>
-                               
+
                             </div>
                             <div class="form-group">
                                 <h:outputLabel value="Data de Adimição:" for="idiAdimicao" styleClass="control-label col-md-2" />
@@ -161,12 +166,12 @@
                                     </h:dataTable>
 
                                 </div>
-                                <div class="form-group" >
-<!--                                    <div class="col-xs-4 " style="padding: 37px 0px 5px 90px;">
+<!--                                <div class="form-group" >
+                                    <div class="col-xs-4 " style="padding: 37px 0px 5px 90px;">
                                         <div class=" btn btn-sm btn-primary"  >                               
                                             <i class="fa fa-plus"></i> Adicionar evendos na Folha
                                         </div>
-                                    </div>-->
+                                    </div>
                                     <div class="btns-top-table col-xs-4" style="padding: 37px 0px 5px 90px;">
                                         <h:link outcome="eventopadfrm" value="Adicionar evendos na Folha" styleClass="btn btn-success" >
                                             <f:param name="id" value="${funcionarioBean.pessoa.pes_codigo}"/>
@@ -174,6 +179,24 @@
                                         </h:link>                             
 
                                     </div>
+                                </div>-->
+<!--
+                                    <div class="form-group" >
+                                        <div class="col-xs-4 " style="padding: 37px 0px 5px 90px;">
+                                            <div class=" btn btn-sm btn-primary"  >                               
+                                                <i class="fa fa-plus"></i> Adicionar evendos na Folha
+                                            </div>
+                                        </div>
+
+                                    </div>-->
+
+
+
+
+
+
+
+
                                     <div class="detalhes col-xs-8 ">
 
                                         <h:dataTable var="car" value="" styleClass=" table table-bordered table-striped">
@@ -260,7 +283,7 @@
                                 <h:commandButton styleClass="btn btn-primary" value="Gerar" ></h:commandButton>
                             </div>
                         </div>
-                    </div>
+                
 
                 </h:form>
             </f:view>

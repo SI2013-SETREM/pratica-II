@@ -92,10 +92,10 @@
                     </div>
                     
                      <div class="form-group">
-                        <h:outputLabel value="Beneficio " for="serieevento" styleClass="control-label col-sm-2" />
+                        <h:outputLabel value="Beneficio:" for="beneevento" styleClass="control-label col-sm-2" />
                         <div style="padding-top: 5px" class="col-md-6 col-sm-12">
-                            <h:selectOneMenu value="#{eventoBean.evento.serieevento}" converter="serieEventoConverter" id="serieevento"   class="form-control" pt:autofocus="" >
-                                <f:selectItems value="#{eventoBean.lstSerieEvento}" var="serieevento"/>
+                            <h:selectOneMenu value="#{eventoBean.evento.beneficio}" converter="beneficioConverter" id="beneevento"   class="form-control" pt:autofocus="" >
+                                <f:selectItems value="#{eventoBean.lstBeneficio}" var="beneevento"/>
                             </h:selectOneMenu>
                         </div>
                     </div>

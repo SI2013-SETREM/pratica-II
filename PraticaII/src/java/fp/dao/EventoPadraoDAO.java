@@ -56,10 +56,18 @@ public class EventoPadraoDAO {
         return (EventoPadrao) session.load(EventoPadrao.class, id);
     }
 
-    public List<EventoPadrao> finAll() {
+    public List<EventoPadrao> findAll() {
 
         Query query = session.createQuery("from EventoPadrao");
         return query.list();
+
+    }
+  
+    
+         public List<EventoPadrao> EventoPessoa(int pes_codigo) {
+
+        Query query = session.createQuery("from EventoPadrao where pes_codigo = :pes_codigo");
+        return  query.setParameter("pes_codigo", pes_codigo).list();
 
     }
     
