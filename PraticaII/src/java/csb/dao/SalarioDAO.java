@@ -77,4 +77,8 @@ public class SalarioDAO
         Query q = session.createQuery("from Salario where sal_situacao is true and sal_datafim is null");
         return q.list();
     }
+     public List<Salario> findBySalPessoaId(int pes_codigo) {
+        Query q = session.createQuery("from Salario where pes_codigo = :pes_codigo");
+        return q.setParameter("pes_codigo", pes_codigo).list();
+    }
 }
