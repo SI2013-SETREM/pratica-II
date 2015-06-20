@@ -41,6 +41,11 @@ public class CargosPessoaDAO {
         Query q = session.createQuery("from CargosPessoa");
         return q.list();
     }
+    
+     public CargosPessoa cargo(int pes_codigo) {
+         Query q = session.createQuery("from CargosPessoa where and pes_codigo = " + pes_codigo);
+        return (CargosPessoa) q.list();
+    }
 
     ////-Metodos novos
     public List<CargosPessoa> GetListCargoPessoa(int pes_codigo, int car_codigo) {///utilizado para selecionar todas as pessoas de determinado cargo ou todos os cargos de determinada pessao
