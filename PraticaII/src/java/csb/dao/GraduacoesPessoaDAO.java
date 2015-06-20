@@ -40,4 +40,8 @@ public class GraduacoesPessoaDAO {
         Query q = session.createQuery("from GraduacoesPessoa");
         return q.list();
     }
+    public List<GraduacoesPessoa> findByGraduacoesId(int pes_codigo) {
+        Query q = session.createQuery("from GraduacoesPessoa where pes_codigo = :pes_codigo");
+        return q.setParameter("pes_codigo", pes_codigo).list();
+    }
 }
