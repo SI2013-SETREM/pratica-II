@@ -21,7 +21,9 @@ and open the template in the editor.
                 Eventos Padrão
             </ui:define>
             <ui:define name="breadcrumb">
-                <li>Lista de eventos</li>
+                <li><h:link value="Folha de Pagamento" outcome="/faces/view/fp/folhapaglst" /></li>
+                <li><h:link value="Recibo de Pagamento" outcome="/faces/view/fp/folhapagfrm" /></li>
+                <li><h:link value="Eventos Padrões do colaborador" outcome="/faces/view/fp/eventopadlst" /></li>
             </ui:define>
 
             <ui:define name="main-content">
@@ -31,13 +33,13 @@ and open the template in the editor.
                         <h3>Lista de Eventos Padrões do Colaborador ${funcionarioBean.pessoa.pes_nome}</h3>
 
                         <div class="btns-top-table">
-<!--                            <h:link outcome="eventopadfrm" styleClass="btn btn-success">
-                                <i class="fa fa-plus"></i> Inserir Evento Padrão
-                            </h:link>-->
-                             <h:link outcome="eventopadfrm" value="Adicionar Evento Padrão" styleClass="btn btn-success">
-                                 <f:param name="idPessoa" value="${funcionarioBean.pessoa.pes_codigo}"/>
-                                    <i class="fa fa-plus"></i> 
-                                </h:link>
+                            <!--                            <h:link outcome="eventopadfrm" styleClass="btn btn-success">
+                                                            <i class="fa fa-plus"></i> Inserir Evento Padrão
+                                                        </h:link>-->
+                            <h:link outcome="eventopadfrm" value="Adicionar Evento Padrão" styleClass="btn btn-success">
+                                <f:param name="idPessoa" value="${funcionarioBean.pessoa.pes_codigo}"/>
+                                <i class="fa fa-plus"></i> 
+                            </h:link>
 
                         </div>
 

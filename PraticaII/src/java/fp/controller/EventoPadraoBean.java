@@ -70,6 +70,7 @@ public class EventoPadraoBean {
         EventoPadrao f = new EventoPadrao();
         f.setPessoa(daoPessoa.findById(_pes_codigo));
         f.setEve_codigo(daoEvento.findById(eve_codigo));
+       
         dao.insert(f);
         return "eventopadlst";
     }

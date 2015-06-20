@@ -11,7 +11,7 @@
     </ui:define>
 
     <ui:define name="breadcrumb">
-         <li><h:link value="Folha de Pagamento" outcome="/faces/view/fp/folhapaglst" /></li>
+        <li><h:link value="Folha de Pagamento" outcome="/faces/view/fp/folhapaglst" /></li>
         <li><h:link value="Recibo de Pagamento" outcome="/faces/view/fp/folhapagfrm" /></li>
     </ui:define>
 
@@ -56,11 +56,18 @@
                         <div class="panel-body">
 
                             <div class="form-group">
-                                <h:outputLabel value="Empresa:" for="emp" styleClass="control-label col-md-2" />
+<!--                                <h:outputLabel value="Empresa:" for="emp" styleClass="control-label col-md-2" />
 
                                 <div class="col-md-4 col-xs-3 autocomplete">
                                     <h:inputText pt:autofocus=""  id="idEmpresa" value="" title="Nome da Empresa" styleClass="form-control" readonly="true" />
+                                </div>-->
+
+                                <h:outputLabel value="Empresa:" for="emp" styleClass="control-label col-md-2" />
+                                <div class="col-md-4 col-xs-3 autocomplete">
+                                    <h:inputText readonly="true" pt:autofocus=""  id="idEmpresa" value="" title="Nome da Empresa" styleClass="form-control" />
                                 </div>
+
+
 
 
                                 <h:outputLabel value="CNPJ:" for="idcnpj" styleClass="control-label col-md-2" />
@@ -126,6 +133,24 @@
                                 </div>
 
                             </div>
+                            <h:dataTable id="tblEvent" value="${funcionarioBean.eventosPadroes}" var="item"  styleClass="dataTable table table-bordered table-striped">
+
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Eventos Padrões do Funcionário"/>
+                                    </f:facet>
+                                    <h:outputText value="${item.eve_codigo.eve_descricao}"/>
+                                </h:column>
+                                <h:column headerClass="col-excluir-header">
+                                    <f:facet name="header">
+                                        <h:outputText value="Excluir"/>
+                                    </f:facet>
+                                    <h:commandLink onclick="return confirm('Deseja realmente excluir o Evento Padrão?');" action="${funcionarioBean.deleteEventoPadraoFolha(item)}">
+                                        <i class="fa fa-trash"></i> Excluir
+                                    </h:commandLink>
+                                </h:column>
+
+                            </h:dataTable>
                             <hr style="border-top: 1px solid #D7D3F5"></hr>
 
                             <div class="table-striped">
@@ -166,124 +191,124 @@
                                     </h:dataTable>
 
                                 </div>
-<!--                                <div class="form-group" >
-                                    <div class="col-xs-4 " style="padding: 37px 0px 5px 90px;">
-                                        <div class=" btn btn-sm btn-primary"  >                               
-                                            <i class="fa fa-plus"></i> Adicionar evendos na Folha
-                                        </div>
-                                    </div>
-                                    <div class="btns-top-table col-xs-4" style="padding: 37px 0px 5px 90px;">
-                                        <h:link outcome="eventopadfrm" value="Adicionar evendos na Folha" styleClass="btn btn-success" >
-                                            <f:param name="id" value="${funcionarioBean.pessoa.pes_codigo}"/>
-                                            <i class="fa fa-plus"></i> 
-                                        </h:link>                             
-
-                                    </div>
-                                </div>-->
-<!--
-                                    <div class="form-group" >
-                                        <div class="col-xs-4 " style="padding: 37px 0px 5px 90px;">
-                                            <div class=" btn btn-sm btn-primary"  >                               
-                                                <i class="fa fa-plus"></i> Adicionar evendos na Folha
-                                            </div>
-                                        </div>
-
-                                    </div>-->
-
-
+                                <!--                                <div class="form-group" >
+                                                                    <div class="col-xs-4 " style="padding: 37px 0px 5px 90px;">
+                                                                        <div class=" btn btn-sm btn-primary"  >                               
+                                                                            <i class="fa fa-plus"></i> Adicionar evendos na Folha
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="btns-top-table col-xs-4" style="padding: 37px 0px 5px 90px;">
+                                                                        <h:link outcome="eventopadfrm" value="Adicionar evendos na Folha" styleClass="btn btn-success" >
+                                                                            <f:param name="id" value="${funcionarioBean.pessoa.pes_codigo}"/>
+                                                                            <i class="fa fa-plus"></i> 
+                                                                        </h:link>                             
+                                
+                                                                    </div>
+                                                                </div>-->
+                                <!--
+                                                                    <div class="form-group" >
+                                                                        <div class="col-xs-4 " style="padding: 37px 0px 5px 90px;">
+                                                                            <div class=" btn btn-sm btn-primary"  >                               
+                                                                                <i class="fa fa-plus"></i> Adicionar evendos na Folha
+                                                                            </div>
+                                                                        </div>
+                                
+                                                                    </div>-->
 
 
 
 
 
 
-                                    <div class="detalhes col-xs-8 ">
 
-                                        <h:dataTable var="car" value="" styleClass=" table table-bordered table-striped">
-                                            <h:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="Total de Acréscimos"/>
-                                                </f:facet>
 
-                                                <h:outputText value="1.950,00 R$" /> <br />
+                                <div class="detalhes col-xs-8 ">
 
-                                            </h:column>
+                                    <h:dataTable var="car" value="" styleClass=" table table-bordered table-striped">
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Total de Acréscimos"/>
+                                            </f:facet>
 
-                                            <p:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="Total de Descontos"/>
-                                                </f:facet>
-                                                <h:outputText value="0,00 R$" /> <br />
+                                            <h:outputText value="1.950,00 R$" /> <br />
 
-                                            </p:column>
-                                            <p:column>
-                                                <f:facet name="header">
-                                                    <h:outputText value="Valor Liquido"/>
-                                                </f:facet>
-                                                <h:outputText value="0,00 R$" /> <br />
+                                        </h:column>
 
-                                            </p:column>
-                                        </h:dataTable>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Total de Descontos"/>
+                                            </f:facet>
+                                            <h:outputText value="0,00 R$" /> <br />
 
-                                    </div>
+                                        </p:column>
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Valor Liquido"/>
+                                            </f:facet>
+                                            <h:outputText value="0,00 R$" /> <br />
+
+                                        </p:column>
+                                    </h:dataTable>
+
                                 </div>
-                                <h:dataTable var="car" value="" styleClass=" table table-bordered table-striped">
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="Salário Base"/>
-                                        </f:facet>
-                                        <h:outputText value="900 R$" /> <br />
-
-                                    </h:column>
-
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="Salário Contr.INSS"/>
-                                        </f:facet>
-                                        <h:outputText value="Salário Base" /> <br />
-
-                                    </h:column>
-
-
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="Base Cálc. FGTS"/>
-                                        </f:facet>
-                                        <h:outputText value="1.500,00 R$" /> <br />
-
-                                    </h:column>
-
-                                    <p:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="FGTS Mês"/>
-                                        </f:facet>
-                                        <h:outputText value="0,00 R$" /> <br />                                  
-                                    </p:column>
-                                    <p:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="Base Cálc. IRRF"/>
-                                        </f:facet>
-                                        <h:outputText value="0,00 R$" /> <br />                                  
-                                    </p:column>
-                                    <p:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="Faixa IRRF"/>
-                                        </f:facet>
-                                        <h:outputText value="0,00 R$" /> <br />                                  
-                                    </p:column>
-                                </h:dataTable>
-
-
                             </div>
+                            <h:dataTable var="car" value="" styleClass=" table table-bordered table-striped">
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Salário Base"/>
+                                    </f:facet>
+                                    <h:outputText value="900 R$" /> <br />
+
+                                </h:column>
+
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Salário Contr.INSS"/>
+                                    </f:facet>
+                                    <h:outputText value="Salário Base" /> <br />
+
+                                </h:column>
+
+
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Base Cálc. FGTS"/>
+                                    </f:facet>
+                                    <h:outputText value="1.500,00 R$" /> <br />
+
+                                </h:column>
+
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="FGTS Mês"/>
+                                    </f:facet>
+                                    <h:outputText value="0,00 R$" /> <br />                                  
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Base Cálc. IRRF"/>
+                                    </f:facet>
+                                    <h:outputText value="0,00 R$" /> <br />                                  
+                                </p:column>
+                                <p:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Faixa IRRF"/>
+                                    </f:facet>
+                                    <h:outputText value="0,00 R$" /> <br />                                  
+                                </p:column>
+                            </h:dataTable>
+
 
                         </div>
-                        <div class="form-group">
-                            <div class="col-md-offset-9 col-md-11 col-xs-offset-10 col-sm-12 btn-group-separated">
-                                <h:link styleClass="btn btn-default" value="Cancelar" />
-                                <h:commandButton styleClass="btn btn-primary" value="Gerar" ></h:commandButton>
-                            </div>
+
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-9 col-md-11 col-xs-offset-10 col-sm-12 btn-group-separated">
+                            <h:link styleClass="btn btn-default" value="Cancelar" />
+                            <h:commandButton styleClass="btn btn-primary" value="Gerar" ></h:commandButton>
                         </div>
-                
+                    </div>
+
 
                 </h:form>
             </f:view>

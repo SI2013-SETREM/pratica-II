@@ -1,6 +1,8 @@
 package ff.controller;
 
+import cfg.dao.EmpresaDAO;
 import cfg.dao.PessoaDAO;
+import cfg.model.Empresa;
 import cfg.model.Pessoa;
 import csb.dao.BeneficiosPessoaDAO;
 import csb.dao.CargosPessoaDAO;
@@ -68,6 +70,10 @@ public class FuncionarioBean {
     private EventoPadraoDAO eventopadraoDAO = new EventoPadraoDAO();
     private DataModel eventospadroes;
     
+    private Empresa empresa = new Empresa();
+    private EmpresaDAO empresaDAO = new EmpresaDAO();
+    private DataModel empresas;
+    
     
     private Evento evento = new Evento();
     private EventoDAO eventoDao = new EventoDAO();
@@ -88,6 +94,13 @@ public class FuncionarioBean {
         //            + ", horas: " + f.getFor_horas() + ", horas mais: " + f.getFor_horasmais() + ", nome: " + f.getFor_nome());
         return "eventopadlst";
     }
+        public String deleteEventoPadraoFolha(EventoPadrao f) {
+        eventopadraoDAO.delete(f);
+    //    LogDAO.insert("Formula", "Deletou fórmula código: " + f.getFor_codigo() + ", taxa: " + f.getFor_taxa()
+        //            + ", horas: " + f.getFor_horas() + ", horas mais: " + f.getFor_horasmais() + ", nome: " + f.getFor_nome());
+        return "folhapagfrm";
+    }
+
 
      public String listarEventosPadroes() {
         return "eventopadlst";
@@ -292,9 +305,6 @@ public class FuncionarioBean {
     }
  //======================================================================
     //EVENTO
-
-  
-    
     public Evento getEvento() {
         return evento;
     }
@@ -357,6 +367,60 @@ public class FuncionarioBean {
     
     public String listar() {
         return "eventolst";
+    }
+ //========================================================================================
+    //EMPRESA
+    
+//    public Empresa getEmpresa() {
+//        this.empresa = empresaDAO.findByIdPessoa(pessoa.getPes_codigo());
+//        return empresa;
+//    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
+
+//    public DataModel getEmpresas() {
+//        this.empresas = new ListDataModel(empresaDAO.EmpresaPessoa(pessoa.getPes_codigo()));
+//        return empresas;
+//    }
+
+    public void setEmpresas(DataModel empresas) {
+        this.empresas = empresas;
+    }
+
+    public String insertEmpresa() {
+        empresaDAO.insert(empresa);
+        return "empresalst";
+    }
+
+    public String editEmpresa(Empresa i) {
+        empresa = (Empresa) empresas.getRowData();
+        return "empresafrm";
+    }
+
+    public String updateEmpresa() {
+        empresaDAO.update(empresa);
+        return "empresalst";
+    }
+
+    public String deleteEmpresa(Empresa i) {
+        empresaDAO.delete(i);
+        return "empresalst";
+    }
+
+    public String salvarEmpresa() {
+        if (empresa.getEmp_codigo() > 0) {
+            empresaDAO.update(empresa);
+        } else {
+            empresaDAO.insert(empresa);
+        }
+
+        return "empresalst";
+    }
+
+    public String listarEmpresa() {
+        return "empresalst";
     }
     
     

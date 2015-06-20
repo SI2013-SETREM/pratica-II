@@ -8,8 +8,10 @@
         ${eventoBean.getpTitle()}
     </ui:define>
     <ui:define name="breadcrumb">
-        <li>Configurações</li>
-        <li>${eventoBean.getpTitle()}</li>
+        <li><h:link value="Folha de Pagamento" outcome="/faces/view/fp/folhapaglst" /></li>
+        <li><h:link value="Recibo de Pagamento" outcome="/faces/view/fp/folhapagfrm" /></li>
+        <li><h:link value="Eventos Padrões do colaborador" outcome="/faces/view/fp/eventopadlst" /></li>
+        <li><h:link value="Lista de eventos" outcome="/faces/view/fp/eventopadfrm" /></li>
     </ui:define>
     <f:metadata>
         <f:viewParam name="idPessoa" value="${eventoBean.idPessoa}" ></f:viewParam>
@@ -62,8 +64,7 @@
                 </h:dataTable>
                 <div class="form-group">
                     <div class="col-md-offset-9 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
-                        <h:link styleClass="btn btn-default" value="Cancelar" />
-                        <h:commandButton id="salvar" styleClass="btn btn-primary" value="Salvar"></h:commandButton>
+                        <h:link styleClass="btn btn-default" value="Cancelar" outcome="eventopadlst"/>
                     </div>
                 </div>
             </h:form>
