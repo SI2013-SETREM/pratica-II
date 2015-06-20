@@ -18,7 +18,9 @@ import ff.model.Advertencia;
 
 import ff.model.Falta;
 import ff.model.Ferias;
+import fp.dao.EventoDAO;
 import fp.dao.EventoPadraoDAO;
+import fp.model.Evento;
 import fp.model.EventoPadrao;
 
 import java.util.ArrayList;
@@ -26,11 +28,14 @@ import java.util.List;
 import javax.faces.model.DataModel;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.model.ListDataModel;
 
+@SessionScoped
 @ManagedBean
 public class FuncionarioBean {
 
+    //========================================================================================
     private Pessoa pessoa = new Pessoa();
     private final PessoaDAO pessoaDAO = new PessoaDAO();
     private DataModel<Pessoa> funcionarios;
@@ -63,44 +68,19 @@ public class FuncionarioBean {
     private EventoPadraoDAO eventopadraoDAO = new EventoPadraoDAO();
     private DataModel eventospadroes;
     
+    
+    private Evento evento = new Evento();
+    private EventoDAO eventoDao = new EventoDAO();
+    private DataModel eventos;
+    
     private String estadoCivil;
     private String tipoPessoa;
-
+    
     public FuncionarioBean() {
     }
-
-//    public String select() {
-//        pessoa = funcionarios.getRowData();
-//        pessoa = pessoaDAO.findById(pessoa.getPes_codigo());
-//        if (pessoa != null) {
-//            salarios = salarioDAO.findBySalPessoaId(pessoa.getPes_codigo());
-//            beneficios = beneficiosPessoaDAO.findByPessoaId(pessoa.getPes_codigo());
-//            ferias = feriasDAO.findById(pessoa.getPes_codigo());
-//            cargos = cargosDAO.GetListCargoPessoa(pessoa.getPes_codigo(), 0);
-//            faltas = faltaDAO.findFaltas(pessoa.getPes_codigo());
-//            graduacoes = graduacoesPessoaDAO.findByGraduacoesId(pessoa.getPes_codigo());
-//            advertencias = advertenciaDAO.findByAvertId(pessoa.getPes_codigo());
-//
-//        } else {
-//            beneficios = new ArrayList<>();
-//            faltas = new ArrayList<>();
-//            ferias = new ArrayList<>();
-//            cargos = new ArrayList<>();
-//            graduacoes = new ArrayList<>();
-//            salarios = new ArrayList<>();
-//            advertencias = new ArrayList<>();
-//        }
-//        return "fichafunfrm";
-//    }
-
     
-    
-    
-    
-    
-    
-    
-    
+//=======================================================================================================
+    //EVENTOS PADRÕES
    
       public String deleteEventoPadrao(EventoPadrao f) {
         eventopadraoDAO.delete(f);
@@ -148,16 +128,11 @@ public class FuncionarioBean {
         eventopadraoDAO.insert(eventopadrao);
         return "eventopadlst";
     }
-
-    public String insert2EventosPadroes(EventoPadrao f) {
-       eventopadraoDAO.insert(f);
-        return "eventopadlst";
-    }
     public DataModel<EventoPadrao> getEventosPadroes() {
         this.eventospadroes = new ListDataModel(eventopadraoDAO.EventoPessoa(pessoa.getPes_codigo()));
         return eventospadroes;
     }
-
+    
     public void setEventosPadroes(DataModel eventospadroes) {
         this.eventospadroes = eventospadroes;
     }
@@ -169,30 +144,18 @@ public class FuncionarioBean {
     public void setEventoPadroesDao(EventoPadraoDAO eventopadraoDAO) {
         this.eventopadraoDAO = eventopadraoDAO;
     }
-    
-    
-    
-    
-    
-    
-    
+ //===============================================================================================================   
+  //FICHA FUNCIONAL  
     
     public String select2() {
         pessoa = funcionarios.getRowData();
         //pessoa = pessoaDAO.findById(pessoa.getPes_codigo());
         //cargosPessoa = cargosDAO.cargo(pessoa.getPes_codigo());
         
-        //cargosPessoa = cargosDAO.GetListCargoPessoa(pessoa.getPes_codigo(),0).get(1);
-        
- 
-        
+        //cargosPessoa = cargosDAO.GetListCargoPessoa(pessoa.getPes_codigo(),0).get(1);    
         return "folhapagfrm";
     }
     
-    public String gerarFolha() {
-        return "eventopadlst";
-    }
-
     public String cancelar() {
         return "fichafulst";
     }
@@ -216,36 +179,7 @@ public class FuncionarioBean {
     public CargosPessoa getCargosPessoa() {
         return cargosPessoa;
     }
-
-    public void setCargosPessoa(CargosPessoa cargosPessoa) {
-        this.cargosPessoa = cargosPessoa;
-    }
-
-    public List<Ferias> getFerias() {
-        return ferias;
-    }
-
-    public List<BeneficiosPessoa> getBeneficios() {
-        return beneficios;
-    }
-
-    public Pessoa getPessoa() {
-        return pessoa;
-    }
-
-    public void setPessoa(Pessoa pessoa) {
-        this.pessoa = pessoa;
-    }
-
-    public DataModel<Pessoa> getFuncionarios() {
-        this.funcionarios = new ListDataModel<>(pessoaDAO.findAllFuncionarios());
-        return funcionarios;
-    }
-
-    public void setFuncionarios(DataModel<Pessoa> funcionarios) {
-        this.funcionarios = funcionarios;
-    }
-
+    
     public List<Falta> getFaltas() {
         return faltas;
     }
@@ -292,8 +226,138 @@ public class FuncionarioBean {
         return tipoPessoa;
     }
 
-    public void setTipoPessoa(String tipoPessoa) {
-        this.tipoPessoa = tipoPessoa;
+    public void setCargosPessoa(CargosPessoa cargosPessoa) {
+        this.cargosPessoa = cargosPessoa;
     }
 
+    public List<Ferias> getFerias() {
+        return ferias;
+    }
+
+    public List<BeneficiosPessoa> getBeneficios() {
+        return beneficios;
+    }
+    
+     public void setTipoPessoa(String tipoPessoa) {
+        this.tipoPessoa = tipoPessoa;
+    }
+//    public String select() {
+//        pessoa = funcionarios.getRowData();
+//        pessoa = pessoaDAO.findById(pessoa.getPes_codigo());
+//        if (pessoa != null) {
+//            salarios = salarioDAO.findBySalPessoaId(pessoa.getPes_codigo());
+//            beneficios = beneficiosPessoaDAO.findByPessoaId(pessoa.getPes_codigo());
+//            ferias = feriasDAO.findById(pessoa.getPes_codigo());
+//            cargos = cargosDAO.GetListCargoPessoa(pessoa.getPes_codigo(), 0);
+//            faltas = faltaDAO.findFaltas(pessoa.getPes_codigo());
+//            graduacoes = graduacoesPessoaDAO.findByGraduacoesId(pessoa.getPes_codigo());
+//            advertencias = advertenciaDAO.findByAvertId(pessoa.getPes_codigo());
+//
+//        } else {
+//            beneficios = new ArrayList<>();
+//            faltas = new ArrayList<>();
+//            ferias = new ArrayList<>();
+//            cargos = new ArrayList<>();
+//            graduacoes = new ArrayList<>();
+//            salarios = new ArrayList<>();
+//            advertencias = new ArrayList<>();
+//        }
+//        return "fichafunfrm";
+//    }
+ 
+//===================================================================    
+    //FOLHA DE PAGAMENTO
+    public String gerarFolha() {
+        return "eventopadlst";
+    }
+
+ //=======================================================================
+    //AMBOS
+
+    public Pessoa getPessoa() {
+        return pessoa;
+    }
+
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
+    }
+
+    public DataModel<Pessoa> getFuncionarios() {
+        this.funcionarios = new ListDataModel<>(pessoaDAO.findAllFuncionarios());
+        return funcionarios;
+    }
+
+    public void setFuncionarios(DataModel<Pessoa> funcionarios) {
+        this.funcionarios = funcionarios;
+    }
+ //======================================================================
+    //EVENTO
+
+  
+    
+    public Evento getEvento() {
+        return evento;
+    }
+    
+    public void setEvento(Evento evento) {
+        this.evento = evento;
+    }
+    
+    public DataModel<Evento> getEventos() {
+        this.eventos = new ListDataModel(eventoDao.findAll());
+        return eventos;
+    }
+    
+    public void setEventos(DataModel eventos) {
+        this.eventos = eventos;
+    }
+    
+    public String insert() {
+        eventoDao.insert(evento);
+        return "eventoslst";
+    }
+    
+    public String edit(Evento i) {
+        evento = (Evento) eventos.getRowData();
+        return "eventosfrm";
+    }
+    
+    public String update() {
+        eventoDao.update(evento);
+        return "eventolst";
+    }
+    
+    public String delete(Evento i) {
+        eventoDao.delete(i);
+  //      LogDAO.insert("Evento", "Deletou evento código: " + i.getEve_codigo() + ", descrição: " + i.getEve_descricao()+
+  //      ", índice: "+i.getEve_indice()+", código benefício: "+i.getBeneficio().getBen_codigo()+", fórmula: "+i.getFormula()+
+  //      ", série evento: "+i.getSerieevento()+", código tabela inss: "+i.getTabelainss().getTbs_codigo()+
+  //      ", código tabela irrf: "+i.getTabelairrf().getTif_codigo());
+        return "eventolst";
+    }
+    
+    public String salvar() {
+        if (evento.getEve_codigo() > 0) {
+            eventoDao.update(evento);
+   //         LogDAO.insert("Evento", "Alterou evento código: " + evento.getEve_codigo() + ", descrição: " + evento.getEve_descricao()+
+   //     ", índice: "+evento.getEve_indice()+", código benefício: "+evento.getBeneficio().getBen_codigo()+", fórmula: "+evento.getFormula()+
+   //     ", série evento: "+evento.getSerieevento()+", código tabela inss: "+evento.getTabelainss().getTbs_codigo()+
+    //    ", código tabela irrf: "+evento.getTabelairrf().getTif_codigo());
+        } else {
+            eventoDao.insert(evento);
+    //            LogDAO.insert("Evento", "Cadastrou evento código: " + evento.getEve_codigo() + ", descrição: " + evento.getEve_descricao()+
+    //    ", índice: "+evento.getEve_indice()+", código benefício: "+evento.getBeneficio().getBen_codigo()+", fórmula: "+evento.getFormula()+
+     //   ", série evento: "+evento.getSerieevento()+", código tabela inss: "+evento.getTabelainss().getTbs_codigo()+
+     //   ", código tabela irrf: "+evento.getTabelairrf().getTif_codigo());
+        }
+        
+        return "eventolst";
+    }
+
+    
+    public String listar() {
+        return "eventolst";
+    }
+    
+    
 }

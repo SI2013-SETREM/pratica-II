@@ -1,6 +1,8 @@
 package fp.controller;
 
 import cfg.dao.LogDAO;
+import cfg.dao.PessoaDAO;
+import cfg.model.Pessoa;
 import csb.dao.BeneficioDAO;
 import csb.model.Beneficio;
 import fp.dao.EventoDAO;
@@ -27,6 +29,7 @@ import javax.faces.model.ListDataModel;
 @RequestScoped
 public class EventoBean {
     
+    private int pes_codigo;
     private final String sTitle = Evento.sTitle;
     private final String pTitle = Evento.pTitle;
     
@@ -61,8 +64,23 @@ public class EventoBean {
     private EventoPadrao eventoPadrao = new EventoPadrao();
     private EventoPadraoDAO eventoPadraoDAO = new EventoPadraoDAO();
     
+    
+    private int idPessoa;
+    private ListDataModel pessoalst;
+    private Pessoa pessoa = new Pessoa();
+    private PessoaDAO pessoadao = new PessoaDAO();
+    
+    
     public EventoBean() {
         
+    }
+
+    public int getPes_codigo() {
+        return pes_codigo;
+    }
+
+    public void setPes_codigo(int pes_codigo) {
+        this.pes_codigo = pes_codigo;
     }
     
     public String getsTitle() {
@@ -178,4 +196,42 @@ public class EventoBean {
         lstbeneficio = beneficiodao.findAll();
         return lstbeneficio;
     }
+
+    public int getIdPessoa() {
+        return idPessoa;
+    }
+
+    public void setIdPessoa(int idPessoa) {
+        this.idPessoa = idPessoa;
+    }
+    public void iniciaPessoa(){
+    this.pessoalst = new ListDataModel<>(pessoadao.findByPessoaId(getIdPessoa()));
+    pessoa = (Pessoa) pessoalst.getRowData();
+    pessoa = pessoadao.findById(pessoa.getPes_codigo());
+    }
+
+    public Pessoa getPessoa() {
+        return pessoa;
+    }
+
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
+    }
+
+    public PessoaDAO getPessoadao() {
+        return pessoadao;
+    }
+
+    public void setPessoadao(PessoaDAO pessoadao) {
+        this.pessoadao = pessoadao;
+    }
+
+    public ListDataModel getPessoalst() {
+        return pessoalst;
+    }
+
+    public void setPessoalst(ListDataModel pessoalst) {
+        this.pessoalst = pessoalst;
+    }
+    
 }

@@ -1,5 +1,7 @@
 package fp.controller;
 
+import cfg.dao.PessoaDAO;
+import fp.dao.EventoDAO;
 import fp.dao.EventoPadraoDAO;
 import fp.model.EventoPadrao;
 import javax.faces.bean.ManagedBean;
@@ -16,6 +18,8 @@ public class EventoPadraoBean {
 
     private EventoPadrao eventopadrao = new EventoPadrao();
     private EventoPadraoDAO dao = new EventoPadraoDAO();
+    private PessoaDAO daoPessoa = new PessoaDAO();
+    private EventoDAO daoEvento = new EventoDAO();
     private DataModel eventospadroes;
     //private int parametro;
 
@@ -62,7 +66,10 @@ public class EventoPadraoBean {
         return "eventopadlst";
     }
 
-    public String insert2(EventoPadrao f) {
+    public String insert2(Integer eve_codigo, Integer _pes_codigo) {
+        EventoPadrao f = new EventoPadrao();
+        f.setPessoa(daoPessoa.findById(_pes_codigo));
+        f.setEve_codigo(daoEvento.findById(eve_codigo));
         dao.insert(f);
         return "eventopadlst";
     }

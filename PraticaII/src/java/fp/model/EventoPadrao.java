@@ -30,6 +30,7 @@ public class EventoPadrao implements Serializable {
     @GeneratedValue (strategy = GenerationType.SEQUENCE, generator = "genEventoPadrao")
     private int evp_codigo;
     @ManyToOne
+    @JoinColumn(name = "eve_codigo", referencedColumnName = "eve_codigo")
     private Evento eve_codigo;
     @ManyToOne
     @JoinColumn(name = "pes_codigo", referencedColumnName = "pes_codigo")

@@ -28,12 +28,17 @@ and open the template in the editor.
                 <div class="panel panel-body">
 
                     <h:form>
-                        <h3>Lista de Eventos Padrões do Funcionário</h3>
+                        <h3>Lista de Eventos Padrões do Colaborador ${funcionarioBean.pessoa.pes_nome}</h3>
 
                         <div class="btns-top-table">
-                            <h:link outcome="eventopadfrm" styleClass="btn btn-success">
+<!--                            <h:link outcome="eventopadfrm" styleClass="btn btn-success">
                                 <i class="fa fa-plus"></i> Inserir Evento Padrão
-                            </h:link>
+                            </h:link>-->
+                             <h:link outcome="eventopadfrm" value="Adicionar Evento Padrão" styleClass="btn btn-success">
+                                 <f:param name="idPessoa" value="${funcionarioBean.pessoa.pes_codigo}"/>
+                                    <i class="fa fa-plus"></i> 
+                                </h:link>
+
                         </div>
 
                         <h:dataTable id="tblEvent" value="${funcionarioBean.eventosPadroes}" var="item"  styleClass="dataTable table table-bordered table-striped">
