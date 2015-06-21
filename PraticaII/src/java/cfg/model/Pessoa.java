@@ -1,5 +1,6 @@
 package cfg.model;
 
+import csb.model.Cargo;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -53,6 +54,10 @@ public class Pessoa implements Serializable {
     @ManyToMany
     @JoinTable(name = "trd_instrutores_treinamento")
     private List<Treinamento> treinamentos;
+    
+    @ManyToMany
+    @JoinTable(name = "car_codigo")
+    private List<Cargo> cargos;
 
     @OneToOne(optional = true, mappedBy = "pessoa") //atributo na classe Usuario que faz o mapeamento
     private Usuario usuario;

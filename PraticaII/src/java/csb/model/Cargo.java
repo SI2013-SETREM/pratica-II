@@ -1,6 +1,7 @@
 package csb.model;
 
 import ad.model.Competencia;
+import cfg.model.Pessoa;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
@@ -71,6 +72,14 @@ public class Cargo implements Serializable, Comparable<Cargo> {
             }
     )
     private List<Epi> Epis;
+    
+    @ManyToMany
+    @JoinTable(name = "csb_episetor")
+    private List<Epi> epis;
+    
+    @ManyToMany
+    @JoinTable(name = "pes_codigo")
+    private List<Pessoa> pessoas;
 
     @ManyToMany
     @JoinTable(name = "csb_beneficios_cargo",

@@ -64,5 +64,4 @@ public class RecrutamentoCargoDAO {
         Query q = session.createQuery("from RecrutamentoCargo");
         return q.list();
     }
-
 }

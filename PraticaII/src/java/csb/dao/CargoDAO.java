@@ -86,5 +86,4 @@ public class CargoDAO {
         }
         return session.createQuery("from Cargo where 1 = 1 " + sqlCargo).list();
     }
-
 }
