@@ -31,6 +31,21 @@ public class CursosPessoaBean {
 
     private Pessoa pessoa = new Pessoa();
     private PessoaDAO pessoadao = new PessoaDAO();
+    
+    private Curso curso = new Curso();
+
+    public Curso getCurso() {
+        return curso;
+    }
+
+    public void setCurso(Curso curso) {
+        this.curso = curso;
+    }
+    private CursoDAO cursodao = new CursoDAO();
+
+    private CursosPessoa cursos_pessoa = new CursosPessoa();
+    private CursosPessoaDAO dao = new CursosPessoaDAO();
+    private DataModel cursos_pessoas;
 
     public List<Empresa> getLstempresa() {
         lstempresa = empresadao.findAll();
@@ -57,12 +72,6 @@ public class CursosPessoaBean {
     public void setLstcurso(List<Curso> lstcurso) {
         this.lstcurso = lstcurso;
     }
-    private Curso curso = new Curso();
-    private CursoDAO cursodao = new CursoDAO();
-
-    private CursosPessoa cursos_pessoa = new CursosPessoa();
-    private CursosPessoaDAO dao = new CursosPessoaDAO();
-    private DataModel cursos_pessoas;
 
     public String getsTitle() {
         return sTitle;
@@ -110,9 +119,9 @@ public class CursosPessoaBean {
     }
     
     public String salvar() {
-        if (cursos_pessoa.getCurso().getCur_codigo() > 0)
-            dao.update(cursos_pessoa);
-        else 
+        //if (cursos_pessoa.getCurso().getCur_codigo() > 0)
+       //     dao.update(cursos_pessoa);
+       // else 
             dao.insert(cursos_pessoa);
         
         return "cursospessoalst";

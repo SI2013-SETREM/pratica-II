@@ -24,22 +24,26 @@ public class CursosPessoa implements Serializable {
     @SequenceGenerator(name="trd_cursos_pessoa_pk_sequence", sequenceName="trd_cursos_pessoa_id_seq")
     @GeneratedValue(strategy=GenerationType.AUTO, generator="trd_cursos_pessoa_pk_sequence")
     
+
     private String crp_descricao;
     private int crp_carga_horaria;
     private Date crp_data_inicio;
     private Date crp_data_fim;
     private Date crp_data_validade;
     private boolean crp_status_validade;
-    @ManyToOne
-    @JoinColumn(name = "codigo_curso")
-    private Curso curso;
     
     @ManyToOne
     @JoinColumn(name = "pes_codigo")
     private Pessoa pessoa;
+    
+    @ManyToOne
+    @JoinColumn(name = "cur_codigo")
+    private Curso curso;
+     
     @ManyToOne
     @JoinColumn(name = "emp_codigo")
     private Empresa empresa;
+
 
     public Pessoa getPessoa() {
         return pessoa;
@@ -70,7 +74,7 @@ public class CursosPessoa implements Serializable {
         return crp_descricao;
     }
 
-    public void setCrp_observacao(String crp_descricao) {
+    public void setCrp_descricao(String crp_descricao) {
         this.crp_descricao = crp_descricao;
     }
 

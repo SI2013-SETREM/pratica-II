@@ -14,7 +14,7 @@ public class InstrutoresTreinamento implements Serializable{
     
     @Id
     @ManyToOne
-    @JoinColumn(name = "pes_codigo", referencedColumnName = "pes_codigo")
+    @JoinColumn(name = "pes_codigo", referencedColumnName = "pes_codigo") 
     private Pessoa pessoa;
 
     @Id

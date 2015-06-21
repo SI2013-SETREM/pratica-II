@@ -38,7 +38,7 @@ public class CursosPessoaDAO {
     }
 
     public List<CursosPessoa> findAll() {
-        Query q = session.createQuery("from Cursos_pessoa");
+        Query q = session.createQuery("from CursosPessoa");
         return q.list();
     }
 }
