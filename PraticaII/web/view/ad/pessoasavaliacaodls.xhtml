@@ -10,6 +10,8 @@
     </ui:define>
 
     <ui:define name="breadcrumb">
+        <li><h:link value="#{perguntaPessoaAvaliacaoBean.getpTitle()}" outcome="/faces/view/ad/pessoasavaliacaolst" /></li>
+        <li><h:link value="${perguntaPessoaAvaliacaoBean.getsTitle()}"/></li>
     </ui:define>
 
     <ui:define name="header">
@@ -48,61 +50,90 @@
                         </div>
                     </div>
                     <div class="col-xs-12">
+                        <label style="font-size: 20px;">Dados dos resultados da Avaliação '#{perguntaPessoaAvaliacaoBean.avaliacao.ava_nome}'</label>
                         <ui:repeat value="#{perguntaPessoaAvaliacaoBean.lsRespostasDetail}" var="item"  varStatus="loop">
-                            <ui:repeat value="#{perguntaPessoaAvaliacaoBean.DadosPessoa(item.pergunta.prgCodigo)}" var="per" varStatus="i"></ui:repeat>
-                            <!--                        <ui:repeat value="{pessoasAvaliacaoBean.pessoas_avaliacao.avaliacao.getQuestionario().getPerguntas()}" var="item"  varStatus="loop">-->
-                            <div class="form-group list-group-item" >
-                                <script>
-                                    $(function () {
-                                        $(document).ready(function () {
-                                            // Build the chart
-                                            $('#per_#{loop.index}').highcharts({
-                                                chart: {
-                                                    plotBackgroundColor: null,
-                                                    plotBorderWidth: null,
-                                                    plotShadow: false
-                                                },
-                                                title: {
-                                                    text: '#{item.pergunta.prgPergunta}'
-                                                },
-                                                tooltip: {
-                                                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                                                },
-                                                plotOptions: {
-                                                    pie: {
-                                                        allowPointSelect: true,
-                                                        cursor: 'pointer',
-                                                        dataLabels: {
-                                                            enabled: false
-                                                        },
-                                                        showInLegend: true
-                                                    }
-                                                },
-                                                series: [{
-                                                        type: 'pie',
-                                                        name: 'Browser share',
-                                                        data: [
-                                                            ['Firefox', 45.0],
-                                                            ['IE', 26.8],
-                                                            {
-                                                                name: 'Chrome',
-                                                                y: 12.8,
-                                                                sliced: true,
-                                                                selected: true
+                            <h:panelGroup rendered="#{item.pergunta.prgTipo == 1}">
+                                <div class="form-group list-group-item" >
+                                    <div class="row">
+                                        <h:outputLabel value="#{loop.index + 1}. #{item.ppa_pergunta}" styleClass="col-md-12"/>
+                                        <ui:repeat value="#{perguntaPessoaAvaliacaoBean.lsRespostasDetail}" var="item2" varStatus="index">
+                                            <h:panelGroup  rendered="#{item2.pergunta.prgCodigo == item.pergunta.prgCodigo}" >
+                                                <h:outputLabel value="#{index.index + 1}) [Nota: #{item2.ppa_pontuacao}]" styleClass="col-md-2" style="text-align:  right;"/>
+                                                <h:outputText value=" #{item.ppa_resposta}" styleClass="col-md-10"/>
+                                            </h:panelGroup>
+                                        </ui:repeat>
+                                    </div>
+                                </div>
+                            </h:panelGroup>
+                            
+                            <h:panelGroup rendered="#{item.pergunta.prgTipo == 2}">
+                                <div style="display: none" id="dados_grafico_#{item.pergunta.prgCodigo}">
+                                    <ui:repeat value="#{item.pergunta.perguntaOpcoes}" var="opt" varStatus="index">
+                                        <div class="OPT">
+                                            <input type="hidden" class="NOME" value="#{opt.getOpcNome()}"/>
+                                            <input type="hidden" class="PONTO" value="#{opt.getOpcPontuacao()}"/>
+                                        </div>
+                                    </ui:repeat>
+                                </div>
+                                <div class="form-group list-group-item" >
+                                    <script>
+                                        $(function () {
+                                            var list = new Array;
+                                            $('#dados_grafico_#{item.pergunta.prgCodigo} > .OPT').each(function (item) {
+                                                list.push([$(this).find('.NOME').val(), parseFloat($(this).find('.PONTO').val())]);
+                                            });
+                                            console.log(list);
+                                            $(document).ready(function () {
+                                                // Build the chart
+                                                $('#per_#{loop.index}').highcharts({
+                                                    chart: {
+                                                        plotBackgroundColor: null,
+                                                        plotBorderWidth: null,
+                                                        plotShadow: false
+                                                    },
+                                                    title: {
+                                                        text: '#{item.ppa_pergunta}'
+                                                    },
+                                                    tooltip: {
+                                                        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                                                    },
+                                                    plotOptions: {
+                                                        pie: {
+                                                            allowPointSelect: true,
+                                                            cursor: 'pointer',
+                                                            dataLabels: {
+                                                                enabled: false
                                                             },
-                                                            ['Safari', 8.5],
-                                                            ['Opera', 6.2],
-                                                            ['Others', 0.7],
-                                                        ]
-                                                    }]
+                                                            showInLegend: true
+                                                        }
+                                                    },
+                                                    series: [{
+                                                            type: 'pie',
+                                                            name: 'Browser share',
+                                                            data: list,
+//                                                            [
+//                                                                ['Firefox', 45.0],
+//                                                                ['IE', 26.8],
+//                                                                {
+//                                                                    name: 'Chrome',
+//                                                                    y: 12.8,
+//                                                                    sliced: true,
+//                                                                    selected: true
+//                                                                },
+//                                                                ['Safari', 8.5],
+//                                                                ['Opera', 6.2],
+//                                                                ['Others', 0.7],
+//                                                            ]
+                                                        }]
+                                                });
                                             });
                                         });
-
-                                    });
-                                </script>
-                                <div id="per_#{loop.index}" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
-                            </div>
+                                    </script>
+                                    <div id="per_#{loop.index}" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+                                </div>
+                            </h:panelGroup>
                         </ui:repeat>
+
                     </div>
                 </div>
 

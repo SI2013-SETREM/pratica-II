@@ -16,17 +16,22 @@
     </ui:define>
 
     <ui:define name="main-content">
-        <script>
-//            $(function () {
-//                $('.autoAva [type=checkbox]').change(function () {
-//                    if ($(this).is(':checked')) {
-//                        $('.avaliadores').slideUp();
-//                    } else {
-//                        $('.avaliadores').slideDown();
-//                    }
-//                });
-//            });
-        </script>
+<!--        <script>
+            $(function () {
+                var Bsubmit = false;
+                $('form').submit(function (e) {
+                    if (!Bsubmit) {
+                        e.preventDefault();
+                        bootbox.confirm('Deseja realmente salvar a avaliação? Não poderá mais editar as listas de avaliadores e avaliados futuramente!', function (item) {
+                            if (item) {
+                                Bsubmit = true;
+                                $('form').submit();
+                            }
+                        });
+                    }
+                });
+            });
+        </script>-->
         <style>
             .autocomplete ul, .calendar input {
                 width: 100%;
@@ -212,7 +217,7 @@
                     <div class="form-group">
                         <div class="col-md-offset-1 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
                             <h:link styleClass="btn btn-default" value="Cancelar" outcome="#{avaliacaoBean.listar()}" />
-                            <h:commandButton styleClass="btn btn-primary" value="Salvar e Avançar" action="#{avaliacaoBean.salvar()}" onclick="return confirm('Deseja realmente salvar a ${avaliacaoBean.getsTitle()}? Não poderá mais editar as listas de avaliadores e avaliados.');"></h:commandButton>
+                            <h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{avaliacaoBean.salvar()}" onclick="return confirm('Deseja realmente salvar a ${avaliacaoBean.getsTitle()}? Não poderá mais editar as listas de avaliadores e avaliados futuramente!');"/>
                         </div>
                     </div>
                 </h:form>

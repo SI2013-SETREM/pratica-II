@@ -5,17 +5,18 @@ import ad.model.Avaliacao;
 import ad.model.PessoasAvaliacao;
 import cfg.controller.LoginBean;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import util.Utilidades;
 
 @ManagedBean
+@SessionScoped
 public class PessoasAvaliacaoBean {
 
-//    @ManagedProperty("#{loginBean}")
-//    private LoginBean loginBean;
     private final String sTitle = PessoasAvaliacao.getsTitle();
     private final String pTitle = PessoasAvaliacao.getpTitle();
 
@@ -23,12 +24,12 @@ public class PessoasAvaliacaoBean {
     private PessoasAvaliacaoDAO dao = new PessoasAvaliacaoDAO();
     private DataModel pessoas_avaliacoes;
     private DataModel avaliacoes;
-    private LoginBean loginB = (LoginBean) Utilidades.getSessionObject("loginBean");
     private int userId = UserCod();
     private List<PessoasAvaliacao> lsPessoasAvaliacao;
     private int idAvaliacao;
 
     private int UserCod() {
+        LoginBean loginB = (LoginBean) Utilidades.getSessionObject("loginBean");
         if (loginB != null && loginB.getUsuario() != null && loginB.getUsuario().getPessoa() != null) {
             return loginB.getUsuario().getPessoa().getPes_codigo();
         } else {
@@ -44,11 +45,11 @@ public class PessoasAvaliacaoBean {
     }
 
     public DataModel getAvaliacoes() {
-        List<PessoasAvaliacao> lsAvaliacaoPessoas = dao.GetListPessoasAvaliacao(0, 0, userId, true);
+        List<PessoasAvaliacao> lsAvaliacaoPessoas = dao.GetListPessoasAvaliacao(0, 0, userId, true, false);
         List<Avaliacao> lsAvaliacao = new ArrayList<>();
         List<Integer> lsCod = new ArrayList<>();
         for (PessoasAvaliacao pa : lsAvaliacaoPessoas) {
-            if (!lsCod.contains(pa.getAvaliacao().getAva_codigo())) {
+            if (!lsCod.contains(pa.getAvaliacao().getAva_codigo()) && pa.getAvaliacao().getAva_status() == 2) {
                 lsCod.add(pa.getAvaliacao().getAva_codigo());
                 lsAvaliacao.add(pa.getAvaliacao());
             }
@@ -114,14 +115,14 @@ public class PessoasAvaliacaoBean {
 
     ///---------------------------------- MApear
     public List<PessoasAvaliacao> GetListPessoasAvaliacao(int ava_id, int pes_codigo, int pes_codigo_avaliador) {
-        lsPessoasAvaliacao = dao.GetListPessoasAvaliacao(ava_id, pes_codigo, pes_codigo_avaliador, false);
+        lsPessoasAvaliacao = dao.GetListPessoasAvaliacao(ava_id, pes_codigo, pes_codigo_avaliador, false, false);
         return lsPessoasAvaliacao;
     }
 
     public void getListPessoaAvaliacoes() {
         List<Integer> ids = new ArrayList<>();
         List<PessoasAvaliacao> lsPesA = new ArrayList<>();
-        List<PessoasAvaliacao> lsPesA2 = dao.GetListPessoasAvaliacao(idAvaliacao, 0, 0, false);
+        List<PessoasAvaliacao> lsPesA2 = dao.GetListPessoasAvaliacao(idAvaliacao, 0, 0, false, false);
         if (lsPesA2 != null && !lsPesA2.isEmpty()) {
             for (PessoasAvaliacao pessoaA : lsPesA2) {
                 int id = pessoaA.getColaboradorAvaliado().getPes_codigo();
@@ -145,7 +146,7 @@ public class PessoasAvaliacaoBean {
     }
 
     public void getDetails() {
-        this.pessoas_avaliacoes = new ListDataModel(dao.GetListPessoasAvaliacao(idAvaliacao, 0, 0, false));
+        this.pessoas_avaliacoes = new ListDataModel(dao.GetListPessoasAvaliacao(idAvaliacao, 0, 0, false, false));
     }
 
     public String getsTitle() {

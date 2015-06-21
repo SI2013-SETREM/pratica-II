@@ -233,7 +233,7 @@ public class AvaliacaoBean {
 
 //-----------------------MAPEAR
     public String getTaxa(Avaliacao i) {
-        List<PessoasAvaliacao> lsPessoaAvaliacao = pessoaAvaliacaoDAO.GetListPessoasAvaliacao(i.getAva_codigo(), 0, 0, false);
+        List<PessoasAvaliacao> lsPessoaAvaliacao = pessoaAvaliacaoDAO.GetListPessoasAvaliacao(i.getAva_codigo(), 0, 0, false, false);
         if (lsPessoaAvaliacao != null && !lsPessoaAvaliacao.isEmpty()) {
             int sizeAll = lsPessoaAvaliacao.size();
             int size = 0;
@@ -275,11 +275,11 @@ public class AvaliacaoBean {
             lsPessoaColaborador = new ArrayList<>();
         }
         if (lsCargoColaborador.isEmpty() && lsPessoaColaborador.isEmpty()) {//Não pode ter uma lista vazia de colaboradores
-            ErroMsg = "Os colaboradores são obrigatórios! Selecione um cargo ou uma pessoa pelo menos";
+            ErroMsg = "Os colaboradores são obrigatórios! Selecione um cargo ou uma pessoa ao menos!";
             return false;
         }
         if (!bautoava && lsCargoAvaliador.isEmpty() && lsPessoaAvaliador.isEmpty()) {//Se não é autoavaliação não podem faltar os avaliadores
-            ErroMsg = "Os avaliadores são obrigatórios quando não tem auto avaliação! Selecione um cargo ou uma pessoa pelo menos";
+            ErroMsg = "Os avaliadores são obrigatórios quando não tem auto avaliação! Selecione um cargo ou uma pessoa ao menos!";
             return false;
         }
         return true;

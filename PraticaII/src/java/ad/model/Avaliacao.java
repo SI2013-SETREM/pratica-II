@@ -40,7 +40,7 @@ public class Avaliacao implements Serializable {
     private String ava_observacao;
 //    @Temporal(javax.persistence.TemporalType.DATE)
     private Date ava_dataFinal;
-    
+
     public Avaliacao() {
     }
 
@@ -117,18 +117,19 @@ public class Avaliacao implements Serializable {
     }
 
     public String getStatus() {
-        if (ava_status == 1) {
-            return "Aguardando Início";
-        } else if (ava_status == 2) {
-            return "Em Andamento";
-        } else if (ava_status == 3) {
-            return "Concluída";
-        } else if (ava_status == 4) {
-            return "Cancelada";
-        } else if (ava_status == 5) {
-            return "Deletada";
-        } else {
-            return "Nenhum";
+        switch (ava_status) {
+            case 1:
+                return "Aguardando Início";
+            case 2:
+                return "Em Andamento";
+            case 3:
+                return "Concluída";
+            case 4:
+                return "Cancelada";
+            case 5:
+                return "Deletada";
+            default:
+                return "Nenhum";
         }
     }
 }

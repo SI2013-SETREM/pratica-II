@@ -1,6 +1,7 @@
 package ad.dao;
 
 import ad.model.PessoasAvaliacao;
+import java.util.Date;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -43,7 +44,7 @@ public class PessoasAvaliacaoDAO {
     }
 
 ////------MApear    
-    public List<PessoasAvaliacao> GetListPessoasAvaliacao(int ava_codigo, int pes_codigo, int pes_codigo_avaliador, boolean mediaNull) {
+    public List<PessoasAvaliacao> GetListPessoasAvaliacao(int ava_codigo, int pes_codigo, int pes_codigo_avaliador, boolean mediaNull, boolean BFilterDate) {
         String sql = "";
         if (ava_codigo != 0) {
             sql += " and ava_codigo = " + ava_codigo;
@@ -57,6 +58,9 @@ public class PessoasAvaliacaoDAO {
         if (mediaNull) {
             //sql += " and pea_media is null";
             sql += " and pea_media = 0";
+        }
+        if (BFilterDate) {
+            sql += " and (ava_dataInicial >= " + new Date() + " and ava_dataFinal <= " + new Date() + ")";
         }
         Query q = session.createQuery(" from PessoasAvaliacao where 1=1 " + sql);
         return q.list();
