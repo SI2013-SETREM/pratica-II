@@ -21,8 +21,9 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import rs.dao.QuestionarioDAO;
 import rs.model.Questionario;
-import td.dao.TreinamentoDAO;
-import td.model.Treinamento;
+import td.dao.TurmaDAO;
+import td.model.Turma;
+import td.model.Turma;
 
 @ManagedBean
 public class AvaliacaoBean {
@@ -43,7 +44,7 @@ public class AvaliacaoBean {
     private PessoaDAO pessoadao = new PessoaDAO();
     private List<AvaliacaoPessoaCargo> lsAvPesCargo;
     private int idTtreino;
-    private TreinamentoDAO treinoDAO = new TreinamentoDAO();
+    private TurmaDAO treinoDAO = new TurmaDAO();
 
     private Avaliacao avaliacao;
     private AvaliacaoDAO dao = new AvaliacaoDAO();
@@ -55,11 +56,11 @@ public class AvaliacaoBean {
     private List<AvaliacaoPessoaCargo> lsAvaliacaoPessoaCargo;
     private List<PessoasAvaliacao> lsPessoasAvaliacao;///Lista de PessoasAvaliação
 
-    public void AvaliacaoTreinamento(int id) {
+    public void AvaliacaoTurma(int id) {
         idTtreino = id;
-        Treinamento treino = treinoDAO.findById(idTtreino);
-        avaliacao.setTreinamento(treino);
-        Title = "Dados do Treinamento " + treino.getTre_descricao();
+        Turma treino = treinoDAO.findById(idTtreino);
+        avaliacao.setTurma(treino);
+        Title = "Dados do Turma do " + treino.getTreinamento().getTre_descricao();
     }
 
     public AvaliacaoBean() {

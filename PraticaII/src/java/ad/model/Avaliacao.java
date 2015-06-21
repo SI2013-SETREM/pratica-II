@@ -13,6 +13,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import rs.model.Questionario;
 import td.model.Treinamento;
+import td.model.Turma;
 
 @Entity
 @Table(name = "avd_avaliacao")
@@ -26,8 +27,8 @@ public class Avaliacao implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "avaliacao_pk_sequence")
     private int ava_codigo;
     @ManyToOne
-    @JoinColumn(name = "tre_codigo", referencedColumnName = "tre_codigo")
-    private Treinamento treinamento;
+    @JoinColumn(name = "tur_codigo", referencedColumnName = "tur_codigo")
+    private Turma turma;
 
     @ManyToOne
     @JoinColumn(name = "qst_codigo", referencedColumnName = "qst_codigo")
@@ -52,12 +53,12 @@ public class Avaliacao implements Serializable {
         this.ava_codigo = ava_codigo;
     }
 
-    public Treinamento getTreinamento() {
-        return treinamento;
+    public Turma getTurma() {
+        return turma;
     }
 
-    public void setTreinamento(Treinamento treinamento) {
-        this.treinamento = treinamento;
+    public void setTurma(Turma turma) {
+        this.turma = turma;
     }
 
     public Questionario getQuestionario() {
