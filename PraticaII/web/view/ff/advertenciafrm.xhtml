@@ -10,14 +10,22 @@
     <ui:define name="title">
         Advertência
     </ui:define>
+    <ui:define name="header">
+        <script type="text/javascript">
+            $(function () {
+                var url = document.URL;
+
+            });
+        </script>
+    </ui:define>
 
     <ui:define name="breadcrumb">
         <f:metadata>
             <f:viewParam name="id" value="${advertenciaBean.idPessoa}"/>          
         </f:metadata>
-        <f:event listener="${advertenciaBean}" type="preRenderComponent"/>
+        <f:event listener="${advertenciaBean.inicia()}" type="preRenderComponent"/>
         <li>Cadastro de Advertêcia </li>
-        
+
 
     </ui:define>
 
@@ -39,8 +47,9 @@
                         </div>
                         <h:outputLabel value="Nome do Aplicador:" for="idiAvaliador" styleClass="control-label col-sm-2 " />
                         <div class="col-md-4 col-xs-12 autocomplete">
-                            <p:autoComplete pt:disabled="#{avaliacaoBean.avaliacao.ava_codigo > 0}" id="cargo1" multiple="true" completeMethod="#{advertenciaBean.completePessoa}" value="#{advertenciaBean.pesAplicador}"
-                                            var="pessoa" itemLabel="#{pessoa.pes_nome}" itemValue="#{pessoa}" converter="pessoaConverter" forceSelection="true">
+
+                            <p:autoComplete  id="cargo1" multiple="false" completeMethod="#{advertenciaBean.completePessoa}" value="#{advertenciaBean.pesAplicador}"
+                                             var="pessoa" itemLabel="#{pessoa.pes_nome}" itemValue="#{pessoa}" converter="pessoaConverter" forceSelection="true">
                                 <p:column>
                                     <h:outputText value="#{pessoa.pes_nome}" />
                                 </p:column>

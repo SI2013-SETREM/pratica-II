@@ -10,6 +10,16 @@
     <ui:define name="title">
         Ferias
     </ui:define>
+     <ui:define name="header">
+        <script type="text/javascript">
+            $(function () {
+                function verifica(){
+                    alert("Tem certeza que deseja salvar!")
+                }
+
+            });
+        </script>
+    </ui:define>
 
     <ui:define name="breadcrumb">
         <f:metadata>
@@ -61,7 +71,7 @@
                     <div class="form-group">
                         <div class="col-md-offset-9 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
                             <h:link styleClass="btn btn-default" value="Cancelar" outcome="${feriasBean.cancelar()}"  />
-                            <h:commandButton styleClass="btn btn-primary" value="Salvar" action="${feriasBean.insert()}"   ></h:commandButton>
+                            <h:commandButton styleClass="btn btn-primary" value="Salvar" action="${feriasBean.insert()}"  onclick="verifica()" ></h:commandButton>
                         </div>
                     </div>
                 </h:form>

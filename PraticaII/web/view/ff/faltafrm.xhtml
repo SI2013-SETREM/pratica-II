@@ -29,8 +29,7 @@
             <f:view>
                 <h:form styleClass="form-horizontal">
                     <h:inputHidden id="faltCodigo" value="#{faltaBean.falta.flt_codigo}" />
-                    <h:inputText id="PessoaCodigo" value="#{faltaBean.falta.pessoa.pes_codigo}" />
-                    
+                                    
 
                     <div class="form-group">
 
@@ -56,7 +55,7 @@
                             <h:inputText pt:autofocus="" pt:required="required" id="idiHoras" value="${faltaBean.falta.flt_qtd_horas}" title="Quantidade de Horas" styleClass="form-control" />
                         </div>
                     </div>
-                    <div class="form-group" onclick="alert('shauhsuahsuahsuahsuhaushuas')">
+                    <div class="form-group">
                         <h:outputLabel value="Justificativa:" for="idiJustific" styleClass="control-label col-sm-2" />
                         <div class="col-md-5 col-sm-12">
                             <h:inputText pt:autofocus=""  id="idiJust" value="${faltaBean.falta.flt_justificativa}" title="Justificativa da Falta" styleClass="form-control" />
@@ -65,7 +64,7 @@
                     <div class="form-group">
                         <div class="col-md-offset-9 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
                             <h:link styleClass="btn btn-default" value="Cancelar"  />
-                            <h:commandButton styleClass="btn btn-primary" value="Salvar" action="${faltaBean.insert()}"  ></h:commandButton>
+                            <h:commandButton styleClass="btn btn-primary" value="Salvar" action="${faltaBean.insert()}" onclick=""  ></h:commandButton>
                         </div>
                     </div>
                 </h:form>
