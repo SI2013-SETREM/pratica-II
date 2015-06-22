@@ -1,11 +1,14 @@
 package csb.dao;
 
 import csb.model.Salario;
+import fp.model.Evento;
 import java.util.Date;
 import java.util.List;
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 import util.HibernateUtil;
 
 public class SalarioDAO
@@ -80,5 +83,16 @@ public class SalarioDAO
      public List<Salario> findBySalPessoaId(int pes_codigo) {
         Query q = session.createQuery("from Salario where pes_codigo = :pes_codigo");
         return q.setParameter("pes_codigo", pes_codigo).list();
+    }
+//      public Salario SalPessoaId(int pes_codigo) {
+//        Query q = session.createQuery("from Salario where pes_codigo = :pes_codigo");
+//        return (Salario) q.setParameter("pes_codigo", pes_codigo).list();
+//    }
+       public List<Salario> SalPessoaId(int pes_codigo) {
+        Criteria crit = session.createCriteria(Salario.class);
+        crit.add(Restrictions.eq("pes_codigo", pes_codigo));
+        List results = crit.list();
+
+        return  crit.list();
     }
 }
