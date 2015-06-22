@@ -21,12 +21,11 @@ import javax.servlet.http.HttpServletRequest;
 @SessionScoped
 public class FeriasBean {
 
-   
     private Pessoa pessoa = new Pessoa();
     private PessoaDAO pessoaDAO = new PessoaDAO();
     private DataModel<Pessoa> pessoas;
     private int idPessoa;
-    
+
     private final FeriasDAO feriasDAO = new FeriasDAO();
     private Ferias ferias = new Ferias();
 
@@ -34,9 +33,10 @@ public class FeriasBean {
     }
 
     public String inicio() {
-       this.pessoas = new ListDataModel<>(pessoaDAO.findByPessoaId(getIdPessoa()));
+        this.pessoas = new ListDataModel<>(pessoaDAO.findByPessoaId(getIdPessoa()));
         pessoa = pessoas.getRowData();
         pessoa = pessoaDAO.findById(pessoa.getPes_codigo());
+        ferias.setPessoa(pessoa);
         return "faltafrm";
     }
 
@@ -44,7 +44,8 @@ public class FeriasBean {
         feriasDAO.insert(ferias);
         return "fichafunfrm";
     }
-    public String cancelar() {  
+
+    public String cancelar() {
         return "fichafunfrm";
     }
 
@@ -72,7 +73,6 @@ public class FeriasBean {
         this.pessoas = pessoas;
     }
 
-
     public Ferias getFerias() {
         return ferias;
     }
@@ -89,5 +89,4 @@ public class FeriasBean {
         this.idPessoa = idPessoa;
     }
 
- 
 }

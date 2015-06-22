@@ -39,7 +39,8 @@ public class FaltaBean {
 
     public String insert() {
         faltaDAO.insert(falta);
-        return "fichafunfrm";
+        falta = new Falta();
+        return "fichafunlst";
     }
 
     public String editar() {

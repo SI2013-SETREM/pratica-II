@@ -18,7 +18,7 @@ import javax.faces.model.ListDataModel;
 import javax.servlet.http.HttpServletRequest;
 
 @ManagedBean
-@SessionScoped
+
 public class AdvertenciaBean {
     
     private AdvertenciaDAO advertenciaDAO = new AdvertenciaDAO();
