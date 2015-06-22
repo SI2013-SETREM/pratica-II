@@ -58,6 +58,7 @@
                                     <h:outputText value="Folha de Pagamento"/>
                                 </f:facet>
                                 <h:commandLink title="Visualalizar Fichafuncional" action="#{funcionarioBean.select2()}" >
+                                    <f:param name="id" value="${item.pes_codigo}"></f:param> 
                                     <i class="fa fa-file-text-o"></i> Gerar
                                 </h:commandLink>
                             </h:column>
