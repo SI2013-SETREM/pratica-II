@@ -23,7 +23,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "ffp_evento")
 public class Evento implements Serializable {
-    
+
     public static final String sTitle = "Evento";
     public static final String pTitle = "Eventos";
 
@@ -38,7 +38,10 @@ public class Evento implements Serializable {
     private boolean eve_tributar_inss;
     private boolean eve_tributar_fgts;
     private boolean eve_calcular_media_agregada13;
-    
+//    private boolean eve_acumular_horas_n;
+//    private boolean eve_acumular_rais_base;
+//    private boolean eve_acumular_rais_horas;
+//    private boolean eve_horas_dias;
     @ManyToOne
     @JoinColumn(name = "tbs_codigo", referencedColumnName = "tbs_codigo")
     private TabelaINSS tabelainss;
@@ -57,7 +60,6 @@ public class Evento implements Serializable {
     @ManyToOne
     @JoinColumn(name = "ben_codigo", referencedColumnName = "ben_codigo")
     private Beneficio beneficio;
-    
 
     public int getEve_codigo() {
         return eve_codigo;
@@ -170,5 +172,8 @@ public class Evento implements Serializable {
     public void setBeneficio(Beneficio beneficio) {
         this.beneficio = beneficio;
     }
+
+  
+
 
 }

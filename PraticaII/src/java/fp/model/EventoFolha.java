@@ -1,4 +1,3 @@
-
 package fp.model;
 
 import java.io.Serializable;
@@ -16,28 +15,28 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "ffp_evento_folha")
 public class EventoFolha implements Serializable {
+
     @Id
     @ManyToOne
+    @JoinColumn(name = "eve_codigo", referencedColumnName = "eve_codigo")
     private Evento eve_evento;
     @Id
     @ManyToOne
-    @JoinColumn(name="hif_codigo", referencedColumnName ="hif_codigo")
+    @JoinColumn(name = "hif_codigo", referencedColumnName = "hif_codigo")
     private HistoricoFolha historicoFolha;
     private double evf_valor;
     private String evf_indice;
     private boolean evf_imprimir;
     private String evf_descricao;
-    
+
     private int evf_serv_codigo;
- 
+
     private int evf_tpe_codigo;
-    
+
     private int evf_ben_codigo;
     private int evf_for_godigo;
     private int evf_tif_codigo;
     private int evs_tbs_codigo;
-
-
 
     public double getEvf_valor() {
         return evf_valor;
@@ -135,7 +134,4 @@ public class EventoFolha implements Serializable {
         this.historicoFolha = historicoFolha;
     }
 
-    
-    
-    
 }

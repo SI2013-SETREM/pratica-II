@@ -54,8 +54,8 @@ public class FeriasDAO {
 
 
       public List<Ferias> findById(int ffu_codigo) {
-        Query q = session.createQuery("from Ferias where ffu_codigo = :ffu_codigo");
-        return q.setParameter("ffu_codigo", ffu_codigo).list();
+        Query q = session.createQuery("from Ferias where pes_codigo = :pes_codigo");
+        return q.setParameter("pes_codigo", ffu_codigo).list();
        
     }
     

@@ -65,8 +65,8 @@ public class FaltaDAO {
     }
      public List<Falta> findFaltas(int id) {
 
-        Query q = session.createQuery("from Falta where ffu_codigo = :ffu_codigo");
-        return q.setParameter("ffu_codigo", id).list();
+        Query q = session.createQuery("from Falta where pes_codigo = :pes_codigo");
+        return q.setParameter("pes_codigo", id).list();
 
     }
     

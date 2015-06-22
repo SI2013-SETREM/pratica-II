@@ -4,11 +4,13 @@ package fp.dao;
 
 import fp.model.HistoricoFolha;
 import java.util.List;
+import org.hibernate.Criteria;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
 
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 import util.HibernateUtil;
 
 /**
@@ -45,6 +47,15 @@ public class HistoricoFolhaDAO {
         Query query = session.createQuery("from HistoricoFolha");
         return query.list();
 
+    }
+  
+       public List<HistoricoFolha> historicos(int pes_codigo, int hif_codigo) {
+        Criteria crit = session.createCriteria(HistoricoFolha.class);
+        crit.add(Restrictions.eq("pes_codigo", pes_codigo));
+        crit.add(Restrictions.eq("hif_codigo", hif_codigo));
+        List results = crit.list();
+
+        return  crit.list();
     }
     
 }

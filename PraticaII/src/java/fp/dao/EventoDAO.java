@@ -1,20 +1,19 @@
-
 package fp.dao;
-
 
 import fp.model.Evento;
 import java.util.List;
+import org.hibernate.Criteria;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
 
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 import util.HibernateUtil;
 
 public class EventoDAO {
-    
-    
-     private Session session;
+
+    private Session session;
 
     public EventoDAO() {
 
@@ -54,5 +53,14 @@ public class EventoDAO {
         return query.list();
 
     }
-    
+
+
+    public List<Evento> EventoId(int eve_codigo) {
+        Criteria crit = session.createCriteria(Evento.class);
+        crit.add(Restrictions.eq("eve_codigo", eve_codigo));
+        List results = crit.list();
+
+        return  crit.list();
+    }
+
 }

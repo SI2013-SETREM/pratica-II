@@ -63,5 +63,9 @@ public class AdvertenciaDAO {
         return query.list();
 
     }
+     public List<Advertencia> findByAvertId(int pes_codigo) {
+        Query q = session.createQuery("from Advertencia where pes_codigo = :pes_codigo");
+        return q.setParameter("pes_codigo", pes_codigo).list();
+    }
     
 }
