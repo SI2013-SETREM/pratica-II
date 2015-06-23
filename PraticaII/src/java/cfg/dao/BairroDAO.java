@@ -1,6 +1,5 @@
 
 package cfg.dao;
-
 import cfg.model.Bairro;
 import java.util.List;
 import org.hibernate.Query;
