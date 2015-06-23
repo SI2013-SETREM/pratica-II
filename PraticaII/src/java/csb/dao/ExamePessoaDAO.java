@@ -37,7 +37,7 @@ public class ExamePessoaDAO {
     }
     
     public List<ExamePessoa> findAll() {
-        Query q = session.createQuery("from ExamePessoa");
+        Query q = session.createQuery("from ExamePessoa order by pes_codigo, eps_dataexame asc");
         return q.list();
     }
 }

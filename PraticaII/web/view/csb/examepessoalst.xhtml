@@ -19,7 +19,9 @@
                         var arrayDate = valueDate.split('/');
                         var dataValid = new Date(arrayDate[2] + '-' + arrayDate[1] + '-' + arrayDate[0]);
                         if (dataHoje > dataValid) {
-                            $(".data-valid").eq(i).css( "color", "red" );
+                            if ($(".sit-valid").eq(i).text() === "ATIVO") {
+                                $(".data-valid").eq(i).css("color", "red");
+                            }
                         }
                     }
                 }
@@ -71,7 +73,7 @@
                         <f:facet name="header">
                             <h:outputText value="Situação"/>
                         </f:facet>
-                        <h:outputText value="${item.isEps_situacao() == true ? 'ATIVO' : 'INATIVO' }"/>
+                        <h:outputText styleClass="sit-valid" value="${item.isEps_situacao() == true ? 'ATIVO' : 'INATIVO' }"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">
