@@ -23,8 +23,8 @@ public class Cargo implements Serializable, Comparable<Cargo> {
     public static final String pTitle = "Cargos";
 
     @Id
-    @SequenceGenerator(name = "car_codigo", sequenceName = "car_codigo")
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "car_codigo")
+    @SequenceGenerator(name = "cargo_pk_sequence", sequenceName = "seq_csb_cargo")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "cargo_pk_sequence")
     private int car_codigo;
     private String car_descricao;
     private boolean car_ativo;
@@ -72,10 +72,6 @@ public class Cargo implements Serializable, Comparable<Cargo> {
             }
     )
     private List<Epi> Epis;
-    
-    @ManyToMany
-    @JoinTable(name = "pes_codigo")
-    private List<Pessoa> pessoas;
 
     @ManyToMany
     @JoinTable(name = "csb_beneficios_cargo",
