@@ -3,6 +3,8 @@ package csb.controller;
 import cfg.dao.LogDAO;
 import csb.dao.BeneficioDAO;
 import csb.model.Beneficio;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 
@@ -10,6 +12,9 @@ import javax.faces.model.ListDataModel;
  *
  * @author Juliano Pires
  */
+@ManagedBean
+@RequestScoped
+
 public class BeneficioBean {
 
     private final String sTitle = Beneficio.sTitle;
