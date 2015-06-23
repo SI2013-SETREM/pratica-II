@@ -23,12 +23,7 @@
             </div>
             <h:form>
                 <h:dataTable value="${serieEventoBean.serieEventos}" var="item" rendered="${serieEventoBean.serieEventos.rowAvailable}" styleClass="dataTable table table-bordered table-striped">
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Código"/>
-                        </f:facet>
-                        <h:outputText value="${item.getSev_codigo()}"/>
-                    </h:column>
+                    
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="Nome"/>

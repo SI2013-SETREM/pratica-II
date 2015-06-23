@@ -12,43 +12,42 @@
 
 
     <ui:define name="breadcrumb">
-        <li>Configurações</li>
+        <li>Folha de Pagamento</li>
         <li><h:link value="${faixaINSSBean.getsTitle()}" outcome="/faces/view/fp/tabelainsslst" /></li>
     </ui:define>
 
     <ui:define name="main-content">
         <div class="panel panel-body">
-            <h3><h:outputText value="Dados da ${faixaINSSBean.getsTitle()}"/></h3>
+            <h3><h:outputText value="Cadastro de ${faixaINSSBean.getsTitle()}"/></h3>
             <f:view>
                 <h:form styleClass="form-horizontal">
                     <h:inputHidden id="fxcod" value="#{faixaINSSBean.faixainss.fai_codigo}" />
                     <div class="form-group">
-                        <h:outputLabel value="Salário Inicial" for="tpeNome" styleClass="control-label col-sm-3" />
-                        <div class="col-md-6 col-sm-12">
-                            <h:inputText id="Fxsalin" value="#{faixaINSSBean.faixainss.fai_sal_ini}" title="TpeNome" styleClass="form-control" pt:autofocus="" />
+                        <h:outputLabel value="Salário Inicial:" for="tpeNome" styleClass="control-label col-sm-2" />
+                        <div class="col-xs-3">
+                            <h:inputText pt:type="number" pt:min="1" pt:max="10000" pt:step="0.10" pt:required="required" id="Fxsalin" value="#{faixaINSSBean.faixainss.fai_sal_ini}" title="Salário Inicial" styleClass="form-control" pt:autofocus="" />
                         </div> 
-                    </div>
-                     <div class="form-group">
-                        <h:outputLabel value="Salário Final" for="tpeNome" styleClass="control-label col-sm-3" />
-                        <div class="col-md-6 col-sm-12">
-                            <h:inputText id="Fxsalfin" value="#{faixaINSSBean.faixainss.fai_sal_fin}" title="TpeNome" styleClass="form-control" pt:autofocus="" />
+                   
+                     
+                        <h:outputLabel value="Salário Final:" for="tpeNome" styleClass="control-label col-sm-2" />
+                        <div class="col-xs-3">
+                            <h:inputText pt:type="number" pt:min="1" pt:max="10000" pt:step="0.10" pt:required="required" id="Fxsalfin" value="#{faixaINSSBean.faixainss.fai_sal_fin}" title="Salário Final" styleClass="form-control" pt:autofocus="" />
                         </div> 
                      </div>
                     <div class="form-group">
-                        <h:outputLabel value="Aliquota" for="tpeNome" styleClass="control-label col-sm-3" />
-                        <div class="col-md-6 col-sm-12">
-                            <h:inputText id="Fxali" value="#{faixaINSSBean.faixainss.fai_aliquota}" title="TpeNome" styleClass="form-control" pt:autofocus="" />
+                        <h:outputLabel value="Aliquota:" for="tpeNome" styleClass="control-label col-sm-2" />
+                        <div class="col-xs-3">
+                            <h:inputText pt:type="number" pt:min="0" pt:max="10000" pt:step="0.10" pt:required="required" id="Fxali" value="#{faixaINSSBean.faixainss.fai_aliquota}" title="Alíquota" styleClass="form-control" pt:autofocus="" />
                         </div> 
-                    </div>
-                      <div class="form-group">
-                        <h:outputLabel value="Ab. Imposta de Renda" for="tpeNome" styleClass="control-label col-sm-3" />
-                        <div class="col-md-6 col-sm-12">
-                            <h:inputText id="Fxir" value="#{faixaINSSBean.faixainss.fai_ab_imp_renda}" title="TpeNome" styleClass="form-control" pt:autofocus="" />
+                    
+                        <h:outputLabel value="Abatimento Imp. de Renda:" for="tpeNome" styleClass="control-label col-sm-2" />
+                        <div class="col-xs-3">
+                            <h:inputText pt:type="number" pt:min="0" pt:max="10000" pt:step="0.10" pt:required="required" id="Fxir" value="#{faixaINSSBean.faixainss.fai_ab_imp_renda}" title="Abatimento Imp. de Renda" styleClass="form-control" pt:autofocus="" />
                         </div> 
                       </div>
                     <div class="form-group">
                         <h:outputLabel value="Tabela INSS: " for="tabelainss" styleClass="control-label col-sm-2" />
-                        <div style="padding-top: 5px" class="col-md-6 col-sm-12">
+                        <div style="padding-top: 5px" class="col-md-8 col-sm-12">
                             <h:selectOneMenu value="#{faixaINSSBean.faixainss.tabelainss}" converter="tabelaINSSConverter" id="tabelainss"   class="form-control" pt:autofocus="" >
                                 <f:selectItems value="#{faixaINSSBean.lstTabelaINSS}" var="tabelainss"/>
                             </h:selectOneMenu>

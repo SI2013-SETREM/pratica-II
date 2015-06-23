@@ -6,10 +6,12 @@
                 xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
     <ui:define name="title">
+        
         ${eventoBean.getsTitle()}
     </ui:define>
 
     <ui:define name="breadcrumb">
+        <li>Folha de Pagamento</li>
         <li><h:link value="${eventoBean.getsTitle()}" outcome="/faces/view/fp/eventolst" /></li>
     </ui:define>
 
@@ -34,14 +36,14 @@
 
                     <div class="form-group">
                         <h:outputLabel value="Descrição:" for="eveDescricaoo" styleClass="control-label col-sm-2" />
-                        <div class="col-md-6 col-sm-12">
-                            <h:inputText id="eveDescricao" value="#{eventoBean.evento.eve_descricao}" title="Descrição" styleClass="form-control" pt:autofocus="" />
+                        <div class="col-md-8 col-sm-12">
+                            <h:inputText pt:required="required" id="eveDescricao" value="#{eventoBean.evento.eve_descricao}" title="Descrição" styleClass="form-control" pt:autofocus="" />
                         </div>
                     </div>
                     <div class="form-group">
                         <h:outputLabel value="Índice:" for="eveIndice" styleClass="control-label col-sm-2" />
-                        <div class="col-md-6 col-sm-12">
-                            <h:inputText id="eveIndice" value="#{eventoBean.evento.eve_indice}" title="Índice" styleClass="form-control" pt:autofocus="" />
+                        <div class="col-md-3 col-sm-12">
+                            <h:inputText pt:type="number" pt:min="0" pt:max="100000" pt:step="0.10" pt:required="required" id="eveIndice" value="#{eventoBean.evento.eve_indice}" title="Índice" styleClass="form-control" pt:autofocus="" />
                         </div>
                     </div>
    
@@ -104,28 +106,28 @@
                     <div class="eventoSit col-md-10">
 
                         <div class="form-group">
-                            <h:outputLabel value="Imprimir:" for="eveimp" styleClass="control-label col-sm-4" />
+                            <h:outputLabel value="Imprimir:" for="eveimp" styleClass="control-label col-sm-2" />
                             <div class="col-md-2 col-sm-4">
                                 <h:selectBooleanCheckbox id="eveimp" value="#{eventoBean.evento.eve_imprimir}" title="1" pt:autofocus="" />
                             </div>
-                            <h:outputLabel value="Tributar FGTS:" for="evetfgts" styleClass="control-label col-sm-3" />
-                            <div class="col-md-2 col-sm-4">
+                            <h:outputLabel value="Tributar FGTS:" for="evetfgts" styleClass="control-label col-sm-2" />
+                            <div class="col-md-1 col-sm-4">
                                 <h:selectBooleanCheckbox id="evetfgts" value="#{eventoBean.evento.eve_tributar_fgts}" title="1" pt:autofocus="" />
                             </div>
-                            <h:outputLabel value="Agregar 13º:" for="eveagr" styleClass="control-label col-sm-4" />
-                            <div class="col-md-2 col-sm-4">
+                            <h:outputLabel value="Agregar 13º:" for="eveagr" styleClass="control-label col-sm-2" />
+                            <div class="col-md-1 col-sm-4">
                                 <h:selectBooleanCheckbox id="eveagre13" value="#{eventoBean.evento.eve_calcular_media_agregada13}" title="1" 
                                                          pt:autofocus="" />
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <h:outputLabel value="Tributar INSS:" for="evetinss" styleClass="control-label col-sm-3" />
+                            <h:outputLabel value="Tributar INSS:" for="evetinss" styleClass="control-label col-sm-2" />
                             <div class="col-md-2 col-sm-4">
                                 <h:selectBooleanCheckbox id="evetinss" value="#{eventoBean.evento.eve_tributar_inss}" title="1" pt:autofocus="" />
                             </div>
-                            <h:outputLabel value="Tributar IRRF:" for="evetirrf" styleClass="control-label col-sm-3" />
-                            <div class="col-md-2 col-sm-4">
+                            <h:outputLabel value="Tributar IRRF:" for="evetirrf" styleClass="control-label col-sm-2" />
+                            <div class="col-md-1 col-sm-1">
                                 <h:selectBooleanCheckbox id="evetirrf" value="#{eventoBean.evento.eve_tributar_irrf}" title="1" pt:autofocus="" />
                             </div>
 
