@@ -21,7 +21,9 @@ import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import rs.dao.QuestionarioDAO;
 import rs.model.Questionario;
+import td.dao.AlunosTurmaDAO;
 import td.dao.TurmaDAO;
+import td.model.AlunosTurma;
 import td.model.Turma;
 import td.model.Turma;
 
@@ -43,9 +45,9 @@ public class AvaliacaoBean {
     private CargoDAO cargodao = new CargoDAO();
     private PessoaDAO pessoadao = new PessoaDAO();
     private List<AvaliacaoPessoaCargo> lsAvPesCargo;
-    private int idTtreino;
+    private int idTurma;
     private TurmaDAO treinoDAO = new TurmaDAO();
-
+    private AlunosTurmaDAO alunoTurmaDAO = new AlunosTurmaDAO();
     private Avaliacao avaliacao;
     private AvaliacaoDAO dao = new AvaliacaoDAO();
     private AvaliacaoPessoaCargoDAO avaliacaoPessoaCargoDAO = new AvaliacaoPessoaCargoDAO();
@@ -57,10 +59,14 @@ public class AvaliacaoBean {
     private List<PessoasAvaliacao> lsPessoasAvaliacao;///Lista de PessoasAvaliação
 
     public void AvaliacaoTurma(int id) {
-        idTtreino = id;
-        Turma treino = treinoDAO.findById(idTtreino);
-        avaliacao.setTurma(treino);
-        Title = "Dados do Turma do " + treino.getTreinamento().getTre_descricao();
+        idTurma = id;
+        Turma turma = treinoDAO.findById(idTurma);
+        avaliacao.setTurma(turma);
+        List<AlunosTurma> LsAlunosTurma = alunoTurmaDAO.GetAlunosTurma(idTurma, 0); //SELECIONO TODOS OS ALUNOS DAQUELA TURMA
+        for (AlunosTurma aluno : LsAlunosTurma) {
+            lsPessoaColaborador.add(aluno.getPessoa()); //PASSO PRA LISTA :-/, BLZ?
+        }
+        Title = "Dados do Turma do " + turma.getTreinamento().getTre_descricao();
     }
 
     public AvaliacaoBean() {
@@ -384,11 +390,11 @@ public class AvaliacaoBean {
     }
 
     public int getIdTtreino() {
-        return idTtreino;
+        return idTurma;
     }
 
-    public void setIdTtreino(int idTtreino) {
-        this.idTtreino = idTtreino;
+    public void setIdTtreino(int idTurma) {
+        this.idTurma = idTurma;
     }
 
     public String getErroMsg() {
