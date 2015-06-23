@@ -94,7 +94,7 @@ public class PessoaDAO {
     }
     
     public List<Pessoa> findPesTur() {//Procura as pessoas cadastradas em uma turma
-        SQLQuery q = session.createSQLQuery("select pe.* from pessoa pe, trd_alunos_turma tu where pe.pes_codigo = tu.pes_codigo and tu.pst_oid = "+id).addEntity(Pessoa.class);
+        SQLQuery q = session.createSQLQuery("select pe.* from pessoa pe, trd_alunos_turma tu where pe.pes_codigo = tu.pes_codigo and tu.tur_codigo = "+id).addEntity(Pessoa.class);
         return q.list();
     }
 }

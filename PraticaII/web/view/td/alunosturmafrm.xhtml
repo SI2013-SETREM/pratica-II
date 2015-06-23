@@ -21,18 +21,18 @@
             <f:view>
                 <h:form styleClass="form-horizontal">
                     <h:messages/>
-                    <h:inputHidden id="pstOid" value="#{alunosTurmaBean.alunos_turma.pst_oid}" />
+                    <h:inputHidden id="pstOid" value="#{alunosTurmaBean.alunos_turma.pst_pestur}" />
 <!--                            <div class="form-group">
                         <h:outputLabel value="Código:" for="curCodigo" styleClass="control-label col-sm-1" />
                         <div class="col-md-6">
-                            <h:inputText id="curCodigo" value="#{alunosTurmaBean.alunos_turma.pst_oid}" title="CurCodigo" styleClass="form-control" />
+                            <h:inputText id="curCodigo" value="#{alunosTurmaBean.alunos_turma.pst_pestur}" title="CurCodigo" styleClass="form-control" />
                         </div>
                     </div>-->
                     <div class="form-group">
                         <h:outputLabel value="Aluno: " for="pessoa" styleClass="control-label col-sm-2" />
                         <div class="col-md-6 col-sm-12">
                             <h:selectOneMenu id="pessoa" converter="pessoaConverter" value="#{alunosTurmaBean.alunos_turma.pessoa}" styleClass="form-control" pt:autofocus="" >
-                                <f:selectItems value="#{alunosTurmaBean.lstpessoa}" var="tipe" itemLabel="#{tipe.toString()}"/>
+                                <f:selectItems value="#{alunosTurmaBean.lstpessoa}" var="tipe" itemLabel="#{tipe.pes_nome}"/>
                             </h:selectOneMenu>
                         </div>
                     </div>
@@ -61,7 +61,7 @@
                     <div class="form-group">
                         <div class="col-md-offset-1 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
                             <h:link styleClass="btn btn-default" value="Cancelar" outcome="#{alunosTurmaBean.listar()}" />
-                            <h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{alunosTurmaBean.salvar()}"></h:commandButton>
+                            <h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{alunosTurmaBean.update()}"></h:commandButton>
                         </div>
                     </div>                   
                 </h:form>

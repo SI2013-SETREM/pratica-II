@@ -79,5 +79,4 @@ public class AlunosTurmaDAO {
         Query q = session.createQuery("from Alunos_turma " + sql);
         return q.list();
     }
-
 }

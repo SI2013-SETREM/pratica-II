@@ -47,11 +47,7 @@ public class AlunosTurmaBean {
     }
 
     public List<Turma> getLstturma() {
-       // int i = alunos_turma.getPst_oid();
-       // if(i > 0){
-          //  turmadao.id = i;
-            lstturma = turmadao.findAll();
-      //  }
+        lstturma = turmadao.findAll();
         return lstturma;
     }
 
@@ -128,11 +124,6 @@ public class AlunosTurmaBean {
     
     public String delete(AlunosTurma i) {
         dao.delete(i);
-        return "alunosturmalst";
-    }
-    
-    public String salvar() {
-        dao.update(alunos_turma);
         return "alunosturmalst";
     }
     

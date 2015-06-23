@@ -21,7 +21,7 @@ public class AlunosTurma implements Serializable {
     @Id
     @SequenceGenerator(name="trd_alunos_turma_pk_sequence", sequenceName="trd_alunos_turma_id_seq")
     @GeneratedValue(strategy=GenerationType.AUTO, generator="trd_alunos_turma_pk_sequence")
-    private int pst_oid;
+    private int pst_pestur;
     private int pst_aprovado;
     private double pst_frequencia;
     private String pst_observacao;
@@ -42,13 +42,13 @@ public class AlunosTurma implements Serializable {
     public void setPessoa(Pessoa pessoa) {
         this.pessoa = pessoa;
     }
-
-    public int getPst_oid() {
-        return pst_oid;
+    
+    public int getPst_pestur() {
+        return pst_pestur;
     }
 
-    public void setPst_oid(int pst_oid) {
-        this.pst_oid = pst_oid;
+    public void setPst_pestur(int pst_pestur) {
+        this.pst_pestur = pst_pestur;
     }
     
     public int getPst_aprovado() {
