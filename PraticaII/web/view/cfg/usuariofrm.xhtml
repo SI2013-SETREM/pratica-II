@@ -19,30 +19,31 @@
             <h3><h:outputText value="Dados do ${usuarioBean.sTitle}"/></h3>
             <f:view>
                 <h:form styleClass="form-horizontal">
-                    <h:inputHidden id="idiCodigo" value="#{usuarioBean.usuario.usu_codigo}" />
-                    <!--                            <div class="form-group">
-                                            <h:outputLabel value="Código:" for="idiCodigo" styleClass="control-label col-sm-1" />
-                                            <div class="col-md-6">
-                                                                    <h:inputText id="idiCodigo" value="#{usuarioBean.usuario.usu_codigo}" title="IdiCodigo" styleClass="form-control" />
-                                            </div>
-                                        </div>-->
+                    <div class="form-group">
+                        <h:outputLabel value="Pessoa:" for="pesCidade" styleClass="control-label col-sm-2" />
+                        <div style="padding-top: 5px" class="col-md-6 col-sm-12">
+                            <h:selectOneMenu value="#{usuarioBean.usuario.pessoa}" converter="pessoaConverter" id="pesCidade" class="form-control">
+                                <f:selectItems value="#{pessoaBean.pessoas}" var="pessoa" />
+                            </h:selectOneMenu>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <h:outputLabel value="Usuário" for="idiDescricao1" styleClass="control-label col-sm-1" />
                         <div class="col-md-6 col-sm-12">
-                            <h:inputText pt:required="required" id="idiDescricao1" value="#{usuarioBean.usuario.usu_nome}" title="Usuário" styleClass="form-control" pt:autofocus="" />
+                            <h:inputText pt:required="required" id="idiDescricao1" value="#{usuarioBean.usuario.usuLogin}" title="Usuário" styleClass="form-control" pt:autofocus="" />
                         </div>
                     </div>
 
                     <div class="form-group">
                         <h:outputLabel value="Senha" for="idiDescricao2" styleClass="control-label col-sm-1" />
                         <div class="col-md-6 col-sm-12">
-                            <h:inputSecret pt:required="required" id="idiDescricao2" value="#{usuarioBean.usuario.usu_senha}" title="Senha" styleClass="form-control" pt:autofocus="" />
+                            <h:inputSecret pt:required="required" id="idiDescricao2" value="#{usuarioBean.usuario.usuSenha}" title="Senha" styleClass="form-control" pt:autofocus="" />
                         </div>
                     </div>
                     <div class="form-group">
                         <h:outputLabel value="Status" for="emeObrigatorio" styleClass="control-label col-sm-1" />
                         <div style="padding-top: 5px" class="col-md-6 col-sm-12">
-                            <h:selectBooleanCheckbox value="#{usuarioBean.usuario.usu_status}" id="emeObrigatorio" title="emeObrigatorio" />
+                            <h:selectBooleanCheckbox value="#{usuarioBean.usuario.usuStatus}" id="emeObrigatorio" title="emeObrigatorio" />
                         </div>
                     </div>
                     

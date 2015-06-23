@@ -65,11 +65,11 @@ public class EmpresaBean {
     public String delete(Empresa i) {
         dao.delete(i);
         LogDAO.insert("Empresa", "Deletou empresa código: " + i.getEmp_codigo() + ", descrição: " + i.getEmp_descricao()
-                    + ", nome: " + i.getEmp_nome() + ", numero endereço: " + i.getEmp_numeroendereco()
-                    + ", web site: " + i.getEmp_website() + ", código bairro: " + i.getBairro().getBai_codigo()
-                    + ", código cidade: " + i.getCidade() + ", empresa sistema: " + i.getEmp_empresa_sistema()
-                    + ", empresa sede: " + i.getEmp_sede() + ", tamanho empresa: " + i.getEmp_tamanho() + ", tipo empresa: "
-                    + i.getEmp_tipo() + ", código endereço: " + i.getEndereco().getEnd_codigo() + ", código repositório: " + i.getRepositorio().getRep_codigo());
+                + ", nome: " + i.getEmp_nome() + ", numero endereço: " + i.getEmp_numeroendereco()
+                + ", web site: " + i.getEmp_website() + ", código bairro: " + i.getBairro().getBai_codigo()
+                + ", código cidade: " + i.getCidade() + ", empresa sistema: " + i.getEmp_empresa_sistema()
+                + ", empresa sede: " + i.getEmp_sede() + ", tamanho empresa: " + i.getEmp_tamanho() + ", tipo empresa: "
+                + i.getEmp_tipo() + ", código endereço: " + i.getEndereco().getEnd_codigo());
         return "empresalst";
     }
 
@@ -81,7 +81,7 @@ public class EmpresaBean {
                     + ", web site: " + empresa.getEmp_website() + ", código bairro: " + empresa.getBairro().getBai_codigo()
                     + ", código cidade: " + empresa.getCidade() + ", empresa sistema: " + empresa.getEmp_empresa_sistema()
                     + ", empresa sede: " + empresa.getEmp_sede() + ", tamanho empresa: " + empresa.getEmp_tamanho() + ", tipo empresa: "
-                    + empresa.getEmp_tipo() + ", código endereço: " + empresa.getEndereco().getEnd_codigo() + ", código repositório: " + empresa.getRepositorio().getRep_codigo());
+                    + empresa.getEmp_tipo() + ", código endereço: " + empresa.getEndereco().getEnd_codigo());
         } else {
             dao.insert(empresa);
             LogDAO.insert("Empresa", "Cadastrou empresa código: " + empresa.getEmp_codigo() + ", descrição: " + empresa.getEmp_descricao()
@@ -89,7 +89,7 @@ public class EmpresaBean {
                     + ", web site: " + empresa.getEmp_website() + ", código bairro: " + empresa.getBairro().getBai_codigo()
                     + ", código cidade: " + empresa.getCidade() + ", empresa sistema: " + empresa.getEmp_empresa_sistema()
                     + ", empresa sede: " + empresa.getEmp_sede() + ", tamanho empresa: " + empresa.getEmp_tamanho() + ", tipo empresa: "
-                    + empresa.getEmp_tipo() + ", código endereço: " + empresa.getEndereco().getEnd_codigo() + ", código repositório: " + empresa.getRepositorio().getRep_codigo());
+                    + empresa.getEmp_tipo() + ", código endereço: " + empresa.getEndereco().getEnd_codigo());
         }
 
         return "empresalst";

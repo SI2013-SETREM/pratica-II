@@ -151,4 +151,24 @@ public class Utilidades {
         Map<String, Object> sessionMap = extCtx.getSessionMap();
         return sessionMap.get(objName);
     }
+    
+    public static String encryptSHA(String text) {
+    String output;
+
+    try {
+        java.security.MessageDigest digest = java.security.MessageDigest.getInstance("SHA-256");
+        byte[] hash = digest.digest(text.getBytes("UTF-8"));
+        java.math.BigInteger bigInt = new java.math.BigInteger(1, hash);
+        output = bigInt.toString(16);
+        while ( output.length() < 64 ) {
+            output = "0"+output;
+        }
+    } 
+    catch (Exception e) {
+        e.printStackTrace(System.err);
+        return null;
+    }
+
+    return output;
+}
 }

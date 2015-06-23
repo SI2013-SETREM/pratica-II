@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import util.Utilidades;
 
 @Entity
 @Table(name = "usuario")
@@ -47,7 +48,7 @@ public class Usuario implements Serializable {
     }
 
     public void setUsuSenha(String usu_senha) {
-        this.usu_senha = usu_senha;
+        this.usu_senha = Utilidades.encryptSHA(usu_senha);
     }
 
     public boolean getUsuStatus() {

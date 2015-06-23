@@ -25,23 +25,18 @@
                     </div>
                     <h:form>
                         <h:dataTable value="${usuarioBean.usuarios}" var="item" styleClass="dataTable table table-bordered table-striped">
+                            
                             <h:column>
                                 <f:facet name="header">
-                                    <h:outputText value="Código"/>
+                                    <h:outputText value="Login"/>
                                 </f:facet>
-                                <h:outputText value="${item.getUsu_codigo()}"/>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Nome"/>
-                                </f:facet>
-                                <h:outputText value="${item.getUsu_nome()}"/>
+                                <h:outputText value="${item.getUsuLogin()}"/>
                             </h:column>
                             <h:column>
                                 <f:facet name="header">
                                     <h:outputText value="Status"/>
                                 </f:facet>
-                                <h:outputText value="${item.getUsu_status() == true ? 'Ativo' : 'Inativo' }"/>
+                                <h:outputText value="${item.getUsuStatus() == true ? 'Ativo' : 'Inativo' }"/>
                             </h:column>
                             <h:column headerClass="col-editar-header">
                                 <f:facet name="header">
