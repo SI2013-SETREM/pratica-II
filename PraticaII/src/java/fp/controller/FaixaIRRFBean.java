@@ -55,6 +55,15 @@ public class FaixaIRRFBean {
         this.faixairrfs = faixairrfs;
     }
 
+    public TabelaIRRF getTabelairrf() {
+        return tabelairrf;
+    }
+
+    public void setTabelairrf(TabelaIRRF tabelairrf) {
+        this.tabelairrf = tabelairrf;
+    }
+    
+
     public String insert() {
         dao.insert(faixairrf);
         return "tabelairrflst";

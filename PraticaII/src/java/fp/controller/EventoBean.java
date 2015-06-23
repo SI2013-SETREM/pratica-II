@@ -1,10 +1,12 @@
 package fp.controller;
 
 import cfg.dao.LogDAO;
+
 import cfg.dao.PessoaDAO;
 import cfg.model.Pessoa;
 import csb.dao.BeneficioDAO;
 import csb.model.Beneficio;
+
 import fp.dao.EventoDAO;
 import fp.dao.EventoPadraoDAO;
 import fp.dao.FormulaDAO;
@@ -192,6 +194,7 @@ public class EventoBean {
         lstformula = formuladao.findAll();
         return lstformula;
     }
+
       public List<Beneficio> getLstBeneficio() {
         lstbeneficio = beneficiodao.findAll();
         return lstbeneficio;
