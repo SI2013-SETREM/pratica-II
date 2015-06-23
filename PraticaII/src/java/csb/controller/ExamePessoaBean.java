@@ -1,10 +1,13 @@
 package csb.controller;
 
 import cfg.dao.LogDAO;
+import cfg.dao.PessoaDAO;
+import cfg.model.Pessoa;
 import csb.controller.*;
 
 import csb.dao.ExamePessoaDAO;
 import csb.model.ExamePessoa;
+import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.model.DataModel;
@@ -21,6 +24,11 @@ public class ExamePessoaBean {
     private ExamePessoaDAO dao = new ExamePessoaDAO();
     private DataModel exames;
 
+    /* PARA FAZER A COMBO DE SETORES */
+    private List<Pessoa> lstpessoa;
+    private Pessoa pessoa = new Pessoa();
+    private PessoaDAO pessoadao = new PessoaDAO();
+    
     public ExamePessoaBean() {
     }
 
@@ -48,6 +56,15 @@ public class ExamePessoaBean {
     public void setExames(DataModel exames) {
         this.exames = exames;
     }
+    
+    public List<Pessoa> getLstpessoa() {
+        lstpessoa = pessoadao.findAllFuncionarios();
+        return lstpessoa;
+    }
+
+    public void setLstpessoa(List<Pessoa> lstpessoa) {
+        this.lstpessoa = lstpessoa;
+    }
 
     public String insert() {
         dao.insert(exa);
@@ -73,16 +90,13 @@ public class ExamePessoaBean {
     }
 
     public String salvar() {
-        if (exa.getTipoExame().getEme_codigo() > 0) {
+        if (exa.getTipoexame().getEme_codigo() > 0) {
             dao.update(exa);
-            LogDAO.insert("Exame", "Alterou exame código: " + exa.getExa_codigo() + ", código exame: " + exa.getPessoa().getPes_codigo()+
-                ", data: "+exa.getEps_dataexame()+", data validade: "+exa.getEps_datavalidade()+", situação: "+exa.isEps_situacao()+
-                ", observação: "+exa.getEps_observacao()+", código exame: "+exa.getExa_codigo());
+//            LogDAO.insert("Exame", "Alterou exame código: " + exa.getExa_codigo() + ", código exame: " + exa.getPessoa().getPes_codigo()+
+//                ", data: "+exa.getEps_dataexame()+", data validade: "+exa.getEps_datavalidade()+", situação: "+exa.isEps_situacao()+
+//                ", observação: "+exa.getEps_observacao()+", código exame: "+exa.getExa_codigo());
         } else {
             dao.insert(exa);
-            LogDAO.insert("Exame", "Cadastrou exame código: " + exa.getExa_codigo() + ", código exame: " + exa.getPessoa().getPes_codigo()+
-                ", data: "+exa.getEps_dataexame()+", data validade: "+exa.getEps_datavalidade()+", situação: "+exa.isEps_situacao()+
-                ", observação: "+exa.getEps_observacao()+", código exame: "+exa.getExa_codigo());
         }
 
         return "examepessoalst";

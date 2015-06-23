@@ -86,6 +86,28 @@ public class TipoExame implements Serializable {
     }
     
     @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 79 * hash + this.eme_codigo;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final TipoExame other = (TipoExame) obj;
+        if (this.eme_codigo != other.eme_codigo) {
+            return false;
+        }
+        return true;
+    }
+    
+    @Override
     public String toString() {
         return getEme_descricao();
     }

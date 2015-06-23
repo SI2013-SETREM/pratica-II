@@ -3,12 +3,10 @@ package csb.model;
 import cfg.model.Pessoa;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
@@ -21,7 +19,6 @@ import javax.persistence.Temporal;
  */
 @Entity
 @Table(name = "csb_examepessoa")
-@IdClass(ExamePessoa.ExamePessoaPK.class)
 public class ExamePessoa implements Serializable {
 
     public static final String sTitle = "Exame";
@@ -32,24 +29,14 @@ public class ExamePessoa implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "exa_codigo")
     private int exa_codigo;
 
-    public int getExa_codigo() {
-        return exa_codigo;
-    }
+    @ManyToOne
+    @JoinColumn(name = "eme_codigo")
+    private TipoExame tipoexame;
 
-    public void setExa_codigo(int exa_codigo) {
-        this.exa_codigo = exa_codigo;
-    }
-    
-    @Id
     @ManyToOne
-    @JoinColumn(name = "eme_codigo", referencedColumnName = "eme_codigo")
-    private TipoExame tipoExame;
-    
-    @Id
-    @ManyToOne
-    @JoinColumn(name = "pes_codigo", referencedColumnName = "pes_codigo")
+    @JoinColumn(name = "pes_codigo")
     private Pessoa pessoa;
-    
+
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date eps_dataexame;
     @Temporal(javax.persistence.TemporalType.DATE)
@@ -57,55 +44,23 @@ public class ExamePessoa implements Serializable {
     private boolean eps_situacao;
     private String eps_observacao;
 
-    
-    public class ExamePessoaPK implements Serializable {
-        protected TipoExame tipoExame;
-        protected Pessoa pessoa;
-
-        public ExamePessoaPK() {}
-
-        public ExamePessoaPK(TipoExame tipoexame, Pessoa pessoa) {
-            this.tipoExame = tipoexame;
-            this.pessoa = pessoa;
-        }
-
-        @Override
-        public int hashCode() {
-            int hash = 7;
-            hash = 17 * hash + Objects.hashCode(this.tipoExame);
-            hash = 17 * hash + Objects.hashCode(this.pessoa);
-            return hash;
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-            if (obj == null) {
-                return false;
-            }
-            if (getClass() != obj.getClass()) {
-                return false;
-            }
-            final ExamePessoaPK other = (ExamePessoaPK) obj;
-            if (!Objects.equals(this.tipoExame, other.tipoExame)) {
-                return false;
-            }
-            if (!Objects.equals(this.pessoa, other.pessoa)) {
-                return false;
-            }
-            return true;
-        }
-        
-    }
-    
     public ExamePessoa() {
     }
 
-    public TipoExame getTipoExame() {
-        return tipoExame;
+    public int getExa_codigo() {
+        return exa_codigo;
     }
 
-    public void setTipoExame(TipoExame tipoExame) {
-        this.tipoExame = tipoExame;
+    public void setExa_codigo(int exa_codigo) {
+        this.exa_codigo = exa_codigo;
+    }
+
+    public TipoExame getTipoexame() {
+        return tipoexame;
+    }
+
+    public void setTipoexame(TipoExame tipoexame) {
+        this.tipoexame = tipoexame;
     }
 
     public Pessoa getPessoa() {
@@ -146,5 +101,31 @@ public class ExamePessoa implements Serializable {
 
     public void setEps_observacao(String eps_observacao) {
         this.eps_observacao = eps_observacao;
+    }
+
+    public String getExa_dataToString(Date data) {
+        return util.Utilidades.getDataString(data);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 79 * hash + this.exa_codigo;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ExamePessoa other = (ExamePessoa) obj;
+        if (this.exa_codigo != other.exa_codigo) {
+            return false;
+        }
+        return true;
     }
 }

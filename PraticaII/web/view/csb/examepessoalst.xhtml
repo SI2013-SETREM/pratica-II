@@ -22,32 +22,32 @@
                 </h:link>
             </div>
             <h:form>
-                <h:dataTable value="${examePessoaBean.exames}" var="item" rendered="${examePessoaBean.exames.rowAvailable}" styleClass="dataTable table table-bordered table-striped">
+                <h:dataTable value="${examePessoaBean.exames}" var="item" styleClass="dataTable table table-bordered table-striped">
                     <h:column>
                         <f:facet name="header">
-                            <h:outputText value="Tipo do Exame"/>
+                            <h:outputText value="Colaborador"/>
                         </f:facet>
-                        <h:outputText value="${item.getEme_codigo()}"/>
+                        <h:outputText value="${item.getPessoa().getPes_nome()}"/>
                     </h:column>
-                      <h:column>
+                    <h:column>
                         <f:facet name="header">
-                            <h:outputText value="Pessoa"/>
+                            <h:outputText value="Tipo de Exame"/>
                         </f:facet>
-                        <h:outputText value="${item.getPes_codigo()}"/>
+                        <h:outputText value="${item.getTipoexame().getEme_descricao()}"/>
                     </h:column>
-                      <h:column>
+                    <h:column>
                         <f:facet name="header">
                             <h:outputText value="Data Exame"/>
                         </f:facet>
-                        <h:outputText value="${item.getEps_dataexame()}"/>
+                        <h:outputText value="${item.getExa_dataToString(item.getEps_dataexame())}"/>
                     </h:column>
-                       <h:column>
+                    <h:column>
                         <f:facet name="header">
                             <h:outputText value="Data Validade"/>
                         </f:facet>
                         <h:outputText value="${item.getEps_datavalidade()}"/>
                     </h:column>
-                        <h:column>
+                    <h:column>
                         <f:facet name="header">
                             <h:outputText value="Situação"/>
                         </f:facet>
@@ -57,9 +57,9 @@
                         <f:facet name="header">
                             <h:outputText value="Observação"/>
                         </f:facet>
-                        <h:outputText value="${item.getEps_observacao()} dias"/>
+                        <h:outputText value="${item.getEps_observacao()}"/>
                     </h:column>
-                   
+
                     <h:column headerClass="col-editar-header">
                         <f:facet name="header">
                             <h:outputText value="Editar"/>
