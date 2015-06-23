@@ -3,6 +3,7 @@ package td.dao;
 import td.model.AlunosTurma;
 import java.util.List;
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import util.HibernateUtil;
@@ -10,6 +11,7 @@ import util.HibernateUtil;
 public class AlunosTurmaDAO {
 
     private Session session;
+    public int idTur, oid;
 
     public AlunosTurmaDAO() {
         session = HibernateUtil.getSessionFactory().openSession();
@@ -38,9 +40,31 @@ public class AlunosTurmaDAO {
     }
 
     public List<AlunosTurma> findAll() {
-        Query q = session.createQuery("from Alunos_turma");
+        Query q = session.createQuery("from AlunosTurma");
         return q.list();
     }
+
+    
+    public void deletaAlunosTurma(){
+        
+        Transaction transaction = session.beginTransaction();
+        try {
+            String hql = "delete from AlunosTurma where tur_codigo = :uid";
+            Query query = session.createQuery(hql);
+            query.setInteger("uid", idTur);
+            query.executeUpdate();
+            transaction.commit();
+        } catch (Throwable t) {
+            transaction.rollback();
+        throw t;
+        }
+    }
+    
+    public List<AlunosTurma> findPesTur(int tur_codigo) {//Procura as pessoas cadastradas em uma turma
+        Query q = session.createQuery("from AlunosTurma where tur_codigo = :tur_codigo");
+        return q.setParameter("tur_codigo", tur_codigo).list();
+    }
+
 
     ///Adicionei esse metodo pois utilizo ele para pegar os alunos da turma
     public List<AlunosTurma> GetAlunosTurma(int tur_codigo, int pes_codigo) {

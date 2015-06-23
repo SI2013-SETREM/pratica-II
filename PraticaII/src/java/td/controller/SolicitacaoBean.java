@@ -126,7 +126,7 @@ public class SolicitacaoBean {
     public List<Pessoa> getLstpessoa() {
         int i = solicitacao.getSol_codigo();
         if(i > 0){
-            pessoadao.idSol = i;
+            pessoadao.id = i;
             lstpessoa = pessoadao.findPesSol();
         }
         return lstpessoa;

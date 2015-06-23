@@ -52,10 +52,6 @@ public class Pessoa implements Serializable {
     private Cidade cidadenasc;
     
     @ManyToMany
-    @JoinTable(name = "trd_instrutores_treinamento")
-    private List<Treinamento> treinamentos;
-    
-    @ManyToMany
     @JoinTable(name = "car_codigo")
     private List<Cargo> cargos;
 
@@ -95,7 +91,6 @@ public class Pessoa implements Serializable {
         this.cidade = cidade;
         this.endereco = endereco;
         this.cidadenasc = cidadenasc;
-        this.treinamentos = treinamentos;
         this.usuario = usuario;
         this.pes_nome = pes_nome;
         this.pes_cpf = pes_cpf;
@@ -324,14 +319,6 @@ public class Pessoa implements Serializable {
 
     public void setPes_cur_pretensaosalarial(Double pes_cur_pretensaosalarial) {
         this.pes_cur_pretensaosalarial = pes_cur_pretensaosalarial;
-    }
-    
-    public List<Treinamento> getTreinamentos() {
-        return treinamentos;
-    }
-
-    public void setTreinamentos(List<Treinamento> treinamentos) {
-        this.treinamentos = treinamentos;
     }
     
     @Override

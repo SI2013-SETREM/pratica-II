@@ -24,7 +24,7 @@ public class CursosPessoa implements Serializable {
     @SequenceGenerator(name="trd_cursos_pessoa_pk_sequence", sequenceName="trd_cursos_pessoa_id_seq")
     @GeneratedValue(strategy=GenerationType.AUTO, generator="trd_cursos_pessoa_pk_sequence")
     
-
+    private int crp_curpes;
     private String crp_descricao;
     private int crp_carga_horaria;
     private Date crp_data_inicio;
@@ -69,7 +69,15 @@ public class CursosPessoa implements Serializable {
     public void setCurso(Curso curso) {
         this.curso = curso;
     }
+    
+    public int getCrp_curpes() {
+        return crp_curpes;
+    }
 
+    public void setCrp_curpes(int crp_curpes) {
+        this.crp_curpes = crp_curpes;
+    }
+    
     public String getCrp_descricao() {
         return crp_descricao;
     }

@@ -75,7 +75,7 @@ public class TreinamentoBean {
     }
     
     public List<Pessoa> completePessoa(String query) {
-        return pessoadao.searchPessoa(query);
+        return pessoadao.searchPessoaTre(query);
     }
     
     public List<Competencia> completeCompetencia(String query) {
@@ -166,7 +166,7 @@ public class TreinamentoBean {
     public List<Pessoa> getLstpessoa() {
         int i = treinamento.getTre_codigo();
         if(i > 0){
-            pessoadao.idSol = i;
+            pessoadao.id = i;
             lstpessoa = pessoadao.findPesTre();
         }
         return lstpessoa;

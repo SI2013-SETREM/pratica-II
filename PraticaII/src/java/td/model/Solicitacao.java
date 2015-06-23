@@ -27,7 +27,7 @@ public class Solicitacao implements Serializable{
     private Date sol_data;
     private int sol_prioridade;
     @ManyToOne
-    @JoinColumn(name = "pes_codigo_solicitou")
+    @JoinColumn(name = "pes_codigo")
     private Pessoa pessoa;
 
     public Pessoa getPessoa() {

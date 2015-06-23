@@ -1,11 +1,17 @@
 package td.controller;
 
+import cfg.dao.PessoaDAO;
+import cfg.model.Pessoa;
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.model.DataModel;
+import javax.faces.model.ListDataModel;
+import td.dao.AlunosTurmaDAO;
 import td.dao.TreinamentoDAO;
 import td.dao.TurmaDAO;
+import td.model.AlunosTurma;
 import td.model.Treinamento;
 import td.model.Turma;
 
@@ -25,6 +31,11 @@ public class TurmaBean {
     private Treinamento treinamento = new Treinamento();
     private TreinamentoDAO treinamentodao = new TreinamentoDAO();
     
+    private PessoaDAO pessoadao = new PessoaDAO();
+    private List<Pessoa> lstpessoa;
+    private AlunosTurmaDAO atdao = new AlunosTurmaDAO();
+    private AlunosTurmaBean atbean = new AlunosTurmaBean();
+    
     public String getsTitle() {
         return sTitle;
     }
@@ -42,6 +53,7 @@ public class TurmaBean {
     }
 
     public DataModel getTurmas() {
+        this.turmas = new ListDataModel(dao.findAll());
         return turmas;
     }
 
@@ -87,11 +99,27 @@ public class TurmaBean {
     }
     
     public String salvar() {
-        if (turma.getTur_codigo()> 0)
-            dao.update(turma);
-        else 
-            dao.insert(turma);
-        
+        if (turma.getTur_codigo()> 0){
+            if (ValidaDados()) {
+                dao.update(turma);
+                if (SalvaListas()) {
+                    return "turmalst";
+                } else {
+                    return "turmalst";
+                }
+            }
+        } else {
+            if (ValidaDados()) {
+                dao.insert(turma);
+                if (SalvaListas()) {
+                    return "turmalst";
+                } else {
+                    return "turmalst";
+                }
+            } else {
+                return "turmafrm";
+            }
+        }
         return "turmalst";
     }
 
@@ -99,4 +127,86 @@ public class TurmaBean {
         return "turmalst";
     }
     
+    public List<Pessoa> getLstpessoa() {
+        int i = turma.getTur_codigo();
+        if(i > 0){
+            pessoadao.id = i;
+            lstpessoa = pessoadao.findPesTur();
+        }
+        return lstpessoa;
+    }
+
+    public void setLstpessoa(List<Pessoa> lstpessoa) {
+        this.lstpessoa = lstpessoa;
+    }
+    
+    public List<Pessoa> completePessoa(String query) {
+        return pessoadao.searchPessoa(query);
+    }
+    
+    private boolean ValidaDados() {//Verifica as Listas se não estão vazias
+        if (lstpessoa == null) {
+            lstpessoa = new ArrayList<>();
+        }
+        return true;
+    }
+    
+    private boolean SalvaListas() {
+        int i = turma.getTur_codigo();
+        if (i == 0){
+            try {
+                SalvarAlunosTurmaNovo(filtraPessoas(lstpessoa));
+                return true;
+            } catch (Exception e) {
+                //Title = e.toString();
+            }
+        }else{
+            try {
+                SalvarAlunosTurmaExistente(filtraPessoas(lstpessoa));
+                return true;
+            } catch (Exception e) {
+               // Title = e.toString();
+            }
+        }
+        return true;
+    }
+    
+    private List<Pessoa> filtraPessoas(List<Pessoa> lsPessoas) {//Filtra Lista de pessoas, para não repetir uma pessoa ao salvar
+        List<Integer> lsCod = new ArrayList<>();
+        List<Pessoa> lsItens = new ArrayList<>();
+        if (!lsPessoas.isEmpty()) {
+            for (Pessoa p : lsPessoas) {
+                if (p != null && !lsCod.contains(p.getPes_codigo())) {
+                    lsCod.add(p.getPes_codigo());
+                    lsItens.add(p);
+                }
+            }
+        }
+        return lsItens;
+    }
+    
+    private void SalvarAlunosTurmaNovo(List<Pessoa> lsPessoa) {
+        if (!lsPessoa.isEmpty()) {
+            for (Pessoa p : lsPessoa) {
+                AlunosTurma at = new AlunosTurma();
+                at.setPessoa(p);
+                at.setTurma(turma);
+                atdao.insert(at);
+            }
+        }
+   }
+    
+    private void SalvarAlunosTurmaExistente(List<Pessoa> lsPessoa) {
+         int i = turma.getTur_codigo();
+         atdao.idTur = i;
+         atdao.deletaAlunosTurma();
+        if (!lsPessoa.isEmpty()) {
+            for (Pessoa p : lsPessoa) {
+                AlunosTurma at = new AlunosTurma();
+                at.setPessoa(p);
+                at.setTurma(turma);
+                atdao.insert(at);
+            }
+        }
+    }
 }

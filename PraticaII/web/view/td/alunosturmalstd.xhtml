@@ -22,13 +22,7 @@
                 </h:link>
             </div>
             <h:form>
-                <h:dataTable value="${alunosTurmaBean.alunos_turmas}" var="item" styleClass="dataTable table table-bordered table-striped">
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Turma"/>
-                        </f:facet>
-                        <h:outputText value="${item.turma.treinamento.getTre_descricao()}"/>
-                    </h:column>
+                <h:dataTable value="${alunosTurmaBean.alunos_turmasD}" var="item" styleClass="dataTable table table-bordered table-striped">
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="Nome"/>
@@ -52,14 +46,6 @@
                             <h:outputText value="Observação"/>
                         </f:facet>
                         <h:outputText value="${item.getPst_observacao()}"/>
-                    </h:column>
-                    <h:column headerClass="col-editar-header">
-                        <f:facet name="header">
-                            <h:outputText value="Avaliar Alunos"/>
-                        </f:facet>
-                        <h:commandLink action="${alunosTurmaBean.edit(item)}">
-                            <i class="fa fa-pencil-square-o"></i> Avaliar
-                        </h:commandLink>
                     </h:column>
                 </h:dataTable>
             </h:form>

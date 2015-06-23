@@ -18,7 +18,7 @@
                         $('#DataDeValidade').prop('hidden', true);
                     }
                 });
-            }))
+            }));
         </script>
     </ui:define>    
 
@@ -36,19 +36,18 @@
             <h3><h:outputText value="Dados de ${cursosPessoaBean.sTitle}"/></h3>
             <f:view>
                 <h:form styleClass="form-horizontal" id="form">
-                    <h:messages />
-                    <h:inputHidden id="curCodigo" value="#{cursosPessoaBean.cursos_pessoa.curso.cur_codigo}" />
+                    <h:inputHidden id="curCodigo" value="#{cursosPessoaBean.cursos_pessoa.crp_curpes}" />
                     <!--                            <div class="form-group">
                                             <h:outputLabel value="Código:" for="curCodigo" styleClass="control-label col-sm-1" />
                                             <div class="col-md-6">
-                                                <h:inputText id="curCodigo" value="#{cursosPessoaBean.cursos_pessoa.curso.cur_codigo}" title="CurCodigo" styleClass="form-control" />
+                                                <h:inputText id="curCodigo" value="#{cursosPessoaBean.cursos_pessoa.crp_curpes}" title="CurCodigo" styleClass="form-control" />
                                             </div>
                                         </div>-->
 
                     <div class="form-group">
                         <h:outputLabel value="Pessoa: " for="pessoa" styleClass="control-label col-sm-2" />
                         <div class="col-md-6 col-sm-12">
-                            <h:selectOneMenu id="cidade" converter="pessoaConverter" value="#{cursosPessoaBean.cursos_pessoa.pessoa.pes_nome}" styleClass="form-control" pt:autofocus="" >
+                            <h:selectOneMenu id="pessoa" converter="pessoaConverter" value="#{cursosPessoaBean.cursos_pessoa.pessoa}" styleClass="form-control" pt:autofocus="" >
                                 <f:selectItems value="#{cursosPessoaBean.lstpessoa}" var="tipe" itemLabel="#{tipe.pes_nome}"/>
                             </h:selectOneMenu>
                         </div>
@@ -64,7 +63,7 @@
                     <div class="form-group">
                         <h:outputLabel value="Empresa: " for="empresa" styleClass="control-label col-sm-2" />
                         <div class="col-md-6 col-sm-12">
-                            <h:selectOneMenu id="cidade" converter="empresaConverter" value="#{cursosPessoaBean.cursos_pessoa.empresa.emp_nome}" styleClass="form-control" pt:autofocus="" >
+                            <h:selectOneMenu id="cidade" converter="empresaConverter" value="#{cursosPessoaBean.cursos_pessoa.empresa}" styleClass="form-control" pt:autofocus="" >
                                 <f:selectItems value="#{cursosPessoaBean.lstempresa}" var="tipe" itemLabel="#{tipe.emp_nome}"/>
                             </h:selectOneMenu>
                         </div>
@@ -72,19 +71,19 @@
                     <div class="form-group">
                         <h:outputLabel value="Descrição:" for="crp_Descricao" styleClass="control-label col-sm-2" />
                         <div class="col-md-6 col-sm-12">
-                            <h:inputText pt:required="required" id="crpDescricao" value="#{cursosPessoaBean.cursos_pessoa.crp_descricao}" title="CrpDescricao" styleClass="form-control" pt:autofocus="" />
+                            <h:inputText id="crpDescricao" value="#{cursosPessoaBean.cursos_pessoa.crp_descricao}" title="CrpDescricao" styleClass="form-control" pt:autofocus="" />
                         </div>
                     </div>
                     <div class="form-group">
                         <h:outputLabel value="Carga Horária:" for="crp_carga_horaria" styleClass="control-label col-sm-2" />
                         <div class="col-md-6 col-sm-12">
-                            <h:inputText pt:type="time" pt:required="required" id="crpCargaHoraria" value="#{cursosPessoaBean.cursos_pessoa.crp_carga_horaria}" title="CrpCargaHoraria" styleClass="form-control" pt:autofocus="" />
+                            <h:inputText id="crpCargaHoraria" value="#{cursosPessoaBean.cursos_pessoa.crp_carga_horaria}" title="CrpCargaHoraria" styleClass="form-control" pt:autofocus="" />
                         </div>
                     </div>
                     <div class="form-group">
                         <h:outputLabel value="Data Inicial:" for="crp_data_inicio" styleClass="control-label col-sm-2" />
                         <div class="col-md-6 col-sm-12">
-                            <h:inputText pt:type="date" pt:required="required" id="crpDataInicial" value="#{cursosPessoaBean.cursos_pessoa.crp_data_inicio}" title="CrpDataInicio" styleClass="form-control" pt:autofocus="" >
+                            <h:inputText pt:type="date" id="crpDataInicial" value="#{cursosPessoaBean.cursos_pessoa.crp_data_inicio}" title="CrpDataInicio" styleClass="form-control" pt:autofocus="" >
                                 <f:convertDateTime pattern="yyyy-MM-dd" />
                             </h:inputText>
                         </div>
@@ -92,7 +91,7 @@
                     <div class="form-group">
                         <h:outputLabel value="Data Final:" for="crp_data_fim" styleClass="control-label col-sm-2" />
                         <div class="col-md-6 col-sm-12">
-                            <h:inputText pt:type="date" pt:required="required" id="crpDataFinal" value="#{cursosPessoaBean.cursos_pessoa.crp_data_fim}" title="CrpDataFim" styleClass="form-control" pt:autofocus="" >
+                            <h:inputText pt:type="date" id="crpDataFinal" value="#{cursosPessoaBean.cursos_pessoa.crp_data_fim}" title="CrpDataFim" styleClass="form-control" pt:autofocus="" >
                                 <f:convertDateTime pattern="yyyy-MM-dd" />
                             </h:inputText>
                         </div>
@@ -100,10 +99,7 @@
                     <div class="form-group">
                         <h:outputLabel value="Validade: " for="crp_status_validade" styleClass="control-label col-sm-2" />
                         <div class="col-md-6 col-sm-12">
-                            <h:selectBooleanCheckbox  id="treStatusValidade" value="#{cursosPessoaBean.cursos_pessoa.crp_status_validade}" title="CrpStatusValidade" pt:autofocus="">
-                                <f:selectItem itemDisabled="true" itemValue="0"/>
-                                <f:selectItem itemDisabled="false" itemValue="1"/>
-                            </h:selectBooleanCheckbox>
+                            <h:selectBooleanCheckbox  id="treStatusValidade" value="#{cursosPessoaBean.cursos_pessoa.crp_status_validade}" title="CrpStatusValidade" pt:autofocus=""/>
                         </div>
                     </div>
                     <div class="form-group" id="DataDeValidade">

@@ -37,17 +37,17 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <h:outputLabel value="Data Inicial" for="tur_datainicio" styleClass="control-label col-sm-2" />
+                        <h:outputLabel value="Data Inicial" for="tur_data_inicio" styleClass="control-label col-sm-2" />
                         <div class="col-md-6 col-sm-12">
-                            <h:inputText pt:type="date" pt:required="required" id="turDataInicio" value="#{turmaBean.turma.tur_datainicio}" title="TurDataInicio" styleClass="form-control" pt:autofocus=""> 
+                            <h:inputText pt:type="date" pt:required="required" id="turDataInicio" value="#{turmaBean.turma.tur_data_inicio}" title="TurDataInicio" styleClass="form-control" pt:autofocus=""> 
                                 <f:convertDateTime pattern="yyyy-MM-dd" />
                             </h:inputText>
                         </div>
                     </div>
                     <div class="form-group">
-                        <h:outputLabel value="Data Final" for="tur_datafim" styleClass="control-label col-sm-2" />
+                        <h:outputLabel value="Data Final" for="tur_data_fim" styleClass="control-label col-sm-2" />
                         <div class="col-md-6 col-sm-12">
-                            <h:inputText pt:type="date" pt:required="required" id="turDataFim" value="#{turmaBean.turma.tur_datafim}" title="TurDataFim" styleClass="form-control" pt:autofocus="" >
+                            <h:inputText pt:type="date" pt:required="required" id="turDataFim" value="#{turmaBean.turma.tur_data_fim}" title="TurDataFim" styleClass="form-control" pt:autofocus="" >
                                 <f:convertDateTime pattern="yyyy-MM-dd" />
                             </h:inputText>
                         </div>
@@ -72,13 +72,15 @@
                     <div class="form-group">
                         <h:outputLabel value="Carga Horária por Seção:" for="tur_cargahoraria_secao" styleClass="control-label col-sm-2" />
                         <div class="col-md-6 col-sm-12">
-                            <h:inputText pt:type="time" id="turCargaHorariaSecao" value="#{turmaBean.turma.tur_cargahoraria_secao}" title="TurCargaHorariaSecao" styleClass="form-control" pt:autofocus="" />
+                            <h:inputText pt:type="time" id="turCargaHorariaSecao" value="#{turmaBean.turma.tur_cargahoraria_secao}" title="TurCargaHorariaSecao" styleClass="form-control" pt:autofocus="" >
+                                <f:convertDateTime type="time" pattern="hh:mm" />
+                            </h:inputText> 
                         </div>
                     </div>
                     <div class="form-group">
                         <h:outputLabel value="Alunos:" for="alunos" styleClass="control-label col-md-2" />
                         <div class="col-md-8 col-xs-12 autocomplete">
-                            <p:autoComplete pt:disabled="#{solicitacaoBean.solicitacao.sol_codigo > 0}" id="solicitacao" multiple="true" completeMethod="#{solicitacaoBean.completePessoa}" value="#{solicitacaoBean.lstpessoa}"
+                            <p:autoComplete pt:disabled="#{turmaBean.turma.tur_codigo > 0}" id="solicitacao" multiple="true" completeMethod="#{turmaBean.completePessoa}" value="#{turmaBean.lstpessoa}"
                                             var="pessoa" itemLabel="#{pessoa.pes_nome}" itemValue="#{pessoa}" converter="pessoaConverter" forceSelection="true" disabled="false">
                                 <p:column>
                                     <h:outputText value="#{pessoa.pes_nome}" />

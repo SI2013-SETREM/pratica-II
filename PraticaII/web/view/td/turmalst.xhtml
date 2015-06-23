@@ -34,7 +34,7 @@
                         <f:facet name="header">
                             <h:outputText value="Data Inicial"/>
                         </f:facet>
-                        <h:outputText pt:type="date" value="${item.getTur_datainicio()}">
+                        <h:outputText pt:type="date" value="${item.getTur_data_inicio()}">
                             <f:convertDateTime pattern="dd/MM/yyyy" />
                         </h:outputText>
                     </h:column>
@@ -42,9 +42,17 @@
                         <f:facet name="header">
                             <h:outputText value="Data Final"/>
                         </f:facet>
-                        <h:outputText pt:type="date" value="${item.getTur_datafim()}">
+                        <h:outputText pt:type="date" value="${item.getTur_data_fim()}">
                             <f:convertDateTime pattern="dd/MM/yyyy" />
                         </h:outputText>
+                    </h:column>
+                    <h:column headerClass="col-editar-header">
+                        <f:facet name="header">
+                            <h:outputText value="Alunos"/>
+                        </f:facet>
+                        <h:commandLink action="${alunosTurmaBean.visualiza(item.getTur_codigo())}">
+                            <i class="fa fa-search"></i> Visualizar
+                        </h:commandLink>
                     </h:column>
                     <h:column headerClass="col-editar-header">
                         <f:facet name="header">

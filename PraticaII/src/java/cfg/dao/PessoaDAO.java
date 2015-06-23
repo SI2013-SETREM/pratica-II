@@ -11,8 +11,8 @@ import util.HibernateUtil;
 public class PessoaDAO {
 
     private Session session;
-    public int idSol;//ID da solicitalção, quando o usuário quer editar uma solicitação, ele busca as competências por esse ID
-
+    public int id;//ID da solicitalção/curso/treinamento
+            
     public PessoaDAO() {
         session = HibernateUtil.getSessionFactory().openSession();
     }
@@ -64,7 +64,7 @@ public class PessoaDAO {
     }
 
     public List<Pessoa> findPesSol() {//Procura as pessoas de uma determinada solicitação
-        SQLQuery q = session.createSQLQuery("select pe.* from pessoa pe, trd_pessoas_recebertreinamento ir where pe.pes_codigo = ir.pes_codigo and ir.sol_codigo =" + idSol).addEntity(Pessoa.class);
+        SQLQuery q = session.createSQLQuery("select pe.* from pessoa pe, trd_pessoas_recebertreinamento ir where pe.pes_codigo = ir.pes_codigo and ir.sol_codigo =" + id).addEntity(Pessoa.class);
         return q.list();
     }
 
@@ -74,7 +74,27 @@ public class PessoaDAO {
     }
     
     public List<Pessoa> findPesTre() {//Procura as pessoas de um determinado treinamento
-        SQLQuery q = session.createSQLQuery("select pe.* from pessoa pe, trd_instrutores_treinamento it where pe.pes_codigo = it.pes_codigo and it.tre_codigo =" + idSol).addEntity(Pessoa.class);
+        SQLQuery q = session.createSQLQuery("select pe.* from pessoa pe, trd_instrutores_treinamento it where pe.pes_codigo = it.pes_codigo and it.tre_codigo =" + id).addEntity(Pessoa.class);
+        return q.list();
+    }
+    
+    public List<Pessoa> searchPessoaTre(String name) {
+        String sqlPessoa = "";
+        String sqlTipoPessoa = " and pes_tipo = 4";
+        if (name != null && name != "") {
+            sqlPessoa = " and upper (translate(pes_nome, 'ÁÇÉÍÓÚÀÈÌÒÙÂÊÎÔÛÃÕËÜáçéíóúàèìòùâêîôûãõëü', 'ACEIOUAEIOUAEIOUAOEUaceiouaeiouaeiouaoeu'))"
+                    + " LIKE upper(translate('%" + name + "%', 'ÁÇÉÍÓÚÀÈÌÒÙÂÊÎÔÛÃÕËÜáçéíóúàèìòùâêîôûãõëü', 'ACEIOUAEIOUAEIOUAOEUaceiouaeiouaeiouaoeu'))";
+        }
+        return session.createQuery("from Pessoa where 1 = 1 " + sqlPessoa+sqlTipoPessoa).list();
+    }
+    
+    public List<Pessoa> findPesCur() {//Procura as pessoas cadastradas em um curso
+        SQLQuery q = session.createSQLQuery("select distinct pe.* from pessoa pe, trd_cursos_pessoa cs where pe.pes_codigo = cs.pes_codigo").addEntity(Pessoa.class);
+        return q.list();
+    }
+    
+    public List<Pessoa> findPesTur() {//Procura as pessoas cadastradas em uma turma
+        SQLQuery q = session.createSQLQuery("select pe.* from pessoa pe, trd_alunos_turma tu where pe.pes_codigo = tu.pes_codigo and tu.pst_oid = "+id).addEntity(Pessoa.class);
         return q.list();
     }
 }

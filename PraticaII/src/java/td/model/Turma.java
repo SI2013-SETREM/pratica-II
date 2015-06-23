@@ -1,7 +1,6 @@
 package td.model;
 
 import java.io.Serializable;
-import java.sql.Time;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,11 +22,11 @@ public class Turma implements Serializable {
     @SequenceGenerator(name="trd_turma_pk_sequence", sequenceName="trd_turma_id_seq")
     @GeneratedValue(strategy=GenerationType.AUTO, generator="trd_turma_pk_sequence")
     private int tur_codigo;
-    private Date tur_datainicio;
-    private Date tur_datafim;
+    private Date tur_data_inicio;
+    private Date tur_data_fim;
     private int tur_limite_alunos;
     private int tur_status_turma;
-    private Time tur_cargahoraria_secao;
+    private Date tur_cargahoraria_secao;
     
     @ManyToOne
     @JoinColumn(name = "tre_codigo")
@@ -42,20 +41,20 @@ public class Turma implements Serializable {
         this.tur_codigo = tur_codigo;
     }
 
-    public Date getTur_datainicio() {
-        return tur_datainicio;
+    public Date getTur_data_inicio() {
+        return tur_data_inicio;
     }
 
-    public void setTur_datainicio(Date tur_datainicio) {
-        this.tur_datainicio = tur_datainicio;
+    public void setTur_data_inicio(Date tur_data_inicio) {
+        this.tur_data_inicio = tur_data_inicio;
     }
 
-    public Date getTur_datafim() {
-        return tur_datafim;
+    public Date getTur_data_fim() {
+        return tur_data_fim;
     }
 
-    public void setTur_datafim(Date tur_datafim) {
-        this.tur_datafim = tur_datafim;
+    public void setTur_data_fim(Date tur_data_fim) {
+        this.tur_data_fim = tur_data_fim;
     }
 
     public int getTur_limite_alunos() {
@@ -74,11 +73,11 @@ public class Turma implements Serializable {
         this.tur_status_turma = tur_status_turma;
     }
 
-    public Time getTur_cargahoraria_secao() {
+    public Date getTur_cargahoraria_secao() {
         return tur_cargahoraria_secao;
     }
 
-    public void setTur_cargahoraria_secao(Time tur_cargahoraria_secao) {
+    public void setTur_cargahoraria_secao(Date tur_cargahoraria_secao) {
         this.tur_cargahoraria_secao = tur_cargahoraria_secao;
     }
     

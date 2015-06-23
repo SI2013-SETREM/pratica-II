@@ -20,39 +20,33 @@
             <h3><h:outputText value="Dados de ${alunosTurmaBean.sTitle}"/></h3>
             <f:view>
                 <h:form styleClass="form-horizontal">
-                    <h:inputHidden id="curCodigo" value="#{alunosTurmaBean.alunos_turma.turma.treinamento.tre_descricao}" />
+                    <h:messages/>
+                    <h:inputHidden id="pstOid" value="#{alunosTurmaBean.alunos_turma.pst_oid}" />
 <!--                            <div class="form-group">
                         <h:outputLabel value="Código:" for="curCodigo" styleClass="control-label col-sm-1" />
                         <div class="col-md-6">
-                            <h:inputText id="curCodigo" value="#{alunosTurmaBean.alunos_turma.turma.treinamento.tre_descricao}" title="CurCodigo" styleClass="form-control" />
+                            <h:inputText id="curCodigo" value="#{alunosTurmaBean.alunos_turma.pst_oid}" title="CurCodigo" styleClass="form-control" />
                         </div>
                     </div>-->
-               
                     <div class="form-group">
-                        <p:outputLabel value="Aluno:" for="pessoa" styleClass="control-label col-sm-2" />
+                        <h:outputLabel value="Aluno: " for="pessoa" styleClass="control-label col-sm-2" />
                         <div class="col-md-6 col-sm-12">
-                            <p:autoComplete id="pessoa" multiple="true" value="#{autoCompletePessoaBean.alunos}" completeMethod="#{autoCompletePessoaBean.completaNomePessoa}"
-                                            var="pessoa" itemLabel="#{pessoa.pes_nome}" itemValue="#{pessoa}" converter="pessoaConverter" forceSelection="true">
-                        <p:column style="width:10%">
-                            <h:outputText styleClass="ui-theme ui-theme-#{pessoa.pes_nome}"/>
-                        </p:column>
-                         <p:column>
-                             <h:outputText value="#{pessoa.pes_nome}" />
-                        </p:column>
-                        </p:autoComplete>
+                            <h:selectOneMenu id="pessoa" converter="pessoaConverter" value="#{alunosTurmaBean.alunos_turma.pessoa}" styleClass="form-control" pt:autofocus="" >
+                                <f:selectItems value="#{alunosTurmaBean.lstpessoa}" var="tipe" itemLabel="#{tipe.toString()}"/>
+                            </h:selectOneMenu>
                         </div>
-                    </div> 
+                    </div>
 
                     <div class="form-group">
                         <h:outputLabel value="Frequência:" for="pst_frequencia" styleClass="control-label col-sm-2" />
                         <div class="col-md-6 col-sm-12">
-                            <h:inputText pt:required="required" id="pstFrequencia" value="#{alunosTurmaBean.alunos_turma.pst_frequencia}" title="PstFrequencia" styleClass="form-control" pt:autofocus="" />
+                            <h:inputText id="pstFrequencia" value="#{alunosTurmaBean.alunos_turma.pst_frequencia}" title="PstFrequencia" styleClass="form-control" pt:autofocus="" />
                         </div>
                     </div>                    
                     <div class="form-group">
                         <h:outputLabel value="Situação:" for="pst_aprovado" styleClass="control-label col-sm-2" />
                         <div class="col-md-6 col-sm-12">
-                            <h:selectOneMenu pt:required="required" id="pstAprovado" value="#{alunosTurmaBean.alunos_turma.pst_aprovado}" title="PstAprovado" styleClass="form-control" pt:autofocus="">
+                            <h:selectOneMenu id="pstAprovado" value="#{alunosTurmaBean.alunos_turma.pst_aprovado}" title="PstAprovado" styleClass="form-control" pt:autofocus="">
                                 <f:selectItem  itemValue="1" itemLabel="Aprovado"/>
                                 <f:selectItem  itemValue="2" itemLabel="Reprovado"/>
                             </h:selectOneMenu>
@@ -61,7 +55,7 @@
                     <div class="form-group">
                         <h:outputLabel value="Observação:" for="pst_observacao" styleClass="control-label col-sm-2" />
                         <div class="col-md-6 col-sm-12">
-                            <h:inputText pt:required="required" id="pstObservacao" value="#{alunosTurmaBean.alunos_turma.pst_observacao}" title="PstObservacao" styleClass="form-control" pt:autofocus="" />
+                            <h:inputText id="pstObservacao" value="#{alunosTurmaBean.alunos_turma.pst_observacao}" title="PstObservacao" styleClass="form-control" pt:autofocus="" />
                         </div>
                     </div>
                     <div class="form-group">
