@@ -74,10 +74,6 @@ public class Cargo implements Serializable, Comparable<Cargo> {
     private List<Epi> Epis;
     
     @ManyToMany
-    @JoinTable(name = "csb_episetor")
-    private List<Epi> epis;
-    
-    @ManyToMany
     @JoinTable(name = "pes_codigo")
     private List<Pessoa> pessoas;
 
