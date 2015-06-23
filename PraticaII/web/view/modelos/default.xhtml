@@ -119,22 +119,16 @@
                                     <span class="fa dropdown-chevron pull-right"></span>
                                 </a>
                                 <ul class="submenu">
+                                    <li class="#{view.viewId.contains('/beneficio') ? 'active' : ''}">
+                                        <h:link outcome="/faces/view/csb/beneficiolst">
+                                            <span class="fa fa-user-md"></span>
+                                            <span class="menu-text">Benefícios</span>
+                                        </h:link>
+                                    </li>
                                     <li class="#{view.viewId.contains('/cargo') ? 'active' : ''}">
                                         <h:link outcome="/faces/view/csb/cargolst">
                                             <span class="fa fa-briefcase"></span>
                                             <span class="menu-text">Cargos</span>
-                                        </h:link>
-                                    </li>
-                                    <li class="#{view.viewId.contains('/setor') ? 'active' : ''}">
-                                        <h:link outcome="/faces/view/csb/setorlst">
-                                            <span class="fa fa-sitemap"></span>
-                                            <span class="menu-text">Setores</span>
-                                        </h:link>
-                                    </li>
-                                    <li class="#{view.viewId.contains('/graduacao') ? 'active' : ''}">
-                                        <h:link outcome="/faces/view/csb/graduacaolst">
-                                            <span class="fa fa-graduation-cap"></span>
-                                            <span class="menu-text">Graduações</span>
                                         </h:link>
                                     </li>
                                     <li class="#{view.viewId.contains('/epi') ? 'active' : ''}">
@@ -143,10 +137,16 @@
                                             <span class="menu-text">Equipamentos de Proteção</span>
                                         </h:link>
                                     </li>
-                                    <li class="#{view.viewId.contains('/tipoexame') ? 'active' : ''}">
-                                        <h:link outcome="/faces/view/csb/tipoexamelst">
-                                            <span class="fa fa-stethoscope"></span>
-                                            <span class="menu-text">Tipo de Exame</span>
+                                    <li class="#{view.viewId.contains('/examepessoa') ? 'active' : ''}">
+                                        <h:link outcome="/faces/view/csb/examepessoalst">
+                                            <span class="fa fa-medkit"></span>
+                                            <span class="menu-text">Exames</span>
+                                        </h:link>
+                                    </li>
+                                    <li class="#{view.viewId.contains('/graduacao') ? 'active' : ''}">
+                                        <h:link outcome="/faces/view/csb/graduacaolst">
+                                            <span class="fa fa-graduation-cap"></span>
+                                            <span class="menu-text">Graduações</span>
                                         </h:link>
                                     </li>
                                     <li class="#{view.viewId.contains('/motivoalteracaosalarial') ? 'active' : ''}">
@@ -155,24 +155,24 @@
                                             <span class="menu-text">Motivo Alteração Salarial</span>
                                         </h:link>
                                     </li>
-                                    <li class="#{view.viewId.contains('/beneficio') ? 'active' : ''}">
-                                        <h:link outcome="/faces/view/csb/beneficiolst">
-                                            <span class="fa fa-user-md"></span>
-                                            <span class="menu-text">Benefícios</span>
-                                        </h:link>
-                                    </li>
-                                    <li class="#{view.viewId.contains('/examepessoa') ? 'active' : ''}">
-                                        <h:link outcome="/faces/view/csb/examepessoalst">
-                                            <span class="fa fa-medkit"></span>
-                                            <span class="menu-text">Exames</span>
-                                        </h:link>
-                                    </li>
                                     <li class="#{view.viewId.contains('/salario') ? 'active' : ''}">
                                         <h:link outcome="/faces/view/csb/salariolst">
                                             <span class="fa fa-money"></span>
                                             <span class="menu-text">Salários</span>
                                         </h:link>
                                     </li>
+                                    <li class="#{view.viewId.contains('/setor') ? 'active' : ''}">
+                                        <h:link outcome="/faces/view/csb/setorlst">
+                                            <span class="fa fa-sitemap"></span>
+                                            <span class="menu-text">Setores</span>
+                                        </h:link>
+                                    </li>
+                                    <li class="#{view.viewId.contains('/tipoexame') ? 'active' : ''}">
+                                        <h:link outcome="/faces/view/csb/tipoexamelst">
+                                            <span class="fa fa-stethoscope"></span>
+                                            <span class="menu-text">Tipo de Exame</span>
+                                        </h:link>
+                                    </li>                                   
                                 </ul>
                             </li>
                             <li class="menu-dropdown #{view.viewId.contains('/td/') ? 'open' : ''}">

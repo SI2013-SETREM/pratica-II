@@ -8,6 +8,26 @@
         ${examePessoaBean.pTitle}
     </ui:define>
 
+    <ui:define name="header">
+        <script type="text/javascript">
+            $(function () {
+                var linhas = $(".data-valid").length;
+                for (var i = 0; i &lt; linhas; i++) {
+                    if ($(".data-valid").eq(i).text().length) {
+                        var dataHoje = new Date();
+                        var valueDate = $(".data-valid").eq(i).text().toString();
+                        var arrayDate = valueDate.split('/');
+                        var dataValid = new Date(arrayDate[2] + '-' + arrayDate[1] + '-' + arrayDate[0]);
+                        if (dataHoje > dataValid) {
+                            $(".data-valid").eq(i).css( "color", "red" );
+                        }
+                    }
+                }
+//                $(".data-valid")
+            });
+        </script>
+    </ui:define>
+
     <ui:define name="breadcrumb">
         <li>Cargos, salários, benefícios</li>
         <li>${examePessoaBean.pTitle}</li>
@@ -45,7 +65,7 @@
                         <f:facet name="header">
                             <h:outputText value="Data Validade"/>
                         </f:facet>
-                        <h:outputText value="${item.getEps_datavalidade()}"/>
+                        <h:outputText styleClass="data-valid" value="#{item.getEps_datavalidade() == null ? '' : item.getExa_dataToString(item.getEps_datavalidade())}"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">

@@ -6,7 +6,9 @@ import cfg.model.Pessoa;
 import csb.controller.*;
 
 import csb.dao.ExamePessoaDAO;
+import csb.dao.TipoExameDAO;
 import csb.model.ExamePessoa;
+import csb.model.TipoExame;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -24,11 +26,16 @@ public class ExamePessoaBean {
     private ExamePessoaDAO dao = new ExamePessoaDAO();
     private DataModel exames;
 
-    /* PARA FAZER A COMBO DE SETORES */
+    /* PARA FAZER A COMBO DE PESSOAS */
     private List<Pessoa> lstpessoa;
     private Pessoa pessoa = new Pessoa();
     private PessoaDAO pessoadao = new PessoaDAO();
-    
+
+    /* PARA FAZER A COMBO DE TIPO EXAMES*/
+    private List<TipoExame> lsttipoexame;
+    private TipoExame tipoexame = new TipoExame();
+    private TipoExameDAO tipoexamedao = new TipoExameDAO();
+
     public ExamePessoaBean() {
     }
 
@@ -57,6 +64,16 @@ public class ExamePessoaBean {
         this.exames = exames;
     }
     
+
+    public List<TipoExame> getLsttipoexame() {
+        lsttipoexame = tipoexamedao.findAll();
+        return lsttipoexame;
+    }
+
+    public void setLsttipoexame(List<TipoExame> lsttipoexame) {
+        this.lsttipoexame = lsttipoexame;
+    }
+
     public List<Pessoa> getLstpessoa() {
         lstpessoa = pessoadao.findAllFuncionarios();
         return lstpessoa;
