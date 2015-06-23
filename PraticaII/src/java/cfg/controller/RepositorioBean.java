@@ -66,7 +66,7 @@ public class RepositorioBean {
     public String delete(Repositorio i) {
         dao.delete(i);
         LogDAO.insert("Repositório", "Deletou repositório código: " + repositorio.getRep_codigo() + ", nome: " + repositorio.getRep_nome()
-                    + ", nome arquivo: " + repositorio.getRep_nomearquivo() + ", extesão: " + repositorio.getRep_extensao() + ", tipo: " + repositorio.getRep_tipo() + ", data: " + repositorio.getRep_data());
+                + ", nome arquivo: " + repositorio.getRep_nomearquivo() + ", extesão: " + repositorio.getRep_extensao() + ", tipo: " + repositorio.getRep_tipo() + ", data: " + repositorio.getRep_data());
         return "repositoriolst";
     }
 
@@ -86,10 +86,6 @@ public class RepositorioBean {
 
     public String listar() {
         return "repositoriolst";
-    }
-    
-    public void upload() {
-        
     }
 
 }

@@ -40,13 +40,14 @@ public class Repositorio implements Serializable {
     public Repositorio() {
     }
 
-    public Repositorio(int rep_codigo, int rep_tipo, Date rep_data, String rep_nome, String rep_nomearquivo, String rep_extensao) {
+    public Repositorio(int rep_codigo, int rep_tipo, Date rep_data, String rep_nome, String rep_nomearquivo, String rep_extensao, byte[] rep_arquivo) {
         this.rep_codigo = rep_codigo;
         this.rep_tipo = rep_tipo;
         this.rep_data = rep_data;
         this.rep_nome = rep_nome;
         this.rep_nomearquivo = rep_nomearquivo;
         this.rep_extensao = rep_extensao;
+        this.rep_arquivo = rep_arquivo;
     }
 
     public int getRep_codigo() {
