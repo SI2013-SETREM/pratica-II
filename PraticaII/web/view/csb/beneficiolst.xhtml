@@ -21,7 +21,7 @@
                     <i class="fa fa-plus"></i> Inserir ${beneficioBean.sTitle}
                 </h:link>
             </div>
-            <h:form>
+            <h:form id="form">
                 <h:dataTable value="${beneficioBean.beneficios}" var="item" rendered="${beneficioBean.beneficios.rowAvailable}" styleClass="dataTable table table-bordered table-striped">
                     <h:column>
                         <f:facet name="header">
