@@ -61,7 +61,7 @@
                     <div class="form-group">
                         <div class="col-md-offset-1 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
                             <h:link styleClass="btn btn-default" value="Cancelar" outcome="#{alunosTurmaBean.listar()}" />
-                            <h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{alunosTurmaBean.update()}"></h:commandButton>
+                            <h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{alunosTurmaBean.salvar(alunosTurmaBean.alunos_turma.pst_pestur, alunosTurmaBean.alunos_turma.pst_frequencia, alunosTurmaBean.alunos_turma.pst_aprovado, alunosTurmaBean.alunos_turma.pst_observacao)}"></h:commandButton>
                         </div>
                     </div>                   
                 </h:form>

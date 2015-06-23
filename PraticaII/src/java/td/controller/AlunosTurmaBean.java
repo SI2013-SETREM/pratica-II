@@ -126,5 +126,11 @@ public class AlunosTurmaBean {
         dao.delete(i);
         return "alunosturmalst";
     }
+
+     public String salvar(int id, int f, int s, String obs) {
+         dao.pst = id;
+         dao.updatePesTur(f, s, obs);   
+        return "alunosturmalst";
+    }
     
 }

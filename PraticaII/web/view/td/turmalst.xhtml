@@ -56,6 +56,14 @@
                     </h:column>
                     <h:column headerClass="col-editar-header">
                         <f:facet name="header">
+                            <h:outputText value="Alunos"/>
+                        </f:facet>
+                        <h:commandLink action="${avaliacaoBean.AvaliacaoTurma(item.getTur_codigo())}">
+                            <i class="fa fa-pencil-square-o"></i> Avaliar
+                        </h:commandLink>
+                    </h:column>
+                    <h:column headerClass="col-editar-header">
+                        <f:facet name="header">
                             <h:outputText value="Editar"/>
                         </f:facet>
                         <h:commandLink action="${turmaBean.edit(item)}">

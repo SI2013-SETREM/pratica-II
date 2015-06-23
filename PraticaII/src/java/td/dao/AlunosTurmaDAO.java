@@ -11,7 +11,7 @@ import util.HibernateUtil;
 public class AlunosTurmaDAO {
 
     private Session session;
-    public int idTur, oid;
+    public int idTur, pst;
 
     public AlunosTurmaDAO() {
         session = HibernateUtil.getSessionFactory().openSession();
@@ -78,5 +78,17 @@ public class AlunosTurmaDAO {
 
         Query q = session.createQuery("from Alunos_turma " + sql);
         return q.list();
+    }
+    
+   public void updatePesTur(int freq, int sit, String obs) {
+       Transaction transaction = session.beginTransaction();
+       try {
+            SQLQuery q = session.createSQLQuery("UPDATE trd_alunos_turma SET pst_frequencia = "+freq+", pst_aprovado = "+sit+", pst_observacao = '"+obs+"' WHERE pst_pestur = "+pst).addEntity(AlunosTurma.class);
+            q.executeUpdate();
+            transaction.commit();
+        } catch (Throwable t) {
+            transaction.rollback();
+        throw t;
+        }  
     }
 }

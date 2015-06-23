@@ -87,7 +87,10 @@ public class AlunosTurma implements Serializable {
     public String retornaSituacao(int a){
         if(a == 1){
             return "Aprovado";
-        }else
+        }
+        if(a == 2){
             return "Reprovado";
+        }else
+            return "Indefinido";
     }
 }
