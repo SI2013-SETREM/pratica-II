@@ -117,7 +117,7 @@ public class EventoBean {
     
     public String edit(Evento i) {
         evento = (Evento) eventos.getRowData();
-        return "eventosfrm";
+        return "eventofrm";
     }
     
     public String update() {
