@@ -5,6 +5,7 @@ import ad.model.Competencia;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,8 +24,8 @@ import org.hibernate.annotations.SQLUpdate;
 @Entity
 @Table(name="rec_pergunta")
 @IdClass(PerguntaPK.class)
-@SQLInsert(sql = "insert into rec_pergunta (cmp_codigo, prg_exibircandidato, prg_obrigatoria, prg_opcaooutros, prg_ordem, prg_pergunta, prg_tipo, prg_codigo, qst_codigo)  values (?, ?, ?, ?, ?, ?, ?, ?, ?)", check = ResultCheckStyle.NONE)
-@SQLUpdate(sql = "update rec_pergunta set cmp_codigo=?, prg_exibircandidato=?, prg_obrigatoria=?, prg_opcaooutros=?, prg_ordem=?, prg_pergunta=?, prg_tipo=? where prg_codigo=? and qst_codigo=?", check = ResultCheckStyle.NONE)
+//@SQLInsert(sql = "insert into rec_pergunta (cmp_codigo, prg_exibircandidato, prg_obrigatoria, prg_opcaooutros, prg_ordem, prg_pergunta, prg_tipo, prg_codigo, qst_codigo)  values (?, ?, ?, ?, ?, ?, ?, ?, ?)", check = ResultCheckStyle.NONE)
+//@SQLUpdate(sql = "update rec_pergunta set cmp_codigo=?, prg_exibircandidato=?, prg_obrigatoria=?, prg_opcaooutros=?, prg_ordem=?, prg_pergunta=?, prg_tipo=? where prg_codigo=? and qst_codigo=?", check = ResultCheckStyle.NONE)
 public class Pergunta implements Serializable, Comparable<Pergunta> {
     
     public static final String sTitle = "Pergunta";
@@ -78,8 +79,8 @@ public class Pergunta implements Serializable, Comparable<Pergunta> {
 //    @GeneratedValue(strategy = TABLE, generator = "prgGen")
     
     @Id
-    @SequenceGenerator(name="pergunta_unique_sequence", sequenceName="seq_rs_pergunta")
-    @GeneratedValue(strategy=GenerationType.AUTO, generator="pergunta_unique_sequence")
+//    @SequenceGenerator(name="pergunta_unique_sequence", sequenceName="seq_rs_pergunta")
+//    @GeneratedValue(strategy=GenerationType.AUTO, generator="pergunta_unique_sequence")
     private int prg_codigo;
     
     @ManyToOne
@@ -97,7 +98,7 @@ public class Pergunta implements Serializable, Comparable<Pergunta> {
     private boolean prg_exibircandidato = true;
     private boolean prg_obrigatoria = true;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JoinColumns ({
         @JoinColumn(name = "qst_codigo", referencedColumnName = "qst_codigo"),
         @JoinColumn(name = "prg_codigo", referencedColumnName = "prg_codigo")

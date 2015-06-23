@@ -9,6 +9,8 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
+import rs.dao.PerguntaDAO;
+import rs.dao.PerguntaOpcaoDAO;
 import rs.dao.QuestionarioDAO;
 import rs.model.Pergunta;
 import rs.model.PerguntaOpcao;
@@ -23,6 +25,8 @@ public class QuestionarioBean {
     
     private Questionario questionario = new Questionario();
     private QuestionarioDAO dao = new QuestionarioDAO();
+    private PerguntaDAO daoPrg = new PerguntaDAO();
+    private PerguntaOpcaoDAO daoPrgOpc = new PerguntaOpcaoDAO();
     private DataModel questionarios;
     
 //    private List<Pergunta> arrPerguntas;
@@ -95,12 +99,46 @@ public class QuestionarioBean {
     
     public String salvar() {
 //        questionario.setPerguntas(getArrPerguntas());
-        if (questionario.getQstCodigo() > 0)
+        if (questionario.getQstCodigo() > 0) {
             dao.update(questionario);
-        else 
-            dao.insert(questionario);
-        
+        } else {
+            this.insert();
+        }
         return "questionariolst?faces-redirect=true";
+    }
+    
+    // TENTAR ISTO http://stackoverflow.com/a/18518859/3136474
+    public void insert() {
+        dao.insert(questionario);
+        
+//        Questionario qst = new Questionario();
+//        qst.setQstTitulo(questionario.getQstTitulo());
+//        qst.setQstPontuacaototal(questionario.getQstPontuacaototal());
+//        qst.setQstPontuacaomax(questionario.getQstPontuacaomax());
+//        qst.setQstTipoQuestoes(questionario.getQstTipoQuestoes());
+//        dao.insert(qst);
+//        
+//        List<Pergunta> arrPerguntas = questionario.getPerguntas();
+//        if (arrPerguntas != null) {
+//            Collections.sort(arrPerguntas);
+//            int prgOrdem = 1;
+//            for (Pergunta pergunta : arrPerguntas) {
+//                if (!"".equals(pergunta.getPrgPergunta())) {
+//                    pergunta.setQuestionario(questionario);
+//                    pergunta.setPrgOrdem(prgOrdem++);
+//                    daoPrg.insert(pergunta);
+//                    
+//                    if (pergunta.getPerguntaOpcoes() != null) {
+//                        int opcCodigo = 1;
+//                        for (PerguntaOpcao perguntaOpcao : pergunta.getPerguntaOpcoes()) {
+////                            perguntaOpcao.setPergunta(pergunta);
+//                            perguntaOpcao.setOpcCodigo(opcCodigo);
+//                            daoPrgOpc.insert(perguntaOpcao);
+//                        }
+//                    }
+//                }
+//            }
+//        }
     }
     
     public String listar() {
@@ -123,6 +161,9 @@ public class QuestionarioBean {
     public void delPergunta(Pergunta p) {
         this.questionario.delPergunta(p);
     }
+//    public void delPergunta(int prgCodigo, int prgOrdem) {
+//        this.questionario.delPergunta(prgCodigo, prgOrdem);
+//    }
     
     public void savePergunta(Pergunta p) {
         List<Pergunta> arrPerguntas = this.questionario.getPerguntas();

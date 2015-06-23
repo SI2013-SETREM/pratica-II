@@ -43,7 +43,7 @@ public class EmpresaBean {
         return empresas;
     }
 
-    public void setEmpresas(DataModel idiomas) {
+    public void setEmpresas(DataModel empresas) {
         this.empresas = empresas;
     }
 

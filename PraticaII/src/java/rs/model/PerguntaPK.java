@@ -2,11 +2,16 @@ package rs.model;
 
 import java.io.Serializable;
 import java.util.Objects;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 // From http://stackoverflow.com/questions/3585034/how-to-map-a-composite-key-with-hibernate
 public class PerguntaPK implements Serializable {
     
+    @ManyToOne
+    @JoinColumn(name = "qst_codigo", referencedColumnName = "qst_codigo")
     protected Questionario questionario;
+    
     protected int prg_codigo;
 
     public PerguntaPK() {

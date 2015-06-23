@@ -9,7 +9,7 @@
     <ui:define name="header">
         <script type="text/javascript">
             function bindClickPergunta() {
-                $('.pergunta-link').click(function(event){
+                $('.pergunta-link').click(function(event) {
                     if (!($(event.target).hasClass('btn') || $(event.target).hasClass('fa'))) { //clique nos botões
                         var $link = $(this);
                         var $form = $('.pergunta-form[data-pergunta=' + $(this).data('pergunta') + ']');
@@ -49,9 +49,20 @@
                         $form.removeClass('hidden');
                         $link.addClass('hidden');
                     } else {
-                        fillPerguntaStatic($form, $link);
-                        $link.removeClass('hidden');
-                        $form.addClass('hidden');
+                        fillPerguntaStatic($form, $link, idPergunta);
+                        var opcVazia = false;
+                        $('.opcOpcao', $form).each(function(idxOpc, o) {
+                            if ($(this).val() === "") {
+                                opcVazia = true;
+                            }
+                        });
+                        if (opcVazia) {
+                            $form.removeClass('hidden');
+                            $link.addClass('hidden');
+                        } else {
+                            $link.removeClass('hidden');
+                            $form.addClass('hidden');
+                        }
                     }
                 });
             }
@@ -63,14 +74,19 @@
                     $('.prgPergunta', $form).attr('placeholder', 'Por favor, preencha a pergunta');
                     $('.prgPergunta', $form).focus();
                 } else {
-                    fillPerguntaStatic($form, $link);
+                    fillPerguntaStatic($form, $link, idPergunta);
                     $link.removeClass('hidden');
                     $form.addClass('hidden');
                 }
                 return false;
             }
-            function fillPerguntaStatic($form, $link) {
-                $('.prgPerguntaStatic', $link).html($('.prgOrdem', $form).html() + ' ' + $('.prgPergunta', $form).val());
+            function fillPerguntaStatic($form, $link, idPergunta) {
+                //$('.prgPerguntaStatic', $link).html($('.prgOrdem', $form).html() + ' ' + $('.prgPergunta', $form).val());
+                if ($('#prgPergunta', $link).html() !== "") {
+                    $('.prgPerguntaStatic', $link).html($('#prgOrdem', $link).html() + '. ' + $('#prgPergunta', $link).html());
+                } else {
+                    $('.prgPerguntaStatic', $link).html($('.prgOrdem[data-pergunta=' + idPergunta + ']', $form).html() + ' ' + $('.prgPergunta[data-pergunta=' + idPergunta + ']', $form).val());
+                }
             }
             //http://stackoverflow.com/questions/13540298/proccess-onclick-function-after-ajax-call-fajax
             function ajaxPergunta(data) {
@@ -162,6 +178,8 @@
                                 <c:forEach items="#{questionarioBean.questionario.perguntas}" var="pergunta" varStatus="loopPergunta">
                                     <c:set var="idPergunta" value="#{pergunta.prgCodigo}_#{loopPergunta.index}" />
                                     <div class="pergunta-link list-group-item hidden" data-pergunta="#{idPergunta}">
+                                        <span id="prgPergunta" class="hidden">#{pergunta.prgPergunta}</span>
+                                        <span id="prgOrdem" class="hidden">#{pergunta.prgOrdem}</span>
                                         <span class="prgPerguntaStatic form-control-static"><!--Alimentado via JavaScript--></span>
                                         <div class="btn-group pull-right">
                                             <h:commandLink onclick="movePergunta('up', '#{idPergunta}');" rendered="#{loopPergunta.index != 0}" immediate="true" styleClass="btn btn-info" action="#{questionarioBean.moveUpPergunta(pergunta)}">
@@ -188,7 +206,7 @@
                                         <div class="row">
                                             <div class="col-xs-8 col-lg-10">
                                                 <div class="input-group">
-                                                    <span class="input-group-addon prgOrdem" pt:data-pergunta="#{idPergunta}">#{pergunta.prgOrdem}.</span>
+                                                    <span class="input-group-addon prgOrdem" data-pergunta="#{idPergunta}">#{pergunta.prgOrdem}.</span>
                                                     <h:inputText pt:placeholder="Pergunta" value="#{pergunta.prgPergunta}" title="Pergunta" styleClass="form-control prgPergunta" pt:data-pergunta="#{idPergunta}" />
                                                 </div>
                                             </div>

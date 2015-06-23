@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,7 +20,7 @@ import org.hibernate.annotations.SQLUpdate;
 
 @Entity
 @Table(name = "rec_questionario")
-@SQLInsert(sql = "insert into rec_questionario (qst_pontuacaomax, qst_pontuacaototal, qst_tipo_questoes, qst_titulo, qst_codigo) values (?, ?, ?, ?, ?)", check = ResultCheckStyle.NONE)
+//@SQLInsert(sql = "insert into rec_questionario (qst_pontuacaomax, qst_pontuacaototal, qst_tipo_questoes, qst_titulo, qst_codigo) values (?, ?, ?, ?, ?)", check = ResultCheckStyle.NONE)
 //@SQLUpdate(sql = "UPDATE rec_questionario SET qst_titulo=?,qst_pontuacaototal=?,qst_pontuacaomax=?,qst_tipo_questoes=?,qst_tipo=? WHERE qst_codigo=?", check = ResultCheckStyle.NONE)
 public class Questionario implements Serializable {
 
@@ -50,7 +51,7 @@ public class Questionario implements Serializable {
      */
     private int qst_tipo_questoes = 1;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JoinColumn(name = "qst_codigo", referencedColumnName = "qst_codigo")
     @OrderBy(value = "prg_ordem")
     private List<Pergunta> perguntas;
@@ -167,6 +168,25 @@ public class Questionario implements Serializable {
             }
         }
     }
+//    public void delPergunta(int prgCodigo, int prgOrdem) {
+//        if (this.perguntas != null) {
+////            int prgOrdem = p.getPrgOrdem();
+////            this.perguntas.remove(p);
+//            System.err.println("DELETANDO PERGUNTA: " + prgCodigo + "," + prgOrdem);
+//            List<Pergunta> arrPergunta = new ArrayList<>();
+//            for (Pergunta pergunta : this.perguntas) {
+//                System.err.println("Navegando na pergunta : " + pergunta.getPrgCodigo() + "," + pergunta.getPrgOrdem());
+//                if (pergunta.getPrgCodigo() != prgCodigo || pergunta.getPrgOrdem() != prgOrdem) {
+//                    System.err.println("PODE ADICIONAR : " + pergunta.getPrgCodigo() + "," + pergunta.getPrgOrdem());
+//                    if (pergunta.getPrgOrdem() > prgOrdem) {
+//                        pergunta.setPrgOrdem(pergunta.getPrgOrdem()-1);
+//                    }
+//                    arrPergunta.add(pergunta);
+//                }
+//            }
+//            this.setPerguntas(arrPergunta);
+//        }
+//    }
 
     public void moveUpPergunta(Pergunta p) {
         int prgOrdem = p.getPrgOrdem();
