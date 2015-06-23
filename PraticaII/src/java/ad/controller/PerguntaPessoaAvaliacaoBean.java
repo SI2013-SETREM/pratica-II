@@ -16,12 +16,13 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import rs.dao.QuestionarioDAO;
 import rs.model.Pergunta;
+import rs.model.PerguntaOpcao;
 import util.Utilidades;
 
 @ManagedBean
 @SessionScoped
 public class PerguntaPessoaAvaliacaoBean {
-    
+
     private final String sTitle = "Avaliado";
     private final String pTitle = "Avaliados";
     private String Detail = "Detalhes";
@@ -40,7 +41,7 @@ public class PerguntaPessoaAvaliacaoBean {
     private int userId = UserCod();
     private int idAvaliacao;
     private int idColaborador;
-    
+
     private int UserCod() {
         LoginBean loginB = (LoginBean) Utilidades.getSessionObject("loginBean");
         if (loginB != null && loginB.getUsuario() != null && loginB.getUsuario().getPessoa() != null) {
@@ -49,7 +50,7 @@ public class PerguntaPessoaAvaliacaoBean {
             return -1;
         }
     }
-    
+
     public PerguntaPessoaAvaliacaoBean() {
     }
 
@@ -68,7 +69,7 @@ public class PerguntaPessoaAvaliacaoBean {
     public List<PerguntaPessoaAvaliacao> getLsPerguntasP() {//Lista questões para avaliar
         return lsPerguntasP;
     }
-    
+
     public String salvar() {
         if (lsPerguntasP != null && !lsPerguntasP.isEmpty()) {
             int media = 0;
@@ -76,10 +77,17 @@ public class PerguntaPessoaAvaliacaoBean {
             for (PerguntaPessoaAvaliacao PergResp : lsPerguntasP) {
                 length += 1;
                 if (PergResp.getPergunta().getPrgTipo() == 2) {
-                    media += Integer.parseInt(PergResp.getPpa_resposta());
-                } else {
-                    media += PergResp.getPpa_pontuacao();
+                    for (PerguntaOpcao opt : PergResp.getPergunta().getPerguntaOpcoes()) {
+                        if (opt.getOpcCodigo() == Integer.parseInt(PergResp.getPpa_resposta())) {
+                            PergResp.setPpa_resposta(opt.getOpcNome());
+                            PergResp.setPpa_pontuacao(opt.getOpcPontuacao());
+                            //media += Integer.parseInt(PergResp.getPpa_resposta());
+                            break;
+                        }
+                    }
                 }
+                PergResp.setPpa_pergunta(PergResp.getPergunta().getPrgPergunta());
+                media += PergResp.getPpa_pontuacao();
                 dao.insert(PergResp);
             }
             PessoasAvaliacao pessoA = PesAvaldao.GetListPessoasAvaliacao(avaliacao.getAva_codigo(), avaliado.getPes_codigo(), userId, true, false).get(0);
@@ -90,7 +98,7 @@ public class PerguntaPessoaAvaliacaoBean {
         //LsPerguntas();
         return "pessoasavaliacaofrm";
     }
-    
+
     private void LsPerguntas() {
         List<PerguntaPessoaAvaliacao> lsPergPes = new ArrayList<>();
         List<PessoasAvaliacao> lsPessoas = PesAvaldao.GetListPessoasAvaliacao(idAvaliacao, 0, userId, true, false);
@@ -119,15 +127,15 @@ public class PerguntaPessoaAvaliacaoBean {
             lsPerguntasP = lsPergPes;
         }
     }
-    
+
     public Pessoa getAvaliado() {
         return avaliado;
     }
-    
+
     public void setAvaliado(Pessoa avaliado) {
         this.avaliado = avaliado;
     }
-    
+
     public void GetAvaliados() {
         List<PessoasAvaliacao> lsPessoas = PesAvaldao.GetListPessoasAvaliacao(idAvaliacao, 0, userId, true, false);
         if (lsPessoas != null && !lsPessoas.isEmpty()) {
@@ -136,31 +144,31 @@ public class PerguntaPessoaAvaliacaoBean {
         LsPerguntas();
         //return "pessoasavaliacaofrm";
     }
-    
+
     public String getsTitle() {
         return sTitle;
     }
-    
+
     public String getpTitle() {
         return pTitle;
     }
-    
+
     public String listar() {
         return "avaliacoespendenteslst";
     }
-    
+
     public int getIdAvaliacao() {
         return idAvaliacao;
     }
-    
+
     public void setIdAvaliacao(int idAvaliacao) {
         this.idAvaliacao = idAvaliacao;
     }
-    
+
     public String getErroMsg() {
         return ErroMsg;
     }
-    
+
     public void getDetails() {
         List<PerguntaPessoaAvaliacao> lsPPA1 = new ArrayList();
         List<PerguntaPessoaAvaliacao> lsPPA2 = dao.ListPerguntasPessoasAvaliacao(idAvaliacao, idColaborador, 0);
@@ -177,33 +185,33 @@ public class PerguntaPessoaAvaliacaoBean {
         this.avaliado = pesDao.findById(idColaborador);
         this.avaliacao = avaDao.findById(idAvaliacao);
     }
-    
+
     public List<PerguntaPessoaAvaliacao> DadosPessoa(int per_id) {
         return dao.ListPerguntasPessoasAvaliacao(idAvaliacao, idColaborador, per_id);
     }
-    
+
     public int getIdColaborador() {
         return idColaborador;
     }
-    
+
     public void setIdColaborador(int idColaborador) {
         this.idColaborador = idColaborador;
     }
-    
+
     public List<PerguntaPessoaAvaliacao> getLsRespostasDetail() {
         return lsRespostasDetail;
     }
-    
+
     public List<PessoasAvaliacao> getLsPessoasAvaliacao() {
         return lsPessoasAvaliacao;
     }
-    
+
     public String getDetail() {
         return Detail;
     }
-    
+
     public Avaliacao getAvaliacao() {
         return avaliacao;
     }
-    
+
 }

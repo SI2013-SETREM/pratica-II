@@ -79,7 +79,7 @@
                                                 <h:outputLabel value="#{loop.index + 1}. #{item.pergunta.prgPergunta}" styleClass="col-md-12"/>
                                                 <h:inputTextarea rendered="#{item.pergunta.prgTipo == 1}" pt:required="#{item.pergunta.prgObrigatoria}" value="#{perguntaPessoaAvaliacaoBean.lsPerguntasP[loop.index].ppa_resposta}" styleClass="form-control"/>
                                                 <h:selectOneMenu rendered="#{item.pergunta.prgTipo == 2}" pt:required="#{item.pergunta.prgObrigatoria}"  value="#{perguntaPessoaAvaliacaoBean.lsPerguntasP[loop.index].ppa_resposta}" styleClass="form-control">
-                                                    <f:selectItems value="#{item.pergunta.perguntaOpcoes}" var="opcao" itemLabel="#{opcao.getOpcNome()}" itemValue="#{opcao.getOpcPontuacao()}" pt:autofocus=""/>
+                                                    <f:selectItems value="#{item.pergunta.perguntaOpcoes}" var="opcao" itemLabel="#{opcao.getOpcNome()}" itemValue="#{opcao.getOpcCodigo()}" pt:autofocus=""/>
                                                 </h:selectOneMenu>
                                             </div>
                                             <div class="col-md-4">

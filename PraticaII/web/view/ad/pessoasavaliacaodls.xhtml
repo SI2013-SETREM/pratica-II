@@ -65,22 +65,28 @@
                                     </div>
                                 </div>
                             </h:panelGroup>
-                            
+
                             <h:panelGroup rendered="#{item.pergunta.prgTipo == 2}">
                                 <div style="display: none" id="dados_grafico_#{item.pergunta.prgCodigo}">
-                                    <ui:repeat value="#{item.pergunta.perguntaOpcoes}" var="opt" varStatus="index">
-                                        <div class="OPT">
-                                            <input type="hidden" class="NOME" value="#{opt.getOpcNome()}"/>
-                                            <input type="hidden" class="PONTO" value="#{opt.getOpcPontuacao()}"/>
-                                        </div>
+                                    <ui:repeat value="#{perguntaPessoaAvaliacaoBean.lsRespostasDetail}" var="item2" varStatus="index">
+                                        <h:panelGroup  rendered="#{item2.pergunta.prgCodigo == item.pergunta.prgCodigo}" >
+                                            <div class="OPT_RESP">
+                                                <input type="hidden" class="NOME" value="#{item2.ppa_resposta}"/>
+                                                <input type="hidden" class="PONTO" value="#{item2.ppa_pontuacao}"/>
+                                            </div>
+                                        </h:panelGroup>
                                     </ui:repeat>
                                 </div>
                                 <div class="form-group list-group-item" >
                                     <script>
                                         $(function () {
                                             var list = new Array;
-                                            $('#dados_grafico_#{item.pergunta.prgCodigo} > .OPT').each(function (item) {
-                                                list.push([$(this).find('.NOME').val(), parseFloat($(this).find('.PONTO').val())]);
+                                            $('#dados_grafico_#{item.pergunta.prgCodigo} > .OPT_RESP').each(function (item) {
+                                                var count = 0;
+                                                $('#dados_grafico_#{item.pergunta.prgCodigo} > .OPT_RESP > .PONTO[value="' + $(this).find('.PONTO').val() + '"]').each(function (item2) {
+                                                    count++;
+                                                });
+                                                list.push([$(this).find('.NOME:eq(0)').val(), parseInt(count)]);
                                             });
                                             console.log(list);
                                             $(document).ready(function () {
