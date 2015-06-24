@@ -19,13 +19,13 @@
             <h:form styleClass="form-horizontal">
                 <h:inputHidden id="RecCodigo" value="#{recrutamentoBean.recrutamento.recCodigo}" />
                 <div class="form-group">
-                    <h:outputLabel value="Título:" for="recTitulo" styleClass="control-label col-sm-1" />
+                    <h:outputLabel value="Título:" for="recTitulo" styleClass="control-label col-sm-1 col-md-2" />
                     <div class="col-md-6 col-sm-12">
                         <h:inputText pt:autofocus="" pt:required="required" id="recTitulo" value="#{recrutamentoBean.recrutamento.recTitulo}" title="Título do Recrutamento" styleClass="form-control" />
                     </div> 
                 </div>
                 <div class="form-group">
-                    <h:outputLabel value="Tipo:" for="recTipo" styleClass="control-label col-sm-1" />
+                    <h:outputLabel value="Tipo:" for="recTipo" styleClass="control-label col-sm-1  col-md-2" />
                     <div style="padding-top: 5px" class="col-md-4 col-sm-12">
                         <h:selectOneMenu value="#{recrutamentoBean.recrutamento.recTipo}" id="recTipo" class="form-control">
                             <f:selectItem itemValue="1" itemLabel="Interno"/>
@@ -35,11 +35,37 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <h:outputLabel value="Início:" for="recInicio" styleClass="control-label col-sm-1" />
+                    <h:outputLabel value="Início:" for="recInicio" styleClass="control-label col-sm-1 col-md-2" />
                     <div class="col-md-4 col-sm-12">
                         <h:inputText pt:type="date" id="datainicial" value="#{recrutamentoBean.recrutamento.recInicio}" title="Data Início" styleClass="form-control">
                             <f:convertDateTime pattern="yyyy-MM-dd"/>
                         </h:inputText>
+                    </div> 
+                </div>
+                <div class="form-group">
+                    <h:outputLabel  value="Cargo:" for="cargo" styleClass="control-label col-sm-1 col-md-2" />
+                    <div class="col-md-6 col-sm-12">
+                        <h:selectOneMenu id="cargo" converter="cargoConverter" value="#{recrutamentoBean.recrutamento.cargo}" styleClass="form-control">
+                            <f:selectItems value="#{recrutamentoBean.cargos}" var="tipe" itemLabel="#{tipe.car_descricao}" />
+                        </h:selectOneMenu>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <h:outputLabel value="Vagas:" for="recCarQuantidade" styleClass="control-label col-sm-1 col-md-2" />
+                    <div class="col-md-6 col-sm-12">
+                        <h:inputText pt:autofocus="" pt:required="required" id="recCarQuantidade" value="#{recrutamentoBean.recrutamento.rec_car_quantidade}" styleClass="form-control" />
+                    </div> 
+                </div>
+                <div class="form-group">
+                    <h:outputLabel value="Descrição da vaga:" for="recCarExpectativaSalario" styleClass="control-label col-sm-1 col-md-2" />
+                    <div class="col-md-6 col-sm-12">
+                        <h:inputText pt:autofocus="" pt:required="required" id="recCarExpectativaSalario" value="#{recrutamentoBean.recrutamento.rec_car_expectativasalario}" styleClass="form-control" />
+                    </div> 
+                </div>
+                 <div class="form-group">
+                    <h:outputLabel value="Expectativa Salarial:" for="recDescricaoCargo" styleClass="control-label col-sm-1 col-md-2" />
+                    <div class="col-md-8 col-sm-12">
+                        <h:inputTextarea rows="6" pt:autofocus="" pt:required="required" id="recDescricaoCargo" value="#{recrutamentoBean.recrutamento.rec_car_descricao}" styleClass="form-control" />
                     </div> 
                 </div>
                 <div class="form-group row">

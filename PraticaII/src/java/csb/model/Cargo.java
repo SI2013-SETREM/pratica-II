@@ -83,9 +83,28 @@ public class Cargo implements Serializable, Comparable<Cargo> {
             }
     )
     private List<Beneficio> beneficios;
+    
+    @ManyToMany
+    @JoinTable(name = "rec_interesse_cargo",
+            joinColumns = {
+                @JoinColumn(name = "car_codigo")
+            },
+            inverseJoinColumns = {
+                @JoinColumn(name = "pes_codigo")
+            }
+    )
+    private List<Pessoa> pessoas;
 
     public Cargo() {
 
+    }
+
+    public List<Pessoa> getPessoas() {
+        return pessoas;
+    }
+
+    public void setPessoas(List<Pessoa> pessoas) {
+        this.pessoas = pessoas;
     }
 
     public int getCar_codigo() {

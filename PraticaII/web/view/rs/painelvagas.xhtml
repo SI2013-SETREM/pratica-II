@@ -1,78 +1,75 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
-    <body>
-        <ui:composition template="../modelos/default.xhtml">
-            <ui:define name="title">
-                Painel de Vagas
-            </ui:define>
-            <ui:define name="header">
-                <style>
-                    .setor{
-                        margin-top: 5px;
-                        font-size: 20px;
-                    }
-                    .vaga{
-                        font-size: 25px;
-                        font-weight: bolder;      
-                    }
-                    .descricao-vaga{
-                        margin-top: 25px;
-                    }
+<ui:composition template="../modelos/default.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
-                </style>
-            </ui:define>
+    <ui:define name="title">
+        Painel de Vagas
+    </ui:define>
+    <ui:define name="header">
+        <style>
+            .setor{
+                margin-top: 5px;
+                font-size: 20px;
+            }
+            .vaga{
+                font-size: 25px;
+                font-weight: bolder;      
+            }
+            .descricao-vaga{
+                margin-top: 25px;
+            }
 
-            <ui:define name="breadcrumb">
-                <li>Recrutamento e Seleção</li>
-                <li>Painel de Vagas</li>
-            </ui:define>
+        </style>
+    </ui:define>
 
-            <ui:define name="main-content">
-                <div class="panel panel-body">
-                    <div class="row">
-                        <c:forEach items="#{recrutamentoCargoBean.dao.rc}" var="vagas" varStatus="loopVaga">
-                            <div class="col-sm-6 col-md-4 col-lg-3">
-                                <div class="thumbnail">
-                                    <div class="caption">
-                                        <span class="setor">#{vagas[loopVaga.index].cargo.car_pai.car_descricao}</span><br/>
-                                        <span class="vaga">#{vagas[loopVaga.index].cargo.car_descricao}</span>
-                                        <p class="text-left descricao-vaga">
-                                            <span>Número de Vagas:</span> <span>#{vagas[loopVaga.index].recCarQuantidade}</span><br/>
-                                            <span>Descrição:</span> <span>#{vagas[loopVaga.index].recCarDescricaoResumida}</span>
-                                        </p>
-                                        <div>
-                                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
-                                                Mais...
-                                            </button>
+    <ui:define name="breadcrumb">
+        <li>Recrutamento e Seleção</li>
+        <li>Painel de Vagas</li>
+    </ui:define>
 
-                                            <!-- Modal -->
-                                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                            <h4 class="modal-title" id="myModalLabel">#{vagas[loopVaga.index].cargo.car_pai.car_descricao} </h4>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <div class="thumbnail">
-                                                                <div class="caption">
-                                                                    <span class="vaga">#{vagas[loopVaga.index].cargo.car_descricao}</span>
-                                                                    <p class="text-left descricao-vaga">
-                                                                        <span>Número de Vagas:</span> <span>#{vagas[loopVaga.index].recCarQuantidade}</span><br/>
-                                                                        <span>Descrição Detalhada:</span> <span>#{vagas[loopVaga.index].recCarDescricao}</span>
-                                                                    </p>
-                                                                </div>
+    <ui:define name="main-content">
+        <h:form>
+            <div class="panel panel-body">
+                <div class="row">
+                    <c:forEach items="#{recrutamentoBean.dao.rc}" var="vagas" varStatus="loopVaga">
+                        <div class="col-sm-6 col-md-4 col-lg-3">
+                            <div class="thumbnail">
+                                <div class="caption">
+                                    <span class="setor">#{vagas.cargo.car_pai.car_descricao}</span><br/>
+                                    <span class="vaga">#{vagas.cargo.car_descricao}</span>
+                                    <p class="text-left descricao-vaga">
+                                        <span>Número de Vagas:</span> <span>#{vagas.rec_car_quantidade}</span><br/>
+                                        <span>Descrição:</span> <span>#{vagas.recCarDescricaoResumida}</span>
+                                    </p>
+                                    <div>
+                                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+                                            Mais...
+                                        </button>
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>
+                                                        <h4 class="modal-title" id="myModalLabel">#{vagas.cargo.car_pai.car_descricao} </h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="thumbnail">
+                                                            <div class="caption">
+                                                                <span class="vaga">#{vagas.cargo.car_descricao}</span>
+                                                                <p class="text-left descricao-vaga">
+                                                                    <span>Número de Vagas:</span> <span>#{vagas.rec_car_quantidade}</span><br/>
+                                                                    <span>Descrição Detalhada:</span> <span>#{vagas.rec_car_descricao}</span>
+                                                                </p>
                                                             </div>
                                                         </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-                                                             <h:commandButton styleClass="btn btn-info" value="Tenho Interesse" action="#{recrutamentoCargoBean.interesse('painelvagas?faces-redirect=true')}"/>
-                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                                                        <h:commandButton styleClass="btn btn-info" value="Tenho Interesse" action="#{recrutamentoBean.interesse(vagas.cargo,'painelvagas?faces-redirect=true')}"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -80,19 +77,10 @@
                                     </div>
                                 </div>
                             </div>
-                        </c:forEach>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <p:tree value="#{recrutamentoCargoBean.arvoreCargos}" var="tree" dynamic="true">
-                                <p:treeNode expandedIcon="fa fa-folder-open" collapsedIcon="fa fa-folder">
-                                    <h:outputText value="#{tree}" />
-                                </p:treeNode>
-                            </p:tree>
-                        </div> 
-                    </div>
+                        </div>
+                    </c:forEach>
                 </div>
-            </ui:define>
-        </ui:composition>
-    </body>
-</html>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>

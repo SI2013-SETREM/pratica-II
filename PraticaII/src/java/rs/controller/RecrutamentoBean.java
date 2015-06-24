@@ -5,21 +5,27 @@
  */
 package rs.controller;
 
+import cfg.controller.LoginBean;
 import cfg.dao.PessoaDAO;
 import cfg.model.Pessoa;
+import csb.dao.CargoDAO;
+import csb.model.Cargo;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
+import org.primefaces.model.TreeNode;
 import rs.dao.RecrutamentoDAO;
 import rs.dao.RecrutamentoPessoasDAO;
 import rs.model.CandidatoRecrutamento;
 import rs.model.Recrutamento;
 import rs.model.RecrutamentoPessoa;
 import rs.model.RecrutamentoPessoaPK;
+import util.Utilidades;
 
 /**
  *
@@ -36,10 +42,32 @@ public class RecrutamentoBean {
     private RecrutamentoPessoasDAO recrutamentoPessoaDAO = new RecrutamentoPessoasDAO();
     private RecrutamentoDAO dao = new RecrutamentoDAO();
     private PessoaDAO pesDao = new PessoaDAO();
+    private CargoDAO daocargo = new CargoDAO();
+    private Pessoa pessoa = new Pessoa();
     private DataModel recrutamentos;
     private List<CandidatoRecrutamento> candidatosRecrutamento;
+    private List<Cargo> cargos;
+    private TreeNode arvoreCargos;
+    private TreeNode selectedNode;
 
     public RecrutamentoBean() {
+    }
+
+    @PostConstruct
+    public void init() {
+        arvoreCargos = daocargo.arvoreCargo();
+    }
+
+    public TreeNode getArvoreCargos() {
+        return arvoreCargos;
+    }
+
+    public TreeNode getSelectedNode() {
+        return selectedNode;
+    }
+
+    public void setSelectedNode(TreeNode selectedNode) {
+        this.selectedNode = selectedNode;
     }
 
     public String getsTitle() {
@@ -48,6 +76,15 @@ public class RecrutamentoBean {
 
     public String getpTitle() {
         return pTitle;
+    }
+
+    public List<Cargo> getCargos() {
+        this.cargos = daocargo.findAll();
+        return cargos;
+    }
+
+    public void setCargos(List<Cargo> cargos) {
+        this.cargos = cargos;
     }
 
     public Recrutamento getRecrutamento() {
@@ -183,6 +220,20 @@ public class RecrutamentoBean {
 
     public void setCandidatosRecrutamento(DataModel candidatosRecrutamento) {
         this.candidatosRecrutamento = (List<CandidatoRecrutamento>) candidatosRecrutamento;
+    }
+
+    public String interesse(Cargo cargo, String pg) {
+        LoginBean login = (LoginBean) Utilidades.getSessionObject("loginBean");
+        this.pessoa = login.getUsuario().getPessoa();
+        if (cargo.getPessoas() == null) {
+            cargo.setPessoas(new ArrayList<Pessoa>());
+        }
+        cargo.getPessoas().add(pessoa);
+//        List<Pessoa> p = new ArrayList();
+//        p.add(pessoa);
+//        cargo.setPessoas(p);
+        daocargo.update(cargo);
+        return pg;
     }
 
 }

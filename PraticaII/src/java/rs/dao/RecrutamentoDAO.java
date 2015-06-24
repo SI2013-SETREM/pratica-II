@@ -5,6 +5,7 @@
  */
 package rs.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -19,9 +20,20 @@ import util.HibernateUtil;
 public class RecrutamentoDAO {
 
     private Session session;
+    public List<Recrutamento> rc = new ArrayList<>();
 
     public RecrutamentoDAO() {
         session = HibernateUtil.getSessionFactory().openSession();
+    }
+
+    public List<Recrutamento> getRc() {
+        Query q = session.createQuery("from Recrutamento where rec_status=2");
+        this.rc = q.list();
+        return rc;
+    }
+
+    public void setRc(List<Recrutamento> rc) {
+        this.rc = rc;
     }
 
     public void insert(Recrutamento r) {
@@ -43,7 +55,7 @@ public class RecrutamentoDAO {
         t.commit();
     }
 
-      public List<Recrutamento> findAll() {
+    public List<Recrutamento> findAll() {
         Query q = session.createQuery("from Recrutamento");
         return q.list();
     }
