@@ -81,7 +81,7 @@ public class Beneficio implements Serializable {
     public void setBen_datafim(Date ben_datafim) {
         this.ben_datafim = ben_datafim;
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 5;
@@ -102,6 +102,12 @@ public class Beneficio implements Serializable {
             return false;
         }
         return true;
+
+    }
+
+    @Override
+    public String toString() {
+        return getBen_descricao();
     }
 
 }
