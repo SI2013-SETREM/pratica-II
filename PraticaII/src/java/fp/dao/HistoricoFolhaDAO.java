@@ -1,6 +1,4 @@
-
 package fp.dao;
-
 
 import fp.model.HistoricoFolha;
 import java.util.List;
@@ -18,8 +16,7 @@ import util.HibernateUtil;
  * @author Max
  */
 public class HistoricoFolhaDAO {
-    
-    
+
     private Session session;
 
     public HistoricoFolhaDAO() {
@@ -35,7 +32,12 @@ public class HistoricoFolhaDAO {
         t.commit();
     }
 
- 
+    public void update(HistoricoFolha historicoFolha) {
+
+        Transaction t = session.beginTransaction();
+        session.merge(historicoFolha);
+        t.commit();
+    }
 
     public HistoricoFolha findById(int id) {
 
@@ -48,14 +50,20 @@ public class HistoricoFolhaDAO {
         return query.list();
 
     }
-  
-       public List<HistoricoFolha> historicos(int pes_codigo, int hif_codigo) {
+
+    public List<HistoricoFolha> historicos(int pes_codigo, int hif_codigo) {
         Criteria crit = session.createCriteria(HistoricoFolha.class);
         crit.add(Restrictions.eq("pes_codigo", pes_codigo));
         crit.add(Restrictions.eq("hif_codigo", hif_codigo));
         List results = crit.list();
 
-        return  crit.list();
+        return crit.list();
     }
-    
+
+    public List<HistoricoFolha> historicoAtual(int pes_codigo, String data) {
+
+        Query query = session.createQuery("from HistoricoFolha where pes_codigo = " + pes_codigo + " and hif_data = '" + data + "' ");
+        return query.list();
+    }
+
 }
