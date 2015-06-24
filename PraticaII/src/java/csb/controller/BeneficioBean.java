@@ -1,6 +1,5 @@
 package csb.controller;
 
-import cfg.dao.LogDAO;
 import csb.dao.BeneficioDAO;
 import csb.model.Beneficio;
 import javax.faces.bean.ManagedBean;
@@ -54,23 +53,22 @@ public class BeneficioBean {
 
     public String insert() {
         dao.insert(beneficio);
-        return "beneficiolst";
+        return "beneficiodispfrm";
     }
 
     public String edit(Beneficio i) {
         beneficio = (Beneficio) beneficios.getRowData();
-        return "beneficiofrm";
+        return "beneficiodispfrm";
     }
 
     public String update() {
         dao.update(beneficio);
-        return "beneficiolst";
+        return "beneficiodisplst";
     }
 
     public String delete(Beneficio i) {
         dao.delete(i);
-        LogDAO.insert("Setor", "Deletou setor código: " + i.getBen_codigo()+ ", descrição: " + i.getBen_descricao());
-        return "beneficiolst";
+        return "beneficiodisplst";
     }
 
     public String salvar() {
@@ -79,10 +77,10 @@ public class BeneficioBean {
         } else {
             dao.insert(beneficio);
         }
-        return "beneficiolst";
+        return "beneficiodisplst";
     }
 
     public String listar() {
-        return "beneficiolst";
+        return "beneficiodisplst";
     }
 }

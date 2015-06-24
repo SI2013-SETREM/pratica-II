@@ -37,7 +37,7 @@ public class BeneficiosPessoaDAO {
     }
     
     public List<BeneficiosPessoa> findAll() {
-        Query q = session.createQuery("from BeneficiosPessoa");
+        Query q = session.createQuery("from BeneficiosPessoa order by pes_codigo, ben_codigo asc");
         return q.list();
     }
     public List<BeneficiosPessoa> findByPessoaId(int pes_codigo) {

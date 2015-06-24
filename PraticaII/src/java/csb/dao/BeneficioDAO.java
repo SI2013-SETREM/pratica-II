@@ -37,7 +37,7 @@ public class BeneficioDAO {
     }
     
     public List<Beneficio> findAll() {
-        Query q = session.createQuery("from Beneficio");
+        Query q = session.createQuery("from Beneficio order by ben_descricao asc");
         return q.list();
     }
 }

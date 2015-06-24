@@ -81,5 +81,27 @@ public class Beneficio implements Serializable {
     public void setBen_datafim(Date ben_datafim) {
         this.ben_datafim = ben_datafim;
     }
+    
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 79 * hash + this.ben_codigo;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Beneficio other = (Beneficio) obj;
+        if (this.ben_codigo != other.ben_codigo) {
+            return false;
+        }
+        return true;
+    }
 
 }

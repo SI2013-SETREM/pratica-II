@@ -3,12 +3,13 @@ package csb.model;
 import cfg.model.Pessoa;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Objects;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
@@ -18,22 +19,24 @@ import javax.persistence.Temporal;
  */
 @Entity
 @Table(name = "csb_beneficios_pessoa")
-@IdClass(BeneficiosPessoa.BeneficiosPessoaPK.class)
 public class BeneficiosPessoa implements Serializable {
 
     public static final String sTitle = "Benefício";
     public static final String pTitle = "Benefícios";
 
     @Id
+    @SequenceGenerator(name = "bnp_codigo", sequenceName = "bnp_codigo")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "bnp_codigo")
+    private int bnp_codigo;
+
     @ManyToOne
     @JoinColumn(name = "ben_codigo", referencedColumnName = "ben_codigo")
     private Beneficio beneficio;
-    
-    @Id
+
     @ManyToOne
     @JoinColumn(name = "pes_codigo", referencedColumnName = "pes_codigo")
     private Pessoa pessoa;
-    
+
     private boolean ben_ativo;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date ben_datainicio;
@@ -41,48 +44,15 @@ public class BeneficiosPessoa implements Serializable {
     private Date ben_datafim;
     private double ben_valor;
 
-    public static class BeneficiosPessoaPK implements Serializable {
-
-        protected Beneficio beneficio;
-        protected Pessoa pessoa;
-
-        public BeneficiosPessoaPK() {
-        }
-
-        public BeneficiosPessoaPK(Beneficio beneficio, Pessoa pessoa) {
-            this.beneficio = beneficio;
-            this.pessoa = pessoa;
-        }
-
-        @Override
-        public int hashCode() {
-            int hash = 7;
-            hash = 17 * hash + Objects.hashCode(this.beneficio);
-            hash = 17 * hash + Objects.hashCode(this.pessoa);
-            return hash;
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-            if (obj == null) {
-                return false;
-            }
-            if (getClass() != obj.getClass()) {
-                return false;
-            }
-            final BeneficiosPessoaPK other = (BeneficiosPessoaPK) obj;
-            if (!Objects.equals(this.beneficio, other.beneficio)) {
-                return false;
-            }
-            if (!Objects.equals(this.pessoa, other.pessoa)) {
-                return false;
-            }
-            return true;
-        }
-
+    public BeneficiosPessoa() {
     }
 
-    public BeneficiosPessoa() {
+    public int getBnp_codigo() {
+        return bnp_codigo;
+    }
+
+    public void setBnp_codigo(int bnp_codigo) {
+        this.bnp_codigo = bnp_codigo;
     }
 
     public Beneficio getBeneficio() {
@@ -131,5 +101,31 @@ public class BeneficiosPessoa implements Serializable {
 
     public void setBen_valor(double ben_valor) {
         this.ben_valor = ben_valor;
+    }
+
+    public String getDataConverter(Date data) {
+        return util.Utilidades.getDataString(data);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 79 * hash + this.bnp_codigo;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final BeneficiosPessoa other = (BeneficiosPessoa) obj;
+        if (this.bnp_codigo != other.bnp_codigo) {
+            return false;
+        }
+        return true;
     }
 }
