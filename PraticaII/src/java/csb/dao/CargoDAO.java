@@ -16,38 +16,71 @@ public class CargoDAO {
     private TreeNode filho;
 
     public CargoDAO() {
-        session = HibernateUtil.getSessionFactory().openSession();
+    }
+
+    public Session getSession() {
+        if (session == null || !session.isOpen() || !session.isConnected()) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
+        return session;
     }
 
     public void insert(Cargo c) {
-        Transaction t = session.beginTransaction();
-        session.save(c);
-        t.commit();
+        try {
+            Transaction t = getSession().beginTransaction();
+            try {
+                getSession().save(c);
+                t.commit();
+            } catch (Exception ex) {
+                t.rollback();
+                throw ex;
+            }
+        } finally {
+            getSession().close();
+        }
     }
 
     public void update(Cargo c) {
-        Transaction t = session.beginTransaction();
-        session.merge(c);
-        t.commit();
+        try {
+            Transaction t = getSession().beginTransaction();
+            try {
+                getSession().merge(c);
+                t.commit();
+            } catch (Exception ex) {
+                t.rollback();
+                throw ex;
+            }
+        } finally {
+            getSession().close();
+        }
     }
 
     public void delete(Cargo c) {
-        Transaction t = session.beginTransaction();
-        session.delete(c);
-        t.commit();
+        try {
+            Transaction t = getSession().beginTransaction();
+            try {
+                getSession().delete(c);
+                t.commit();
+            } catch (Exception ex) {
+                t.rollback();
+                throw ex;
+            }
+        } finally {
+            getSession().close();
+        }
     }
 
     public Cargo findById(int car_codigo) {
-        return (Cargo) session.load(Cargo.class, car_codigo);
+        return (Cargo) getSession().load(Cargo.class, car_codigo);
     }
 
     public List<Cargo> findAll() {
-        Query q = session.createQuery("from Cargo ORDER BY car_pai");
+        Query q = getSession().createQuery("from Cargo ORDER BY car_pai");
         return q.list();
     }
 
     public List<Cargo> findAllParents() {
-        Query q = session.createQuery("from Cargo where car_pai is null order by car_descricao asc");
+        Query q = getSession().createQuery("from Cargo where car_pai is null order by car_descricao asc");
         return q.list();
     }
 
@@ -58,7 +91,7 @@ public class CargoDAO {
         } else {
             s += " where car_pai=null";
         }
-        Query q = session.createQuery(s);
+        Query q = getSession().createQuery(s);
         return q.list();
     }
 
@@ -84,6 +117,6 @@ public class CargoDAO {
             sqlCargo = " and upper (translate(car_descricao, 'ÁÇÉÍÓÚÀÈÌÒÙÂÊÎÔÛÃÕËÜáçéíóúàèìòùâêîôûãõëü', 'ACEIOUAEIOUAEIOUAOEUaceiouaeiouaeiouaoeu'))"
                     + " LIKE upper(translate('%" + name + "%', 'ÁÇÉÍÓÚÀÈÌÒÙÂÊÎÔÛÃÕËÜáçéíóúàèìòùâêîôûãõëü', 'ACEIOUAEIOUAEIOUAOEUaceiouaeiouaeiouaoeu'))";
         }
-        return session.createQuery("from Cargo where 1 = 1 " + sqlCargo).list();
+        return getSession().createQuery("from Cargo where 1 = 1 " + sqlCargo).list();
     }
 }

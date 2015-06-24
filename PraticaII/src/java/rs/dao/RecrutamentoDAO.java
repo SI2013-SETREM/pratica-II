@@ -23,11 +23,17 @@ public class RecrutamentoDAO {
     public List<Recrutamento> rc = new ArrayList<>();
 
     public RecrutamentoDAO() {
-        session = HibernateUtil.getSessionFactory().openSession();
+    }
+
+    public Session getSession() {
+        if (session == null || !session.isOpen() || !session.isConnected()) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
+        return session;
     }
 
     public List<Recrutamento> getRc() {
-        Query q = session.createQuery("from Recrutamento where rec_status=2");
+        Query q = getSession().createQuery("from Recrutamento where rec_status=2");
         this.rc = q.list();
         return rc;
     }
@@ -37,26 +43,47 @@ public class RecrutamentoDAO {
     }
 
     public void insert(Recrutamento r) {
-        Transaction t = session.beginTransaction();
-        r.setRecStatus(2);
-        session.save(r);
-        t.commit();
+        try {
+            Transaction t = getSession().beginTransaction();
+            try {
+                r.setRecStatus(2);
+                getSession().save(r);
+                t.commit();
+            } catch (Exception ex) {
+                t.rollback();
+                throw ex;
+            }
+        } finally {
+            getSession().close();
+        }
     }
 
     public void update(Recrutamento r) {
-        Transaction t = session.beginTransaction();
-        session.update(r);
-        t.commit();
+        try {
+            Transaction t = getSession().beginTransaction();
+            try {
+                if (r.getRecStatus() == 0) {
+                    r.setRecStatus(2);
+                }
+                getSession().update(r);
+                t.commit();
+            } catch (Exception ex) {
+                t.rollback();
+                throw ex;
+            }
+        } finally {
+            getSession().close();
+        }
     }
 
     public void delete(Recrutamento r) {
-        Transaction t = session.beginTransaction();
-        session.delete(r);
+        Transaction t = getSession().beginTransaction();
+        getSession().delete(r);
         t.commit();
     }
 
     public List<Recrutamento> findAll() {
-        Query q = session.createQuery("from Recrutamento");
+        Query q = getSession().createQuery("from Recrutamento");
         return q.list();
     }
 }

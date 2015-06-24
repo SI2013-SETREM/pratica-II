@@ -7,6 +7,7 @@
     <ui:define name="title">
         Painel de Vagas
     </ui:define>
+    
     <ui:define name="header">
         <style>
             .setor{
@@ -44,12 +45,12 @@
                                         <span>Descrição:</span> <span>#{vagas.recCarDescricaoResumida}</span>
                                     </p>
                                     <div>
-                                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+                                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal${vagas.cargo.car_codigo}">
                                             Mais...
                                         </button>
 
                                         <!-- Modal -->
-                                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                        <div class="modal fade" id="modal${vagas.cargo.car_codigo}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">

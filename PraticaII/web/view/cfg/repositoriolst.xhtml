@@ -60,10 +60,10 @@
                             </h:column>
                             <h:column headerClass="col-editar-header">
                                 <f:facet name="header">
-                                    <h:outputText value="Editar"/>
+                                    <h:outputText value="Baixar"/>
                                 </f:facet>
-                                <h:commandLink action="${repositorioBean.edit(item)}">
-                                    <i class="fa fa-pencil"></i> Editar
+                                <h:commandLink action="${repositorioBean.download(item)}">
+                                    <i class="fa fa-download"></i> Baixar
                                 </h:commandLink>
                             </h:column>
                             <h:column headerClass="col-excluir-header">

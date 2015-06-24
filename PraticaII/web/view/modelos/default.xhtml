@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <h:head>
         <link rel="icon" href="#{resource['img/favicon.ico']}" sizes="16x16" />
@@ -57,7 +58,10 @@
                         <li class="dropdown dropdown-user">
                             <a href="javascript:void(0);">
                                 <span>${loginBean.usuario.pessoa.pes_nome}</span>
-                                <h:graphicImage class="user-photo" name="img/user.jpg"></h:graphicImage>
+                                <c:if test="${loginBean.usuario.pessoa.repositorio != null}">
+                                    <img class="user-photo" src="DirectServlet?method=image&amp;id=${loginBean.usuario.pessoa.pes_codigo}" />
+                                    <h:graphicImage class="user-photo" name="img/user.jpg"></h:graphicImage>
+                                </c:if>
                             </a>
                         </li>
                     </ul>

@@ -5,8 +5,14 @@
  */
 package cfg.model;
 
+import cfg.controller.RepositorioBean;
+import cfg.dao.LogDAO;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,6 +21,7 @@ import javax.persistence.Lob;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
+import javax.servlet.http.Part;
 
 @Entity
 @Table(name = "repositorio")
@@ -38,6 +45,14 @@ public class Repositorio implements Serializable {
     private byte[] rep_arquivo;
 
     public Repositorio() {
+    }
+    
+    public Repositorio(Part file) {
+        this.upload(file);
+        
+        this.parseFilename(file.getSubmittedFileName());
+        
+        this.setRep_data(new Date());
     }
 
     public Repositorio(int rep_codigo, int rep_tipo, Date rep_data, String rep_nome, String rep_nomearquivo, String rep_extensao, byte[] rep_arquivo) {
@@ -106,7 +121,36 @@ public class Repositorio implements Serializable {
         this.rep_arquivo = rep_arquivo;
     }
     
-     @Override
+    public void upload(Part file) {
+        byte[] RepArquivo = new byte[1048576];
+        try {
+            InputStream fileContent = file.getInputStream();
+            final byte[] fileByte = new byte[1024];
+            int currentOffset = 0;
+            while (fileContent.read(fileByte) != -1) {
+                System.arraycopy(
+                    fileByte, 0,
+                    RepArquivo, currentOffset,
+                    fileByte.length
+                );
+                currentOffset += fileByte.length;
+            }
+            fileContent.close();
+        } catch (IOException ex) {
+            LogDAO.insert("Repositório", "Falha no upload do arquivo: " + file.getSubmittedFileName() + ". Detalhes da falha: " + ex.getMessage());
+        }
+        this.setRep_arquivo(RepArquivo);
+    }
+    
+    public void parseFilename(String filename) {
+        int index = filename.indexOf(".");
+        if (index != -1) {
+            this.setRep_nomearquivo(filename.substring(0, index));
+            this.setRep_extensao(filename.substring(index + 1, filename.length()));
+        }
+    }
+    
+    @Override
     public int hashCode() {
         int hash = 7;
         hash = 59 * hash + this.rep_codigo;
@@ -127,6 +171,7 @@ public class Repositorio implements Serializable {
         }
         return true;
     }
+    
     @Override
     public String toString() {
         return getRep_nome();

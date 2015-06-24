@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -26,6 +25,7 @@ public class Recrutamento implements Serializable {
 
     public static final String sTitle = "Recrutamento";
     public static final String pTitle = "Recrutamentos";
+    
     @Id
     @SequenceGenerator(name = "recrutamento_pk_sequence", sequenceName = "seq_rs_recrutamento")
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "recrutamento_pk_sequence")
@@ -36,7 +36,16 @@ public class Recrutamento implements Serializable {
     private Date rec_inicio;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date rec_fim;
-    private int rec_status;
+    /** 
+     * 1 - Aguardando Início
+     * 2 - Buscando Candidatos
+     * 3 - Avaliando Candidatos
+     * 4 - Candidatos Selecionados
+     * 5 - Treinamento
+     * 6 - Concluído
+     * 7 - Cancelado
+     */
+    private int rec_status = 1;
     private int rec_car_quantidade;
     private double rec_car_expectativasalario;
     private String rec_car_descricao;
