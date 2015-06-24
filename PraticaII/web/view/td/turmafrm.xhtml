@@ -80,8 +80,8 @@
                     <div class="form-group">
                         <h:outputLabel value="Alunos:" for="alunos" styleClass="control-label col-md-2" />
                         <div class="col-md-8 col-xs-12 autocomplete">
-                            <p:autoComplete pt:disabled="#{turmaBean.turma.tur_codigo > 0}" id="solicitacao" multiple="true" completeMethod="#{turmaBean.completePessoa}" value="#{turmaBean.lstpessoa}"
-                                            var="pessoa" itemLabel="#{pessoa.pes_nome}" itemValue="#{pessoa}" converter="pessoaConverter" forceSelection="true" disabled="false">
+                            <p:autoComplete id="solicitacao" multiple="true" completeMethod="#{turmaBean.completePessoa}" value="#{turmaBean.lstpessoa}"
+                                            var="pessoa" itemLabel="#{pessoa.pes_nome}" itemValue="#{pessoa}" converter="pessoaConverter" forceSelection="true">
                                 <p:column>
                                     <h:outputText value="#{pessoa.pes_nome}" />
                                 </p:column>

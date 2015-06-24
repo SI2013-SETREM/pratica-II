@@ -92,7 +92,7 @@
                     <div class="form-group">
                         <p:outputLabel value="Competências:" for="competencia" styleClass="control-label col-sm-2" />
                         <div class="col-md-6 col-sm-12">
-                            <p:autoComplete pt:disabled="#{treinamentoBean.treinamento.tre_codigo > 0}" id="competencia" multiple="true" completeMethod="#{treinamentoBean.completeCompetencia}" value="#{treinamentoBean.lstcompetencia}" 
+                            <p:autoComplete required="true" pt:disabled="#{treinamentoBean.treinamento.tre_codigo > 0}" id="competencia" multiple="true" completeMethod="#{treinamentoBean.completeCompetencia}" value="#{treinamentoBean.lstcompetencia}" 
                                             var="competencia" itemLabel="#{competencia.cmp_descricao}" itemValue="#{competencia}" converter="CompetenciaConverter" forceSelection="true" disabled="false">
                             <p:column>
                                 <h:outputText value="#{competencia.cmp_descricao}" />
