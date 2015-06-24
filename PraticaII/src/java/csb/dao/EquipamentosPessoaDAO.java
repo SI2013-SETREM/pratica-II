@@ -37,7 +37,7 @@ public class EquipamentosPessoaDAO {
     }
     
     public List<EquipamentosPessoa> findAll() {
-        Query q = session.createQuery("from EquipamentosPessoa");
+        Query q = session.createQuery("from EquipamentosPessoa order by pes_codigo, epe_datainicio asc");
         return q.list();
     }
 }

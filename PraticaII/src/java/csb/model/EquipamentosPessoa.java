@@ -5,10 +5,13 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
@@ -18,80 +21,40 @@ import javax.persistence.Temporal;
  */
 @Entity
 @Table(name = "csb_equipamentospessoa")
-@IdClass(EquipamentosPessoa.EquipamentosPessoaPK.class)
 public class EquipamentosPessoa implements Serializable {
-    
+
     public static final String sTitle = "Equipamento";
     public static final String pTitle = "Equipamentos";
 
     @Id
+    @SequenceGenerator(name = "eqp_pk_sequence", sequenceName = "seq_csb_equipamentospessoa")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "eqp_pk_sequence")
+    private int eqp_codigo;
+
     @ManyToOne
     @JoinColumn(name = "epi_codigo", referencedColumnName = "epi_codigo")
     private Epi epi;
-    
-    @Id
+
     @ManyToOne
     @JoinColumn(name = "pes_codigo", referencedColumnName = "pes_codigo")
     private Pessoa pessoa;
-    
-    @Id
-    @ManyToOne
-    @JoinColumn(name = "car_codigo", referencedColumnName = "car_codigo")
-    private Cargo cargo;
-    
+
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date epe_datainicio;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date epe_datavencimento;
-    private boolean epe_situacao;
+    private char epe_situacao;
     private double epe_valor;
-    
-    public class EquipamentosPessoaPK implements Serializable {
-        protected Cargo cargo;
-        protected Pessoa pessoa;
-        protected Epi epi;
-
-        public EquipamentosPessoaPK() {}
-
-        public EquipamentosPessoaPK(Cargo cargo, Pessoa pessoa, Epi epi) {
-            this.cargo = cargo;
-            this.pessoa = pessoa;
-            this.epi = epi;
-        }
-
-        @Override
-        public int hashCode() {
-            int hash = 7;
-            hash = 11 * hash + Objects.hashCode(this.cargo);
-            hash = 11 * hash + Objects.hashCode(this.pessoa);
-            hash = 11 * hash + Objects.hashCode(this.epi);
-            return hash;
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-            if (obj == null) {
-                return false;
-            }
-            if (getClass() != obj.getClass()) {
-                return false;
-            }
-            final EquipamentosPessoaPK other = (EquipamentosPessoaPK) obj;
-            if (!Objects.equals(this.cargo, other.cargo)) {
-                return false;
-            }
-            if (!Objects.equals(this.pessoa, other.pessoa)) {
-                return false;
-            }
-            if (!Objects.equals(this.epi, other.epi)) {
-                return false;
-            }
-            return true;
-        }
-
-    }
 
     public EquipamentosPessoa() {
+    }
+
+    public int getEqp_codigo() {
+        return eqp_codigo;
+    }
+
+    public void setEqp_codigo(int eqp_codigo) {
+        this.eqp_codigo = eqp_codigo;
     }
 
     public Epi getEpi() {
@@ -110,14 +73,6 @@ public class EquipamentosPessoa implements Serializable {
         this.pessoa = pessoa;
     }
 
-    public Cargo getCargo() {
-        return cargo;
-    }
-
-    public void setCargo(Cargo cargo) {
-        this.cargo = cargo;
-    }
-
     public Date getEpe_datainicio() {
         return epe_datainicio;
     }
@@ -134,11 +89,23 @@ public class EquipamentosPessoa implements Serializable {
         this.epe_datavencimento = epe_datavencimento;
     }
 
-    public boolean isEpe_situacao() {
+    public char getEpe_situacao() {
         return epe_situacao;
     }
 
-    public void setEpe_situacao(boolean epe_situacao) {
+    public String getEpe_situacaoString() {
+        if (epe_situacao == 'E') {
+            return "EM USO";
+        } else if (epe_situacao == 'D') {
+            return "DESCARTADO";
+        } else if (epe_situacao == 'P') {
+            return "PLANEJADO";
+        } else {
+            return "DESCONHECIDO";
+        }
+    }
+
+    public void setEpe_situacao(char epe_situacao) {
         this.epe_situacao = epe_situacao;
     }
 
@@ -149,6 +116,31 @@ public class EquipamentosPessoa implements Serializable {
     public void setEpe_valor(double epe_valor) {
         this.epe_valor = epe_valor;
     }
-    
-    
+
+    public String getDataConverter(Date data) {
+        return util.Utilidades.getDataString(data);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 79 * hash + this.eqp_codigo;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final EquipamentosPessoa other = (EquipamentosPessoa) obj;
+        if (this.eqp_codigo != other.eqp_codigo) {
+            return false;
+        }
+        return true;
+    }
+
 }

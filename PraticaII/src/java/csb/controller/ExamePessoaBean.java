@@ -3,7 +3,6 @@ package csb.controller;
 import cfg.dao.LogDAO;
 import cfg.dao.PessoaDAO;
 import cfg.model.Pessoa;
-import csb.controller.*;
 
 import csb.dao.ExamePessoaDAO;
 import csb.dao.TipoExameDAO;

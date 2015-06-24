@@ -133,8 +133,14 @@
                                     </li>
                                     <li class="#{view.viewId.contains('/epi') ? 'active' : ''}">
                                         <h:link outcome="/faces/view/csb/epilst">
-                                            <span class="fa fa-hacker-news"></span>
+                                            <span class="fa fa-shield"></span>
                                             <span class="menu-text">Equipamentos de Proteção</span>
+                                        </h:link>
+                                    </li>
+                                    <li class="#{view.viewId.contains('/equipamentospessoa') ? 'active' : ''}">
+                                        <h:link outcome="/faces/view/csb/equipamentospessoalst">
+                                            <span class="fa fa-life-bouy"></span>
+                                            <span class="menu-text">EPI's dos Colaboradores</span>
                                         </h:link>
                                     </li>
                                     <li class="#{view.viewId.contains('/examepessoa') ? 'active' : ''}">

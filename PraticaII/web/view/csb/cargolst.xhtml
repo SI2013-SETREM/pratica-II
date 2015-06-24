@@ -62,13 +62,17 @@
                         <f:facet name="header">
                             <h:outputText value="Piso (R$)"/>
                         </f:facet>
-                        <h:outputText class="car_pisosalarial" value="${item.getCar_pisosalarial()}"/>
+                        <h:outputText class="car_pisosalarial" value="${item.getCar_pisosalarial()}">
+                            <f:convertNumber type="currency"/>
+                        </h:outputText>
                     </h:column>
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="Teto (R$)"/>
                         </f:facet>
-                        <h:outputText class="car_tetosalarial" value="${item.getCar_tetosalarial()}"/>
+                        <h:outputText class="car_tetosalarial" value="${item.getCar_tetosalarial()}">
+                            <f:convertNumber type="currency"/>
+                        </h:outputText>
                     </h:column>
                     <h:column>
                         <f:facet name="header">
