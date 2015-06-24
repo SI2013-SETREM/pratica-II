@@ -402,6 +402,24 @@
                                             <span class="menu-text">Parâmetros</span>
                                         </h:link>
                                     </li>
+                                    <li class="#{view.viewId.contains('/pessoa') ? 'active' : ''}">
+                                        <h:link outcome="/faces/view/cfg/pessoalst">
+                                            <span class="fa fa-user"></span>
+                                            <span class="menu-text">Pessoas</span>
+                                        </h:link>
+                                    </li>
+                                    <li class="#{view.viewId.contains('/repositorio') ? 'active' : ''}">
+                                        <h:link outcome="/faces/view/cfg/repositoriolst">
+                                            <span class="fa fa-archive"></span>
+                                            <span class="menu-text">Repositório</span>
+                                        </h:link>
+                                    </li>
+                                    <li class="#{view.viewId.contains('/log') ? 'active' : ''}">
+                                        <h:link outcome="/faces/view/cfg/loglst">
+                                            <span class="fa fa-history"></span>
+                                            <span class="menu-text">Log de Operações</span>
+                                        </h:link>
+                                    </li>
                                 </ul>
                             </li>
                             <li class="#{view.viewId == '/view/about.xhtml' ? 'active' : ''}">
