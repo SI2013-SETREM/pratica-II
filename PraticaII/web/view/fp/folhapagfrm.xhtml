@@ -56,11 +56,11 @@
                         <div class="panel-body">
 
                             <div class="form-group">
-<!--                                <h:outputLabel value="Empresa:" for="emp" styleClass="control-label col-md-2" />
-
-                                <div class="col-md-4 col-xs-3 autocomplete">
-                                    <h:inputText pt:autofocus=""  id="idEmpresa" value="" title="Nome da Empresa" styleClass="form-control" readonly="true" />
-                                </div>-->
+                                <!--                                <h:outputLabel value="Empresa:" for="emp" styleClass="control-label col-md-2" />
+                                
+                                                                <div class="col-md-4 col-xs-3 autocomplete">
+                                                                    <h:inputText pt:autofocus=""  id="idEmpresa" value="" title="Nome da Empresa" styleClass="form-control" readonly="true" />
+                                                                </div>-->
 
                                 <h:outputLabel value="Empresa:" for="emp" styleClass="control-label col-md-2" />
                                 <div class="col-md-4 col-xs-3 autocomplete">
@@ -113,10 +113,6 @@
 
                                 <div class="btns-top-table col-xs-3">
 
-                                    <!--                                    <h:link outcome="eventopadlst" value="Gerenciar Eventos Padrão" styleClass="btn btn-success">
-                                                                            <f:param name="codigoFolha" value="${funcionarioBean.pessoa.pes_codigo}"/>
-                                                                            <i class="fa fa-plus"></i> 
-                                                                        </h:link>-->
                                     <h:commandLink styleClass="btn btn-success" action="#{funcionarioBean.gerarFolha()}">
                                         <i class="fa fa-plus"></i> Gerenciar Eventos Padrão
                                     </h:commandLink>
@@ -151,6 +147,11 @@
                                 </h:column>
 
                             </h:dataTable>
+                            <div class="form-group">
+                                <div class="col-md-offset-9 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
+                                        <h:link styleClass="btn btn-default" value="Adicionar eventos ao Recibo" outcome="folhapagfrm"/>
+                                </div>
+                            </div>
                             <hr style="border-top: 1px solid #D7D3F5"></hr>
 
                             <div class="table-striped">

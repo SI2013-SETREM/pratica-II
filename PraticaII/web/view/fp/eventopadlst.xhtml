@@ -10,10 +10,6 @@ and open the template in the editor.
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
-    <head>
-        <title>TODO supply a title</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
     <body>
 
         <ui:composition template="./../modelos/default.xhtml">
@@ -61,6 +57,11 @@ and open the template in the editor.
                             </h:column>
 
                         </h:dataTable>
+                          <div class="form-group">
+                    <div class="col-md-offset-9 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
+                        <h:link styleClass="btn btn-default" value="Voltar ao Recibo de Pagamento" outcome="folhapagfrm"/>
+                    </div>
+                </div>
                     </h:form>
                 </div>
             </ui:define>
