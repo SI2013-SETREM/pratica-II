@@ -125,8 +125,14 @@
                                 <ul class="submenu">
                                     <li class="#{view.viewId.contains('/beneficio') ? 'active' : ''}">
                                         <h:link outcome="/faces/view/csb/beneficiolst">
-                                            <span class="fa fa-user-md"></span>
-                                            <span class="menu-text">Benefícios</span>
+                                            <span class="fa fa-cutlery"></span>
+                                            <span class="menu-text">Benefícios Disponíveis</span>
+                                        </h:link>
+                                    </li>
+                                    <li class="#{view.viewId.contains('/beneficiospessoa') ? 'active' : ''}">
+                                        <h:link outcome="/faces/view/csb/beneficiospessoalst">
+                                            <span class="fa fa-check-square-o"></span>
+                                            <span class="menu-text">Benefícios Utilizados</span>
                                         </h:link>
                                     </li>
                                     <li class="#{view.viewId.contains('/cargo') ? 'active' : ''}">

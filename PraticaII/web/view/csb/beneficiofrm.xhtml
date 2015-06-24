@@ -9,7 +9,6 @@
         <script type="text/javascript">
             $(function () {
                 $(".emePeriodico").click(function () {
-                    debugger;
                     if ($(".emePeriodico").is(':checked')) {
                         $("#emeIntervalorepeticaoDiv").fadeIn();
                         $(".emeIntervalorepeticao").attr("required", "required");
@@ -44,9 +43,12 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <h:outputLabel value="Valor (R$)" for="benValor" styleClass="control-label col-sm-1" />
+                        <h:outputLabel value="Valor:" for="benValor" styleClass="control-label col-sm-1" />
                         <div class="col-md-6 col-sm-12">
-                            <h:inputText pt:type="number" pt:min="1" pt:max="10000" pt:step="0.10" pt:required="required" id="benValor" value="#{beneficioBean.beneficio.ben_valor}" title="Valor (R$)" styleClass="form-control" />
+                            <div class="input-group">
+                                <div class="input-group-addon">R$</div>
+                                <h:inputText pt:type="number" pt:min="1" pt:max="100000" pt:step="0.1" pt:required="required" id="benValor" value="#{beneficioBean.beneficio.ben_valor}" title="Valor (R$)" styleClass="form-control car_pisosalarial" />
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
