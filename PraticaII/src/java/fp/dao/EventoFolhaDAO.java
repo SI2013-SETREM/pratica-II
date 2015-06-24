@@ -1,6 +1,4 @@
-
 package fp.dao;
-
 
 import fp.model.EventoFolha;
 import java.util.List;
@@ -18,8 +16,7 @@ import util.HibernateUtil;
  * @author Max
  */
 public class EventoFolhaDAO {
-    
-    
+
     private Session session;
 
     public EventoFolhaDAO() {
@@ -35,8 +32,6 @@ public class EventoFolhaDAO {
         t.commit();
     }
 
- 
-
     public EventoFolha findById(int id) {
 
         return (EventoFolha) session.load(EventoFolha.class, id);
@@ -48,12 +43,12 @@ public class EventoFolhaDAO {
         return query.list();
 
     }
-       public List<EventoFolha> EventoFolhas(int hif_codigo) {
-        Criteria crit = session.createCriteria(EventoFolha.class);    
-        crit.add(Restrictions.eq("hif_codigo", hif_codigo));
-        List results = crit.list();
 
-        return  crit.list();
+    public List<EventoFolha> EventoFolhas(int hif_codigo) {
+
+        Query query = session.createQuery("from EventoFolha where hif_codigo = " + hif_codigo + " ");
+        return query.list();
+
     }
-    
+
 }
