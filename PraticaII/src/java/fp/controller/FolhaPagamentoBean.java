@@ -15,6 +15,8 @@ import fp.model.Evento;
 import fp.model.EventoFolha;
 import fp.model.EventoPadrao;
 import fp.model.HistoricoFolha;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -51,14 +53,37 @@ public class FolhaPagamentoBean {
     private HistoricoFolha historicoFolha = new HistoricoFolha();
     private HistoricoFolhaDAO historicoFolhaDAO = new HistoricoFolhaDAO();
     private List<HistoricoFolha> HistFolhas;
+    private DataModel<HistoricoFolha> histFolhas;
 
     private EventoFolha eventoFolha = new EventoFolha();
     private EventoFolhaDAO eventoFolhaDAO = new EventoFolhaDAO();
     private List<EventoFolha> EveFolhas;
-    
-    
+    private DataModel<EventoFolha> DataModelEveFolhas;
+
+    private calculoFolha calculoFolha = new calculoFolha();
 
     public FolhaPagamentoBean() {
+    }
+
+    public DataModel<HistoricoFolha> getHistFolhas() {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+        String dat = dateFormat.format(date);
+        this.histFolhas = new ListDataModel(historicoFolhaDAO.historicoAtual(pessoa.getPes_codigo(), dat));
+        return histFolhas;
+    }
+
+    public DataModel<EventoFolha> getDataModelEveFolhas() {
+        this.DataModelEveFolhas = new ListDataModel(eventoFolhaDAO.EventoFolhas(historicoFolha.getHif_codigo()));
+        return DataModelEveFolhas;
+    }
+
+    public void setDataModelEveFolhas(DataModel<EventoFolha> DataModelEveFolhas) {
+        this.DataModelEveFolhas = DataModelEveFolhas;
+    }
+
+    public void setHistFolhas(DataModel<HistoricoFolha> histFolhas) {
+        this.histFolhas = histFolhas;
     }
 
     public String salvaEventPadrao(int pes_codigo) {
@@ -83,10 +108,10 @@ public class FolhaPagamentoBean {
             evento = eventoDAO.findById(evento.getEve_codigo());
 
             if (serie == 1) {
-                valor = calculaDesconto(evento);
+                valor = calculoFolha.calculaDesconto(evento, salarioBase);
                 ValorDesc += valor;
             } else {
-                valor = calculaAcrescimo(evento);
+                valor = calculoFolha.calculaAcrescimo(evento, salarioBase);
                 ValorAcresc += valor;
             }
 
@@ -107,7 +132,7 @@ public class FolhaPagamentoBean {
 
         }
         Date data = new Date();
-        double salarioLiq = ValorAcresc +(salarioBase -ValorDesc);
+        double salarioLiq = ValorAcresc + (salarioBase - ValorDesc);
         historicoFolha.setPessoa(pessoa);
         historicoFolha.setHif_valor_acre(ValorAcresc);
         historicoFolha.setHif_valor_desc(ValorDesc);
@@ -116,9 +141,10 @@ public class FolhaPagamentoBean {
         historicoFolha.setHif_valor_liquido(salarioLiq);
         salvarCabecalho();
         for (EventoFolha f : listaFolha) {
-            f.setHistoricoFolha(getHistoricoFolha());
+            f.setHistoricoFolha(historicoFolha);
             salvarItens();
         }
+
         return "folhapagfrm";
     }
 
@@ -281,10 +307,9 @@ public class FolhaPagamentoBean {
         this.historicoFolha = historicoFolha;
     }
 
-    public List<HistoricoFolha> getHistFolhas() {
-        return HistFolhas;
-    }
-
+    /* public List<HistoricoFolha> getHistFolhas() {
+     return HistFolhas;
+     }*/
     public void setHistFolhas(List<HistoricoFolha> HistFolhas) {
         this.HistFolhas = HistFolhas;
     }
