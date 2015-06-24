@@ -16,7 +16,6 @@
                 function verifica(){
                     alert("Tem certeza que deseja salvar!")
                 }
-
             });
         </script>
     </ui:define>
@@ -53,7 +52,7 @@
                         <h:outputLabel value="Data de Inicio:" for="idiDataInic" styleClass="control-label col-sm-2" />
                         <div class="col-md-3 col-sm-6">
 
-                            <h:inputText pt:type="date" id="idiData" pt:required="required" value="${feriasBean.ferias.fer_data_inicio}" title="Data inicio de ferias" styleClass="form-control">
+                            <h:inputText pt:type="date" id="idiDataInic" pt:required="required" value="${feriasBean.ferias.fer_data_inicio}" title="Data inicio de ferias" styleClass="form-control">
                                 <f:convertDateTime pattern="yyyy-MM-dd"/>
                             </h:inputText>
 
@@ -61,7 +60,7 @@
                         <h:outputLabel value="Data Fim:" for="idiDataFim" styleClass="control-label col-sm-2" />
                         <div class="col-md-3 col-sm-6">
 
-                            <h:inputText pt:type="date" id="idiData" pt:required="required" value="${feriasBean.ferias.fer_data_fim}" title="Data fim de ferias" styleClass="form-control">
+                            <h:inputText pt:type="date" id="idiDataFim" pt:required="required" value="${feriasBean.ferias.fer_data_fim}" title="Data fim de ferias" styleClass="form-control">
                                 <f:convertDateTime pattern="yyyy-MM-dd"/>
                             </h:inputText>
 

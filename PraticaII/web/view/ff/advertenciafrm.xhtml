@@ -38,7 +38,6 @@
             <f:view>
                 <h:form styleClass="form-horizontal">
                     <h:inputHidden id="faltCodigo" value="#{advertenciaBean.advertencia.adv_codigo}" />
-
                     <div class="form-group">
 
                         <h:outputLabel value="Descrição:" for="idiDescricao" styleClass="control-label col-sm-2 " />
@@ -48,7 +47,7 @@
                         <h:outputLabel value="Nome do Aplicador:" for="idiAvaliador" styleClass="control-label col-sm-2 " />
                         <div class="col-md-4 col-xs-12 autocomplete">
 
-                            <p:autoComplete  id="cargo1" multiple="false" completeMethod="#{advertenciaBean.completePessoa}" value="#{advertenciaBean.pesAplicador}"
+                            <p:autoComplete  id="idiAvaliador" multiple="false" completeMethod="#{advertenciaBean.completePessoa}" value="#{advertenciaBean.advertencia.pessoaAplicador}"
                                              var="pessoa" itemLabel="#{pessoa.pes_nome}" itemValue="#{pessoa}" converter="pessoaConverter" forceSelection="true">
                                 <p:column>
                                     <h:outputText value="#{pessoa.pes_nome}" />
@@ -70,16 +69,23 @@
                     </div>
 
                     <div class="form-group">
-                        <h:outputLabel value="Observaçôes" for="idiObs" styleClass=" control-label col-xs-2" />
+                        <h:outputLabel value="Motivo: " for="idMotivo" styleClass=" control-label col-xs-2" />
                         <div class="col-md-6 col-sm-12">
-                            <h:inputText pt:autofocus="" pt:required="required" id="idiObs" value="${advertenciaBean.advertencia.adv_observacao}" title="Quantidade de Horas" styleClass="form-control" />
+                            <h:inputText pt:autofocus="" pt:required="required" id="idMotivo" value="${advertenciaBean.advertencia.adv_motivo}" title="Motivo" styleClass="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel value="Observações: " for="idiObs" styleClass=" control-label col-xs-2" />
+                        <div class="col-md-6 col-sm-12">
+                            <h:inputTextarea pt:autofocus="" id="idiObs" value="${advertenciaBean.advertencia.adv_observacao}" title="Observações" styleClass="form-control" />
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-md-offset-9 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
                             <h:link styleClass="btn btn-default" value="Cancelar" outcome="${advertenciaBean.listar()}" />
-                            <h:commandButton styleClass="btn btn-primary" value="Salvar" action="${advertenciaBean.insert()}"  ></h:commandButton>
+                            <h:commandButton styleClass="btn btn-primary" value="Salvar" action="${advertenciaBean.insert()}"></h:commandButton>
                         </div>
                     </div>
                 </h:form>

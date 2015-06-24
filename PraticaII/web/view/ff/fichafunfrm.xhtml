@@ -42,14 +42,6 @@
                 margin: 0px 250px -50px 0px;
             }
         </style>
-        <script>
-            $(function () {
-                alert('resertre')
-
-            });
-        </script>
-
-
         <div class="panel panel-body">          
             <f:view>
                 <h:form styleClass="form-horizontal" >
@@ -318,7 +310,7 @@
                                 </h:link>                             
 
                             </div>
-                            <h:dataTable value="${funcionarioBean.ferias}" rendered="${funcionarioBean.eventos.rowAvailable}" var="item"  styleClass="dataTable table table-bordered table-striped">
+                            <h:dataTable value="${funcionarioBean.ferias}" var="item"  styleClass="dataTable table table-bordered table-striped">
 
                                 <h:column>
                                     <f:facet name="header">
@@ -346,7 +338,7 @@
                                 <div class="col-xs-3">
                                     <h3>Dependentes</h3>  
                                 </div>
-                              
+
                             </div>
 
                             <h:dataTable value=""  var="it"  rendered="${funcionarioBean.eventos.rowAvailable}" styleClass="dataTable table table-bordered table-striped">

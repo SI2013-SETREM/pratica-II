@@ -32,17 +32,18 @@ public class FeriasBean {
     public FeriasBean() {
     }
 
-    public String inicio() {
+    public void inicio() {
         this.pessoas = new ListDataModel<>(pessoaDAO.findByPessoaId(getIdPessoa()));
         pessoa = pessoas.getRowData();
         pessoa = pessoaDAO.findById(pessoa.getPes_codigo());
         ferias.setPessoa(pessoa);
-        return "faltafrm";
+        //return "faltafrm";
     }
 
     public String insert() {
         feriasDAO.insert(ferias);
-        return "fichafunfrm";
+        return "fichafunlst";
+        //return "fichafunfrm";
     }
 
     public String cancelar() {

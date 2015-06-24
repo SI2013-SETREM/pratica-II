@@ -18,9 +18,9 @@ import javax.faces.model.ListDataModel;
 import javax.servlet.http.HttpServletRequest;
 
 @ManagedBean
-
+@SessionScoped
 public class AdvertenciaBean {
-    
+
     private AdvertenciaDAO advertenciaDAO = new AdvertenciaDAO();
     private Advertencia advertencia = new Advertencia();
     private List<Pessoa> pesAplicador;
@@ -28,27 +28,31 @@ public class AdvertenciaBean {
     private PessoaDAO pessoaDAO = new PessoaDAO();
     private DataModel<Pessoa> pessoas;
     private int idPessoa;
-    
+
     public AdvertenciaBean() {
     }
-    
-    public String inicia() {
+
+    public void inicia() {
 
         this.pessoas = new ListDataModel<>(pessoaDAO.findByPessoaId(getIdPessoa()));
         pessoa = pessoas.getRowData();
         pessoa = pessoaDAO.findById(pessoa.getPes_codigo());
         advertencia.setPessoa(pessoa);
-        
-        return "faltafrm";
+        //return "faltafrm";
     }
-    
+
     public String insert() {
-        advertenciaDAO.insert(advertencia);
-        return "fichafunfrm";
+        if (advertencia.getPessoa() != null && advertencia.getPessoa().getPes_codigo() != 0 && advertencia.getPessoaAplicador() != null && advertencia.getPessoaAplicador().getPes_codigo() != 0) {
+            advertenciaDAO.insert(advertencia);
+            return "fichafunlst";
+        }
+        return "advertenciafrm";
     }
+
     public String listar() {
         return "fichafunfrm";
     }
+
     public List<Pessoa> completePessoa(String query) {
         return pessoaDAO.searchPessoa(query);
     }
@@ -108,7 +112,5 @@ public class AdvertenciaBean {
     public void setPesAplicador(List<Pessoa> pesAplicador) {
         this.pesAplicador = pesAplicador;
     }
-    
-  
-    
+
 }

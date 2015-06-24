@@ -12,7 +12,6 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import rs.model.Questionario;
-import td.model.Treinamento;
 import td.model.Turma;
 
 @Entity
@@ -36,10 +35,10 @@ public class Avaliacao implements Serializable {
 
     private int ava_status;
     private String ava_nome;
-//    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date ava_dataInicial;
     private String ava_observacao;
-//    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date ava_dataFinal;
 
     public Avaliacao() {
