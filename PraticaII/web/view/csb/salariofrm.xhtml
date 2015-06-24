@@ -9,6 +9,42 @@
         ${salarioBean.pTitle}
     </ui:define>
 
+    <ui:define name="header">
+        <script type="text/javascript">
+            $(function () {
+                var salarioAtual = parseFloat($(".salSalario").val());
+                $(".promocao").change(function () {
+                    if ($(".promocao")[0].checked) {
+                        $("#haveParent").fadeIn();
+                    } else {
+                        $("#haveParent").fadeOut();
+                    }
+                });
+
+                $(".salSalario").blur(function () {
+                    var salarioNovo = parseFloat($(".salSalario").val());
+                    if (salarioNovo &lt; salarioAtual){
+                        bootbox.confirm("Uma vez estipulado um valor no contrato de trabalho, este não poderá sofrer redução. <br /> <br /> Todavia, existe uma exceção, prevista na CLT, em seu artigo 503, que torna lícita a possibilidade de redução do salário em até <b>25%</b> com redução de jornada de trabalho em casos de força maior ou prejuízo susceptíveis de afetar substancialmente a situação econômica da empresa, observando sempre o limite do Salário Mínimo. Porém esta alteração requer um termo devidamente assinado pelo colaborador dizendo que o mesmo está ciente e corcorda com os novos termos. <br /><br /> <b>Você deseja continuar?</b>", function (result) {
+                            if (result === false) {
+                                $(".salSalario").val(salarioAtual.toFixed(2));
+                            } else {
+                                var porcentagemRestante = parseFloat(salarioNovo * 100 / salarioAtual);
+                                if (porcentagemRestante &lt; 75)
+                                {
+                                    bootbox.alert("A diminuição salarial ultrapassa os <b>25%</b> previstos em lei. A alteração não poderá ser realizada.");
+                                    $(".salSalario").val(salarioAtual.toFixed(2));
+                                }
+                            }
+                        });
+                    }
+                    if (salarioAtual != salarioNovo){
+                        $('.btn-save').removeClass('disabled');
+                    }
+                });
+            });
+        </script>
+    </ui:define>
+
     <ui:define name="breadcrumb">
         <li>Cargos, Salários e Benefícios</li>
         <li><h:link value="${salarioBean.pTitle}" outcome="/faces/view/csb/salariolst" /></li>
@@ -16,9 +52,12 @@
 
     <ui:define name="main-content">
         <div class="panel panel-body">
-            <h3><h:outputText value="Dados do ${salarioBean.sTitle}"/></h3>
+            <h3><h:outputText value="Dados de Salário do ${salarioBean.sTitle} ${salarioBean.salario.pessoa.pes_nome}"/></h3>
+            <h4><h:outputText value="CPF: ${salarioBean.salario.pessoa.pes_cpf}"/></h4>
+            <hr />
             <f:view>
                 <h:form styleClass="form-horizontal">
+                    <h:messages for="ERROR" showDetail="true"></h:messages>
                     <h:inputHidden id="sal_codigo" value="#{salarioBean.salario.sal_codigo}"/>
                     <h:inputHidden id="cargo" value="#{salarioBean.salario.cargo}" converter="cargoConverter"/>
                     <h:inputHidden id="pessoa" value="#{salarioBean.salario.pessoa}" converter="pessoaConverter"/>
@@ -31,12 +70,14 @@
                     <h:inputHidden id="sal_situacao" value="#{salarioBean.salario.sal_situacao}"/>
                     <!--SALARIO-->
                     <div class="form-group">
-                        <h:outputLabel value="Novo salário:" for="sal_valorbruto" styleClass="control-label col-sm-2" />
+                        <h:outputLabel value="Valor:" for="sal_valorbruto" styleClass="control-label col-sm-2" />
                         <div class="col-md-6 col-sm-12">
-                            <h:inputText required="required" id="sal_valorbruto" value="#{salarioBean.salario.sal_valorbruto}" title="Novo Salário" styleClass="form-control"/>
+                            <div class="input-group">
+                                <div class="input-group-addon">R$</div>
+                                <h:inputText pt:type="number" pt:min="1" pt:max="100000" pt:step="0.10" pt:required="required" id="sal_valorbruto" value="#{salarioBean.salario.sal_valorbruto}" title="Valor (R$)" styleClass="form-control salSalario" />
+                            </div>
                         </div>
                     </div>
-
                     <!--MOTIVOALTERACAOSALARIO-->
                     <div class="form-group">
                         <h:outputLabel value="Motivo de Alteração Salarial:" for="motivoAlteracaoSalarial" styleClass="control-label col-sm-2" />
@@ -46,11 +87,51 @@
                             </h:selectOneMenu>
                         </div>
                     </div>
-
+                    <div class="form-group">
+                        <h:outputLabel value="Mudança de Cargo?" for="promocao" styleClass="control-label col-sm-2" />
+                        <div style="padding-top: 5px" class="col-md-6 col-sm-12">
+                            <h:selectBooleanCheckbox value="false" id="promocao" styleClass="promocao" title="Se marcado possibilita mudança de cargo!" />
+                        </div>
+                    </div>
+                    <div id="haveParent" style="display: none;">
+                        <div class="form-group">
+                            <h:outputLabel value="Cargo: " for="salCargo" styleClass="control-label col-sm-2" />
+                            <div class="col-md-6 col-sm-12">
+                                <h:selectOneMenu id="salCargo" pt:required="true" converter="cargoConverter" value="#{salarioBean.salario.cargo}" styleClass="form-control" >
+                                    <f:selectItems value="#{salarioBean.lstCargo}" var="tipe" itemLabel="#{tipe.car_descricao} | CBO: #{tipe.car_cbo}"/>
+                                </h:selectOneMenu>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-12">
+                            <span styleClass="control-label col-sm-4">* É necessário fornecer as credenciais do responsável por esta alteração!</span>
+                            <br />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Login: " for="usu_login" styleClass="control-label col-sm-2" />
+                        <div class="col-md-6 col-sm-12">
+                            <div class="input-group">
+                                <div class="input-group-addon"><span class="fa fa-user"></span></div>
+                                <h:inputText pt:type="text" pt:required="required" id="usu_login" value="#{salarioBean.usu_login}" title="Login do Responsável" styleClass="form-control usu_login" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Password: " for="usu_pass" styleClass="control-label col-sm-2" />
+                        <div class="col-md-6 col-sm-12">
+                            <div class="input-group">
+                                <div class="input-group-addon"><span class="fa fa-lock"></span></div>
+                                <h:inputText pt:type="password" pt:required="required" id="usu_pass" value="#{salarioBean.usu_pass}" title="Senha do Responsável" styleClass="form-control usu_login" />
+                            </div>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <div class="col-md-offset-1 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
                             <h:link styleClass="btn btn-default" value="Cancelar" outcome="#{salarioBean.listar()}" />
-                            <h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{salarioBean.updateSalario()}"/>
+                            <h:commandButton styleClass="btn btn-info disabled btn-save" value="Confirmar Novo Salário" action="#{salarioBean.updateSalario()}" />
                         </div>
                     </div>
                 </h:form>

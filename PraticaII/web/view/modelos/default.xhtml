@@ -173,8 +173,14 @@
                                     </li>
                                     <li class="#{view.viewId.contains('/salario') ? 'active' : ''}">
                                         <h:link outcome="/faces/view/csb/salariolst">
-                                            <span class="fa fa-money"></span>
-                                            <span class="menu-text">Salários</span>
+                                            <span class="fa fa-group"></span>
+                                            <span class="menu-text">Colaboradores</span>
+                                        </h:link>
+                                    </li>
+                                    <li class="#{view.viewId.contains('/colaboradoresdesligados') ? 'active' : ''}">
+                                        <h:link outcome="/faces/view/csb/colaboradoresdesligadoslst">
+                                            <span class="fa fa-user-times"></span>
+                                            <span class="menu-text">Colaboradores Desligados</span>
                                         </h:link>
                                     </li>
                                     <li class="#{view.viewId.contains('/setor') ? 'active' : ''}">

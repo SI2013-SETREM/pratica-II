@@ -2,7 +2,9 @@ package csb.controller;
 
 import cfg.dao.LogDAO;
 import cfg.dao.PessoaDAO;
+import cfg.dao.UsuarioDAO;
 import cfg.model.Pessoa;
+import cfg.model.Usuario;
 import csb.dao.CargoDAO;
 import csb.dao.MotivoAlteracaoSalarialDAO;
 import csb.dao.SalarioDAO;
@@ -42,6 +44,9 @@ public class SalarioBean {
     private SalarioDAO dao = new SalarioDAO();
     private DataModel salarios;
 
+    private String usu_login;
+    private String usu_pass;
+
     public SalarioBean() {
     }
 
@@ -70,6 +75,22 @@ public class SalarioBean {
         this.salario = salario;
     }
 
+    public String getUsu_login() {
+        return usu_login;
+    }
+
+    public void setUsu_login(String usu_login) {
+        this.usu_login = usu_login;
+    }
+
+    public String getUsu_pass() {
+        return usu_pass;
+    }
+
+    public void setUsu_pass(String usu_pass) {
+        this.usu_pass = usu_pass;
+    }
+
     public String insert() {
         dao.insert(salario);
         return "salariolst";
@@ -79,6 +100,11 @@ public class SalarioBean {
         salario = (Salario) salarios.getRowData();
         return "salariofrm";
     }
+    
+    public String editTOFF(Salario i) {
+        salario = (Salario) salarios.getRowData();
+        return "salariotoff";
+    }
 
     public String update() {
         dao.update(salario);
@@ -86,8 +112,14 @@ public class SalarioBean {
     }
 
     public String updateSalario() {
-        dao.updateSalario(salario);
-        return "salariolst";
+        UsuarioDAO daoUser = new UsuarioDAO();
+        Usuario usrResponsavel = daoUser.findUser(this.usu_login, util.Utilidades.encryptSHA(this.usu_pass));
+        if (usrResponsavel != null) {
+            dao.updateSalario(salario);
+            return "salariolst";
+        } else {
+            throw new Error("Error");
+        }
     }
 
     public String delete(Salario i) {
@@ -103,15 +135,15 @@ public class SalarioBean {
         if (salario.getSal_codigo() > 0) {
             dao.update(salario);
             LogDAO.insert("Salario", "Alterou salário código: " + salario.getSal_codigo() + ", código cargo: " + salario.getCargo().getCar_codigo()
-                + ", motivo alteração salarial código: " + salario.getMotivoAlteracaoSalarial().getMas_codigo() + ", código pessoa: " + salario.getPessoa().getPes_codigo()
-                + ", data início salário: " + salario.getSal_datainicio() + ", data fim salário: " + salario.getSal_datafim() + ", situação: " + salario.isSal_situacao()
-                + ", valor bruto: " + salario.getSal_valorbruto());
+                    + ", motivo alteração salarial código: " + salario.getMotivoAlteracaoSalarial().getMas_codigo() + ", código pessoa: " + salario.getPessoa().getPes_codigo()
+                    + ", data início salário: " + salario.getSal_datainicio() + ", data fim salário: " + salario.getSal_datafim() + ", situação: " + salario.isSal_situacao()
+                    + ", valor bruto: " + salario.getSal_valorbruto());
         } else {
             dao.insert(salario);
             LogDAO.insert("Salario", "Cadastrou salário código: " + salario.getSal_codigo() + ", código cargo: " + salario.getCargo().getCar_codigo()
-                + ", motivo alteração salarial código: " + salario.getMotivoAlteracaoSalarial().getMas_codigo() + ", código pessoa: " + salario.getPessoa().getPes_codigo()
-                + ", data início salário: " + salario.getSal_datainicio() + ", data fim salário: " + salario.getSal_datafim() + ", situação: " + salario.isSal_situacao()
-                + ", valor bruto: " + salario.getSal_valorbruto());
+                    + ", motivo alteração salarial código: " + salario.getMotivoAlteracaoSalarial().getMas_codigo() + ", código pessoa: " + salario.getPessoa().getPes_codigo()
+                    + ", data início salário: " + salario.getSal_datainicio() + ", data fim salário: " + salario.getSal_datafim() + ", situação: " + salario.isSal_situacao()
+                    + ", valor bruto: " + salario.getSal_valorbruto());
         }
         return "salariolst";
     }
@@ -130,7 +162,7 @@ public class SalarioBean {
     }
 
     public List<Cargo> getLstCargo() {
-        lstCargo = cargoDAO.findAll();
+        lstCargo = cargoDAO.findAllChildrens();
         return lstCargo;
     }
 

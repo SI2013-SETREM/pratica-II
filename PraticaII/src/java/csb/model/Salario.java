@@ -23,26 +23,26 @@ import javax.persistence.Transient;
 @Table(name = "csb_salario")
 public class Salario implements Serializable {
 
-    public static final String sTitle = "Salário";
-    public static final String pTitle = "Salários";
-    
+    public static final String sTitle = "Colaborador";
+    public static final String pTitle = "Colaboradores";
+
     @Id
-    @SequenceGenerator(name="salario_pk_sequence", sequenceName="seq_csb_salario")
-    @GeneratedValue(strategy=GenerationType.AUTO, generator="salario_pk_sequence")
+    @SequenceGenerator(name = "salario_pk_sequence", sequenceName = "seq_csb_salario")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "salario_pk_sequence")
     private int sal_codigo;
-    
+
     @ManyToOne
     @JoinColumn(name = "car_codigo", referencedColumnName = "car_codigo")
     private Cargo cargo;
-    
+
     @ManyToOne
     @JoinColumn(name = "mas_codigo", referencedColumnName = "mas_codigo")
     private MotivoAlteracaoSalarial motivoAlteracaoSalarial;
-    
+
     @ManyToOne
     @JoinColumn(name = "pes_codigo", referencedColumnName = "pes_codigo")
     private Pessoa pessoa;
-    
+
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date sal_datainicio;
     @Temporal(javax.persistence.TemporalType.DATE)
@@ -52,19 +52,16 @@ public class Salario implements Serializable {
     @Transient
     private double sal_valorbrutoNovo;
 
-    public double getSal_valorbrutoNovo()
-    {
+    public double getSal_valorbrutoNovo() {
         return sal_valorbrutoNovo;
     }
 
-    public void setSal_valorbrutoNovo(double sal_valorbrutoNovo)
-    {
+    public void setSal_valorbrutoNovo(double sal_valorbrutoNovo) {
         this.sal_valorbrutoNovo = sal_valorbrutoNovo;
     }
 
     public Salario() {
     }
-    
 
     public int getSal_codigo() {
         return sal_codigo;
@@ -106,28 +103,27 @@ public class Salario implements Serializable {
         this.sal_datainicio = sal_datainicio;
     }
 
+    public String getDataConverter(Date data) {
+        return util.Utilidades.getDataString(data);
+    }
+
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         int hash = 7;
         hash = 19 * hash + Objects.hashCode(this.motivoAlteracaoSalarial);
         return hash;
     }
 
     @Override
-    public boolean equals(Object obj)
-    {
-        if (obj == null)
-        {
+    public boolean equals(Object obj) {
+        if (obj == null) {
             return false;
         }
-        if (getClass() != obj.getClass())
-        {
+        if (getClass() != obj.getClass()) {
             return false;
         }
         final Salario other = (Salario) obj;
-        if (!Objects.equals(this.motivoAlteracaoSalarial, other.motivoAlteracaoSalarial))
-        {
+        if (!Objects.equals(this.motivoAlteracaoSalarial, other.motivoAlteracaoSalarial)) {
             return false;
         }
         return true;

@@ -79,6 +79,11 @@ public class CargoDAO {
         return q.list();
     }
 
+    public List<Cargo> findAllChildrens() {
+        Query q = getSession().createQuery("from Cargo where car_pai is not null order by car_pai, car_ordem asc");
+        return q.list();
+    }
+    
     public List<Cargo> findAllParents() {
         Query q = getSession().createQuery("from Cargo where car_pai is null order by car_descricao asc");
         return q.list();

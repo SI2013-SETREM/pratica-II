@@ -40,20 +40,26 @@
                             <f:convertNumber type="currency"/>
                         </h:outputText>
                     </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Data Início"/>
+                        </f:facet>
+                        <h:outputText value="${item.getDataConverter(item.getSal_datainicio())}"/>
+                    </h:column>
                     <h:column headerClass="col-editar-header">
                         <f:facet name="header">
                             <h:outputText value="Editar"/>
                         </f:facet>
                         <h:commandLink action="${salarioBean.edit(item)}">
-                            <i class="fa fa-pencil"></i> Editar
+                            <i class="fa fa-gears"></i> Gerenciar
                         </h:commandLink>
                     </h:column>
                     <h:column headerClass="col-excluir-header">
                         <f:facet name="header">
                             <h:outputText value="Excluir"/>
                         </f:facet>
-                        <h:commandLink onclick="return confirm('Deseja realmente excluir o ${salarioBean.sTitle}?');" action="${salarioBean.delete(item)}">
-                            <i class="fa fa-trash"></i> Excluir
+                        <h:commandLink onclick="return confirm('Deseja realmente desligar o colaborador selecionado?');"  action="${salarioBean.editTOFF(item)}">
+                            <i class="fa fa-frown-o"></i> Desligar
                         </h:commandLink>
                     </h:column>
                 </h:dataTable>
