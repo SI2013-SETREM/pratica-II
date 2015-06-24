@@ -71,10 +71,12 @@ public class BairroBean {
     public String salvar() {
         if (bairro.getBai_codigo() > 0) {
             dao.update(bairro);
-            LogDAO.insert("Bairro", "Alterou bairro código: " + bairro.getBai_codigo() + ", descrição: " + bairro.getBai_descricao());
+            LogDAO.insert("Bairro", "Alterou bairro código: " + bairro.getBai_codigo() +
+                    ", descrição: " + bairro.getBai_descricao());
         } else {
             dao.insert(bairro);
-            LogDAO.insert("Bairro", "Cadastrou bairro código: " + bairro.getBai_codigo() + ", descrição: " + bairro.getBai_descricao());
+            LogDAO.insert("Bairro", "Cadastrou bairro código: " + bairro.getBai_codigo() +
+                    ", descrição: " + bairro.getBai_descricao());
         }
 
         return "bairrolst";
