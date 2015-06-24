@@ -20,12 +20,20 @@ import ff.model.Advertencia;
 
 import ff.model.Falta;
 import ff.model.Ferias;
+import fp.controller.calculoFolha;
 import fp.dao.EventoDAO;
+import fp.dao.EventoFolhaDAO;
 import fp.dao.EventoPadraoDAO;
+import fp.dao.HistoricoFolhaDAO;
 import fp.model.Evento;
+import fp.model.EventoFolha;
 import fp.model.EventoPadrao;
+import fp.model.HistoricoFolha;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.faces.model.DataModel;
 
@@ -48,7 +56,6 @@ public class FuncionarioBean {
     private final FeriasDAO feriasDAO = new FeriasDAO();
     private List<Ferias> ferias;
 
-  
     private final CargosPessoaDAO cargosDAO = new CargosPessoaDAO();
     private List<CargosPessoa> cargos;
     private CargosPessoa cargosPessoa = new CargosPessoa();
@@ -62,113 +69,119 @@ public class FuncionarioBean {
 
     private final SalarioDAO salarioDAO = new SalarioDAO();
     private List<Salario> salarios;
-    
+
     private final AdvertenciaDAO advertenciaDAO = new AdvertenciaDAO();
     private List<Advertencia> advertencias;
-    
+
     private EventoPadrao eventopadrao = new EventoPadrao();
     private EventoPadraoDAO eventopadraoDAO = new EventoPadraoDAO();
     private DataModel eventospadroes;
-    
+
     private Empresa empresa = new Empresa();
     private EmpresaDAO empresaDAO = new EmpresaDAO();
     private DataModel empresas;
-    
-    
+
     private Evento evento = new Evento();
     private EventoDAO eventoDao = new EventoDAO();
     private DataModel eventos;
-    
+
+    private List<Evento> Listeventos;
+
     private String estadoCivil;
     private String tipoPessoa;
-    
+
     public FuncionarioBean() {
     }
-    
+
 //=======================================================================================================
     //EVENTOS PADRÕES
-   
-      public String deleteEventoPadrao(EventoPadrao f) {
+    public String deleteEventoPadrao(EventoPadrao f) {
         eventopadraoDAO.delete(f);
-    //    LogDAO.insert("Formula", "Deletou fórmula código: " + f.getFor_codigo() + ", taxa: " + f.getFor_taxa()
+        //    LogDAO.insert("Formula", "Deletou fórmula código: " + f.getFor_codigo() + ", taxa: " + f.getFor_taxa()
         //            + ", horas: " + f.getFor_horas() + ", horas mais: " + f.getFor_horasmais() + ", nome: " + f.getFor_nome());
         return "eventopadlst";
     }
-        public String deleteEventoPadraoFolha(EventoPadrao f) {
+
+    public String deleteEventoPadraoFolha(EventoPadrao f) {
         eventopadraoDAO.delete(f);
-    //    LogDAO.insert("Formula", "Deletou fórmula código: " + f.getFor_codigo() + ", taxa: " + f.getFor_taxa()
+        //    LogDAO.insert("Formula", "Deletou fórmula código: " + f.getFor_codigo() + ", taxa: " + f.getFor_taxa()
         //            + ", horas: " + f.getFor_horas() + ", horas mais: " + f.getFor_horasmais() + ", nome: " + f.getFor_nome());
         return "folhapagfrm";
     }
 
-
-     public String listarEventosPadroes() {
+    public String listarEventosPadroes() {
         return "eventopadlst";
     }
-    
+
     public void setEventospadroes(DataModel eventospadroes) {
         this.eventospadroes = eventospadroes;
     }
- public String salvarEventospadroes() {
+
+    public String salvarEventospadroes() {
         if (eventopadrao.getEvp_codigo() > 0) {
             eventopadraoDAO.update(eventopadrao);
-      //      LogDAO.insert("Formula", "Alterou fórmula código: " + formula.getFor_codigo() + ", taxa: " + formula.getFor_taxa()
+            //      LogDAO.insert("Formula", "Alterou fórmula código: " + formula.getFor_codigo() + ", taxa: " + formula.getFor_taxa()
             //              + ", horas: " + formula.getFor_horas() + ", horas mais: " + formula.getFor_horasmais() + ", nome: " + formula.getFor_nome());
         } else {
             eventopadraoDAO.insert(eventopadrao);
-       //     LogDAO.insert("Formula", "Cadastrou fórmula código: " + formula.getFor_codigo() + ", taxa: " + formula.getFor_taxa()
+            //     LogDAO.insert("Formula", "Cadastrou fórmula código: " + formula.getFor_codigo() + ", taxa: " + formula.getFor_taxa()
             //             + ", horas: " + formula.getFor_horas() + ", horas mais: " + formula.getFor_horasmais() + ", nome: " + formula.getFor_nome());
         }
 
         return "eventopadlst";
     }
-     public String deleteEventospadroes(EventoPadrao f) {
+
+    public String deleteEventospadroes(EventoPadrao f) {
         eventopadraoDAO.delete(f);
-    //    LogDAO.insert("Formula", "Deletou fórmula código: " + f.getFor_codigo() + ", taxa: " + f.getFor_taxa()
+        //    LogDAO.insert("Formula", "Deletou fórmula código: " + f.getFor_codigo() + ", taxa: " + f.getFor_taxa()
         //            + ", horas: " + f.getFor_horas() + ", horas mais: " + f.getFor_horasmais() + ", nome: " + f.getFor_nome());
         return "eventopadlst";
     }
-     public String updateEventosPadroes() {
+
+    public String updateEventosPadroes() {
         eventopadraoDAO.update(eventopadrao);
         return "eventopadlst";
     }
-    
-      public String editEventosPadroes(EventoPadrao ep) {
+
+    public String editEventosPadroes(EventoPadrao ep) {
         eventopadrao = (EventoPadrao) eventospadroes.getRowData();
         return "eventopadfrm";
     }
-     public String insertEventospadroes() {
+
+    public String insertEventospadroes() {
         eventopadraoDAO.insert(eventopadrao);
         return "eventopadlst";
     }
+
     public DataModel<EventoPadrao> getEventosPadroes() {
         this.eventospadroes = new ListDataModel(eventopadraoDAO.EventoPessoa(pessoa.getPes_codigo()));
         return eventospadroes;
     }
-    
+
     public void setEventosPadroes(DataModel eventospadroes) {
         this.eventospadroes = eventospadroes;
     }
-    
-      public EventoPadraoDAO getEventoPadraoDao() {
+
+    public EventoPadraoDAO getEventoPadraoDao() {
         return eventopadraoDAO;
     }
 
     public void setEventoPadroesDao(EventoPadraoDAO eventopadraoDAO) {
         this.eventopadraoDAO = eventopadraoDAO;
     }
- //===============================================================================================================   
-  //FICHA FUNCIONAL  
-    
+    //===============================================================================================================   
+    //FICHA FUNCIONAL  
+
     public String select2() {
         pessoa = funcionarios.getRowData();
         //pessoa = pessoaDAO.findById(pessoa.getPes_codigo());
         //cargosPessoa = cargosDAO.cargo(pessoa.getPes_codigo());
-        
+
         //cargosPessoa = cargosDAO.GetListCargoPessoa(pessoa.getPes_codigo(),0).get(1);    
         return "folhapagfrm";
     }
-     public String select() {
+
+    public String select() {
         pessoa = funcionarios.getRowData();
         pessoa = pessoaDAO.findById(pessoa.getPes_codigo());
         if (pessoa != null) {
@@ -191,7 +204,7 @@ public class FuncionarioBean {
         }
         return "fichafunfrm";
     }
-    
+
     public String cancelar() {
         return "fichafulst";
     }
@@ -215,7 +228,7 @@ public class FuncionarioBean {
     public CargosPessoa getCargosPessoa() {
         return cargosPessoa;
     }
-    
+
     public List<Falta> getFaltas() {
         return faltas;
     }
@@ -257,8 +270,7 @@ public class FuncionarioBean {
     }
 
     public String getTipoPessoa(String p) {
-     
-                
+
         return tipoPessoa;
     }
 
@@ -273,43 +285,19 @@ public class FuncionarioBean {
     public List<BeneficiosPessoa> getBeneficios() {
         return beneficios;
     }
-    
-     public void setTipoPessoa(String tipoPessoa) {
+
+    public void setTipoPessoa(String tipoPessoa) {
         this.tipoPessoa = tipoPessoa;
     }
-//    public String select() {
-//        pessoa = funcionarios.getRowData();
-//        pessoa = pessoaDAO.findById(pessoa.getPes_codigo());
-//        if (pessoa != null) {
-//            salarios = salarioDAO.findBySalPessoaId(pessoa.getPes_codigo());
-//            beneficios = beneficiosPessoaDAO.findByPessoaId(pessoa.getPes_codigo());
-//            ferias = feriasDAO.findById(pessoa.getPes_codigo());
-//            cargos = cargosDAO.GetListCargoPessoa(pessoa.getPes_codigo(), 0);
-//            faltas = faltaDAO.findFaltas(pessoa.getPes_codigo());
-//            graduacoes = graduacoesPessoaDAO.findByGraduacoesId(pessoa.getPes_codigo());
-//            advertencias = advertenciaDAO.findByAvertId(pessoa.getPes_codigo());
-//
-//        } else {
-//            beneficios = new ArrayList<>();
-//            faltas = new ArrayList<>();
-//            ferias = new ArrayList<>();
-//            cargos = new ArrayList<>();
-//            graduacoes = new ArrayList<>();
-//            salarios = new ArrayList<>();
-//            advertencias = new ArrayList<>();
-//        }
-//        return "fichafunfrm";
-//    }
- 
+
 //===================================================================    
     //FOLHA DE PAGAMENTO
     public String gerarFolha() {
         return "eventopadlst";
     }
 
- //=======================================================================
+    //=======================================================================
     //AMBOS
-
     public Pessoa getPessoa() {
         return pessoa;
     }
@@ -326,79 +314,201 @@ public class FuncionarioBean {
     public void setFuncionarios(DataModel<Pessoa> funcionarios) {
         this.funcionarios = funcionarios;
     }
- //======================================================================
+
+    //======================================================================
     //EVENTO
+    private EventoPadraoDAO dao = new EventoPadraoDAO();
+    private calculoFolha calculoFolha = new calculoFolha();
+
+    private EventoFolha eventoFolha = new EventoFolha();
+    private EventoFolhaDAO eventoFolhaDAO = new EventoFolhaDAO();
+    private List<EventoFolha> EveFolhas;
+
+    private HistoricoFolha historicoFolha = new HistoricoFolha();
+    private HistoricoFolhaDAO historicoFolhaDAO = new HistoricoFolhaDAO();
+    private List<HistoricoFolha> HistFolhas;
+    
+    private int idEvento;
+
+    public String insert2(Integer eve_codigo, Integer _pes_codigo) {
+
+        EventoPadrao f = new EventoPadrao();
+
+        if (getIdEvento() != 2) {
+
+            f.setPessoa(pessoaDAO.findById(_pes_codigo));
+            f.setEve_codigo(eventoDao.findById(eve_codigo));
+
+            dao.insert(f);
+            return "eventopadlst";
+        } else {
+
+            this.funcionarios = new ListDataModel<>(pessoaDAO.findByPessoaId(_pes_codigo));
+            pessoa = funcionarios.getRowData();
+            pessoa = pessoaDAO.findById(pessoa.getPes_codigo());
+
+            double valor = 0;
+            double ValorAcresc = 0, ValorDesc = 0;
+            double salarioBase = salarioBruto();
+            List<EventoFolha> listaFolha = new ArrayList<EventoFolha>();
+            Listeventos = eventoDao.EventoId(eve_codigo);
+
+            for (Evento e : Listeventos) {
+                int serie = e.getSerieevento().getSev_codigo();
+
+                evento = eventoDao.findById(eve_codigo);
+
+                if (serie == 1) {
+                    valor = calculoFolha.calculaDesconto(evento, salarioBase);
+                    ValorDesc += valor;
+                } else {
+                    valor = calculoFolha.calculaAcrescimo(evento, salarioBase);
+                    ValorAcresc += valor;
+                }
+
+                //eventos = eventoDAO.EventoId(evento.getEve_codigo());
+                eventoFolha.setEve_evento(getEvento());
+                eventoFolha.setEvf_descricao(evento.getEve_descricao());
+                eventoFolha.setEvf_valor(valor);
+                eventoFolha.setEvf_indice("" + evento.getEve_indice());
+                eventoFolha.setEvf_imprimir(evento.isEve_imprimir());
+                eventoFolha.setEvf_serv_codigo(e.getSerieevento().getSev_codigo());
+                eventoFolha.setEvf_tif_codigo(e.getTipoevento().getTpe_codigo());
+                eventoFolha.setEvf_ben_codigo(e.getBeneficio().getBen_codigo());
+                eventoFolha.setEvf_for_godigo(e.getFormula().getFor_codigo());
+                eventoFolha.setEvf_tif_codigo(e.getTabelairrf().getTif_codigo());
+                eventoFolha.setEvs_tbs_codigo(e.getTabelainss().getTbs_codigo());
+
+                listaFolha.add(eventoFolha);
+
+            }
+
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date date = new Date();
+            String dat = dateFormat.format(date);
+
+            HistFolhas = historicoFolhaDAO.historicoAtual(pessoa.getPes_codigo(), dat);
+            for (HistoricoFolha h : HistFolhas) {
+                double desconto, acrescimo, liquido;
+                desconto = h.getHif_valor_desc();
+                acrescimo = h.getHif_valor_acre();
+                liquido = h.getHif_valor_liquido();
+
+                ValorDesc += desconto;
+                ValorAcresc += acrescimo;
+
+                double salarioLiq = ValorAcresc + (salarioBase - ValorDesc);
+                historicoFolha.setPessoa(pessoa);
+                historicoFolha.setHif_valor_acre(ValorAcresc);
+                historicoFolha.setHif_valor_desc(ValorDesc);
+                historicoFolha.setHif_salario_base(salarioBase);
+                historicoFolha.setHif_data(date);
+                historicoFolha.setHif_valor_liquido(salarioLiq);
+
+                salvarCabecalho();
+
+                for (EventoFolha ef : listaFolha) {
+                    ef.setHistoricoFolha(historicoFolha);
+
+                    salvarItens();
+                }
+
+            }
+
+        }
+        return "folhapagfrm";
+    }
+
+    public double salarioBruto() {
+
+        double sal = 0;
+        salarios = salarioDAO.findBySalPessoaId(pessoa.getPes_codigo());
+        for (Salario s : salarios) {
+            sal = s.getSal_valorbruto();
+        }
+
+        return sal;
+    }
+
+    public void salvarItens() {
+
+        eventoFolhaDAO.insert(eventoFolha);
+    }
+
+    public void salvarCabecalho() {
+
+        historicoFolhaDAO.update(historicoFolha);
+    }
+
     public Evento getEvento() {
         return evento;
     }
-    
+
     public void setEvento(Evento evento) {
         this.evento = evento;
     }
-    
+
     public DataModel<Evento> getEventos() {
         this.eventos = new ListDataModel(eventoDao.findAll());
         return eventos;
     }
-    
+
     public void setEventos(DataModel eventos) {
         this.eventos = eventos;
     }
-    
+
     public String insert() {
         eventoDao.insert(evento);
         return "eventoslst";
     }
-    
+
     public String edit(Evento i) {
         evento = (Evento) eventos.getRowData();
         return "eventosfrm";
     }
-    
+
     public String update() {
         eventoDao.update(evento);
         return "eventolst";
     }
-    
+
     public String delete(Evento i) {
         eventoDao.delete(i);
-  //      LogDAO.insert("Evento", "Deletou evento código: " + i.getEve_codigo() + ", descrição: " + i.getEve_descricao()+
-  //      ", índice: "+i.getEve_indice()+", código benefício: "+i.getBeneficio().getBen_codigo()+", fórmula: "+i.getFormula()+
-  //      ", série evento: "+i.getSerieevento()+", código tabela inss: "+i.getTabelainss().getTbs_codigo()+
-  //      ", código tabela irrf: "+i.getTabelairrf().getTif_codigo());
-        return "eventolst";
-    }
-    
-    public String salvar() {
-        if (evento.getEve_codigo() > 0) {
-            eventoDao.update(evento);
-   //         LogDAO.insert("Evento", "Alterou evento código: " + evento.getEve_codigo() + ", descrição: " + evento.getEve_descricao()+
-   //     ", índice: "+evento.getEve_indice()+", código benefício: "+evento.getBeneficio().getBen_codigo()+", fórmula: "+evento.getFormula()+
-   //     ", série evento: "+evento.getSerieevento()+", código tabela inss: "+evento.getTabelainss().getTbs_codigo()+
-    //    ", código tabela irrf: "+evento.getTabelairrf().getTif_codigo());
-        } else {
-            eventoDao.insert(evento);
-    //            LogDAO.insert("Evento", "Cadastrou evento código: " + evento.getEve_codigo() + ", descrição: " + evento.getEve_descricao()+
-    //    ", índice: "+evento.getEve_indice()+", código benefício: "+evento.getBeneficio().getBen_codigo()+", fórmula: "+evento.getFormula()+
-     //   ", série evento: "+evento.getSerieevento()+", código tabela inss: "+evento.getTabelainss().getTbs_codigo()+
-     //   ", código tabela irrf: "+evento.getTabelairrf().getTif_codigo());
-        }
-        
+        //      LogDAO.insert("Evento", "Deletou evento código: " + i.getEve_codigo() + ", descrição: " + i.getEve_descricao()+
+        //      ", índice: "+i.getEve_indice()+", código benefício: "+i.getBeneficio().getBen_codigo()+", fórmula: "+i.getFormula()+
+        //      ", série evento: "+i.getSerieevento()+", código tabela inss: "+i.getTabelainss().getTbs_codigo()+
+        //      ", código tabela irrf: "+i.getTabelairrf().getTif_codigo());
         return "eventolst";
     }
 
-    
+    public String salvar() {
+        if (evento.getEve_codigo() > 0) {
+            eventoDao.update(evento);
+            //         LogDAO.insert("Evento", "Alterou evento código: " + evento.getEve_codigo() + ", descrição: " + evento.getEve_descricao()+
+            //     ", índice: "+evento.getEve_indice()+", código benefício: "+evento.getBeneficio().getBen_codigo()+", fórmula: "+evento.getFormula()+
+            //     ", série evento: "+evento.getSerieevento()+", código tabela inss: "+evento.getTabelainss().getTbs_codigo()+
+            //    ", código tabela irrf: "+evento.getTabelairrf().getTif_codigo());
+        } else {
+            eventoDao.insert(evento);
+            //            LogDAO.insert("Evento", "Cadastrou evento código: " + evento.getEve_codigo() + ", descrição: " + evento.getEve_descricao()+
+            //    ", índice: "+evento.getEve_indice()+", código benefício: "+evento.getBeneficio().getBen_codigo()+", fórmula: "+evento.getFormula()+
+            //   ", série evento: "+evento.getSerieevento()+", código tabela inss: "+evento.getTabelainss().getTbs_codigo()+
+            //   ", código tabela irrf: "+evento.getTabelairrf().getTif_codigo());
+        }
+
+        return "eventolst";
+    }
+
     public String listar() {
         return "eventolst";
     }
- //========================================================================================
+    //========================================================================================
     //EMPRESA
-    
+
 //    public Empresa getEmpresa() {
 //        this.empresa = empresaDAO.findByIdPessoa(pessoa.getPes_codigo());
 //        return empresa;
 //    }
-
     public void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
     }
@@ -407,7 +517,6 @@ public class FuncionarioBean {
 //        this.empresas = new ListDataModel(empresaDAO.EmpresaPessoa(pessoa.getPes_codigo()));
 //        return empresas;
 //    }
-
     public void setEmpresas(DataModel empresas) {
         this.empresas = empresas;
     }
@@ -445,6 +554,117 @@ public class FuncionarioBean {
     public String listarEmpresa() {
         return "empresalst";
     }
-    
-    
+
+    public EventoPadrao getEventopadrao() {
+        return eventopadrao;
+    }
+
+    public void setEventopadrao(EventoPadrao eventopadrao) {
+        this.eventopadrao = eventopadrao;
+    }
+
+    public EventoPadraoDAO getEventopadraoDAO() {
+        return eventopadraoDAO;
+    }
+
+    public void setEventopadraoDAO(EventoPadraoDAO eventopadraoDAO) {
+        this.eventopadraoDAO = eventopadraoDAO;
+    }
+
+    public EmpresaDAO getEmpresaDAO() {
+        return empresaDAO;
+    }
+
+    public void setEmpresaDAO(EmpresaDAO empresaDAO) {
+        this.empresaDAO = empresaDAO;
+    }
+
+    public EventoDAO getEventoDao() {
+        return eventoDao;
+    }
+
+    public void setEventoDao(EventoDAO eventoDao) {
+        this.eventoDao = eventoDao;
+    }
+
+    public List<Evento> getListeventos() {
+        return Listeventos;
+    }
+
+    public void setListeventos(List<Evento> Listeventos) {
+        this.Listeventos = Listeventos;
+    }
+
+    public EventoPadraoDAO getDao() {
+        return dao;
+    }
+
+    public void setDao(EventoPadraoDAO dao) {
+        this.dao = dao;
+    }
+
+    public calculoFolha getCalculoFolha() {
+        return calculoFolha;
+    }
+
+    public void setCalculoFolha(calculoFolha calculoFolha) {
+        this.calculoFolha = calculoFolha;
+    }
+
+    public EventoFolha getEventoFolha() {
+        return eventoFolha;
+    }
+
+    public void setEventoFolha(EventoFolha eventoFolha) {
+        this.eventoFolha = eventoFolha;
+    }
+
+    public EventoFolhaDAO getEventoFolhaDAO() {
+        return eventoFolhaDAO;
+    }
+
+    public void setEventoFolhaDAO(EventoFolhaDAO eventoFolhaDAO) {
+        this.eventoFolhaDAO = eventoFolhaDAO;
+    }
+
+    public List<EventoFolha> getEveFolhas() {
+        return EveFolhas;
+    }
+
+    public void setEveFolhas(List<EventoFolha> EveFolhas) {
+        this.EveFolhas = EveFolhas;
+    }
+
+    public HistoricoFolha getHistoricoFolha() {
+        return historicoFolha;
+    }
+
+    public void setHistoricoFolha(HistoricoFolha historicoFolha) {
+        this.historicoFolha = historicoFolha;
+    }
+
+    public HistoricoFolhaDAO getHistoricoFolhaDAO() {
+        return historicoFolhaDAO;
+    }
+
+    public void setHistoricoFolhaDAO(HistoricoFolhaDAO historicoFolhaDAO) {
+        this.historicoFolhaDAO = historicoFolhaDAO;
+    }
+
+    public List<HistoricoFolha> getHistFolhas() {
+        return HistFolhas;
+    }
+
+    public void setHistFolhas(List<HistoricoFolha> HistFolhas) {
+        this.HistFolhas = HistFolhas;
+    }
+
+    public int getIdEvento() {
+        return idEvento;
+    }
+
+    public void setIdEvento(int idEvento) {
+        this.idEvento = idEvento;
+    }
+
 }
