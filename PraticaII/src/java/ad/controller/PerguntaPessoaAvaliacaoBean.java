@@ -107,7 +107,7 @@ public class PerguntaPessoaAvaliacaoBean {
             avaliado = lsPessoas.get(0).getColaboradorAvaliado();
             ErroMsg = "";
         } else {
-            ErroMsg = "Não tem mais colaboradores para avalair nesta avaliação!";
+            ErroMsg = "Não tem mais colaboradores para avaliar nesta avaliação!";
             avaliado = null;
         }
         if (avaliacao.getQuestionario() != null && avaliacao.getQuestionario().getPerguntas() != null && !avaliacao.getQuestionario().getPerguntas().isEmpty()) {
@@ -181,7 +181,8 @@ public class PerguntaPessoaAvaliacaoBean {
                 }
             }
         }
-        this.lsRespostasDetail = lsPPA1;
+        this.lsPerguntasP = lsPPA1;
+        this.lsRespostasDetail = lsPPA2;
         this.avaliado = pesDao.findById(idColaborador);
         this.avaliacao = avaDao.findById(idAvaliacao);
     }

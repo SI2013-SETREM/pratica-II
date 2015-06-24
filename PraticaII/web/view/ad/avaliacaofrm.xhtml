@@ -4,7 +4,8 @@
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
-                xmlns:p="http://primefaces.org/ui">
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <ui:define name="title">
         #{avaliacaoBean.getpTitle()}
@@ -16,22 +17,22 @@
     </ui:define>
 
     <ui:define name="main-content">
-<!--        <script>
-            $(function () {
-                var Bsubmit = false;
-                $('form').submit(function (e) {
-                    if (!Bsubmit) {
-                        e.preventDefault();
-                        bootbox.confirm('Deseja realmente salvar a avaliação? Não poderá mais editar as listas de avaliadores e avaliados futuramente!', function (item) {
-                            if (item) {
-                                Bsubmit = true;
-                                $('form').submit();
+        <!--        <script>
+                    $(function () {
+                        var Bsubmit = false;
+                        $('form').submit(function (e) {
+                            if (!Bsubmit) {
+                                e.preventDefault();
+                                bootbox.confirm('Deseja realmente salvar a avaliação? Não poderá mais editar as listas de avaliadores e avaliados futuramente!', function (item) {
+                                    if (item) {
+                                        Bsubmit = true;
+                                        $('form').submit();
+                                    }
+                                });
                             }
                         });
-                    }
-                });
-            });
-        </script>-->
+                    });
+                </script>-->
         <style>
             .autocomplete ul, .calendar input {
                 width: 100%;
@@ -52,13 +53,18 @@
             .labelBool [type=checkbox]{
                 float: right;
             }
+            .disabledField{
+                pointer-events: none;
+                opacity: 0.7;
+            }
         </style>
         <div class="panel panel-body">
             <label style="color: red; font-size: 16px;">#{avaliacaoBean.getErroMsg()}</label>
             <h3><h:outputText value="#{avaliacaoBean.getTitle()}"/></h3>
             <f:view>
                 <h:form styleClass="form-horizontal">
-                    <h:inputHidden id="idiCodigo" value="#{avaliacaoBean.avaliacao.ava_codigo}" />
+                    <h:inputHidden id="idCodAvaliacao" value="#{avaliacaoBean.avaliacao.ava_codigo}" />
+                    <h:inputHidden id="idCodTurma" value="#{avaliacaoBean.idTurma}" />
                     <div class="row">
                         <div class="col-md-6 col-xs-12">
                             <div class="form-group">
@@ -110,7 +116,7 @@
                         <div class="col-md-6 col-xs-12">
                             <div class="form-group labelBool">
                                 <div class="col-md-4 autoAva">
-                                    <h:selectBooleanCheckbox id="autoava" value="#{avaliacaoBean.bautoava}" title="Auto Avaliação" pt:autofocus="" />
+                                    <h:selectBooleanCheckbox id="autoava" value="#{avaliacaoBean.bautoava}" title="Auto Avaliação" pt:autofocus="" styleClass="#{avaliacaoBean.avaliacao.ava_codigo > 0 ? 'disabledField': ''}" />
                                 </div>
                                 <h:outputLabel value="Auto Avaliação" for="autoava" styleClass="control-label col-md-8" />
                             </div>
@@ -119,7 +125,7 @@
                             <div class="form-group">
                                 <h:outputLabel value="Questionário: " for="questionario" styleClass="control-label col-md-4" />
                                 <div class="col-md-8 col-sm-12">
-                                    <h:selectOneMenu id="questionario" converter="QuestionarioConverter" value="#{avaliacaoBean.avaliacao.questionario}" styleClass="form-control" pt:autofocus="" >
+                                    <h:selectOneMenu id="questionario" converter="QuestionarioConverter" value="#{avaliacaoBean.avaliacao.questionario}" styleClass="form-control #{avaliacaoBean.avaliacao.ava_codigo > 0 ? 'disabledField': ''}" pt:autofocus="" >
                                         <f:selectItems value="#{avaliacaoBean.lsQuestionario}" var="qst" itemLabel="#{qst.getQstTitulo()}" itemValue="#{qst}"/>
                                     </h:selectOneMenu>
                                 </div>
@@ -142,8 +148,9 @@
                                     <div class="col-md-12 col-xs-12">
                                         <div class="form-group">
                                             <h:outputLabel value="Cargos:" for="cargo1" styleClass="control-label col-md-4" />
+
                                             <div class="col-md-8 col-xs-12 autocomplete">
-                                                <p:autoComplete pt:disabled="#{avaliacaoBean.avaliacao.ava_codigo > 0}" id="cargo1" multiple="true" completeMethod="#{avaliacaoBean.completeCargo}" value="#{avaliacaoBean.lsCargoAvaliador}"
+                                                <p:autoComplete pt:disabled="#{avaliacaoBean.avaliacao.ava_codigo > 0}" id="cargo1"  styleClass="cargo1" multiple="true" completeMethod="#{avaliacaoBean.completeCargo}" value="#{avaliacaoBean.lsCargoAvaliador}"
                                                                 var="cargo" itemLabel="#{cargo.car_descricao}" itemValue="#{cargo}" converter="cargoConverter" forceSelection="true">
                                                     <p:column>
                                                         <h:outputText value="#{cargo.car_descricao}" />
@@ -189,7 +196,7 @@
                                         <div class="form-group">
                                             <h:outputLabel value="Pessoas:" for="pessoa2" styleClass="control-label col-md-4" />
                                             <div class="col-md-8 col-xs-12 autocomplete">
-                                                <p:autoComplete pt:disabled="#{avaliacaoBean.avaliacao.ava_codigo > 0}" id="pessoa2" multiple="true" completeMethod="#{avaliacaoBean.completePessoa}" value="#{avaliacaoBean.lsPessoaColaborador}"
+                                                <p:autoComplete styleClass="#{avaliacaoBean.avaliacao.turma.tur_codigo > 0 ? 'disabledField':''}" pt:disabled="#{avaliacaoBean.avaliacao.ava_codigo > 0}" id="pessoa2" multiple="true" completeMethod="#{avaliacaoBean.completePessoa}" value="#{avaliacaoBean.lsPessoaColaborador}"
                                                                 var="pessoa" itemLabel="#{pessoa.pes_nome}" itemValue="#{pessoa}" converter="pessoaConverter" forceSelection="true">
                                                     <p:column>
                                                         <h:outputText value="#{pessoa.pes_nome}" />

@@ -70,13 +70,13 @@ public class AlunosTurmaDAO {
     public List<AlunosTurma> GetAlunosTurma(int tur_codigo, int pes_codigo) {
         String sql = "";
         if (tur_codigo != 0) {
-            sql += " AND tur_codigo = " + tur_codigo;
+            sql += " and tur_codigo = " + tur_codigo;
         }
         if (pes_codigo != 0) {
-            sql += " AND pes_codigo = " + pes_codigo;
+            sql += " and pes_codigo = " + pes_codigo;
         }
 
-        Query q = session.createQuery("from Alunos_turma " + sql);
+        Query q = session.createQuery("from AlunosTurma where 1=1 " + sql);
         return q.list();
     }
     

@@ -5,7 +5,6 @@ import ad.model.Avaliacao;
 import ad.model.PessoasAvaliacao;
 import cfg.controller.LoginBean;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -136,7 +135,7 @@ public class PessoasAvaliacaoBean {
                             size++;
                         }
                     }
-                    pessoaA.setPea_media(mediaG / size);
+                    pessoaA.setPea_media(Integer.parseInt("" + Math.round(mediaG / size)));
                     lsPesA.add(pessoaA);
                 }
             }

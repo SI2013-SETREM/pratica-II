@@ -33,7 +33,7 @@ public class PessoasAvaliacao implements Serializable {
     @JoinColumn(name = "ava_codigo", referencedColumnName = "ava_codigo")
     private Avaliacao avaliacao;
 
-    private double pea_media;
+    private int pea_media;
     private String pea_observacao;
     private Date pea_datahora_resposta;
 
@@ -87,7 +87,7 @@ public class PessoasAvaliacao implements Serializable {
     public PessoasAvaliacao() {
     }
 
-    public PessoasAvaliacao(Pessoa colaboradorAvaliado, Pessoa avaliador, Avaliacao avaliacao, double pea_media, String pea_observacao, Date pea_datahora_resposta) {
+    public PessoasAvaliacao(Pessoa colaboradorAvaliado, Pessoa avaliador, Avaliacao avaliacao, int pea_media, String pea_observacao, Date pea_datahora_resposta) {
         this.colaboradorAvaliado = colaboradorAvaliado;
         this.avaliador = avaliador;
         this.avaliacao = avaliacao;
@@ -120,11 +120,11 @@ public class PessoasAvaliacao implements Serializable {
         this.avaliacao = avaliacao;
     }
 
-    public double getPea_media() {
+    public int getPea_media() {
         return pea_media;
     }
 
-    public void setPea_media(double pea_media) {
+    public void setPea_media(int pea_media) {
         this.pea_media = pea_media;
     }
 

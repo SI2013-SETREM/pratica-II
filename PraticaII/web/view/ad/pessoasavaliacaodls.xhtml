@@ -47,32 +47,45 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-md-6 col-xs-12">
+                                <div class="form-group">
+                                    <h:outputLabel value="E-mail:" for="email" styleClass="lbl col-md-4"/>
+                                    <div class="col-md-8 col-xs-12">
+                                        <h:outputText id="email" value="#{perguntaPessoaAvaliacaoBean.avaliado.pes_email}" styleClass="field"/>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-xs-12">
                         <label style="font-size: 20px;">Dados dos resultados da Avaliação '#{perguntaPessoaAvaliacaoBean.avaliacao.ava_nome}'</label>
-                        <ui:repeat value="#{perguntaPessoaAvaliacaoBean.lsRespostasDetail}" var="item"  varStatus="loop">
+                        <ui:repeat value="#{perguntaPessoaAvaliacaoBean.lsPerguntasP}" var="item"  varStatus="loop">
                             <h:panelGroup rendered="#{item.pergunta.prgTipo == 1}">
                                 <div class="form-group list-group-item" >
                                     <div class="row">
-                                        <h:outputLabel value="#{loop.index + 1}. #{item.ppa_pergunta}" styleClass="col-md-12"/>
-                                        <ui:repeat value="#{perguntaPessoaAvaliacaoBean.lsRespostasDetail}" var="item2" varStatus="index">
-                                            <h:panelGroup  rendered="#{item2.pergunta.prgCodigo == item.pergunta.prgCodigo}" >
-                                                <h:outputLabel value="#{index.index + 1}) [Nota: #{item2.ppa_pontuacao}]" styleClass="col-md-2" style="text-align:  right;"/>
-                                                <h:outputText value=" #{item.ppa_resposta}" styleClass="col-md-10"/>
-                                            </h:panelGroup>
-                                        </ui:repeat>
+                                        <ol style="padding: 0 15px;">
+                                            <div class="row"> <h:outputLabel value="#{loop.index + 1}. #{item.ppa_pergunta}" styleClass="col-md-12"/></div>
+                                            <ui:repeat value="#{perguntaPessoaAvaliacaoBean.lsRespostasDetail}" var="item2" varStatus="ind">
+                                                <h:panelGroup  rendered="#{item2.pergunta.prgCodigo == item.pergunta.prgCodigo}" >
+                                                    <li class="col-xs-12" style="margin: 0 0 7px 40px;">
+                                                        <b style="margin-right: 10px;">[Nota: #{item2.ppa_pontuacao}]</b>
+                                                        <span>#{item2.ppa_resposta}</span>
+                                                    </li>
+                                                </h:panelGroup>
+                                            </ui:repeat>
+                                        </ol>
+
                                     </div>
                                 </div>
                             </h:panelGroup>
 
                             <h:panelGroup rendered="#{item.pergunta.prgTipo == 2}">
                                 <div style="display: none" id="dados_grafico_#{item.pergunta.prgCodigo}">
-                                    <ui:repeat value="#{perguntaPessoaAvaliacaoBean.lsRespostasDetail}" var="item2" varStatus="index">
-                                        <h:panelGroup  rendered="#{item2.pergunta.prgCodigo == item.pergunta.prgCodigo}" >
+                                    <ui:repeat value="#{perguntaPessoaAvaliacaoBean.lsRespostasDetail}" var="item3" varStatus="index">
+                                        <h:panelGroup  rendered="#{item3.pergunta.prgCodigo == item.pergunta.prgCodigo}" >
                                             <div class="OPT_RESP">
-                                                <input type="hidden" class="NOME" value="#{item2.ppa_resposta}"/>
-                                                <input type="hidden" class="PONTO" value="#{item2.ppa_pontuacao}"/>
+                                                <input type="hidden" class="NOME" value="#{item3.ppa_resposta}"/>
+                                                <input type="hidden" class="PONTO" value="#{item3.ppa_pontuacao}"/>
                                             </div>
                                         </h:panelGroup>
                                     </ui:repeat>
@@ -95,45 +108,44 @@
                                                     chart: {
                                                         plotBackgroundColor: null,
                                                         plotBorderWidth: null,
-                                                        plotShadow: false
+                                                        plotShadow: false, marginTop: 130
                                                     },
                                                     title: {
-                                                        text: '#{item.ppa_pergunta}'
-                                                    },
-                                                    tooltip: {
-                                                        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                                                    },
-                                                    plotOptions: {
-                                                        pie: {
-                                                            allowPointSelect: true,
-                                                            cursor: 'pointer',
-                                                            dataLabels: {
-                                                                enabled: false
-                                                            },
-                                                            showInLegend: true
-                                                        }
-                                                    },
-                                                    series: [{
-                                                            type: 'pie',
-                                                            name: 'Browser share',
-                                                            data: list,
-//                                                            [
-//                                                                ['Firefox', 45.0],
-//                                                                ['IE', 26.8],
-//                                                                {
-//                                                                    name: 'Chrome',
-//                                                                    y: 12.8,
-//                                                                    sliced: true,
-//                                                                    selected: true
-//                                                                },
-//                                                                ['Safari', 8.5],
-//                                                                ['Opera', 6.2],
-//                                                                ['Others', 0.7],
-//                                                            ]
-                                                        }]
-                                                });
-                                            });
-                                        });
+                                                        text: '#{loop.index + 1}. #{item.ppa_pergunta}',
+                                                                            align: 'left',
+                                                                            x: 0,
+                                                                            y: 30
+                                                                        },
+                                                                        legend: {
+                                                                            align: 'left',
+                                                                            verticalAlign: 'top',
+                                                                            floating: 'true',
+                                                                            layout: 'vertical',
+                                                                            x: 0,
+                                                                            y: 50
+
+                                                                        },
+                                                                        tooltip: {
+                                                                            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                                                                        },
+                                                                        plotOptions: {
+                                                                            pie: {
+                                                                                allowPointSelect: true,
+                                                                                cursor: 'pointer',
+                                                                                dataLabels: {
+                                                                                    enabled: false
+                                                                                },
+                                                                                showInLegend: true
+                                                                            }
+                                                                        },
+                                                                        series: [{
+                                                                                type: 'pie',
+                                                                                name: 'Porcentagem',
+                                                                                data: list,
+                                                                            }]
+                                                                    });
+                                                                });
+                                                            });
                                     </script>
                                     <div id="per_#{loop.index}" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
                                 </div>

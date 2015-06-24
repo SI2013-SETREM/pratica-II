@@ -25,7 +25,6 @@ import td.dao.AlunosTurmaDAO;
 import td.dao.TurmaDAO;
 import td.model.AlunosTurma;
 import td.model.Turma;
-import td.model.Turma;
 
 @ManagedBean
 public class AvaliacaoBean {
@@ -46,7 +45,7 @@ public class AvaliacaoBean {
     private PessoaDAO pessoadao = new PessoaDAO();
     private List<AvaliacaoPessoaCargo> lsAvPesCargo;
     private int idTurma;
-    private TurmaDAO treinoDAO = new TurmaDAO();
+    private TurmaDAO turmaDAO = new TurmaDAO();
     private AlunosTurmaDAO alunoTurmaDAO = new AlunosTurmaDAO();
     private Avaliacao avaliacao;
     private AvaliacaoDAO dao = new AvaliacaoDAO();
@@ -58,18 +57,20 @@ public class AvaliacaoBean {
     private List<AvaliacaoPessoaCargo> lsAvaliacaoPessoaCargo;
     private List<PessoasAvaliacao> lsPessoasAvaliacao;///Lista de PessoasAvaliação
 
-    public void AvaliacaoTurma(int id) {
+    public AvaliacaoBean() {
+    }
+
+    public String avaliacaoTurma(int id) {
+        avaliacao = getAvaliacao();
         idTurma = id;
-        Turma turma = treinoDAO.findById(idTurma);
+        Turma turma = turmaDAO.findById(idTurma);
         avaliacao.setTurma(turma);
         List<AlunosTurma> LsAlunosTurma = alunoTurmaDAO.GetAlunosTurma(idTurma, 0); //SELECIONO TODOS OS ALUNOS DAQUELA TURMA
         for (AlunosTurma aluno : LsAlunosTurma) {
             lsPessoaColaborador.add(aluno.getPessoa()); //PASSO PRA LISTA :-/, BLZ?
         }
-        Title = "Dados do Turma do " + turma.getTreinamento().getTre_descricao();
-    }
-
-    public AvaliacaoBean() {
+        Title = "Avaliação da Turma do Treinamento \"" + turma.getTreinamento().getTre_descricao() + "\"";
+        return "/faces/view/ad/avaliacaofrm";
     }
 
     public List<Cargo> completeCargo(String query) {
@@ -87,6 +88,9 @@ public class AvaliacaoBean {
             avaliacao.setAva_dataInicial(new Date());
             avaliacao.setAva_dataFinal(new Date());
             avaliacao.setAva_status(0);
+        }
+        if (lsPessoaColaborador == null) {
+            lsPessoaColaborador = new ArrayList();
         }
         return avaliacao;
     }
@@ -141,6 +145,13 @@ public class AvaliacaoBean {
                 }
             }
         }
+        if (avaliacao.getTurma() != null && avaliacao.getTurma().getTur_codigo() != 0) {
+            Turma turma = avaliacao.getTurma();
+            idTurma = turma.getTur_codigo();
+            if (turma.getTreinamento() != null && turma.getTreinamento().getTre_codigo() != 0) {
+                Title = "Avaliação da Turma do Treinamento \"" + turma.getTreinamento().getTre_descricao() + "\"";
+            }
+        }
         return "avaliacaofrm";
     }
 
@@ -161,6 +172,10 @@ public class AvaliacaoBean {
             dao.update(avaliacao);
         } else {
             if (ValidaDados()) {
+                if (idTurma != 0) {
+                    Turma turma = turmaDAO.findById(idTurma);
+                    avaliacao.setTurma(turma);
+                }
                 dao.insert(avaliacao);
                 if (SalvaListas()) {
                     //return "questionariofrm";
@@ -253,7 +268,7 @@ public class AvaliacaoBean {
             taxa = (int) ((size * 100) / sizeAll);
             return taxa + "%";
         }
-        return "nda";
+        return "0%";
     }
 
     private boolean SalvaListas() {
@@ -389,11 +404,11 @@ public class AvaliacaoBean {
         return lsQuestionario;
     }
 
-    public int getIdTtreino() {
+    public int getIdTurma() {
         return idTurma;
     }
 
-    public void setIdTtreino(int idTurma) {
+    public void setIdTurma(int idTurma) {
         this.idTurma = idTurma;
     }
 
