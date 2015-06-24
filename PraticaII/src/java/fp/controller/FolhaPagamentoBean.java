@@ -10,11 +10,15 @@ import ff.model.Falta;
 import fp.dao.EventoDAO;
 import fp.dao.EventoFolhaDAO;
 import fp.dao.EventoPadraoDAO;
+import fp.dao.FaixaINSSDAO;
 import fp.dao.HistoricoFolhaDAO;
+import fp.dao.TabelaINSSDAO;
 import fp.model.Evento;
 import fp.model.EventoFolha;
 import fp.model.EventoPadrao;
+import fp.model.FaixaINSS;
 import fp.model.HistoricoFolha;
+import fp.model.TabelaINSS;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
@@ -60,6 +64,9 @@ public class FolhaPagamentoBean {
     private List<EventoFolha> EveFolhas;
     private DataModel<EventoFolha> DataModelEveFolhas;
 
+   
+   
+    
     private calculoFolha calculoFolha = new calculoFolha();
 
     public FolhaPagamentoBean() {
@@ -106,7 +113,7 @@ public class FolhaPagamentoBean {
             this.eventos = new ListDataModel<>(eventoDAO.EventoId(codEv));
             evento = eventos.getRowData();
             evento = eventoDAO.findById(evento.getEve_codigo());
-
+       
             if (serie == 1) {
                 valor = calculoFolha.calculaDesconto(evento, salarioBase);
                 ValorDesc += valor;
@@ -132,7 +139,7 @@ public class FolhaPagamentoBean {
 
         }
         Date data = new Date();
-        double salarioLiq = ValorAcresc + (salarioBase - ValorDesc);
+        double salarioLiq = ValorAcresc - ValorDesc;
         historicoFolha.setPessoa(pessoa);
         historicoFolha.setHif_valor_acre(ValorAcresc);
         historicoFolha.setHif_valor_desc(ValorDesc);
@@ -201,63 +208,7 @@ public class FolhaPagamentoBean {
         return sal;
     }
 
-    public double calculaDesconto(Evento objD) {
-
-        double sal = salarioBruto();
-        double desconto = 0;
-        int tipoEv = objD.getTipoevento().getTpe_codigo();
-
-        if (objD.isEve_tributar_fgts()) {
-
-            desconto = sal * objD.getEve_indice();
-
-        }
-        if (objD.isEve_tributar_inss()) {
-
-            if (tipoEv == 1) { // verificar os tipos 
-
-            }
-        }
-        if (objD.isEve_tributar_irrf()) {
-
-        }
-        if (objD.isEve_calcular_media_agregada13()) {
-
-        }
-
-        return desconto;
-    }
-
-    public double calculaAcrescimo(Evento objA) {
-
-        double acrescimo = 0;
-        double sal = salarioBruto();
-        int tipoEv = objA.getTipoevento().getTpe_codigo();
-
-        if (objA.getEve_indice() != 0) {
-            if (tipoEv == 1) {
-                acrescimo = acrescimo * objA.getEve_indice();
-            } else if (tipoEv == 2) {
-
-            }
-        }
-
-        if (objA.isEve_tributar_inss()) {
-
-        }
-
-        if (objA.isEve_tributar_irrf()) {
-
-        }
-        if (objA.isEve_calcular_media_agregada13()) {
-
-        }
-        if (objA.getBeneficio().getBen_codigo() > 0) {
-            acrescimo += objA.getBeneficio().getBen_valor();
-
-        }
-        return acrescimo;
-    }
+ 
 
     public Salario getSalario() {
         return salario;
@@ -370,5 +321,6 @@ public class FolhaPagamentoBean {
     public void setIdPessoa(int idPessoa) {
         this.idPessoa = idPessoa;
     }
+    
 
 }
