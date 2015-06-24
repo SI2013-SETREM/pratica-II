@@ -18,6 +18,16 @@
                         $(".pesDesNec").removeAttr("required");
                     }
                 });
+                $(".pesTipo").change(function () {
+                    alert('boa galvão');
+                    if ($(".pesNecEsp").is(':checked')) {
+                        $("#pesNecessidadeEspecial").fadeIn();
+                        $(".pesDesNec").attr("required", "required");
+                    } else {
+                        $("#pesNecessidadeEspecial").fadeOut();
+                        $(".pesDesNec").removeAttr("required");
+                    }
+                });
             });
             function formataCpfCnpj() {
                 var valor = document.getElementById('frmPessoa:pesCPF').value;
@@ -187,7 +197,7 @@
                     </div>
                     <div class="form-group">
                         <h:outputLabel value="Tipo Pessoa:" for="pesTipo" styleClass="control-label col-sm-2" />
-                        <div style="padding-top: 5px" class="col-xs-2 col-sm-3">
+                        <div style="padding-top: 5px" class="col-md-6 col-sm-12">
                             <h:selectOneMenu value="#{pessoaBean.pessoa.pes_tipo}" id="pesTipo" class="form-control">
                                 <f:selectItem itemValue="1" itemLabel="Funcionário"/>
                                 <f:selectItem itemValue="2" itemLabel="Ex-Funcionário"/>
@@ -195,13 +205,12 @@
                                 <f:selectItem itemValue="4" itemLabel="Instrutores"/>
                             </h:selectOneMenu>
                         </div>
-                        <h:outputLabel value="Est Civíl:" for="pesEC" styleClass="control-label col-sm-1" />
-                        <div style="padding-top: 5px" class="col-xs-2">
-                            <h:selectOneMenu value="#{pessoaBean.pessoa.pes_estadocivil}" id="pesEC" class="form-control">
-                                <f:selectItem itemValue="1" itemLabel="Solteiro(a)"/>
-                                <f:selectItem itemValue="2" itemLabel="Casado(a)"/>
-                                <f:selectItem itemValue="3" itemLabel="Separado(a)"/>
-                                <f:selectItem itemValue="4" itemLabel="Outros"/>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Empresa" for="pesEmpresa" styleClass="control-label col-sm-2" />
+                        <div style="padding-top: 5px" class="col-md-6 col-sm-12">
+                            <h:selectOneMenu value="#{pessoaBean.pessoa.empresa}" converter="empresaConverter" id="pesEmpresa" class="form-control">
+                                <f:selectItems value="#{empresaBean.empresas}" var="empresa" />
                             </h:selectOneMenu>
                         </div>
                     </div>
@@ -225,10 +234,19 @@
                     </div>
                     <div class="form-group">
                         <h:outputLabel value="Data Cad:" for="pesDataCad" styleClass="control-label col-sm-2" />
-                        <div class="col-md-6 col-sm-12">
+                        <div class="col-md-2 col-sm-3">
                             <h:inputText id="pesDataCad" pt:type="date" value="#{pessoaBean.pessoa.pes_datacadastro}" title="Data do Cadastro da pessoa" pt:required="required" styleClass="form-control" pt:autofocus="">
                                 <f:convertDateTime pattern="yyyy-MM-dd"/>
                             </h:inputText>
+                        </div>
+                        <h:outputLabel value="Est Civíl:" for="pesEC" styleClass="control-label col-sm-2" />
+                        <div style="padding-top: 5px" class="col-xs-2">
+                            <h:selectOneMenu value="#{pessoaBean.pessoa.pes_estadocivil}" id="pesEC" class="form-control">
+                                <f:selectItem itemValue="1" itemLabel="Solteiro(a)"/>
+                                <f:selectItem itemValue="2" itemLabel="Casado(a)"/>
+                                <f:selectItem itemValue="3" itemLabel="Separado(a)"/>
+                                <f:selectItem itemValue="4" itemLabel="Outros"/>
+                            </h:selectOneMenu>
                         </div>
                     </div>
 

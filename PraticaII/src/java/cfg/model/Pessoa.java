@@ -42,7 +42,7 @@ public class Pessoa implements Serializable {
     @ManyToOne
     @JoinColumn(name = "cid_cep")
     private Cidade cidade;
-    
+
     @ManyToOne
     @JoinColumn(name = "end_codigo")
     private Endereco endereco;
@@ -51,13 +51,17 @@ public class Pessoa implements Serializable {
     @JoinColumn(name = "cid_cep_nasc")
     private Cidade cidadenasc;
     
+    @ManyToOne
+    @JoinColumn(name = "pes_empresa")
+    private Empresa empresa;
+
     @ManyToMany
     @JoinTable(name = "car_codigo")
     private List<Cargo> cargos;
 
     @OneToOne(optional = true, mappedBy = "pessoa") //atributo na classe Usuario que faz o mapeamento
     private Usuario usuario;
-    
+
     private String pes_nome;
     private String pes_cpf;
     private String pes_rg;
@@ -84,13 +88,15 @@ public class Pessoa implements Serializable {
     public Pessoa() {
     }
 
-    public Pessoa(int pes_codigo, Repositorio repositorio, Bairro bairro, Cidade cidade, Endereco endereco, Cidade cidadenasc, List<Treinamento> treinamentos, Usuario usuario, String pes_nome, String pes_cpf, String pes_rg, Date pes_datanasc, String pes_numeroend, String pes_complementoend, String pes_telefone, String pes_email, String pes_pai, String pes_mae, int pes_tipo, int pes_estadocivil, String pes_observacoes, Boolean pes_necessidadeespecial, String pes_necessidadeespecialdsc, Date pes_datacadastro, String pes_cur_resumo, Date pes_cur_dataatualizado, Double pes_cur_pretensaosalarial) {
+    public Pessoa(int pes_codigo, Repositorio repositorio, Bairro bairro, Cidade cidade, Endereco endereco, Cidade cidadenasc, List<Cargo> cargos, Empresa empresa, Usuario usuario, String pes_nome, String pes_cpf, String pes_rg, Date pes_datanasc, String pes_numeroend, String pes_complementoend, String pes_telefone, String pes_email, String pes_pai, String pes_mae, int pes_tipo, int pes_estadocivil, String pes_observacoes, Boolean pes_necessidadeespecial, String pes_necessidadeespecialdsc, Date pes_datacadastro, String pes_cur_resumo, Date pes_cur_dataatualizado, Double pes_cur_pretensaosalarial) {
         this.pes_codigo = pes_codigo;
         this.repositorio = repositorio;
         this.bairro = bairro;
         this.cidade = cidade;
         this.endereco = endereco;
         this.cidadenasc = cidadenasc;
+        this.cargos = cargos;
+        this.empresa = empresa;
         this.usuario = usuario;
         this.pes_nome = pes_nome;
         this.pes_cpf = pes_cpf;
@@ -112,6 +118,8 @@ public class Pessoa implements Serializable {
         this.pes_cur_dataatualizado = pes_cur_dataatualizado;
         this.pes_cur_pretensaosalarial = pes_cur_pretensaosalarial;
     }
+
+    
 
     public int getPes_codigo() {
         return pes_codigo;
@@ -136,7 +144,7 @@ public class Pessoa implements Serializable {
     public void setBairro(Bairro bairro) {
         this.bairro = bairro;
     }
-    
+
     public Endereco getEndereco() {
         return endereco;
     }
@@ -152,6 +160,14 @@ public class Pessoa implements Serializable {
     public void setCidade(Cidade cidade) {
         this.cidade = cidade;
     }
+
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }  
 
     public Cidade getCidadenasc() {
         return cidadenasc;
@@ -320,7 +336,7 @@ public class Pessoa implements Serializable {
     public void setPes_cur_pretensaosalarial(Double pes_cur_pretensaosalarial) {
         this.pes_cur_pretensaosalarial = pes_cur_pretensaosalarial;
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 5;
@@ -342,10 +358,10 @@ public class Pessoa implements Serializable {
         }
         return true;
     }
-    
+
     @Override
     public String toString() {
         return getPes_nome();
     }
-    
+
 }
