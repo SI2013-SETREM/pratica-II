@@ -29,6 +29,10 @@ public class CargosBean {
     /* PARA FAZER A COMBO DE CARGOS */
     private DataModel lsCargosParents;
     private List<Cargo> lsCargo;
+    
+    /* PARA FAZER A COMBO DE CARGOS */
+    private DataModel lsCargosNext;
+    private List<Cargo> lsCargoNext;
 
     /* PARA FAZER A COMBO DE SETORES */
     private List<Setor> lstsetor;
@@ -77,6 +81,15 @@ public class CargosBean {
         this.lsCargosParents = lsCargosParents;
     }
 
+    public DataModel getLsCargosNext() {
+        this.lsCargosNext = new ListDataModel(dao.findAll());
+        return lsCargosNext;
+    }
+
+    public void setLsCargosNext(DataModel lsCargosNext) {
+        this.lsCargosNext = lsCargosNext;
+    }
+    
     public String insert() {
         dao.insert(cargo);
         return "cargolst";
@@ -141,6 +154,15 @@ public class CargosBean {
     public void setLscargo(List<Cargo> lscargo) {
         this.lsCargo = lscargo;
     }
+
+    public List<Cargo> getLsCargoNext() {
+        lsCargoNext = dao.findAll();
+        return lsCargoNext;
+    }
+
+    public void setLsCargoNext(List<Cargo> lsCargoNext) {
+        this.lsCargoNext = lsCargoNext;
+    }  
 
     public List<Graduacao> getLsGraduacao() {
         lsGraduacao = graduacaodao.findAll();

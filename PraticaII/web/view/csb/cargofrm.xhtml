@@ -137,33 +137,40 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <h:outputLabel style="width: 133px" value="Ativo?:" for="car_ativo" styleClass="control-label col-sm-1" />
+                        <h:outputLabel style="width: 133px" value="Ativo?" for="car_ativo" styleClass="control-label col-sm-1" />
                         <div style="padding-top: 5px" class="col-md-6 col-sm-12">
                             <h:selectBooleanCheckbox value="#{cargosBean.cargo.car_ativo}" id="carAtivo" class="carAtivo" title="Ativo" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <h:outputLabel style="width: 133px" value="É Cargo Pai?:" for="car_tempai" styleClass="control-label col-sm-1" />
+                        <h:outputLabel style="width: 133px" value="É Cargo Pai?" for="car_tempai" styleClass="control-label col-sm-1" />
                         <div style="padding-top: 5px" class="col-md-6 col-sm-12">
                             <h:selectBooleanCheckbox value="false" styleClass="carTempaiChck" title="Tem Pai" />
                         </div>
                     </div>
                     <div id="haveParent">
                         <div class="form-group">
-                            <h:outputLabel style="width: 133px" value="Cargo: " for="car_pai" styleClass="control-label col-sm-1" />
+                            <h:outputLabel style="width: 133px" value="Cargo Pertencente: " for="car_pai" styleClass="control-label col-sm-1" />
                             <div class="col-md-6 col-sm-12">
-                                <h:selectOneMenu id="cargoPai" pt:required="false" converter="cargoConverter" value="#{cargosBean.cargo.car_pai}" styleClass="form-control cargoPaiCbo" pt:autofocus="" >
+                                <h:selectOneMenu id="cargoPai" pt:required="false" converter="cargoConverter" value="#{cargosBean.cargo.car_pai}" styleClass="form-control cargoPaiCbo">
                                     <f:selectItems value="#{cargosBean.lscargo}" var="tipe" itemLabel="#{tipe.car_descricao}"/>
                                 </h:selectOneMenu>
-
                             </div>
                         </div>
                         <div class="form-group">
-                            <h:outputLabel style="width: 133px" value="Ordem:" for="carOrdem" styleClass="control-label col-sm-1" />
+                            <h:outputLabel style="width: 133px" value="Próximo Cargo " for="car_next" styleClass="control-label col-sm-1" />
                             <div class="col-md-6 col-sm-12">
-                                <h:inputText pt:type="number" pt:min="1" pt:max="100" pt:step="1" id="carOrdem" value="#{cargosBean.cargo.car_ordem}" title="Ordem do Cargo" styleClass="form-control carOrdemNumber" />
+                                <h:selectOneMenu id="car_next" pt:required="false" converter="cargoConverter" value="#{cargosBean.cargo.car_next}" styleClass="form-control car_next">                                    <f:selectItems value="#{cargosBean.lscargo}" var="tipe" itemLabel="#{tipe.car_descricao}"/>
+                                    <f:selectItems value="#{cargosBean.lsCargoNext}" var="tipe" itemLabel="#{tipe.car_descricao}"/>
+                                </h:selectOneMenu>
                             </div>
                         </div>
+                        <!--                        <div class="form-group">
+                                                    <h:outputLabel style="width: 133px" value="Ordem:" for="carOrdem" styleClass="control-label col-sm-1" />
+                                                    <div class="col-md-6 col-sm-12">
+                                                        <h:inputText pt:type="number" pt:min="1" pt:max="100" pt:step="1" id="carOrdem" value="#{cargosBean.cargo.car_ordem}" title="Ordem do Cargo" styleClass="form-control carOrdemNumber" />
+                                                    </div>
+                                                </div>-->
                     </div>
                     <div class="form-group">
                         <p:outputLabel style="width: 133px" value="Graduações:" for="graduacoes" styleClass="control-label col-sm-1" />

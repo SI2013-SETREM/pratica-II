@@ -37,6 +37,10 @@ public class Cargo implements Serializable, Comparable<Cargo> {
     private Cargo car_pai;
 
     @ManyToOne
+    @JoinColumn(name = "car_next", referencedColumnName = "car_codigo")
+    private Cargo car_next;
+
+    @ManyToOne
     @JoinColumn(name = "set_codigo")
     private Setor setor;
 
@@ -83,7 +87,7 @@ public class Cargo implements Serializable, Comparable<Cargo> {
             }
     )
     private List<Beneficio> beneficios;
-    
+
     @ManyToMany
     @JoinTable(name = "rec_interesse_cargo",
             joinColumns = {
@@ -163,6 +167,14 @@ public class Cargo implements Serializable, Comparable<Cargo> {
         this.car_pai = car_pai;
     }
 
+    public Cargo getCar_next() {
+        return car_next;
+    }
+
+    public void setCar_next(Cargo car_next) {
+        this.car_next = car_next;
+    }
+ 
     public Integer getCar_ordem() {
         return car_ordem;
     }
@@ -186,7 +198,7 @@ public class Cargo implements Serializable, Comparable<Cargo> {
     public void setBeneficios(List<Beneficio> beneficios) {
         this.beneficios = beneficios;
     }
-    
+
     public List<Competencia> getCompetencias() {
         return Competencias;
     }

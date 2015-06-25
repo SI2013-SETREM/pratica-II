@@ -45,6 +45,7 @@ public class SalarioBean {
     private SalarioDAO dao = new SalarioDAO();
     private DataModel salarios;
     private DataModel salariosHistorico;
+    private DataModel salariosCargoHistorico;
     private DataModel salariosOff;
 
     private String usu_login;
@@ -82,7 +83,16 @@ public class SalarioBean {
     public void setSalariosHistorico(DataModel salariosHistorico) {
         this.salariosHistorico = salariosHistorico;
     }
-    
+
+    public DataModel getSalariosCargoHistorico(Salario sal) {
+        this.salariosCargoHistorico = new ListDataModel(dao.findSalByCargo(sal.getCargo().getCar_codigo()));
+        return salariosCargoHistorico;
+    }
+
+    public void setSalariosCargoHistorico(DataModel salariosCargoHistorico) {
+        this.salariosCargoHistorico = salariosCargoHistorico;
+    }
+
     public void setSalario(Salario salario) {
         this.salario = salario;
     }
@@ -154,7 +164,7 @@ public class SalarioBean {
             dao.updateSalario(salario);
             return "salariolst";
         } else {
-            throw new Error("Error");
+            throw new Error("As credenciais fornecidas são inválidas, tente novamente!");
         }
     }
 
@@ -162,6 +172,12 @@ public class SalarioBean {
         salario = (Salario) salarios.getRowData();
         this.salariosHistorico = new ListDataModel(dao.findBySalPessoaId(sal.getPessoa().getPes_codigo()));
         return "historiasalario";
+    }
+
+    public String historyTeam(Salario sal) {
+        salario = (Salario) salarios.getRowData();
+        this.salariosCargoHistorico = new ListDataModel(dao.findSalByCargo(sal.getCargo().getCar_codigo()));
+        return "historiacargosalario";
     }
 
     public String turnOffEmployer() {
@@ -175,7 +191,7 @@ public class SalarioBean {
             dao.turnOffEmployer(sal);
             return "salariolst";
         } else {
-            throw new Error("Error");
+            throw new Error("As credenciais fornecidas são inválidas, tente novamente!");
         }
     }
 
