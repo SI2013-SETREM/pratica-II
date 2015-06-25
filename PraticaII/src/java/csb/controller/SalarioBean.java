@@ -11,6 +11,7 @@ import csb.dao.SalarioDAO;
 import csb.model.Cargo;
 import csb.model.MotivoAlteracaoSalarial;
 import csb.model.Salario;
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -43,6 +44,7 @@ public class SalarioBean {
     private Salario salario = new Salario();
     private SalarioDAO dao = new SalarioDAO();
     private DataModel salarios;
+    private DataModel salariosOff;
 
     private String usu_login;
     private String usu_pass;
@@ -75,6 +77,30 @@ public class SalarioBean {
         this.salario = salario;
     }
 
+    public DataModel getSalariosOff() {
+        List<Salario> lsSalBank = dao.findSalariosInativos();
+        List<Salario> lsSal = new ArrayList<Salario>();
+        for (Salario sal : lsSalBank) {
+            boolean contem = false;
+            if (lsSal.size() > 0) {
+                for (Salario se : lsSal) {
+                    if (sal.getPessoa().getPes_codigo() == se.getPessoa().getPes_codigo()) {
+                        contem = true;
+                    }
+                }
+            }
+            if (!contem) {
+                lsSal.add(sal);
+            }
+        }
+        this.salariosOff = new ListDataModel(lsSal);
+        return salariosOff;
+    }
+
+    public void setSalariosOff(DataModel salariosOff) {
+        this.salariosOff = salariosOff;
+    }
+
     public String getUsu_login() {
         return usu_login;
     }
@@ -100,7 +126,7 @@ public class SalarioBean {
         salario = (Salario) salarios.getRowData();
         return "salariofrm";
     }
-    
+
     public String editTOFF(Salario i) {
         salario = (Salario) salarios.getRowData();
         return "salariotoff";
@@ -116,6 +142,21 @@ public class SalarioBean {
         Usuario usrResponsavel = daoUser.findUser(this.usu_login, util.Utilidades.encryptSHA(this.usu_pass));
         if (usrResponsavel != null) {
             dao.updateSalario(salario);
+            return "salariolst";
+        } else {
+            throw new Error("Error");
+        }
+    }
+
+    public String turnOffEmployer() {
+        UsuarioDAO daoUser = new UsuarioDAO();
+        Usuario usrResponsavel = daoUser.findUser(this.usu_login, util.Utilidades.encryptSHA(this.usu_pass));
+        if (usrResponsavel != null) {
+            Salario sal = dao.findById(salario.getSal_codigo());
+            sal.setSal_situacao(false);
+            sal.setSal_datafim(salario.getSal_datafim());
+            salario = null;
+            dao.turnOffEmployer(sal);
             return "salariolst";
         } else {
             throw new Error("Error");

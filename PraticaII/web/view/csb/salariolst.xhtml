@@ -9,7 +9,13 @@
     <ui:define name="title">
         ${salarioBean.pTitle}
     </ui:define>
-
+    <ui:define name="header">
+        <style type="text/css">
+            table{
+                font-size: 14px;
+            }
+        </style>
+    </ui:define>
     <ui:define name="breadcrumb">
         <li>Cargos, Salários e Benefícios</li>
         <li>${salarioBean.pTitle}</li>
@@ -48,7 +54,7 @@
                     </h:column>
                     <h:column headerClass="col-editar-header">
                         <f:facet name="header">
-                            <h:outputText value="Editar"/>
+                            <h:outputText value="Gerenciar"/>
                         </f:facet>
                         <h:commandLink action="${salarioBean.edit(item)}">
                             <i class="fa fa-gears"></i> Gerenciar
@@ -56,7 +62,7 @@
                     </h:column>
                     <h:column headerClass="col-excluir-header">
                         <f:facet name="header">
-                            <h:outputText value="Excluir"/>
+                            <h:outputText value="Desligar"/>
                         </f:facet>
                         <h:commandLink onclick="return confirm('Deseja realmente desligar o colaborador selecionado?');"  action="${salarioBean.editTOFF(item)}">
                             <i class="fa fa-frown-o"></i> Desligar

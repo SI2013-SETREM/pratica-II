@@ -10,9 +10,21 @@
     </ui:define>
 
     <ui:define name="header">
+        <style>
+            .sal-comparation{
+                margin-left: 180px; 
+                margin-top: -25px; 
+                height: 250px; 
+                width: 500px;
+                display: none;
+            }
+        </style>
+        <script type="text/javascript" src="http://code.highcharts.com/highcharts.js"></script>
+        <script type="text/javascript" src="http://code.highcharts.com/modules/exporting.js"></script>
         <script type="text/javascript">
             $(function () {
                 var salarioAtual = parseFloat($(".salSalario").val());
+                var salarioNovo = 0;
                 $(".promocao").change(function () {
                     if ($(".promocao")[0].checked) {
                         $("#haveParent").fadeIn();
@@ -20,9 +32,9 @@
                         $("#haveParent").fadeOut();
                     }
                 });
-
+                                
                 $(".salSalario").blur(function () {
-                    var salarioNovo = parseFloat($(".salSalario").val());
+                    salarioNovo = parseFloat($(".salSalario").val());
                     if (salarioNovo &lt; salarioAtual){
                         bootbox.confirm("Uma vez estipulado um valor no contrato de trabalho, este não poderá sofrer redução. <br /> <br /> Todavia, existe uma exceção, prevista na CLT, em seu artigo 503, que torna lícita a possibilidade de redução do salário em até <b>25%</b> com redução de jornada de trabalho em casos de força maior ou prejuízo susceptíveis de afetar substancialmente a situação econômica da empresa, observando sempre o limite do Salário Mínimo. Porém esta alteração requer um termo devidamente assinado pelo colaborador dizendo que o mesmo está ciente e corcorda com os novos termos. <br /><br /> <b>Você deseja continuar?</b>", function (result) {
                             if (result === false) {
@@ -31,16 +43,102 @@
                                 var porcentagemRestante = parseFloat(salarioNovo * 100 / salarioAtual);
                                 if (porcentagemRestante &lt; 75)
                                 {
-                                    bootbox.alert("A diminuição salarial ultrapassa os <b>25%</b> previstos em lei. A alteração não poderá ser realizada.");
-                                    $(".salSalario").val(salarioAtual.toFixed(2));
+                                   bootbox.alert("A diminuição salarial ultrapassa os <b>25%</b> previstos em lei. A alteração não poderá ser realizada.");
+                                   $(".salSalario").val(salarioAtual.toFixed(2));
+                                }else{
+                                    $('.btn-save').removeClass('disabled');
+                                   $('#sal_compare').fadeIn();
+                                    var list = new Array;
+                                    list.push(['Reajuste Proposto', salarioNovo]);
+                                    list.push(['Salário Atual', salarioAtual]);
+                        
+                                                            $('#sal_compare').highcharts({
+                                                    chart: {
+                                                        plotBackgroundColor: null,
+                                                        plotBorderWidth: null,
+                                                        plotShadow: false, marginTop: 130
+                                                    },
+                                                    title: {
+                                                        text: 'Reajuste x Salário Atual',
+                                                                            align: 'left',
+                                                                            x: 0,
+                                                                            y: 30
+                                                                        },
+                                                                        legend: {
+                                                                            align: 'left',
+                                                                            verticalAlign: 'top',
+                                                                            floating: 'true',
+                                                                            layout: 'vertical',
+                                                                            x: 0,
+                                                                            y: 50
+
+                                                                        },
+                                                                        plotOptions: {
+                                                                            pie: {
+                                                                                allowPointSelect: true,
+                                                                                cursor: 'pointer',
+                                                                                dataLabels: {
+                                                                                    enabled: false
+                                                                                },
+                                                                                showInLegend: false
+                                                                            }
+                                                                        },
+                                                                        series: [{
+                                                                                type: 'bar',
+                                                                                name: 'Reajuste x Salário',
+                                                                                data: list,
+                                                                            }]
+                                                                    });
                                 }
                             }
                         });
-                    }
-                    if (salarioAtual != salarioNovo){
+                    } else {
+                       if (salarioAtual != salarioNovo){
                         $('.btn-save').removeClass('disabled');
+                        $('#sal_compare').fadeIn();
+                        var list = new Array;
+                        list.push(['Reajuste Proposto', salarioNovo]);
+                        list.push(['Salário Atual', salarioAtual]);
+                        
+                        $('#sal_compare').highcharts({
+                                                    chart: {
+                                                        plotBackgroundColor: null,
+                                                        plotBorderWidth: null,
+                                                        plotShadow: false, marginTop: 130
+                                                    },
+                                                    title: {
+                                                        text: 'Reajuste x Salário Atual',
+                                                                            align: 'left',
+                                                                            x: 0,
+                                                                            y: 30
+                                                                        },
+                                                                        legend: {
+                                                                            align: 'left',
+                                                                            verticalAlign: 'top',
+                                                                            floating: 'true',
+                                                                            layout: 'vertical',
+                                                                            x: 0,
+                                                                            y: 50,
+                                                                        },
+                                                                        plotOptions: {
+                                                                            pie: {
+                                                                                allowPointSelect: true,
+                                                                                cursor: 'pointer',
+                                                                                dataLabels: {
+                                                                                    enabled: false
+                                                                                },
+                                                                                showInLegend: false
+                                                                            }
+                                                                        },
+                                                                        series: [{
+                                                                                type: 'bar',
+                                                                                name: 'Valor R$',
+                                                                                data: list,
+                                                                            }]
+                                                                    });
                     }
-                });
+                }
+                });                
             });
         </script>
     </ui:define>
@@ -85,6 +183,11 @@
                             <h:selectOneMenu value="#{salarioBean.salario.motivoAlteracaoSalarial}" required="required" converter="motivoAlteracaoSalarioConverter" id="motivoAlteracaoSalarial" class="form-control">
                                 <f:selectItems value="#{salarioBean.lstMotivoAlteracaoSalarial}" var="mas"/>
                             </h:selectOneMenu>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="control-label col-sm-2">
+                            <div id="sal_compare" class="sal-comparation"></div>
                         </div>
                     </div>
                     <div class="form-group">
