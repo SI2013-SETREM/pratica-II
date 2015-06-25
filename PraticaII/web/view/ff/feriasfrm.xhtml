@@ -10,10 +10,10 @@
     <ui:define name="title">
         Ferias
     </ui:define>
-     <ui:define name="header">
+    <ui:define name="header">
         <script type="text/javascript">
             $(function () {
-                function verifica(){
+                function verifica() {
                     alert("Tem certeza que deseja salvar!")
                 }
             });
@@ -21,11 +21,10 @@
     </ui:define>
 
     <ui:define name="breadcrumb">
-        <f:metadata>
-            <f:viewParam name="id" value="${feriasBean.idPessoa}"/>          
-        </f:metadata>
-        <f:event listener="${feriasBean.inicio()}" type="preRenderComponent"/>
-        <li>Cadastro de Ferias </li>
+
+        <li><h:link value="Lista de Fichas" outcome="/faces/view/ff/fichafunlst" /></li>
+        <li><h:link value="Ficha Funcional" outcome="/faces/view/ff/fichafunfrm" /></li>
+        <li><h:link value="Férias" outcome="/faces/view/ff/feriasfrm" /></li>
 
     </ui:define>
 
@@ -37,13 +36,13 @@
             <h3><h:outputText value="Registro de Férias"/></h3>
             <f:view>
                 <h:form styleClass="form-horizontal">
-                    <h:inputHidden id="feriasCodigo" value="${feriasBean.ferias.fer_codigo}" />
+<!--                    <h:inputHidden id="feriasCodigo" value="${funcionarioBean.ferias.pessoa}" />-->
 
                     <div class="form-group">
 
                         <h:outputLabel value="Observação:" for="idiObs" styleClass="control-label col-sm-2 " />
                         <div class="col-md-4 col-sm-6">
-                            <h:inputText pt:autofocus=""  id="idiObs" value="${feriasBean.ferias.fer_observacao}" title="Observação" styleClass="form-control" />
+                            <h:inputText pt:autofocus=""  id="idiObs" value="${funcionarioBean.ferias.fer_observacao}" title="Observação" styleClass="form-control" />
                         </div>
 
                     </div>
@@ -52,7 +51,7 @@
                         <h:outputLabel value="Data de Inicio:" for="idiDataInic" styleClass="control-label col-sm-2" />
                         <div class="col-md-3 col-sm-6">
 
-                            <h:inputText pt:type="date" id="idiDataInic" pt:required="required" value="${feriasBean.ferias.fer_data_inicio}" title="Data inicio de ferias" styleClass="form-control">
+                            <h:inputText pt:type="date" id="idiDataInic" pt:required="required" value="${funcionarioBean.ferias.fer_data_inicio}" title="Data inicio de ferias" styleClass="form-control">
                                 <f:convertDateTime pattern="yyyy-MM-dd"/>
                             </h:inputText>
 
@@ -60,7 +59,7 @@
                         <h:outputLabel value="Data Fim:" for="idiDataFim" styleClass="control-label col-sm-2" />
                         <div class="col-md-3 col-sm-6">
 
-                            <h:inputText pt:type="date" id="idiDataFim" pt:required="required" value="${feriasBean.ferias.fer_data_fim}" title="Data fim de ferias" styleClass="form-control">
+                            <h:inputText pt:type="date" id="idiDataFim" pt:required="required" value="${funcionarioBean.ferias.fer_data_fim}" title="Data fim de ferias" styleClass="form-control">
                                 <f:convertDateTime pattern="yyyy-MM-dd"/>
                             </h:inputText>
 
@@ -69,8 +68,8 @@
 
                     <div class="form-group">
                         <div class="col-md-offset-9 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
-                            <h:link styleClass="btn btn-default" value="Cancelar" outcome="${feriasBean.cancelar()}"  />
-                            <h:commandButton styleClass="btn btn-primary" value="Salvar" action="${feriasBean.insert()}"  onclick="verifica()" ></h:commandButton>
+                            <h:link styleClass="btn btn-default" value="Cancelar" outcome="fichafunfrm"  />
+                            <h:commandButton styleClass="btn btn-primary" value="Salvar" action="${funcionarioBean.insertFerias()}"  onclick="verifica()" ></h:commandButton>
                         </div>
                     </div>
                 </h:form>

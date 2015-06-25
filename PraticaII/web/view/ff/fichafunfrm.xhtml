@@ -14,7 +14,8 @@
 
 
     <ui:define name="breadcrumb">
-        <li>Ficha Funcional</li>
+        <li><h:link value="Lista de Fichas" outcome="/faces/view/ff/fichafunlst" /></li>
+        <li><h:link value="Ficha Funcional" outcome="/faces/view/ff/fichafunfrm" /></li>
 
     </ui:define>
 
@@ -78,7 +79,7 @@
                                     <label  for="dtnas" styleClass="control-label col-sm-2" >Data de Nascimento:</label>
                                 </div>
                                 <div class="col-md-2  text-right">
-                                    <input id="dtnas" value="${funcionarioBean.pessoa.pes_datanasc}"  style="border: none" title="Data de Nascimeto" styleClass="form-control" readonly="true" />
+                                    <input id="dtnas" value="${funcionarioBean.pessoa.pes_datanasc}"  style="border: none" title="Data de Nascimeto" styleClass="form-control" readonly="true" />                       
                                 </div>
 
                             </div>
@@ -205,6 +206,7 @@
 
                             </div>
                         </div>
+                        <!--//==============================================================BENEFICIOS==============================================================================-->
                         <div class="bloco2">
                             <div class="form-group">
                                 <h3>Lista de Benefícios</h3>
@@ -229,6 +231,7 @@
                         </div>
                         <div  id="cargos" class="bloco2">
                             <div class="form-group">
+                                <!--======================================================================CARGOS============================================================================-->
                                 <h3>Cargos</h3>
                             </div>
 
@@ -267,6 +270,7 @@
                         </div>
                         <div class="bloco2">
                             <div class="form-group">
+                                <!--======================================================================SALARIO============================================================================-->
                                 <h3>Salário</h3>
                             </div>
 
@@ -280,15 +284,18 @@
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">
-                                        <h:outputText value="Data de Inicio"/>
+                                        <h:outputText value="Data Inicio"/>
                                     </f:facet>
-                                    <h:outputText value="#{var.sal_datainicio}"/>
+                                    <h:outputText value="${var.sal_datainicio}">
+                                        <f:convertDateTime pattern="dd/MM/yyyy"/></h:outputText>
                                 </h:column>
+
                                 <h:column>
                                     <f:facet name="header">
                                         <h:outputText value="Data Fim"/>
                                     </f:facet>
-                                    <h:outputText value="#{var.sal_datafim}"/>
+                                    <h:outputText value="${var.sal_datafim}">
+                                        <f:convertDateTime pattern="dd/MM/yyyy"/></h:outputText>
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">
@@ -301,16 +308,20 @@
                         </div>
                         <div class="bloco2">
                             <div class="col-xs-3">
+                                <!--======================================================================FERIAS============================================================================-->
                                 <h3>Férias</h3>  
                             </div>
                             <div class="btns-top-table col-xs-offset-10">
-                                <h:link outcome="feriasfrm" value="Insert" styleClass="btn btn-success" >
-                                    <f:param name="id" value="${funcionarioBean.pessoa.pes_codigo}"/>
+
+
+                                <h:link outcome="feriasfrm" value="Inserir Férias" styleClass="btn btn-success">
+                                    <f:param name="idPessoaferas" value="${funcionarioBean.pessoa.pes_codigo}"/>
                                     <i class="fa fa-plus"></i> 
-                                </h:link>                             
+                                </h:link>
+
 
                             </div>
-                            <h:dataTable value="${funcionarioBean.ferias}" var="item"  styleClass="dataTable table table-bordered table-striped">
+                            <h:dataTable value="${funcionarioBean.lstferias}" var="item"  styleClass="dataTable table table-bordered table-striped">
 
                                 <h:column>
                                     <f:facet name="header">
@@ -320,15 +331,17 @@
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">
-                                        <h:outputText value="Data Inicio"/>
+                                        <h:outputText value="Data Inicial"/>
                                     </f:facet>
-                                    <h:outputText value="#{item.fer_data_inicio}"/>
+                                    <h:outputText value="${item.fer_data_inicio}">
+                                        <f:convertDateTime pattern="dd/MM/yyyy"/></h:outputText>
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">
                                         <h:outputText value="Data Final"/>
                                     </f:facet>
-                                    <h:outputText value="#{item.fer_data_fim}"/>
+                                    <h:outputText value="${item.fer_data_fim}">
+                                        <f:convertDateTime pattern="dd/MM/yyyy"/></h:outputText>
                                 </h:column>
                             </h:dataTable>
                         </div>
@@ -336,6 +349,7 @@
                         <div class="bloco2">
                             <div class="form-group">
                                 <div class="col-xs-3">
+                                    <!--===========================================================================DEPENDENTES==================================================================-->
                                     <h3>Dependentes</h3>  
                                 </div>
 
@@ -359,16 +373,16 @@
                             </h:dataTable>
                         </div>
                         <div class="bloco2">
+                            <!--======================================================================FALTAS============================================================================-->
                             <div class="col-xs-3">
                                 <h3>Faltas</h3>  
                             </div>
-
                             <div class="btns-top-table col-xs-offset-10">
-                                <h:link outcome="faltafrm" value="Insert" styleClass="btn btn-success" >
-                                    <f:param name="id" value="${funcionarioBean.pessoa.pes_codigo}"/>
-                                    <i class="fa fa-plus"></i> 
-                                </h:link>                             
 
+                                <h:link outcome="faltafrm" value="Inserir Faltas" styleClass="btn btn-success">
+                                    <f:param name="idPessoafalta" value="${funcionarioBean.pessoa.pes_codigo}"/>
+                                    <i class="fa fa-plus"></i> 
+                                </h:link>
                             </div>
 
                             <h:dataTable value="${funcionarioBean.faltas}"  var="itm"  styleClass="dataTable table table-bordered table-striped">
@@ -377,7 +391,8 @@
                                     <f:facet name="header">
                                         <h:outputText value="Data"/>
                                     </f:facet>
-                                    <h:outputText value="#{itm.flt_data}"/>
+                                    <h:outputText value="${itm.flt_data}">
+                                        <f:convertDateTime pattern="dd/MM/yyyy"/></h:outputText>
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">
@@ -404,14 +419,15 @@
 
                         <div class="bloco2">
                             <div class="col-xs-3">
+                                <!--=====================================================================ADVERTENCIAS======================================================================-->
                                 <h3>Advertências</h3>  
                             </div>
 
-                            <div class="btns-top-table col-xs-offset-10">
-                                <h:link outcome="advertenciafrm" value="Insert" styleClass="btn btn-success" >
-                                    <f:param name="id" value="${funcionarioBean.pessoa.pes_codigo}"/>
+                            <div class="btns-top-table col-xs-offset-9">
+                                <h:link outcome="advertenciafrm" value="Inserir Advertências" styleClass="btn btn-success">
+                                    <f:param name="idPessoaadv" value="${funcionarioBean.pessoa.pes_codigo}"/>
                                     <i class="fa fa-plus"></i> 
-                                </h:link>                             
+                                </h:link>                            
 
                             </div>
 
@@ -434,13 +450,14 @@
                                     <f:facet name="header">
                                         <h:outputText value="Data"/>
                                     </f:facet>
-                                    <h:outputText value="#{vr.adv_data}"/>
+                                    <h:outputText value="${vr.adv_data}">
+                                        <f:convertDateTime pattern="dd/MM/yyyy"/></h:outputText>
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">
                                         <h:outputText value="Motivo"/>
                                     </f:facet>
-                                    <h:outputText value="#{vr.adv_data}"/>
+                                    <h:outputText value="#{vr.adv_motivo}"/>
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">

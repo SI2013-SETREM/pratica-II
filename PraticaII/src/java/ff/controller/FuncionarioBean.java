@@ -44,7 +44,7 @@ import javax.faces.model.ListDataModel;
 @SessionScoped
 @ManagedBean
 public class FuncionarioBean {
-
+//INICIALIZADORES
     //========================================================================================
     private Pessoa pessoa = new Pessoa();
     private final PessoaDAO pessoaDAO = new PessoaDAO();
@@ -54,7 +54,8 @@ public class FuncionarioBean {
     private List<BeneficiosPessoa> beneficios;
 
     private final FeriasDAO feriasDAO = new FeriasDAO();
-    private List<Ferias> ferias;
+    private List<Ferias> lstferias;
+    private Ferias ferias = new Ferias();
 
     private final CargosPessoaDAO cargosDAO = new CargosPessoaDAO();
     private List<CargosPessoa> cargos;
@@ -69,7 +70,8 @@ public class FuncionarioBean {
 
     private final SalarioDAO salarioDAO = new SalarioDAO();
     private List<Salario> salarios;
-
+    
+    private Advertencia advertencia = new Advertencia();
     private final AdvertenciaDAO advertenciaDAO = new AdvertenciaDAO();
     private List<Advertencia> advertencias;
 
@@ -89,11 +91,12 @@ public class FuncionarioBean {
 
     private String estadoCivil;
     private String tipoPessoa;
+    
 
     public FuncionarioBean() {
     }
 
-//=======================================================================================================
+//========================================================================================================================================================
     //EVENTOS PADRÕES
     public String deleteEventoPadrao(EventoPadrao f) {
         eventopadraoDAO.delete(f);
@@ -169,7 +172,7 @@ public class FuncionarioBean {
     public void setEventoPadroesDao(EventoPadraoDAO eventopadraoDAO) {
         this.eventopadraoDAO = eventopadraoDAO;
     }
-    //===============================================================================================================   
+    //===============================================================================================================================================================  
     //FICHA FUNCIONAL  
 
     public String select2() {
@@ -187,7 +190,7 @@ public class FuncionarioBean {
         if (pessoa != null) {
             salarios = salarioDAO.findBySalPessoaId(pessoa.getPes_codigo());
             beneficios = beneficiosPessoaDAO.findByPessoaId(pessoa.getPes_codigo());
-            ferias = feriasDAO.findById(pessoa.getPes_codigo());
+            lstferias = feriasDAO.findById(pessoa.getPes_codigo());
             cargos = cargosDAO.GetListCargoPessoa(pessoa.getPes_codigo(), 0);
             faltas = faltaDAO.findFaltas(pessoa.getPes_codigo());
             graduacoes = graduacoesPessoaDAO.findByGraduacoesId(pessoa.getPes_codigo());
@@ -196,7 +199,7 @@ public class FuncionarioBean {
         } else {
             beneficios = new ArrayList<>();
             faltas = new ArrayList<>();
-            ferias = new ArrayList<>();
+            lstferias = new ArrayList<>();
             cargos = new ArrayList<>();
             graduacoes = new ArrayList<>();
             salarios = new ArrayList<>();
@@ -206,7 +209,7 @@ public class FuncionarioBean {
     }
 
     public String cancelar() {
-        return "fichafulst";
+        return "fichafunlst";
     }
 
     public List<GraduacoesPessoa> getGraduacoes() {
@@ -278,8 +281,8 @@ public class FuncionarioBean {
         this.cargosPessoa = cargosPessoa;
     }
 
-    public List<Ferias> getFerias() {
-        return ferias;
+    public List<Ferias> getlstFerias() {
+        return lstferias;
     }
 
     public List<BeneficiosPessoa> getBeneficios() {
@@ -289,15 +292,48 @@ public class FuncionarioBean {
     public void setTipoPessoa(String tipoPessoa) {
         this.tipoPessoa = tipoPessoa;
     }
-
-//===================================================================    
+    
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+    //FERIAS
+     public String insertFerias() {
+        ferias.setPessoa(pessoaDAO.findById(pessoa.getPes_codigo()));
+        feriasDAO.insert(ferias);
+        ferias = null;
+        return "fichafunlst";    
+    }
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+    //FALTA
+     public String insertFalta() {
+        falta.setPessoa(pessoaDAO.findById(pessoa.getPes_codigo()));
+        faltaDAO.insert(falta);
+        falta = new Falta();
+        return "fichafunlst";
+    }
+    
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+    //ADVERTENCIA
+    
+     public String insertAdvertencia() {
+         advertencia.setPessoa(pessoaDAO.findById(pessoa.getPes_codigo()));
+        if (advertencia.getPessoa() != null && advertencia.getPessoa().getPes_codigo() != 0 && advertencia.getPessoaAplicador() != null && advertencia.getPessoaAplicador().getPes_codigo() != 0) {
+            advertenciaDAO.insert(advertencia);
+            return "fichafunlst";
+        }
+        return "advertenciafrm";
+    }
+     
+     public List<Pessoa> completePessoa(String query) {
+        return pessoaDAO.searchPessoa(query);
+    }
+    
+//=======================================================================================================================================================================    
     //FOLHA DE PAGAMENTO
     public String gerarFolha() {
         return "eventopadlst";
     }
 
-    //=======================================================================
-    //AMBOS
+    //=========================================================================================================================================================================
+    //PESSOA
     public Pessoa getPessoa() {
         return pessoa;
     }
@@ -315,7 +351,7 @@ public class FuncionarioBean {
         this.funcionarios = funcionarios;
     }
 
-    //======================================================================
+    //===========================================================================================================================================================================
     //EVENTO
     private EventoPadraoDAO dao = new EventoPadraoDAO();
     private calculoFolha calculoFolha = new calculoFolha();
@@ -502,21 +538,14 @@ public class FuncionarioBean {
     public String listar() {
         return "eventolst";
     }
-    //========================================================================================
+    //============================================================================================================================================================================
     //EMPRESA
 
-//    public Empresa getEmpresa() {
-//        this.empresa = empresaDAO.findByIdPessoa(pessoa.getPes_codigo());
-//        return empresa;
-//    }
     public void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
     }
 
-//    public DataModel getEmpresas() {
-//        this.empresas = new ListDataModel(empresaDAO.EmpresaPessoa(pessoa.getPes_codigo()));
-//        return empresas;
-//    }
+
     public void setEmpresas(DataModel empresas) {
         this.empresas = empresas;
     }
@@ -550,11 +579,12 @@ public class FuncionarioBean {
 
         return "empresalst";
     }
+//===========================================================================================================================================================
+    //GUETTER E SETTER
 
     public String listarEmpresa() {
         return "empresalst";
     }
-
     public EventoPadrao getEventopadrao() {
         return eventopadrao;
     }
@@ -665,6 +695,30 @@ public class FuncionarioBean {
 
     public void setIdEvento(int idEvento) {
         this.idEvento = idEvento;
+    }
+
+    public Ferias getFerias() {
+        return ferias;
+    }
+
+    public void setFerias(Ferias ferias) {
+        this.ferias = ferias;
+    }
+
+    public List<Ferias> getLstferias() {
+        return lstferias;
+    }
+
+    public void setLstferias(List<Ferias> lstferias) {
+        this.lstferias = lstferias;
+    }
+
+    public Advertencia getAdvertencia() {
+        return advertencia;
+    }
+
+    public void setAdvertencia(Advertencia advertencia) {
+        this.advertencia = advertencia;
     }
 
 }
