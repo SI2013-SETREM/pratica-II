@@ -1,0 +1,147 @@
+<ui:composition template="./../modelos/default.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+    <ui:define name="title">
+        ${salarioBean.pTitle}
+    </ui:define>
+
+    <ui:define name="header">
+        <script type="text/javascript">
+            $(function () {
+
+            });
+        </script>
+    </ui:define>
+    <ui:define name="header">
+        <style type="text/css">
+            table{
+                font-size: 14px;
+            }
+        </style>
+        <script type="text/javascript" src="http://code.highcharts.com/highcharts.js"></script>
+        <script type="text/javascript" src="http://code.highcharts.com/modules/exporting.js"></script>
+        <script type="text/javascript">
+            $(function () {
+                var list = new Array;
+                var count = $(".car-cargo").length;
+                for (var i = 0; i &lt; count; i++){
+                    var dateBR = $(".car-datainicio").eq(i).text();
+                    var dataBRA = new Array;
+                    dataBRA = dateBR.split('/');
+                    var dataUS = dataBRA[2] + '-' + dataBRA[1] + '-' + (parseInt(dataBRA[0]) + 1);
+                    var data = new Date(dataUS);
+                    var dataG = Date.UTC(data.getFullYear(), data.getMonth(), data.getDate());
+                    var sal = parseFloat($(".car-salario").eq(i).text().replace('R$ ', '').replace('.', '').replace(',', '.'));
+                    list.push([dataG, sal]);
+                }
+                console.log(list);
+                $('#container-evolution').highcharts({
+                    chart: {
+                        type: 'spline'
+                    },
+                    title: {
+                        text: 'Evolução'
+                    },
+                    subtitle: {
+                        text: 'Evolução do Colaborador na Empresa'
+                    },
+                    xAxis: {
+                        type: 'datetime',
+                        dateTimeLabelFormats: {
+                            month: '%e. %b',
+                            year: '%b'
+                        },
+                        title: {
+                            text: 'Data de Início'
+                        }
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Valor do Salário (R$)'
+                        },
+                        min: 0
+                    },
+                    tooltip: {
+                        headerFormat: '<b>{series.name}</b><br />',
+                        pointFormat: '{point.x:%e. %b}: R$ {point.y:.2f}'
+                    },
+                    plotOptions: {
+                        spline: {
+                            marker: {
+                                enabled: true
+                            }
+                        }
+                    },
+                    series: [{
+                            name: 'Juliano Pires',
+                            data: list
+                        }]
+                });
+            });
+        </script>
+    </ui:define>
+    <ui:define name="breadcrumb">
+        <li>Cargos, Salários e Benefícios</li>
+        <li><h:link value="${salarioBean.pTitle}" outcome="/faces/view/csb/salariolst" /></li>
+    </ui:define>
+
+    <ui:define name="main-content">
+        <div class="panel panel-body">
+            <h3><h:outputText value="Histórico de ${salarioBean.salario.pessoa.pes_nome}"/></h3>
+            <h5><h:outputText value="CPF: ${salarioBean.salario.pessoa.pes_cpf}"/></h5>
+            <hr />
+            <f:view>
+                <h:form styleClass="form-horizontal">
+                    <h:messages for="ERROR" showDetail="true"></h:messages>
+                    <h:inputHidden id="sal_codigo" value="#{salarioBean.salario.sal_codigo}"/>
+                    <h:inputHidden id="cargo" value="#{salarioBean.salario.cargo}" converter="cargoConverter"/>
+                    <h:inputHidden id="pessoa" value="#{salarioBean.salario.pessoa}" converter="pessoaConverter"/>
+                    <!--MOTIVOALTERACAOSALARIO-->
+                    <h:dataTable value="${salarioBean.getSalariosHistorico(salarioBean.salario)}" var="item" styleClass="dataTable table table-bordered table-striped">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Cargo"/>
+                            </f:facet>
+                            <h:outputText pt:class="car-cargo" value="${item.getCargo().getCar_descricao()}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Salário"/>
+                            </f:facet>
+                            <h:outputText pt:class="car-salario" value="${item.getSal_valorbruto()}">
+                                <f:convertNumber type="currency"/>
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Data Início"/>
+                            </f:facet>
+                            <h:outputText pt:class="car-datainicio" value="${item.getDataConverter(item.getSal_datainicio())}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Data de Encerramento"/>
+                            </f:facet>
+                            <h:outputText value="${item.getSal_datafim() == null ? '' : item.getDataConverter(item.getSal_datafim())}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Motivo da Alteração"/>
+                            </f:facet>
+                            <h:outputText value="${item.getMotivoAlteracaoSalarial().getMas_descricao()}"/>
+                        </h:column>
+                    </h:dataTable>
+                    <hr />
+                    <h3><h:outputText value="Evolução de ${salarioBean.salario.pessoa.pes_nome}"/></h3>
+                    <div id="container-evolution"></div>
+                </h:form>
+
+
+            </f:view>
+        </div>
+    </ui:define>
+</ui:composition>

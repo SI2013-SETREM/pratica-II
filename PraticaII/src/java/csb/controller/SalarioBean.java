@@ -44,6 +44,7 @@ public class SalarioBean {
     private Salario salario = new Salario();
     private SalarioDAO dao = new SalarioDAO();
     private DataModel salarios;
+    private DataModel salariosHistorico;
     private DataModel salariosOff;
 
     private String usu_login;
@@ -73,6 +74,15 @@ public class SalarioBean {
         this.salarios = datamodel;
     }
 
+    public DataModel getSalariosHistorico(Salario sal) {
+        this.salariosHistorico = new ListDataModel(dao.findBySalPessoaId(sal.getPessoa().getPes_codigo()));
+        return salariosHistorico;
+    }
+
+    public void setSalariosHistorico(DataModel salariosHistorico) {
+        this.salariosHistorico = salariosHistorico;
+    }
+    
     public void setSalario(Salario salario) {
         this.salario = salario;
     }
@@ -146,6 +156,12 @@ public class SalarioBean {
         } else {
             throw new Error("Error");
         }
+    }
+
+    public String history(Salario sal) {
+        salario = (Salario) salarios.getRowData();
+        this.salariosHistorico = new ListDataModel(dao.findBySalPessoaId(sal.getPessoa().getPes_codigo()));
+        return "historiasalario";
     }
 
     public String turnOffEmployer() {

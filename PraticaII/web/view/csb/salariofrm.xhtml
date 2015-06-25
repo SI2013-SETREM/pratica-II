@@ -13,7 +13,7 @@
         <style>
             .sal-comparation{
                 margin-left: 180px; 
-                margin-top: -25px; 
+                margin-top: -20px; 
                 height: 250px; 
                 width: 500px;
                 display: none;
@@ -23,6 +23,17 @@
         <script type="text/javascript" src="http://code.highcharts.com/modules/exporting.js"></script>
         <script type="text/javascript">
             $(function () {
+                var data = new Date();
+                var mes = parseInt(parseInt(data.getMonth()) + 1);
+                var dia = data.getDate();
+                if (mes === 1 || mes === 2 || mes === 3 || mes === 4 || mes === 5 || mes === 6 || mes === 7 || mes === 8 || mes === 9) {
+                    mes = "0" + mes;
+                }
+                if (dia === 1 || dia === 2 || dia === 3 || dia === 4 || dia === 5 || dia === 6 || dia === 7 || dia === 8 || dia === 9) {
+                    dia = "0" + dia;
+                }
+                $(".salDataIni").val(data.getFullYear() + "-" + mes + "-" + dia);
+                
                 var salarioAtual = parseFloat($(".salSalario").val());
                 var salarioNovo = 0;
                 $(".promocao").change(function () {
@@ -162,9 +173,6 @@
                     <h:inputHidden id="sal_datafim" value="#{salarioBean.salario.sal_datafim}">
                         <f:convertDateTime pattern="yyyy-MM-dd"/>
                     </h:inputHidden>
-                    <h:inputHidden id="sal_datainicio" value="#{salarioBean.salario.sal_datainicio}">
-                        <f:convertDateTime pattern="yyyy-MM-dd"/>
-                    </h:inputHidden>
                     <h:inputHidden id="sal_situacao" value="#{salarioBean.salario.sal_situacao}"/>
                     <!--SALARIO-->
                     <div class="form-group">
@@ -183,6 +191,14 @@
                             <h:selectOneMenu value="#{salarioBean.salario.motivoAlteracaoSalarial}" required="required" converter="motivoAlteracaoSalarioConverter" id="motivoAlteracaoSalarial" class="form-control">
                                 <f:selectItems value="#{salarioBean.lstMotivoAlteracaoSalarial}" var="mas"/>
                             </h:selectOneMenu>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Data de Início" for="salDataIni" styleClass="control-label col-sm-2" />
+                        <div class="col-md-6 col-sm-12">
+                            <h:inputText pt:type="date" pt:required="required" id="salDataIni" value="#{salarioBean.salario.sal_datainicio}" title="Data de Início da Alteração" styleClass="form-control salDataIni">
+                                <f:convertDateTime pattern="yyyy-MM-dd" />
+                            </h:inputText>
                         </div>
                     </div>
                     <div class="form-group">

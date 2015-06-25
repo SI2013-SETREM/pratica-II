@@ -60,6 +60,14 @@
                             <i class="fa fa-gears"></i> Gerenciar
                         </h:commandLink>
                     </h:column>
+                    <h:column headerClass="col-editar-header">
+                        <f:facet name="header">
+                            <h:outputText value="História"/>
+                        </f:facet>
+                        <h:commandLink action="${salarioBean.history(item)}">
+                            <i class="fa fa-eye"></i> Ver
+                        </h:commandLink>
+                    </h:column>
                     <h:column headerClass="col-excluir-header">
                         <f:facet name="header">
                             <h:outputText value="Desligar"/>

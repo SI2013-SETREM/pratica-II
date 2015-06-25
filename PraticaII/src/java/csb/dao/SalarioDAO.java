@@ -43,7 +43,7 @@ public class SalarioDAO {
         Salario salInsert = new Salario();
         salInsert.setPessoa(s.getPessoa());
         salInsert.setCargo(s.getCargo());
-        salInsert.setSal_datainicio(new Date());
+        salInsert.setSal_datainicio(s.getSal_datainicio());
         salInsert.setSal_situacao(true);
         salInsert.setSal_valorbruto(s.getSal_valorbruto());
 
@@ -85,7 +85,7 @@ public class SalarioDAO {
     }
 
     public List<Salario> findBySalPessoaId(int pes_codigo) {
-        Query q = session.createQuery("from Salario where pes_codigo = :pes_codigo");
+        Query q = session.createQuery("from Salario where pes_codigo = :pes_codigo order by sal_datainicio asc");
         return q.setParameter("pes_codigo", pes_codigo).list();
     }
 //      public Salario SalPessoaId(int pes_codigo) {
