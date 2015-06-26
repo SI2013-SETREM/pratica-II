@@ -19,54 +19,59 @@
 
         <script>
 
+        $(window).load(function (){
+            
+            verificaSerie();
+        });
+
             function verificaSerie() {
 
-                var e = document.getElementById("serieevento");
+                //var e = $('#serieevento');
                 //var valorEscolhido = e.getSelectedIndex().val;
                 //var valorEscolhido = e.options[e.getSelectedIndex()].value;
-                var valorEscolhido = $('#serieevento');
-                var divcadastro = document.getElementById("cadastro");
-                var divtributar = document.getElementById("tributar");
-                var divagregar = document.getElementById("agregar");
-                var divimprimir = document.getElementById("imprimir");
-                var divbotoes = document.getElementById("botoes");
-                var divindice = document.getElementById("indice");
-                var divbeneficio = document.getElementById("beneficio");
+                var valorEscolhido = $('[data-seletor=serieevento]').val();
+                console.log(valorEscolhido);
+                var divcadastro = $("#cadastro");
+                var divtributar = $("#tributar");
+                var divagregar = $("#agregar");
+                var divimprimir = $("#imprimir");
+                var divbotoes = $("#botoes");
+                var divindice = $("#indice");
+                var divbeneficio = $("#beneficio");
                 
-                var indice = $('#eveIndice');
-                var beneficio = $('#beneevento');
-                var eveinss = $('#evetinss');
-                var eveirrf = $('#eveirrf');
+                //var indice = $('#eveIndice');
+                //var beneficio = $('#beneevento');
+                //var eveinss = $('#evetinss');
+                //var eveirrf = $('#eveirrf');
                 //var evefgts = $('#evefgts');
 
-                if (valorEscolhido === 1) {
+                if (valorEscolhido === "1") {
 
-                    divcadastro.style.display = 'block';
-                    divtributar.style.display = 'none';
-                    divagregar.style.display = 'block';
-                    divimprimir.style.display = 'block';
-                    divbotoes.style.display = 'block';
-                    divindice.style.display = 'block';
-                    divbeneficio.style.display = 'block';
+                    divcadastro.hide();
+                    divcadastro.show();
+                    divtributar.hide();
+                    divagregar.show();
+                    divimprimir.show();
+                    divbotoes.show();
+                    divindice.show();
+                    divbeneficio.show();
 
-                } else {
-                    //divcadastro.show();
-
-                    divcadastro.style.display = 'block';
-                    divtributar.style.display = 'block';
-                    divagregar.style.display = 'none';
-                    divimprimir.style.display = 'block';
-                    divbotoes.style.display = 'block';
-                    divindice.style.display = 'none';
-                    divbeneficio.style.display = 'none';
+                } else if(valorEscolhido === "2"){
+                    
+            
+                    divcadastro.show();
+                    divtributar.show();
+                    divagregar.hide();
+                    divimprimir.show();
+                    divbotoes.show();
+                    divindice.hide();
+                    divbeneficio.hide();
 
                 }
 
 
 
             }
-
-
 
         </script>
 
@@ -124,22 +129,15 @@
                     <div class="form-group">
                         <h:outputLabel value="Série: " for="serieevento" styleClass="control-label col-sm-2" />
                         <div style="padding-top: 5px" class="col-md-6 col-sm-12">
-                            <h:selectOneMenu value="#{eventoBean.evento.serieevento}" converter="serieEventoConverter" id="serieevento"   class="form-control" >
+                            <h:selectOneMenu pt:data-seletor="serieevento" value="#{eventoBean.evento.serieevento}" converter="serieEventoConverter" id="serieevento" onclick="verificaSerie()" class="form-control" >
                                 <f:selectItems value="#{eventoBean.lstSerieEvento}" var="serieevento"/>
                             </h:selectOneMenu>
                         </div>
                     </div>
 
-                    <div class="col-md-offset-1 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
-                        <h:commandButton styleClass="btn btn-primary"  value="Próximo Passo" onclick="javascript:verificaSerie()"></h:commandButton>
-                    </div>
-
+                    
                     <div id="cadastro" class="form-group" style="display: none">
-                        <br>
-                        </br>
-                        <br>
-                        </br>
-
+                        
                         <div class="form-group">
                             <h:outputLabel value="Descrição:" for="eveDescricaoo" styleClass="control-label col-sm-2" />
                             <div class="col-md-8 col-sm-12">
