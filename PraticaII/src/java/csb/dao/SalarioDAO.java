@@ -94,9 +94,9 @@ public class SalarioDAO {
         return q.setParameter("car_codigo", car_codigo).list();
     }    
     
-      public List<Salario> findSalPessoaFolha(int pes_codigo) {
-        Query q = session.createQuery("from Salario where pes_codigo = :pes_codigo");
-        return  q.setParameter("pes_codigo", pes_codigo).list();
+      public Object findSalPessoaFolha(int pes_codigo) {
+        Query q = session.createQuery("from Salario where pes_codigo = "+pes_codigo+" and sal_situacao = true");
+        return  q.uniqueResult();
     }
 
     public List<Salario> SalPessoaId(int pes_codigo) {
