@@ -16,6 +16,7 @@ import csb.model.CargosPessoa;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 import javax.faces.bean.ManagedBean;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
@@ -53,6 +54,8 @@ public class AvaliacaoBean {
     private PessoasAvaliacaoDAO pessoaAvaliacaoDAO = new PessoasAvaliacaoDAO();
     private CargosPessoaDAO cargosPessoaDAO = new CargosPessoaDAO();
     private DataModel avaliacoes;
+
+    private TimeZone timeZone = TimeZone.getDefault();
 
     private List<AvaliacaoPessoaCargo> lsAvaliacaoPessoaCargo;
     private List<PessoasAvaliacao> lsPessoasAvaliacao;///Lista de PessoasAvaliação
@@ -177,9 +180,14 @@ public class AvaliacaoBean {
                     avaliacao.setTurma(turma);
                 }
                 dao.insert(avaliacao);
-                if (SalvaListas()) {
-                    //return "questionariofrm";
-                } else {
+                try {
+                    if (!SalvaListas()) {
+                        return "avaliacaofrm";
+                    }
+                } catch (Exception e) {
+                    avaliacao.setAva_status(5);
+                    dao.update(avaliacao);
+                    avaliacao.setAva_status(1);
                     return "avaliacaofrm";
                 }
             } else {
@@ -317,7 +325,6 @@ public class AvaliacaoBean {
                     pessoaAvaliacao.setAvaliacao(avaliacao);
                     pessoaAvaliacao.setAvaliador(a);
                     pessoaAvaliacao.setColaboradorAvaliado(c);
-                    pessoaAvaliacao.setPea_media(0);
                     pessoaAvaliacaoDAO.insert(pessoaAvaliacao);
                 }
             }
@@ -329,7 +336,6 @@ public class AvaliacaoBean {
                     pessoaAvaliacao.setAvaliacao(avaliacao);
                     pessoaAvaliacao.setAvaliador(c);
                     pessoaAvaliacao.setColaboradorAvaliado(c);
-                    pessoaAvaliacao.setPea_media(0);
                     pessoaAvaliacaoDAO.insert(pessoaAvaliacao);
                 }
             }
@@ -414,5 +420,13 @@ public class AvaliacaoBean {
 
     public String getErroMsg() {
         return ErroMsg;
+    }
+
+    public TimeZone getTimeZone() {
+        return timeZone;
+    }
+
+    public void setTimeZone(TimeZone timeZone) {
+        this.timeZone = timeZone;
     }
 }

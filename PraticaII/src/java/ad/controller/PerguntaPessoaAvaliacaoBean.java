@@ -137,10 +137,10 @@ public class PerguntaPessoaAvaliacaoBean {
     }
 
     public void GetAvaliados() {
-        List<PessoasAvaliacao> lsPessoas = PesAvaldao.GetListPessoasAvaliacao(idAvaliacao, 0, userId, true, false);
-        if (lsPessoas != null && !lsPessoas.isEmpty()) {
-            avaliado = lsPessoas.get(0).getColaboradorAvaliado();
-        }
+//        List<PessoasAvaliacao> lsPessoas = PesAvaldao.GetListPessoasAvaliacao(idAvaliacao, 0, userId, true, false);
+//        if (lsPessoas != null && !lsPessoas.isEmpty()) {
+//            avaliado = lsPessoas.get(0).getColaboradorAvaliado();
+//        }
         LsPerguntas();
         //return "pessoasavaliacaofrm";
     }

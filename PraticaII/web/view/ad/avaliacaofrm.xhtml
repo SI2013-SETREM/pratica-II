@@ -96,7 +96,7 @@
                                 <h:outputLabel value="Data de Início:" for="datainicio" styleClass="control-label col-md-4" />
                                 <div class="col-md-8 col-xs-12 ">
                                     <h:inputText pt:type="date" id="datainicio" value="#{avaliacaoBean.avaliacao.ava_dataInicial}" title="Data de Início" styleClass="form-control">
-                                        <f:convertDateTime pattern="yyyy-MM-dd"/>
+                                        <f:convertDateTime pattern="yyyy-MM-dd" timeZone="#{avaliacaoBean.timeZone}"/>
                                     </h:inputText>
                                 </div>
                             </div>
@@ -106,7 +106,7 @@
                                 <h:outputLabel value="Data de Término:" for="datafim" styleClass="control-label col-md-4" />
                                 <div class="col-md-8 col-xs-12">
                                     <h:inputText pt:type="date" id="datafim" value="#{avaliacaoBean.avaliacao.ava_dataFinal}" title="Data de Término" styleClass="form-control">
-                                        <f:convertDateTime pattern="yyyy-MM-dd"/>
+                                        <f:convertDateTime pattern="yyyy-MM-dd" timeZone="#{avaliacaoBean.timeZone}"/>
                                     </h:inputText>
                                 </div>
                             </div>
@@ -114,9 +114,9 @@
                     </div>
                     <div class="row">
                         <div class="col-md-6 col-xs-12">
-                            <div class="form-group labelBool">
+                            <div class="form-group labelBool #{avaliacaoBean.avaliacao.ava_codigo > 0 ? 'disabledField': ''}">
                                 <div class="col-md-4 autoAva">
-                                    <h:selectBooleanCheckbox id="autoava" value="#{avaliacaoBean.bautoava}" title="Auto Avaliação" pt:autofocus="" styleClass="#{avaliacaoBean.avaliacao.ava_codigo > 0 ? 'disabledField': ''}" />
+                                    <h:selectBooleanCheckbox id="autoava" value="#{avaliacaoBean.bautoava}" title="Auto Avaliação" pt:autofocus=""  />
                                 </div>
                                 <h:outputLabel value="Auto Avaliação" for="autoava" styleClass="control-label col-md-8" />
                             </div>

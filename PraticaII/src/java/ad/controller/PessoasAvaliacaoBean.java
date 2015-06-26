@@ -7,13 +7,15 @@ import cfg.controller.LoginBean;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import util.Utilidades;
 
 @ManagedBean
-@SessionScoped
+//@SessionScoped
+@RequestScoped
 public class PessoasAvaliacaoBean {
 
     private final String sTitle = PessoasAvaliacao.getsTitle();

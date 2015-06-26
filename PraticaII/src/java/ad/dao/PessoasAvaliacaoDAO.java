@@ -13,33 +13,66 @@ public class PessoasAvaliacaoDAO {
     private Session session;
 
     public PessoasAvaliacaoDAO() {
-        session = HibernateUtil.getSessionFactory().openSession();
+    }
+    
+    public Session getSession() {
+        if (session == null || !session.isOpen() || !session.isConnected()) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
+        return session;
     }
 
     public void insert(PessoasAvaliacao i) {
-        Transaction t = session.beginTransaction();
-        session.save(i);
-        t.commit();
+        try {
+            Transaction t = getSession().beginTransaction();
+            try {
+                getSession().save(i);
+                t.commit();
+            } catch (Exception ex) {
+                t.rollback();
+                throw ex;
+            }
+        } finally {
+            getSession().close();
+        }
     }
 
     public void update(PessoasAvaliacao i) {
-        Transaction t = session.beginTransaction();
-        session.merge(i);
-        t.commit();
+        try {
+            Transaction t = getSession().beginTransaction();
+            try {
+                getSession().merge(i);
+                t.commit();
+            } catch (Exception ex) {
+                t.rollback();
+                throw ex;
+            }
+        } finally {
+            getSession().close();
+        }
     }
 
     public void delete(PessoasAvaliacao i) {
-        Transaction t = session.beginTransaction();
-        session.delete(i);
-        t.commit();
+        try {
+            Transaction t = getSession().beginTransaction();
+            try {
+                getSession().delete(i);
+                t.commit();
+            } catch (Exception ex) {
+                t.rollback();
+                throw ex;
+            }
+        } finally {
+            getSession().close();
+        }
     }
 
     public PessoasAvaliacao findById(int idi_codigo) {
-        return (PessoasAvaliacao) session.load(PessoasAvaliacao.class, idi_codigo);
+        return (PessoasAvaliacao) getSession().load(PessoasAvaliacao.class, idi_codigo);
     }
 
     public List<PessoasAvaliacao> findAll() {
-        Query q = session.createQuery("from PessoasAvaliacao");
+        Query q = getSession().createQuery("from PessoasAvaliacao");
         return q.list();
     }
 
@@ -62,7 +95,7 @@ public class PessoasAvaliacaoDAO {
         if (BFilterDate) {
             sql += " and (ava_dataInicial >= " + new Date() + " and ava_dataFinal <= " + new Date() + ")";
         }
-        Query q = session.createQuery(" from PessoasAvaliacao where 1=1 " + sql);
+        Query q = getSession().createQuery(" from PessoasAvaliacao where 1=1 " + sql);
         return q.list();
     }
 }

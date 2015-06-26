@@ -1,9 +1,7 @@
 package ad.dao;
 
 import ad.model.Avaliacao;
-import csb.model.CargosPessoa;
 import java.util.List;
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import util.HibernateUtil;
@@ -14,6 +12,13 @@ public class AvaliacaoDAO {
 
     public AvaliacaoDAO() {
         session = HibernateUtil.getSessionFactory().openSession();
+    }
+
+    public Session getSession() {
+        if (session == null || !session.isOpen() || !session.isConnected()) {
+            session = HibernateUtil.getSessionFactory().openSession();
+        }
+        return session;
     }
 
     public void insert(Avaliacao i) {
@@ -35,6 +40,7 @@ public class AvaliacaoDAO {
     }
 
     public Avaliacao findById(int idi_codigo) {
+        session = HibernateUtil.getSessionFactory().openSession();
         return (Avaliacao) session.load(Avaliacao.class, idi_codigo);
     }
 

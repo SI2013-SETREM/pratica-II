@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -87,14 +88,14 @@ public class PessoasAvaliacao implements Serializable {
     public PessoasAvaliacao() {
     }
 
-    public PessoasAvaliacao(Pessoa colaboradorAvaliado, Pessoa avaliador, Avaliacao avaliacao, int pea_media, String pea_observacao, Date pea_datahora_resposta) {
-        this.colaboradorAvaliado = colaboradorAvaliado;
-        this.avaliador = avaliador;
-        this.avaliacao = avaliacao;
-        this.pea_media = pea_media;
-        this.pea_observacao = pea_observacao;
-        this.pea_datahora_resposta = pea_datahora_resposta;
-    }
+//    public PessoasAvaliacao(Pessoa colaboradorAvaliado, Pessoa avaliador, Avaliacao avaliacao, int pea_media, String pea_observacao, Date pea_datahora_resposta) {
+//        this.colaboradorAvaliado = colaboradorAvaliado;
+//        this.avaliador = avaliador;
+//        this.avaliacao = avaliacao;
+//        this.pea_media = pea_media;
+//        this.pea_observacao = pea_observacao;
+//        this.pea_datahora_resposta = pea_datahora_resposta;
+//    }
 
     public Pessoa getColaboradorAvaliado() {
         return colaboradorAvaliado;
