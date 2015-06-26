@@ -30,7 +30,7 @@
                 <div class="panel panel-body">
                     <h:form>
                         
-                        <h:dataTable value="${funcionarioBean.funcionarios}" var="item"  styleClass="dataTable table table-bordered table-striped">
+                        <h:dataTable value="${folhaPagamentoBean.funcionarios}" var="item"  styleClass="dataTable table table-bordered table-striped">
 
                              <h:column>
                                 <f:facet name="header">
@@ -49,7 +49,7 @@
                                 <f:facet name="header">
                                     <h:outputText value="Folhas Anteriores"/>
                                 </f:facet>
-                                <h:commandLink title="Visualalizar Fichafuncional" action="#{funcionarioBean.select2()}" >
+                                <h:commandLink title="Visualalizar Fichafuncional" action="#{folhaPagamentoBean.selectFuncionario()}" >
                                     <i class="fa fa-file-text-o"></i> Visualizar
                                 </h:commandLink>
                             </h:column>
@@ -57,7 +57,7 @@
                                 <f:facet name="header">
                                     <h:outputText value="Folha de Pagamento"/>
                                 </f:facet>
-                                <h:commandLink title="Visualalizar Fichafuncional" action="#{funcionarioBean.select2()}" >
+                                <h:commandLink title="Visualalizar Fichafuncional" action="#{folhaPagamentoBean.selectFuncionario()}" >
                                     <f:param name="id" value="${item.pes_codigo}"></f:param> 
                                     <i class="fa fa-file-text-o"></i> Gerar
                                 </h:commandLink>

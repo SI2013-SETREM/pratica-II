@@ -27,8 +27,8 @@
                         <f:facet name="header">
                             <h:outputText value="Adicionar"/>
                         </f:facet>
-                        <h:commandLink onclick="return confirm('Deseja realmente adicionar o evento ${folhaPagamentoBean.evento.eve_descricao} a este Funcionário?');" action="${folhaPagamentoBean.insertEventoPadrao(item.eve_codigo)}">
-                            <i class="fa fa-plus-circle"></i> Adicionar ao Funcionário</h:commandLink>
+                        <h:commandLink onclick="return confirm('Deseja realmente adicionar o evento na Folha?');" action="${folhaPagamentoBean.addEventoFolha(item.eve_codigo)}">
+                            <i class="fa fa-plus-circle"></i> Adicionar a Folha</h:commandLink>
                     </h:column>
                     <h:column>
                         <f:facet name="header">
@@ -46,7 +46,7 @@
                         <f:facet name="header">
                             <h:outputText value="Indice"/>
                         </f:facet>
-                        <h:outputText value="${item.getEve_indice()}"/>
+                        <h:outputText value="${item.eve_indice}"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">
