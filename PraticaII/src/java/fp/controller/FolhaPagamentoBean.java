@@ -91,6 +91,11 @@ public class FolhaPagamentoBean {
         pessoa = funcionarios.getRowData();
         return "folhapagfrm";
     }
+    
+     public String selectFuncionario2() {
+        pessoa = funcionarios.getRowData();
+        return "recibosanterioreslst";
+    }
 //=======================================================================================================================================================
     //EVENTOS PADROES
 
