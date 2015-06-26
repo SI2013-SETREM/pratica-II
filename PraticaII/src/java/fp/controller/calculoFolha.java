@@ -28,7 +28,7 @@ public class calculoFolha {
      private List<FaixaIRRF> Listfaixairrf;
     
 
-    public double calculaDesconto(Evento objD, double salario) {
+  public double calculaDesconto(Evento objD, double salario) {
         double desconto = 0;
         // fgts
         if (objD.isEve_tributar_fgts()) {
@@ -79,7 +79,7 @@ public class calculoFolha {
         return desconto;
     }
 
-    public double calculaAcrescimo(Evento objA, double salario) {
+   public double calculaAcrescimo(Evento objA, double salario) {
         double acrescimo = 0;
         double valorHora = salario / 220;
         // salario base

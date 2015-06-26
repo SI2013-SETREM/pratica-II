@@ -36,15 +36,19 @@ import javax.servlet.http.HttpServletRequest;
 @ManagedBean
 @SessionScoped
 public class FolhaPagamentoBean {
+//=============================================================================================================================================
+    //INICIALIZADORES
 
     private Pessoa pessoa = new Pessoa();
     private PessoaDAO pessoaDAO = new PessoaDAO();
     private DataModel<Pessoa> pessoas;
+    private DataModel<Pessoa> funcionarios;
     private int idPessoa;
 
     private final EventoPadraoDAO eventoPadraoDAO = new EventoPadraoDAO();
     private EventoPadrao eventoPadrao = new EventoPadrao();
     private List<EventoPadrao> eventosPadroes;
+    private DataModel eventospadroesdm;
 
     private Salario salario = new Salario();
     private SalarioDAO salarioDAO = new SalarioDAO();
@@ -53,6 +57,7 @@ public class FolhaPagamentoBean {
     private Evento evento = new Evento();
     private EventoDAO eventoDAO = new EventoDAO();
     private DataModel<Evento> eventos;
+    private List<Evento> Listeventos;
 
     private HistoricoFolha historicoFolha = new HistoricoFolha();
     private HistoricoFolhaDAO historicoFolhaDAO = new HistoricoFolhaDAO();
@@ -64,20 +69,213 @@ public class FolhaPagamentoBean {
     private List<EventoFolha> EveFolhas;
     private DataModel<EventoFolha> DataModelEveFolhas;
 
-   
-   
-    
     private calculoFolha calculoFolha = new calculoFolha();
+
+    private int idEvento;
 
     public FolhaPagamentoBean() {
     }
 
+    //=======================================================================================================================================================
+    //PESSOA / FUNCIONARIO
+    public DataModel<Pessoa> getFuncionarios() {
+        //if (this.funcionarios == null) {
+            this.funcionarios = new ListDataModel<>(pessoaDAO.findAllFuncionarios());
+        //}
+        return funcionarios;
+    }
+
+    public String selectFuncionario() {
+        pessoa = funcionarios.getRowData();
+        return "folhapagfrm";
+    }
+//=======================================================================================================================================================
+    //EVENTOS PADROES
+
+    public String gerenciarEventosPadroes() {
+        return "eventopadlst";
+    }
+
+    public DataModel<EventoPadrao> getEventosPadroes() {
+        this.eventospadroesdm = new ListDataModel(eventoPadraoDAO.EventoPessoa(pessoa.getPes_codigo()));
+        return eventospadroesdm;
+    }
+
+    public String deleteEventoPadrao(EventoPadrao f) {
+        eventoPadraoDAO.delete(f);
+        //    LogDAO.insert("Formula", "Deletou fórmula código: " + f.getFor_codigo() + ", taxa: " + f.getFor_taxa()
+        //            + ", horas: " + f.getFor_horas() + ", horas mais: " + f.getFor_horasmais() + ", nome: " + f.getFor_nome());
+        return "eventopadlst";
+    }
+
+    public String deleteEventoPadraoFolha(EventoPadrao f) {
+        eventoPadraoDAO.delete(f);
+        //    LogDAO.insert("Formula", "Deletou fórmula código: " + f.getFor_codigo() + ", taxa: " + f.getFor_taxa()
+        //            + ", horas: " + f.getFor_horas() + ", horas mais: " + f.getFor_horasmais() + ", nome: " + f.getFor_nome());
+        return "folhapagfrm";
+    }
+
+    public String insertEventoPadrao(Integer eve_codigo) {
+
+        EventoPadrao f = new EventoPadrao();
+        f.setPessoa(pessoaDAO.findById(pessoa.getPes_codigo()));
+        f.setEve_codigo(eventoDAO.findById(eve_codigo));
+
+        eventoPadraoDAO.insert(f);
+        return "eventopadlst";
+    }
+
+    public int getIdEvento() {
+        return idEvento;
+    }
+
+//=======================================================================================================================================================
+    //HISTORICO FOLHA
     public DataModel<HistoricoFolha> getHistFolhas() {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
         String dat = dateFormat.format(date);
         this.histFolhas = new ListDataModel(historicoFolhaDAO.historicoAtual(pessoa.getPes_codigo(), dat));
         return histFolhas;
+    }
+
+    public void setHistFolhas(DataModel<HistoricoFolha> histFolhas) {
+        this.histFolhas = histFolhas;
+    }
+
+    //=======================================================================================================================================================
+    //EVENTOS FOLHA
+    public String addEventoFolha(Integer eve_codigo) {
+
+        double valor = 0;
+        double ValorAcresc = 0, ValorDesc = 0;
+        double salarioBase = salarioBruto();
+
+        evento = eventoDAO.findById(eve_codigo);
+
+        int serie = evento.getSerieevento().getSev_codigo();
+
+        if (serie == 2) {
+            valor = calculoFolha.calculaDesconto(evento, salarioBase);
+            ValorDesc += valor;
+        } else {
+            valor = calculoFolha.calculaAcrescimo(evento, salarioBase);
+            ValorAcresc += valor;
+        }
+
+        eventoFolha.setEve_evento(getEvento());
+        eventoFolha.setEvf_descricao(evento.getEve_descricao());
+        eventoFolha.setEvf_valor(valor);
+        eventoFolha.setEvf_indice("" + evento.getEve_indice());
+        eventoFolha.setEvf_imprimir(evento.isEve_imprimir());
+        eventoFolha.setEvf_serv_codigo(evento.getSerieevento().getSev_codigo());
+        eventoFolha.setEvf_tif_codigo(evento.getTipoevento().getTpe_codigo());
+
+        if (evento.getBeneficio() != null) {
+            eventoFolha.setEvf_ben_codigo(evento.getBeneficio().getBen_codigo());
+        } else {
+            eventoFolha.setEvf_ben_codigo(0);
+        }
+        if (evento.getFormula() != null) {
+            eventoFolha.setEvf_for_godigo(evento.getFormula().getFor_codigo());
+        } else {
+            eventoFolha.setEvf_for_godigo(0);
+        }
+        if (evento.getTabelairrf() != null) {
+            eventoFolha.setEvf_tif_codigo(evento.getTabelairrf().getTif_codigo());
+        } else {
+            eventoFolha.setEvf_tif_codigo(0);
+        }
+        if (evento.getTabelainss() != null) {
+            eventoFolha.setEvs_tbs_codigo(evento.getTabelainss().getTbs_codigo());
+        } else {
+            eventoFolha.setEvs_tbs_codigo(0);
+        }
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+        String dat = dateFormat.format(date);
+
+        HistFolhas = historicoFolhaDAO.historicoAtual(pessoa.getPes_codigo(), dat);
+
+        if (HistFolhas.isEmpty()) {
+
+            double salarioLiq = ValorAcresc + (salarioBase - ValorDesc);
+            historicoFolha.setPessoa(pessoa);
+            historicoFolha.setHif_valor_acre(ValorAcresc);
+            historicoFolha.setHif_valor_desc(ValorDesc);
+            historicoFolha.setHif_salario_base(salarioBase);
+            historicoFolha.setHif_data(date);
+            historicoFolha.setHif_valor_liquido(salarioLiq);
+
+            salvarCabecalho();
+
+            eventoFolha.setHistoricoFolha(historicoFolha);
+
+            salvarItens();
+
+        } else {
+
+            for (HistoricoFolha h : HistFolhas) {
+                
+                double desconto, acrescimo, liquido;
+                desconto = h.getHif_valor_desc();
+                acrescimo = h.getHif_valor_acre();
+                liquido = h.getHif_valor_liquido();
+
+                ValorDesc += desconto;
+                ValorAcresc += acrescimo;
+
+                double salarioLiq = ValorAcresc - ValorDesc;
+                historicoFolha.setPessoa(pessoa);
+                historicoFolha.setHif_valor_acre(ValorAcresc);
+                historicoFolha.setHif_valor_desc(ValorDesc);
+                historicoFolha.setHif_salario_base(salarioBase);
+                historicoFolha.setHif_data(date);
+                historicoFolha.setHif_valor_liquido(salarioLiq);
+
+                salvarCabecalho();
+                eventoFolha.setHistoricoFolha(historicoFolha);
+                salvarItens();
+            }
+
+        }
+
+        for (HistoricoFolha h : HistFolhas) {
+            double desconto, acrescimo, liquido;
+            desconto = h.getHif_valor_desc();
+            acrescimo = h.getHif_valor_acre();
+            liquido = h.getHif_valor_liquido();
+
+            ValorDesc += desconto;
+            ValorAcresc += acrescimo;
+
+            double salarioLiq = ValorAcresc + (salarioBase - ValorDesc);
+            historicoFolha.setPessoa(pessoa);
+            historicoFolha.setHif_valor_acre(ValorAcresc);
+            historicoFolha.setHif_valor_desc(ValorDesc);
+            historicoFolha.setHif_salario_base(salarioBase);
+            historicoFolha.setHif_data(date);
+            historicoFolha.setHif_valor_liquido(salarioLiq);
+
+            salvarCabecalho();
+
+        }
+
+        return "";
+    }
+
+    public void salvarItens() {
+
+        eventoFolhaDAO.insert(eventoFolha);
+    }
+
+    public Evento getEvento() {
+        return evento;
+    }
+
+    public void setEvento(Evento evento) {
+        this.evento = evento;
     }
 
     public DataModel<EventoFolha> getDataModelEveFolhas() {
@@ -89,32 +287,25 @@ public class FolhaPagamentoBean {
         this.DataModelEveFolhas = DataModelEveFolhas;
     }
 
-    public void setHistFolhas(DataModel<HistoricoFolha> histFolhas) {
-        this.histFolhas = histFolhas;
+    public String adicionarMaisEventos() {
+        return "eventofolhafrm";
     }
 
-    public String salvaEventPadrao(int pes_codigo) {
-
-        this.pessoas = new ListDataModel<>(pessoaDAO.findByPessoaId(pes_codigo));
-        pessoa = pessoas.getRowData();
-        pessoa = pessoaDAO.findById(pessoa.getPes_codigo());
+    public String adicionarNaFolhaEP() {
 
         double ValorAcresc = 0, ValorDesc = 0;
         double salarioBase = salarioBruto();
         List<EventoFolha> listaFolha = new ArrayList<EventoFolha>();
+        List<EventoPadrao> eventosPadroes = new ArrayList<EventoPadrao>();
         eventosPadroes = eventoPadraoDAO.EventoPessoa(pessoa.getPes_codigo());
 
         for (EventoPadrao e : eventosPadroes) {
             int serie = e.getEve_codigo().getSerieevento().getSev_codigo();
             double valor = 0;
 
-            int codEv = 0;
-            codEv = e.getEve_codigo().getEve_codigo();
-            this.eventos = new ListDataModel<>(eventoDAO.EventoId(codEv));
-            evento = eventos.getRowData();
-            evento = eventoDAO.findById(evento.getEve_codigo());
-       
-            if (serie == 1) {
+            evento = eventoDAO.findById(e.getEve_codigo().getEve_codigo());
+
+            if (serie == 2) {
                 valor = calculoFolha.calculaDesconto(evento, salarioBase);
                 ValorDesc += valor;
             } else {
@@ -122,7 +313,8 @@ public class FolhaPagamentoBean {
                 ValorAcresc += valor;
             }
 
-            //eventos = eventoDAO.EventoId(evento.getEve_codigo());
+            eventoFolha = new EventoFolha();
+
             eventoFolha.setEve_evento(getEvento());
             eventoFolha.setEvf_descricao(evento.getEve_descricao());
             eventoFolha.setEvf_valor(valor);
@@ -130,10 +322,27 @@ public class FolhaPagamentoBean {
             eventoFolha.setEvf_imprimir(evento.isEve_imprimir());
             eventoFolha.setEvf_serv_codigo(e.getEve_codigo().getSerieevento().getSev_codigo());
             eventoFolha.setEvf_tif_codigo(e.getEve_codigo().getTipoevento().getTpe_codigo());
-            eventoFolha.setEvf_ben_codigo(e.getEve_codigo().getBeneficio().getBen_codigo());
-            eventoFolha.setEvf_for_godigo(e.getEve_codigo().getFormula().getFor_codigo());
-            eventoFolha.setEvf_tif_codigo(e.getEve_codigo().getTabelairrf().getTif_codigo());
-            eventoFolha.setEvs_tbs_codigo(e.getEve_codigo().getTabelainss().getTbs_codigo());
+
+            if (e.getEve_codigo().getBeneficio() != null) {
+                eventoFolha.setEvf_ben_codigo(e.getEve_codigo().getBeneficio().getBen_codigo());
+            } else {
+                eventoFolha.setEvf_ben_codigo(0);
+            }
+            if (e.getEve_codigo().getFormula() != null) {
+                eventoFolha.setEvf_for_godigo(e.getEve_codigo().getFormula().getFor_codigo());
+            } else {
+                eventoFolha.setEvf_for_godigo(0);
+            }
+            if (e.getEve_codigo().getTabelairrf() != null) {
+                eventoFolha.setEvf_tif_codigo(e.getEve_codigo().getTabelairrf().getTif_codigo());
+            } else {
+                eventoFolha.setEvf_tif_codigo(0);
+            }
+            if (e.getEve_codigo().getTabelainss() != null) {
+                eventoFolha.setEvs_tbs_codigo(e.getEve_codigo().getTabelainss().getTbs_codigo());
+            } else {
+                eventoFolha.setEvs_tbs_codigo(0);
+            }
 
             listaFolha.add(eventoFolha);
 
@@ -149,15 +358,16 @@ public class FolhaPagamentoBean {
         salvarCabecalho();
         for (EventoFolha f : listaFolha) {
             f.setHistoricoFolha(historicoFolha);
-            salvarItens();
+
+            salvarItens(f);
         }
 
         return "folhapagfrm";
     }
 
-    public void salvarItens() {
+    public void salvarItens(EventoFolha f) {
 
-        eventoFolhaDAO.insert(eventoFolha);
+        eventoFolhaDAO.insert(f);
     }
 
     public void salvarCabecalho() {
@@ -165,6 +375,19 @@ public class FolhaPagamentoBean {
         historicoFolhaDAO.insert(historicoFolha);
     }
 
+    public double salarioBruto() {
+
+        double sal = 0;
+                salarios = salarioDAO.findSalPessoaFolha(pessoa.getPes_codigo());
+        for (Salario s: salarios){
+        sal = s.getSal_valorbruto();
+        }
+        
+        return sal;
+    }
+
+    //===========================================================================================================================================
+    //GUETTERS E SETTERS
     public EventoPadrao getEventoPadrao() {
         return eventoPadrao;
     }
@@ -197,19 +420,6 @@ public class FolhaPagamentoBean {
         this.pessoas = pessoas;
     }
 
-    public double salarioBruto() {
-
-        double sal = 0;
-        salarios = salarioDAO.findBySalPessoaId(pessoa.getPes_codigo());
-        for (Salario s : salarios) {
-            sal = s.getSal_valorbruto();
-        }
-
-        return sal;
-    }
-
- 
-
     public Salario getSalario() {
         return salario;
     }
@@ -226,22 +436,16 @@ public class FolhaPagamentoBean {
         this.salarioDAO = salarioDAO;
     }
 
-    public List<EventoPadrao> getEventosPadroes() {
-        return eventosPadroes;
-    }
-
     public void setEventosPadroes(List<EventoPadrao> eventosPadroes) {
         this.eventosPadroes = eventosPadroes;
     }
 
-    public Evento getEvento() {
-        return evento;
-    }
-
-    public void setEvento(Evento evento) {
-        this.evento = evento;
-    }
-
+//    public Evento getEvento() {
+//        return evento;
+//    }
+//    public void setEvento(Evento evento) {
+//        this.evento = evento;
+//    }
     public EventoDAO getEventoDAO() {
         return eventoDAO;
     }
@@ -258,9 +462,6 @@ public class FolhaPagamentoBean {
         this.historicoFolha = historicoFolha;
     }
 
-    /* public List<HistoricoFolha> getHistFolhas() {
-     return HistFolhas;
-     }*/
     public void setHistFolhas(List<HistoricoFolha> HistFolhas) {
         this.HistFolhas = HistFolhas;
     }
@@ -307,6 +508,7 @@ public class FolhaPagamentoBean {
     }
 
     public DataModel<Evento> getEventos() {
+        this.eventos = new ListDataModel(eventoDAO.findAll());
         return eventos;
     }
 
@@ -321,6 +523,5 @@ public class FolhaPagamentoBean {
     public void setIdPessoa(int idPessoa) {
         this.idPessoa = idPessoa;
     }
-    
 
 }
