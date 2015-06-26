@@ -71,6 +71,8 @@ public class FolhaPagamentoBean {
 
     private calculoFolha calculoFolha = new calculoFolha();
 
+    private String tipoPessoa;
+
     private int idEvento;
 
     public FolhaPagamentoBean() {
@@ -80,7 +82,7 @@ public class FolhaPagamentoBean {
     //PESSOA / FUNCIONARIO
     public DataModel<Pessoa> getFuncionarios() {
         //if (this.funcionarios == null) {
-            this.funcionarios = new ListDataModel<>(pessoaDAO.findAllFuncionarios());
+        this.funcionarios = new ListDataModel<>(pessoaDAO.findAllFuncionarios());
         //}
         return funcionarios;
     }
@@ -217,7 +219,7 @@ public class FolhaPagamentoBean {
         } else {
 
             for (HistoricoFolha h : HistFolhas) {
-                
+
                 double desconto, acrescimo, liquido;
                 desconto = h.getHif_valor_desc();
                 acrescimo = h.getHif_valor_acre();
@@ -241,28 +243,7 @@ public class FolhaPagamentoBean {
 
         }
 
-        for (HistoricoFolha h : HistFolhas) {
-            double desconto, acrescimo, liquido;
-            desconto = h.getHif_valor_desc();
-            acrescimo = h.getHif_valor_acre();
-            liquido = h.getHif_valor_liquido();
-
-            ValorDesc += desconto;
-            ValorAcresc += acrescimo;
-
-            double salarioLiq = ValorAcresc + (salarioBase - ValorDesc);
-            historicoFolha.setPessoa(pessoa);
-            historicoFolha.setHif_valor_acre(ValorAcresc);
-            historicoFolha.setHif_valor_desc(ValorDesc);
-            historicoFolha.setHif_salario_base(salarioBase);
-            historicoFolha.setHif_data(date);
-            historicoFolha.setHif_valor_liquido(salarioLiq);
-
-            salvarCabecalho();
-
-        }
-
-        return "";
+        return "folhapagfrm";
     }
 
     public void salvarItens() {
@@ -378,11 +359,12 @@ public class FolhaPagamentoBean {
     public double salarioBruto() {
 
         double sal = 0;
-                salarios = salarioDAO.findSalPessoaFolha(pessoa.getPes_codigo());
-        for (Salario s: salarios){
-        sal = s.getSal_valorbruto();
+        Salario salar = new Salario();
+        salar = (Salario) salarioDAO.findSalPessoaFolha(pessoa.getPes_codigo());
+        if (salar != null) {
+            sal = salar.getSal_valorbruto();
         }
-        
+
         return sal;
     }
 
@@ -522,6 +504,23 @@ public class FolhaPagamentoBean {
 
     public void setIdPessoa(int idPessoa) {
         this.idPessoa = idPessoa;
+    }
+
+    public String getTipoPessoa() {
+        String tipo = "";
+        int valor = pessoa.getPes_tipo();
+
+        if (valor == 1) {
+            tipo = "Funcionário";
+        } else if (valor == 2) {
+            tipo = "Ex-Funcionário";
+        } else if (valor == 3) {
+            tipo = "Pessoa Externa (Candidatos)";
+        } else if (valor == 4) {
+            tipo = "Instrutores";
+        }
+
+        return tipo;
     }
 
 }
