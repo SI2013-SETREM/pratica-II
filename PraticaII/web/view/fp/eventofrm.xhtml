@@ -6,7 +6,7 @@
                 xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
     <ui:define name="title">
-        
+
         ${eventoBean.getsTitle()}
     </ui:define>
 
@@ -16,6 +16,93 @@
     </ui:define>
 
     <ui:define name="main-content">
+
+        <script>
+
+            function verificaSerie() {
+
+                var e = document.getElementById("serieevento");
+                //var valorEscolhido = e.getSelectedIndex().val;
+                //var valorEscolhido = e.options[e.getSelectedIndex()].value;
+                var valorEscolhido = $('#serieevento');
+                var divcadastro = document.getElementById("cadastro");
+                var divtributar = document.getElementById("tributar");
+                var divagregar = document.getElementById("agregar");
+                var divimprimir = document.getElementById("imprimir");
+                var divbotoes = document.getElementById("botoes");
+                var divindice = document.getElementById("indice");
+                var divbeneficio = document.getElementById("beneficio");
+                
+                var indice = $('#eveIndice');
+                var beneficio = $('#beneevento');
+                var eveinss = $('#evetinss');
+                var eveirrf = $('#eveirrf');
+                //var evefgts = $('#evefgts');
+
+                if (valorEscolhido === 1) {
+
+                    divcadastro.style.display = 'block';
+                    divtributar.style.display = 'none';
+                    divagregar.style.display = 'block';
+                    divimprimir.style.display = 'block';
+                    divbotoes.style.display = 'block';
+                    divindice.style.display = 'block';
+                    divbeneficio.style.display = 'block';
+
+                } else {
+                    //divcadastro.show();
+
+                    divcadastro.style.display = 'block';
+                    divtributar.style.display = 'block';
+                    divagregar.style.display = 'none';
+                    divimprimir.style.display = 'block';
+                    divbotoes.style.display = 'block';
+                    divindice.style.display = 'none';
+                    divbeneficio.style.display = 'none';
+
+                }
+
+
+
+            }
+
+
+
+        </script>
+
+
+
+
+        <script>
+            function verificaIRRF(irrf) {
+
+//                var div = document.getElementById('divtabelairrf');
+                var div = $('#divtabelairrf');
+                //var eirrf = document.getElementById('selectirrf');
+                //var eirrf = $('#selectirrf');
+
+                if (irrf.checked === true) {
+                    div.show();
+                } else {
+                    div.hide();
+                }
+            }
+        </script>
+
+        <script>
+            function verificaINSS(inss) {
+
+                var div = $('#divtabelainss');
+
+                if (inss.checked === true) {
+                    div.show();
+                } else {
+                    div.hide();
+                }
+            }
+        </script>
+
+
         <style>
             .eventoSit{
                 border: 1px solid #ccc;
@@ -29,119 +116,147 @@
         </style>
 
         <div class="panel panel-body">
-            <h3><h:outputText value="Dados de ${eventoBean.getsTitle()}"/></h3>
+            <h3><h:outputText value="Cadastro de ${eventoBean.getsTitle()}"/></h3>
             <f:view>
                 <h:form styleClass="form-horizontal">
                     <h:inputHidden id="eveCodigo" value="#{eventoBean.evento.eve_codigo}" />
 
                     <div class="form-group">
-                        <h:outputLabel value="Descrição:" for="eveDescricaoo" styleClass="control-label col-sm-2" />
-                        <div class="col-md-8 col-sm-12">
-                            <h:inputText pt:required="required" id="eveDescricao" value="#{eventoBean.evento.eve_descricao}" title="Descrição" styleClass="form-control" pt:autofocus="" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <h:outputLabel value="Índice:" for="eveIndice" styleClass="control-label col-sm-2" />
-                        <div class="col-md-3 col-sm-12">
-                            <h:inputText pt:type="number" pt:min="0" pt:max="100000" pt:step="0.10" pt:required="required" id="eveIndice" value="#{eventoBean.evento.eve_indice}" title="Índice" styleClass="form-control" pt:autofocus="" />
-                        </div>
-                    </div>
-   
-                    <div class="form-group">
                         <h:outputLabel value="Série: " for="serieevento" styleClass="control-label col-sm-2" />
                         <div style="padding-top: 5px" class="col-md-6 col-sm-12">
-                            <h:selectOneMenu value="#{eventoBean.evento.serieevento}" converter="serieEventoConverter" id="serieevento"   class="form-control" pt:autofocus="" >
+                            <h:selectOneMenu value="#{eventoBean.evento.serieevento}" converter="serieEventoConverter" id="serieevento"   class="form-control" >
                                 <f:selectItems value="#{eventoBean.lstSerieEvento}" var="serieevento"/>
                             </h:selectOneMenu>
                         </div>
                     </div>
 
+                    <div class="col-md-offset-1 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
+                        <h:commandButton styleClass="btn btn-primary"  value="Próximo Passo" onclick="javascript:verificaSerie()"></h:commandButton>
+                    </div>
+
+                    <div id="cadastro" class="form-group" style="display: none">
+                        <br>
+                        </br>
+                        <br>
+                        </br>
+
+                        <div class="form-group">
+                            <h:outputLabel value="Descrição:" for="eveDescricaoo" styleClass="control-label col-sm-2" />
+                            <div class="col-md-8 col-sm-12">
+                                <h:inputText pt:required="required" id="eveDescricao" value="#{eventoBean.evento.eve_descricao}" title="Descrição" styleClass="form-control"/>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <h:outputLabel value="Tipo: " for="tipoevento" styleClass="control-label col-sm-2" />
+                            <div style="padding-top: 5px" class="col-md-6 col-sm-12">
+                                <h:selectOneMenu value="#{eventoBean.evento.tipoevento}" converter="tipoEventoConverter" id="tipoevento"   class="form-control" >
+                                    <f:selectItems value="#{eventoBean.lstTipoEvento}" var="tipoevento"/>
+                                </h:selectOneMenu>
+                            </div>
+                        </div>
+
+                        <div class="form-group"  style="display: none" id="indice" >
+                            <h:outputLabel value="Índice:" for="eveIndice" styleClass="control-label col-sm-2" />
+                            <div class="col-md-3 col-sm-12">
+                                <h:inputText pt:type="number" pt:min="0" pt:max="100000" pt:step="0.10" pt:required="required" id="eveIndice" value="#{eventoBean.evento.eve_indice}" title="Índice" styleClass="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <h:outputLabel value="Formula: " for="eveformula" styleClass="control-label col-sm-2" />
+                            <div style="padding-top: 5px" class="col-md-6 col-sm-12">
+                                <h:selectOneMenu value="#{eventoBean.evento.formula}" converter="formulaConverter" id="eveformula"   class="form-control" >
+                                    <f:selectItems value="#{eventoBean.lstFormula}" var="eveformula"/>
+                                </h:selectOneMenu>
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="display: none" id="beneficio">
+                            <h:outputLabel value="Beneficio:" for="beneevento" styleClass="control-label col-sm-2" />
+                            <div style="padding-top: 5px" class="col-md-6 col-sm-12">
+                                <h:selectOneMenu value="#{eventoBean.evento.beneficio}" converter="beneficioConverter" id="beneevento"   class="form-control" >
+                                    <f:selectItems value="#{eventoBean.lstBeneficio}" var="beneevento"/>
+                                </h:selectOneMenu>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-1"></div>
+
                     <div class="form-group">
-                        <h:outputLabel value="Tipo: " for="tipoevento" styleClass="control-label col-sm-2" />
-                        <div style="padding-top: 5px" class="col-md-6 col-sm-12">
-                            <h:selectOneMenu value="#{eventoBean.evento.tipoevento}" converter="tipoEventoConverter" id="tipoevento"   class="form-control" pt:autofocus="" >
-                                <f:selectItems value="#{eventoBean.lstTipoEvento}" var="tipoevento"/>
-                            </h:selectOneMenu>
+                        <div styleClass="control-label col-sm-1" style="display: none" id="imprimir" >
+                            <h:outputLabel value="Imprimir:" for="eveimp" styleClass="control-label col-sm-2" />
+                            <div class="col-md-1 col-sm-4">
+                                <h:selectBooleanCheckbox id="eveimp" value="#{eventoBean.evento.eve_imprimir}" title="1" />
+                            </div>
                         </div>
                     </div>
 
+                    <div class="col-md-1"></div>
+
                     <div class="form-group">
+                        <div styleClass="control-label col-sm-1" style="display: none" id="agregar" >
+                            <h:outputLabel value="Agregar 13º:" for="eveagr" styleClass="control-label col-sm-2" />
+                            <div class="col-md-1 col-sm-4">
+                                <h:selectBooleanCheckbox id="eveagre13" value="#{eventoBean.evento.eve_calcular_media_agregada13}" title="1" 
+                                                         />
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-1"></div>
+                    <div class="eventoSit col-md-10" id="tributar" style="display: none">
+
+                        <div class="form-group" >
+
+                            <h:outputLabel value="Tributar FGTS:" for="evetfgts" styleClass="control-label col-sm-2" />
+                            <div class="col-md-1 col-sm-4">
+                                <h:selectBooleanCheckbox id="evefgts" value="#{eventoBean.evento.eve_tributar_fgts}" title="1" />
+                            </div>
+
+                            <h:outputLabel value="Tributar INSS:" for="evetinss" styleClass="control-label col-sm-2" />
+                            <div class="col-md-2 col-sm-4">
+                                <h:selectBooleanCheckbox id="eveinss" onclick="verificaINSS(this);" value="#{eventoBean.evento.eve_tributar_inss}" title="1" />
+                            </div>
+                            <h:outputLabel value="Tributar IRRF:" for="evetirrf" styleClass="control-label col-sm-2" />
+                            <div class="col-md-1 col-sm-1">
+                                <h:selectBooleanCheckbox id="eveirrf" onclick="verificaIRRF(this);" value="#{eventoBean.evento.eve_tributar_irrf}" title="1" />
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div id="divtabelainss" class="form-group" style="display: none">
                         <h:outputLabel value="Tabela INSS: " for="tabelainss" styleClass="control-label col-sm-2" />
                         <div style="padding-top: 5px" class="col-md-6 col-sm-12">
-                            <h:selectOneMenu value="#{eventoBean.evento.tabelainss}" converter="tabelaINSSConverter" id="tabelainss"   class="form-control" pt:autofocus="" >
+                            <h:selectOneMenu value="#{eventoBean.evento.tabelainss}" converter="tabelaINSSConverter" id="selectinss"   class="form-control" >
                                 <f:selectItems value="#{eventoBean.lstTabinss}" var="tabelainss"/>
                             </h:selectOneMenu>
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div id="divtabelairrf" class="form-group" style="display: none">
                         <h:outputLabel value="Tabela IRRF: " for="tabelairrf" styleClass="control-label col-sm-2" />
                         <div style="padding-top: 5px" class="col-md-6 col-sm-12">
-                            <h:selectOneMenu value="#{eventoBean.evento.tabelairrf}" converter="tabelaIRRFConverter" id="tabelairrf"   class="form-control" pt:autofocus="" >
-                                <f:selectItems value="#{eventoBean.lstTabirrf}" var="tabelairrf"/>
+                            <h:selectOneMenu value="#{eventoBean.evento.tabelairrf}" converter="tabelaIRRFConverter" id="selectirrf"   class="form-control" >
+                                <f:selectItems id="lstirrf" value="#{eventoBean.lstTabirrf}" var="tabelairrf"/>
                             </h:selectOneMenu>
                         </div>
                     </div>
 
 
-                    <div class="form-group">
-                        <h:outputLabel value="Formula: " for="eveformula" styleClass="control-label col-sm-2" />
-                        <div style="padding-top: 5px" class="col-md-6 col-sm-12">
-                            <h:selectOneMenu value="#{eventoBean.evento.formula}" converter="formulaConverter" id="eveformula"   class="form-control" pt:autofocus="" >
-                                <f:selectItems value="#{eventoBean.lstFormula}" var="eveformula"/>
-                            </h:selectOneMenu>
-                        </div>
-                    </div>
-                    
-                     <div class="form-group">
-                        <h:outputLabel value="Beneficio:" for="beneevento" styleClass="control-label col-sm-2" />
-                        <div style="padding-top: 5px" class="col-md-6 col-sm-12">
-                            <h:selectOneMenu value="#{eventoBean.evento.beneficio}" converter="beneficioConverter" id="beneevento"   class="form-control" pt:autofocus="" >
-                                <f:selectItems value="#{eventoBean.lstBeneficio}" var="beneevento"/>
-                            </h:selectOneMenu>
-                        </div>
-                    </div>
-
-                    <div class="col-md-1"></div>
-                    <div class="eventoSit col-md-10">
-
-                        <div class="form-group">
-                            <h:outputLabel value="Imprimir:" for="eveimp" styleClass="control-label col-sm-2" />
-                            <div class="col-md-2 col-sm-4">
-                                <h:selectBooleanCheckbox id="eveimp" value="#{eventoBean.evento.eve_imprimir}" title="1" pt:autofocus="" />
-                            </div>
-                            <h:outputLabel value="Tributar FGTS:" for="evetfgts" styleClass="control-label col-sm-2" />
-                            <div class="col-md-1 col-sm-4">
-                                <h:selectBooleanCheckbox id="evetfgts" value="#{eventoBean.evento.eve_tributar_fgts}" title="1" pt:autofocus="" />
-                            </div>
-                            <h:outputLabel value="Agregar 13º:" for="eveagr" styleClass="control-label col-sm-2" />
-                            <div class="col-md-1 col-sm-4">
-                                <h:selectBooleanCheckbox id="eveagre13" value="#{eventoBean.evento.eve_calcular_media_agregada13}" title="1" 
-                                                         pt:autofocus="" />
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <h:outputLabel value="Tributar INSS:" for="evetinss" styleClass="control-label col-sm-2" />
-                            <div class="col-md-2 col-sm-4">
-                                <h:selectBooleanCheckbox id="evetinss" value="#{eventoBean.evento.eve_tributar_inss}" title="1" pt:autofocus="" />
-                            </div>
-                            <h:outputLabel value="Tributar IRRF:" for="evetirrf" styleClass="control-label col-sm-2" />
-                            <div class="col-md-1 col-sm-1">
-                                <h:selectBooleanCheckbox id="evetirrf" value="#{eventoBean.evento.eve_tributar_irrf}" title="1" pt:autofocus="" />
-                            </div>
-
-                        </div>
-                    </div>
 
 
-
-                    <div class="form-group">
+                    <div class="form-group" style="display: none" id="botoes">
                         <div class="col-md-offset-1 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
                             <h:link styleClass="btn btn-default" value="Cancelar" outcome="#{eventoBean.listar()}" />
                             <h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{eventoBean.salvar()}"></h:commandButton>
                         </div>
                     </div>
+
                 </h:form>
             </f:view>
         </div>
