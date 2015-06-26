@@ -1,4 +1,4 @@
-package cfg.converter;
+package rs.converter;
 
 import cfg.dao.PessoaDAO;
 import cfg.model.Pessoa;
@@ -18,6 +18,7 @@ public class RecrutamentoPessoaConverter implements javax.faces.convert.Converte
     @Override
     public Object getAsObject(FacesContext facesContext, UIComponent uIComponent, String string) {
         String[] parametros = string.split("-");
+        System.err.println("CONVERTER PARAMETROS: " + parametros[0] + "-" + parametros[1]);
         Pessoa p = new PessoaDAO().findById(Integer.parseInt(parametros[0]));
         Recrutamento r = new RecrutamentoDAO().findById(Integer.parseInt(parametros[1]));
         RecrutamentoPessoaPK rp = new RecrutamentoPessoaPK();
