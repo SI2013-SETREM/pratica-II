@@ -22,7 +22,7 @@
     </h:head>
 
     <h:body>
-        #{loginBean.setUsuarioByLogin(request.getRemoteUser())}
+        ${loginBean.setUsuarioByLogin(request.getRemoteUser())}
         <div class="page-container">
             <div class="page-header navbar navbar-static-top">
                 <div class="page-logo">
@@ -53,7 +53,7 @@
                             <h:link outcome="/faces/view/cfg/perfil">
                                 <span>${loginBean.usuario.pessoa.pes_nome}</span>
                                 <c:if test="${loginBean.usuario.pessoa.repositorio != null}">
-                                    <img class="user-photo" src="/PraticaII/DirectServlet?method=image&amp;id=${loginBean.usuario.pessoa.repositorio.rep_codigo}" />
+                                    <img class="user-photo" src="${loginBean.profileImageUrl}" />
                                 </c:if>
                             </h:link>
                         </li>

@@ -57,7 +57,10 @@ public class LoginBean {
             Repositorio repositorio = new Repositorio(file);
             repositorio.setRep_nome("Foto " + this.usuario.getPessoa().getPes_nome());
             
-            String original = this.usuario.getPessoa().getRepositorio().getRep_nomearquivo() + "." + this.usuario.getPessoa().getRepositorio().getRep_extensao();
+            String original = "";
+            if (this.usuario.getPessoa() != null && this.usuario.getPessoa().getRepositorio() != null) {
+                original = this.usuario.getPessoa().getRepositorio().getRep_nomearquivo() + "." + this.usuario.getPessoa().getRepositorio().getRep_extensao();
+            }
             String novo = repositorio.getRep_nomearquivo() + "." + repositorio.getRep_extensao();
 
             daoRepositorio.insert(repositorio);
@@ -66,6 +69,17 @@ public class LoginBean {
             
             LogDAO.insert("Usuário", "Foto do usuário alterada de " + original + " para " + novo);
         }
+    }
+    
+    public String getProfileImageUrl() {
+        if (usuario.getPessoa() != null && usuario.getPessoa().getRepositorio() != null) {
+            return this.getImageUrl(usuario.getPessoa().getRepositorio().getRep_codigo());
+        }
+        return "";
+    }
+    
+    public String getImageUrl(int rep_codigo) {
+        return "/PraticaII/DirectServlet?method=image&id=" + rep_codigo;
     }
     
 }

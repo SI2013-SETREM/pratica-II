@@ -2,11 +2,15 @@ package cfg.controller;
 
 import cfg.dao.EmpresaDAO;
 import cfg.dao.LogDAO;
+import cfg.dao.RepositorioDAO;
 import cfg.model.Empresa;
+import cfg.model.Repositorio;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
+import javax.servlet.http.Part;
+import util.Utilidades;
 
 @ManagedBean
 @RequestScoped
@@ -18,6 +22,7 @@ public class EmpresaBean {
     private Empresa empresa = new Empresa();
     private EmpresaDAO dao = new EmpresaDAO();
     private DataModel empresas;
+    private Part file;
 
     public EmpresaBean() {
     }
@@ -47,6 +52,14 @@ public class EmpresaBean {
         this.empresas = empresas;
     }
 
+    public Part getFile() {
+        return file;
+    }
+
+    public void setFile(Part file) {
+        this.file = file;
+    }
+
     public String insert() {
         dao.insert(empresa);
         return "empresalst";
@@ -74,6 +87,13 @@ public class EmpresaBean {
     }
 
     public String salvar() {
+        if (file != null) {
+            Repositorio repositorio = new Repositorio(file);
+            repositorio.setRep_nome("Logomarca da empresa " + empresa.getEmp_nome());
+            RepositorioDAO daoRep = new RepositorioDAO();
+            daoRep.insert(repositorio);
+            empresa.setRepositorio(repositorio);
+        }
         if (empresa.getEmp_codigo() > 0) {
             dao.update(empresa);
             LogDAO.insert("Empresa", "Alterou empresa código: " + empresa.getEmp_codigo() + ", descrição: " + empresa.getEmp_descricao()

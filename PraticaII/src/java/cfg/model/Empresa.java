@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import util.Utilidades;
 
 @Entity
 @Table(name = "empresa")
@@ -55,22 +56,6 @@ public class Empresa implements Serializable {
     private int emp_empresa_sistema;
 
     public Empresa() {
-    }
-
-    public Empresa(int emp_codigo, String emp_nome, Repositorio repositorio, Cidade cidade, Bairro bairro, Endereco endereco, int emp_tipo, int emp_tamanho, String emp_descricao, String emp_website, String emp_numeroendereco, int emp_sede, int emp_empresa_sistema) {
-        this.emp_codigo = emp_codigo;
-        this.emp_nome = emp_nome;
-        this.repositorio = repositorio;
-        this.cidade = cidade;
-        this.bairro = bairro;
-        this.endereco = endereco;
-        this.emp_tipo = emp_tipo;
-        this.emp_tamanho = emp_tamanho;
-        this.emp_descricao = emp_descricao;
-        this.emp_website = emp_website;
-        this.emp_numeroendereco = emp_numeroendereco;
-        this.emp_sede = emp_sede;
-        this.emp_empresa_sistema = emp_empresa_sistema;
     }
 
     public int getEmp_codigo() {
@@ -175,6 +160,13 @@ public class Empresa implements Serializable {
 
     public void setEmp_empresa_sistema(int emp_empresa_sistema) {
         this.emp_empresa_sistema = emp_empresa_sistema;
+    }
+    
+    public String getImageUrl() {
+        if (this.getRepositorio() != null) {
+            return Utilidades.getLoginBean().getImageUrl(this.getRepositorio().getRep_codigo());
+        }
+        return "";
     }
 
     @Override

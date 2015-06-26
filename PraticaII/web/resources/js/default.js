@@ -23,6 +23,7 @@ if (typeof($.fn.dataTable) !== 'undefined') {
                 "sortDescending": ": Ordenar colunas de forma descendente"
             }
         },
+        "pageLength": 50,
         "lengthMenu": [ 5, 10, 50, 100 ],
         "renderer": "bootstrap",
         "pagingType": "full_numbers",
