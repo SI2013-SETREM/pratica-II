@@ -6,73 +6,62 @@ import cfg.model.Pessoa;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="rec_pessoa_competencia")
-@IdClass(PessoaCompetencia.PessoaCompetenciaPK.class)
 public class PessoaCompetencia implements Serializable {
     
     public static final String sTitle = "Competência";
     public static final String pTitle = "Competências";
     
     @Id
+    @SequenceGenerator(name = "pescompetencia_pk_sequence", sequenceName = "seq_rs_pessoa_competencia")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "pescompetencia_pk_sequence")
+    private int pes_cmp_codigo;
+    
     @ManyToOne
     @JoinColumn(name = "pes_codigo", referencedColumnName = "pes_codigo")
     private Pessoa pessoa;
     
-    @Id
     @ManyToOne
     @JoinColumn(name = "cmp_codigo", referencedColumnName = "cmp_codigo")
     private Competencia competencia;
     
+    /**
+     * 1 - Básico 
+     * 2 - Básico a Intermediário 
+     * 3 - Intermediário 
+     * 4 - Intermediário a Avançado 
+     * 5 - Avançado 
+     */
     private int pes_cmp_nivel;
 
-    // From http://stackoverflow.com/questions/3585034/how-to-map-a-composite-key-with-hibernate
-    public class PessoaCompetenciaPK implements Serializable {
-        protected Pessoa pessoa;
-        protected Competencia competencia;
-
-        public PessoaCompetenciaPK() {}
-
-        public PessoaCompetenciaPK(Pessoa pessoa, Competencia competencia) {
-            this.pessoa = pessoa;
-            this.competencia = competencia;
-        }
-
-        @Override
-        public int hashCode() {
-            int hash = 5;
-            hash = 61 * hash + Objects.hashCode(this.pessoa);
-            hash = 61 * hash + Objects.hashCode(this.competencia);
-            return hash;
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-            if (obj == null) {
-                return false;
-            }
-            if (getClass() != obj.getClass()) {
-                return false;
-            }
-            final PessoaCompetenciaPK other = (PessoaCompetenciaPK) obj;
-            if (!Objects.equals(this.pessoa, other.pessoa)) {
-                return false;
-            }
-            if (!Objects.equals(this.competencia, other.competencia)) {
-                return false;
-            }
-            return true;
-        }
-
-    }
+    private String[] niveis = {
+        "", //0 não existe
+        "Básico", //1
+        "Básico a Intermediário", //2
+        "Intermediário", //3
+        "Intermediário a Avançado", //4
+        "Avançado", //5
+    };
 
     public PessoaCompetencia() {
+    }
+
+    public int getPesCmpCodigo() {
+        return pes_cmp_codigo;
+    }
+
+    public void setPesCmpCodigo(int pes_cmp_codigo) {
+        this.pes_cmp_codigo = pes_cmp_codigo;
     }
 
     public Pessoa getPessoa() {
@@ -98,8 +87,14 @@ public class PessoaCompetencia implements Serializable {
     public void setPesCmpNivel(int pes_cmp_nivel) {
         this.pes_cmp_nivel = pes_cmp_nivel;
     }
-
     
-    
+    public String getNivelDsc() {
+        int nivel = this.getPesCmpNivel();
+        if (nivel > 1 && nivel < this.niveis.length) {
+            return this.niveis[nivel];
+        } else {
+            return this.niveis[0];
+        }
+    }
     
 }

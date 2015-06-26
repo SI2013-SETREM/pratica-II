@@ -32,7 +32,7 @@ public class RepositorioBean {
     private RepositorioDAO dao = new RepositorioDAO();
     private DataModel repositorios;
 
-    private javax.servlet.http.Part file;
+    private Part file;
 
     public Part getFile() {
         return file;

@@ -4,76 +4,63 @@ package rs.model;
 import cfg.model.Idioma;
 import cfg.model.Pessoa;
 import java.io.Serializable;
-import java.util.Objects;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="rec_pessoa_idioma")
-@IdClass(PessoaIdioma.PessoaIdiomaPK.class)
 public class PessoaIdioma implements Serializable {
     
     public static final String sTitle = "Idioma";
     public static final String pTitle = "Idiomas";
     
     @Id
+    @SequenceGenerator(name = "pesidioma_pk_sequence", sequenceName = "seq_rs_pessoa_idioma")
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "pesidioma_pk_sequence")
+    private int pes_idi_codigo;
+    
     @ManyToOne
     @JoinColumn(name = "pes_codigo", referencedColumnName = "pes_codigo")
     private Pessoa pessoa;
     
-    @Id
     @ManyToOne
     @JoinColumn(name = "idi_codigo", referencedColumnName = "idi_codigo")
     private Idioma idioma;
     
+    /**
+     * 1 - Básico 
+     * 2 - Básico a Intermediário 
+     * 3 - Intermediário 
+     * 4 - Avançado 
+     * 5 - Fluente 
+     */
     private int pes_idi_nivelfala;
     private int pes_idi_nivelescrita;
 
-    // From http://stackoverflow.com/questions/3585034/how-to-map-a-composite-key-with-hibernate
-    public class PessoaIdiomaPK implements Serializable {
-        protected Pessoa pessoa;
-        protected Idioma idioma;
-
-        public PessoaIdiomaPK() {}
-
-        public PessoaIdiomaPK(Pessoa pessoa, Idioma idioma) {
-            this.pessoa = pessoa;
-            this.idioma = idioma;
-        }
-
-        @Override
-        public int hashCode() {
-            int hash = 3;
-            hash = 41 * hash + Objects.hashCode(this.pessoa);
-            hash = 41 * hash + Objects.hashCode(this.idioma);
-            return hash;
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-            if (obj == null) {
-                return false;
-            }
-            if (getClass() != obj.getClass()) {
-                return false;
-            }
-            final PessoaIdiomaPK other = (PessoaIdiomaPK) obj;
-            if (!Objects.equals(this.pessoa, other.pessoa)) {
-                return false;
-            }
-            if (!Objects.equals(this.idioma, other.idioma)) {
-                return false;
-            }
-            return true;
-        }
-        
+    private String[] niveis = {
+        "", //0 não existe
+        "Básico", //1
+        "Básico a Intermediário", //2
+        "Intermediário", //3
+        "Avançado", //4
+        "Fluente", //5
+    };
+    
+    public PessoaIdioma() {
     }
 
-    public PessoaIdioma() {
+    public int getPesIdiCodigo() {
+        return pes_idi_codigo;
+    }
+
+    public void setPesIdiCodigo(int pes_idi_codigo) {
+        this.pes_idi_codigo = pes_idi_codigo;
     }
 
     public Pessoa getPessoa() {
@@ -107,9 +94,13 @@ public class PessoaIdioma implements Serializable {
     public void setPesIdiNivelescrita(int pes_idi_nivelescrita) {
         this.pes_idi_nivelescrita = pes_idi_nivelescrita;
     }
-
     
-    
-    
+    public String getNivelDsc(int nivel) {
+        if (nivel > 1 && nivel < this.niveis.length) {
+            return this.niveis[nivel];
+        } else {
+            return this.niveis[0];
+        }
+    }
     
 }

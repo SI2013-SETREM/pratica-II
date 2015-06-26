@@ -1,0 +1,66 @@
+<ui:composition template="./../modelos/default.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <ui:define name="title">
+        Currículo
+    </ui:define>
+    
+    <ui:define name="breadcrumb">
+        <li>Recrutamento e Seleção</li>
+        <li><h:link value="Gestão de Currículos" outcome="/faces/view/rs/curriculolst" /></li>
+        <li>Currículo de #{curriculoBean.pessoa}</li>
+    </ui:define>
+    
+    <ui:define name="main-content">
+        <div class="panel panel-body">
+            <div class="row">
+                <div class="col-lg-8">
+                    <ui:insert name="content"></ui:insert>
+                </div>
+                <div class="col-lg-3">
+                    <ul class="nav nav-pills nav-stacked pull-right" style="width: 100%">
+                        <li class="#{view.viewId.contains('/rs/curriculofrm') ? 'active' : ''}">
+                            <h:link outcome="/faces/view/rs/curriculofrm">
+                                <span class="fa fa-file-text-o"></span>
+                                <span class="menu-text">Dados Básicos</span>
+                            </h:link>
+                        </li>
+                        <li class="#{view.viewId.contains('/rs/curriculoFormacao') ? 'active' : ''}">
+                            <h:link outcome="/faces/view/rs/curriculoFormacaolst">
+                                <span class="fa fa-graduation-cap"></span>
+                                <span class="menu-text">Formação</span>
+                            </h:link>
+                        </li>
+                        <li class="#{view.viewId.contains('/rs/curriculoExperiencia') ? 'active' : ''}">
+                            <h:link outcome="/faces/view/rs/curriculoExperiencialst">
+                                <span class="fa fa-briefcase"></span>
+                                <span class="menu-text">Experiência</span>
+                            </h:link>
+                        </li>
+                        <li class="#{view.viewId.contains('/rs/curriculoIdioma') ? 'active' : ''}">
+                            <h:link outcome="/faces/view/rs/curriculoIdiomalst">
+                                <span class="fa fa-language"></span>
+                                <span class="menu-text">Idiomas</span>
+                            </h:link>
+                        </li>
+                        <li class="#{view.viewId.contains('/rs/curriculoCompetencia') ? 'active' : ''}">
+                            <h:link outcome="/faces/view/rs/curriculoCompetencialst">
+                                <span class="fa fa-cubes"></span>
+                                <span class="menu-text">Competências</span>
+                            </h:link>
+                        </li>
+                        <li class="#{view.viewId.contains('/rs/curriculoRedeSocial') ? 'active' : ''}">
+                            <h:link outcome="/faces/view/rs/curriculoRedeSociallst">
+                                <span class="fa fa-share-alt"></span>
+                                <span class="menu-text">Redes Sociais</span>
+                            </h:link>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </ui:define>
+    
+</ui:composition>

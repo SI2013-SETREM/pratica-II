@@ -34,10 +34,10 @@
                 </div>
                 <div class="page-topmenu pull-right">
                     <ul class="nav navbar-nav pull-right">
-                        <li class="dropdown dropdown-inbox">
+<!--                        <li class="dropdown dropdown-inbox">
                             <a class="dropdown-toggle dropdown-icon" data-close-others="true" data-toggle="dropdown" href="javascript:void(0);">
                                 <i class="fa fa-envelope"></i>
-                                <!--<span class="badge badge-danger">9</span>-->
+                                <span class="badge badge-danger">9</span>
                                 <span class="badge badge-danger"></span>
                             </a>
                             <ul class="dropdown-menu pull-right messages-list">
@@ -47,29 +47,22 @@
                                         Nova mensagem
                                     </a>
                                 </li>
-                                <!--                                <li class="messages-top">
-                                                                    <span>Você tem 9 novas mensagens</span>
-                                                                    <a href="#">Ver todas</a>
-                                                                </li>
-                                                                <li>
-                                                                </li>-->
                             </ul>
-                        </li>
+                        </li>-->
                         <li class="dropdown dropdown-user">
-                            <a href="javascript:void(0);">
+                            <h:link outcome="/faces/view/cfg/perfil">
                                 <span>${loginBean.usuario.pessoa.pes_nome}</span>
                                 <c:if test="${loginBean.usuario.pessoa.repositorio != null}">
-                                    <img class="user-photo" src="DirectServlet?method=image&amp;id=${loginBean.usuario.pessoa.pes_codigo}" />
-                                    <h:graphicImage class="user-photo" name="img/user.jpg"></h:graphicImage>
+                                    <img class="user-photo" src="/PraticaII/DirectServlet?method=image&amp;id=${loginBean.usuario.pessoa.repositorio.rep_codigo}" />
                                 </c:if>
-                            </a>
+                            </h:link>
                         </li>
                     </ul>
                 </div>
             </div>
             <div class="main-content-wrapper">
                 <div class="page-sidebar-wrapper">
-                    <div class="page-sidebar navbar-collapse collapse">
+                    <div class="page-sidebar navbar-collapse">
                         <ul class="page-sidebar-menu">
                             <li class="#{view.viewId == '/view/index.xhtml' ? 'active' : ''}">
                                 <h:link outcome="/faces/view/index">
@@ -90,8 +83,8 @@
                                     <span class="fa dropdown-chevron pull-right"></span>
                                 </a>
                                 <ul class="submenu">
-                                    <li class="#{view.viewId.contains('/rs/cv') ? 'active' : ''}">
-                                        <h:link outcome="/faces/view/rs/cv">
+                                    <li class="#{view.viewId.contains('/rs/curriculo') ? 'active' : ''}">
+                                        <h:link outcome="/faces/view/rs/curriculolst">
                                             <span class="fa fa-file-text-o"></span>
                                             <span class="menu-text">Gestão de Currículos</span>
                                         </h:link>

@@ -225,9 +225,42 @@ body {
         margin-right: 10px;
     }
 }
+.home-item {
+    display: block;
+    min-height: 50px;
+    width: 100%;
+    text-align: center;
+    background: @corHoverBranco;
+    border-radius: 5px;
+    color: @corSecundaria;
+    padding: 10px 0;
+    
+    i {
+        display: block;
+        width: 100%;
+        text-align: center;
+    }
+    
+    &:hover {
+        background: #e5e5e5;
+        text-decoration: none;
+        color: @corPrimaria;
+    }
+    
+    span {
+        font-size: 16px;
+    }
+}
+.about-image {
+    display: block;
+    max-width: 300px;
+    margin: 20px;
+}
 .user-photo {
     border-radius: 5px;
     margin-left: 5px;
+    max-height: 50px;
+    max-width: 100px;
 }
 .page-topmenu .navbar-nav > li {
     > a {

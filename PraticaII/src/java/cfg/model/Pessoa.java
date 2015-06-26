@@ -28,7 +28,6 @@ public class Pessoa implements Serializable {
     @Id
     @SequenceGenerator(name = "pes_codigo", sequenceName = "pes_codigo")
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "pes_codigo")
-
     private int pes_codigo;
 
     @ManyToOne

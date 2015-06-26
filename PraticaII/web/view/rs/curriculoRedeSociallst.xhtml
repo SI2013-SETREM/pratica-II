@@ -1,0 +1,67 @@
+<ui:composition template="./../modelos/wizardCurriculo.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+    <ui:define name="content">
+        <div class="panel panel-body">
+            <h3><h:outputText value="Currículo de ${curriculoBean.pessoa.pes_nome}"/></h3>
+            <h4><h:outputText value="Redes Sociais"/></h4>
+            <h:form>
+                <div class="btns-top-table">
+                    <h:commandLink styleClass="btn btn-success" action="${curriculoBean.novaRedeSocial()}">
+                        <i class="fa fa-plus"></i> Inserir Rede Social
+                    </h:commandLink>
+                </div>
+                <h:dataTable value="${curriculoBean.redessociais}" var="item" styleClass="dataTable table table-bordered table-striped">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Rede Social"/>
+                        </f:facet>
+                        <h:outputText value="${item.getRedeSocial().getRsc_nome()}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Link para o perfil"/>
+                        </f:facet>
+                        <h:outputText>
+                            <i>teste</i> ${item.getPesRscUrl()}
+                        </h:outputText>
+                    </h:column>
+                    <h:column headerClass="col-editar-header">
+                        <f:facet name="header">
+                            <h:outputText value="Editar"/>
+                        </f:facet>
+                        <h:commandLink action="${curriculoBean.editRedeSocial()}">
+                            <i class="fa fa-pencil"></i> Editar
+                        </h:commandLink>
+                    </h:column>
+                    <h:column headerClass="col-excluir-header">
+                        <f:facet name="header">
+                            <h:outputText value="Excluir"/>
+                        </f:facet>
+                        <h:commandLink action="${curriculoBean.deleteRedeSocial()}">
+                            <i class="fa fa-trash"></i> Excluir
+                        </h:commandLink>
+                    </h:column>
+                </h:dataTable>
+                <div class="form-group row">
+                    <div class="col-lg-6 btn-group-separated">
+                        <h:link styleClass="btn btn-default" style="" value="Cancelar" outcome="#{curriculoBean.listar()}" />
+                        <!--<h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{curriculoBean.salvarCurriculo()}"/>-->
+                    </div>
+                    <div class="col-lg-6 btn-group-separated text-right">
+                        <h:commandLink styleClass="btn btn-info" action="#{curriculoBean.voltarRedeSocial()}">
+                            <i class="fa fa-chevron-left"></i> Voltar
+                        </h:commandLink>
+                        <h:commandLink styleClass="btn btn-primary" action="#{curriculoBean.avancarRedeSocial()}">
+                            Salvar
+                        </h:commandLink>
+                    </div>
+                </div>
+            </h:form>
+        </div>
+    </ui:define>
+
+</ui:composition>

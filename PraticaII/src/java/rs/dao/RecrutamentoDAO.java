@@ -13,10 +13,6 @@ import org.hibernate.Transaction;
 import rs.model.Recrutamento;
 import util.HibernateUtil;
 
-/**
- *
- * @author NADINE
- */
 public class RecrutamentoDAO {
 
     private Session session;

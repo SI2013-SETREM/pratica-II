@@ -13,6 +13,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -38,7 +39,10 @@ public class Repositorio implements Serializable {
     private int rep_tipo;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date rep_data;
+    
+    @Column(nullable = true)
     private String rep_nome;
+    
     private String rep_nomearquivo;
     private String rep_extensao;
     @Lob
