@@ -326,6 +326,8 @@ public class FuncionarioBean {
     public String insertFerias() {
         ferias.setPessoa(pessoaDAO.findById(pessoa.getPes_codigo()));
         feriasDAO.insert(ferias);
+//        LogDAO.insert("Ferias", "Cadastrou ferias código: " + ferias.getFer_codigo()
+//                    + ", data inicio: " + ferias.getFer_data_inicio() + ", data fim: " + ferias.getFer_data_fim());
         ferias = null;
         return "fichafunlst";
     }
@@ -341,6 +343,8 @@ public class FuncionarioBean {
     public String insertFalta() {
         falta.setPessoa(pessoaDAO.findById(pessoa.getPes_codigo()));
         faltaDAO.insert(falta);
+//         LogDAO.insert("Falta", "Cadastrou falta código: " + falta.getFlt_codigo()
+//                    + ", data: " + falta.getFlt_data() + ", quantidade de horas: " + falta.getFlt_qtd_horas());
         falta = new Falta();
         return "fichafunlst";
     }
@@ -357,9 +361,9 @@ public class FuncionarioBean {
         advertencia.setPessoa(pessoaDAO.findById(pessoa.getPes_codigo()));
         if (advertencia.getPessoa() != null && advertencia.getPessoa().getPes_codigo() != 0 && advertencia.getPessoaAplicador() != null && advertencia.getPessoaAplicador().getPes_codigo() != 0) {
             advertenciaDAO.insert(advertencia);
-            LogDAO.insert("Advertencia", "Cadastrou advertência código: " + advertencia.getAdv_codigo()
-                    + ", motivo: " + advertencia.getAdv_motivo() + ", descrição: " + advertencia.getAdv_descricao()
-                    + ", observação: " + advertencia.getAdv_observacao() + ", data: " + advertencia.getAdv_data());
+//            LogDAO.insert("Advertencia", "Cadastrou advertência código: " + advertencia.getAdv_codigo()
+//                    + ", motivo: " + advertencia.getAdv_motivo() + ", descrição: " + advertencia.getAdv_descricao()
+//                    + ", observação: " + advertencia.getAdv_observacao() + ", data: " + advertencia.getAdv_data());
             return "fichafunlst";
         }
         return "advertenciafrm";
