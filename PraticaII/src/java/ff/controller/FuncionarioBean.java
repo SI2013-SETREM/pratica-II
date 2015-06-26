@@ -1,6 +1,7 @@
 package ff.controller;
 
 import cfg.dao.EmpresaDAO;
+import cfg.dao.LogDAO;
 import cfg.dao.PessoaDAO;
 import cfg.model.Empresa;
 import cfg.model.Pessoa;
@@ -46,6 +47,7 @@ import javax.faces.model.ListDataModel;
 public class FuncionarioBean {
 //INICIALIZADORES
     //========================================================================================
+
     private Pessoa pessoa = new Pessoa();
     private final PessoaDAO pessoaDAO = new PessoaDAO();
     private DataModel<Pessoa> funcionarios;
@@ -70,7 +72,7 @@ public class FuncionarioBean {
 
     private final SalarioDAO salarioDAO = new SalarioDAO();
     private List<Salario> salarios;
-    
+
     private Advertencia advertencia = new Advertencia();
     private final AdvertenciaDAO advertenciaDAO = new AdvertenciaDAO();
     private List<Advertencia> advertencias;
@@ -91,7 +93,6 @@ public class FuncionarioBean {
 
     private String estadoCivil;
     private String tipoPessoa;
-    
 
     public FuncionarioBean() {
     }
@@ -265,7 +266,7 @@ public class FuncionarioBean {
     }
 
     public String getEstadoCivil() {
-          String estado = "";
+        String estado = "";
         int valor = pessoa.getPes_tipo();
 
         if (valor == 1) {
@@ -279,7 +280,7 @@ public class FuncionarioBean {
         }
 
         return estado;
-        
+
     }
 
     public void setEstadoCivil(String estadoCivil) {
@@ -319,57 +320,61 @@ public class FuncionarioBean {
     public void setTipoPessoa(String tipoPessoa) {
         this.tipoPessoa = tipoPessoa;
     }
-    
+
 //----------------------------------------------------------------------------------------------------------------------------------------------------
     //FERIAS
-     public String insertFerias() {
+    public String insertFerias() {
         ferias.setPessoa(pessoaDAO.findById(pessoa.getPes_codigo()));
         feriasDAO.insert(ferias);
         ferias = null;
-        return "fichafunlst";    
+        return "fichafunlst";
     }
-     
-     public String novaFerias() {
+
+    public String novaFerias() {
         this.ferias = new Ferias();
 //        this.arrPerguntas = null;
         return "feriasfrm";
     }
 //----------------------------------------------------------------------------------------------------------------------------------------------------
     //FALTA
-     public String insertFalta() {
+
+    public String insertFalta() {
         falta.setPessoa(pessoaDAO.findById(pessoa.getPes_codigo()));
         faltaDAO.insert(falta);
         falta = new Falta();
         return "fichafunlst";
     }
-      public String novaFalta() {
+
+    public String novaFalta() {
         this.falta = new Falta();
 //        this.arrPerguntas = null;
         return "faltafrm";
     }
-    
+
 //----------------------------------------------------------------------------------------------------------------------------------------------------
     //ADVERTENCIA
-    
-      public String insertAdvertencia() {
-         advertencia.setPessoa(pessoaDAO.findById(pessoa.getPes_codigo()));
+    public String insertAdvertencia() {
+        advertencia.setPessoa(pessoaDAO.findById(pessoa.getPes_codigo()));
         if (advertencia.getPessoa() != null && advertencia.getPessoa().getPes_codigo() != 0 && advertencia.getPessoaAplicador() != null && advertencia.getPessoaAplicador().getPes_codigo() != 0) {
             advertenciaDAO.insert(advertencia);
+            LogDAO.insert("Advertencia", "Cadastrou advertência código: " + advertencia.getAdv_codigo()
+                    + ", motivo: " + advertencia.getAdv_motivo() + ", descrição: " + advertencia.getAdv_descricao()
+                    + ", observação: " + advertencia.getAdv_observacao() + ", data: " + advertencia.getAdv_data());
             return "fichafunlst";
         }
         return "advertenciafrm";
     }
-     
-     public List<Pessoa> completePessoa(String query) {
+
+    public List<Pessoa> completePessoa(String query) {
         return pessoaDAO.searchPessoa(query);
     }
-     
-     public String novaADV() {
+
+    public String novaADV() {
         this.advertencia = new Advertencia();
 //        this.arrPerguntas = null;
         return "advertenciafrm";
     }
-    
+
 //=======================================================================================================================================================================    
     //FOLHA DE PAGAMENTO
     public String gerarFolha() {
@@ -407,7 +412,7 @@ public class FuncionarioBean {
     private HistoricoFolha historicoFolha = new HistoricoFolha();
     private HistoricoFolhaDAO historicoFolhaDAO = new HistoricoFolhaDAO();
     private List<HistoricoFolha> HistFolhas;
-    
+
     private int idEvento;
 
     public String insert2(Integer eve_codigo, Integer _pes_codigo) {
@@ -589,7 +594,6 @@ public class FuncionarioBean {
         this.empresa = empresa;
     }
 
-
     public void setEmpresas(DataModel empresas) {
         this.empresas = empresas;
     }
@@ -629,6 +633,7 @@ public class FuncionarioBean {
     public String listarEmpresa() {
         return "empresalst";
     }
+
     public EventoPadrao getEventopadrao() {
         return eventopadrao;
     }
@@ -764,5 +769,5 @@ public class FuncionarioBean {
     public void setAdvertencia(Advertencia advertencia) {
         this.advertencia = advertencia;
     }
-  
+
 }
