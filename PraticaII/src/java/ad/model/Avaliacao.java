@@ -129,4 +129,12 @@ public class Avaliacao implements Serializable {
                 return "Nenhum";
         }
     }
+
+    public String getTipoAva() {
+        if (turma != null && turma.getTur_codigo() != 0) {
+            return "De Treinamento";
+        } else {
+            return "De Desempenho";
+        }
+    }
 }

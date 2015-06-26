@@ -5,16 +5,15 @@ import ad.model.Avaliacao;
 import ad.model.PessoasAvaliacao;
 import cfg.controller.LoginBean;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import util.Utilidades;
 
 @ManagedBean
-//@SessionScoped
 @RequestScoped
 public class PessoasAvaliacaoBean {
 
@@ -50,7 +49,10 @@ public class PessoasAvaliacaoBean {
         List<Avaliacao> lsAvaliacao = new ArrayList<>();
         List<Integer> lsCod = new ArrayList<>();
         for (PessoasAvaliacao pa : lsAvaliacaoPessoas) {
-            if (!lsCod.contains(pa.getAvaliacao().getAva_codigo()) && pa.getAvaliacao().getAva_status() == 2) {
+            if (!lsCod.contains(pa.getAvaliacao().getAva_codigo())
+                    && pa.getAvaliacao().getAva_status() == 2
+                    && pa.getAvaliacao().getAva_dataFinal().after(new Date())
+                    && pa.getAvaliacao().getAva_dataInicial().before(new Date())) {
                 lsCod.add(pa.getAvaliacao().getAva_codigo());
                 lsAvaliacao.add(pa.getAvaliacao());
             }

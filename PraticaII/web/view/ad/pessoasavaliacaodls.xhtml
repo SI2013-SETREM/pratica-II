@@ -55,6 +55,14 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-md-6 col-xs-12">
+                                <div class="form-group">
+                                    <h:outputLabel value="Desempenho:" for="desempenho" styleClass="lbl col-md-4"/>
+                                    <div class="col-md-8 col-xs-12">
+                                        <h:outputText id="desempenho" value="#{perguntaPessoaAvaliacaoBean.desempenho}" styleClass="field"/>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-xs-12">
@@ -96,8 +104,8 @@
                                         $(function () {
                                             var list = [];
                                             $('#dados_grafico_#{item.pergunta.prgCodigo} > .OPT_RESP').each(function (item) {
-                                                var name = $(this).find('.NOME:eq(0)').val();
                                                 var pont = $(this).find('.PONTO:eq(0)').val();
+                                                var name = $(this).find('.NOME:eq(0)').val() + " [Nota:" + pont + "]";
                                                 var count = $('#dados_grafico_#{item.pergunta.prgCodigo} > .OPT_RESP > .PONTO[value="' + pont + '"]').length;
                                                 var cont = false;
                                                 if (list.length > 0)
@@ -117,40 +125,40 @@
                                                 },
                                                 title: {
                                                     text: '#{loop.index + 1}. #{item.ppa_pergunta}',
-                                                    align: 'left',
-                                                    x: 0,
-                                                    y: 30
-                                                },
-                                                legend: {
-                                                    align: 'left',
-                                                    verticalAlign: 'top',
-                                                    floating: 'true',
-                                                    layout: 'vertical',
-                                                    x: 0,
-                                                    y: 50
+                                                                    align: 'left',
+                                                                    x: 0,
+                                                                    y: 30
+                                                                },
+                                                                legend: {
+                                                                    align: 'left',
+                                                                    verticalAlign: 'top',
+                                                                    floating: 'true',
+                                                                    layout: 'vertical',
+                                                                    x: 0,
+                                                                    y: 50
 
-                                                },
-                                                tooltip: {
-                                                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-                                                },
-                                                plotOptions: {
-                                                    pie: {
-                                                        allowPointSelect: true,
-                                                        cursor: 'pointer',
-                                                        dataLabels: {
-                                                            enabled: false
-                                                        },
-                                                        showInLegend: true
-                                                    }
-                                                },
-                                                series: [{
-                                                        type: 'pie',
-                                                        name: 'Porcentagem',
-                                                        data: list,
-                                                    }]
-                                            });
-                                        });
-                                        /*]]>*/
+                                                                },
+                                                                tooltip: {
+                                                                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                                                                },
+                                                                plotOptions: {
+                                                                    pie: {
+                                                                        allowPointSelect: true,
+                                                                        cursor: 'pointer',
+                                                                        dataLabels: {
+                                                                            enabled: false
+                                                                        },
+                                                                        showInLegend: true
+                                                                    }
+                                                                },
+                                                                series: [{
+                                                                        type: 'pie',
+                                                                        name: 'Porcentagem',
+                                                                        data: list,
+                                                                    }]
+                                                            });
+                                                        });
+                                                        /*]]>*/
                                     </script>
                                     <div id="per_#{loop.index}" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
                                 </div>

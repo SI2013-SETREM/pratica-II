@@ -2,6 +2,7 @@ package ad.controller;
 
 import ad.dao.TipoCompetenciaDAO;
 import ad.model.TipoCompetencia;
+import cfg.dao.LogDAO;
 import javax.faces.bean.ManagedBean;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
@@ -62,6 +63,7 @@ public class TipoCompetenciaBean {
     public String delete(TipoCompetencia i) {
         try {
             dao.delete(i);
+            LogDAO.insert("TipoCompetencia", "Deletou Tipo de Competência código: " + i.getTcp_codigo() + ", nome: " + i.getTcp_descricao());
         } catch (Exception e) {
             ErroMsg = "Não é possível excluir este Tipo de Competência!";
         }
@@ -71,8 +73,10 @@ public class TipoCompetenciaBean {
     public String salvar() {
         if (tipocompetencia.getTcp_codigo() > 0) {
             dao.update(tipocompetencia);
+            LogDAO.insert("TipoCompetencia", "Alterou Tipo de Competência código: " + tipocompetencia.getTcp_codigo() + ", nome: " + tipocompetencia.getTcp_descricao());
         } else {
             dao.insert(tipocompetencia);
+            LogDAO.insert("TipoCompetencia", "Cadastrou Tipo de Competência nome: " + tipocompetencia.getTcp_descricao());
         }
         return "tipocompetencialst";
     }

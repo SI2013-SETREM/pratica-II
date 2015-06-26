@@ -8,6 +8,7 @@ import ad.model.Avaliacao;
 import cfg.dao.PessoaDAO;
 import ad.model.AvaliacaoPessoaCargo;
 import ad.model.PessoasAvaliacao;
+import cfg.dao.LogDAO;
 import cfg.model.Pessoa;
 import csb.dao.CargoDAO;
 import csb.dao.CargosPessoaDAO;
@@ -167,34 +168,39 @@ public class AvaliacaoBean {
         //dao.delete(i);
         i.setAva_status(5);
         dao.update(i);
+        LogDAO.insert("Avaliacao", "Deletou Avaliacao código: " + i.getAva_codigo() + ", nome: " + i.getAva_nome());
         return "avaliacaolst";
     }
 
     public String salvar() {
-        if (avaliacao.getAva_codigo() > 0) {
-            dao.update(avaliacao);
-        } else {
-            if (ValidaDados()) {
-                if (idTurma != 0) {
-                    Turma turma = turmaDAO.findById(idTurma);
-                    avaliacao.setTurma(turma);
-                }
-                dao.insert(avaliacao);
-                try {
-                    if (!SalvaListas()) {
-                        return "avaliacaofrm";
-                    }
-                } catch (Exception e) {
-                    avaliacao.setAva_status(5);
-                    dao.update(avaliacao);
-                    avaliacao.setAva_status(1);
-                    return "avaliacaofrm";
-                }
+        if (avaliacao.getAva_dataFinal().after(avaliacao.getAva_dataInicial())) {
+            if (avaliacao.getAva_codigo() > 0) {
+                dao.update(avaliacao);
+                LogDAO.insert("Avaliacao", "Alterou Avaliacao código: " + avaliacao.getAva_codigo() + ", nome: " + avaliacao.getAva_nome());
+                return "avaliacaolst";
             } else {
-                return "avaliacaofrm";
+                if (ValidaDados()) {
+                    if (idTurma != 0) {
+                        Turma turma = turmaDAO.findById(idTurma);
+                        avaliacao.setTurma(turma);
+                        LogDAO.insert("Avaliacao", "Cadastrou Avaliacao nome: " + avaliacao.getAva_nome());
+                    }
+                    dao.insert(avaliacao);
+                    try {
+                        if (SalvaListas()) {
+                            return "avaliacaolst";
+                        }
+                    } catch (Exception e) {
+                        avaliacao.setAva_status(5);
+                        dao.update(avaliacao);
+                        avaliacao.setAva_status(1);
+                    }
+                }
             }
+        } else {
+            ErroMsg = "A Data Final não pode ser Menor que a Data Inicial!";
         }
-        return "avaliacaolst";
+        return "avaliacaofrm";
     }
 
     public String listar() {
@@ -326,6 +332,7 @@ public class AvaliacaoBean {
                     pessoaAvaliacao.setAvaliador(a);
                     pessoaAvaliacao.setColaboradorAvaliado(c);
                     pessoaAvaliacaoDAO.insert(pessoaAvaliacao);
+                    LogDAO.insert("PessoasAvaliacao", "Cadastrou Pessoas Avaliacao");
                 }
             }
         }
@@ -337,6 +344,7 @@ public class AvaliacaoBean {
                     pessoaAvaliacao.setAvaliador(c);
                     pessoaAvaliacao.setColaboradorAvaliado(c);
                     pessoaAvaliacaoDAO.insert(pessoaAvaliacao);
+                    LogDAO.insert("PessoasAvaliacao", "Cadastrou Pessoas Avaliacao");
                 }
             }
         }
@@ -351,6 +359,7 @@ public class AvaliacaoBean {
                 //AvaPesCarg.setCargo(new Cargo());
                 AvaPesCarg.setPessoa(p);
                 avaliacaoPessoaCargoDAO.insert(AvaPesCarg);
+                LogDAO.insert("AvaliacaoPessoaCargo", "Cadastrou Avaliacao Pessoa Cargo");
             }
         }
         if (!lsCargos.isEmpty()) {
@@ -361,6 +370,7 @@ public class AvaliacaoBean {
                 AvaPesCarg.setCargo(c);
                 //AvaPesCarg.setPessoa(new Pessoa());
                 avaliacaoPessoaCargoDAO.insert(AvaPesCarg);
+                LogDAO.insert("AvaliacaoPessoaCargo", "Cadastrou Avaliacao Pessoa Cargo");
             }
         }
     }

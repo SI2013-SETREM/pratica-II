@@ -9,7 +9,8 @@
     </ui:define>
 
     <ui:define name="breadcrumb">
-        <li><h:link value="${pessoasAvaliacaoBean.getpTitle()}"/></li>
+        <li><h:link value="#{avaliacaoBean.getpTitle()}" outcome="/faces/view/ad/avaliacaolst" /></li>
+        <li><h:link value="Avaliações Pendentes"/></li>
     </ui:define>
 
     <ui:define name="main-content">

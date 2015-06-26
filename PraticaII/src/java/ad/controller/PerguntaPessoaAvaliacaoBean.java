@@ -7,6 +7,7 @@ import ad.model.Avaliacao;
 import ad.model.PerguntaPessoaAvaliacao;
 import ad.model.PessoasAvaliacao;
 import cfg.controller.LoginBean;
+import cfg.dao.LogDAO;
 import cfg.dao.PessoaDAO;
 import cfg.model.Pessoa;
 import java.util.ArrayList;
@@ -27,6 +28,7 @@ public class PerguntaPessoaAvaliacaoBean {
     private final String pTitle = "Avaliados";
     private String Detail = "Detalhes";
     private String ErroMsg = "";
+    private String Desempenho = "0%";
     private PerguntaPessoaAvaliacao perguntaPessoaAvaliacao = new PerguntaPessoaAvaliacao();
     private PerguntaPessoaAvaliacaoDAO dao = new PerguntaPessoaAvaliacaoDAO();
     private PessoasAvaliacaoDAO PesAvaldao = new PessoasAvaliacaoDAO();
@@ -89,6 +91,7 @@ public class PerguntaPessoaAvaliacaoBean {
                 PergResp.setPpa_pergunta(PergResp.getPergunta().getPrgPergunta());
                 media += PergResp.getPpa_pontuacao();
                 dao.insert(PergResp);
+                LogDAO.insert("PerguntaPessoaAvaliacao", "Cadastrou Pergunta Pessoa Avaliacao");
             }
             PessoasAvaliacao pessoA = PesAvaldao.GetListPessoasAvaliacao(avaliacao.getAva_codigo(), avaliado.getPes_codigo(), userId, true, false).get(0);
             pessoA.setPea_datahora_resposta(new Date());
@@ -173,13 +176,20 @@ public class PerguntaPessoaAvaliacaoBean {
         List<PerguntaPessoaAvaliacao> lsPPA1 = new ArrayList();
         List<PerguntaPessoaAvaliacao> lsPPA2 = dao.ListPerguntasPessoasAvaliacao(idAvaliacao, idColaborador, 0);
         List<Integer> ids = new ArrayList();
+        int atual = 0;
         if (lsPPA2 != null && !lsPPA2.isEmpty()) {
             for (PerguntaPessoaAvaliacao ppa : lsPPA2) {
                 if (!ids.contains(ppa.getPergunta().getPrgCodigo())) {
                     ids.add(ppa.getPergunta().getPrgCodigo());
                     lsPPA1.add(ppa);
                 }
+                atual += ppa.getPpa_pontuacao();
             }
+            int max = lsPPA2.get(0).getPergunta().getQuestionario().getQstPontuacaomax();
+            float maxSize = max * lsPPA2.size();
+            float des = atual / maxSize;
+            float des2 = des * 100;
+            Desempenho = Math.round(des2) + "%";
         }
         this.lsPerguntasP = lsPPA1;
         this.lsRespostasDetail = lsPPA2;
@@ -213,6 +223,14 @@ public class PerguntaPessoaAvaliacaoBean {
 
     public Avaliacao getAvaliacao() {
         return avaliacao;
+    }
+
+    public void setDesempenho(String Desempenho) {
+        this.Desempenho = Desempenho;
+    }
+
+    public String getDesempenho() {
+        return Desempenho;
     }
 
 }
