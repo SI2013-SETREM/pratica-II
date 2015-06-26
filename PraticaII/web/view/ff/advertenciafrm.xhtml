@@ -38,12 +38,12 @@
 
                         <h:outputLabel value="Descrição:" for="idiDescricao" styleClass="control-label col-sm-2 " />
                         <div class="col-md-3 col-sm-6">
-                            <h:inputText pt:autofocus=""  id="idiDescricao" value="${funcionarioBean.advertencia.adv_descricao}" title="Descrição da Advertência" styleClass="form-control" />
+                            <h:inputText pt:autofocus=""  pt:required="required" id="idiDescricao" value="${funcionarioBean.advertencia.adv_descricao}" title="Descrição da Advertência" styleClass="form-control" />
                         </div>
                         <h:outputLabel value="Nome do Aplicador:" for="idiAvaliador" styleClass="control-label col-sm-2 " />
                         <div class="col-md-4 col-xs-12 autocomplete">
 
-                            <p:autoComplete  id="idiAvaliador" multiple="false" completeMethod="#{funcionarioBean.completePessoa}" value="#{funcionarioBean.advertencia.pessoaAplicador}"
+                            <p:autoComplete  pt:required="required" id="idiAvaliador" multiple="false" completeMethod="#{funcionarioBean.completePessoa}" value="#{funcionarioBean.advertencia.pessoaAplicador}"
                                              var="pessoa" itemLabel="#{pessoa.pes_nome}" itemValue="#{pessoa}" converter="pessoaConverter" forceSelection="true">
                                 <p:column>
                                     <h:outputText value="#{pessoa.pes_nome}" />
@@ -57,7 +57,7 @@
                         <h:outputLabel value="Data:" for="idiData" styleClass="control-label col-sm-2" />
                         <div class="col-md-3 col-sm-6">
 
-                            <h:inputText pt:type="date" id="idiData" value="${funcionarioBean.advertencia.adv_data}" title="Data da Advertência" styleClass="form-control">
+                            <h:inputText pt:type="date" id="idiData" pt:required="required" value="${funcionarioBean.advertencia.adv_data}" title="Data da Advertência" styleClass="form-control">
                                 <f:convertDateTime pattern="yyyy-MM-dd"/>
                             </h:inputText>
 
@@ -72,7 +72,7 @@
                     </div>
 
                     <div class="form-group">
-                        <h:outputLabel value="Observações: " for="idiObs" styleClass=" control-label col-xs-2" />
+                        <h:outputLabel value="Observações: "  for="idiObs" styleClass=" control-label col-xs-2" />
                         <div class="col-md-6 col-sm-12">
                             <h:inputTextarea pt:autofocus="" id="idiObs" value="${funcionarioBean.advertencia.adv_observacao}" title="Observações" styleClass="form-control" />
                         </div>

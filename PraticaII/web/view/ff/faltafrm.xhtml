@@ -32,7 +32,7 @@
 
                         <h:outputLabel value="Observação:" for="idiObs" styleClass="control-label col-sm-2 " />
                         <div class="col-md-4 col-sm-6">
-                            <h:inputText pt:autofocus=""  id="idiObs" value="${funcionarioBean.falta.observacao}" title="Observação" styleClass="form-control" />
+                            <h:inputText pt:autofocus=""  pt:required="required" id="idiObs" value="${funcionarioBean.falta.observacao}" title="Observação" styleClass="form-control" />
                         </div>
 
                         <h:outputLabel value="Data:" for="idiData" styleClass="control-label col-sm-1" />
@@ -55,7 +55,7 @@
                     <div class="form-group">
                         <h:outputLabel value="Justificativa:" for="idiJustific" styleClass="control-label col-sm-2" />
                         <div class="col-md-5 col-sm-12">
-                            <h:inputText pt:autofocus=""  id="idiJust" value="${funcionarioBean.falta.flt_justificativa}" title="Justificativa da Falta" styleClass="form-control" />
+                            <h:inputText pt:autofocus=""  pt:required="required" id="idiJust" value="${funcionarioBean.falta.flt_justificativa}" title="Justificativa da Falta" styleClass="form-control" />
                         </div>
                     </div>
                     <div class="form-group">

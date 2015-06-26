@@ -206,7 +206,7 @@
 
                             </div>
                         </div>
-                        <!--//==============================================================BENEFICIOS==============================================================================-->
+ <!--//==============================================================BENEFICIOS==============================================================================-->
                         <div class="bloco2">
                             <div class="form-group">
                                 <h3>Lista de Benefícios</h3>
@@ -231,7 +231,7 @@
                         </div>
                         <div  id="cargos" class="bloco2">
                             <div class="form-group">
-                                <!--======================================================================CARGOS============================================================================-->
+  <!--======================================================================CARGOS============================================================================-->
                                 <h3>Cargos</h3>
                             </div>
 
@@ -270,7 +270,7 @@
                         </div>
                         <div class="bloco2">
                             <div class="form-group">
-                                <!--======================================================================SALARIO============================================================================-->
+ <!--======================================================================SALARIO============================================================================-->
                                 <h3>Salário</h3>
                             </div>
 
@@ -306,20 +306,44 @@
 
                             </h:dataTable>
                         </div>
+                        
+                        <div class="bloco2">
+                            <div class="form-group">
+                                <div class="col-xs-3">
+ <!--===========================================================================DEPENDENTES==================================================================-->
+                                    <h3>Dependentes</h3>  
+                                </div>
+
+                            </div>
+
+                            <h:dataTable value=""  var="it"  rendered="${funcionarioBean.eventos.rowAvailable}" styleClass="dataTable table table-bordered table-striped">
+
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Nome"/>
+                                    </f:facet>
+                                    <h:outputText value="#{it}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Identidade"/>
+                                    </f:facet>
+                                    <h:outputText value="#{it}"/>
+                                </h:column>
+
+                            </h:dataTable>
+                        </div>
                         <div class="bloco2">
                             <div class="col-xs-3">
-                                <!--======================================================================FERIAS============================================================================-->
+ <!--======================================================================FERIAS============================================================================-->
                                 <h3>Férias</h3>  
                             </div>
-                            <div class="btns-top-table col-xs-offset-10">
-
-
-                                <h:link outcome="feriasfrm" value="Inserir Férias" styleClass="btn btn-success">
-                                    <f:param name="idPessoaferas" value="${funcionarioBean.pessoa.pes_codigo}"/>
-                                    <i class="fa fa-plus"></i> 
-                                </h:link>
-
-
+                          <div class="btns-top-table col-xs-offset-10">
+                                
+                                <h:commandLink styleClass="btn btn-success" action="#{funcionarioBean.novaFerias()}">
+                                    <i class="fa fa-plus"></i> Inserir Férias
+                                </h:commandLink>
+                                
                             </div>
                             <h:dataTable value="${funcionarioBean.lstferias}" var="item"  styleClass="dataTable table table-bordered table-striped">
 
@@ -346,43 +370,18 @@
                             </h:dataTable>
                         </div>
 
+                        
                         <div class="bloco2">
-                            <div class="form-group">
-                                <div class="col-xs-3">
-                                    <!--===========================================================================DEPENDENTES==================================================================-->
-                                    <h3>Dependentes</h3>  
-                                </div>
-
-                            </div>
-
-                            <h:dataTable value=""  var="it"  rendered="${funcionarioBean.eventos.rowAvailable}" styleClass="dataTable table table-bordered table-striped">
-
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Nome"/>
-                                    </f:facet>
-                                    <h:outputText value="#{it}"/>
-                                </h:column>
-                                <h:column>
-                                    <f:facet name="header">
-                                        <h:outputText value="Identidade"/>
-                                    </f:facet>
-                                    <h:outputText value="#{it}"/>
-                                </h:column>
-
-                            </h:dataTable>
-                        </div>
-                        <div class="bloco2">
-                            <!--======================================================================FALTAS============================================================================-->
+ <!--======================================================================FALTAS============================================================================-->
                             <div class="col-xs-3">
                                 <h3>Faltas</h3>  
                             </div>
-                            <div class="btns-top-table col-xs-offset-10">
+                           <div class="btns-top-table col-xs-offset-10">
 
-                                <h:link outcome="faltafrm" value="Inserir Faltas" styleClass="btn btn-success">
-                                    <f:param name="idPessoafalta" value="${funcionarioBean.pessoa.pes_codigo}"/>
-                                    <i class="fa fa-plus"></i> 
-                                </h:link>
+                                <h:commandLink styleClass="btn btn-success" action="#{funcionarioBean.novaFalta()}">
+                                    <i class="fa fa-plus"></i> Inserir Faltas
+                                </h:commandLink>
+
                             </div>
 
                             <h:dataTable value="${funcionarioBean.faltas}"  var="itm"  styleClass="dataTable table table-bordered table-striped">
@@ -423,12 +422,12 @@
                                 <h3>Advertências</h3>  
                             </div>
 
-                            <div class="btns-top-table col-xs-offset-9">
-                                <h:link outcome="advertenciafrm" value="Inserir Advertências" styleClass="btn btn-success">
-                                    <f:param name="idPessoaadv" value="${funcionarioBean.pessoa.pes_codigo}"/>
-                                    <i class="fa fa-plus"></i> 
-                                </h:link>                            
+                         <div class="btns-top-table col-xs-offset-9">
 
+                                <h:commandLink styleClass="btn btn-success" action="#{funcionarioBean.novaADV()}">
+                                    <i class="fa fa-plus"></i> Inserir Advertências
+                                </h:commandLink>
+                            
                             </div>
 
                             <h:dataTable value="${funcionarioBean.advertencias}"  var="vr"  styleClass="dataTable table table-bordered table-striped">

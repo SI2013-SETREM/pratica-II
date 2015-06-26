@@ -328,6 +328,12 @@ public class FuncionarioBean {
         ferias = null;
         return "fichafunlst";    
     }
+     
+     public String novaFerias() {
+        this.ferias = new Ferias();
+//        this.arrPerguntas = null;
+        return "feriasfrm";
+    }
 //----------------------------------------------------------------------------------------------------------------------------------------------------
     //FALTA
      public String insertFalta() {
@@ -336,11 +342,16 @@ public class FuncionarioBean {
         falta = new Falta();
         return "fichafunlst";
     }
+      public String novaFalta() {
+        this.falta = new Falta();
+//        this.arrPerguntas = null;
+        return "faltafrm";
+    }
     
 //----------------------------------------------------------------------------------------------------------------------------------------------------
     //ADVERTENCIA
     
-     public String insertAdvertencia() {
+      public String insertAdvertencia() {
          advertencia.setPessoa(pessoaDAO.findById(pessoa.getPes_codigo()));
         if (advertencia.getPessoa() != null && advertencia.getPessoa().getPes_codigo() != 0 && advertencia.getPessoaAplicador() != null && advertencia.getPessoaAplicador().getPes_codigo() != 0) {
             advertenciaDAO.insert(advertencia);
@@ -351,6 +362,12 @@ public class FuncionarioBean {
      
      public List<Pessoa> completePessoa(String query) {
         return pessoaDAO.searchPessoa(query);
+    }
+     
+     public String novaADV() {
+        this.advertencia = new Advertencia();
+//        this.arrPerguntas = null;
+        return "advertenciafrm";
     }
     
 //=======================================================================================================================================================================    

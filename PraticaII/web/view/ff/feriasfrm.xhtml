@@ -36,13 +36,12 @@
             <h3><h:outputText value="Registro de Férias"/></h3>
             <f:view>
                 <h:form styleClass="form-horizontal">
-<!--                    <h:inputHidden id="feriasCodigo" value="${funcionarioBean.ferias.pessoa}" />-->
 
                     <div class="form-group">
 
                         <h:outputLabel value="Observação:" for="idiObs" styleClass="control-label col-sm-2 " />
                         <div class="col-md-4 col-sm-6">
-                            <h:inputText pt:autofocus=""  id="idiObs" value="${funcionarioBean.ferias.fer_observacao}" title="Observação" styleClass="form-control" />
+                            <h:inputText pt:autofocus=""  pt:required="required" id="idiObs" value="${funcionarioBean.ferias.fer_observacao}" title="Observação" styleClass="form-control" />
                         </div>
 
                     </div>
