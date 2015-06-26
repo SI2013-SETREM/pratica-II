@@ -5,11 +5,11 @@
  */
 package rs.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import rs.model.Entrevista;
 import rs.model.Recrutamento;
 import util.HibernateUtil;
 
@@ -17,12 +17,11 @@ import util.HibernateUtil;
  *
  * @author NADINE
  */
-public class RecrutamentoDAO {
+public class EntrevistaDAO {
 
     private Session session;
-    public List<Recrutamento> rc = new ArrayList<>();
 
-    public RecrutamentoDAO() {
+    public EntrevistaDAO() {
     }
 
     public Session getSession() {
@@ -32,22 +31,11 @@ public class RecrutamentoDAO {
         return session;
     }
 
-    public List<Recrutamento> getRc() {
-        Query q = getSession().createQuery("from Recrutamento where rec_status=2");
-        this.rc = q.list();
-        return rc;
-    }
-
-    public void setRc(List<Recrutamento> rc) {
-        this.rc = rc;
-    }
-
-    public void insert(Recrutamento r) {
+    public void insert(Entrevista e) {
         try {
             Transaction t = getSession().beginTransaction();
             try {
-                r.setRecStatus(2);
-                getSession().save(r);
+                getSession().save(e);
                 t.commit();
             } catch (Exception ex) {
                 t.rollback();
@@ -58,14 +46,11 @@ public class RecrutamentoDAO {
         }
     }
 
-    public void update(Recrutamento r) {
+    public void update(Entrevista e) {
         try {
             Transaction t = getSession().beginTransaction();
             try {
-                if (r.getRecStatus() == 0) {
-                    r.setRecStatus(2);
-                }
-                getSession().update(r);
+                getSession().update(e);
                 t.commit();
             } catch (Exception ex) {
                 t.rollback();
@@ -76,18 +61,19 @@ public class RecrutamentoDAO {
         }
     }
 
-    public void delete(Recrutamento r) {
+    public void delete(Entrevista e) {
         Transaction t = getSession().beginTransaction();
-        getSession().delete(r);
+        getSession().delete(e);
         t.commit();
     }
 
-    public List<Recrutamento> findAll() {
-        Query q = getSession().createQuery("from Recrutamento");
+    public List<Entrevista> findAll() {
+        Query q = getSession().createQuery("from Entrevista");
         return q.list();
     }
-
-    public Recrutamento findById(int rec_codigo) {
-        return (Recrutamento) session.load(Recrutamento.class, rec_codigo);
+    
+     public List<Entrevista> findEntrevistasRecrutamento(Recrutamento r) {
+        Query q = getSession().createQuery("from Entrevista where rec_codigo="+r.getRecCodigo());
+        return q.list();
     }
 }

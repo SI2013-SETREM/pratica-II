@@ -1,100 +1,94 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
-    <body>
-        <ui:composition template="../modelos/default.xhtml">
+<ui:composition template="../modelos/default.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
-            <ui:define name="title">
-                Processos de Recrutamento
-            </ui:define>
+    <ui:define name="title">
+        Processos de Recrutamento
+    </ui:define>
 
-            <ui:define name="main-content">
-                <div class="panel panel-body">
-                    <h3><h:outputText value="Lista de ${recrutamentoBean.pTitle}"/></h3>
-                    <h:form>
-                        <div class="btns-top-table">
-                            <h:commandLink styleClass="btn btn-success" action="${recrutamentoBean.novo('recrutamentofrm?faces-redirect=true')}">
-                                <i class="fa fa-plus"></i> Inserir ${recrutamentoBean.sTitle}
-                            </h:commandLink>
-                        </div>
-                        <h:dataTable value="${recrutamentoBean.recrutamentos}" var="item" styleClass="dataTable table table-bordered table-striped">
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Nome"/>
-                                </f:facet>
-                                <h:outputText value="${item.getRecTitulo()}"/>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Tipo"/>
-                                </f:facet>
-                                <h:outputText rendered="${item.getRecTipo()==1}" value="Interno"/>
-                                <h:outputText rendered="${item.getRecTipo()==2}" value="Externo"/>
-                                <h:outputText rendered="${item.getRecTipo()==3}" value="Misto"/>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Data Início"/>
-                                </f:facet>
-                                <h:outputText value="${item.getRecInicio()}">
-                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
-                                </h:outputText>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Data Fim"/>
-                                </f:facet>
-                                <h:outputText value="${item.getRecFim()}">
-                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
-                                </h:outputText>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Status"/>
-                                </f:facet>
-                                <h:outputText rendered="${item.getRecStatus()==1}" value="Aguardando início"/>
-                                <h:outputText rendered="${item.getRecStatus()==2}" value="Buscando candidatos"/>
-                                <h:outputText rendered="${item.getRecStatus()==3}" value="Avaliando candidatos"/>
-                                <h:outputText rendered="${item.getRecStatus()==4}" value="Candidatos selecionados"/>
-                                <h:outputText rendered="${item.getRecStatus()==5}" value="Treinamento"/>
-                                <h:outputText rendered="${item.getRecStatus()==6}" value="Concluído"/>
-                                <h:outputText rendered="${item.getRecStatus()==7}" value="Cancelado"/>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Concluir"/>
-                                </f:facet>
-                                <h:outputText rendered="${item.getRecStatus() == 6 or item.getRecStatus() == 7}" escape="false" value="&lt;i class='fa fa-legal'&gt;&lt;/i&gt; Concluir indisponível" />
-                                <h:commandLink rendered="${item.getRecStatus() != 6 and item.getRecStatus() != 7}" onclick="return confirm('Deseja realmente concluir o recrutamento ${recrutamentoBean.sTitle}?');" action="${recrutamentoBean.altera_status(6,item)}">
-                                    <i class="fa fa-legal"></i> Concluir
-                                </h:commandLink>
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Cancelar"/>
-                                </f:facet>
-                                <h:outputText rendered="${item.getRecStatus() == 6 or item.getRecStatus() == 7}" escape="false" value="&lt;i class='fa fa-trash'&gt;&lt;/i&gt; Cancelar indisponível" />
-                                <h:commandLink rendered="${item.getRecStatus() != 6 and item.getRecStatus() != 7}" onclick="return confirm('Deseja realmente cancelar o recrutamento ${recrutamentoBean.sTitle}?');" action="${recrutamentoBean.altera_status(7,item)}">
-                                    <i class="fa fa-trash"></i> Cancelar
-                                </h:commandLink>
-                            </h:column>
-                            <h:column headerClass="col-editar-header">
-                                <f:facet name="header">
-                                    <h:outputText value="Editar"/>
-                                </f:facet>
-                                <h:outputText rendered="${item.getRecStatus() == 6 or item.getRecStatus() == 7}" escape="false" value="&lt;i class='fa fa-pencil'&gt;&lt;/i&gt; Editar indisponível" />
-                                <h:commandLink rendered="${item.getRecStatus() != 6 and item.getRecStatus() != 7 and item.getRecStatus()==2}" action="${recrutamentoBean.edit(item,'recrutamentoCandidatos?faces-redirect=true')}">
-                                    <i class="fa fa-pencil"></i> Editar
-                                </h:commandLink>
-                            </h:column>
-                        </h:dataTable>
-                    </h:form>
+    <ui:define name="main-content">
+        <div class="panel panel-body">
+            <h3><h:outputText value="Lista de ${recrutamentoBean.pTitle}"/></h3>
+            <h:form>
+                <div class="btns-top-table">
+                    <h:commandLink styleClass="btn btn-success" action="${recrutamentoBean.novo('recrutamentofrm?faces-redirect=true')}">
+                        <i class="fa fa-plus"></i> Inserir ${recrutamentoBean.sTitle}
+                    </h:commandLink>
                 </div>
-            </ui:define>
-        </ui:composition>
-    </body>
-</html>
+                <h:dataTable value="${recrutamentoBean.recrutamentos}" var="item" styleClass="dataTable table table-bordered table-striped">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Nome"/>
+                        </f:facet>
+                        <h:outputText value="${item.getRecTitulo()}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Tipo"/>
+                        </f:facet>
+                        <h:outputText rendered="${item.getRecTipo()==1}" value="Interno"/>
+                        <h:outputText rendered="${item.getRecTipo()==2}" value="Externo"/>
+                        <h:outputText rendered="${item.getRecTipo()==3}" value="Misto"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Data Início"/>
+                        </f:facet>
+                        <h:outputText value="${item.getRecInicio()}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Data Fim"/>
+                        </f:facet>
+                        <h:outputText value="${item.getRecFim()}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Status"/>
+                        </f:facet>
+                        <h:outputText rendered="${item.getRecStatus()==1}" value="Aguardando início"/>
+                        <h:outputText rendered="${item.getRecStatus()==2}" value="Buscando candidatos"/>
+                        <h:outputText rendered="${item.getRecStatus()==3}" value="Avaliando candidatos"/>
+                        <h:outputText rendered="${item.getRecStatus()==4}" value="Candidatos selecionados"/>
+                        <h:outputText rendered="${item.getRecStatus()==5}" value="Treinamento"/>
+                        <h:outputText rendered="${item.getRecStatus()==6}" value="Concluído"/>
+                        <h:outputText rendered="${item.getRecStatus()==7}" value="Cancelado"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Concluir"/>
+                        </f:facet>
+                        <h:outputText rendered="${item.getRecStatus() == 6 or item.getRecStatus() == 7}" escape="false" value="&lt;i class='fa fa-legal'&gt;&lt;/i&gt; Concluir indisponível" />
+                        <h:commandLink rendered="${item.getRecStatus() != 6 and item.getRecStatus() != 7}" onclick="return confirm('Deseja realmente concluir o recrutamento ${recrutamentoBean.sTitle}?');" action="${recrutamentoBean.altera_status(6,item)}">
+                            <i class="fa fa-legal"></i> Concluir
+                        </h:commandLink>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Cancelar"/>
+                        </f:facet>
+                        <h:outputText rendered="${item.getRecStatus() == 6 or item.getRecStatus() == 7}" escape="false" value="&lt;i class='fa fa-trash'&gt;&lt;/i&gt; Cancelar indisponível" />
+                        <h:commandLink rendered="${item.getRecStatus() != 6 and item.getRecStatus() != 7}" onclick="return confirm('Deseja realmente cancelar o recrutamento ${recrutamentoBean.sTitle}?');" action="${recrutamentoBean.altera_status(7,item)}">
+                            <i class="fa fa-trash"></i> Cancelar
+                        </h:commandLink>
+                    </h:column>
+                    <h:column headerClass="col-editar-header">
+                        <f:facet name="header">
+                            <h:outputText value="Editar"/>
+                        </f:facet>
+                        <h:outputText rendered="${item.getRecStatus() == 6 or item.getRecStatus() == 7}" escape="false" value="&lt;i class='fa fa-pencil'&gt;&lt;/i&gt; Editar indisponível" />
+                        <h:commandLink rendered="${item.getRecStatus() != 6 and item.getRecStatus() != 7 and item.getRecStatus()==2}" action="${recrutamentoBean.edit('recrutamentoCandidatos?faces-redirect=true')}">
+                            <i class="fa fa-pencil"></i> Editar
+                        </h:commandLink>
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>

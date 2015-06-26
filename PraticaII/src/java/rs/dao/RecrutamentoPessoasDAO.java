@@ -10,6 +10,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import rs.model.RecrutamentoPessoa;
+import rs.model.RecrutamentoPessoaPK;
 import util.HibernateUtil;
 
 /**
@@ -17,7 +18,8 @@ import util.HibernateUtil;
  * @author NADINE
  */
 public class RecrutamentoPessoasDAO {
-      private Session session;
+
+    private Session session;
 
     public RecrutamentoPessoasDAO() {
         session = HibernateUtil.getSessionFactory().openSession();
@@ -40,13 +42,13 @@ public class RecrutamentoPessoasDAO {
         session.delete(r);
         t.commit();
     }
-    
-     public String salvar() {
+
+    public String salvar() {
 //        if (RecrutamentoPessoa. > 0)
 //            dao.update(questionario);
 //        else 
 //            dao.insert(questionario);
-        
+
         return "questionariolst?faces-redirect=true";
     }
 
@@ -59,11 +61,12 @@ public class RecrutamentoPessoasDAO {
         Query q = session.createQuery("from RecrutamentoPessoa where recrutamento = " + String.valueOf(recCodigo));
         return q.list();
     }
-    
-      public RecrutamentoPessoa findById(RecrutamentoPessoa rp) {
+
+    public RecrutamentoPessoa findById(RecrutamentoPessoa rp) {
         return (RecrutamentoPessoa) session.load(RecrutamentoPessoa.class, rp);
     }
 
-    
-   
+    public RecrutamentoPessoa findByPKId(RecrutamentoPessoaPK rp) {
+        return (RecrutamentoPessoa) session.load(RecrutamentoPessoa.class, rp);
+    }
 }

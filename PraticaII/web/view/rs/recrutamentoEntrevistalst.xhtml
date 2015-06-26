@@ -1,0 +1,56 @@
+<ui:composition template="./../modelos/wizardRecrutamentoModelo.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+    <ui:define name="title">
+        Entrevistas
+    </ui:define>
+
+    <ui:define name="breadcrumb">
+        <li>Entrevistas</li>
+        <li><h:link value="Candidatos do Recrutamento" outcome="/faces/view/rs/recrutamentolst" /></li>
+    </ui:define>
+
+    <ui:define name="content">
+        <div class="panel panel-body">
+            <h3><h:outputText value="Lista de Entrevistas"/></h3>
+            <h:form>
+                <div class="btns-top-table">
+                    <h:commandLink styleClass="btn btn-success" action="${recrutamentoBean.novaEntrevista('recrutamentoEntrevistafrm?faces-redirect=true')}">
+                        <i class="fa fa-plus"></i> Inserir Entrevista
+                    </h:commandLink>
+                </div>
+                <h:dataTable value="${recrutamentoBean.entrevistas}" var="item" styleClass="dataTable table table-bordered table-striped">
+                    <h:column class="col-lg-6">
+                        <f:facet name="header">
+                            <h:outputText value="Nome"/>
+                        </f:facet>
+                        <h:outputText value="${item.getPessoa().getPes_nome()}"/>
+                    </h:column>
+                    <h:column class="col-lg-4">
+                        <f:facet name="header">
+                            <h:outputText value="Entrevistado?"/>
+                        </f:facet>
+                        <h:outputText rendered="${item.isMarcadaentrevista()==false}" value="Não Entrevistado" styleClass="text-danger"/>
+                        <h:outputText rendered="${item.isMarcadaentrevista()==true}" value="Entrevistado" styleClass="text-success"/>
+                    </h:column>
+                    <h:column headerClass="col-editar-header">
+                        <f:facet name="header">
+                            <h:outputText value="Editar"/>
+                        </f:facet>
+                        <h:commandLink action="${recrutamentoBean.editEntrevista()}">
+                            <i class="fa fa-pencil"></i> Editar
+                        </h:commandLink>
+                    </h:column>
+                </h:dataTable>
+                <div class="col-lg-6" style="text-align: right">
+                    <h:commandButton styleClass="btn btn-info" value="Voltar" action="#{recrutamentoBean.voltar('recrutamentoC?faces-redirect=true')}"/>
+                    <h:commandButton styleClass="btn btn-info" value="Avançar" action="#{recrutamentoBean.salvarEntrevista('recrutamentoSelecao?faces-redirect=true')}"/>
+                </div>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>
+

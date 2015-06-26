@@ -3,7 +3,6 @@ package rs.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
@@ -15,11 +14,11 @@ import javax.persistence.Temporal;
 
 @Entity
 @Table(name="rec_entrevista")
-@IdClass(Entrevista.EntrevistaPK.class)
+@IdClass(EntrevistaPK.class)
 public class Entrevista implements Serializable {
     
     public static final String sTitle = "Entrevista";
-    public static final String pTitle = "Entrevista";
+    public static final String pTitle = "Entrevistas";
     
     @Id
     @ManyToOne
@@ -34,46 +33,9 @@ public class Entrevista implements Serializable {
     
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date ent_datahora;
-
-    // From http://stackoverflow.com/questions/3585034/how-to-map-a-composite-key-with-hibernate
-    public class EntrevistaPK implements Serializable {
-        protected RecrutamentoPessoa recrutamentoPessoa;
-        protected int ent_codigo;
-
-        public EntrevistaPK() {}
-
-        public EntrevistaPK(RecrutamentoPessoa recrutamentoPessoa, int ent_codigo) {
-            this.recrutamentoPessoa = recrutamentoPessoa;
-            this.ent_codigo = ent_codigo;
-        }
-
-        @Override
-        public int hashCode() {
-            int hash = 7;
-            hash = 11 * hash + Objects.hashCode(this.recrutamentoPessoa);
-            hash = 11 * hash + this.ent_codigo;
-            return hash;
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-            if (obj == null) {
-                return false;
-            }
-            if (getClass() != obj.getClass()) {
-                return false;
-            }
-            final EntrevistaPK other = (EntrevistaPK) obj;
-            if (!Objects.equals(this.recrutamentoPessoa, other.recrutamentoPessoa)) {
-                return false;
-            }
-            if (this.ent_codigo != other.ent_codigo) {
-                return false;
-            }
-            return true;
-        }
-
-    }
+    private String ent_resumo_entrevista;
+    
+   
 
     public Entrevista() {
     }
@@ -100,6 +62,14 @@ public class Entrevista implements Serializable {
 
     public void setEntDatahora(Date ent_datahora) {
         this.ent_datahora = ent_datahora;
+    }
+
+    public String getEnt_resumo_entrevista() {
+        return ent_resumo_entrevista;
+    }
+
+    public void setEnt_resumo_entrevista(String ent_resumo_entrevista) {
+        this.ent_resumo_entrevista = ent_resumo_entrevista;
     }
     
 }
