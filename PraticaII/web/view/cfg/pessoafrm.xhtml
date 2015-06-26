@@ -18,17 +18,12 @@
                         $(".pesDesNec").removeAttr("required");
                     }
                 });
-                $(".pesTipo").change(function () {
-                    alert('boa galvão');
-                    if ($(".pesNecEsp").is(':checked')) {
-                        $("#pesNecessidadeEspecial").fadeIn();
-                        $(".pesDesNec").attr("required", "required");
-                    } else {
-                        $("#pesNecessidadeEspecial").fadeOut();
-                        $(".pesDesNec").removeAttr("required");
-                    }
-                });
             });
+            
+            function teste(){
+                //var e = $("select[name$='pesTipo_input'] option:selected").val()
+                alert(e);
+            }
             function formataCpfCnpj() {
                 var valor = document.getElementById('frmPessoa:pesCPF').value;
                 valor = valor.replace(".", "").replace(".", "").replace("-", "").replace("/", "");
@@ -198,7 +193,7 @@
                     <div class="form-group">
                         <h:outputLabel value="Tipo Pessoa:" for="pesTipo" styleClass="control-label col-sm-2" />
                         <div style="padding-top: 5px" class="col-md-6 col-sm-12">
-                            <h:selectOneMenu value="#{pessoaBean.pessoa.pes_tipo}" id="pesTipo" class="form-control">
+                            <h:selectOneMenu value="#{pessoaBean.pessoa.pes_tipo}" id="pesTipo" class="form-control" onchange="teste();">
                                 <f:selectItem itemValue="1" itemLabel="Funcionário"/>
                                 <f:selectItem itemValue="2" itemLabel="Ex-Funcionário"/>
                                 <f:selectItem itemValue="3" itemLabel="Pessoa Externa (Candidatos)"/>
