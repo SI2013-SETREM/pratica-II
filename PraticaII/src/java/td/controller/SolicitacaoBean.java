@@ -2,6 +2,7 @@ package td.controller;
 
 import ad.dao.CompetenciaDAO;
 import ad.model.Competencia;
+import cfg.dao.LogDAO;
 import cfg.dao.PessoaDAO;
 import cfg.model.Pessoa;
 import java.util.ArrayList;
@@ -24,15 +25,15 @@ public class SolicitacaoBean {
     private final String sTitle = Solicitacao.sTitle;
     private final String pTitle = Solicitacao.pTitle;
     private String Title = "Dados da " + sTitle;
-    
+
     private List<Pessoa> lstpessoa;
     private List<Pessoa> lstUmapessoa;
     private List<Competencia> lstcompetencia;
-    
-   // private Pessoa pessoa = new Pessoa();
+
+    // private Pessoa pessoa = new Pessoa();
     private PessoaDAO pessoadao = new PessoaDAO();
     private CompetenciaDAO compdao = new CompetenciaDAO();
-    private CompetenciasSolicitacaoDAO compSolDao= new CompetenciasSolicitacaoDAO();
+    private CompetenciasSolicitacaoDAO compSolDao = new CompetenciasSolicitacaoDAO();
     private PessoasReceberTreinamentoDAO pesTreDao = new PessoasReceberTreinamentoDAO();
 
     private Solicitacao solicitacao = new Solicitacao();
@@ -46,7 +47,7 @@ public class SolicitacaoBean {
     public String getpTitle() {
         return Title;
     }
-    
+
     public Solicitacao getSolicitacao() {
         return solicitacao;
     }
@@ -63,12 +64,12 @@ public class SolicitacaoBean {
     public void setSolicitacoes(DataModel solicitacoes) {
         this.solicitacoes = solicitacoes;
     }
-    
+
     public String insert() {
         dao.insert(solicitacao);
         return "solicitacaolst";
     }
-    
+
     public String edit(Solicitacao i) {
         solicitacao = (Solicitacao) solicitacoes.getRowData();
         return "solicitacaofrm";
@@ -78,17 +79,21 @@ public class SolicitacaoBean {
         dao.update(solicitacao);
         return "solicitacaolst";
     }
-    
+
     public String delete(Solicitacao i) {
         dao.delete(i);
+        LogDAO.insert("Solicitacao", "Deletou solicitação código: " + i.getSol_codigo()
+                + ", data: " + i.getSol_data() + ", prioridade: " + i.getSol_prioridade());
         return "solicitacaolst";
     }
-    
+
     public String salvar() {
-        if (solicitacao.getSol_codigo()> 0){
-           // dao.update(solicitacao);
+        if (solicitacao.getSol_codigo() > 0) {
+            // dao.update(solicitacao);
             if (ValidaDados()) {
                 dao.update(solicitacao);
+                LogDAO.insert("Solicitacao", "Alterou solicitação código: " + solicitacao.getSol_codigo()
+                        + ", data: " + solicitacao.getSol_data() + ", prioridade: " + solicitacao.getSol_prioridade());
                 if (SalvaListas()) {
                     return "solicitacaolst";
                 } else {
@@ -98,6 +103,8 @@ public class SolicitacaoBean {
         } else {
             if (ValidaDados()) {
                 dao.insert(solicitacao);
+                LogDAO.insert("Solicitacao", "Cadastrou solicitação código: " + solicitacao.getSol_codigo()
+                        + ", data: " + solicitacao.getSol_data() + ", prioridade: " + solicitacao.getSol_prioridade());
                 if (SalvaListas()) {
                     return "solicitacaolst";
                 } else {
@@ -122,10 +129,10 @@ public class SolicitacaoBean {
     public void setLstUmapessoa(List<Pessoa> lstUmapessoa) {
         this.lstUmapessoa = lstUmapessoa;
     }
-    
+
     public List<Pessoa> getLstpessoa() {
         int i = solicitacao.getSol_codigo();
-        if(i > 0){
+        if (i > 0) {
             pessoadao.id = i;
             lstpessoa = pessoadao.findPesSol();
         }
@@ -138,7 +145,7 @@ public class SolicitacaoBean {
 
     public List<Competencia> getLstcompetencia() {
         int i = solicitacao.getSol_codigo();
-        if(i > 0){
+        if (i > 0) {
             compdao.idSol = i;
             lstcompetencia = compdao.findCompSol();
         }
@@ -148,16 +155,15 @@ public class SolicitacaoBean {
     public void setLstcompetencia(List<Competencia> lstcompetencia) {
         this.lstcompetencia = lstcompetencia;
     }
-    
+
     public List<Pessoa> completePessoa(String query) {
         return pessoadao.searchPessoa(query);
     }
-    
+
     public List<Competencia> completeCompetencia(String query) {
         return compdao.searchCompetencia(query);
     }
-    
-    
+
     private boolean ValidaDados() {//Verifica as Listas se não estão vazias
         if (lstpessoa == null) {
             lstpessoa = new ArrayList<>();
@@ -167,19 +173,19 @@ public class SolicitacaoBean {
         }
         return true;
     }
-    
+
     private boolean SalvaListas() {
         int i = solicitacao.getSol_codigo();
-        if (i == 0){
+        if (i == 0) {
             try {
-                SalvarPesCompNovo(filtraCompetencia(lstcompetencia),filtraPessoas(lstpessoa));
+                SalvarPesCompNovo(filtraCompetencia(lstcompetencia), filtraPessoas(lstpessoa));
                 return true;
             } catch (Exception e) {
                 Title = e.toString();
             }
-        }else{
+        } else {
             try {
-                SalvarPesCompExistente(filtraCompetencia(lstcompetencia),filtraPessoas(lstpessoa));
+                SalvarPesCompExistente(filtraCompetencia(lstcompetencia), filtraPessoas(lstpessoa));
                 return true;
             } catch (Exception e) {
                 Title = e.toString();
@@ -187,7 +193,7 @@ public class SolicitacaoBean {
         }
         return true;
     }
-    
+
     private List<Competencia> filtraCompetencia(List<Competencia> lstCompetencia) {
         List<Integer> lsCod = new ArrayList<>();
         List<Competencia> lsItens = new ArrayList<>();
@@ -201,8 +207,8 @@ public class SolicitacaoBean {
         }
         return lsItens;
     }
-    
-     private List<Pessoa> filtraPessoas(List<Pessoa> lsPessoas) {//Filtra Lista de pessoas, para não repetir uma pessoa ao salvar
+
+    private List<Pessoa> filtraPessoas(List<Pessoa> lsPessoas) {//Filtra Lista de pessoas, para não repetir uma pessoa ao salvar
         List<Integer> lsCod = new ArrayList<>();
         List<Pessoa> lsItens = new ArrayList<>();
         if (!lsPessoas.isEmpty()) {
@@ -215,7 +221,7 @@ public class SolicitacaoBean {
         }
         return lsItens;
     }
-   
+
     private void SalvarPesCompNovo(List<Competencia> lsCompetencia, List<Pessoa> lsPessoa) {//Salva a lista de cargos e pessoas que fazem parte da avlaiação, basta passar a lista de Cargos e Pessoas e o Tipo (Colaborador= 1 ou Avaliador = 2)
         if (!lsPessoa.isEmpty()) {
             for (Pessoa p : lsPessoa) {
@@ -233,15 +239,14 @@ public class SolicitacaoBean {
                 compSolDao.insert(comp);
             }
         }
-   }
-      
-    
-     private void SalvarPesCompExistente(List<Competencia> lsCompetencia, List<Pessoa> lsPessoa) {//Salva a lista de cargos e pessoas que fazem parte da avlaiação, basta passar a lista de Cargos e Pessoas e o Tipo (Colaborador= 1 ou Avaliador = 2)
-         int i = solicitacao.getSol_codigo();
-         compSolDao.idSol = i;
-         pesTreDao.idSol = i;
-         compSolDao.deletaCompSol();
-         pesTreDao.deletaPesSol();
+    }
+
+    private void SalvarPesCompExistente(List<Competencia> lsCompetencia, List<Pessoa> lsPessoa) {//Salva a lista de cargos e pessoas que fazem parte da avlaiação, basta passar a lista de Cargos e Pessoas e o Tipo (Colaborador= 1 ou Avaliador = 2)
+        int i = solicitacao.getSol_codigo();
+        compSolDao.idSol = i;
+        pesTreDao.idSol = i;
+        compSolDao.deletaCompSol();
+        pesTreDao.deletaPesSol();
         if (!lsPessoa.isEmpty()) {
             for (Pessoa p : lsPessoa) {
                 PessoasReceberTreinamento pes = new PessoasReceberTreinamento();
@@ -258,5 +263,5 @@ public class SolicitacaoBean {
                 compSolDao.insert(comp);
             }
         }
-   }
+    }
 }

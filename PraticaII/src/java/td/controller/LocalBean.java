@@ -2,6 +2,7 @@ package td.controller;
 
 import cfg.dao.CidadeDAO;
 import cfg.dao.EmpresaDAO;
+import cfg.dao.LogDAO;
 import cfg.model.Cidade;
 import cfg.model.Empresa;
 import java.util.List;
@@ -18,19 +19,19 @@ public class LocalBean {
 
     private final String sTitle = Local.sTitle;
     private final String pTitle = Local.pTitle;
-    
+
     private List<Cidade> lstcidade;
     private Cidade cidade = new Cidade();
     private CidadeDAO cidadedao = new CidadeDAO();
-    
+
     private List<Empresa> lstempresa;
     private Empresa empresa = new Empresa();
     private EmpresaDAO empresadao = new EmpresaDAO();
-    
+
     private Local local = new Local();
     private LocalDAO dao = new LocalDAO();
     private DataModel locais;
-   
+
     public String getsTitle() {
         return sTitle;
     }
@@ -38,7 +39,7 @@ public class LocalBean {
     public String getpTitle() {
         return pTitle;
     }
-    
+
     public Local getLocal() {
         return local;
     }
@@ -55,12 +56,12 @@ public class LocalBean {
     public void setLocais(DataModel locais) {
         this.locais = locais;
     }
-    
+
     public String insert() {
         dao.insert(local);
         return "locallst";
     }
-    
+
     public String edit(Local i) {
         local = (Local) locais.getRowData();
         return "localfrm";
@@ -70,25 +71,32 @@ public class LocalBean {
         dao.update(local);
         return "locallst";
     }
-    
+
     public String delete(Local i) {
         dao.delete(i);
+        LogDAO.insert("Local", "Deletoou local código: " + i.getLoc_codigo()
+                    + ", descrição: " + i.getLoc_descricao() + ", infra-estrutura: " + i.getLoc_infraestrutura());
         return "locallst";
     }
-    
+
     public String salvar() {
-        if (local.getLoc_codigo()> 0)
+        if (local.getLoc_codigo() > 0) {
             dao.update(local);
-        else 
+            LogDAO.insert("Local", "Alterou local código: " + local.getLoc_codigo()
+                    + ", descrição: " + local.getLoc_descricao() + ", infra-estrutura: " + local.getLoc_infraestrutura());
+        } else {
             dao.insert(local);
-        
+            LogDAO.insert("Local", "Cadastrou local código: " + local.getLoc_codigo()
+                    + ", descrição: " + local.getLoc_descricao() + ", infra-estrutura: " + local.getLoc_infraestrutura());
+        }
+
         return "locallst";
     }
 
     public String listar() {
         return "locallst";
     }
-    
+
     public List<Cidade> getLstcidade() {
         lstcidade = cidadedao.findAll();
         return lstcidade;

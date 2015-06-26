@@ -2,6 +2,7 @@ package td.controller;
 
 import ad.dao.CompetenciaDAO;
 import ad.model.Competencia;
+import cfg.dao.LogDAO;
 import cfg.dao.PessoaDAO;
 import cfg.model.Pessoa;
 import java.util.ArrayList;
@@ -99,14 +100,19 @@ public class TreinamentoBean {
     
     public String delete(Treinamento i) {
         dao.delete(i);
+                        LogDAO.insert("Treinamento", "Deletou treinamento código: " + i.getTre_codigo()
+                        + ", descrição: " + i.getTre_descricao() + ", carga horária: " + i.getTre_cargahoraria()+
+                        ", custo total: "+i.getTre_custototal()+i.getLocal()+", status: "+i.getTre_status());
         return "treinamentolst";
     }
     
     public String salvar() {
         if (treinamento.getTre_codigo()> 0){
-           // dao.update(solicitacao);
             if (ValidaDados()) {
                 dao.update(treinamento);
+                LogDAO.insert("Treinamento", "Alterou treinamento código: " + treinamento.getTre_codigo()
+                        + ", descrição: " + treinamento.getTre_descricao() + ", carga horária: " + treinamento.getTre_cargahoraria()+
+                        ", custo total: "+treinamento.getTre_custototal()+treinamento.getLocal()+", status: "+treinamento.getTre_status());
                 if (SalvaListas()) {
                     return "treinamentolst";
                 } else {
@@ -116,6 +122,9 @@ public class TreinamentoBean {
         } else {
             if (ValidaDados()) {
                 dao.insert(treinamento);
+                                LogDAO.insert("Treinamento", "Cadastrou treinamento código: " + treinamento.getTre_codigo()
+                        + ", descrição: " + treinamento.getTre_descricao() + ", carga horária: " + treinamento.getTre_cargahoraria()+
+                        ", custo total: "+treinamento.getTre_custototal()+treinamento.getLocal()+", status: "+treinamento.getTre_status());
                 if (SalvaListas()) {
                     return "treinamentolst";
                 } else {

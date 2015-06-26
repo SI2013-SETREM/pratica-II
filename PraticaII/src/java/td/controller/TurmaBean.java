@@ -1,5 +1,6 @@
 package td.controller;
 
+import cfg.dao.LogDAO;
 import cfg.dao.PessoaDAO;
 import cfg.model.Pessoa;
 import java.util.ArrayList;
@@ -95,6 +96,9 @@ public class TurmaBean {
     
     public String delete(Turma i) {
         dao.delete(i);
+        LogDAO.insert("Turma", "Deletou turma código: " + i.getTur_codigo()+
+                    ", data fim: " + i.getTur_data_fim()+", data início:"+i.getTur_data_inicio()+
+                    ", status turma: "+i.getTur_status_turma()+", carga horária: "+i.getTur_cargahoraria_secao()+", limite de alunos: "+i.getTur_limite_alunos());
         return "turmalst";
     }
     
@@ -102,6 +106,9 @@ public class TurmaBean {
         if (turma.getTur_codigo()> 0){
             if (ValidaDados()) {
                 dao.update(turma);
+                LogDAO.insert("Turma", "Alterou turma código: " + turma.getTur_codigo()+
+                    ", data fim: " + turma.getTur_data_fim()+", data início:"+turma.getTur_data_inicio()+
+                    ", status turma: "+turma.getTur_status_turma()+", carga horária: "+turma.getTur_cargahoraria_secao()+", limite de alunos: "+turma.getTur_limite_alunos());
                 if (SalvaListas()) {
                     return "turmalst";
                 } else {
@@ -111,6 +118,9 @@ public class TurmaBean {
         } else {
             if (ValidaDados()) {
                 dao.insert(turma);
+                LogDAO.insert("Turma", "Cadastrou turma código: " + turma.getTur_codigo()+
+                    ", data fim: " + turma.getTur_data_fim()+", data início:"+turma.getTur_data_inicio()+
+                    ", status turma: "+turma.getTur_status_turma()+", carga horária: "+turma.getTur_cargahoraria_secao()+", limite de alunos: "+turma.getTur_limite_alunos());
                 if (SalvaListas()) {
                     return "turmalst";
                 } else {
