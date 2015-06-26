@@ -80,7 +80,7 @@ public class CargoDAO {
     }
 
     public List<Cargo> findAllChildrens() {
-        Query q = getSession().createQuery("from Cargo where car_pai is not null order by car_pai, car_ordem asc");
+        Query q = getSession().createQuery("from Cargo where car_pai is not null order by car_pai asc");
         return q.list();
     }
     

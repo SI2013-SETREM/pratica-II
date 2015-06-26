@@ -29,10 +29,6 @@ public class CargosBean {
     /* PARA FAZER A COMBO DE CARGOS */
     private DataModel lsCargosParents;
     private List<Cargo> lsCargo;
-    
-    /* PARA FAZER A COMBO DE CARGOS */
-    private DataModel lsCargosNext;
-    private List<Cargo> lsCargoNext;
 
     /* PARA FAZER A COMBO DE SETORES */
     private List<Setor> lstsetor;
@@ -80,16 +76,7 @@ public class CargosBean {
     public void setLsCargosParents(DataModel lsCargosParents) {
         this.lsCargosParents = lsCargosParents;
     }
-
-    public DataModel getLsCargosNext() {
-        this.lsCargosNext = new ListDataModel(dao.findAll());
-        return lsCargosNext;
-    }
-
-    public void setLsCargosNext(DataModel lsCargosNext) {
-        this.lsCargosNext = lsCargosNext;
-    }
-    
+   
     public String insert() {
         dao.insert(cargo);
         return "cargolst";
@@ -110,7 +97,7 @@ public class CargosBean {
         LogDAO.insert("Cargo", "Deletou cargo código: " + c.getCar_codigo() + ", descrição: " + c.getCar_descricao()
                 + ", ativo: " + c.isCar_ativo() + ", cbo: " + c.getCar_cbo() + ", teto salarial: " + c.getCar_tetosalarial()
                 + ", piso salarial: " + c.getCar_pisosalarial() + ", código cargo pai: 0"
-                + ", ordem: " + c.getCar_ordem() + ", código setor: " + c.getSetor().getSet_codigo());
+                + ", código setor: " + c.getSetor().getSet_codigo());
         return "cargolst";
     }
 
@@ -120,14 +107,14 @@ public class CargosBean {
             LogDAO.insert("Cargo", "Alterou cargo código: " + cargo.getCar_codigo() + ", descrição: " + cargo.getCar_descricao()
                     + ", ativo: " + cargo.isCar_ativo() + ", cbo: " + cargo.getCar_cbo() + ", teto salarial: " + cargo.getCar_tetosalarial()
                     + ", piso salarial: " + cargo.getCar_pisosalarial() + ", código cargo pai: 0"
-                    + ", ordem: " + cargo.getCar_ordem() + ", código setor: " + cargo.getSetor().getSet_codigo());
+                    + ", código setor: " + cargo.getSetor().getSet_codigo());
 
         } else {
             dao.insert(cargo);
             LogDAO.insert("Cargo", "Cadastrou cargo código: " + cargo.getCar_codigo() + ", descrição: " + cargo.getCar_descricao()
                     + ", ativo: " + cargo.isCar_ativo() + ", cbo: " + cargo.getCar_cbo() + ", teto salarial: " + cargo.getCar_tetosalarial()
                     + ", piso salarial: " + cargo.getCar_pisosalarial() + ", código cargo pai: 0"
-                    + ", ordem: " + cargo.getCar_ordem() + ", código setor: " + cargo.getSetor().getSet_codigo());
+                    + ", código setor: " + cargo.getSetor().getSet_codigo());
         }
 
         return "cargolst";
@@ -154,15 +141,6 @@ public class CargosBean {
     public void setLscargo(List<Cargo> lscargo) {
         this.lsCargo = lscargo;
     }
-
-    public List<Cargo> getLsCargoNext() {
-        lsCargoNext = dao.findAll();
-        return lsCargoNext;
-    }
-
-    public void setLsCargoNext(List<Cargo> lsCargoNext) {
-        this.lsCargoNext = lsCargoNext;
-    }  
 
     public List<Graduacao> getLsGraduacao() {
         lsGraduacao = graduacaodao.findAll();

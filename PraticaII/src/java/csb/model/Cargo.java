@@ -31,14 +31,9 @@ public class Cargo implements Serializable, Comparable<Cargo> {
     private String car_cbo;
     private Double car_tetosalarial;
     private Double car_pisosalarial;
-    private Integer car_ordem;
     @ManyToOne
     @JoinColumn(name = "car_pai", referencedColumnName = "car_codigo")
     private Cargo car_pai;
-
-    @ManyToOne
-    @JoinColumn(name = "car_next", referencedColumnName = "car_codigo")
-    private Cargo car_next;
 
     @ManyToOne
     @JoinColumn(name = "set_codigo")
@@ -165,22 +160,6 @@ public class Cargo implements Serializable, Comparable<Cargo> {
 
     public void setCar_pai(Cargo car_pai) {
         this.car_pai = car_pai;
-    }
-
-    public Cargo getCar_next() {
-        return car_next;
-    }
-
-    public void setCar_next(Cargo car_next) {
-        this.car_next = car_next;
-    }
- 
-    public Integer getCar_ordem() {
-        return car_ordem;
-    }
-
-    public void setCar_ordem(Integer car_ordem) {
-        this.car_ordem = car_ordem;
     }
 
     public Setor getSetor() {

@@ -6,7 +6,7 @@
     <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
     <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/praticaII</property>
     <property name="hibernate.connection.username">postgres</property>
-    <property name="hibernate.connection.password">123</property>
+    <property name="hibernate.connection.password">ha6dqqvd</property>
     <property name="hibernate.show_sql">true</property>
     <property name="hibernate.format_sql">true</property>
     <property name="hibernate.hbm2ddl.auto">update</property>
@@ -76,7 +76,6 @@
     <mapping class="rs.model.PessoaRedeSocial"/>
     <mapping class="rs.model.Questionario"/>
     <mapping class="rs.model.Recrutamento"/>
-    <mapping class="rs.model.RecrutamentoCargo"/>
     <mapping class="rs.model.RecrutamentoPessoa"/>
     <mapping class="td.model.Curso"/>
     <mapping class="td.model.Local"/>
@@ -89,5 +88,7 @@
     <mapping class="td.model.CursosPessoa"/>
     <mapping class="td.model.InstrutoresTreinamento"/>
     <mapping class="td.model.CompetenciasTreinamento"/>
+    <mapping class="csb.model.PlanejamentoCarreira"/>
+    <mapping class="csb.model.PlanejamentoCargos"/>
   </session-factory>
 </hibernate-configuration>

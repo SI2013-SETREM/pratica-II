@@ -187,7 +187,13 @@
                                             <span class="fa fa-stethoscope"></span>
                                             <span class="menu-text">Tipo de Exame</span>
                                         </h:link>
-                                    </li>                                   
+                                    </li> 
+                                    <li class="#{view.viewId.contains('/planejamentocarreira') ? 'active' : ''}">
+                                        <h:link outcome="/faces/view/csb/planejamentocarreiralst">
+                                            <span class="fa fa-connectdevelop"></span>
+                                            <span class="menu-text">Plano de Carreira</span>
+                                        </h:link>
+                                    </li> 
                                 </ul>
                             </li>
                             <li class="menu-dropdown #{view.viewId.contains('/td/') ? 'open' : ''}">
