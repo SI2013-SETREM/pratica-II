@@ -1,26 +1,212 @@
-<ui:composition template="../modelos/default.xhtml"
+<ui:composition template="./../modelos/default.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
-                xmlns:f="http://xmlns.jcp.org/jsf/core">
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:p="http://primefaces.org/ui">
 
     <ui:define name="title">
-        Recibos do Colaborador #{folhaPagamentoBean.pessoa.pes_nome}
+        Folha de Pagemento
+    </ui:define>
+
+    <ui:define name="header">
+
     </ui:define>
 
     <ui:define name="breadcrumb">
-        Teste
+        <li><h:link value="Folha de Pagamento" outcome="/faces/view/fp/folhapaglst" /></li>
+        <li><h:link value="Recibo de Pagamento" outcome="/faces/view/fp/folhapagfrm" /></li>
     </ui:define>
 
     <ui:define name="main-content">
+        <style>
+            .bloco {
+                margin: 0px 10px 0px;
+                padding: 25px 25px 10px 0px;           
+                background: #f8f8f8;
+                border: 1px solid #ddd;
+                border-radius: .25em;
+                overflow: auto;
+            }
+            .bloco2 {
+                margin: 0px 10px 0px;
+                padding: 0px 0px 0px 0px;           
+                background: #f8f8f8;
+                border: 1px solid #ddd;
+                border-radius: .25em;
+                overflow: auto;
+            }
+            .table{
+                margin-bottom: 1px;
+            }
+
+            .detalhes{
+                float: right;
+                padding: 15px 14px 0px;
+
+            }
+        </style>
         <div class="panel panel-body">
-            <h3><h:outputText value="Recibo"/></h3>
-            <div class="btns-top-table">
-            </div>
-            <h:form>
-          
-               
-            </h:form>
+            <h3><h:outputText value="Folha de Pagamento"/></h3>
+            <f:view>
+                <h:form styleClass="form-horizontal">
+
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h2 class="panel-title tex-primary">Dados da Empresa</h2>
+                        </div>
+
+                        <div class="panel-body">
+
+                            <div class="form-group">
+
+                                <h:outputLabel value="Empresa:" for="emp" styleClass="control-label col-md-2" />
+                                <div class="col-md-4 col-xs-3 autocomplete">
+                                    <h:inputText readonly="true" pt:autofocus=""  id="idEmpresa" value="#{folhaPagamentoBean.pessoa.empresa}" title=" Nome da Empresa" styleClass="form-control" />
+                                </div>
+
+
+
+
+                                <h:outputLabel value="Tipo:" for="idtipoemp" styleClass="control-label col-md-2" />
+                                <div class=" col-xs-4" >
+                                    <h:outputLabel value="#{folhaPagamentoBean.pessoa.empresa.emp_tipo}" for="idtipoemp" styleClass="control-label" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <h:outputLabel value="Endereço:" for="idEndereco" styleClass="control-label col-md-2" />
+                                <div class=" col-xs-6" >
+                                    <h:outputLabel value="#{folhaPagamentoBean.pessoa.empresa.endereco}" for="idendereco" styleClass="control-label" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h2 class="panel-title tex-primary">Dados do Colaborador</h2>
+                        </div>
+                        <div class="panel-body">
+
+                            <div class="form-group">
+
+                                <h:outputLabel value="Colaborador:" for="idColaborador" styleClass="control-label col-md-2" />
+                                <div class="col-md-4 col-xs-3 autocomplete">
+                                    <h:inputText readonly="true" pt:autofocus=""  id="idNome" value="#{folhaPagamentoBean.pessoa.pes_nome}" title="Nome do colaborador" styleClass="form-control" />
+                                </div>
+                                <h:outputLabel value="CPF:" for="idCPF" styleClass="control-label col-md-2" />
+                                <div class=" col-xs-3" >
+                                    <h:outputLabel value="${folhaPagamentoBean.pessoa.pes_cpf}" for="idcpf" styleClass="control-label"  />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <h:outputLabel value="Cargo:" for="idCargo" styleClass="control-label col-md-2" />
+                                <div class=" col-xs-6" >
+                                    <h:outputLabel value="" for="idcargo" styleClass="control-label" />
+                                </div>                             
+                            </div>
+                            <div class="form-group">
+                                <h:outputLabel value="Data de Admição:" for="idiAdimicao" styleClass="control-label col-md-2" />
+                                <div class=" col-xs-6" >
+                                    <h:outputLabel pt:type="date" value="${folhaPagamentoBean.pessoa.pes_datacadastro}" for="idAdmicao" styleClass="control-label" >
+                                        <f:convertDateTime pattern="yyyy-MM-dd"/>
+                                    </h:outputLabel>
+                                </div>
+                            </div>
+                            <hr style="border-top: 1px solid #D7D3F5"></hr>
+                            <div id="padrao">
+
+                                <div style="margin: 5px">
+                                    <div class="from-group">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="folha" >
+                                <div>                               
+                                    <h:dataTable var="itens" value="${folhaPagamentoBean.getEventosfolhasantigos(folhaPagamentoBean.historicoAntigoUnico)}" styleClass=" table table-bordered table-striped">
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Código"/>
+                                            </f:facet>
+                                            <h:outputText value="${itens.eve_evento.eve_codigo}" /> 
+                                        </h:column>
+
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Descrição"/>
+                                            </f:facet>
+                                            <h:outputText value="${itens.evf_descricao}" /> 
+                                        </h:column>
+
+
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Indice"/>
+                                            </f:facet>
+                                            <h:outputText value="${itens.evf_indice }" />
+                                        </h:column>
+
+                                        <p:column>
+                                            <f:facet name="header">
+                                                <h:outputText value="Valor"/>
+                                            </f:facet>
+                                            <h:outputText value="${itens.evf_valor}" />
+                                        </p:column>
+                                    </h:dataTable>
+                                </div>
+
+                                <div class="form-group" >
+
+
+
+                                    <div class="detalhes col-xs-8 ">
+
+                                        <h:dataTable var="itens" value="#{folhaPagamentoBean.getHistoricoAntigoUnicoDM(folhaPagamentoBean.historicoAntigoUnico)}" styleClass=" table table-bordered table-striped">                      
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Acréscimos"/>
+                                                </f:facet>
+                                                <h:outputText value="${itens.hif_valor_acre}" />
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Descontos"/>
+                                                </f:facet>
+                                                <h:outputText value="${itens.hif_valor_desc }" />
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Liquido"/>
+                                                </f:facet>
+                                                <h:outputText value="${itens.hif_valor_liquido }" />
+                                            </h:column>
+
+                                        </h:dataTable>
+
+                                    </div>
+                                </div>                   
+                                <div class="form-group">
+                                    <div class="col-md-offset-9 col-md-11 col-xs-offset-10 col-sm-12 btn-group-separated">
+                                        <h:commandButton styleClass="btn btn-primary"   value="Imprimir" ></h:commandButton>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+                </h:form>
+            </f:view>
         </div>
     </ui:define>
+
 </ui:composition>

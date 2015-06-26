@@ -75,6 +75,40 @@ public class FolhaPagamentoBean {
 
     private int idEvento;
 
+    /* PIRES */
+    private HistoricoFolha historicoAntigoUnico;
+    private DataModel historicoAntigoUnicoDM;
+    private DataModel eventosfolhasantigos;  
+
+    public DataModel getHistoricoAntigoUnicoDM(HistoricoFolha hist) {
+        List<HistoricoFolha> lstFolha = new ArrayList();
+        lstFolha.add(historicoFolhaDAO.findById(hist.getHif_codigo()));
+        this.historicoAntigoUnicoDM = new ListDataModel(lstFolha);
+        return historicoAntigoUnicoDM;
+    }
+
+    public DataModel getEventosfolhasantigos(HistoricoFolha hist) {
+        List<EventoFolha> lstEvtFolha = eventoFolhaDAO.findByHistorico(hist.getHif_codigo());
+        this.eventosfolhasantigos = new ListDataModel(lstEvtFolha);
+        return eventosfolhasantigos;
+    }
+
+    public void setEventosfolhasantigos(DataModel eventosfolhasantigos) {
+        this.eventosfolhasantigos = eventosfolhasantigos;
+    }
+    
+    public void setHistoricoAntigoUnicoDM(DataModel historicoAntigoUnicoDM) {
+        this.historicoAntigoUnicoDM = historicoAntigoUnicoDM;
+    }
+
+    public HistoricoFolha getHistoricoAntigoUnico() {
+        return historicoAntigoUnico;
+    }
+
+    public void setHistoricoAntigoUnico(HistoricoFolha historicoAntigoUnico) {
+        this.historicoAntigoUnico = historicoAntigoUnico;
+    }
+    /*PIRES*/
     public FolhaPagamentoBean() {
     }
 
@@ -96,8 +130,8 @@ public class FolhaPagamentoBean {
         pessoa = funcionarios.getRowData();
         return "recibosanterioreslst";
     }
-      public String selectFuncionario3() {
-      //  pessoa = funcionarios.getRowData();
+      public String selectFuncionario3(HistoricoFolha historico) {
+        this.historicoAntigoUnico = historico;
         return "reciboanteriorview";
     }
 //=======================================================================================================================================================
@@ -147,7 +181,6 @@ public class FolhaPagamentoBean {
         this.histFolhas = new ListDataModel(historicoFolhaDAO.historicoTodos(pessoa.getPes_codigo()));
         return histFolhas;
     }
-    
     
     public DataModel<HistoricoFolha> getHistFolhas() {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -276,7 +309,7 @@ public class FolhaPagamentoBean {
     }
 
     public DataModel<EventoFolha> getDataModelEveFolhas() {
-        this.DataModelEveFolhas = new ListDataModel(eventoFolhaDAO.EventoFolhas(historicoFolha.getHif_codigo()));
+        this.DataModelEveFolhas = new ListDataModel(eventoFolhaDAO.findAll());
         return DataModelEveFolhas;
     }
 

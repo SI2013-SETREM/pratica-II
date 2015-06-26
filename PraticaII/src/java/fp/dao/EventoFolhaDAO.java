@@ -44,6 +44,13 @@ public class EventoFolhaDAO {
 
     }
 
+    public List<EventoFolha> findByHistorico(int hif_codigo) {
+
+        Query query = session.createQuery("from EventoFolha where hif_codigo =" + hif_codigo);
+        return query.list();
+
+    }
+
     public List<EventoFolha> EventoFolhas(int hif_codigo) {
 
         Query query = session.createQuery("from EventoFolha where hif_codigo = " + hif_codigo + " ");
