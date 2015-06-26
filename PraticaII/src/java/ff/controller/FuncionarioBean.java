@@ -265,7 +265,21 @@ public class FuncionarioBean {
     }
 
     public String getEstadoCivil() {
-        return estadoCivil;
+          String estado = "";
+        int valor = pessoa.getPes_tipo();
+
+        if (valor == 1) {
+            estado = "Solteiro(a)";
+        } else if (valor == 2) {
+            estado = "Casado(a)";
+        } else if (valor == 3) {
+            estado = "Separado(a)";
+        } else if (valor == 4) {
+            estado = "Outros";
+        }
+
+        return estado;
+        
     }
 
     public void setEstadoCivil(String estadoCivil) {
@@ -274,7 +288,20 @@ public class FuncionarioBean {
 
     public String getTipoPessoa(String p) {
 
-        return tipoPessoa;
+        String tipo = "";
+        int valor = pessoa.getPes_tipo();
+
+        if (valor == 1) {
+            tipo = "Funcionário";
+        } else if (valor == 2) {
+            tipo = "Ex-Funcionário";
+        } else if (valor == 3) {
+            tipo = "Pessoa Externa (Candidatos)";
+        } else if (valor == 4) {
+            tipo = "Instrutores";
+        }
+
+        return tipo;
     }
 
     public void setCargosPessoa(CargosPessoa cargosPessoa) {
@@ -720,5 +747,5 @@ public class FuncionarioBean {
     public void setAdvertencia(Advertencia advertencia) {
         this.advertencia = advertencia;
     }
-
+  
 }
