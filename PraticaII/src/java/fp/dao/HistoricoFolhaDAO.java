@@ -65,5 +65,10 @@ public class HistoricoFolhaDAO {
         Query query = session.createQuery("from HistoricoFolha where pes_codigo = " + pes_codigo + " and hif_data = '" + data + "' ");
         return query.list();
     }
+    
+    public List<HistoricoFolha> historicoTodos(int pes_codigo) {
+        Query query = session.createQuery("from HistoricoFolha where pes_codigo =" +pes_codigo);
+        return query.list();
+    }
 
 }
