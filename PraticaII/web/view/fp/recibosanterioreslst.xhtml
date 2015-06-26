@@ -1,15 +1,15 @@
 <ui:composition template="../modelos/default.xhtml"
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-    xmlns:h="http://xmlns.jcp.org/jsf/html"
-    xmlns:f="http://xmlns.jcp.org/jsf/core">
-    
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
     <ui:define name="title">
         Recibos do Colaborador #{folhaPagamentoBean.pessoa.pes_nome}
     </ui:define>
 
     <ui:define name="breadcrumb">
-      Teste
+        Teste
     </ui:define>
 
     <ui:define name="main-content">
@@ -18,32 +18,43 @@
             <div class="btns-top-table">
             </div>
             <h:form>
-                 <div>
-                                      <h:dataTable var="itens" value="${folhaPagamentoBean.dataModelEveFolhas}" styleClass=" table table-bordered table-striped">
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="Código"/>
-                                            </f:facet>
-                                            <h:outputText value="${itens.eve_evento.eve_codigo}" /> 
-                                        </h:column>
+                
+                <h:dataTable var="itens" value="#{folhaPagamentoBean.histFolhas1}" styleClass=" table table-bordered table-striped">
+                        <h:column headerClass="col-visualizar-header">
+                                <f:facet name="header">
+                                    <h:outputText value="Folha"/>
+                                </f:facet>
+                                <h:commandLink title="Visualalizar" action="#{folhaPagamentoBean.selectFuncionario3()}" >
+                                    <i class="fa fa-file-text-o"></i> Visualizar
+                                </h:commandLink>
+                            </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Data"/>
+                            </f:facet>
+                            <h:outputText value="${itens.hif_data}" /> 
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Acréscimos"/>
+                            </f:facet>
+                            <h:outputText value="${itens.hif_valor_acre}" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Descontos"/>
+                            </f:facet>
+                            <h:outputText value="${itens.hif_valor_desc }" />
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Liquido"/>
+                            </f:facet>
+                            <h:outputText value="${itens.hif_valor_liquido }" />
+                        </h:column>
 
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="Descrição"/>
-                                            </f:facet>
-                                            <h:outputText value="${itens.evf_descricao}" /> 
-                                        </h:column>
-
-
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="Indice"/>
-                                            </f:facet>
-                                            <h:outputText value="${itens.evf_indice }" />
-                                        </h:column>
-              
-                                    </h:dataTable>
-                                </div>
+                    </h:dataTable>
+               
             </h:form>
         </div>
     </ui:define>

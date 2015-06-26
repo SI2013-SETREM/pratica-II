@@ -96,6 +96,10 @@ public class FolhaPagamentoBean {
         pessoa = funcionarios.getRowData();
         return "recibosanterioreslst";
     }
+      public String selectFuncionario3() {
+      //  pessoa = funcionarios.getRowData();
+        return "reciboanteriorview";
+    }
 //=======================================================================================================================================================
     //EVENTOS PADROES
 
@@ -138,6 +142,13 @@ public class FolhaPagamentoBean {
 
 //=======================================================================================================================================================
     //HISTORICO FOLHA
+    
+    public DataModel<HistoricoFolha> getHistFolhas1() {
+        this.histFolhas = new ListDataModel(historicoFolhaDAO.historicoTodos(pessoa.getPes_codigo()));
+        return histFolhas;
+    }
+    
+    
     public DataModel<HistoricoFolha> getHistFolhas() {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
@@ -145,11 +156,11 @@ public class FolhaPagamentoBean {
         this.histFolhas = new ListDataModel(historicoFolhaDAO.historicoAtual(pessoa.getPes_codigo(), dat));
         return histFolhas;
     }
-
+    
     public void setHistFolhas(DataModel<HistoricoFolha> histFolhas) {
         this.histFolhas = histFolhas;
     }
-
+   
     //=======================================================================================================================================================
     //EVENTOS FOLHA
     public String addEventoFolha(Integer eve_codigo) {
