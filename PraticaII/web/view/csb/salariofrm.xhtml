@@ -183,6 +183,7 @@
                     <h:inputHidden id="sal_codigo" value="#{salarioBean.salario.sal_codigo}"/>
                     <h:inputHidden id="cargo" value="#{salarioBean.salario.cargo}" converter="cargoConverter"/>
                     <h:inputHidden id="pessoa" value="#{salarioBean.salario.pessoa}" converter="pessoaConverter"/>
+                    <h:inputHidden id="planejamentoCargos" value="#{salarioBean.salario.planejamentocargo}" converter="planejamentoCargosConverter"/>
                     <h:inputHidden id="sal_datafim" value="#{salarioBean.salario.sal_datafim}">
                         <f:convertDateTime pattern="yyyy-MM-dd"/>
                     </h:inputHidden>

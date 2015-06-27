@@ -259,10 +259,10 @@ public class SalarioBean {
             this.lstCargo = cargoDAO.findAllChildrens();
             return this.lstCargo;
         } else {
-            this.lstCargo = new ArrayList<Cargo>();
+            this.lstCargo = new ArrayList<>();
             List<PlanejamentoCargos> lstt = daoPLN.findByPlanejamento(s.getPlanejamentocargo().getPlanejamento().getPla_codigo());
-            for (int i = 0; i < lstt.size(); i++) {
-                this.lstCargo.add(lstt.get(i).getCargo());
+            for (PlanejamentoCargos lstt1 : lstt) {
+                this.lstCargo.add(lstt1.getCargo());
             }
             return this.lstCargo;
         }

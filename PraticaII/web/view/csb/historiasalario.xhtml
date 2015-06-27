@@ -21,6 +21,9 @@
             table{
                 font-size: 14px;
             }
+            pintaTudo{
+                background-color: red;
+            }
         </style>
         <script type="text/javascript" src="http://code.highcharts.com/highcharts.js"></script>
         <script type="text/javascript" src="http://code.highcharts.com/modules/funnel.js"></script>
@@ -31,7 +34,6 @@
                 var list = new Array;
                 var count = $(".car-cargo").length;
                 for (var i = 0; i &lt; count; i++){
-                    debugger;
                     var dateBR = $(".car-datainicio").eq(i).text();
                     var dataBRA = new Array;
                     dataBRA = dateBR.split('/');
@@ -118,6 +120,29 @@
                                     listaM
                         }]
                 });
+                debugger;
+                var cargoPes = $(".car-cargo").eq($(".car-cargo").length-1).text();
+                var parar = 0;
+                for (var i=0; i &lt; $(".car_descricao").length; i++){
+                    if ($(".car_descricao").eq(i).text() != cargoPes){
+                        if (i &lt; parar || i === parar){
+                        $(".car_descricao").eq(i).parent().parent().children().eq(3).children().addClass('fa fa-check-circle-o fa-fw');
+                        $(".car_descricao").eq(i).parent().parent().children().eq(0).css('background-color','#90EE90')
+                        $(".car_descricao").eq(i).parent().parent().children().eq(1).css('background-color','#90EE90')
+                        $(".car_descricao").eq(i).parent().parent().children().eq(2).css('background-color','#90EE90')
+                        $(".car_descricao").eq(i).parent().parent().children().eq(3).css('background-color','#90EE90')
+                        }
+                    }
+                    else{
+                        $(".car_descricao").eq(i).parent().parent().children().eq(3).children().addClass('fa fa-spinner fa-spin');
+                        $(".car_descricao").eq(i).parent().parent().children().eq(0).css('background-color','#F0E68C')
+                        $(".car_descricao").eq(i).parent().parent().children().eq(1).css('background-color','#F0E68C')
+                        $(".car_descricao").eq(i).parent().parent().children().eq(2).css('background-color','#F0E68C')
+                        $(".car_descricao").eq(i).parent().parent().children().eq(3).css('background-color','#F0E68C')
+                        parar = i;
+                    }
+                }
+                
             });
         </script>
     </ui:define>
@@ -199,6 +224,13 @@
                                 <h:outputText value="Tempo Mínino para Avanço (dias)"/>
                             </f:facet>
                             <h:outputText styleClass='car_tempominimo' value="${item.getCar_tempominimo()}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <i class="fa fa-smile-o fa-fw" />
+                                <h:outputText value="Situação"/>
+                            </f:facet>
+                            <h:outputText styleClass='car_situacaoP' />
                         </h:column>
                     </h:dataTable>
                 </h:form>

@@ -46,6 +46,7 @@ public class SalarioDAO {
         salInsert.setSal_datainicio(s.getSal_datainicio());
         salInsert.setSal_situacao(true);
         salInsert.setSal_valorbruto(s.getSal_valorbruto());
+        salInsert.setPlanejamentocargo(s.getPlanejamentocargo());
 
         session.save(salInsert);
         session.merge(salUpdate);
