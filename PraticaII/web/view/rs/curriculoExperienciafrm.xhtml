@@ -6,11 +6,10 @@
 
     <ui:define name="content">
         <h3><h:outputText value="Currículo de ${curriculoBean.pessoa.pes_nome}"/></h3>
-        <h4><h:outputText value="Formação"/></h4>
+        <h4><h:outputText value="Experiência"/></h4>
         <f:view>
             <h:messages/>
             <h:form styleClass="form-horizontal">
-                <h:inputHidden id="frmCodigo" value="#{curriculoBean.pessoaExperiencia.expCodigo}" />
                 <div class="form-group">
                     <h:outputLabel  value="Empresa" for="frmEmpresa" styleClass="control-label col-sm-1 col-md-2" />
                     <div class="col-md-6 col-sm-12">
@@ -26,60 +25,53 @@
                     </div> 
                 </div>
                 <div class="form-group">
-                    <h:outputLabel value="Data de Início" for="frmDatainicio" styleClass="control-label col-sm-1 col-md-2" />
+                    <h:outputLabel value="Descrição" for="expDescricao" styleClass="control-label col-sm-1 col-md-2" />
                     <div class="col-md-8 col-sm-12">
-                        <h:inputText pt:type="date" id="frmDatainicio" value="#{curriculoBean.pessoaFormacao.frmDatainicio}" styleClass="form-control">
+                        <h:inputTextarea rows="4" id="expDescricao" value="#{curriculoBean.pessoaExperiencia.expDescricao}" styleClass="form-control"/>
+                    </div> 
+                </div>
+                <div class="form-group">
+                    <h:outputLabel value="Data de Início" for="expDatainicio" styleClass="control-label col-sm-1 col-md-2" />
+                    <div class="col-md-8 col-sm-12">
+                        <h:inputText pt:type="date" id="expDatainicio" value="#{curriculoBean.pessoaExperiencia.expDatainicio}" styleClass="form-control">
                             <f:convertDateTime pattern="yyyy-MM-dd"/>
                         </h:inputText>
                     </div> 
                 </div>
                 <div class="form-group">
-                    <h:outputLabel value="Data de Conclusão" for="frmDatafim" styleClass="control-label col-sm-1 col-md-2" />
+                    <h:outputLabel value="Data de Saída" for="expDatafim" styleClass="control-label col-sm-1 col-md-2" />
                     <div class="col-md-8 col-sm-12">
-                        <h:inputText pt:type="date" id="frmDatafim" value="#{curriculoBean.pessoaFormacao.frmDatafim}" styleClass="form-control">
+                        <h:inputText pt:type="date" id="expDatafim" value="#{curriculoBean.pessoaExperiencia.expDatafim}" styleClass="form-control">
                             <f:convertDateTime pattern="yyyy-MM-dd"/>
                         </h:inputText>
                     </div> 
                 </div>
                 <div class="form-group">
-                    <h:outputLabel value="Referência" for="frmReferencia" styleClass="control-label col-sm-1 col-md-2" />
+                    <h:outputLabel value="Local" for="expLocal" styleClass="control-label col-sm-1 col-md-2" />
                     <div class="col-md-8 col-sm-12">
-                        <h:inputTextarea rows="4" id="frmReferencia" value="#{curriculoBean.pessoaFormacao.frmReferencia}" styleClass="form-control" />
+                        <h:inputTextarea rows="4" id="expLocal" value="#{curriculoBean.pessoaExperiencia.expLocal}" styleClass="form-control"/>
                     </div> 
                 </div>
                 <div class="form-group">
-                    <h:outputLabel value="Anotação" for="frmAnotacao" styleClass="control-label col-sm-1 col-md-2" />
+                    <h:outputLabel value="Referência" for="expReferencia" styleClass="control-label col-sm-1 col-md-2" />
                     <div class="col-md-8 col-sm-12">
-                        <h:inputTextarea rows="4" id="frmAnotacao" value="#{curriculoBean.pessoaFormacao.frmAnotacao}" styleClass="form-control" />
-                    </div>
+                        <h:inputTextarea rows="4" id="expReferencia" value="#{curriculoBean.pessoaExperiencia.expReferencia}" styleClass="form-control"/>
+                    </div> 
                 </div>
                 <div class="form-group">
-                    <h:outputLabel value="Tipo" for="frmTipo" styleClass="control-label col-sm-1 col-md-2" />
+                    <h:outputLabel value="Anotações" for="expAnotacao" styleClass="control-label col-sm-1 col-md-2" />
                     <div class="col-md-8 col-sm-12">
-                        <h:selectOneMenu id="frmTipo" value="#{curriculoBean.pessoaFormacao.frmTipo}" class="form-control">
-                            <f:selectItem itemValue="1" itemLabel="Graduação"/>
-                            <f:selectItem itemValue="2" itemLabel="Curso Técnico"/>
-                            <f:selectItem itemValue="3" itemLabel="Curso"/>
-                            <f:selectItem itemValue="4" itemLabel="Ensino Fundamental"/>
-                            <f:selectItem itemValue="5" itemLabel="Ensino Médio"/>
-                            <f:selectItem itemValue="6" itemLabel="Outros"/>
-                        </h:selectOneMenu>
-                    </div>
+                        <h:inputTextarea rows="4" id="expAnotacao" value="#{curriculoBean.pessoaExperiencia.expAnotacao}" styleClass="form-control"/>
+                    </div> 
                 </div>
                 <div class="form-group">
-                    <h:outputLabel value="Status" for="frmStatus" styleClass="control-label col-sm-1 col-md-2" />
-                    <div class="col-md-8 col-sm-12">
-                        <h:selectOneMenu id="frmStatus" value="#{curriculoBean.pessoaFormacao.frmStatus}" class="form-control">
-                            <f:selectItem itemValue="1" itemLabel="Concluído"/>
-                            <f:selectItem itemValue="2" itemLabel="Em andamento"/>
-                            <f:selectItem itemValue="3" itemLabel="Abandonado"/>
-                        </h:selectOneMenu>
-                    </div>
+                    <h:outputLabel value="Volutário" for="expVoluntario" styleClass="control-label col-sm-1 col-md-2" />
+                    <h:selectBooleanCheckbox value="#{curriculoBean.pessoaExperiencia.expVoluntario}"/>
                 </div>
                 <div class="form-group row">
                     <div class="col-lg-6 btn-group-separated">
                         <h:link styleClass="btn btn-default" style="" value="Cancelar" outcome="#{curriculoBean.listFormacao()}" />
-                        <h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{curriculoBean.saveFormacao()}"/>
+                        <h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{curriculoBean.saveExperiencia()}"/>
                     </div>
                 </div>
             </h:form>

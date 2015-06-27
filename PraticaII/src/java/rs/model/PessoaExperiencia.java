@@ -19,7 +19,6 @@ import javax.persistence.Temporal;
 
 @Entity
 @Table(name="rec_pessoa_experiencia")
-@IdClass(PessoaExperiencia.PessoaExperienciaPK.class)
 public class PessoaExperiencia implements Serializable {
     
     public static final String sTitle = "Experiência";
@@ -51,52 +50,6 @@ public class PessoaExperiencia implements Serializable {
     private String exp_referencia;
     private String exp_anotacao;
     private boolean exp_voluntario;
-
-    // From http://stackoverflow.com/questions/3585034/how-to-map-a-composite-key-with-hibernate
-    public class PessoaExperienciaPK implements Serializable {
-        protected Pessoa pessoa;
-        protected Empresa empresa;
-        protected int exp_codigo;
-
-        public PessoaExperienciaPK() {}
-
-        public PessoaExperienciaPK(Pessoa pessoa, Empresa empresa, int exp_codigo) {
-            this.pessoa = pessoa;
-            this.empresa = empresa;
-            this.exp_codigo = exp_codigo;
-        }
-
-        @Override
-        public int hashCode() {
-            int hash = 7;
-            hash = 47 * hash + Objects.hashCode(this.pessoa);
-            hash = 47 * hash + Objects.hashCode(this.empresa);
-            hash = 47 * hash + this.exp_codigo;
-            return hash;
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-            if (obj == null) {
-                return false;
-            }
-            if (getClass() != obj.getClass()) {
-                return false;
-            }
-            final PessoaExperienciaPK other = (PessoaExperienciaPK) obj;
-            if (!Objects.equals(this.pessoa, other.pessoa)) {
-                return false;
-            }
-            if (!Objects.equals(this.empresa, other.empresa)) {
-                return false;
-            }
-            if (this.exp_codigo != other.exp_codigo) {
-                return false;
-            }
-            return true;
-        }
-
-    }
 
     public PessoaExperiencia() {
     }
@@ -188,9 +141,5 @@ public class PessoaExperiencia implements Serializable {
     public void setExpVoluntario(boolean exp_voluntario) {
         this.exp_voluntario = exp_voluntario;
     }
-
-    
-    
-    
     
 }

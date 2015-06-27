@@ -59,7 +59,7 @@ public class CurriculoDAO {
         try {
             Transaction t = getSession().beginTransaction();
             try {
-                getSession().update(obj);
+                getSession().merge(obj);
                 t.commit();
             } catch (Exception ex) {
                 t.rollback();

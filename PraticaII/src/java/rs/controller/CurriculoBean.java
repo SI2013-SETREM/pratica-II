@@ -5,6 +5,7 @@ import cfg.dao.EmpresaDAO;
 import cfg.model.Empresa;
 import cfg.model.Pessoa;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import rs.dao.CurriculoDAO;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -119,6 +120,7 @@ public class CurriculoBean {
     }
 
     public DataModel getExperiencias() {
+        this.experiencias= new ListDataModel(dao.findExperiencias(pessoa.getPes_codigo()));
         return experiencias;
     }
 
@@ -224,7 +226,7 @@ public class CurriculoBean {
     public String novaExperiencia() {
         this.pessoaExperiencia = new PessoaExperiencia();
         this.pessoaExperiencia.setPessoa(pessoa);
-        return "curriculoExperienciafrm";
+        return "curriculoExperienciafrm?faces-redirect=true";
     }
     
     public String editExperiencia() {
@@ -247,7 +249,7 @@ public class CurriculoBean {
     }
     
     public String listExperiencia() {
-        return "curriculoExperiencialst";
+        return "curriculoExperiencialst?faces-redirect=true";
     }
     
     public String voltarExperiencia() {
