@@ -44,6 +44,7 @@ public class RecrutamentoBean {
     private List<RecrutamentoPessoa> recrutamentoPessoas;
     private List<Pessoa> pessoas;
     private Pessoa pessoaRecrutamento;
+    private RecrutamentoPessoa recrutementoPessoa;
 
     private PessoaDAO pesDao = new PessoaDAO();
     private Pessoa pessoa = new Pessoa();
@@ -148,8 +149,16 @@ public class RecrutamentoBean {
         return "recrutamentolst?faces-redirect=true";
     }
 
-    public String edit(String pagina) {
+    public String edit() {
         recrutamento = (Recrutamento) recrutamentos.getRowData();
+        String pagina = "recrutamentolst?faces-redirect=true";
+        if (recrutamento.getRecStatus() == 2) {
+            pagina = "recrutamentoCandidatos?faces-redirect=true";
+        } else if (recrutamento.getRecStatus() == 3) {
+            pagina = "recrutamentoEntrevistalst?faces-redirect=true";
+        } else if (recrutamento.getRecStatus() == 4) {
+            pagina = "recrutamentoSelecaolst?faces-redirect=true";
+        }
         return pagina;
     }
 
@@ -255,7 +264,7 @@ public class RecrutamentoBean {
         this.pessoaRecrutamento = entrevista.getRecrutamentoPessoa().getPessoa();
         return "recrutamentoEntrevistafrm?faces-redirect=true";
     }
-    
+
     public void deleteEntrevista() {
         this.daoEntrevista.delete((Entrevista) entrevistas.getRowData());
     }
@@ -282,6 +291,9 @@ public class RecrutamentoBean {
         } else {
             daoEntrevista.insert(entrevista);
         }
+        recrutamento.setRecStatus(3);
+        recrutamentoPessoaDAO.update(recrutementoPessoa);
+        dao.update(recrutamento);
         return pg;
     }
 
@@ -330,7 +342,7 @@ public class RecrutamentoBean {
         }
         return pessoas;
     }
-    
+
     public void setPessoas(List<Pessoa> pessoas) {
         this.pessoas = pessoas;
     }
@@ -342,14 +354,22 @@ public class RecrutamentoBean {
     public void setPessoaRecrutamento(Pessoa pessoaRecrutamento) {
         this.pessoaRecrutamento = pessoaRecrutamento;
     }
-    
-//    public List<RecrutamentoPessoa> getRecrutamentoPessoas() {
-//        this.recrutamentoPessoas = recrutamentoPessoaDAO.findByRecrutamento(recrutamento.getRecCodigo());
-//        return recrutamentoPessoas;
-//    }
+
+    public List<RecrutamentoPessoa> getRecrutamentoPessoas() {
+        this.recrutamentoPessoas = recrutamentoPessoaDAO.findByRecrutamento(recrutamento.getRecCodigo());
+        return recrutamentoPessoas;
+    }
 
     public void setRecrutamentoPessoas(List<RecrutamentoPessoa> recrutamentoPessoas) {
         this.recrutamentoPessoas = recrutamentoPessoas;
+    }
+
+    public RecrutamentoPessoa getRecrutementoPessoa() {
+        return recrutementoPessoa;
+    }
+
+    public void setRecrutementoPessoa(RecrutamentoPessoa recrutementoPessoa) {
+        this.recrutementoPessoa = recrutementoPessoa;
     }
 
     public String voltar(String pg) {

@@ -41,6 +41,16 @@
                         <h:inputTextarea rows="6" id="ent_resumo_entrevista" value="#{recrutamentoBean.entrevista.ent_resumo_entrevista}" styleClass="form-control" />
                     </div> 
                 </div>
+               <div class="form-group">
+                    <h:outputLabel value="Status Candidato:" for="recPesStatus" styleClass="control-label col-sm-1 col-md-2" />
+                    <div style="padding-top: 5px" class="col-md-4 col-sm-12">
+                        <h:selectOneMenu value="#{recrutamentoBean.recrutementoPessoa.recPesStatus}" id="recPesStatus" class="form-control">
+                            <f:selectItem itemValue="1" itemLabel="Aguardando avaliação"/>
+                            <f:selectItem itemValue="3" itemLabel="Eliminado"/>
+                            <f:selectItem itemValue="4" itemLabel="Selecionado"/>
+                        </h:selectOneMenu>
+                    </div>
+                </div>
                 <div class="form-group row">
                     <div class="col-md-4 col-sm-12 btn-group-separated">
                         <h:link styleClass="btn btn-default" value="Cancelar" outcome="#{recrutamentoBean.listarEntrevista()}" />

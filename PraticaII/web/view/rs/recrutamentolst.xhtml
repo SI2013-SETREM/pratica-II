@@ -83,7 +83,7 @@
                             <h:outputText value="Editar"/>
                         </f:facet>
                         <h:outputText rendered="${item.getRecStatus() == 6 or item.getRecStatus() == 7}" escape="false" value="&lt;i class='fa fa-pencil'&gt;&lt;/i&gt; Editar indisponível" />
-                        <h:commandLink rendered="${item.getRecStatus() != 6 and item.getRecStatus() != 7 and item.getRecStatus()==2}" action="${recrutamentoBean.edit('recrutamentoCandidatos?faces-redirect=true')}">
+                        <h:commandLink rendered="${item.getRecStatus() != 6 and item.getRecStatus() != 7}" action="${recrutamentoBean.edit()}">
                             <i class="fa fa-pencil"></i> Editar
                         </h:commandLink>
                     </h:column>
