@@ -11,23 +11,7 @@
     </ui:define>
 
     <ui:define name="header">
-<!--        <script type="text/javascript">
-            $(function () {
 
-                $(document).ready(function () {
-                    $('#folha').addClass('hide');
-
-                    $('.salvEV').click(function () {
-                        $('#padrao').hide();
-                        $('#folha').removeClass('hide');
-
-                    });
-
-                });
-
-
-            });
-        </script>-->
     </ui:define>
 
     <ui:define name="breadcrumb">
@@ -130,73 +114,89 @@
                             <div class="form-group">
                                 <h:outputLabel value="Data de Admição:" for="idiAdimicao" styleClass="control-label col-md-2" />
                                 <div class=" col-xs-6" >
-                                    <h:outputLabel pt:type="date" value="${folhaPagamentoBean.pessoa.pes_datacadastro}" for="idAdmicao" styleClass="control-label" >
+                                    <h:outputLabel pt:type="date" value="#{folhaPagamentoBean.pessoa.pes_datacadastro}" for="idAdmicao" styleClass="control-label" >
                                         <f:convertDateTime pattern="yyyy-MM-dd"/>
                                     </h:outputLabel>
                                 </div>
-
                             </div>
+                            
+                           
                             <hr style="border-top: 1px solid #D7D3F5"></hr>
                             <div id="padrao">
-                                <h:outputLabel value="Eventos Padrões para o Colaborador"  styleClass="control-label col-md-2" />
-                                <h:dataTable var="fl" value="${folhaPagamentoBean.eventosPadroes}" styleClass=" table table-bordered table-striped">
-
-
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="Evento"/>
-                                        </f:facet>
-                                        <h:outputText value="${fl.eve_codigo.eve_descricao}" /> 
-                                    </h:column>
-
-
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="Série"/>
-                                        </f:facet>
-                                        <h:outputText value="${fl.eve_codigo.serieevento.sev_nome }" />
-                                    </h:column>
-
-                                    <p:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="Tipo"/>
-                                        </f:facet>
-                                        <h:outputText value="${fl.eve_codigo.tipoevento.tpe_nome}" />
-                                    </p:column>
-                                    <h:column headerClass="col-excluir-header">
-                                        <f:facet name="header">
-                                            <h:outputText value="Excluir"/>
-                                        </f:facet>
-                                        <h:commandLink onclick="return confirm('Deseja realmente excluir o Evento Padrão?');" action="${folhaPagamentoBean.deleteEventoPadraoFolha(fl)}">
-                                            <i class="fa fa-trash"></i> Excluir
-                                        </h:commandLink>
-                                    </h:column>
-                                </h:dataTable>
-                                
-                                
-                                <div style="margin: 5px">
-                                    <div class="from-group">
-                                        <div class="col-md-offset-10 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
-
-                                            <p:commandButton styleClass="salvEV btn btn-primary" value="OK" action="#{folhaPagamentoBean.adicionarNaFolhaEP()}" ajax="false"  >
-                                                            
-                                            </p:commandButton>  
-
-
-                                        </div>
+                                <div class="panel panel-info">
+                                    <div class="panel-heading">
+                                        <h2 class="panel-title tex-primary">Eventos do Colaborador</h2>
                                     </div>
+                                    <div class="panel-body">
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        <h:dataTable var="fl" value="#{folhaPagamentoBean.eventosPadroes}" styleClass=" table table-bordered table-striped">
+
+
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Evento"/>
+                                                </f:facet>
+                                                <h:outputText value="${fl.eve_codigo.eve_descricao}" /> 
+                                            </h:column>
+
+
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Série"/>
+                                                </f:facet>
+                                                <h:outputText value="${fl.eve_codigo.serieevento.sev_nome }" />
+                                            </h:column>
+
+                                            <p:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Tipo"/>
+                                                </f:facet>
+                                                <h:outputText value="${fl.eve_codigo.tipoevento.tpe_nome}" />
+                                            </p:column>
+                                            <h:column headerClass="col-excluir-header">
+                                                <f:facet name="header">
+                                                    <h:outputText value="Excluir"/>
+                                                </f:facet>
+                                                <h:commandLink onclick="return confirm('Deseja realmente excluir o Evento Padrão?');" action="${folhaPagamentoBean.deleteEventoPadraoFolha(fl)}">
+                                                    <i class="fa fa-trash"></i> Excluir
+                                                </h:commandLink>
+                                            </h:column>
+                                        </h:dataTable>
+  
+                                        <div style="margin: 5px">
+                                            <div class="from-group">
+                                                <div class="col-md-offset-4 col-md-11 col-sm-offset-0 col-sm-12 btn-group-separated">
+
+                                                    <p:commandButton  styleClass="salvEV btn btn-primary" value="Adicionar Eventos a Folha" action="#{folhaPagamentoBean.adicionarNaFolhaEP()}" >
+                                                    </p:commandButton>  
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
                                 </div>
+
                             </div>
 
                             <div id="folha" >
                                 <div>
-                                    
-                                      <h:dataTable var="itens" value="${folhaPagamentoBean.dataModelEveFolhas}" styleClass=" table table-bordered table-striped">
+
+                                    <h:dataTable var="itens" value="#{folhaPagamentoBean.dataModelEveFolhas}" styleClass=" table table-bordered table-striped">
                                         <h:column>
                                             <f:facet name="header">
                                                 <h:outputText value="Código"/>
                                             </f:facet>
-                                            <h:outputText value="${itens.eve_evento.eve_codigo}" /> 
+                                            <h:outputText value="#{itens.eve_evento.eve_codigo}" /> 
                                         </h:column>
 
                                         <h:column>
@@ -209,9 +209,9 @@
 
                                         <h:column>
                                             <f:facet name="header">
-                                                <h:outputText value="Indice"/>
+                                                <h:outputText value="Serie"/>
                                             </f:facet>
-                                            <h:outputText value="${itens.evf_indice }" />
+                                            <h:outputText value="${itens.eve_evento.serieevento.sev_descricao}" />
                                         </h:column>
 
                                         <p:column>
@@ -230,16 +230,16 @@
                                             <i class="fa fa-plus"></i> 
                                         </h:link>
                                     </div>
-                                    
+
                                     <div class="detalhes col-xs-8 ">
 
-                                        <h:dataTable var="it" value="${folhaPagamentoBean.histFolhas}" styleClass=" table table-bordered table-striped">
+                                        <h:dataTable var="it" value="#{folhaPagamentoBean.histFolhas}" styleClass=" table table-bordered table-striped">
                                             <h:column>
                                                 <f:facet name="header">
                                                     <h:outputText value="Total de Acréscimos"/>
                                                 </f:facet>
 
-                                                <h:outputText value="${it.hif_valor_acre}" /> <br />
+                                                <h:outputText value="#{it.hif_valor_acre}" /> <br />
 
                                             </h:column>
 
@@ -247,78 +247,29 @@
                                                 <f:facet name="header">
                                                     <h:outputText value="Total de Descontos"/>
                                                 </f:facet>
-                                                <h:outputText value="${it.hif_valor_desc}" /> <br />
+                                                <h:outputText value="#{it.hif_valor_desc}" /> <br />
 
                                             </p:column>
                                             <p:column>
                                                 <f:facet name="header">
                                                     <h:outputText value="Valor Liquido"/>
                                                 </f:facet>
-                                                <h:outputText value="${it.hif_valor_liquido}" /> <br />
+                                                <h:outputText value="#{it.hif_valor_liquido}" /> <br />
 
                                             </p:column>
                                         </h:dataTable>
 
                                     </div>
                                 </div>
-<!--                                <h:dataTable var="car" value="" styleClass=" table table-bordered table-striped">
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="Salário Base"/>
-                                        </f:facet>
-                                        <h:outputText value="900 R$" /> <br />
-
-                                    </h:column>
-
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="Salário Contr.INSS"/>
-                                        </f:facet>
-                                        <h:outputText value="Salário Base" /> <br />
-
-                                    </h:column>
-
-
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="Base Cálc. FGTS"/>
-                                        </f:facet>
-                                        <h:outputText value="1.500,00 R$" /> <br />
-
-                                    </h:column>
-
-                                    <p:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="FGTS Mês"/>
-                                        </f:facet>
-                                        <h:outputText value="0,00 R$" /> <br />                                  
-                                    </p:column>
-                                    <p:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="Base Cálc. IRRF"/>
-                                        </f:facet>
-                                        <h:outputText value="0,00 R$" /> <br />                                  
-                                    </p:column>
-                                    <p:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="Faixa IRRF"/>
-                                        </f:facet>
-                                        <h:outputText value="0,00 R$" /> <br />                                  
-                                    </p:column>
-                                </h:dataTable>-->
-
-
                                 <div class="form-group">
                                     <div class="col-md-offset-9 col-md-11 col-xs-offset-10 col-sm-12 btn-group-separated">
-                                        <h:link styleClass="btn btn-default" value="Cancelar" />
-                                        <h:commandButton styleClass="btn btn-primary"   value="Gerar" ></h:commandButton>
+
+                                        <h:commandButton styleClass="btn btn-primary"   value="Imprimir" ></h:commandButton>
                                     </div>
                                 </div>
                             </div>
 
-
                         </div>
-
 
                     </div>
 

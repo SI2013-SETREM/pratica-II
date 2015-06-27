@@ -138,6 +138,7 @@ public class FolhaPagamentoBean {
     //EVENTOS PADROES
 
     public String gerenciarEventosPadroes() {
+        //pessoa = funcionarios.getRowData();
         return "eventopadlst";
     }
 
@@ -198,6 +199,10 @@ public class FolhaPagamentoBean {
     //EVENTOS FOLHA
     public String addEventoFolha(Integer eve_codigo) {
 
+        historicoFolha = new HistoricoFolha();
+        eventoFolha = new EventoFolha();
+        
+        
         double valor = 0;
         double ValorAcresc = 0, ValorDesc = 0;
         double salarioBase = salarioBruto();
