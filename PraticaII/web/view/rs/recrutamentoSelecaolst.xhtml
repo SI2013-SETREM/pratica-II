@@ -46,19 +46,14 @@
                         <h:outputText value="Eliminado"  rendered="#{item.getRecPesStatus() == 3}"/>
                     </h:column>
                 </h:dataTable>
-                <div class="form-group row">
-                    <div class="col-lg-6 btn-group-separated">
-                        <h:link styleClass="btn btn-default" style="" value="Cancelar" outcome="#{recrutamentoBean.listar()}" />
-                        <h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{recrutamentoBean.salvarCandidatos('recrutamentolst?faces-redirect=true')}"/>
-                    </div>
-                    <div class="col-lg-6 btn-group-separated" style="text-align: right">
-                        <h:commandLink styleClass="btn btn-info" action="#{recrutamentoBean.voltar('recrutamentofrm?faces-redirect=true')}">
-                            <i class="fa fa-chevron-left"></i> Voltar
-                        </h:commandLink>
-                        <h:commandLink styleClass="btn btn-info" action="#{recrutamentoBean.salvarCandidatos('recrutamentoEntrevistalst?faces-redirect=true')}">
-                            Avançar <i class="fa fa-chevron-right"></i>
-                        </h:commandLink>
-                    </div>
+
+                <div class="col-lg-12 btn-group-separated" style="text-align: right">
+                    <h:commandLink styleClass="btn btn-info" action="#{recrutamentoBean.voltar('recrutamentoEntrevistalst?faces-redirect=true')}">
+                        <i class="fa fa-chevron-left"></i> Voltar
+                    </h:commandLink>
+                    <h:commandLink styleClass="btn btn-info" action="#{recrutamentoBean.listar()}">
+                        Concluir <i class="fa fa-chevron-right"></i>
+                    </h:commandLink>
                 </div>
             </h:form>
         </f:view>

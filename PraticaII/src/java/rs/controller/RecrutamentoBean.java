@@ -204,6 +204,7 @@ public class RecrutamentoBean {
 
     public String novaEntrevista(String pg) {
         this.entrevista = new Entrevista();
+//        this.entrevista.setRecrutamentoPessoa(new RecrutamentoPessoa());
         this.pessoaRecrutamento = new Pessoa();
         entrevista.setEntDatahora(new Date());
         return pg;
@@ -296,8 +297,10 @@ public class RecrutamentoBean {
         } else {
             daoEntrevista.insert(entrevista);
         }
-        recrutamento.setRecStatus(3);
-        recrutamentoPessoaDAO.update(recrutamentoPessoa);
+        recrutamento.setRecStatus(4);
+        if (recrutamentoPessoa != null) {
+            recrutamentoPessoaDAO.update(recrutamentoPessoa);
+        }
         dao.update(recrutamento);
         return pg;
     }

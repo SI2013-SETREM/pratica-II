@@ -2,7 +2,8 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
-                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <ui:define name="title">
         Manutenção Entrevista
@@ -41,16 +42,18 @@
                         <h:inputTextarea rows="6" id="ent_resumo_entrevista" value="#{recrutamentoBean.entrevista.ent_resumo_entrevista}" styleClass="form-control" />
                     </div> 
                 </div>
-               <div class="form-group">
-                    <h:outputLabel value="Status Candidato:" for="recPesStatus" styleClass="control-label col-sm-1 col-md-3" />
-                    <div style="padding-top: 5px" class="col-md-4 col-sm-12">
-                        <h:selectOneMenu value="#{recrutamentoBean.entrevista.recrutamentoPessoa.recPesStatus}" id="recPesStatus" class="form-control">
-                            <f:selectItem itemValue="1" itemLabel="Aguardando avaliação"/>
-                            <f:selectItem itemValue="3" itemLabel="Eliminado"/>
-                            <f:selectItem itemValue="4" itemLabel="Selecionado"/>
-                        </h:selectOneMenu>
+                <c:if test="#{recrutamentoBean.entrevista.recrutamentoPessoa != null}">
+                   <div class="form-group">
+                        <h:outputLabel value="Status Candidato:" for="recPesStatus" styleClass="control-label col-sm-1 col-md-3" />
+                        <div style="padding-top: 5px" class="col-md-4 col-sm-12">
+                            <h:selectOneMenu value="#{recrutamentoBean.entrevista.recrutamentoPessoa.recPesStatus}" id="recPesStatus" class="form-control">
+                                <f:selectItem itemValue="1" itemLabel="Aguardando avaliação"/>
+                                <f:selectItem itemValue="3" itemLabel="Eliminado"/>
+                                <f:selectItem itemValue="4" itemLabel="Selecionado"/>
+                            </h:selectOneMenu>
+                        </div>
                     </div>
-                </div>
+                </c:if>
                 <div class="form-group row">
                     <div class="col-md-4 col-sm-12 btn-group-separated">
                         <h:link styleClass="btn btn-default" value="Cancelar" outcome="#{recrutamentoBean.listarEntrevista()}" />
