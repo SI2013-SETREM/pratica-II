@@ -48,6 +48,13 @@
 
                     <h:column>
                         <f:facet name="header">
+                            <h:outputText value="Tipo de Avaliação"/>
+                        </f:facet>
+                        <h:outputText value="${item.getTipoAva()}"/>
+                    </h:column>
+
+                    <h:column>
+                        <f:facet name="header">
                             <h:outputText value="Data Inicial"/>
                         </f:facet>
                         <h:outputText value="${item.getAva_dataInicial()}">
