@@ -183,9 +183,9 @@ public class AvaliacaoBean {
                     if (idTurma != 0) {
                         Turma turma = turmaDAO.findById(idTurma);
                         avaliacao.setTurma(turma);
-                        LogDAO.insert("Avaliacao", "Cadastrou Avaliacao nome: " + avaliacao.getAva_nome());
                     }
                     dao.insert(avaliacao);
+                    LogDAO.insert("Avaliacao", "Cadastrou Avaliacao nome: " + avaliacao.getAva_nome());
                     try {
                         if (SalvaListas()) {
                             return "avaliacaolst";
