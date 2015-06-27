@@ -99,39 +99,6 @@ public class Pessoa implements Serializable {
     public Pessoa() {
     }
 
-    public Pessoa(int pes_codigo, Repositorio repositorio, Bairro bairro, Cidade cidade, Endereco endereco, Cidade cidadenasc, List<Cargo> cargos, Empresa empresa, Usuario usuario, String pes_nome, String pes_cpf, String pes_rg, Date pes_datanasc, String pes_numeroend, String pes_complementoend, String pes_telefone, String pes_email, String pes_pai, String pes_mae, int pes_tipo, int pes_estadocivil, String pes_observacoes, Boolean pes_necessidadeespecial, String pes_necessidadeespecialdsc, Date pes_datacadastro, String pes_cur_resumo, Date pes_cur_dataatualizado, Double pes_cur_pretensaosalarial) {
-        this.pes_codigo = pes_codigo;
-        this.repositorio = repositorio;
-        this.bairro = bairro;
-        this.cidade = cidade;
-        this.endereco = endereco;
-        this.cidadenasc = cidadenasc;
-        this.cargos = cargos;
-        this.empresa = empresa;
-        this.usuario = usuario;
-        this.pes_nome = pes_nome;
-        this.pes_cpf = pes_cpf;
-        this.pes_rg = pes_rg;
-        this.pes_datanasc = pes_datanasc;
-        this.pes_numeroend = pes_numeroend;
-        this.pes_complementoend = pes_complementoend;
-        this.pes_telefone = pes_telefone;
-        this.pes_email = pes_email;
-        this.pes_pai = pes_pai;
-        this.pes_mae = pes_mae;
-        this.pes_tipo = pes_tipo;
-        this.pes_estadocivil = pes_estadocivil;
-        this.pes_observacoes = pes_observacoes;
-        this.pes_necessidadeespecial = pes_necessidadeespecial;
-        this.pes_necessidadeespecialdsc = pes_necessidadeespecialdsc;
-        this.pes_datacadastro = pes_datacadastro;
-        this.pes_cur_resumo = pes_cur_resumo;
-        this.pes_cur_dataatualizado = pes_cur_dataatualizado;
-        this.pes_cur_pretensaosalarial = pes_cur_pretensaosalarial;
-    }
-
-    
-
     public int getPes_codigo() {
         return pes_codigo;
     }

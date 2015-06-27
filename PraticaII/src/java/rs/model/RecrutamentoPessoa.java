@@ -2,6 +2,7 @@ package rs.model;
 
 import cfg.model.Pessoa;
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
@@ -70,4 +71,30 @@ public class RecrutamentoPessoa implements Serializable {
         this.rec_pes_status = rec_pes_status;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 67 * hash + Objects.hashCode(this.recrutamento);
+        hash = 67 * hash + Objects.hashCode(this.pessoa);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final RecrutamentoPessoa other = (RecrutamentoPessoa) obj;
+        if (!Objects.equals(this.recrutamento, other.recrutamento)) {
+            return false;
+        }
+        if (!Objects.equals(this.pessoa, other.pessoa)) {
+            return false;
+        }
+        return true;
+    }
+    
 }

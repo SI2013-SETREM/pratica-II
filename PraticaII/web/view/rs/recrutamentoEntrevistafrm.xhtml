@@ -18,12 +18,12 @@
         <f:view>
             <h:messages  showDetail="true"/>
             <h:form styleClass="form-horizontal">
-                <h:inputHidden id="EntCodigo" value="#{recrutamentoBean.entrevista.getEntCodigo()}" />
+                <h:inputHidden id="EntCodigo" value="#{recrutamentoBean.entrevista.entCodigo}" />
                 <div class="form-group">
                     <h:outputLabel  value="Candidato:" for="recrutamentopessoa" styleClass="control-label col-sm-1 col-md-2" />
                     <div class="col-md-8 col-sm-12">
-                        <h:selectOneMenu id="recrutamentopessoa" converter="recrutamentoPessoaConverter" value="#{recrutamentoBean.entrevista.recrutamentoPessoa}" styleClass="form-control">
-                            <f:selectItems value="#{recrutamentoBean.recrutamentoPessoas}" var="tipe" itemLabel="#{tipe.pessoa.getPes_nome()}" />
+                        <h:selectOneMenu id="recrutamentopessoa" converter="pessoaConverter" value="#{recrutamentoBean.pessoaRecrutamento}" styleClass="form-control">
+                            <f:selectItems value="#{recrutamentoBean.pessoas}" var="tipe" itemLabel="#{tipe.pes_nome}" />
                         </h:selectOneMenu>
                     </div>
                 </div>

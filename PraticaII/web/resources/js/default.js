@@ -71,6 +71,28 @@ $(document).ready(function(){
         }
     });
     
+    // Fallback para navegadores que não suportam HTML5
+    //Documentação: http://xdsoft.net/jqplugins/datetimepicker/
+    $('input[type=datetime]').get().forEach(function (input, idx) {
+        if (input.type === 'text') { //o navegador não suporta HTML5
+            $(input).datetimepicker({
+                'lang': 'pt-BR',
+                'format': 'Y-m-d H:i',
+                'step': 15,
+            });
+        }
+    });
+    $('input[type=date]').get().forEach(function (input, idx) {
+        if (input.type === 'text') { //o navegador não suporta HTML5
+            $(input).datetimepicker({
+                'timepicker': false,
+                'lang': 'pt-BR',
+                'format': 'Y-m-d',
+                'step': 15,
+            });
+        }
+    });
+    
     //Login
     $('.form-login input')
         .focus(function() {

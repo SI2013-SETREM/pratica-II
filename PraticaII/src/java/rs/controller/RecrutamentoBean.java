@@ -42,6 +42,8 @@ public class RecrutamentoBean {
     private RecrutamentoPessoasDAO recrutamentoPessoaDAO = new RecrutamentoPessoasDAO();
     private RecrutamentoDAO dao = new RecrutamentoDAO();
     private List<RecrutamentoPessoa> recrutamentoPessoas;
+    private List<Pessoa> pessoas;
+    private Pessoa pessoaRecrutamento;
 
     private PessoaDAO pesDao = new PessoaDAO();
     private Pessoa pessoa = new Pessoa();
@@ -189,6 +191,7 @@ public class RecrutamentoBean {
 
     public String novaEntrevista(String pg) {
         this.entrevista = new Entrevista();
+        this.pessoaRecrutamento = new Pessoa();
         entrevista.setEntDatahora(new Date());
         return pg;
     }
@@ -248,9 +251,13 @@ public class RecrutamentoBean {
     }
 
     public String editEntrevista() {
-        CandidatosEntrevistas cd = (CandidatosEntrevistas) entrevistas.getRowData();
-        this.entrevista = cd.getEntrevista();
+        this.entrevista = (Entrevista) entrevistas.getRowData();
+        this.pessoaRecrutamento = entrevista.getRecrutamentoPessoa().getPessoa();
         return "recrutamentoEntrevistafrm?faces-redirect=true";
+    }
+    
+    public void deleteEntrevista() {
+        this.daoEntrevista.delete((Entrevista) entrevistas.getRowData());
     }
 
     public String updateEntrevista() {
@@ -264,6 +271,12 @@ public class RecrutamentoBean {
     }
 
     public String salvarEntrevista(String pg) {
+        if (pessoaRecrutamento != null) {
+            RecrutamentoPessoa recPes = new RecrutamentoPessoa();
+            recPes.setRecrutamento(recrutamento);
+            recPes.setPessoa(pessoaRecrutamento);
+            entrevista.setRecrutamentoPessoa(recPes);
+        }
         if (entrevista.getEntCodigo() > 0) {
             daoEntrevista.update(entrevista);
         } else {
@@ -309,10 +322,31 @@ public class RecrutamentoBean {
         return entrevistas;
     }
 
-    public List<RecrutamentoPessoa> getRecrutamentoPessoas() {
+    public List<Pessoa> getPessoas() {
         this.recrutamentoPessoas = recrutamentoPessoaDAO.findByRecrutamento(recrutamento.getRecCodigo());
-        return recrutamentoPessoas;
+        pessoas = new ArrayList<>();
+        for (RecrutamentoPessoa recpes : recrutamentoPessoas) {
+            pessoas.add(recpes.getPessoa());
+        }
+        return pessoas;
     }
+    
+    public void setPessoas(List<Pessoa> pessoas) {
+        this.pessoas = pessoas;
+    }
+
+    public Pessoa getPessoaRecrutamento() {
+        return pessoaRecrutamento;
+    }
+
+    public void setPessoaRecrutamento(Pessoa pessoaRecrutamento) {
+        this.pessoaRecrutamento = pessoaRecrutamento;
+    }
+    
+//    public List<RecrutamentoPessoa> getRecrutamentoPessoas() {
+//        this.recrutamentoPessoas = recrutamentoPessoaDAO.findByRecrutamento(recrutamento.getRecCodigo());
+//        return recrutamentoPessoas;
+//    }
 
     public void setRecrutamentoPessoas(List<RecrutamentoPessoa> recrutamentoPessoas) {
         this.recrutamentoPessoas = recrutamentoPessoas;
