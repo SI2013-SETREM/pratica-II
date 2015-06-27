@@ -1,0 +1,37 @@
+<ui:composition template="./../modelos/wizardRecrutamentoModelo.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+    <ui:define name="content">
+        <h3><h:outputText value="Dados do novo funcionário"/></h3>
+        <f:view>
+            <h:messages showDetail="true"/>
+            <h:form styleClass="form-horizontal">
+                <div class="form-group">
+                    <h:outputLabel value="Novo Funcionário:" styleClass="control-label col-sm-10 col-md-3" />
+                    <div class="col-md-8 col-sm-12">
+                        <h:outputText styleClass="form-control-static" value="${recrutamentoBean.recrutamentoPessoa.pessoa.pes_nome}" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <h:outputLabel value="Valor do Salário:" for="sal_valorbruto" styleClass="control-label col-sm-10 col-md-3" />
+                    <div class="col-md-8 col-sm-12">
+                        <div class="input-group">
+                            <div class="input-group-addon">R$</div>
+                            <h:inputText pt:type="number" pt:min="1" pt:max="10000" pt:step="0.10" pt:required="required" id="sal_valorbruto" value="#{recrutamentoBean.salario.sal_valorbruto}" title="Valor (R$)" styleClass="form-control salSalario" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-4 col-sm-12 btn-group-separated">
+                        <h:link styleClass="btn btn-default" value="Cancelar" outcome="#{recrutamentoBean.voltar('recrutamentoSelecaolst')}" />
+                        <h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{recrutamentoBean.selecionado()}"/>
+                    </div>
+                </div>
+            </h:form>
+        </f:view>
+    </ui:define>
+
+</ui:composition>

@@ -4,7 +4,9 @@ import cfg.controller.LoginBean;
 import cfg.dao.PessoaDAO;
 import cfg.model.Pessoa;
 import csb.dao.CargoDAO;
+import csb.dao.SalarioDAO;
 import csb.model.Cargo;
+import csb.model.Salario;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -35,16 +37,15 @@ public class RecrutamentoBean {
 
     private final String sTitle = Recrutamento.sTitle;
     private final String pTitle = Recrutamento.pTitle;
-    private final String sTitleEntrevista = Entrevista.sTitle;
-    private final String pTitleEntrevistas = Entrevista.pTitle;
 
     private Recrutamento recrutamento;
     private RecrutamentoPessoasDAO recrutamentoPessoaDAO = new RecrutamentoPessoasDAO();
     private RecrutamentoDAO dao = new RecrutamentoDAO();
     private List<RecrutamentoPessoa> recrutamentoPessoas;
+    private DataModel recrutamentoPessoasDM;
     private List<Pessoa> pessoas;
     private Pessoa pessoaRecrutamento;
-    private RecrutamentoPessoa recrutementoPessoa;
+    private RecrutamentoPessoa recrutamentoPessoa;
 
     private PessoaDAO pesDao = new PessoaDAO();
     private Pessoa pessoa = new Pessoa();
@@ -62,6 +63,9 @@ public class RecrutamentoBean {
     private DataModel entrevistas;
     private List<CandidatosEntrevistas> candidatosEntrevistas;
 
+    private SalarioDAO daoSalario = new SalarioDAO();
+    private Salario salario = new Salario();
+    
     public RecrutamentoBean() {
     }
 
@@ -213,7 +217,7 @@ public class RecrutamentoBean {
             recruta.setRecrutamento(recrutamento);
             if (cr.isSelecionado()) {
                 if (cr.getStatus() == 0) {
-                    recruta.setRecPesStatus(1);
+                    recruta.setRecPesStatus(1); //Aguardando avaliação
                     recrutamentoPessoaDAO.insert(recruta);
                 }
 //                if (recruta.getRecrutamentoPessoaPK() == null) {
@@ -284,6 +288,7 @@ public class RecrutamentoBean {
             RecrutamentoPessoa recPes = new RecrutamentoPessoa();
             recPes.setRecrutamento(recrutamento);
             recPes.setPessoa(pessoaRecrutamento);
+            recPes.setRecPesStatus(2); //Em avaliação
             entrevista.setRecrutamentoPessoa(recPes);
         }
         if (entrevista.getEntCodigo() > 0) {
@@ -292,7 +297,7 @@ public class RecrutamentoBean {
             daoEntrevista.insert(entrevista);
         }
         recrutamento.setRecStatus(3);
-        recrutamentoPessoaDAO.update(recrutementoPessoa);
+        recrutamentoPessoaDAO.update(recrutamentoPessoa);
         dao.update(recrutamento);
         return pg;
     }
@@ -364,14 +369,69 @@ public class RecrutamentoBean {
         this.recrutamentoPessoas = recrutamentoPessoas;
     }
 
-    public RecrutamentoPessoa getRecrutementoPessoa() {
-        return recrutementoPessoa;
+    public DataModel getRecrutamentoPessoasDM() {
+        recrutamentoPessoasDM = new ListDataModel<>(getRecrutamentoPessoas());
+        return recrutamentoPessoasDM;
     }
 
-    public void setRecrutementoPessoa(RecrutamentoPessoa recrutementoPessoa) {
-        this.recrutementoPessoa = recrutementoPessoa;
+    public void setRecrutamentoPessoasDM(DataModel recrutamentoPessoasDM) {
+        this.recrutamentoPessoasDM = recrutamentoPessoasDM;
     }
 
+    public RecrutamentoPessoa getRecrutamentoPessoa() {
+        return recrutamentoPessoa;
+    }
+
+    public void setRecrutamentoPessoa(RecrutamentoPessoa recrutamentoPessoa) {
+        this.recrutamentoPessoa = recrutamentoPessoa;
+    }
+
+    public Salario getSalario() {
+        return salario;
+    }
+
+    public void setSalario(Salario salario) {
+        this.salario = salario;
+    }
+
+    public String selecionarPessoa() {
+        recrutamentoPessoa = (RecrutamentoPessoa) recrutamentoPessoasDM.getRowData();
+        salario = new Salario();
+        return "recrutamentoSelecionadofrm"; //Formulário cadastra funcionário
+    }
+    
+    public String selecionado() {
+        recrutamentoPessoa.setRecPesStatus(4); //Selecionado
+        recrutamentoPessoaDAO.update(recrutamentoPessoa);
+        
+        // Altera para Funcionário
+        Pessoa pessoa = pesDao.findById(recrutamentoPessoa.getPessoa().getPes_codigo());
+        pessoa.setPes_tipo(1); //Funcionário
+        pesDao.update(pessoa);
+        
+//        salario.setPlanejamentocargo();
+        salario.setCargo(recrutamento.getCargo());
+//        salario.setMotivoAlteracaoSalarial(null);
+        salario.setPessoa(pessoa);
+        salario.setSal_datainicio(new Date());
+        //salario.setSal_datafim(null); //Fica assim
+        salario.setSal_situacao(true);
+        daoSalario.insert(salario);
+        
+        return "recrutamentoSelecaolst";
+    }
+    
+    public String eliminarPessoa() {
+        recrutamentoPessoa = (RecrutamentoPessoa) recrutamentoPessoasDM.getRowData();
+        return "recrutamentoEliminadofrm"; //Formulário feedback
+    }
+    
+    public String eliminado() {
+        recrutamentoPessoa.setRecPesStatus(3); //Eliminado
+        recrutamentoPessoaDAO.update(recrutamentoPessoa);
+        return "recrutamentoSelecaolst";
+    }
+    
     public String voltar(String pg) {
         return pg;
     }

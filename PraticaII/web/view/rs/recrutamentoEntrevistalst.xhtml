@@ -4,15 +4,6 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
-    <ui:define name="title">
-        Entrevistas
-    </ui:define>
-
-    <ui:define name="breadcrumb">
-        <li>Entrevistas</li>
-        <li><h:link value="Candidatos do Recrutamento" outcome="/faces/view/rs/recrutamentolst" /></li>
-    </ui:define>
-
     <ui:define name="content">
         <h3><h:outputText value="Lista de Entrevistas"/></h3>
         <h:form>
@@ -57,7 +48,7 @@
                 <h:commandLink styleClass="btn btn-info" action="#{recrutamentoBean.voltar('recrutamentoCandidatos?faces-redirect=true')}">
                     <i class="fa fa-chevron-left"></i> Voltar
                 </h:commandLink>
-                <h:commandLink styleClass="btn btn-info" action="#{recrutamentoBean.voltar('recrutamentoSelecao?faces-redirect=true')}">
+                <h:commandLink styleClass="btn btn-info" action="#{recrutamentoBean.voltar('recrutamentoSelecaolst?faces-redirect=true')}">
                     Avançar <i class="fa fa-chevron-right"></i>
                 </h:commandLink>
             </div>

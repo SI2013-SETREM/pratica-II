@@ -32,7 +32,10 @@ public class RecrutamentoPessoa implements Serializable {
 //    private RecrutamentoPessoaPK recrutamentoPessoaPK;
 
     /**
-     * 1 - Aguardando avaliação 2 - Em avaliação 3 - Eliminado 4 - Selecionado
+     * 1 - Aguardando avaliação 
+     * 2 - Em avaliação 
+     * 3 - Eliminado 
+     * 4 - Selecionado
      */
     private int rec_pes_status;
 

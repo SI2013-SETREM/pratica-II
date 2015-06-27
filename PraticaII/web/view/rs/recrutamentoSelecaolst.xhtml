@@ -4,20 +4,11 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
-    <ui:define name="title">
-        Selecionar Candidatos
-    </ui:define>
-
-    <ui:define name="breadcrumb">
-        <li>Recrutamento</li>
-        <li><h:link value="Candidatos do Recrutamento" outcome="/faces/view/rs/recrutamentolst" /></li>
-    </ui:define>
-
     <ui:define name="content">
         <h3><h:outputText value="Candidatos do Recrutamento"/></h3>
         <f:view>
             <h:form styleClass="form-horizontal">
-                <h:dataTable value="${recrutamentoBean.candidatosRecrutamento}" var="item" styleClass="dataTable table table-bordered table-striped">
+                <h:dataTable value="${recrutamentoBean.recrutamentoPessoasDM}" var="item" styleClass="dataTable table table-bordered table-striped">
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="Código"/>
@@ -38,15 +29,21 @@
                     </h:column>
                     <h:column>
                         <f:facet name="header">
-                            <h:outputText value="RG"/>
+                            <h:outputText value="Selecionar"/>
                         </f:facet>
-                        <h:outputText value="${item.getPessoa().getPes_rg()}"/>
+                        <h:commandLink action="${recrutamentoBean.selecionarPessoa()}" rendered="#{item.getRecPesStatus() != 3 and item.getRecPesStatus() != 4}">
+                            <i class="fa fa-check-circle"></i> Selecionar
+                        </h:commandLink>
+                        <h:outputText value="Selecionado"  rendered="#{item.getRecPesStatus() == 4}"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">
-                            <h:outputText value="Selecionar"/>
+                            <h:outputText value="Eliminar"/>
                         </f:facet>
-                        <h:selectBooleanCheckbox value="#{item.selecionado}" disabled="#{item.status!=1 and item.status!=0}"/>
+                        <h:commandLink action="${recrutamentoBean.eliminarPessoa()}" rendered="#{item.getRecPesStatus() != 3 and item.getRecPesStatus() != 4}">
+                            <i class="fa fa-ban"></i> Eliminar
+                        </h:commandLink>
+                        <h:outputText value="Eliminado"  rendered="#{item.getRecPesStatus() == 3}"/>
                     </h:column>
                 </h:dataTable>
                 <div class="form-group row">

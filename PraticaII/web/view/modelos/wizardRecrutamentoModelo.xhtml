@@ -3,10 +3,18 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:h="http://xmlns.jcp.org/jsf/html">
 
+    <ui:define name="title">
+        Processo de Recrutamento e Seleção
+    </ui:define>
+    
+    <ui:define name="breadcrumb">
+        <li><h:link value="Processos de Recrutamento e Seleção" outcome="/faces/view/rs/recrutamentolst" /></li>
+    </ui:define>
+    
     <ui:define name="main-content">
         <div class="panel panel-body">
             <div class="row">
-                <div class="col-lg-8">
+                <div class="col-lg-9">
                     <ui:insert name="content"></ui:insert>
                 </div>
                 <div class="col-lg-3">
@@ -23,10 +31,20 @@
                                 <span class="menu-text">Selecionar Candidatos</span>
                             </h:link>
                         </li>
-                         <li class="#{view.viewId.contains('/rs/recrutamentoEntrevista') ? 'active' : ''}">
+                        <li class="#{view.viewId.contains('/rs/recrutamentoEntrevista') ? 'active' : ''}">
                             <h:link outcome="/faces/view/rs/recrutamentoEntrevistalst">
-                                <span class="fa fa-users"></span>
+                                <span class="fa fa-comments"></span>
                                 <span class="menu-text">Entrevistas</span>
+                            </h:link>
+                        </li>
+                        <li class="#{
+                            (view.viewId.contains('/rs/recrutamentoSelecao') 
+                            || view.viewId.contains('/rs/recrutamentoSelecionado') 
+                            || view.viewId.contains('/rs/recrutamentoEliminado')) 
+                                ? 'active' : ''}">
+                            <h:link outcome="/faces/view/rs/recrutamentoSelecaolst">
+                                <span class="fa fa-check-circle"></span>
+                                <span class="menu-text">Seleção</span>
                             </h:link>
                         </li>
                     </ul>

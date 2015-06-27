@@ -4,15 +4,6 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
-    <ui:define name="title">
-        Manutenção Recrutamento
-    </ui:define>
-
-    <ui:define name="breadcrumb">
-        <li>Recrutamento</li>
-        <li><h:link value="${recrutamentoBean.pTitle}" outcome="/faces/view/rs/recrutamentolst" /></li>
-    </ui:define>
-
     <ui:define name="content">
         <h3><h:outputText value="Dados do ${recrutamentoBean.sTitle}"/></h3>
         <f:view>

@@ -20,7 +20,7 @@
             <h:form styleClass="form-horizontal">
                 <h:inputHidden id="EntCodigo" value="#{recrutamentoBean.entrevista.entCodigo}" />
                 <div class="form-group">
-                    <h:outputLabel  value="Candidato:" for="recrutamentopessoa" styleClass="control-label col-sm-1 col-md-2" />
+                    <h:outputLabel  value="Candidato:" for="recrutamentopessoa" styleClass="control-label col-sm-1 col-md-3" />
                     <div class="col-md-8 col-sm-12">
                         <h:selectOneMenu id="recrutamentopessoa" converter="pessoaConverter" value="#{recrutamentoBean.pessoaRecrutamento}" styleClass="form-control">
                             <f:selectItems value="#{recrutamentoBean.pessoas}" var="tipe" itemLabel="#{tipe.pes_nome}" />
@@ -28,23 +28,23 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <h:outputLabel value="Data da entrevista:" for="entDatahora" styleClass="control-label col-sm-1 col-md-2" />
+                    <h:outputLabel value="Data da entrevista:" for="entDatahora" styleClass="control-label col-sm-1 col-md-3" />
                     <div class="col-md-4 col-sm-12">
                         <h:inputText pt:type="datetime" id="entDatahora" value="#{recrutamentoBean.entrevista.entDatahora}" title="Data Entrevista" styleClass="form-control">
                             <f:convertDateTime pattern="yyyy-MM-dd HH:mm"/>
                         </h:inputText>
                     </div> 
-                </div> 
+                </div>
                 <div class="form-group">
-                    <h:outputLabel value="Resumo entrevista:" for="ent_resumo_entrevista" styleClass="control-label col-sm-1 col-md-2" />
+                    <h:outputLabel value="Resumo entrevista:" for="ent_resumo_entrevista" styleClass="control-label col-sm-1 col-md-3" />
                     <div class="col-md-8 col-sm-12">
                         <h:inputTextarea rows="6" id="ent_resumo_entrevista" value="#{recrutamentoBean.entrevista.ent_resumo_entrevista}" styleClass="form-control" />
                     </div> 
                 </div>
                <div class="form-group">
-                    <h:outputLabel value="Status Candidato:" for="recPesStatus" styleClass="control-label col-sm-1 col-md-2" />
+                    <h:outputLabel value="Status Candidato:" for="recPesStatus" styleClass="control-label col-sm-1 col-md-3" />
                     <div style="padding-top: 5px" class="col-md-4 col-sm-12">
-                        <h:selectOneMenu value="#{recrutamentoBean.recrutementoPessoa.recPesStatus}" id="recPesStatus" class="form-control">
+                        <h:selectOneMenu value="#{recrutamentoBean.entrevista.recrutamentoPessoa.recPesStatus}" id="recPesStatus" class="form-control">
                             <f:selectItem itemValue="1" itemLabel="Aguardando avaliação"/>
                             <f:selectItem itemValue="3" itemLabel="Eliminado"/>
                             <f:selectItem itemValue="4" itemLabel="Selecionado"/>
