@@ -28,6 +28,12 @@
                             </h:column>
                             <h:column>
                                 <f:facet name="header">
+                                    <h:outputText value="Usuário"/>
+                                </f:facet>
+                                <h:outputText value="${item.getUsuario().getPessoa().getPes_nome()}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
                                     <h:outputText value="Tabela"/>
                                 </f:facet>
                                 <h:outputText value="${item.getLog_tabela()}"/>
