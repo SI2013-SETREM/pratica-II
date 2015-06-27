@@ -23,21 +23,25 @@
             }
         </style>
         <script type="text/javascript" src="http://code.highcharts.com/highcharts.js"></script>
+        <script type="text/javascript" src="http://code.highcharts.com/modules/funnel.js"></script>
         <script type="text/javascript" src="http://code.highcharts.com/modules/exporting.js"></script>
+        
         <script type="text/javascript">
             $(function () {
                 var list = new Array;
                 var count = $(".car-cargo").length;
                 for (var i = 0; i &lt; count; i++){
+                    debugger;
                     var dateBR = $(".car-datainicio").eq(i).text();
                     var dataBRA = new Array;
                     dataBRA = dateBR.split('/');
-                    var dataUS = dataBRA[2] + '-' + dataBRA[1] + '-' + (parseInt(dataBRA[0]) + 1);
+                    var dataUS = dataBRA[2] + '-' + dataBRA[1] + '-' + parseInt(dataBRA[0]);
                     var data = new Date(dataUS);
                     var dataG = Date.UTC(data.getFullYear(), data.getMonth(), data.getDate());
                     var sal = parseFloat($(".car-salario").eq(i).text().replace('R$ ', '').replace('.', '').replace(',', '.'));
                     list.push([dataG, sal]);
                 }
+                
                 $('#container-evolution').highcharts({
                     chart: {
                         type: 'spline'
@@ -78,6 +82,40 @@
                     series: [{
                             name: $(".pesNome").text().replace('Histórico de ',''),
                             data: list
+                        }]
+                });
+                
+                var listaM = new Array;
+                for (var i = 0; i &lt; $(".car_ordem").length; i++) {
+                    listaM.push([$(".car_descricao").eq(i).text(), parseInt($(".car_tempominimo").eq(i).text())]);
+                }
+
+                $('#container').highcharts({
+                    chart: {
+                        type: 'pyramid',
+                        marginRight: 100
+                    },
+                    title: {
+                        text: 'Plano de Carreira',
+                        x: -50
+                    },
+                    plotOptions: {
+                        series: {
+                            dataLabels: {
+                                enabled: true,
+                                format: '<b>{point.name}</b> ({point.y:,.0f})',
+                                color: 'black',
+                                softConnector: true
+                            }
+                        }
+                    },
+                    legend: {
+                        enabled: false
+                    },
+                    series: [{
+                            name: 'Pirâmide Evolucional',
+                            data:
+                                    listaM
                         }]
                 });
             });
@@ -138,6 +176,34 @@
                     <h3><h:outputText value="Evolução de ${salarioBean.salario.pessoa.pes_nome}"/></h3>
                     <div id="container-evolution"></div>
                 </h:form>
+                <h:form styleClass="form-horizontal">
+                    <h:inputHidden id="planejamento" value="#{salarioBean.salario.planejamentocargo.planejamento}" converter="planejamentoConverter"/> 
+                    <h:dataTable value="${salarioBean.getPlanocargos(salarioBean.salario.planejamentocargo.planejamento)}" var="item" styleClass="dataTable table table-bordered table-striped">
+                        <h:column>
+                            <f:facet name="header">
+                                <i class="fa fa-level-up fa-fw" />
+                                <h:outputText value="Ordem Evolutiva"/>
+                            </f:facet>
+                            <h:outputText styleClass='car_ordem' value="${item.getCar_ordem()}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <i class="fa fa-briefcase fa-fw" />
+                                <h:outputText value="Cargo"/>
+                            </f:facet>
+                            <h:outputText styleClass='car_descricao' value="${item.getCargo().getCar_descricao()}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <i class="fa fa-clock-o fa-fw" />
+                                <h:outputText value="Tempo Mínino para Avanço (dias)"/>
+                            </f:facet>
+                            <h:outputText styleClass='car_tempominimo' value="${item.getCar_tempominimo()}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:form>
+                <div id="container" style="min-width: 410px; max-width: 50%; margin: 0 auto"></div>
+                <hr />
             </f:view>
         </div>
     </ui:define>

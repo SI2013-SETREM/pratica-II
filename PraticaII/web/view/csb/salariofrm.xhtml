@@ -23,6 +23,19 @@
         <script type="text/javascript" src="http://code.highcharts.com/modules/exporting.js"></script>
         <script type="text/javascript">
             $(function () {
+                var salMin = parseFloat($("#salValores").attr('data-valormin'));
+                var salMax = parseFloat($("#salValores").attr('data-valormax'));
+                $(".salSalario").attr('min', salMin);
+                $(".salSalario").attr('max', salMax);
+                
+                $(".salCargo").blur(function(){
+                    var nSalMin = parseFloat($(".salCargo :selected").text().split('|')[1].replace(' Piso (R$): ','').replace(' ',''));
+                    var nSalMax = parseFloat($(".salCargo :selected").text().split('|')[2].replace(' Teto (R$): ',''));
+                    $(".salSalario").attr('min', nSalMin);
+                    $(".salSalario").attr('max', nSalMax);
+                });
+                
+                
                 var data = new Date();
                 var mes = parseInt(parseInt(data.getMonth()) + 1);
                 var dia = data.getDate();
@@ -175,12 +188,13 @@
                     </h:inputHidden>
                     <h:inputHidden id="sal_situacao" value="#{salarioBean.salario.sal_situacao}"/>
                     <!--SALARIO-->
+                    <div id='salValores' data-valormin='#{salarioBean.salario.cargo.car_pisosalarial}' data-valormax='#{salarioBean.salario.cargo.car_tetosalarial}'></div>
                     <div class="form-group">
                         <h:outputLabel value="Valor:" for="sal_valorbruto" styleClass="control-label col-sm-2" />
                         <div class="col-md-6 col-sm-12">
                             <div class="input-group">
                                 <div class="input-group-addon">R$</div>
-                                <h:inputText pt:type="number" pt:min="1" pt:max="100000" pt:step="0.10" pt:required="required" id="sal_valorbruto" value="#{salarioBean.salario.sal_valorbruto}" title="Valor (R$)" styleClass="form-control salSalario" />
+                                <h:inputText pt:type="number" pt:min="1" pt:max="10000" pt:step="0.10" pt:required="required" id="sal_valorbruto" value="#{salarioBean.salario.sal_valorbruto}" title="Valor (R$)" styleClass="form-control salSalario" />
                             </div>
                         </div>
                     </div>
@@ -207,17 +221,17 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <h:outputLabel value="Mudança de Cargo?" for="promocao" styleClass="control-label col-sm-2" />
+                        <h:outputLabel value="Avançar no Plano de Carreira?" for="promocao" styleClass="control-label col-sm-2" />
                         <div style="padding-top: 5px" class="col-md-6 col-sm-12">
                             <h:selectBooleanCheckbox value="false" id="promocao" styleClass="promocao" title="Se marcado possibilita mudança de cargo!" />
                         </div>
                     </div>
                     <div id="haveParent" style="display: none;">
                         <div class="form-group">
-                            <h:outputLabel value="Cargo: " for="salCargo" styleClass="control-label col-sm-2" />
+                            <h:outputLabel value="Próximo Cargo: " for="salCargo" styleClass="control-label col-sm-2" />
                             <div class="col-md-6 col-sm-12">
-                                <h:selectOneMenu id="salCargo" pt:required="true" converter="cargoConverter" value="#{salarioBean.salario.cargo}" styleClass="form-control" >
-                                    <f:selectItems value="#{salarioBean.lstCargo}" var="tipe" itemLabel="#{tipe.car_descricao} | CBO: #{tipe.car_cbo}"/>
+                                <h:selectOneMenu id="salCargo" pt:required="true" converter="cargoConverter" value="#{salarioBean.salario.cargo}" styleClass="form-control salCargo" >
+                                    <f:selectItems value="#{salarioBean.getLstCargo(salarioBean.salario)}" var="tipe" itemLabel="#{tipe.car_descricao} | Piso (R$): #{tipe.car_pisosalarial} | Teto (R$): #{tipe.car_tetosalarial}"/>
                                 </h:selectOneMenu>
                             </div>
                         </div>

@@ -51,6 +51,14 @@
                             <i class="fa fa-gears"></i> Gerenciar
                         </h:commandLink>
                     </h:column>
+                    <h:column headerClass="col-editar-header">
+                        <f:facet name="header">
+                            <h:outputText value="Gerenciar"/>
+                        </f:facet>
+                        <h:commandLink action="${planejamentoCarreiraBean.seePlan(item)}">
+                            <i class="fa fa-eye"></i> Ver Plano
+                        </h:commandLink>
+                    </h:column>
                     <h:column headerClass="col-excluir-header">
                         <f:facet name="header">
                             <h:outputText value="Excluir"/>

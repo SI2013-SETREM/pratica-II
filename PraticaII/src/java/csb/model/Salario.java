@@ -43,6 +43,10 @@ public class Salario implements Serializable {
     @JoinColumn(name = "pes_codigo", referencedColumnName = "pes_codigo")
     private Pessoa pessoa;
 
+    @ManyToOne
+    @JoinColumn(name = "pln_codigo", referencedColumnName = "pln_codigo")
+    private PlanejamentoCargos planejamentocargo;
+
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date sal_datainicio;
     @Temporal(javax.persistence.TemporalType.DATE)
@@ -95,6 +99,14 @@ public class Salario implements Serializable {
         this.pessoa = pessoa;
     }
 
+    public PlanejamentoCargos getPlanejamentocargo() {
+        return planejamentocargo;
+    }
+
+    public void setPlanejamentocargo(PlanejamentoCargos planejamentocargo) {
+        this.planejamentocargo = planejamentocargo;
+    }
+    
     public Date getSal_datainicio() {
         return sal_datainicio;
     }

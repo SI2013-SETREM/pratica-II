@@ -1,6 +1,7 @@
 package csb.dao;
 
 import csb.model.Cargo;
+import csb.model.PlanejamentoCargos;
 import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -74,16 +75,21 @@ public class CargoDAO {
         return (Cargo) getSession().load(Cargo.class, car_codigo);
     }
 
-    public List<Cargo> findAll() {
-        Query q = getSession().createQuery("from Cargo ORDER BY car_pai");
-        return q.list();
-    }
-
     public List<Cargo> findAllChildrens() {
         Query q = getSession().createQuery("from Cargo where car_pai is not null order by car_pai asc");
         return q.list();
     }
-    
+
+    public List<Cargo> findAll() {
+        Query q = getSession().createQuery("from Cargo order by car_descricao asc");
+        return q.list();
+    }
+
+    public List<Cargo> findPlanoDoCargo(PlanejamentoCargos pln_codigo) {
+        Query q = getSession().createSQLQuery("from Cargo where car_codigo in (select car_codigo from PlanejamentoCargos where pla_codigo = (select pla_codigo from PlanejamentoCargos where pln_codigo = " + pln_codigo + ") order by car_ordem);");
+        return q.list();
+    }
+
     public List<Cargo> findAllParents() {
         Query q = getSession().createQuery("from Cargo where car_pai is null order by car_descricao asc");
         return q.list();

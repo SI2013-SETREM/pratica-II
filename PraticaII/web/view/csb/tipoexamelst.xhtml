@@ -33,7 +33,7 @@
                         <f:facet name="header">
                             <h:outputText value="Tipo"/>
                         </f:facet>
-                        <h:outputText value="${item.getEme_tipo() == 'A' ? 'ADMISSIONAL' : $item.getEme_tipo() == 'D' ? 'DEMISSIONAL' : $item.getEme_tipo() == 'P' ? 'PERIODICO' : $item.getEme_tipo() == 'R' ? 'RETORNO AO TRABALHO' : $item.getEme_tipo() == 'M' ? 'MUDANÇA DE CARGO' : 'DESCONHECIDO'}"/>
+                        <h:outputText value="${item.getDescEmeTipo()}"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">

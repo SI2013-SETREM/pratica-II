@@ -1,0 +1,119 @@
+<ui:composition template="./../modelos/default.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+    <ui:define name="title">
+        ${planejamentoCarreiraBean.pTitle}
+    </ui:define>
+
+    <ui:define name="header">
+        <script type="text/javascript" src="http://code.highcharts.com/highcharts.js"></script>
+        <script type="text/javascript" src="http://code.highcharts.com/modules/funnel.js"></script>
+        <script type="text/javascript" src="http://code.highcharts.com/modules/exporting.js"></script>
+        <script type='text/javascript'>
+            $(function () {
+                var list = new Array;
+                for (var i = 0; i &lt; $(".car_ordem").length; i++) {
+                    list.push([$(".car_descricao").eq(i).text(), parseInt($(".car_tempominimo").eq(i).text())]);
+                }
+
+                $('#container').highcharts({
+                    chart: {
+                        type: 'pyramid',
+                        marginRight: 100
+                    },
+                    title: {
+                        text: 'Plano de Carreira',
+                        x: -50
+                    },
+                    plotOptions: {
+                        series: {
+                            dataLabels: {
+                                enabled: true,
+                                format: '<b>{point.name}</b> ({point.y:,.0f})',
+                                color: 'black',
+                                softConnector: true
+                            }
+                        }
+                    },
+                    legend: {
+                        enabled: false
+                    },
+                    series: [{
+                            name: 'Pirâmide Evolucional',
+                            data:
+                                    list
+                        }]
+                });
+            });
+        </script>
+    </ui:define>
+
+    <ui:define name="breadcrumb">
+        <li>Cargos, Salários e Benefícios</li>
+        <li><h:link value="${planejamentoCarreiraBean.pTitle}" outcome="/faces/view/csb/planejamentocarreiralst" /></li>
+    </ui:define>
+
+    <ui:define name="main-content">
+        <div class="panel panel-body">
+            <h3><h:outputText value="Plano de Carreira atual para "/><b>${planejamentoCarreiraBean.planocargo.planejamento.pla_descricao}</b></h3>
+            <hr />
+            <f:view>
+                <h:form pt:style='display: none;' styleClass="form-horizontal">
+                    <h:inputHidden id="planejamento" value="#{planejamentoCarreiraBean.planocargo.planejamento}" converter="planejamentoConverter"/> 
+                    <h:dataTable value="${planejamentoCarreiraBean.getPlanocargos(planejamentoCarreiraBean.planocargo.planejamento)}" var="item" styleClass="dataTable table table-bordered table-striped">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="car_ordem"/>
+                            </f:facet>
+                            <h:outputText styleClass='car_ordem' value="${item.getCar_ordem()}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="car_descricao"/>
+                            </f:facet>
+                            <h:outputText styleClass='car_descricao' value="${item.getCargo().getCar_descricao()}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="car_tempominimo"/>
+                            </f:facet>
+                            <h:outputText styleClass='car_tempominimo' value="${item.getCar_tempominimo()}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:form>
+                <div id="container" style="min-width: 410px; max-width: 50%; margin: 0 auto"></div>
+                <hr />
+                <h:form styleClass="form-horizontal">
+                    <h3><h:outputText value="Plano de Carreira atual para "/><b>${planejamentoCarreiraBean.planocargo.planejamento.pla_descricao}</b></h3>
+                    <h:dataTable value="${planejamentoCarreiraBean.getPlanocargos(planejamentoCarreiraBean.planocargo.planejamento)}" var="item2" styleClass="dataTable table table-bordered table-striped">
+                        <h:column>
+                            <f:facet name="header">
+                                <i class="fa fa-level-up fa-fw" />
+                                <h:outputText value="Ordem Evolutiva"/>
+                            </f:facet>
+                            <h:outputText value="${item2.getCar_ordem()}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <i class="fa fa-briefcase fa-fw" />
+                                <h:outputText value="Cargo"/>
+                            </f:facet>
+                            <h:outputText value="${item2.getCargo().getCar_descricao()}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <i class="fa fa-clock-o fa-fw" />
+                                <h:outputText value="Tempo Mínimo para Avanço"/>
+                            </f:facet>
+                            <h:outputText value="${item2.getCar_tempominimo()} dias"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:form>
+            </f:view>
+        </div>
+    </ui:define>
+</ui:composition>

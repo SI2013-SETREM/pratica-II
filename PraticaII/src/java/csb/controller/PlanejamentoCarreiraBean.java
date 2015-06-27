@@ -113,6 +113,11 @@ public class PlanejamentoCarreiraBean {
         return "planejamentocarreiramanager";
     }
 
+    public String seePlan(PlanejamentoCarreira p) {
+        this.planocargo.setPlanejamento(p);
+        return "planejamentocarreira";
+    }
+
     public String update() {
         dao.update(planejamento);
         return "planejamentocarreiralst";
@@ -146,7 +151,12 @@ public class PlanejamentoCarreiraBean {
         } else {
             List<PlanejamentoCargos> lsConfirm = daoPC.findByPlanejamentoCargo(planocargo.getPlanejamento().getPla_codigo(), planocargo.getCargo().getCar_codigo());
             if (lsConfirm == null || lsConfirm.isEmpty()) {
-                daoPC.insert(planocargo);
+                List<PlanejamentoCargos> lsConfirmOrd = daoPC.findByPlanejamentoOrdem(planocargo.getPlanejamento().getPla_codigo(), planocargo.getCar_ordem());
+                if (lsConfirmOrd == null || lsConfirmOrd.isEmpty()) {
+                    daoPC.insert(planocargo);
+                } else {
+                    throw new Error("Desculpe, este registro nao pode ser inserido pois já existe um cargo utilizando esta ordem!");
+                }
             } else {
                 throw new Error("Desculpe, este registro nao pode ser inserido pois este cargo já pertence ao planejamento!");
             }

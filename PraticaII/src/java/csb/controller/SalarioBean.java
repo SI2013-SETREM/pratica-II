@@ -7,9 +7,12 @@ import cfg.model.Pessoa;
 import cfg.model.Usuario;
 import csb.dao.CargoDAO;
 import csb.dao.MotivoAlteracaoSalarialDAO;
+import csb.dao.PlanejamentoCargosDAO;
 import csb.dao.SalarioDAO;
 import csb.model.Cargo;
 import csb.model.MotivoAlteracaoSalarial;
+import csb.model.PlanejamentoCargos;
+import csb.model.PlanejamentoCarreira;
 import csb.model.Salario;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +40,10 @@ public class SalarioBean {
     private Cargo cargo = new Cargo();
     private CargoDAO cargoDAO = new CargoDAO();
 
+    private PlanejamentoCargos planocargo;
+    private PlanejamentoCargosDAO daoPLN = new PlanejamentoCargosDAO();
+    private DataModel planocargos;
+
     private List<Pessoa> lstPessoa;
     private Pessoa pessoa = new Pessoa();
     private PessoaDAO pessoaDAO = new PessoaDAO();
@@ -60,6 +67,23 @@ public class SalarioBean {
 
     public String getpTitle() {
         return pTitle;
+    }
+
+    public DataModel getPlanocargos(PlanejamentoCarreira p) {
+        this.planocargos = new ListDataModel(daoPLN.findByPlanejamento(p.getPla_codigo()));
+        return planocargos;
+    }
+
+    public void setPlanocargos(DataModel planocargos) {
+        this.planocargos = planocargos;
+    }
+
+    public PlanejamentoCargos getPlanocargo() {
+        return planocargo;
+    }
+
+    public void setPlanocargo(PlanejamentoCargos planocargo) {
+        this.planocargo = planocargo;
     }
 
     public Salario getSalario() {
@@ -98,20 +122,11 @@ public class SalarioBean {
     }
 
     public DataModel getSalariosOff() {
-        List<Salario> lsSalBank = dao.findSalariosInativos();
-        List<Salario> lsSal = new ArrayList<Salario>();
-        for (Salario sal : lsSalBank) {
-            boolean contem = false;
-            if (lsSal.size() > 0) {
-                for (Salario se : lsSal) {
-                    if (sal.getPessoa().getPes_codigo() == se.getPessoa().getPes_codigo()) {
-                        contem = true;
-                    }
-                }
-            }
-            if (!contem) {
-                lsSal.add(sal);
-            }
+        List<Pessoa> lsPessoa = pessoaDAO.findCandidatos("2");
+        List<Salario> lsSal = new ArrayList<>();
+        for (Pessoa lsPessoa1 : lsPessoa) {
+            List<Salario> teste = dao.findBySalPessoaIdInativo(lsPessoa1.getPes_codigo());
+            lsSal.add(teste.get(0));
         }
         this.salariosOff = new ListDataModel(lsSal);
         return salariosOff;
@@ -171,6 +186,7 @@ public class SalarioBean {
     public String history(Salario sal) {
         salario = (Salario) salarios.getRowData();
         this.salariosHistorico = new ListDataModel(dao.findBySalPessoaId(sal.getPessoa().getPes_codigo()));
+        this.planocargos = new ListDataModel(daoPLN.findByPlanejamento(sal.getPlanejamentocargo().getPlanejamento().getPla_codigo()));
         return "historiasalario";
     }
 
@@ -189,6 +205,9 @@ public class SalarioBean {
             sal.setSal_datafim(salario.getSal_datafim());
             salario = null;
             dao.turnOffEmployer(sal);
+            Pessoa deslig = pessoaDAO.findById(sal.getPessoa().getPes_codigo());
+            deslig.setPes_tipo(2);
+            pessoaDAO.update(deslig);
             return "salariolst";
         } else {
             throw new Error("As credenciais fornecidas são inválidas, tente novamente!");
@@ -234,9 +253,19 @@ public class SalarioBean {
         this.lstMotivoAlteracaoSalarial = lstMotivoAlteracaoSalarial;
     }
 
-    public List<Cargo> getLstCargo() {
-        lstCargo = cargoDAO.findAllChildrens();
-        return lstCargo;
+    /*RETORNARA APENAS O PROXIMO CARGO DO PLANO DE CARREIRA*/
+    public List<Cargo> getLstCargo(Salario s) {
+        if (s == null || s.getSal_codigo() == 0) {
+            this.lstCargo = cargoDAO.findAllChildrens();
+            return this.lstCargo;
+        } else {
+            this.lstCargo = new ArrayList<Cargo>();
+            List<PlanejamentoCargos> lstt = daoPLN.findByPlanejamento(s.getPlanejamentocargo().getPlanejamento().getPla_codigo());
+            for (int i = 0; i < lstt.size(); i++) {
+                this.lstCargo.add(lstt.get(i).getCargo());
+            }
+            return this.lstCargo;
+        }
     }
 
     public void setLstCargo(List<Cargo> lstCargo) {

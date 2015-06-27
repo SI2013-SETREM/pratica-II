@@ -42,12 +42,12 @@ public class PlanejamentoCargosDAO {
     }
 
     public List<PlanejamentoCargos> findAll() {
-        Query q = session.createQuery("from PlanejamentoCargos order by pla_codigo asc");
+        Query q = session.createQuery("from PlanejamentoCargos order by car_ordem asc");
         return q.list();
     }
 
     public List<PlanejamentoCargos> findByCargo(int car_codigo) {
-        Query q = session.createQuery("from PlanejamentoCargos where car_codigo = " + car_codigo + " order by pla_codigo, car_ordem asc");
+        Query q = session.createQuery("from PlanejamentoCargos where car_codigo = " + car_codigo + " order by car_ordem asc");
         return q.list();
     }
 

@@ -89,6 +89,11 @@ public class SalarioDAO {
         return q.setParameter("pes_codigo", pes_codigo).list();
     }
     
+    public List<Salario> findBySalPessoaIdInativo(int pes_codigo) {
+        Query q = session.createQuery("from Salario where pes_codigo = :pes_codigo and sal_situacao = false order by sal_datafim desc");
+        return q.setParameter("pes_codigo", pes_codigo).list();
+    }
+    
     public List<Salario> findSalByCargo(int car_codigo) {
         Query q = session.createQuery("from Salario where car_codigo = :car_codigo order by pes_codigo asc");
         return q.setParameter("car_codigo", car_codigo).list();

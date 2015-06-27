@@ -84,7 +84,21 @@ public class TipoExame implements Serializable {
     public void setEme_intervalorepeticao(int eme_intervalorepeticao) {
         this.eme_intervalorepeticao = eme_intervalorepeticao;
     }
-    
+
+    public String getDescEmeTipo() {
+        if (eme_tipo == 'A') {
+            return "Admissional";
+        } else if (eme_tipo == 'D') {
+            return "Demissional";
+        } else if (eme_tipo == 'M') {
+            return "Mudança de Cargo/Função";
+        } else if (eme_tipo == 'P') {
+            return "Periódico";
+        } else {
+            return "Desconhecido";
+        }
+    }
+
     @Override
     public int hashCode() {
         int hash = 5;
@@ -106,7 +120,7 @@ public class TipoExame implements Serializable {
         }
         return true;
     }
-    
+
     @Override
     public String toString() {
         return getEme_descricao();
