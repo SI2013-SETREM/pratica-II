@@ -51,7 +51,8 @@ public class FuncionarioBean {
     private Pessoa pessoa = new Pessoa();
     private final PessoaDAO pessoaDAO = new PessoaDAO();
     private DataModel<Pessoa> funcionarios;
-
+    private List<Pessoa> dependentes;
+    
     private final BeneficiosPessoaDAO beneficiosPessoaDAO = new BeneficiosPessoaDAO();
     private List<BeneficiosPessoa> beneficios;
 
@@ -196,7 +197,7 @@ public class FuncionarioBean {
             faltas = faltaDAO.findFaltas(pessoa.getPes_codigo());
             graduacoes = graduacoesPessoaDAO.findByGraduacoesId(pessoa.getPes_codigo());
             advertencias = advertenciaDAO.findByAvertId(pessoa.getPes_codigo());
-
+            dependentes = pessoaDAO.findByDependentesId(pessoa.getPes_codigo());
         } else {
             beneficios = new ArrayList<>();
             faltas = new ArrayList<>();
@@ -205,6 +206,7 @@ public class FuncionarioBean {
             graduacoes = new ArrayList<>();
             salarios = new ArrayList<>();
             advertencias = new ArrayList<>();
+            dependentes = new ArrayList<>();
         }
         return "fichafunfrm";
     }
@@ -287,7 +289,7 @@ public class FuncionarioBean {
         this.estadoCivil = estadoCivil;
     }
 
-    public String getTipoPessoa(String p) {
+    public String getTipoPessoa() {
 
         String tipo = "";
         int valor = pessoa.getPes_tipo();
@@ -772,6 +774,14 @@ public class FuncionarioBean {
 
     public void setAdvertencia(Advertencia advertencia) {
         this.advertencia = advertencia;
+    }
+
+    public List<Pessoa> getDependentes() {
+        return dependentes;
+    }
+
+    public void setDependentes(List<Pessoa> dependentes) {
+        this.dependentes = dependentes;
     }
 
 }

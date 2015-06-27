@@ -72,7 +72,7 @@ public class FolhaPagamentoBean {
     private calculoFolha calculoFolha = new calculoFolha();
 
     private String tipoPessoa;
-
+    private String tipoempresa;
     private int idEvento;
 
     /* PIRES */
@@ -570,6 +570,10 @@ public class FolhaPagamentoBean {
         }
 
         return tipo;
+    }
+
+    public void setTipoempresa(String tipoempresa) {
+        this.tipoempresa = tipoempresa;
     }
 
 }

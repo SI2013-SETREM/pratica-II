@@ -38,6 +38,10 @@ public class PessoaDAO {
     public Pessoa findById(int pes_codigo) {
         return (Pessoa) session.load(Pessoa.class, pes_codigo);
     }
+    public List<Pessoa> findByDependentesId(int pes_dependente) {
+        Query q = session.createQuery("from Pessoa where pes_dependente = :pes_dependente");
+        return q.setParameter("pes_dependente", pes_dependente).list();
+    }
 
     public List<Pessoa> findAll() {
         Query q = session.createQuery("from Pessoa");

@@ -81,14 +81,6 @@
                                 <div class="col-md-4 col-xs-3 autocomplete">
                                     <h:inputText readonly="true" pt:autofocus=""  id="idEmpresa" value="#{folhaPagamentoBean.pessoa.empresa}" title=" Nome da Empresa" styleClass="form-control" />
                                 </div>
-
-
-
-
-                                <h:outputLabel value="Tipo:" for="idtipoemp" styleClass="control-label col-md-2" />
-                                <div class=" col-xs-4" >
-                                    <h:outputLabel value="#{folhaPagamentoBean.pessoa.empresa.emp_tipo}" for="idtipoemp" styleClass="control-label" />
-                                </div>
                             </div>
                             <div class="form-group">
                                 <h:outputLabel value="Endereço:" for="idEndereco" styleClass="control-label col-md-2" />
@@ -148,12 +140,7 @@
                             <div id="padrao">
                                 <h:outputLabel value="Eventos Padrões para o Colaborador"  styleClass="control-label col-md-2" />
                                 <h:dataTable var="fl" value="${folhaPagamentoBean.eventosPadroes}" styleClass=" table table-bordered table-striped">
-<!--                                    <h:column>
-                                        <f:facet name="header">
-                                            <h:outputText value="Código"/>
-                                        </f:facet>
-                                        <h:outputText value="{fl.evp_codigo}" /> 
-                                    </h:column>-->
+
 
                                     <h:column>
                                         <f:facet name="header">
@@ -203,37 +190,6 @@
 
                             <div id="folha" >
                                 <div>
-<!--                                    <h:dataTable var="itens" value="${folhaPagamentoBean.dataModelEveFolhas}" styleClass=" table table-bordered table-striped">
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="Código"/>
-                                            </f:facet>
-                                            <h:outputText value="${itens.eve_evento.eve_codigo}" /> 
-                                        </h:column>
-
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="Descrição"/>
-                                            </f:facet>
-                                            <h:outputText value="${itens.evf_descricao}" /> 
-                                        </h:column>
-
-
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="Indice"/>
-                                            </f:facet>
-                                            <h:outputText value="${itens.evf_indice }" />
-                                        </h:column>
-
-                                        <p:column>
-                                            <f:facet name="header">
-                                                <h:outputText value="Valor"/>
-                                            </f:facet>
-                                            <h:outputText value="${itens.evf_valor}" />
-                                        </p:column>
-                                    </h:dataTable>-->
-                                    
                                     
                                       <h:dataTable var="itens" value="${folhaPagamentoBean.dataModelEveFolhas}" styleClass=" table table-bordered table-striped">
                                         <h:column>
