@@ -55,8 +55,12 @@
                         <h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{recrutamentoBean.salvarCandidatos('recrutamentolst?faces-redirect=true')}"/>
                     </div>
                     <div class="col-lg-6 btn-group-separated" style="text-align: right">
-                        <h:commandButton styleClass="btn btn-info" value="Voltar" action="#{recrutamentoBean.voltar('recrutamentofrm?faces-redirect=true')}"/>
-                        <h:commandButton styleClass="btn btn-info" value="Avançar" action="#{recrutamentoBean.salvarCandidatos('recrutamentoEntrevistalst?faces-redirect=true')}"/>
+                        <h:commandLink styleClass="btn btn-info" action="#{recrutamentoBean.voltar('recrutamentofrm?faces-redirect=true')}">
+                            <i class="fa fa-chevron-left"></i> Voltar
+                        </h:commandLink>
+                        <h:commandLink styleClass="btn btn-info" action="#{recrutamentoBean.salvarCandidatos('recrutamentoEntrevistalst?faces-redirect=true')}">
+                            Avançar <i class="fa fa-chevron-right"></i>
+                        </h:commandLink>
                     </div>
                 </div>
             </h:form>

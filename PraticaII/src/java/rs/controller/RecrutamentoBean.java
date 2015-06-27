@@ -22,6 +22,7 @@ import rs.model.CandidatosEntrevistas;
 import rs.model.Entrevista;
 import rs.model.Recrutamento;
 import rs.model.RecrutamentoPessoa;
+import rs.model.RecrutamentoPessoaPK;
 import util.Utilidades;
 
 /**
@@ -125,6 +126,10 @@ public class RecrutamentoBean {
     }
 
     public Entrevista getEntrevista() {
+        if (entrevista == null) {
+            entrevista = new Entrevista();
+            entrevista.setEntDatahora(new Date());
+        }
         return entrevista;
     }
 
@@ -181,10 +186,10 @@ public class RecrutamentoBean {
         recrutamento.setRecInicio(new Date());
         return pg;
     }
-    
-     public String novaEntrevista(String pg) {
+
+    public String novaEntrevista(String pg) {
         this.entrevista = new Entrevista();
-//        entrevista.setRecrutamentoPessoa(null);
+        entrevista.setEntDatahora(new Date());
         return pg;
     }
 
@@ -207,7 +212,10 @@ public class RecrutamentoBean {
 //                recruta.getRecrutamentoPessoaPK().setRecrutamento(recrutamento.getRecCodigo());
 //                rp.add(recruta);
             } else if (cr.getStatus() != 0) {
-                recruta = recrutamentoPessoaDAO.findById(recruta);
+                RecrutamentoPessoaPK rp = new RecrutamentoPessoaPK();
+                rp.setPessoa(recruta.getPessoa());
+                rp.setRecrutamento(recruta.getRecrutamento());
+                recruta = recrutamentoPessoaDAO.findByPKId(rp);
                 recrutamentoPessoaDAO.delete(recruta);
             }
         }

@@ -45,9 +45,13 @@
                         </h:commandLink>
                     </h:column>
                 </h:dataTable>
-                <div class="col-lg-6" style="text-align: right">
-                    <h:commandButton styleClass="btn btn-info" value="Voltar" action="#{recrutamentoBean.voltar('recrutamentoC?faces-redirect=true')}"/>
-                    <h:commandButton styleClass="btn btn-info" value="Avançar" action="#{recrutamentoBean.salvarEntrevista('recrutamentoSelecao?faces-redirect=true')}"/>
+                <div class="col-lg-12 btn-group-separated" style="text-align: right">
+                    <h:commandLink styleClass="btn btn-info" action="#{recrutamentoBean.voltar('recrutamentoCandidatos?faces-redirect=true')}">
+                        <i class="fa fa-chevron-left"></i> Voltar
+                    </h:commandLink>
+                    <h:commandLink styleClass="btn btn-info" action="#{recrutamentoBean.voltar('recrutamentoSelecao?faces-redirect=true')}">
+                        Avançar <i class="fa fa-chevron-right"></i>
+                    </h:commandLink>
                 </div>
             </h:form>
         </div>

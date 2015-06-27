@@ -21,10 +21,11 @@ public class RecrutamentoPessoaConverter implements javax.faces.convert.Converte
         System.err.println("CONVERTER PARAMETROS: " + parametros[0] + "-" + parametros[1]);
         Pessoa p = new PessoaDAO().findById(Integer.parseInt(parametros[0]));
         Recrutamento r = new RecrutamentoDAO().findById(Integer.parseInt(parametros[1]));
-        RecrutamentoPessoaPK rp = new RecrutamentoPessoaPK();
+        RecrutamentoPessoa rp = new RecrutamentoPessoa();
         rp.setPessoa(p);
         rp.setRecrutamento(r);
-        return new RecrutamentoPessoasDAO().findByPKId(rp);
+        return new RecrutamentoPessoasDAO().findById(rp);
+//        return new RecrutamentoPessoasDAO().findByPKId(rp);
     }
     
     @Override
