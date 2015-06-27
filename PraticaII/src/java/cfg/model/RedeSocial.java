@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import util.Utilidades;
 
 @Entity
 @Table(name = "redesocial")
@@ -25,7 +26,6 @@ public class RedeSocial implements Serializable {
     @Id
     @SequenceGenerator(name = "rsc_codigo", sequenceName = "rsc_codigo")
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "rsc_codigo")
- 
     private int rsc_codigo;
     private String rsc_nome;
     private String rsc_url;
@@ -36,14 +36,6 @@ public class RedeSocial implements Serializable {
     private Repositorio repositorio;
 
     public RedeSocial() {
-    }
-
-    public RedeSocial(int rsc_codigo, String rsc_nome, String rsc_url, String rsc_urlperfil, Repositorio repositorio) {
-        this.rsc_codigo = rsc_codigo;
-        this.rsc_nome = rsc_nome;
-        this.rsc_url = rsc_url;
-        this.rsc_urlperfil = rsc_urlperfil;
-        this.repositorio = repositorio;
     }
 
     public int getRsc_codigo() {
@@ -86,6 +78,12 @@ public class RedeSocial implements Serializable {
         this.repositorio = repositorio;
     }
     
+    public String getImageUrl() {
+        if (this.getRepositorio() != null) {
+            return Utilidades.getLoginBean().getImageUrl(this.getRepositorio().getRep_codigo());
+        }
+        return "";
+    }
     
     @Override
     public int hashCode() {

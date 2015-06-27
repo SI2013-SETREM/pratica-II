@@ -72,7 +72,19 @@ public class Pessoa implements Serializable {
     private String pes_email;
     private String pes_pai;
     private String pes_mae;
+    /**
+     * 1 - Funcionário
+     * 2 - Ex Funcionário
+     * 3 - Pessoa de Fora (Candidatos)
+     * 4 - Instrutores
+     */
     private int pes_tipo;
+    /**
+     * 1 - Solteiro (a)
+     * 2 - Casado (a)
+     * 3 - Separado (a)
+     * 4 - Outros
+     */
     private int pes_estadocivil;
     private String pes_observacoes;
     private Boolean pes_necessidadeespecial;

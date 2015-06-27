@@ -84,9 +84,7 @@ public class RecrutamentoDAO {
     }
 
     public Recrutamento findById(int rec_codigo) {
-        System.err.println("REC FIN ID " + rec_codigo);
         Object obj = getSession().load(Recrutamento.class, rec_codigo);
-        System.err.println("REC FIN OBJ CLASS " + obj);
         return (Recrutamento) obj;
     }
 }

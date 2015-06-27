@@ -5,78 +5,76 @@
                 xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
     <ui:define name="content">
-        <div class="panel panel-body">
-            <h3><h:outputText value="Currículo de ${curriculoBean.pessoa.pes_nome}"/></h3>
-            <h4><h:outputText value="Experiência"/></h4>
-            <h:form>
-                <div class="btns-top-table">
-                    <h:commandLink styleClass="btn btn-success" action="${curriculoBean.novaExperiencia()}">
-                        <i class="fa fa-plus"></i> Inserir Experiência
+        <h3><h:outputText value="Currículo de ${curriculoBean.pessoa.pes_nome}"/></h3>
+        <h4><h:outputText value="Experiência"/></h4>
+        <h:form>
+            <div class="btns-top-table">
+                <h:commandLink styleClass="btn btn-success" action="${curriculoBean.novaExperiencia()}">
+                    <i class="fa fa-plus"></i> Inserir Experiência
+                </h:commandLink>
+            </div>
+            <h:dataTable value="${curriculoBean.experiencias}" var="item" styleClass="dataTable table table-bordered table-striped">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Empresa"/>
+                    </f:facet>
+                    <h:outputText value="${item.getEmpresa().getEmp_nome()}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Cargo"/>
+                    </f:facet>
+                    <h:outputText value="${item.getExpCargo()}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Data de Início"/>
+                    </f:facet>
+                    <h:outputText value="${item.getExpDatainicio()}">
+                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                    </h:outputText>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Data de Fim"/>
+                    </f:facet>
+                    <h:outputText rendered="${item.getExpDatafim() == null}" value="Emprego atual"/>
+                    <h:outputText rendered="${item.getExpDatafim() != null}" value="${item.getExpDatafim()}">
+                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                    </h:outputText>
+                </h:column>
+                <h:column headerClass="col-editar-header">
+                    <f:facet name="header">
+                        <h:outputText value="Editar"/>
+                    </f:facet>
+                    <h:commandLink action="${curriculoBean.editExperiencia()}">
+                        <i class="fa fa-pencil"></i> Editar
+                    </h:commandLink>
+                </h:column>
+                <h:column headerClass="col-excluir-header">
+                    <f:facet name="header">
+                        <h:outputText value="Excluir"/>
+                    </f:facet>
+                    <h:commandLink action="${curriculoBean.deleteExperiencia()}">
+                        <i class="fa fa-trash"></i> Excluir
+                    </h:commandLink>
+                </h:column>
+            </h:dataTable>
+            <div class="form-group row">
+                <div class="col-lg-6 btn-group-separated">
+                    <h:link styleClass="btn btn-default" style="" value="Cancelar" outcome="#{curriculoBean.listar()}" />
+                    <!--<h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{curriculoBean.salvarCurriculo()}"/>-->
+                </div>
+                <div class="col-lg-6 btn-group-separated text-right">
+                    <h:commandLink styleClass="btn btn-info" action="#{curriculoBean.voltarExperiencia()}">
+                        <i class="fa fa-chevron-left"></i> Voltar
+                    </h:commandLink>
+                    <h:commandLink styleClass="btn btn-info" action="#{curriculoBean.avancarExperiencia()}">
+                        Avançar <i class="fa fa-chevron-right"></i>
                     </h:commandLink>
                 </div>
-                <h:dataTable value="${curriculoBean.experiencias}" var="item" styleClass="dataTable table table-bordered table-striped">
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Empresa"/>
-                        </f:facet>
-                        <h:outputText value="${item.getEmpresa().getEmp_nome()}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Cargo"/>
-                        </f:facet>
-                        <h:outputText value="${item.getExpCargo()}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Data de Início"/>
-                        </f:facet>
-                        <h:outputText value="${item.getExpDatainicio()}">
-                            <f:convertDateTime pattern="dd/MM/yyyy"/>
-                        </h:outputText>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Data de Fim"/>
-                        </f:facet>
-                        <h:outputText rendered="${item.getExpDatafim() == null}" value="Emprego atual"/>
-                        <h:outputText rendered="${item.getExpDatafim() != null}" value="${item.getExpDatafim()}">
-                            <f:convertDateTime pattern="dd/MM/yyyy"/>
-                        </h:outputText>
-                    </h:column>
-                    <h:column headerClass="col-editar-header">
-                        <f:facet name="header">
-                            <h:outputText value="Editar"/>
-                        </f:facet>
-                        <h:commandLink action="${curriculoBean.editExperiencia()}">
-                            <i class="fa fa-pencil"></i> Editar
-                        </h:commandLink>
-                    </h:column>
-                    <h:column headerClass="col-excluir-header">
-                        <f:facet name="header">
-                            <h:outputText value="Excluir"/>
-                        </f:facet>
-                        <h:commandLink action="${curriculoBean.deleteExperiencia()}">
-                            <i class="fa fa-trash"></i> Excluir
-                        </h:commandLink>
-                    </h:column>
-                </h:dataTable>
-                <div class="form-group row">
-                    <div class="col-lg-6 btn-group-separated">
-                        <h:link styleClass="btn btn-default" style="" value="Cancelar" outcome="#{curriculoBean.listar()}" />
-                        <!--<h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{curriculoBean.salvarCurriculo()}"/>-->
-                    </div>
-                    <div class="col-lg-6 btn-group-separated text-right">
-                        <h:commandLink styleClass="btn btn-info" action="#{curriculoBean.voltarExperiencia()}">
-                            <i class="fa fa-chevron-left"></i> Voltar
-                        </h:commandLink>
-                        <h:commandLink styleClass="btn btn-info" action="#{curriculoBean.avancarExperiencia()}">
-                            Avançar <i class="fa fa-chevron-right"></i>
-                        </h:commandLink>
-                    </div>
-                </div>
-            </h:form>
-        </div>
+            </div>
+        </h:form>
     </ui:define>
 
 </ui:composition>

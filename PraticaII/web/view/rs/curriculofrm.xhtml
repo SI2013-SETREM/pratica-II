@@ -5,45 +5,40 @@
                 xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
     <ui:define name="content">
-        <div class="panel panel-body">
-            <h3><h:outputText value="Currículo de ${curriculoBean.pessoa.pes_nome}"/></h3>
-            <h4><h:outputText value="Dados Básicos"/></h4>
-            <f:view>
-                <h:form styleClass="form-horizontal">
-                    <h:inputHidden id="PesCodigo" value="#{curriculoBean.pessoa.pes_codigo}" />
-                    <div class="form-group">
-                        <h:outputLabel value="Resumo:" for="cvResumo" styleClass="control-label col-sm-1 col-md-2" />
-                        <div class="col-md-6 col-sm-12">
-                            <h:inputTextarea style="max-width: 100%;" rows="5" pt:autofocus="" pt:required="required" id="cvResumo" value="#{curriculoBean.pessoa.pes_cur_resumo}" title="Resumo do Currículo" styleClass="form-control" />
+        <h3><h:outputText value="Currículo de ${curriculoBean.pessoa.pes_nome}"/></h3>
+        <h4><h:outputText value="Dados Básicos"/></h4>
+        <f:view>
+            <h:form styleClass="form-horizontal">
+                <h:inputHidden id="PesCodigo" value="#{curriculoBean.pessoa.pes_codigo}" />
+                <div class="form-group">
+                    <h:outputLabel value="Resumo:" for="cvResumo" styleClass="control-label col-sm-1 col-md-2" />
+                    <div class="col-md-6 col-sm-12">
+                        <h:inputTextarea style="max-width: 100%;" rows="5" pt:autofocus="" pt:required="required" id="cvResumo" value="#{curriculoBean.pessoa.pes_cur_resumo}" title="Resumo do Currículo" styleClass="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <h:outputLabel value="Pretensão Salarial" for="cvPretensao" styleClass="control-label col-sm-1 col-md-2" />
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="input-group">
+                            <div class="input-group-addon">R$</div>
+                            <h:inputText pt:type="number" pt:min="1" pt:max="100000" pt:step="1" pt:required="required" id="carPisosalarial" value="#{curriculoBean.pessoa.pes_cur_pretensaosalarial}" title="Pretensão Salarial" styleClass="form-control" />
+                            <div class="input-group-addon">,00</div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <h:outputLabel value="Pretensão Salarial" for="cvPretensao" styleClass="control-label col-sm-1 col-md-2" />
-                        <div class="col-lg-4 col-md-6 col-sm-12">
-                            <div class="input-group">
-                                <div class="input-group-addon">R$</div>
-                                <h:inputText pt:type="number" pt:min="1" pt:max="100000" pt:step="1" pt:required="required" id="carPisosalarial" value="#{curriculoBean.pessoa.pes_cur_pretensaosalarial}" title="Pretensão Salarial" styleClass="form-control" />
-                                <div class="input-group-addon">,00</div>
-                            </div>
-                        </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-lg-6 btn-group-separated">
+                        <h:link styleClass="btn btn-default" style="" value="Cancelar" outcome="#{curriculoBean.listar()}" />
+                        <h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{curriculoBean.salvarCurriculo()}"/>
                     </div>
-                    <div class="form-group row">
-                        <div class="col-lg-6 btn-group-separated">
-                            <h:link styleClass="btn btn-default" style="" value="Cancelar" outcome="#{curriculoBean.listar()}" />
-                            <h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{curriculoBean.salvarCurriculo()}"/>
-                        </div>
-                        <div class="col-lg-6 btn-group-separated text-right">
-<!--                            <h:commandLink styleClass="btn btn-info" action="#{curriculoBean.listar()}">
-                                <i class="fa fa-chevron-left"></i> Voltar
-                            </h:commandLink>-->
-                            <h:commandLink styleClass="btn btn-info" action="#{curriculoBean.avancarCurriculo()}">
-                                Avançar <i class="fa fa-chevron-right"></i>
-                            </h:commandLink>
-                        </div>
+                    <div class="col-lg-6 btn-group-separated text-right">
+                        <h:commandLink styleClass="btn btn-info" action="#{curriculoBean.avancarCurriculo()}">
+                            Avançar <i class="fa fa-chevron-right"></i>
+                        </h:commandLink>
                     </div>
-                </h:form>
-            </f:view>
-        </div>
+                </div>
+            </h:form>
+        </f:view>
     </ui:define>
 
 </ui:composition>

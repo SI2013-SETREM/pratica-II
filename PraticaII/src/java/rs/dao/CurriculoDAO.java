@@ -40,6 +40,21 @@ public class CurriculoDAO {
         this.update(pessoa);
     }
     
+    public void insertObj(Object obj) {
+        try {
+            Transaction t = getSession().beginTransaction();
+            try {
+                getSession().merge(obj);
+                t.commit();
+            } catch (Exception ex) {
+                t.rollback();
+                throw ex;
+            }
+        } finally {
+            getSession().close();
+        }
+    }
+    
     public void updateObj(Object obj) {
         try {
             Transaction t = getSession().beginTransaction();
@@ -59,7 +74,7 @@ public class CurriculoDAO {
         try {
             Transaction t = getSession().beginTransaction();
             try {
-                getSession().update(model);
+                getSession().delete(model);
                 t.commit();
             } catch (Exception ex) {
                 t.rollback();

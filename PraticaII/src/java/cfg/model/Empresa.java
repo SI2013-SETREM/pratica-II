@@ -47,7 +47,20 @@ public class Empresa implements Serializable {
     @JoinColumn(name = "end_codigo", referencedColumnName = "end_codigo")
     private Endereco endereco;
     
+    /**
+     * 1 - Empresa Privada 
+     * 2 - Empresa Pública 
+     * 3 - Escola Privada 
+     * 4 - Escola Pública
+     */
     private int emp_tipo;
+    /**
+     * 1 - Familiar 
+     * 2 - Pequena 
+     * 3 - Média 
+     * 4 - Grande 
+     * 5 - Global 
+     */
     private int emp_tamanho;
     private String emp_descricao;
     private String emp_website;

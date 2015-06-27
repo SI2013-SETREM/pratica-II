@@ -47,7 +47,20 @@ public class PessoaFormacao implements Serializable {
     
     private String frm_referencia;
     private String frm_anotacao;
+    /**
+     * 1 - Graduação
+     * 2 - Curso Técnico 
+     * 3 - Curso 
+     * 4 - Ensino Fundamental 
+     * 5 - Ensino Médio 
+     * 6 - Outros
+     */
     private int frm_tipo;
+    /**
+     * 1 - Concluído
+     * 2 - Em andamento
+     * 3 - Abandonado
+     */
     private int frm_status;
 
     public PessoaFormacao() {

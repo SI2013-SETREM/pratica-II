@@ -3,7 +3,8 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
-                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <ui:define name="title">
         ${redeSocialBean.pTitle}
@@ -16,16 +17,10 @@
 
     <ui:define name="main-content">
         <div class="panel panel-body">
-            <h3><h:outputText value="Dados do ${redeSocialBean.sTitle}"/></h3>
+            <h3><h:outputText value="Dados da ${redeSocialBean.sTitle}"/></h3>
             <f:view>
-                <h:form styleClass="form-horizontal">
+                <h:form styleClass="form-horizontal" enctype="multipart/form-data">
                     <h:inputHidden id="idiCodigo" value="#{redeSocialBean.redeSocial.rsc_codigo}" />
-                    <!--                            <div class="form-group">
-                                            <h:outputLabel value="Código:" for="idiCodigo" styleClass="control-label col-sm-1" />
-                                            <div class="col-md-6">
-                                                <h:inputText id="idiCodigo" value="#{redeSocialBean.redeSocial.rsc_codigo}" title="IdiCodigo" styleClass="form-control" />
-                                            </div>
-                                        </div>-->
                     <div class="form-group">
                         <h:outputLabel value="Descrição:" for="idiDescricao" styleClass="control-label col-sm-1" />
                         <div class="col-md-6 col-sm-12">
@@ -47,9 +42,10 @@
                     <div class="form-group">
                         <h:outputLabel value="Repositório" for="empRepositorio" styleClass="control-label col-sm-1" />
                         <div style="padding-top: 5px" class="col-md-6 col-sm-12">
-                            <h:selectOneMenu value="#{redeSocialBean.redeSocial.repositorio}" converter="repositorioConverter" id="empRepositorio" class="form-control">
-                                <f:selectItems value="#{repositorioBean.repositorios}" var="repositorio" />
-                            </h:selectOneMenu>
+                            <c:if test='${redeSocialBean.redeSocial.getImageUrl() != ""}'>
+                                <img class="img-empresa" src="${redeSocialBean.redeSocial.getImageUrl()}" />
+                            </c:if>
+                            <h:inputFile value="#{redeSocialBean.file}"/> 
                         </div>
                     </div> 
                     <div class="form-group">

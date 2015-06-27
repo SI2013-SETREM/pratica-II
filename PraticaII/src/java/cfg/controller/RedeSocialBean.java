@@ -10,6 +10,7 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import java.util.List;
+import javax.servlet.http.Part;
 
 @ManagedBean
 @RequestScoped
@@ -23,16 +24,9 @@ public class RedeSocialBean {
     private DataModel redessociais;
     private RepositorioDAO repositorioDAO = new RepositorioDAO();
 
+    private Part file;
+    
     private List<Repositorio> repositorios;
-
-    public List<Repositorio> getRepositorios() {
-        repositorios = repositorioDAO.findAll();
-        return repositorios;
-    }
-
-    public void setRepositorios(List<Repositorio> repositorios) {
-        this.repositorios = repositorios;
-    }
 
     public RedeSocialBean() {
     }
@@ -43,6 +37,23 @@ public class RedeSocialBean {
 
     public String getpTitle() {
         return pTitle;
+    }
+    
+    public List<Repositorio> getRepositorios() {
+        repositorios = repositorioDAO.findAll();
+        return repositorios;
+    }
+
+    public void setRepositorios(List<Repositorio> repositorios) {
+        this.repositorios = repositorios;
+    }
+
+    public Part getFile() {
+        return file;
+    }
+
+    public void setFile(Part file) {
+        this.file = file;
     }
 
     public RedeSocial getRedeSocial() {
@@ -67,9 +78,9 @@ public class RedeSocialBean {
         return "redeSociallst";
     }
 
-    public String edit(RedeSocial i) {
+    public String edit() {
         redesocial = (RedeSocial) redessociais.getRowData();
-        return "redeSociallst";
+        return "redeSocialfrm";
     }
 
     public String update() {
@@ -85,6 +96,13 @@ public class RedeSocialBean {
     }
 
     public String salvar() {
+        if (file != null) {
+            Repositorio repositorio = new Repositorio(file);
+            repositorio.setRep_nome("Logomarca da rede social " + redesocial.getRsc_nome());
+            RepositorioDAO daoRep = new RepositorioDAO();
+            daoRep.insert(repositorio);
+            redesocial.setRepositorio(repositorio);
+        }
         if (redesocial.getRsc_codigo() > 0) {
             dao.update(redesocial);
             LogDAO.insert("RedeSocial", "Alterou rede social código: " + redesocial.getRsc_codigo()+ ", nome: " + redesocial.getRsc_nome()+

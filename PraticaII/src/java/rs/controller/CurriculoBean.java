@@ -1,7 +1,10 @@
 
 package rs.controller;
 
+import cfg.dao.EmpresaDAO;
+import cfg.model.Empresa;
 import cfg.model.Pessoa;
+import java.util.List;
 import rs.dao.CurriculoDAO;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -18,6 +21,7 @@ import rs.model.PessoaRedeSocial;
 public class CurriculoBean {
 
     private CurriculoDAO dao = new CurriculoDAO();
+    private EmpresaDAO daoEmpresa = new EmpresaDAO();
     private Pessoa pessoa = new Pessoa();
     private DataModel cvs;
     private PessoaFormacao pessoaFormacao;
@@ -31,10 +35,22 @@ public class CurriculoBean {
     private PessoaRedeSocial pessoaRedeSocial;
     private DataModel redessociais;
     
+    private List<Empresa> empresas;
+    
     public CurriculoBean() {
     }
 
     ///// Getters e Setters Models /////
+    
+    public List<Empresa> getEmpresas() {
+        empresas = daoEmpresa.findAll();
+        return empresas;
+    }
+    
+    public void setEmpresas(List<Empresa> empresas) {    
+        this.empresas = empresas;
+    }
+
     public Pessoa getPessoa() {
         return pessoa;
     }
@@ -159,7 +175,7 @@ public class CurriculoBean {
     
     public String avancarCurriculo() {
         storeCurriculo();
-        return "curriculoFormacaolst";
+        return listFormacao();
     }
     
     public void storeCurriculo() {
@@ -169,6 +185,7 @@ public class CurriculoBean {
     ///// FORMAÇÃO /////
     public String novaFormacao() {
         this.pessoaFormacao = new PessoaFormacao();
+        this.pessoaFormacao.setPessoa(pessoa);
         return "curriculoFormacaofrm";
     }
     
@@ -182,17 +199,31 @@ public class CurriculoBean {
         dao.deleteObj(pf);
     }
     
+    public String saveFormacao() {
+        if (pessoaFormacao.getFrmCodigo() > 0) {
+            dao.updateObj(pessoaFormacao);
+        } else {
+            dao.insertObj(pessoaFormacao);
+        }
+        return listFormacao();
+    }
+    
+    public String listFormacao() {
+        return "curriculoFormacaolst";
+    }
+    
     public String voltarFormacao() {
         return "curriculofrm";
     }
     
     public String avancarFormacao() {
-        return "curriculoExperiencialst";
+        return listExperiencia();
     }
     
     ///// EXPERIÊNCIA /////
     public String novaExperiencia() {
         this.pessoaExperiencia = new PessoaExperiencia();
+        this.pessoaExperiencia.setPessoa(pessoa);
         return "curriculoExperienciafrm";
     }
     
@@ -206,17 +237,31 @@ public class CurriculoBean {
         dao.deleteObj(pf);
     }
     
+    public String saveExperiencia() {
+        if (pessoaExperiencia.getExpCodigo() > 0) {
+            dao.updateObj(pessoaExperiencia);
+        } else {
+            dao.insertObj(pessoaExperiencia);
+        }
+        return listExperiencia();
+    }
+    
+    public String listExperiencia() {
+        return "curriculoExperiencialst";
+    }
+    
     public String voltarExperiencia() {
-        return "curriculoFormacaolst";
+        return listFormacao();
     }
     
     public String avancarExperiencia() {
-        return "curriculoIdiomalst";
+        return listIdioma();
     }
     
     ///// IDIOMA /////
     public String novoIdioma() {
         this.pessoaIdioma = new PessoaIdioma();
+        this.pessoaIdioma.setPessoa(pessoa);
         return "curriculoIdiomafrm";
     }
     
@@ -230,17 +275,31 @@ public class CurriculoBean {
         dao.deleteObj(pf);
     }
     
+    public String saveIdioma() {
+        if (pessoaIdioma.getPesIdiCodigo() > 0) {
+            dao.updateObj(pessoaIdioma);
+        } else {
+            dao.insertObj(pessoaIdioma);
+        }
+        return listIdioma();
+    }
+    
+    public String listIdioma() {
+        return "curriculoIdiomalst";
+    }
+    
     public String voltarIdioma() {
-        return "curriculoExperiencialst";
+        return listExperiencia();
     }
     
     public String avancarIdioma() {
-        return "curriculoCompetencialst";
+        return listCompetencia();
     }
     
     ///// COMPETENCIA /////
     public String novaCompetencia() {
         this.pessoaCompetencia = new PessoaCompetencia();
+        this.pessoaCompetencia.setPessoa(pessoa);
         return "curriculoCompetenciafrm";
     }
     
@@ -254,17 +313,31 @@ public class CurriculoBean {
         dao.deleteObj(pf);
     }
     
+    public String saveCompetencia() {
+        if (pessoaCompetencia.getPesCmpCodigo() > 0) {
+            dao.updateObj(pessoaCompetencia);
+        } else {
+            dao.insertObj(pessoaCompetencia);
+        }
+        return listCompetencia();
+    }
+    
+    public String listCompetencia() {
+        return "curriculoCompetencialst";
+    }
+    
     public String voltarCompetencia() {
-        return "curriculoIdiomalst";
+        return listIdioma();
     }
     
     public String avancarCompetencia() {
-        return "curriculoRedeSociallst";
+        return listRedeSocial();
     }
     
     ///// REDE SOCIAL /////
     public String novaRedeSocial() {
         this.pessoaRedeSocial = new PessoaRedeSocial();
+        this.pessoaRedeSocial.setPessoa(pessoa);
         return "curriculoRedeSocialfrm";
     }
     
@@ -278,12 +351,25 @@ public class CurriculoBean {
         dao.deleteObj(obj);
     }
     
+    public String saveRedeSocial() {
+        if (pessoaRedeSocial.getPesRscCodigo() > 0) {
+            dao.updateObj(pessoaRedeSocial);
+        } else {
+            dao.insertObj(pessoaRedeSocial);
+        }
+        return listRedeSocial();
+    }
+    
+    public String listRedeSocial() {
+        return "curriculoRedeSociallst";
+    }
+    
     public String voltarRedeSocial() {
-        return "curriculoCompetencialst";
+        return listCompetencia();
     }
     
     public String avancarRedeSocial() {
-        return "curriculolst";
+        return listar();
     }
     
 }

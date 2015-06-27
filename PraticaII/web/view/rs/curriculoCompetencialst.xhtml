@@ -5,61 +5,59 @@
                 xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
     <ui:define name="content">
-        <div class="panel panel-body">
-            <h3><h:outputText value="Currículo de ${curriculoBean.pessoa.pes_nome}"/></h3>
-            <h4><h:outputText value="Competências"/></h4>
-            <h:form>
-                <div class="btns-top-table">
-                    <h:commandLink styleClass="btn btn-success" action="${curriculoBean.novaCompetencia()}">
-                        <i class="fa fa-plus"></i> Inserir Competência
+        <h3><h:outputText value="Currículo de ${curriculoBean.pessoa.pes_nome}"/></h3>
+        <h4><h:outputText value="Competências"/></h4>
+        <h:form>
+            <div class="btns-top-table">
+                <h:commandLink styleClass="btn btn-success" action="${curriculoBean.novaCompetencia()}">
+                    <i class="fa fa-plus"></i> Inserir Competência
+                </h:commandLink>
+            </div>
+            <h:dataTable value="${curriculoBean.competencias}" var="item" styleClass="dataTable table table-bordered table-striped">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Competência"/>
+                    </f:facet>
+                    <h:outputText value="${item.getCompetencia().getCmp_descricao()}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Nível"/>
+                    </f:facet>
+                    <h:outputText value="${item.getNivelDsc()}"/>
+                </h:column>
+                <h:column headerClass="col-editar-header">
+                    <f:facet name="header">
+                        <h:outputText value="Editar"/>
+                    </f:facet>
+                    <h:commandLink action="${curriculoBean.editCompetencia()}">
+                        <i class="fa fa-pencil"></i> Editar
+                    </h:commandLink>
+                </h:column>
+                <h:column headerClass="col-excluir-header">
+                    <f:facet name="header">
+                        <h:outputText value="Excluir"/>
+                    </f:facet>
+                    <h:commandLink action="${curriculoBean.deleteCompetencia()}">
+                        <i class="fa fa-trash"></i> Excluir
+                    </h:commandLink>
+                </h:column>
+            </h:dataTable>
+            <div class="form-group row">
+                <div class="col-lg-6 btn-group-separated">
+                    <h:link styleClass="btn btn-default" style="" value="Cancelar" outcome="#{curriculoBean.listar()}" />
+                    <!--<h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{curriculoBean.salvarCurriculo()}"/>-->
+                </div>
+                <div class="col-lg-6 btn-group-separated text-right">
+                    <h:commandLink styleClass="btn btn-info" action="#{curriculoBean.voltarCompetencia()}">
+                        <i class="fa fa-chevron-left"></i> Voltar
+                    </h:commandLink>
+                    <h:commandLink styleClass="btn btn-info" action="#{curriculoBean.avancarCompetencia()}">
+                        Avançar <i class="fa fa-chevron-right"></i>
                     </h:commandLink>
                 </div>
-                <h:dataTable value="${curriculoBean.competencias}" var="item" styleClass="dataTable table table-bordered table-striped">
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Competência"/>
-                        </f:facet>
-                        <h:outputText value="${item.getCompetencia().getCmp_descricao()}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputText value="Nível"/>
-                        </f:facet>
-                        <h:outputText value="${item.getNivelDsc()}"/>
-                    </h:column>
-                    <h:column headerClass="col-editar-header">
-                        <f:facet name="header">
-                            <h:outputText value="Editar"/>
-                        </f:facet>
-                        <h:commandLink action="${curriculoBean.editCompetencia()}">
-                            <i class="fa fa-pencil"></i> Editar
-                        </h:commandLink>
-                    </h:column>
-                    <h:column headerClass="col-excluir-header">
-                        <f:facet name="header">
-                            <h:outputText value="Excluir"/>
-                        </f:facet>
-                        <h:commandLink action="${curriculoBean.deleteCompetencia()}">
-                            <i class="fa fa-trash"></i> Excluir
-                        </h:commandLink>
-                    </h:column>
-                </h:dataTable>
-                <div class="form-group row">
-                    <div class="col-lg-6 btn-group-separated">
-                        <h:link styleClass="btn btn-default" style="" value="Cancelar" outcome="#{curriculoBean.listar()}" />
-                        <!--<h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{curriculoBean.salvarCurriculo()}"/>-->
-                    </div>
-                    <div class="col-lg-6 btn-group-separated text-right">
-                        <h:commandLink styleClass="btn btn-info" action="#{curriculoBean.voltarCompetencia()}">
-                            <i class="fa fa-chevron-left"></i> Voltar
-                        </h:commandLink>
-                        <h:commandLink styleClass="btn btn-info" action="#{curriculoBean.avancarCompetencia()}">
-                            Avançar <i class="fa fa-chevron-right"></i>
-                        </h:commandLink>
-                    </div>
-                </div>
-            </h:form>
-        </div>
+            </div>
+        </h:form>
     </ui:define>
 
 </ui:composition>
