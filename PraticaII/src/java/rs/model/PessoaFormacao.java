@@ -133,6 +133,31 @@ public class PessoaFormacao implements Serializable {
     public int getFrmTipo() {
         return frm_tipo;
     }
+    
+    public String getFrmTipoDsc() {
+        String r = "";
+        switch (frm_tipo) {
+            case 1:
+                r = "Graduação";
+                break;
+            case 2:
+                r = "Curso Técnico";
+                break;
+            case 3:
+                r = "Curso";
+                break;
+            case 4:
+                r = "Ensino Fundamental";
+                break;
+            case 5:
+                r = "Ensino Médio";
+                break;
+            case 6:
+                r = "Outros";
+                break;
+        }
+        return r;
+    }
 
     public void setFrmTipo(int frm_tipo) {
         this.frm_tipo = frm_tipo;

@@ -1,9 +1,15 @@
 
 package rs.controller;
 
+import ad.dao.CompetenciaDAO;
+import ad.model.Competencia;
 import cfg.dao.EmpresaDAO;
+import cfg.dao.IdiomaDAO;
+import cfg.dao.RedeSocialDAO;
 import cfg.model.Empresa;
+import cfg.model.Idioma;
 import cfg.model.Pessoa;
+import cfg.model.RedeSocial;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import rs.dao.CurriculoDAO;
@@ -23,6 +29,10 @@ public class CurriculoBean {
 
     private CurriculoDAO dao = new CurriculoDAO();
     private EmpresaDAO daoEmpresa = new EmpresaDAO();
+    private IdiomaDAO daoIdioma = new IdiomaDAO();
+    private CompetenciaDAO daoCompetencia = new CompetenciaDAO();
+    private RedeSocialDAO daoRedeSocial = new RedeSocialDAO();
+    
     private Pessoa pessoa = new Pessoa();
     private DataModel cvs;
     private PessoaFormacao pessoaFormacao;
@@ -37,6 +47,9 @@ public class CurriculoBean {
     private DataModel redessociais;
     
     private List<Empresa> empresas;
+    private List<Idioma> listIdiomas;
+    private List<Competencia> listCompetencias;
+    private List<RedeSocial> listRedesSociais;
     
     public CurriculoBean() {
     }
@@ -52,6 +65,33 @@ public class CurriculoBean {
         this.empresas = empresas;
     }
 
+    public List<Idioma> getListIdiomas() {
+        listIdiomas = daoIdioma.findAll();
+        return listIdiomas;
+    }
+
+    public void setListIdiomas(List<Idioma> listIdiomas) {
+        this.listIdiomas = listIdiomas;
+    }
+
+    public List<Competencia> getListCompetencias() {
+        listCompetencias = daoCompetencia.findAll();
+        return listCompetencias;
+    }
+
+    public void setListCompetencias(List<Competencia> listCompetencias) {
+        this.listCompetencias = listCompetencias;
+    }
+
+    public List<RedeSocial> getListRedesSociais() {
+        listRedesSociais = daoRedeSocial.findAll();
+        return listRedesSociais;
+    }
+
+    public void setListRedesSociais(List<RedeSocial> listRedesSociais) {
+        this.listRedesSociais = listRedesSociais;
+    }
+    
     public Pessoa getPessoa() {
         return pessoa;
     }
@@ -120,7 +160,7 @@ public class CurriculoBean {
     }
 
     public DataModel getExperiencias() {
-        this.experiencias= new ListDataModel(dao.findExperiencias(pessoa.getPes_codigo()));
+        this.experiencias = new ListDataModel(dao.findExperiencias(pessoa.getPes_codigo()));
         return experiencias;
     }
 
@@ -372,6 +412,11 @@ public class CurriculoBean {
     
     public String avancarRedeSocial() {
         return listar();
+    }
+    
+    ///// RESUMO /////
+    public String voltarResumo() {
+        return listRedeSocial();
     }
     
 }

@@ -22,15 +22,15 @@
                 </h:column>
                 <h:column>
                     <f:facet name="header">
-                        <h:outputText value="Nível de Fala"/>
-                    </f:facet>
-                    <h:outputText value="${item.getNivelDsc(item.getPesIdiNivelfala())}"/>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">
                         <h:outputText value="Nível de Escrita"/>
                     </f:facet>
                     <h:outputText value="${item.getNivelDsc(item.getPesIdiNivelescrita())}"/>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Nível de Fala"/>
+                    </f:facet>
+                    <h:outputText value="${item.getNivelDsc(item.getPesIdiNivelfala())}"/>
                 </h:column>
                 <h:column headerClass="col-editar-header">
                     <f:facet name="header">
@@ -44,7 +44,7 @@
                     <f:facet name="header">
                         <h:outputText value="Excluir"/>
                     </f:facet>
-                    <h:commandLink action="${curriculoBean.deleteIdioma()}">
+                    <h:commandLink action="${curriculoBean.deleteIdioma()}" onclick="return confirm('Tem certeza de que deseja remover o registro?');">
                         <i class="fa fa-trash"></i> Excluir
                     </h:commandLink>
                 </h:column>

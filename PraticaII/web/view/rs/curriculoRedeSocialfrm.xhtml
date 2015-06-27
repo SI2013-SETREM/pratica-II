@@ -1,0 +1,49 @@
+<ui:composition template="./../modelos/wizardCurriculo.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+    <ui:define name="content">
+        <h3><h:outputText value="Currículo de ${curriculoBean.pessoa.pes_nome}"/></h3>
+        <h4><h:outputText value="Rede Social"/></h4>
+        <f:view>
+            <h:messages/>
+            <h:form styleClass="form-horizontal">
+                <div class="form-group">
+                    <h:outputLabel value="Rede Social" for="pesRedeSocial" styleClass="control-label col-sm-1 col-md-3" />
+                    <div class="col-md-6 col-sm-12">
+                        <h:selectOneMenu id="pesRedeSocial" converter="redesocialConverter" value="#{curriculoBean.pessoaRedeSocial.redeSocial}" styleClass="form-control">
+                            <f:selectItems value="#{curriculoBean.listRedesSociais}" var="tipe" itemLabel="#{tipe.rsc_nome}" />
+                        </h:selectOneMenu>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <h:outputLabel value="Usuário" for="pesRscUsuario" styleClass="control-label col-sm-1 col-md-3" />
+                    <div class="col-md-6 col-sm-12">
+                        <h:inputText id="pesRscUsuario" value="#{curriculoBean.pessoaRedeSocial.pesRscUsuario}" styleClass="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <h:outputLabel value="Link para o perfil" for="pesRscUrl" styleClass="control-label col-sm-1 col-md-3" />
+                    <div class="col-md-6 col-sm-12">
+                        <h:inputText id="pesRscUrl" value="#{curriculoBean.pessoaRedeSocial.pesRscUrl}" styleClass="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <h:outputLabel value="Descrição" for="pesRscDescricao" styleClass="control-label col-sm-1 col-md-3" />
+                    <div class="col-md-6 col-sm-12">
+                        <h:inputText id="pesRscDescricao" value="#{curriculoBean.pessoaRedeSocial.pesRscDescricao}" styleClass="form-control" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-lg-6 btn-group-separated">
+                        <h:link styleClass="btn btn-default" style="" value="Cancelar" outcome="#{curriculoBean.listRedeSocial()}" />
+                        <h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{curriculoBean.saveRedeSocial()}"/>
+                    </div>
+                </div>
+            </h:form>
+        </f:view>
+    </ui:define>
+
+</ui:composition>

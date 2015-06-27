@@ -1,0 +1,43 @@
+<ui:composition template="./../modelos/wizardCurriculo.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+    <ui:define name="content">
+        <h3><h:outputText value="Currículo de ${curriculoBean.pessoa.pes_nome}"/></h3>
+        <h4><h:outputText value="Competência"/></h4>
+        <f:view>
+            <h:messages/>
+            <h:form styleClass="form-horizontal">
+                <div class="form-group">
+                    <h:outputLabel value="Competencia" for="pesCompetencia" styleClass="control-label col-sm-1 col-md-3" />
+                    <div class="col-md-6 col-sm-12">
+                        <h:selectOneMenu id="pesCompetencia" converter="CompetenciaConverter" value="#{curriculoBean.pessoaCompetencia.competencia}" styleClass="form-control">
+                            <f:selectItems value="#{curriculoBean.listCompetencias}" var="tipe" itemLabel="#{tipe.cmp_descricao}" />
+                        </h:selectOneMenu>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <h:outputLabel value="Nível de conhecimento" for="pesCmpNivel" styleClass="control-label col-sm-1 col-md-3" />
+                    <div class="col-md-6 col-sm-12">
+                        <h:selectOneMenu id="pesCmpNivel" value="#{curriculoBean.pessoaCompetencia.pesCmpNivel}" styleClass="form-control">
+                            <f:selectItem itemValue="1" itemLabel="Básico"/>
+                            <f:selectItem itemValue="2" itemLabel="Básico a Intermediário"/>
+                            <f:selectItem itemValue="3" itemLabel="Intermediário"/>
+                            <f:selectItem itemValue="4" itemLabel="Intermediário a Avançado"/>
+                            <f:selectItem itemValue="5" itemLabel="Avançado"/>
+                        </h:selectOneMenu>
+                    </div> 
+                </div>
+                <div class="form-group row">
+                    <div class="col-lg-6 btn-group-separated">
+                        <h:link styleClass="btn btn-default" style="" value="Cancelar" outcome="#{curriculoBean.listCompetencia()}" />
+                        <h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{curriculoBean.saveCompetencia()}"/>
+                    </div>
+                </div>
+            </h:form>
+        </f:view>
+    </ui:define>
+
+</ui:composition>

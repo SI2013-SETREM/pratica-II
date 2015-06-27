@@ -24,9 +24,9 @@
                     <f:facet name="header">
                         <h:outputText value="Link para o perfil"/>
                     </f:facet>
-                    <h:outputText>
-                        <i>teste</i> ${item.getPesRscUrl()}
-                    </h:outputText>
+                    <a href="${item.getPesRscUrl()}" target="_blank">
+                        ${item.getPesRscUsuario()} <i class="fa fa-external-link"></i>
+                    </a>
                 </h:column>
                 <h:column headerClass="col-editar-header">
                     <f:facet name="header">
@@ -40,7 +40,7 @@
                     <f:facet name="header">
                         <h:outputText value="Excluir"/>
                     </f:facet>
-                    <h:commandLink action="${curriculoBean.deleteRedeSocial()}">
+                    <h:commandLink action="${curriculoBean.deleteRedeSocial()}" onclick="return confirm('Tem certeza de que deseja excluir o registro?');">
                         <i class="fa fa-trash"></i> Excluir
                     </h:commandLink>
                 </h:column>
@@ -48,7 +48,6 @@
             <div class="form-group row">
                 <div class="col-lg-6 btn-group-separated">
                     <h:link styleClass="btn btn-default" style="" value="Cancelar" outcome="#{curriculoBean.listar()}" />
-                    <!--<h:commandButton styleClass="btn btn-primary" value="Salvar" action="#{curriculoBean.salvarCurriculo()}"/>-->
                 </div>
                 <div class="col-lg-6 btn-group-separated text-right">
                     <h:commandLink styleClass="btn btn-info" action="#{curriculoBean.voltarRedeSocial()}">

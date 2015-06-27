@@ -38,7 +38,7 @@
                     <f:facet name="header">
                         <h:outputText value="Excluir"/>
                     </f:facet>
-                    <h:commandLink action="${curriculoBean.deleteCompetencia()}">
+                    <h:commandLink action="${curriculoBean.deleteCompetencia()}" onclick="return confirm('Tem certeza de que deseja excluir o registro?');">
                         <i class="fa fa-trash"></i> Excluir
                     </h:commandLink>
                 </h:column>

@@ -23,7 +23,7 @@
                     <ul class="nav nav-pills nav-stacked pull-right" style="width: 100%">
                         <li class="#{view.viewId.contains('/rs/curriculofrm') ? 'active' : ''}">
                             <h:link outcome="/faces/view/rs/curriculofrm">
-                                <span class="fa fa-file-text-o"></span>
+                                <span class="fa fa-file-o"></span>
                                 <span class="menu-text">Dados Básicos</span>
                             </h:link>
                         </li>
@@ -55,6 +55,12 @@
                             <h:link outcome="/faces/view/rs/curriculoRedeSociallst">
                                 <span class="fa fa-share-alt"></span>
                                 <span class="menu-text">Redes Sociais</span>
+                            </h:link>
+                        </li>
+                        <li class="#{view.viewId.contains('/rs/curriculoResumo') ? 'active' : ''}">
+                            <h:link outcome="/faces/view/rs/curriculoResumo">
+                                <span class="fa fa-file-text"></span>
+                                <span class="menu-text">Currículo</span>
                             </h:link>
                         </li>
                     </ul>
