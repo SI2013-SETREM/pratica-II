@@ -1,5 +1,5 @@
 # Pratica-II
-Repositório da Prática II da turma de Sistemas de Informação de 2013
+Repositório da Prática II da turma de Sistemas de Informação que iniciou o curso em 2013
 
 ## Grupos:
 **Grupo 1 - Recrutamento e Seleção**  
